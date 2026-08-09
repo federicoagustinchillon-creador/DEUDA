@@ -1,0 +1,328 @@
+\chapter{Desarrollo Empírico y Resultados}
+\label{ch:resultados}
+
+Este capítulo contrasta empíricamente las hipótesis planteadas en el Capítulo \ref{ch:introduccion} mediante econometría de series de tiempo. El paso desde el análisis descriptivo del Capítulo \ref{ch:descriptivo} hacia la estimación econométrica permite evaluar los determinantes de la Función de Reacción Fiscal argentina para el período 2004--2025 ($n=88$). La evidencia recogida es mayormente débil o estadísticamente no concluyente: la regla de reacción fiscal lineal de Bohn no opera de forma estable en la muestra. Dicha inoperancia estadística constituye el hallazgo central del capítulo, resulta coherente con la hipótesis de fatiga fiscal que motiva la tesis y se analiza en profundidad en el Capítulo \ref{ch:discusion}.
+
+\section{Contrastes Adicionales de Raíz Unitaria (DF-GLS)}
+\label{sec:dfgls}
+
+La Sección \ref{sec:estacionariedad} del Capítulo \ref{ch:descriptivo} ya avanzó un diagnóstico de integración basado en los contrastes complementarios de ADF y KPSS y en el contraste de quiebre endógeno de Zivot-Andrews. Para robustecerlo se aplica adicionalmente el test de raíz unitaria \textit{Dickey-Fuller Generalized Least Squares} (DF-GLS) de \textcite{elliott1996}, que remueve la tendencia determinística mediante mínimos cuadrados generalizados antes de estimar la regresión aumentada, logrando una potencia estadística sustancialmente mayor que el ADF convencional en muestras acotadas como la presente ($n=88$).
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:dfgls} Resultados del Test de Raíz Unitaria DF-GLS (Elliott-Rothenberg-Stock, 1996).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrl}
+\toprule
+\textbf{Variable} & \textbf{Estad. (nivel)} & \textbf{Crít. 5\% (nivel)} & \textbf{Estad. (1.\ dif.)} & \textbf{Crít. 5\% (1.\ dif.)} & \textbf{Conclusión} \\
+\midrule
+$pb_t$ & -1.85 & -3.06 & -10.15 & -2.16 & I(1) \\
+$d_t$ & -1.06 & -3.07 & -3.82 & -2.16 & I(1) \\
+EMBI+ ($risk_t$) & -2.78 & -3.07 & -3.03 & -2.17 & Ambiguo \\
+$\tilde{y}_t$ & -2.54 & -3.10 & -0.09 & -2.20 & Ambiguo \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia sobre la base de datos oficial. Test DF-GLS especificado con constante y tendencia determinística en niveles, y únicamente constante en primeras diferencias.
+\end{flushleft}
+\end{table}
+
+El DF-GLS confirma, con mayor potencia estadística que el protocolo del Capítulo \ref{ch:descriptivo}, el carácter integrado de orden uno de $pb_t$ y $d_t$, las dos series estructurales de la ecuación de Bohn: ambas no rechazan la raíz unitaria en niveles ($p=0.382$ y $p=0.812$, respectivamente) y sí la rechazan tras la primera diferencia ($p<0.001$ en ambos casos). El panorama es más matizado para el EMBI+ y la brecha del producto. El EMBI+ exhibe un estadístico de nivel ($-2.78$) que no rechaza la raíz unitaria al 5\% pero se aproxima al valor crítico, a diferencia del ADF simple del Capítulo \ref{ch:descriptivo}, que sí rechazaba con holgura. La brecha del producto, por su parte, no rechaza la raíz unitaria ni en niveles ni en primera diferencia, un patrón que la literatura de series de tiempo atribuye habitualmente a la pérdida de potencia del contraste al diferenciar una serie cercana a la estacionariedad (\textit{overdifferencing} o sobrediferenciación). La discrepancia entre pruebas es consistente con el diagnóstico del Capítulo \ref{ch:descriptivo}: el orden de integración del sistema no es unánime, y las conclusiones de esta tesis no se apoyan en una clasificación única allí donde la evidencia disponible es mixta. Sobre esta base, la Sección \ref{sec:johansen_cap6} retoma el contraste formal de cointegración de Johansen, ya presentado con sus resultados completos, para evaluar si el sistema conjunto admite una relación de equilibrio de largo plazo pese a esta heterogeneidad en los órdenes de integración individuales.
+
+\section{Relación de Largo Plazo: Cointegración de Johansen}
+\label{sec:johansen_cap6}
+
+Como se estableció en la Sección \ref{sec:estacionariedad} del Capítulo \ref{ch:descriptivo}, el sistema conformado por la ratio Deuda/PIB, el Resultado Primario, el EMBI+ y el TCRM exhibe órdenes de integración mixtos y, en el caso de la deuda, ambiguos incluso permitiendo un quiebre estructural endógeno. Esta circunstancia obliga a verificar formalmente si existe al menos una combinación lineal estacionaria entre estas cuatro variables --condición necesaria para que una regresión en niveles no sea espuria-- mediante el procedimiento de máxima verosimilitud de Johansen.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:johansen} Test de cointegración de Johansen (Traza y Máximo Autovalor), sistema [Deuda/PIB, Result. Primario, EMBI+, TCRM].}
+\begin{tabular}{lrrcrrc}
+\toprule
+\multirow{2}{*}{$H_0$: rango $\le$} & \multicolumn{3}{c}{\textbf{Estadístico de Traza}} & \multicolumn{3}{c}{\textbf{Estadístico de Máx. Autovalor}} \\
+ & \textbf{Valor} & \textbf{Crít. 95\%} & \textbf{Rechaza} & \textbf{Valor} & \textbf{Crít. 95\%} & \textbf{Rechaza} \\
+\midrule
+0 & 58.94 & 47.85 & Sí & 26.13 & 27.59 & No \\
+1 & 32.81 & 29.80 & Sí & 16.16 & 21.13 & No \\
+2 & 16.64 & 15.49 & Sí & 11.34 & 14.26 & No \\
+3 & 5.30  & 3.84  & Sí & 5.30  & 3.84  & Sí \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia. Orden de rezagos del VAR subyacente seleccionado por Criterio de Información de Akaike ($p=2$); véase la Tabla \ref{tab:rezagos_var} para la selección completa y el análisis de sensibilidad. En la prueba de Máximo Autovalor, la secuencia formal de decisión se detiene en la hipótesis $H_0: r=0$ (no rechazada al 5\%); la significatividad reportada en $r \le 3$ responde a la equivalencia algebraica de la última raíz con el contraste de Traza.
+\end{flushleft}
+\end{table}
+
+Los dos estadísticos de Johansen ofrecen un diagnóstico divergente. El estadístico de Traza rechaza secuencialmente las hipótesis de rango cero, uno, dos y tres, sugiriendo --en su extremo-- rango pleno (equivalente a que el sistema en niveles ya sería estacionario, lo cual contradice el diagnóstico de integración del Capítulo \ref{ch:descriptivo}). El estadístico de Máximo Autovalor, en cambio, no logra rechazar la hipótesis de rango cero ($26.13 < 27.59$), lo cual es más conservador y compatible con, a lo sumo, una relación de cointegración débil entre el subconjunto de variables.
+
+\subsection{Selección del Orden de Rezagos y Sensibilidad del Rango Estimado}
+\label{sec:rezagos_var}
+
+Dado que el resultado del procedimiento de Johansen depende del orden de rezagos del VAR en niveles sobre el que se construye, corresponde documentar tanto el criterio de selección empleado como la estabilidad del rango estimado frente a órdenes alternativos. La Tabla \ref{tab:rezagos_var} reporta ambos elementos.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:rezagos_var} Selección del Orden de Rezagos del VAR y Sensibilidad del Rango de Cointegración.}
+\begin{tabular}{lrrrr}
+\toprule
+\multicolumn{5}{l}{\textit{Panel A. Criterios de información (VAR en niveles, sistema de 4 variables, $n=88$)}} \\
+\midrule
+\textbf{Orden $p$} & \textbf{AIC} & \textbf{BIC} & \textbf{HQ} & \textbf{FPE} \\
+\midrule
+1 & 7.221 & \textbf{7.816} & 7.459 & 1368.00 \\
+2 & \textbf{6.849} & 7.921 & \textbf{7.279} & \textbf{947.00} \\
+3 & 6.967 & 8.515 & 7.588 & 1073.00 \\
+4 & 6.932 & 8.957 & 7.744 & 1052.00 \\
+\midrule
+\multicolumn{5}{l}{\textit{Panel B. Rango de cointegración estimado al 5\% según el orden adoptado}} \\
+\midrule
+\textbf{Orden $p$} & \multicolumn{2}{c}{\textbf{Rango (Traza)}} & \multicolumn{2}{c}{\textbf{Rango (Máx. Autovalor)}} \\
+\midrule
+1 & \multicolumn{2}{c}{1} & \multicolumn{2}{c}{1} \\
+2 & \multicolumn{2}{c}{4} & \multicolumn{2}{c}{0*} \\
+3 & \multicolumn{2}{c}{2} & \multicolumn{2}{c}{1} \\
+4 & \multicolumn{2}{c}{1} & \multicolumn{2}{c}{1} \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Valores mínimos de cada criterio en negrita (Panel A). El Panel B reporta el número de relaciones de cointegración cuyo estadístico supera el valor crítico al 5\%, para cada orden de rezagos evaluado (* al 10\% de significatividad asciende a 1). Elaboración propia.
+\end{flushleft}
+\end{table}
+
+Tres de los cuatro criterios (AIC, HQ y FPE) seleccionan $p=2$; únicamente el BIC, más parsimonioso por construcción, indica $p=1$. Se adopta $p=2$ por mayoría de criterios y por la evidencia de persistencia trimestral documentada en el Capítulo \ref{ch:descriptivo}.
+
+El Panel B es el resultado sustantivo de este ejercicio. El rango estimado por el estadístico de Traza es inestable: adopta los valores 1, 4, 2 y 1 según se fije el orden en 1, 2, 3 o 4 rezagos respectivamente. El estadístico de Máximo Autovalor, por su parte, indica $r \le 1$ en todo el rango explorado ($r=0$ bajo $p=2$ al 5\% de significatividad, y $r=1$ bajo $p=1, 3, 4$). La divergencia entre ambos contrastes documentada más arriba no es un empate irresoluble entre dos diagnósticos igualmente informativos: el contraste de Traza --que la literatura reconoce como el más sensible a la especificación del orden de rezagos y al tamaño muestral finito-- es el que produce la ambigüedad, mientras que el contraste de Máximo Autovalor entrega una respuesta acotada a lo sumo a una relación de cointegración. Esta tesis adopta en consecuencia la lectura conservadora de $r=1$: existe a lo sumo una relación de equilibrio de largo plazo en el sistema de cuatro variables, y no el rango pleno que sugeriría la lectura literal del estadístico de Traza bajo $p=2$.
+
+Este diagnóstico sustenta la decisión metodológica adoptada: no estimar un Vector de Corrección de Errores (VECM) pleno, que exigiría comprometerse con un rango exacto y con la identificación de los vectores de cointegración, y recurrir en su lugar a Mínimos Cuadrados Ordinarios Dinámicos (DOLS), que provee estimadores consistentes de la relación de largo plazo aun bajo incertidumbre sobre el rango exacto del sistema. Esta opción es, además, consistente con el argumento de \citet{bohn2007} de que la verificación empírica de la condición de transversalidad de Bohn no exige, como paso previo estrictamente necesario, resolver de manera inequívoca la cointegración del sistema.
+
+\section{Estimación de la Función de Reacción Fiscal por Mínimos Cuadrados Ordinarios Dinámicos (DOLS)}
+\label{sec:dols_resultados}
+
+Ante el diagnóstico de a lo sumo una relación de cointegración ($r=1$) y la inestabilidad del contraste de Traza frente al orden de rezagos, documentados en la Sección \ref{sec:johansen_cap6}, se opta por Mínimos Cuadrados Ordinarios Dinámicos (DOLS, \citealp{stock1993}) por sobre su alternativa semi-paramétrica, \textit{Fully Modified OLS} (FMOLS, \citealp{phillips1990}): ambos estimadores son asintóticamente equivalentes y corrigen el sesgo de segundo orden de la endogeneidad de corto plazo, pero DOLS incorpora dicha corrección \textit{ex ante}, mediante adelantos y rezagos de las primeras diferencias de los regresores, mientras que FMOLS la aplica \textit{ex post} sobre los residuos, requiriendo estimar no paramétricamente un espectro de frecuencia cero mediante un núcleo y un ancho de banda arbitrarios que se vuelven inestables en muestras acotadas. \citet{stock1993} documentan mediante simulación de Monte Carlo que esta diferencia se traduce en mejores propiedades de tamaño y potencia para DOLS precisamente cuando el número de observaciones es limitado --el caso de esta tesis ($n=88$, que se reduce a $n=78$ tras incorporar la ampliación dinámica de adelantos y rezagos)--, lo que motiva la elección por una ventaja de eficiencia en muestras finitas.
+
+\subsection{Alcance de la Ecuación de Largo Plazo: por qué el DOLS no replica el sistema de Johansen}
+\label{sec:alcance_dols}
+
+El contraste de la Sección \ref{sec:johansen_cap6} evalúa el espacio de cointegración de un sistema de cuatro variables (Deuda/PIB, Resultado Primario, EMBI+ y TCRM), mientras que la ecuación DOLS que sigue retiene únicamente $d_{t-1}$ y la brecha del producto $\tilde{y}_t$ como regresores estructurales. Esta asimetría es deliberada y responde a tres razones que conviene explicitar.
+
+En primer lugar, ambos procedimientos responden a preguntas distintas. El contraste de Johansen es un diagnóstico \textit{de sistema}: verifica si existe alguna combinación lineal estacionaria entre las cuatro variables, condición necesaria para que una regresión en niveles no sea espuria. La ecuación DOLS, en cambio, estima un \textit{objeto teórico específico y previamente definido}: la Función de Reacción Fiscal de \citet{bohn1998}, cuya forma canónica es $pb_t = f(d_{t-1}, \tilde{y}_t)$. El parámetro de interés $\rho$ está definido dentro de esa especificación; ampliarla con regresores adicionales estimaría un objeto distinto y no comparable con la literatura de referencia \citep{bohn1998, ghosh2013}.
+
+En segundo lugar, y de manera decisiva, el EMBI+ y el TCRM no son exógenos respecto del resultado primario, sino \textit{simultáneamente determinados} con él. El test de Wu-Hausman de la Sección \ref{sec:iv2sls} rechaza la exogeneidad del riesgo soberano de manera categórica ($p<0.001$). Incorporar el EMBI+ como regresor adicional en la ecuación de largo plazo, por tanto, no añadiría un control: introduciría un regresor endógeno cuya presencia sesgaría el propio coeficiente $\rho$ que la ecuación busca identificar. Por esa razón el riesgo soberano no se traslada a la ecuación DOLS sino a un diseño de estimación separado --el IV-2SLS de la Sección \ref{sec:iv2sls}--, que es el procedimiento apropiado para un regresor endógeno. El TCRM, por su parte, opera en esta tesis como determinante del stock de deuda por la vía del Ajuste Stock-Flujo (Sección \ref{sec:restriccion_intertemporal}), es decir, sobre la variable explicativa $d_{t-1}$, y no como determinante directo del esfuerzo primario contemporáneo; su inclusión en la ecuación de reacción confundiría el canal de valuación con el canal de comportamiento fiscal.
+
+En tercer lugar, el diagnóstico de multicolinealidad respalda que esta restricción no descarta información relevante a costa de sesgo por variable omitida grave. La especificación ampliada (Bohn + EMBI+ + TCRM) arroja un VIF máximo de $3.82$ y un número de condición de $3.84$ sobre regresores estandarizados, ambos holgadamente por debajo de los umbrales convencionales de $10$ y $30$: los regresores del núcleo de Bohn ($VIF=1.02$) son prácticamente ortogonales entre sí y comparten poca varianza con las dos variables excluidas. La estimación restringida no está, en consecuencia, absorbiendo por vía de la constante un efecto sustantivo de las variables omitidas.
+
+Cabe precisar, además, que todas las variables del sistema ($pb_t$, $d_t$, $\tilde{y}_t$ y $risk_t$) se emplean en niveles (o, en el caso de $\tilde{y}_t$, en desviación porcentual de su tendencia), y no en logaritmos. Esta decisión no es arbitraria: el Resultado Primario ($pb_t$) y la Brecha del Producto ($\tilde{y}_t$) toman valores negativos en una proporción sustancial de la muestra, déficits fiscales y fases recesivas del ciclo respectivamente, lo cual vuelve matemáticamente inadmisible su transformación logarítmica. Mantener todas las variables en niveles, en lugar de aplicar logaritmos únicamente a los regresores que lo permitirían (como $d_t$ o $risk_t$), preserva la interpretación homogénea y directa de los coeficientes estimados como puntos porcentuales del PIB (o puntos básicos) por unidad de la variable explicativa, y evita el problema de interpretación mixta que resultaría de combinar elasticidades (variables en logaritmos) con efectos marginales en niveles dentro de una misma ecuación estructural.
+
+La Tabla \ref{tab:dols} reporta la estimación DOLS de la Función de Reacción Fiscal, especificada como $pb_t = \alpha + \rho\, d_{t-1} + \gamma\, \tilde{y}_t + \sum_{j=-4}^{4} \phi_j \Delta d_{t-j} + \varepsilon_t$, donde los términos $\Delta d_{t-j}$ (adelantos y rezagos de la primera diferencia de la deuda) constituyen la ampliación dinámica de Stock-Watson que garantiza la súper-consistencia del estimador de $\rho$ frente a la endogeneidad de corto plazo, sin ser en sí mismos de interés estructural directo.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:dols} Estimación DOLS de la Función de Reacción Fiscal ($n=78$, errores HAC, 4 rezagos).}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est. (HAC)} & \textbf{Estadístico z} & \textbf{$p$-valor} \\
+\midrule
+Constante & -0.5294 & 0.731 & -0.724 & 0.469 \\
+$d_{t-1}$ (ratio deuda rezagada) & -0.0071 & 0.012 & -0.577 & 0.564 \\
+Brecha del Producto ($\tilde{y}_t$) & 0.0200 & 0.017 & 1.188 & 0.235 \\
+$\Delta d_t$ & -0.0735 & 0.042 & -1.769 & 0.077$^{*}$ \\
+$\Delta d_{t-1}$ & -0.0608 & 0.032 & -1.905 & 0.057$^{*}$ \\
+$\Delta d_{t+1}$ & -0.2227 & 0.068 & -3.283 & 0.001$^{***}$ \\
+$\Delta d_{t-2}$ & -0.0550 & 0.030 & -1.855 & 0.064$^{*}$ \\
+$\Delta d_{t+2}$ & -0.0503 & 0.044 & -1.154 & 0.249 \\
+$\Delta d_{t-3}$ & -0.0308 & 0.021 & -1.444 & 0.149 \\
+$\Delta d_{t+3}$ & -0.0594 & 0.040 & -1.479 & 0.139 \\
+$\Delta d_{t-4}$ & -0.0386 & 0.026 & -1.498 & 0.134 \\
+$\Delta d_{t+4}$ & -0.0367 & 0.049 & -0.755 & 0.450 \\
+\midrule
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} $R^2=0.586$. $R^2$ ajustado$=0.517$. $F=6.409$ ($p<0.001$). Durbin-Watson$=0.321$. $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$. Errores estándar robustos a heterocedasticidad y autocorrelación (HAC, Newey-West, 4 rezagos).
+\end{flushleft}
+\end{table}
+
+El coeficiente de interés estructural, $\rho$, que mide la respuesta de largo plazo del superávit primario ante la deuda heredada, resulta de $-0.0071$ y no es estadísticamente significativo ($p=0.564$). La muestra disponible no permite rechazar la hipótesis nula de ausencia de reacción fiscal sistemática. Además, la estimación puntual presenta signo negativo, opuesto al requerido por la condición de sostenibilidad de \citet{bohn1998}. La combinación de un coeficiente pequeño, estadísticamente nulo y sin el signo teórico esperado constituye evidencia consistente con la Hipótesis 1 ($H_{1a}$: Reacción Fiscal Débil).
+
+Entre los términos de ampliación dinámica, únicamente $\Delta d_{t+1}$ (el adelanto de un trimestre de la variación de deuda) resulta significativo al 1\% ($p=0.001$), mientras que $\Delta d_t$, $\Delta d_{t-1}$ y $\Delta d_{t-2}$ apenas alcanzan significatividad al 10\%. Se reitera que estos coeficientes no admiten una interpretación estructural directa --son parámetros no estructurales (\textit{nuisance parameters}) de la técnica DOLS--, aunque su patrón (adelantos más relevantes que rezagos) sugiere que buena parte de la asociación estadística en el corto plazo responde a anticipación de mercado o a ajustes contables simultáneos, y no a una dinámica de ajuste fiscal genuinamente rezagada.
+
+El estadístico Durbin-Watson de 0.321, muy por debajo del valor de referencia de ausencia de autocorrelación (2.0), indica autocorrelación residual positiva de primer orden, atribuible a la inercia del proceso presupuestario argentino: una porción sustancial del gasto público (previsional, salarial, transferencias indexadas) y de la recaudación exhibe una dinámica autorregresiva que una especificación DOLS de rezagos acotados no absorbe por completo. La prueba de multiplicador de Lagrange de Breusch-Godfrey (cuatro rezagos) confirma esta persistencia, rechazando de manera categórica la hipótesis nula de no autocorrelación ($p$-valor $<0.001$). Los errores estándar HAC (Newey-West) empleados en la Tabla \ref{tab:dols} corrigen la inferencia frente a esta propiedad, de modo que la significatividad reportada para $\rho$ y los términos de ampliación dinámica permanece válida pese a la persistencia residual.
+
+Como complemento del diagnóstico de autocorrelación serial, se aplicó adicionalmente el test ARCH-LM de \citet{engle1982} para detectar heterocedasticidad condicional en los residuos del DOLS, es decir, conglomerados de volatilidad (\textit{volatility clustering}) --un patrón habitual en series fiscales y financieras de economías con historia de crisis recurrentes--. El estadístico de multiplicador de Lagrange, con cuatro rezagos, resulta en $LM=18.74$ ($p=0.0009$), rechazando categóricamente la hipótesis nula de homocedasticidad condicional. Este hallazgo es consistente con, y refuerza, la decisión metodológica de reportar la totalidad de las estimaciones de este capítulo bajo errores estándar robustos a heterocedasticidad y autocorrelación (HAC, Newey-West): la combinación de autocorrelación serial (Durbin-Watson, Breusch-Godfrey) y heterocedasticidad condicional (ARCH-LM) documentada en esta sección indica que cualquier inferencia basada en errores estándar convencionales (homocedásticos y no autocorrelacionados) habría subestimado sistemáticamente la incertidumbre de los coeficientes estimados.
+
+Finalmente, se evaluó la estabilidad estructural de la especificación DOLS mediante el test de Suma Acumulada de Residuos Recursivos (CUSUM) y su variante cuadrática (CUSUMSQ) de \citet{brown1975}, que testean si los parámetros del modelo permanecen constantes a lo largo de la muestra sin necesidad de especificar \textit{a priori} una fecha de quiebre. La Figura \ref{fig:cusum} presenta ambos estadísticos junto a sus bandas de confianza al 95\%.
+
+\begin{figure}[H]
+\centering
+\caption{Test de Estabilidad Estructural CUSUM y CUSUMSQ de la Especificación DOLS}
+\label{fig:cusum}
+\includegraphics[width=0.95\textwidth]{figura_6_2_cusum.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Residuos OLS recursivos sobre la misma especificación de la Tabla \ref{tab:dols}. Bandas de confianza al 95\% según \citet{brown1975} (CUSUM) y \citet{harvey1990} (CUSUMSQ). Elaboración propia.}
+\end{figure}
+
+Ambos estadísticos permanecen dentro de sus respectivas bandas de confianza a lo largo de la totalidad de la muestra (desviación máxima del CUSUMSQ de 0.393, frente a un límite de 0.596 al 5\%), sin cruzar el límite en ningún punto. Este resultado admite una lectura que exige matización cuidadosa: la ausencia de inestabilidad detectada por el CUSUM/CUSUMSQ no contradice la evidencia de quiebres estructurales documentada en la Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo} ni la motivación teórica del modelo de umbral de Hansen (Sección \ref{sec:hansen}), sino que testea una propiedad distinta: mientras el CUSUM evalúa la constancia de los \textit{parámetros estimados} de una especificación lineal única a lo largo del tiempo, los quiebres detectados por \texttt{ruptures} y el propio umbral de Hansen refieren a un cambio de \textit{régimen} en el nivel de las series o en la relación condicional entre ellas, una hipótesis alternativa distinta de --y no necesariamente en tensión con-- la constancia paramétrica de la regresión lineal DOLS. En otras palabras: los coeficientes de la Tabla \ref{tab:dols}, aunque débiles y no significativos en la especificación OLS que el CUSUM evalúa, no cruzan los límites de confianza en ningún punto de la muestra: el no-rechazo del CUSUM implica ausencia de evidencia de inestabilidad en la especificación lineal OLS, no una afirmación positiva de estabilidad del coeficiente estructural $\rho$. La Sección \ref{sec:sensibilidad_temporal} complementa este diagnóstico mostrando que, bajo ampliación dinámica DOLS por subperíodo, la reacción fiscal estimada es positiva y significativa en ambas mitades de la muestra (2004--2014: $\rho=0.0373$, $p=0.0015$; 2015--2025: $\rho=0.0530$, $p=0.0026$, ambos bajo la especificación estática; véase la Tabla \ref{tab:sensibilidad_temporal} para las versiones DOLS), siendo el coeficiente nulo de muestra completa un artefacto de la ampliación global que absorbe correlaciones de corto plazo de distinta naturaleza en cada régimen.
+
+Este patrón de autocorrelación serial persistente en los residuos de la regla de Bohn confirma dos realidades metodológicas de las economías periféricas: en primer lugar, los shocks sobre el resultado primario (como caídas en la recaudación por comercio exterior o rigideces estructurales del gasto corriente) poseen una memoria estocástica de largo plazo; en segundo lugar, la persistencia residual indica que una especificación lineal estática resulta incapaz de absorber la totalidad de la varianza del vector de solvencia, actuando como un fuerte indicador indirecto de la presencia de no linealidades o quiebres estructurales ocultos que justifican el salto analítico hacia la regresión de umbral de Hansen implementada en la Sección \ref{sec:hansen}.
+
+\section{Corrección por Endogeneidad: Variables Instrumentales en Dos Etapas (IV-2SLS)}
+\label{sec:iv2sls}
+
+El EMBI+ no puede tratarse como una variable de control estrictamente exógena: la teoría económica predice causalidad inversa, dado que un deterioro del resultado primario eleva la prima de riesgo percibida por los acreedores, mientras que un incremento exógeno del EMBI+ encarece el financiamiento y presiona al resultado fiscal. Para atender este problema, se instrumentó el EMBI+ mediante el índice de volatilidad global VIX y un diferencial de riesgo soberano regional (EMBI$_{Brasil}$, variable \textit{proxy} de mercado construida sobre el ETF EMB -iShares JPMorgan USD Emerging Markets Bond, que replica el JPMorgan EMBI Global Diversified-), en reemplazo del Tipo de Cambio Real Multilateral (TCRM) rezagado empleado en una versión preliminar de este ejercicio, descartado por violar la restricción de exclusión (impacta las cuentas fiscales de manera directa e independiente del canal de riesgo soberano, vía retenciones a las exportaciones y subsidios indexados al tipo de cambio real). Un diferencial de riesgo soberano regional captura el mismo canal de riesgo sistémico de mercados emergentes que castiga al EMBI+ argentino, sin ese efecto presupuestario directo sobre $pb_t$.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:iv2sls} Estimación IV-2SLS de la Función de Reacción Fiscal ($n=73$).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est. (HAC)} & \textbf{$t$} & \textbf{$p$-valor} \\
+\midrule
+Constante & -2.8294 & 1.996 & -1.418 & 0.156 \\
+$d_{t-1}$ & -0.0072 & 0.022 & -0.330 & 0.742 \\
+Brecha del Producto & 0.0672 & 0.048 & 1.391 & 0.164 \\
+EMBI+ (instrumentado) & 0.0009 & 0.001 & 1.042 & 0.297 \\
+\midrule
+\multicolumn{5}{l}{\textit{Estadísticos de diagnóstico instrumental}} \\
+\midrule
+F (1.\textsuperscript{a} etapa, relevancia) & \multicolumn{4}{l}{$23.39$ \quad ($p<0.001$) \quad [Umbral Staiger-Stock: $>10$] $\checkmark$} \\
+Test Wu-Hausman (endogeneidad) & \multicolumn{4}{l}{$19.88$ \quad ($p<0.001$) \quad [EMBI+ es endógeno] $\checkmark$} \\
+Test Sargan (sobreidentificación) & \multicolumn{4}{l}{$0.313$ \quad ($p=0.576$) \quad [Instrumentos válidos, no se rechaza] $\checkmark$} \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Variable endógena: EMBI+. Instrumentos excluidos: VIX e EMBI$_{Brasil}$ (variable \textit{proxy} construida sobre el ETF EMB, iShares JPMorgan USD Emerging Markets Bond). Errores estándar robustos a heterocedasticidad y autocorrelación (HAC, kernel Newey-West). La muestra se reduce de $n=87$ a $n=73$ porque el ETF EMB cotiza recién desde diciembre de 2007 (el período 2004T1--2007T3 se excluye por omisión de datos no disponibles). $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+El estadístico F de la regresión de primera etapa mide la fuerza de la correlación entre los instrumentos excluidos (VIX, EMBI$_{Brasil}$) y la variable endógena (EMBI+); alcanza $23.39$ ($p<0.001$), por encima del umbral de referencia de 10 de \textcite{staiger1997}: los instrumentos son, en el sentido de la relevancia de primera etapa, fuertes. El test de endogeneidad de Wu-Hausman confirma que el riesgo soberano es efectivamente endógeno al esfuerzo fiscal ($19.88$, $p<0.001$), tal como anticipa la teoría económica.
+
+El test de sobreidentificación de Sargan no rechaza la validez conjunta de los instrumentos ($0.313$, $p=0.576$): a diferencia de la especificación con TCRM rezagado, el diferencial de riesgo soberano regional no viola la restricción de exclusión. La sustitución de instrumento resuelve, en consecuencia, el problema de validez identificado en la versión preliminar de este ejercicio, al costo de reducir la muestra útil de 87 a 73 observaciones por la cobertura del ETF EMB desde diciembre de 2007.
+
+Conviene precisar, no obstante, el alcance informativo del test de Sargan en este contexto. Como señalan \citet{bound1995}, el test de sobreidentificación carece de potencia para detectar violaciones de la restricción de exclusión cuando los instrumentos comparten el mismo canal de transmisión potencial hacia la variable dependiente --en este caso, el apetito de riesgo global que tanto el VIX como el EMBI$_{Brasil}$ capturan--. El resultado no significativo del Sargan ($p=0.576$) es condición necesaria pero no suficiente para garantizar la restricción de exclusión: constituye evidencia favorable a la validez de los instrumentos en la medida en que los dos instrumentos difieran en su canal de transmisión (el VIX mide volatilidad implícita de acciones globales; el EMBI$_{Brasil}$ mide diferenciales de renta fija soberana regional), diferencia que el test explota para su identificación. Ello no elimina, sin embargo, la posibilidad de un canal compartido no detectado. Esta calificación no revierte el diseño instrumental adoptado --el único disponible dentro de la muestra y dentro de las restricciones de identificación de la literatura de referencia \citep{blanchard2021}--, sino que delimita el alcance de la evidencia que el Sargan provee.
+
+La Figura \ref{fig:diagnostico_primera_etapa} proyecta el valor real del EMBI+ contra su valor ajustado por la regresión de primera etapa (en función de $d_{t-1}$, la brecha del producto, el VIX y el EMBI$_{Brasil}$). La nube de puntos se ajusta razonablemente bien a la recta de 45 grados, consistente con el estadístico F de relevancia de 23.39.
+
+\begin{figure}[H]
+\centering
+\caption{Diagnóstico de Primera Etapa del IV-2SLS: EMBI+ Real vs. Ajustado}
+\label{fig:diagnostico_primera_etapa}
+\includegraphics[width=0.8\textwidth]{fig6_1_diagnostico_primera_etapa.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} EMBI+ real vs. EMBI+ ajustado por $d_{t-1}$, brecha del producto, VIX y EMBI$_{Brasil}$. El estadístico F de relevancia (23.39) supera el umbral de 10 de \textcite{staiger1997}; el test de Sargan (0.313, $p=0.576$) no rechaza la validez conjunta de los instrumentos. Elaboración propia.}
+\end{figure}
+
+El coeficiente puntual del EMBI+ instrumentado es positivo ($0.0009$) y no alcanza significatividad estadística ($p=0.297$): un incremento del riesgo soberano no se traduce, en esta estimación, en un ajuste del esfuerzo fiscal en ninguna dirección. La resolución del problema de validez instrumental no produjo, entonces, un canal de riesgo soberano estadísticamente significativo; produjo evidencia más creíble de su ausencia.
+
+Como evidencia complementaria y de bajo costo sobre la dirección temporal de la relación (no un sustituto de la estrategia de instrumentación anterior), se aplicó un contraste de causalidad de Granger bivariado entre el EMBI+ (en niveles, dado su carácter I(0)) y la primera diferencia del resultado primario (estacionaria, dado que $pb_t$ es I(1)), en ambas direcciones y para uno a cuatro rezagos. Ninguna de las dos direcciones resulta significativa a los niveles convencionales ($p$ entre 0.16 y 0.90 según el rezago considerado), lo cual refleja la potencia limitada de un contraste bivariado simple frente a una muestra de 84 observaciones trimestrales y una relación que, según la propia estimación IV-2SLS, opera condicionada por controles adicionales (brecha del producto) que el bivariado no incorpora.
+
+\section{Modelo de Umbral de Hansen}
+\label{sec:hansen}
+
+El ejercicio más exigente del protocolo econométrico consistió en testear si la Función de Reacción Fiscal exhibe un quiebre de régimen endógeno condicionado por el nivel de riesgo soberano, siguiendo la metodología de regresión de umbral para series de tiempo de \citet{hansen1999,hansen2000}. El algoritmo realiza una búsqueda secuencial del umbral $\tau$ sobre los percentiles 15 a 85 de la distribución del EMBI+, seleccionando aquel valor que minimiza la suma de cuadrados de los residuos del modelo particionado.
+
+La búsqueda identificó un umbral óptimo en $\tau^*=2400$ puntos básicos de EMBI+. La Tabla \ref{tab:hansen} reporta la estimación del modelo particionado en dicho punto.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:hansen} Modelo de Umbral de Hansen, $\tau^*=2400$ pb de EMBI+ ($n=87$, errores HAC).}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est.} & \textbf{$z$} & \textbf{$p$-valor} \\
+\midrule
+Constante & -1.6579 & 1.080 & -1.536 & 0.125 \\
+Brecha del Producto ($\tilde{y}_t$) & 0.0254 & 0.032 & 0.801 & 0.423 \\
+$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t \le 2400)$ (Régimen Normal) & 0.0163 & 0.018 & 0.899 & 0.368 \\
+$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t > 2400)$ (Régimen de Estrés) & 0.0114 & 0.015 & 0.756 & 0.450 \\
+\midrule
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} $R^2=0.033$. $R^2$ ajustado$=-0.001$. $F=0.640$ ($p=0.592$). Durbin-Watson$=0.186$.
+\end{flushleft}
+\end{table}
+
+Considerado de manera aislada, el patrón de coeficientes es cualitativamente compatible con la hipótesis de fatiga fiscal: la reacción estimada en el régimen de estrés (0.0114) es menor que en el régimen normal (0.0163). Sin embargo, ninguno de los dos coeficientes de régimen es estadísticamente significativo por separado ($p=0.368$ y $p=0.450$, respectivamente), y el poder explicativo global del modelo es extremadamente bajo ($R^2=0.033$, $F=0.640$, $p=0.592$).
+
+Más determinante aún es el resultado del contraste de significatividad del propio umbral, implementado mediante \textit{bootstrap} del estadístico Sup-LM con 1.000 réplicas: el estadístico F observado para la partición óptima es de apenas $0.0102$, con un $p$-valor \textit{bootstrap} de $0.383$. Este resultado no permite rechazar la hipótesis nula de linealidad de la Función de Reacción Fiscal: la muestra disponible no alcanza para aislar estadísticamente el quiebre localizado en $\tau^*=2400$ puntos básicos como un régimen separado del proceso lineal, una limitación de potencia que el Capítulo \ref{ch:discusion} examina a la luz de la volatilidad estructural del riesgo soberano argentino.
+
+En la especificación en niveles aquí reportada --que replica la forma canónica de \citet{ghosh2013}--, la evidencia de esta tesis no verifica la existencia de un umbral discreto de fatiga fiscal en la muestra 2004--2025. Ninguno de sus componentes estructurales resulta estadísticamente significativo en forma conjunta. La Sección \ref{sec:robustez_hansen_dpb} matiza este diagnóstico bajo una especificación alternativa que satisface el supuesto de estacionariedad del test. El Capítulo \ref{ch:discusion} desarrolla las implicancias conjuntas de ambos resultados.
+
+\textit{Nota metodológica sobre el supuesto de estacionariedad del test de umbral.} El contraste Sup-LM y su \textit{bootstrap} son asintóticamente válidos bajo el supuesto de estacionariedad estricta de todos los regresores, incluida la variable dependiente \citep[Assumption~A, p.~577]{hansen2000}. Sin embargo, el diagnóstico de la Sección \ref{sec:dfgls} clasifica $pb_t$ como I(1) (Tabla \ref{tab:dfgls}: estadístico $-1.85$, crítico $-3.06$), de modo que dicho supuesto no se cumple en sentido estricto en la especificación en niveles reportada arriba. En presencia de una variable dependiente integrada de orden uno, la distribución asintótica del estadístico Sup-LM queda comprometida, y el $p$-valor de 0.383 debe interpretarse con cautela. \citet{caner2004} extienden el marco de umbral al caso de procesos cointegrados. El resultado reportado permanece como el diagnóstico central de esta sección; la Sección \ref{sec:robustez_hansen_dpb} reporta, como verificación adicional, la misma especificación con la variable dependiente en primera diferencia (I(0)).
+
+\subsection{Robustez: Umbral de Hansen con la Variable Dependiente en Primera Diferencia}
+\label{sec:robustez_hansen_dpb}
+
+La nota metodológica anterior exige reestimar el modelo de umbral bajo una especificación cuya variable dependiente satisfaga el supuesto de estacionariedad estricta de \citet{hansen2000}. Dado que $pb_t$ es I(1) mientras que su primera diferencia $\Delta pb_t$ es I(0) (Tabla \ref{tab:dfgls}: estadístico $-10.15$ frente a un crítico de $-2.16$), se reestimó exactamente el mismo procedimiento reemplazando $pb_t$ por $\Delta pb_t$ como variable dependiente.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:hansen_dpb} Modelo de Umbral de Hansen con $\Delta pb_t$ (I(0)) como Dependiente ($n=87$, errores HAC).}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est.} & \textbf{$z$} & \textbf{$p$-valor} \\
+\midrule
+Constante & -0.8214 & 0.282 & -2.916 & 0.004 \\
+Brecha del Producto ($\tilde{y}_t$) & -0.0144 & 0.016 & -0.923 & 0.356 \\
+$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t \le 2800)$ (Régimen Normal) & 0.0145 & 0.006 & 2.589 & 0.010 \\
+$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t > 2800)$ (Régimen de Estrés) & 0.0065 & 0.003 & 2.237 & 0.025 \\
+\midrule
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Umbral óptimo $\tau^*=2800$ pb de EMBI+ (frente a 2400 pb en la especificación en niveles). \textit{Bootstrap} Sup-LM (1.000 réplicas): $F=0.1310$, $p=0.019$. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+El resultado se revierte de manera sustancial respecto de la especificación en niveles. El \textit{bootstrap} Sup-LM rechaza la linealidad al 5\% ($p=0.019$, frente a $p=0.383$ en niveles), y ambos coeficientes de régimen resultan individualmente significativos: $0.0145$ ($p=0.010$) en el régimen normal y $0.0065$ ($p=0.025$) en el régimen de estrés, con el patrón exacto que predeciría la fatiga fiscal --reacción atenuada, no ausente, bajo estrés financiero--.
+
+Esta especificación exige, sin embargo, una lectura cuidadosa antes de extraer una conclusión sustantiva. El objeto que estima no es idéntico al de la Tabla \ref{tab:hansen}: mientras aquella modela el \textit{nivel} del resultado primario en función del \textit{nivel} de la deuda rezagada por régimen --la forma canónica de \citet{ghosh2013}--, esta especificación modela la \textit{variación} trimestral del resultado primario frente al mismo regresor, un objeto más cercano a un mecanismo de ajuste de corto plazo que a la regla de reacción de nivel de la literatura de referencia.
+
+Con esa salvedad explícita, el resultado es sustantivo: bajo la especificación que satisface el supuesto de estacionariedad exigido por el test, la evidencia de un umbral --y de un patrón de atenuación consistente con fatiga fiscal-- es estadísticamente significativa. El Capítulo \ref{ch:discusion} retoma esta tensión entre ambas especificaciones para calificar el diagnóstico de $H_{1a}$ del Capítulo \ref{ch:conclusiones}.
+
+\section{Sensibilidad Temporal: Reestimación por Subperíodos}
+\label{sec:sensibilidad_temporal}
+
+Como ejercicio de robustez adicional, se reestimó la relación entre el Resultado Primario, la deuda rezagada y la Brecha del Producto en dos submuestras de tamaño similar, 2004T1--2014T4 ($n=43$) y 2015T1--2025T4 ($n=44$), evaluando si el coeficiente de reacción fiscal es sensible a la ventana temporal considerada. Se reportan tres especificaciones por subperíodo: la estática de Mínimos Cuadrados Ordinarios con errores HAC, y dos versiones DOLS con ampliación dinámica reducida ($m=1$ y $m=2$ adelantos y rezagos, frente a los $m=4$ del DOLS de muestra completa de la Tabla \ref{tab:dols}). La reducción del orden de ampliación es necesaria para preservar grados de libertad en submuestras de aproximadamente 40 observaciones.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:sensibilidad_temporal} Sensibilidad Temporal del Coeficiente de Reacción Fiscal ($\rho$) por Subperíodo: Especificación Estática y DOLS.}
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Subperíodo} & \textbf{Especificación} & \textbf{$n$} & \textbf{$\rho$ ($d_{t-1}$)} & \textbf{Error Est. (HAC)} & \textbf{$p$-valor} \\
+\midrule
+\multirow{3}{*}{2004T1--2014T4} & MCO estático & 43 & 0.0373 & 0.0118 & 0.0015 \\
+ & DOLS ($m=1$) & 40 & 0.0384 & 0.0207 & 0.0632 \\
+ & DOLS ($m=2$) & 38 & 0.0604 & 0.0409 & 0.1398 \\
+\midrule
+\multirow{3}{*}{2015T1--2025T4} & MCO estático & 44 & 0.0530 & 0.0176 & 0.0026 \\
+ & DOLS ($m=1$) & 41 & 0.0364 & 0.0175 & 0.0377 \\
+ & DOLS ($m=2$) & 39 & 0.0357 & 0.0183 & 0.0508 \\
+\midrule
+\textit{Muestra completa} & \textit{DOLS ($m=4$)} & \textit{78} & \textit{-0.0071} & \textit{0.0123} & \textit{0.5640} \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Especificación estática: $pb_t = \alpha + \rho\, d_{t-1} + \gamma\, \tilde{y}_t + \varepsilon_t$. Especificación DOLS: la anterior más $\sum_{j=-m}^{m}\phi_j \Delta d_{t-j}$. Errores HAC (Newey-West) en todos los casos. La fila final reproduce, para comparación, la estimación de muestra completa de la Tabla \ref{tab:dols}. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+Bajo la especificación estática, ambos subperíodos exhiben un coeficiente $\rho$ positivo y significativo al 1\% (0.0373 y 0.0530). Al introducir la ampliación dinámica, ese resultado se atenúa pero no desaparece: el coeficiente conserva el signo positivo en las cuatro estimaciones DOLS, y su significatividad se degrada de manera gradual --al 10\% en 2004--2014 con $m=1$ ($p=0.063$), al 5\% en 2015--2025 con $m=1$ ($p=0.038$), y al borde del 5\% con $m=2$ en el segundo subperíodo ($p=0.051$)--, perdiéndose únicamente en 2004--2014 con $m=2$ ($p=0.140$).
+
+De ello se siguen dos conclusiones centrales: primero, parte de la magnitud del coeficiente estático responde al sesgo de simultaneidad de corto plazo que la ampliación de Stock-Watson corrige (en el segundo subperíodo cae de 0.0530 a 0.0364); segundo, el signo positivo no es un mero artefacto estático. La discrepancia con el DOLS de muestra completa ($\rho=-0.0071$) responde a la inestabilidad paramétrica de la relación a lo largo del tiempo: dos submuestras con coeficiente positivo coexisten con un coeficiente agregado nulo si el parámetro no es constante, en consonancia con los quiebres estructurales múltiples de Bai-Perron documentados en la Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo}.
+
+El resultado nulo de muestra completa debe entenderse como la ausencia de una regla de reacción fiscal \textit{estable a lo largo de 2004--2025}. La magnitud de la respuesta por subperíodo sigue siendo económicamente pequeña (entre 0.036 y 0.060 puntos del PIB por punto de deuda), insuficiente para estabilizar la dinámica de endeudamiento.
+
+\section{Interpretación de la Magnitud Económica de los Coeficientes}
+
+Corresponde cuantificar la magnitud económica de los coeficientes puntuales estimados. El coeficiente de reacción fiscal del DOLS de muestra completa ($\rho=-0.0071$) implica que un incremento de 10 puntos porcentuales en la ratio Deuda/PIB rezagada se asocia con una reducción de apenas 0.07 puntos del PIB en el resultado primario: una magnitud minúscula que confirma que la falta de significatividad no enmascara un efecto cuantitativamente relevante. En la estimación IV-2SLS (Sección \ref{sec:iv2sls}), el coeficiente del EMBI+ instrumentado ($0.0009$) implica que un shock de 100 puntos básicos en el riesgo soberano genera una variación marginal de apenas 0.09 puntos del PIB en el superávit primario, igualmente insignificante en términos macroeconómicos.
+
+\section{Síntesis de la Evidencia Empírica}
+\label{sec:sintesis_empirica}
+
+Las cuatro estrategias de estimación aplicadas convergen en un diagnóstico común: la Función de Reacción Fiscal argentina en el período 2004--2025 no exhibe una reacción lineal significativa al endeudamiento ($\rho=-0.0071$, $p=0.564$), ni cointegración inequívoca entre sus componentes, ni un quiebre de régimen por fatiga fiscal en niveles (Sup-LM $p=0.383$). No obstante, la especificación en primeras diferencias detecta un umbral estadísticamente significativo ($p=0.019$), con atenuación de la respuesta bajo estrés. La estimación IV-2SLS confirma la ausencia de un canal de reacción directa frente al riesgo soberano ($p=0.297$). Finalmente, el análisis de sensibilidad temporal muestra coeficientes positivos en submuestras, revelando que el resultado nulo de muestra completa es consecuencia de la inestabilidad paramétrica entre regímenes y no de una ausencia total de respuesta en todo subperíodo, hallazgo coherente con los quiebres estructurales documentados en la Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo}.
+
+Este cuerpo de evidencia, caracterizado por una débil reacción sistemática y una marcada inestabilidad temporal, se traslada al Capítulo \ref{ch:discusion} para evaluar sus implicancias teóricas sobre la solvencia intertemporal y nutrir las proyecciones estocásticas del horizonte 2026--2035.

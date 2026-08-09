@@ -1,0 +1,206 @@
+\chapter{Discusión}
+\label{ch:discusion}
+
+\section{Sostenibilidad Intertemporal y Reglas Fiscales}
+
+Los resultados del Capítulo \ref{ch:resultados} exigen matices más finos que una confirmación o refutación binaria de las hipótesis del Capítulo \ref{ch:introduccion}. La evidencia no permite sostener, con significatividad convencional, que el Estado argentino incrementó sistemáticamente su superávit primario frente al aumento de la ratio Deuda/PIB durante 2004--2025 ($\rho=-0.0071$, $p=0.564$). Esta falta de significatividad estadística, unida al signo puntual negativo del parámetro, constituye evidencia empírica a favor de la Hipótesis 1: la política fiscal argentina no cumplió con la regla de reacción activa requerida por la condición de transversalidad de \citet{bohn1998}.
+
+Esta lectura se ve reforzada por el diagnóstico de validez instrumental de la estimación IV-2SLS. Los instrumentos utilizados (VIX y el diferencial de riesgo soberano regional basado en el ETF EMB) resultan estadísticamente sólidos en la primera etapa ($F=23.39$), el test de Wu-Hausman confirma la endogeneidad del riesgo soberano y el test de sobreidentificación de Sargan no rechaza la validez conjunta de los instrumentos ($0.313$, $p=0.576$). Con un diseño instrumental válido, el coeficiente del EMBI+ instrumentado ($0.0009$, $p=0.297$) tampoco resulta significativo. Como advierten \citet{blanchard2021,blanchard2022}, en economías con historial de cesación de pagos (\textit{default}) y descalce de monedas resulta complejo aislar variables verdaderamente exógenas al ciclo fiscal doméstico, respondiendo la percepción de riesgo a factores idiosincráticos y eventos de renegociación.
+
+El signo negativo del coeficiente ($\rho=-0.0071$), aun sin significatividad estadística, indica que ante incrementos en la deuda heredada el resultado primario no se ajustó al alza. Esta inoperancia de la regla de Bohn traslada el ajuste hacia canales exógenos a la decisión fiscal discrecional (devaluación real, licuación inflacionaria y quitas forzosas), tal como documenta el Capítulo \ref{ch:descriptivo}. La Sección \ref{sec:fatiga_discusion} retoma esta lectura y la articula con el Nivel I del marco teórico.
+
+Corresponde precisar el alcance temporal de este diagnóstico. La reestimación por subperíodos con especificación dinámica con ampliación de rezagos (DOLS; Sección \ref{sec:sensibilidad_temporal}) arroja un $\rho$ positivo en las cuatro especificaciones y significativo en tres de ellas (entre 0.036 y 0.060). El parámetro nulo de la muestra completa refleja una respuesta inestable entre ventanas temporales que no satisface la exigencia de sistematicidad de \citet{bohn1998}, en consonancia con los quiebres estructurales múltiples de la Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo}.
+
+\section{La Hipótesis de Fatiga Fiscal}
+\label{sec:fatiga_discusion}
+
+El modelo de umbral de \citet{hansen1999,hansen2000} identifica un punto de quiebre candidato en $\tau^*=2400$ puntos básicos de EMBI+, con una reacción fiscal estimada menor en el régimen de estrés ($\beta_2 = 0.0114$, $p=0.450$) que en el régimen normal ($\beta_1 = 0.0163$, $p=0.368$). Aunque este ordenamiento cualitativo coincide con la hipótesis de fatiga fiscal de \citet{ghosh2013}, el contraste de significatividad \textit{bootstrap} (Sup-LM, $p=0.383$) no permite rechazar la hipótesis nula de linealidad. Al no ser significativos los coeficientes de régimen ni su diferencia, la muestra 2004--2025 no aporta evidencia estadística de fatiga fiscal no lineal bajo la especificación en niveles.
+
+El modelo de \citet{ghosh2013} fue calibrado para economías avanzadas con acceso continuo a financiamiento en moneda doméstica. Su aplicación a Argentina, donde la restricción vinculante es la disponibilidad de divisas y no la curva de Laffer fiscal interna (Nivel I del marco teórico, Capítulo \ref{ch:marco_teorico}), somete la hipótesis a una especificación potencialmente inadecuada para el contexto bimonetario \citep{eichengreen2003}.
+
+Este resultado se matiza al examinar la especificación en primeras diferencias ($\Delta pb_t$), detallada en la Sección \ref{sec:robustez_hansen_dpb}. Al utilizar la serie en diferencias ---que satisface el supuesto de estacionariedad exigido por \citet{hansen2000}---, el \textit{bootstrap} Sup-LM rechaza la linealidad ($p=0.019$) y los coeficientes resultan significativos con la ordenación esperada. La evidencia de un umbral es, en consecuencia, sensible a la especificación elegida. Las restricciones del tamaño muestral ($n=88$) y la volatilidad del indicador de riesgo (desvío estándar de 876 pbs) constituyen limitaciones reales del diseño que obligan a interpretar el resultado con cautela.
+
+El diagnóstico de esta tesis se ancla en el Nivel I del marco teórico (Capítulo \ref{ch:marco_teorico}): los ajustes del stock de deuda operaron mediante canales exógenos a la decisión fiscal discrecional. Esta interpretación es consistente con la literatura macroeconómica estructuralista \citep{aruguete2021, damill2015}, según la cual en economías bimonetarias la sostenibilidad está acotada por la restricción externa de divisas.
+
+Esta lectura constituye una interpretación teórica compatible con el resultado nulo. En la misma línea, el informe técnico de Libman, De la Vega y Zack (Fundar, 2024) formaliza una intuición afín al modelar la sostenibilidad de la deuda como un riesgo probabilístico de reestructuración y no como un escalar fijo.
+
+La cuantificación directa de la contribución de cada canal al Ajuste Stock-Flujo ($SF_t$) --mediante la descomposición contable de la identidad $d_t = \frac{1+r_t}{1+g_t}d_{t-1} - pb_t + SF_t$ (Sección \ref{sec:restriccion_intertemporal}) para los episodios de mayor variación discreta de la ratio Deuda/PIB (2005, 2018 y 2020; Capítulo \ref{ch:descriptivo})-- permitiría transformar esta interpretación en evidencia directa. Como primera aproximación, la Tabla \ref{tab:sft_ilustrativo} aplica esa descomposición usando $d_t$, $d_{t-1}$ y $pb_t$ del dataset de la tesis, junto con una tasa de interés real efectiva $r_t$ aproximada a partir de series del FMI.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:sft_ilustrativo} Descomposición Ilustrativa del Ajuste Stock-Flujo ($SF_t$), Episodios Seleccionados.}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Año} & \textbf{$d_t$} & \textbf{$d_{t-1}$} & \textbf{$pb_t$} & \textbf{$r_t$ (aprox.)} & \textbf{$g_t$} & \textbf{$SF_t$ implícito} \\
+\midrule
+2005 (reestructuración) & 70.5\% & 106.0\% & 5.7\% & $-7.3\%$ & 8.9\% & $-14.1\%$ \\
+2018 (depreciación) & 90.3\% & 76.4\% & $-9.5\%$ & $-21.4\%$ & $-2.6\%$ & $19.2\%$ \\
+2020 (quita + licuación) & 105.6\% & 93.7\% & $-10.4\%$ & $-27.6\%$ & $-9.9\%$ & $20.0\%$ \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} $d_t$, $d_{t-1}$, $pb_t$: dataset propio de la tesis. $r_t$: aproximación construida a partir de series del \textit{IMF WEO DataMapper} (gobierno general). $g_t$: crecimiento real del PIB. Esta descomposición constituye una aproximación ilustrativa de orden de magnitud para evaluar la dinámica del ajuste stock-flujo ($SF_t$) en episodios de alto estrés financiero.
+\end{flushleft}
+\end{table}
+
+Con todas las salvedades anteriores, el orden de magnitud es informativo: los tres episodios muestran un $SF_t$ implícito de entre 14 y 20 puntos del PIB, un salto discreto muy superior a lo que cualquier coeficiente de reacción fiscal plausible podría compensar en un solo año.
+
+\section{Implicancias de Economía Política}
+
+Aun reconociendo estas limitaciones estadísticas, los coeficientes hallados son compatibles con los planteos de economía política sobre restricciones estructurales: la dificultad de sostener un esfuerzo fiscal primario suficiente remite a la tensión entre las exigencias financieras del Tesoro y las condiciones socioeconómicas de la población \citep{cantamutto2020}. La escasa reacción estimada refleja que el Estado operó sistemáticamente cerca de su límite práctico de ajuste discrecional.
+
+\section{Proyecciones Probabilísticas post-2025 y Gráficos de Abanico}
+
+El horizonte posterior a 2025 demanda abandonar los modelos contables deterministas, dado que la evidencia del Capítulo \ref{ch:resultados} no permite calibrar con precisión una regla de reacción fiscal para incorporar en la identidad de acumulación de deuda. Ante esta limitación, se optó por un Análisis de Sostenibilidad de la Deuda (DSA) que combina un componente determinista (tres sendas con supuestos macroeconómicos explícitos) y uno estocástico (Monte Carlo, 1.000 iteraciones), siguiendo el estándar de organismos multilaterales \citep{imf2003,imf2021}. La matriz de varianzas y covarianzas del componente estocástico se calibró inicialmente sobre órdenes de magnitud razonables de la volatilidad histórica argentina; las Secciones \ref{sec:garch_robustez} y \ref{sec:dcc_garch} reemplazan esa calibración, para las variables con serie histórica propia, por desvíos GARCH(1,1) y por la correlación condicional dinámica de un modelo DCC-GARCH \citep{engle2002}.
+
+A diferencia de las aplicaciones estandarizadas de DSA que asumen de forma irrestricta la simetría y normalidad de las perturbaciones macroeconómicas, esta tesis reconoce que las series temporales de la economía argentina exhiben propiedades estadísticas de colas pesadas (\textit{fat tails}) y asimetría extrema, consistentes con crisis de balanza de pagos recurrentes: un patrón ya documentado en la Sección \ref{sec:propiedades_muestra} del Capítulo \ref{ch:descriptivo} para el EMBI+, y confirmado aquí para los propios \textit{shocks} del componente estocástico del DSA. Concretamente, se estimaron por máxima verosimilitud los grados de libertad de una distribución $t$ de Student multivariada ($\nu \approx 5.1$), acordes a la curtosis en exceso observada en los \textit{shocks} históricos de resultado primario ($23.8$) y de tipo de cambio real ($14.4$). Este ajuste metodológico, que preserva la volatilidad calibrada de cada variable pero añade una probabilidad mayor de eventos extremos, dota a los gráficos de abanico resultantes de un realismo analítico superior frente a la subestimación del riesgo de insolvencia fiscal que caracteriza a los modelos simétricos tradicionales.
+
+\subsection{Escenarios Deterministas}
+
+Partiendo de una ratio inicial de 74\% del PIB en 2025 --un valor calibrado a partir del nivel de deuda consolidada del SPNF de cierre observado en el Capítulo \ref{ch:descriptivo} (70--71\% en los últimos trimestres de 2025 según el panel trimestral)--, la Tabla \ref{tab:dsa_determinista} resume la trayectoria de la ratio Deuda/PIB bajo tres escenarios hacia 2035: Optimista (superávit primario de 2.5\% del PIB, crecimiento de 4.5\%), Referencia (superávit de 1.5\%, crecimiento de 3.5\%) y Estrés (contracción del producto, superávit exiguo de 0.5\% y una depreciación real acumulada del 25\%).
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:dsa_determinista} DSA determinista: Deuda Pública Consolidada Ampliada (SPNF + BCRA) / PIB, escenarios seleccionados (\%).}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Año} & \textbf{Optimista} & \textbf{Referencia} & \textbf{Estrés} \\
+\midrule
+2026 & 74.0 & 74.0 & 74.0 \\
+2030 & 61.8 & 77.6 & 246.3 \\
+2033 & 52.9 & 80.7 & 571.9 \\
+2034 & 50.0 & 81.7 & 753.8 \\
+2035 & 47.1 & 82.8 & 992.1 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia, simulación determinista ($\alpha=0.463$ proporción de deuda en moneda extranjera). La fila 2035 corresponde a una iteración anual adicional bajo los supuestos inalterados de cada escenario, preservando la trazabilidad a la ventana prospectiva de diez años (2026--2035) declarada en el Capítulo \ref{ch:metodologia}.
+\end{flushleft}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Trayectorias del DSA Determinista bajo los Tres Escenarios (2026--2035)}
+\label{fig:dsa_determinista}
+\includegraphics[width=0.85\textwidth]{dsa_determinista.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Trayectorias correspondientes a la Tabla \ref{tab:dsa_determinista}. Elaboración propia.}
+\end{figure}
+
+El escenario de Estrés arroja una trayectoria explosiva que supera el 100\% del PIB hacia el final de la década y alcanza magnitudes extremas (más de 990\% del PIB) hacia 2035. Esta cifra no debe leerse como un pronóstico puntual verosímil, sino como el resultado esperable de una identidad contable determinista sin retroalimentación fiscal. Su valor analítico radica en ilustrar la sensibilidad de la trayectoria de deuda a la simultaneidad de \textit{shocks} adversos --el fenómeno que \citet{celasun2006} identifican como la falla central de los enfoques deterministas--, y no en constituir una proyección literal del sendero más probable.
+
+\subsection{Simulación Estocástica: Gráfico de Abanico de Monte Carlo}
+
+\begin{figure}[H]
+\centering
+\caption{Gráfico de Abanico: Distribución de Probabilidad de la Trayectoria de Deuda/PIB}
+\label{fig:fan_chart_final}
+\includegraphics[width=0.85\textwidth]{dsa_grafico_abanico.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Simulación de Monte Carlo (1.000 iteraciones, parámetros del escenario de Referencia con \textit{shocks} multivariados correlacionados, distribución $t$ de Student con $\nu\approx5.1$). Bandas de 10--90\% y 25--75\%; línea central: mediana. Elaboración propia.}
+\end{figure}
+
+A diferencia del escenario de Estrés determinista, la simulación estocástica reportada en la Figura \ref{fig:fan_chart_final} introduce \textit{shocks} anuales aleatorios alrededor de los parámetros centrales del escenario de Referencia, generando 1.000 trayectorias alternativas de la ratio Deuda/PIB hacia 2035. La mediana de estas trayectorias se mantiene relativamente estable en el entorno de 80\% del PIB, mientras que las bandas de confianza se ensanchan progresivamente con el horizonte de proyección.
+
+El resultado cuantitativo central es que la probabilidad de que la ratio Deuda/PIB supere la frontera crítica del 100\% del producto hacia 2035 es del 30.4\%: casi uno de cada tres escenarios simulados. Esta frontera del 100\% del PIB coincide con el pico histórico de la ratio de deuda argentina documentado en el Capítulo \ref{ch:descriptivo} (2020). Esta cifra debe interpretarse como una medida de la vulnerabilidad estructural pasiva de la economía argentina frente a la volatilidad histórica de sus fundamentos, y no como una probabilidad neta que ya incorpore una eventual respuesta fiscal correctiva.
+
+La cifra de 30.4\% corresponde exclusivamente al escenario de Referencia. Para dimensionar la sensibilidad de la probabilidad de insolvencia a los supuestos macroeconómicos de cada senda, se replicó el mismo ejercicio de Monte Carlo centrando las 1.000 simulaciones alrededor de los parámetros medios de cada uno de los tres escenarios deterministas de la Tabla \ref{tab:dsa_determinista}. La Tabla \ref{tab:probabilidad_escenarios} reporta el resultado.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:probabilidad_escenarios} Probabilidad de Insolvencia (Deuda/PIB $>100\%$ en 2035) por Escenario, Monte Carlo (1.000 iteraciones).}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Escenario} & \textbf{Probabilidad de superar 100\% del PIB} & \textbf{Mediana 2035 (\% PIB)} \\
+\midrule
+Optimista & 5.0\% & 46.1\% \\
+Referencia & 30.4\% & 81.3\% \\
+Estrés & 100.0\% & 822.0\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia, misma matriz de covarianza y distribución $t$ de Student ($\nu\approx5.1$) que la Figura \ref{fig:fan_chart_final}, centrada alternativamente en los parámetros medios de cada escenario de la Tabla \ref{tab:dsa_determinista}.
+\end{flushleft}
+\end{table}
+
+Bajo el escenario Optimista, la probabilidad de cruzar el umbral crítico se reduce a apenas 5.0\%, con una mediana de deuda en 2035 (46.1\% del PIB) muy por debajo del nivel inicial de 2025 (74\%): un superávit primario sostenido de 2.5\% del PIB y un crecimiento de 4.5\% alcanzarían para revertir la trayectoria de la deuda. En el extremo opuesto, el escenario de Estrés arroja una probabilidad de insolvencia del 100\%. En suma, la probabilidad de cruzar la frontera del 100\% del PIB muestra una elevada sensibilidad al escenario macroeconómico de origen, evidenciando la dominancia de los fundamentos macroeconómicos sobre el margen de maniobra fiscal.
+
+\subsection{Robustez de la calibración: desvíos estándar estimados vía GARCH}
+\label{sec:garch_robustez}
+
+La matriz de covarianzas utilizada en la simulación estocástica se calibró, como se detalló en el Capítulo \ref{ch:metodologia}, a partir de los desvíos estándar históricos muestrales de cada \textit{shock}. Como chequeo de robustez, se reestimaron los desvíos estándar del resultado primario, del crecimiento del producto y de la variación del tipo de cambio real mediante un modelo GARCH(1,1) univariado por serie, mientras que la matriz de correlación histórica y los desvíos de las tasas de interés se mantuvieron en su valor calibrado original.
+
+La Tabla \ref{tab:garch_stddevs} compara ambos conjuntos de desvíos estándar anualizados.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:garch_stddevs} Desvíos Estándar Anualizados: Calibración Histórica vs. GARCH(1,1).}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Shock} & \textbf{Calibrado} & \textbf{GARCH(1,1)} \\
+\midrule
+Resultado primario ($\sigma_{pb}$) & 0.0150 & 0.0114 \\
+Crecimiento del PIB ($\sigma_{g}$) & 0.0400 & 0.0640 \\
+Variación TCR ($\sigma_{\Delta e}$) & 0.1500 & 0.0862 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Los desvíos de $r_d$, $r_f$ y la matriz de correlación se mantienen calibrados en ambas columnas. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+Los tres desvíos GARCH se ubican en el mismo orden de magnitud que la calibración original: el resultado primario y el tipo de cambio real resultan algo menos volátiles bajo GARCH, mientras que el crecimiento resulta algo más volátil, un resultado plausible dado que la serie de PIB real exhibe conglomerados de volatilidad (\textit{volatility clustering}). La Tabla \ref{tab:garch_dsa_comparacion} traslada estos desvíos alternativos a la simulación estocástica completa.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:garch_dsa_comparacion} Probabilidad de Insolvencia a 2035: Calibración Histórica vs. GARCH Parcial.}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Escenario} & \textbf{Prob. calibrada} & \textbf{Prob. GARCH parcial} \\
+\midrule
+Optimista & 5.0\% & 4.0\% \\
+Referencia & 30.4\% & 31.9\% \\
+Estrés & 100.0\% & 100.0\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} 1.000 simulaciones por escenario en ambas columnas. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+La probabilidad de insolvencia del escenario de Referencia se desplaza de 30.4\% a 31.9\% bajo la calibración GARCH parcial: una diferencia de apenas 1.5 puntos porcentuales que confirma la robustez del diagnóstico central.
+
+\subsection{Correlación Condicional Dinámica: DCC-GARCH}
+\label{sec:dcc_garch}
+
+Como extensión, se estimó un modelo de Correlación Condicional Dinámica (DCC-GARCH, \citealp{engle2002}) en dos etapas de Cuasi-Máxima Verosimilitud (QML) sobre los residuos estandarizados de los GARCH(1,1) univariados.
+
+La estimación por QML converge a un parámetro de reactividad $a=0$: el DCC(1,1) colapsa a Correlación Condicional Constante (CCC, \citealp{bollerslev1990}). El aporte de esta etapa es la reestimación por QML del \textit{nivel} de correlación (resultado primario-crecimiento: 0.40 calibrada vs. 0.11 QML; resultado primario-tipo de cambio real: $-0.30$ vs. $-0.07$; crecimiento-tipo de cambio real: $-0.50$ vs. $-0.25$). Sustituyendo estas correlaciones en el DSA, la probabilidad de insolvencia del escenario de Referencia hacia 2035 pasa de 30.4\% a 29.1\%, confirmando la robustez cualitativa de los resultados.
+
+\section{Limitaciones del Análisis de Proyecciones}
+\label{sec:limitaciones_dsa}
+
+Las proyecciones DSA presentadas en este capítulo deben interpretarse bajo cuatro advertencias metodológicas. Primera, la matriz de varianzas y covarianzas del componente estocástico combina parámetros estimados con calibraciones históricas para las tasas de interés. Segunda, la identidad contable adopta una regla de reacción fiscal pasiva en concordancia con los hallazgos del Capítulo \ref{ch:resultados}. Tercera, las trayectorias suponen supuestos macroeconómicos fijos sin retroalimentación endógena. Cuarta, la distribución $t$ multivariada introduce dependencia en colas (\textit{tail dependence}) que podría sobreestimar la frecuencia de eventos extremos simultáneos.
+
+El coeficiente de dependencia en colas es $\lambda = 2 \cdot T_{\nu+1}\!\left(-\sqrt{(\nu+1)(1-\rho)/(1+\rho)}\right)$, que para $\nu=5.1$ y la correlación QML estimada ($\rho=0.11$) resulta $\lambda \approx 0.07$ (7.0\%) \citep{demarta2005}. Para dimensionar el efecto de esta propiedad sobre la cifra central, se reestimó el escenario de Referencia bajo especificaciones alternativas. La Tabla \ref{tab:tail_dependence_robustez} reporta el resultado.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:tail_dependence_robustez} Robustez de la Probabilidad de Insolvencia (2035, Escenario Referencia) a la Estructura de Dependencia en Colas.}
+\begin{tabular}{lr}
+\toprule
+\textbf{Especificación de los \textit{shocks}} & \textbf{$P(d_{2035}>100\%)$} \\
+\midrule
+Cópula-$t$ correlacionada (reportada, Tabla \ref{tab:probabilidad_escenarios}) & 30.4\% \\
+Cópula Gaussiana + marginales $t$ (correlación sin exceso de dependencia en colas) & 29.1\% \\
+Marginales $t$ independientes (sin correlación, sin dependencia en colas) & 26.7\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} 1.000 simulaciones por especificación, misma semilla y mismos parámetros de escenario que la Figura \ref{fig:fan_chart_final}. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+La probabilidad se desplaza de 30.4\% a 29.1\% al remover el exceso de dependencia en colas de la cópula-$t$, y a 26.7\% al remover además la correlación entre \textit{shocks}. En ambos casos el desplazamiento es moderado (entre 1.3 y 3.7 puntos porcentuales) y no revierte ninguna conclusión cualitativa.
+
+El contraste entre los tres escenarios de la Tabla \ref{tab:probabilidad_escenarios} ---desde una probabilidad de insolvencia prácticamente nula hasta una trayectoria de insostenibilidad segura--- constituye el hallazgo sustantivo central de este capítulo: la sostenibilidad de la deuda pública argentina hacia 2035 depende, en un grado mucho mayor que de cualquier ajuste fiscal discrecional marginal, de la evolución de las variables macroeconómicas fundamentales sobre las cuales la política fiscal \textit{per se} ejerce un control solo parcial.

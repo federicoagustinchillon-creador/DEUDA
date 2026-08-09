@@ -1,0 +1,22 @@
+                   IV-2SLS Estimation Summary                   
+Dep. Variable:   ,pb_pib          ,  R-squared:         ,-0.4740
+Estimator:       ,IV-2SLS         ,  Adj. R-squared:    ,-0.5381
+No. Observations:,73              ,  F-statistic:       ,2.4443 
+Date:            ,Thu, Aug 06 2026,  P-value (F-stat)   ,0.4854 
+Time:            ,15:49:38        ,  Distribution:      ,chi2(3)
+Cov. Estimator:  ,kernel          ,                     ,       
+                 ,                ,                     ,       
+                    Parameter Estimates                    
+     ,Parameter,Std. Err., T-stat,P-value,Lower CI,Upper CI
+const,-2.8294  ,1.9958   ,-1.4177,0.1563 ,-6.7412 ,1.0823  
+d_t_1,-0.0072  ,0.0219   ,-0.3299,0.7415 ,-0.0501 ,0.0357  
+g_gap,0.0672   ,0.0483   ,1.3906 ,0.1644 ,-0.0275 ,0.1620  
+EMBI ,0.0009   ,0.0009   ,1.0420 ,0.2974 ,-0.0008 ,0.0027  
+
+Endogenous: EMBI
+Instruments: VIX, EMBI_BRASIL
+Kernel Covariance (HAC)
+Debiased: False
+Kernel: newey-west
+Automatic Bandwidth: True
+Bandwidth: 7

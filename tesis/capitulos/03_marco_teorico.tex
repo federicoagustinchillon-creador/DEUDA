@@ -1,0 +1,60 @@
+\chapter{Marco Teórico}
+\label{ch:marco_teorico}
+
+Este capítulo organiza el marco teórico en tres niveles de abstracción decreciente --el paradigma macroeconómico de la restricción externa, la teoría general de la solvencia intertemporal y la teoría sustantiva de la fatiga fiscal en economías periféricas--, definiendo la estructura analítica que articula las hipótesis y el diseño econométrico desarrollado para la economía argentina durante el período 2004--2025 (Capítulos \ref{ch:metodologia} y \ref{ch:resultados}).
+
+\section[Nivel I: Paradigma de la Restricción Externa]{Nivel I: El Paradigma Macroeconómico de la Restricción Externa}
+
+Esta tesis se enmarca en el paradigma de la restricción externa al crecimiento de las economías periféricas \citep{damill2015}: la disponibilidad de divisas constituye el límite operativo y la restricción vinculante al proceso de acumulación en economías con pasivos en moneda extranjera. Bajo este enfoque, la deuda pública consolidada no es un fenómeno puramente fiscal, sino la contrapartida financiera de un patrón de inserción internacional asimétrico.
+
+Las economías periféricas enfrentan el problema estructural del \textbf{pecado original} (\textit{original sin}, \citealp{eichengreen2003}): la incapacidad de emitir deuda internacional en moneda doméstica. Ello genera un insuperable \textbf{descalce de monedas} (\textit{currency mismatch}), donde los ingresos del Estado se recaudan en moneda local mientras que los servicios del pasivo soberano se encuentran denominados en divisas. Cuando la economía no genera divisas genuinas al ritmo requerido por el perfil de vencimientos, el endeudamiento externo opera como mecanismo de cierre de brecha, trasladando la escasez de divisas hacia el futuro bajo la forma de un servicio de deuda creciente y expuesto a devaluaciones.
+
+\section{Nivel II: Teoría General de la Solvencia Intertemporal}
+
+En el nivel de la teoría general, esta tesis adopta el marco de la Restricción Presupuestaria Intertemporal formalizado por \citet{bohn1998, bohn2007}. Conviene precisar la distinción terminológica entre solvencia y sostenibilidad que vertebra este marco: mientras la \textbf{solvencia} es una condición contable de largo plazo --exige que el valor presente descontado de los superávits primarios esperados iguale el stock de deuda inicial--, la \textbf{sostenibilidad} atañe a la viabilidad práctica y política de ejecutar dicho sendero de ajuste sin alcanzar límites de extracción ni perder el financiamiento de mercado.
+
+La evolución de la ratio deuda/PIB ($d_t$) en el período $t$ se rige por la ecuación fundamental de movimiento:
+\begin{equation}
+d_t - d_{t-1} = \frac{r_t - g_t}{1 + g_t} d_{t-1} - pb_t
+\end{equation}
+donde $d_{t-1}$ representa la ratio deuda/PIB del período anterior, $pb_t$ es el resultado primario como proporción del PIB, $r_t$ es la tasa de interés real ponderada de la cartera de pasivos, y $g_t$ es la tasa de variación real del producto.
+
+La estabilización de la ratio no depende exclusivamente del esfuerzo fiscal ($pb_t$). Si la tasa de interés real supera al crecimiento económico ($r_t > g_t$), se genera una dinámica autorregresiva explosiva (efecto ``bola de nieve''). Para que la condición de solvencia intertemporal (esquema No-Ponzi) se verifique, el valor esperado del stock de deuda descontado debe anularse en el horizonte infinito, satisfaciendo la \textbf{condición de transversalidad}:
+\begin{equation}
+\lim_{e \to \infty} \mathbb{E}_t \left[ \prod_{j=1}^{e} \left( \frac{1 + g_{t+j}}{1 + r_{t+j}} \right) d_{t+e} \right] = 0
+\end{equation}
+
+Para garantizar el cumplimiento de la condición de transversalidad, \citet{bohn1998} postula la existencia de una \textbf{Función de Reacción Fiscal} lineal en la que el gobierno ajusta el resultado primario ante variaciones en el stock de deuda heredado:
+\begin{equation}
+pb_t = \alpha + \rho \, d_{t-1} + \gamma \, \tilde{y}_t + \varepsilon_t
+\end{equation}
+donde $\tilde{y}_t$ representa el ciclo económico (brecha del producto), $\varepsilon_t$ es el término de error, y el parámetro $\rho$ mide la respuesta marginal del esfuerzo fiscal frente al stock de deuda acumulado. La condición suficiente de solvencia establece que un coeficiente de reacción estrictamente positivo ($\rho > 0$) asegura la sostenibilidad intertemporal de la deuda pública. El propio \citet{bohn2007} demuestra que la verificación empírica de $\rho > 0$ es suficiente para el cumplimiento de la condición de transversalidad, sin exigir cointegración estricta en niveles.
+
+\subsection[La Restricción Presupuestaria Intertemporal y el Ajuste SF]{La Restricción Presupuestaria Intertemporal y el Ajuste Stock-Flujo (SF)}
+\label{sec:restriccion_intertemporal}
+
+La ecuación de movimiento simplificada asume que la variación del stock de deuda responde únicamente al resultado primario y al diferencial $r_t - g_t$. La literatura teórica y empírica \citep{bohn1998, imf2003} reconoce un componente residual macro-determinante: el \textbf{Ajuste Stock-Flujo} (\textit{Stock-Flow Adjustment}, $SF_t$), que capta toda variación del stock no explicada por el flujo fiscal corriente:
+\begin{equation}
+d_t = \frac{1 + r_t}{1 + g_t}\, d_{t-1} - pb_t + SF_t
+\end{equation}
+donde $SF_t$ agrupa los factores de valuación cambiaria, capitalización de intereses, emisión de títulos por rescates bancarios o pasivos contingentes y variaciones de activos financieros.
+
+En economías periféricas sujetas a descalce de monedas, $SF_t$ no es un componente estocástico de segundo orden, sino un determinante central de la trayectoria de la deuda. Los saltos discretos de la ratio deuda/PIB en Argentina durante 2018--2019 y 2020 obedecen principalmente a devaluaciones nominales que revalúan en pesos el stock de deuda denominado en moneda extranjera y a la capitalización de intereses en procesos de reestructuración. La asimetría entre un flujo fiscal ($pb_t$) que se ajusta de manera gradual y un ajuste de stock ($SF_t$) que reacciona de forma discreta ante \textit{shocks} cambiarios constituye la razón teórica fundamental de por qué una regla lineal de Bohn ($\rho$ constante) resulta inadecuada para capturar la dinámica de solvencia en Argentina.
+
+\section[Nivel III: Teoría de la Fatiga Fiscal]{Nivel III: Teoría Sustantiva de la Fatiga Fiscal en Economías Periféricas}
+
+En el nivel de la teoría sustantiva, esta tesis adopta el marco de la \textbf{Fatiga Fiscal} de \citet{ghosh2013}, formalizado econométricamente mediante el modelo de regresión de umbral de \citet{hansen1999}. Ghosh et al. (2013) sostienen que la reacción fiscal no es invariante respecto del nivel de endeudamiento o de tensión financiera: existe un límite práctico para la extracción de excedentes fiscales. Al superar la deuda o el riesgo soberano un umbral crítico, el esfuerzo fiscal se atenúa o colapsa, imposibilitando el cumplimiento de la condición de transversalidad sin incurrir en reestructuraciones o dominancia fiscal.
+
+Formulada dentro del modelo de umbral de \citet{hansen1999}, la Función de Reacción Fiscal no lineal adopta la siguiente estructura:
+\begin{equation}
+pb_t = \alpha + \beta_1 d_{t-1} \mathbb{I}(risk_t \le \tau^*) + \beta_2 d_{t-1} \mathbb{I}(risk_t > \tau^*) + \gamma \tilde{y}_t + \varepsilon_t
+\end{equation}
+donde $\mathbb{I}(\cdot)$ representa la función indicadora de régimen, $risk_t$ es la variable de tensión financiera (proxy por el indicador de riesgo país EMBI+), y $\tau^*$ es el parámetro de umbral crítico estimado endógenamente. El coeficiente $\beta_1$ mide la respuesta fiscal en el régimen normal ($risk_t \le \tau^*$), mientras que $\beta_2$ captura la respuesta en el régimen de estrés financiero ($risk_t > \tau^*$). La hipótesis de fatiga fiscal se verifica cuando $\beta_2 < \beta_1$, evidenciando una pérdida de efectividad o atenuación del esfuerzo fiscal al cruzar el umbral $\tau^*$.
+
+La aplicación de la hipótesis de fatiga fiscal a economías periféricas requiere una traslación crítica. En economías centrales, la fatiga fiscal emerge como un límite de economía política interna al incremento de impuestos o recortes de gasto. En economías periféricas como la argentina, la fatiga adquiere un carácter bifronte: enfrenta el límite de economía política frente al ajuste \citep{cantamutto2024} y la barrera material de la restricción externa \citep{aruguete2021}. Debido al descalce de monedas, la generación de un superávit primario en pesos no se traduce de forma directa en capacidad de pago en divisas si la restricción externa es vinculante.
+
+Esta dualidad explica la recurrencia de episodios de fatiga fiscal en la historia reciente argentina --el colapso de 2001, la crisis cambiaria de 2018 y la reestructuración de 2020--, en los cuales el sendero de superávits primarios requerido por la carga de servicios excedió los límites políticos y materiales de extracción fiscal. Estos episodios constituyen la motivación histórica que la especificación no lineal de Hansen ($\tau^*$, $\beta_1$, $\beta_2$) contrasta empíricamente en el Capítulo \ref{ch:resultados}.
+
+\section{Alcances y Límites del Marco Teórico}
+
+Quedan deliberadamente fuera de este estudio la teoría neoclásica del crecimiento óptimo y los modelos de ciclo real sin fricciones financieras (incompatibles con la restricción externa y el canal de riesgo soberano), así como el análisis jurídico sobre la legitimidad del endeudamiento. Los conceptos integrados en este marco teórico --restricción externa, descalce de monedas, solvencia de Bohn ($\rho$), ajuste stock-flujo ($SF_t$) y fatiga fiscal de Hansen ($\tau^*, \beta_1, \beta_2$)-- poseen una correspondencia isomórfica directa con la matriz operacional del Capítulo \ref{ch:metodologia} y el desarrollo empírico del Capítulo \ref{ch:resultados}.

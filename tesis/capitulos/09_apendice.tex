@@ -1,0 +1,104 @@
+\chapter{Apéndice: Robustez Adicional y Estructura del Código Empírico}
+\label{ch:apendice}
+
+\section{Tabla Consolidada de Limitaciones Metodológicas}
+\label{sec:limitaciones_consolidadas}
+
+La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas reconocidas explícitamente en esta tesis (Sección \ref{sec:aporte_metodologico}), clasificando su tipo (estructural vs. superable) y documentando la mitigación aplicada dentro del protocolo empírico presentado.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:limitaciones} Limitaciones Metodológicas: Tipo y Mitigación Aplicada.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{4.5cm}p{2.2cm}p{7.8cm}}
+\toprule
+\textbf{Limitación} & \textbf{Tipo} & \textbf{Mitigación aplicada en esta tesis} \\
+\midrule
+(i) Tamaño muestral reducido (88 obs. / 73 en IV-2SLS) & Estructural & Tests de robustez por subperíodos; discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
+\midrule
+(ii) Autocorrelación residual DOLS (DW$=0.321$) & Inherente a la dinámica fiscal AR & Errores HAC Newey-West en toda la inferencia; test Breusch-Godfrey (4 rezagos); interpretación como evidencia de inercia estructural presupuestaria \\
+\midrule
+(iii) Calibración (no estimación) de 2 de 5 shocks DSA ($r_d$, $r_f$) & Superable & Reestimación GARCH(1,1) de los 3 shocks con serie propia; DCC-GARCH de correlaciones; comparación en Tablas \ref{tab:garch_stddevs}--\ref{tab:garch_dsa_comparacion} \\
+\midrule
+(iv) Heterocedasticidad condicional ARCH-LM ($p=0.0009$) & Inherente a la volatilidad estructural AR & Errores HAC; robustez GARCH; interpretación como confirmación de la motivación para el DSA estocástico no gaussiano \\
+\midrule
+(v) Fragilidad de la especificación estática ($\rho$ cambia signo al pasar a DOLS) & Inherente a endogeneidad de corto plazo & Protocolo DOLS como especificación principal; MCO estático presentado solo como ejercicio de robustez y falsación (Sección \ref{sec:sensibilidad_temporal}) \\
+\midrule
+(vi) Ausencia de cointegración bivariada Engle-Granger ($p=0.301$) & Consistente con I(1) sin ancla & Johansen multivariado como contraste principal; DOLS como estimador robusto a incertidumbre sobre el rango de cointegración; Engle-Granger como robustez (Apéndice \ref{sec:engle_granger}) \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} ``Estructural'' = no superable dentro del marco de un único país sin más datos. ``Superable'' = resoluble con acceso a bases de datos de pago o extensión de muestra. ``Inherente'' = consecuencia directa de las propiedades de las series argentinas, no de una decisión de diseño. Elaboración propia en base a Sección \ref{sec:aporte_metodologico} (Capítulo \ref{ch:conclusiones}).
+\end{flushleft}
+\end{table}
+
+\section[Test de Cointegración de Engle-Granger]{Test de Engle-Granger (Ecuación Única)}
+\label{sec:engle_granger}
+
+Como robustez complementaria al procedimiento de máxima verosimilitud de Johansen desarrollado en la Sección \ref{sec:johansen_cap6}, que evalúa la cointegración del sistema conjunto de cuatro variables, se reporta aquí un test de cointegración de ecuación única basado en residuos, en el mismo espíritu que el procedimiento de \textcite{phillips1990}\footnote{\texttt{statsmodels} no implementa nativamente el estadístico de Phillips-Ouliaris. Se reporta en su lugar el test de \citet{engle1987}, de la misma familia de contrastes residuales de cointegración de ecuación única, declarándolo como tal en lugar de presentarlo bajo un nombre que no le corresponde.} sobre el par bivariado núcleo de la relación de Bohn: la ratio Deuda/PIB y el Resultado Primario/PIB.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:engle_granger} Test de Cointegración Residual de Engle-Granger (Deuda/PIB, Result. Primario/PIB).}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Estadístico} & \textbf{Crít. 1\%} & \textbf{Crít. 5\%} & \textbf{Crít. 10\%} & \textbf{$p$-valor} \\
+\midrule
+-2.4508 & -4.0268 & -3.4073 & -3.0936 & 0.3012 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia mediante \texttt{statsmodels.tsa.stattools.coint} (especificación con constante). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase7\_diagnosticos\_robustez.py}).
+\end{flushleft}
+\end{table}
+
+El estadístico de Engle-Granger ($-2.45$) no logra rechazar la hipótesis nula de ausencia de cointegración residual entre la ratio de deuda y el resultado primario considerados de manera bivariada ($p=0.301$), incluso a un nivel de significatividad del 10\%. Este resultado es consistente con, y no contradictorio respecto de, el diagnóstico divergente ya reportado en la Sección \ref{sec:johansen_cap6}: mientras el estadístico de Traza de Johansen sugería, en su extremo, rango pleno para el sistema conjunto de cuatro variables, el Máximo Autovalor y ahora este contraste bivariado de robustez coinciden en no encontrar evidencia contundente de una relación de equilibrio de largo plazo simple entre las dos variables estructurales de la ecuación de Bohn consideradas de manera aislada. Ello refuerza la decisión metodológica, ya justificada en la Sección \ref{sec:johansen_cap6}, de no imponer una relación de cointegración bivariada no verificada y, en su lugar, recurrir a la técnica DOLS, que no exige, como paso previo, la certeza de cointegración exacta del subsistema bivariado, para estimar la Función de Reacción Fiscal.
+
+\section{Estructura de la Cadena de Procesamiento de Código (Referencia)}
+\label{sec:apendice_codigo}
+
+La totalidad de los resultados cuantitativos reportados en esta tesis (estadísticas descriptivas, contrastes de raíz unitaria y cointegración, estimaciones DOLS/IV-2SLS/Hansen, quiebres de Bai-Perron, DCC-GARCH, deuda consolidada, diagnósticos de robustez de este Apéndice y simulaciones DSA) se computan mediante una cadena de procesamiento de código Python real y re-ejecutable, sin datos simulados ni resultados fabricados manualmente. Por razones de extensión, este Apéndice documenta la \textbf{estructura} de esa cadena de procesamiento y remite al archivo consolidado \texttt{codigo/codigo\_completo\_deuda.py}, que reúne el código fuente íntegro de cada etapa en un único documento de lectura, en lugar de reproducir aquí sus más de 4.100 líneas.
+
+\footnotesize
+\begin{longtable}{p{1.1cm}p{4.4cm}p{4.8cm}p{4.3cm}}
+\caption{\label{tab:pipeline_estructura} Estructura de la Cadena de Procesamiento Empírico: Etapas, Scripts e Insumos/Salidas.} \\
+\toprule
+\textbf{Etapa} & \textbf{Script} & \textbf{Función} & \textbf{Salida} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\textit{Tabla A.3 (continuación)}} \\
+\toprule
+\textbf{Etapa} & \textbf{Script} & \textbf{Función} & \textbf{Salida} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\textit{Continúa en la página siguiente}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+1.1--1.3 & \url{codigo/ingesta_datos/ingesta_datos_financieros.py} \newline \url{ingesta_bcra.py} \newline \url{ingesta_mecon_indec.py} & Descarga de series desde BCRA, MECON/INDEC (\url{datos.gob.ar}) y Yahoo Finance & Series brutas por fuente \\
+1.4 & \url{codigo/ingesta_datos/construccion_dataset.py} & Orquesta 1.1--1.3, fusiona y valida el panel trimestral & \url{datos/dataset_consolidado_real.csv} ($n=88$) \\
+1.5 & \url{ingesta_spread_regional.py} & Spread soberano regional (ETF EMB), Mejora Dim. III & \url{datos/procesados/spread_regional_trimestral.csv} \\
+1.6 & \url{ingesta_bcra_pasivos.py} & Pasivos remunerados del BCRA (API v4.0), Mejora Dim. IV & \url{datos/procesados/bcra_pasivos_trimestral.csv} \\
+2.1 & \url{codigo/modelos/fase1_estacionariedad.py} & Raíz unitaria (ADF, KPSS, PP, DF-GLS, Zivot-Andrews) & Tabla \ref{tab:estacionariedad}, Tabla \ref{tab:dfgls}, Sección \ref{sec:zivot_andrews} \\
+2.2 & \url{fase2_cointegracion.py} & Cointegración de Johansen & Tabla de Johansen (Sección \ref{sec:johansen_cap6}) \\
+2.3 & \url{fase3_reaccion_fiscal.py} & DOLS, diagnósticos de especificación & Tabla \ref{tab:dols} \\
+2.4 & \url{fase4_variables_instrumentales.py} & IV-2SLS (VIX + spread regional), F de primera etapa, Wu-Hausman, Sargan & Tabla \ref{tab:iv2sls} \\
+2.5 & \url{fase5_umbral_hansen.py} & Umbral de Hansen, \textit{bootstrap} Sup-LM & Tabla \ref{tab:hansen} \\
+2.6 & \url{fase6_sostenibilidad_deuda.py} & DSA determinista y Monte Carlo (t de Student) & Tabla \ref{tab:dsa_determinista}, Figura \ref{fig:fan_chart_final} \\
+2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario, causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figuras \ref{fig:acf_pacf}, \ref{fig:cusum}; Tablas \ref{tab:sensibilidad_temporal}, \ref{tab:probabilidad_escenarios}, \ref{tab:engle_granger}, \ref{tab:garch_stddevs}, \ref{tab:garch_dsa_comparacion} \\
+2.8 & \url{fase8_deuda_consolidada.py} & Consolida deuda SPNF + pasivos BCRA, Mejora Dim. IV & Figura \ref{fig:deuda_consolidada}, Tabla \ref{tab:probabilidad_escenarios} (Sección \ref{sec:deuda_consolidada}) \\
+2.9 & \url{bai_perron.py} \newline \url{fase9_bai_perron.py} & Quiebres estructurales múltiples (DP + BIC), Mejora Dim. I & Figura \ref{fig:bai_perron} (Sección \ref{sec:quiebres_estructurales}) \\
+2.10 & \url{dcc_garch.py} \newline \url{fase10_dcc_garch.py} & DCC-GARCH, correlación condicional dinámica, Mejora Dim. II & Sección \ref{sec:dcc_garch} \\
+2.11 & \url{fase11_dols_subperiodos.py} & DOLS por subperíodo ($m=1,2$) frente a MCO estático & Tabla \ref{tab:sensibilidad_temporal} (Sección \ref{sec:sensibilidad_temporal}) \\
+2.12 & \url{fase12_diagnosticos_complementarios.py} & Selección del orden de rezagos del VAR (AIC/BIC/HQ/FPE), sensibilidad del rango de Johansen, VIF y número de condición & Tablas \ref{tab:rezagos_var} y \ref{tab:vif} \\
+2.13 & \url{fase13_robustez_hansen_dpb.py} & Robustez del umbral de Hansen con $\Delta pb_t$ (I(0)) como dependiente & Tabla \ref{tab:hansen_dpb} (Sección \ref{sec:robustez_hansen_dpb}) \\
+2.14 & \url{fase14_dsa_tail_dependence.py} & Robustez del DSA a la estructura de dependencia en colas (marginales $t$ independientes, cópula Gaussiana) & Tabla \ref{tab:tail_dependence_robustez} \\
+2.15 & \url{fase15_sft_decomposicion_ilustrativa.py} & Descomposición ilustrativa del Ajuste Stock-Flujo ($SF_t$), episodios 2005/2018/2020 & Tabla \ref{tab:sft_ilustrativo} \\
+3.1--3.2 & \url{codigo/graficos/generacion_graficos_tesis.py} \newline \url{generacion_cronologia_quiebres.py} & Figuras 5.1, 5.3, 5.4 y 6.1 & Figuras del Capítulo \ref{ch:descriptivo} y \ref{ch:resultados} \\
+\end{longtable}
+\normalsize
+\begin{flushleft}
+\footnotesize \textit{Nota.} Todos los resultados intermedios se guardan adicionalmente en \texttt{resultados/tablas/*.csv} para trazabilidad. El archivo \texttt{codigo/codigo\_completo\_deuda.py} concatena el código fuente íntegro de las Etapas 1.1 a 3.2 en un único documento de lectura, indicando en cada sección la ruta del archivo original ejecutable. Los nombres de los scripts se corresponden uno a uno con las etapas del protocolo econométrico del Capítulo \ref{ch:metodologia}.
+\end{flushleft}

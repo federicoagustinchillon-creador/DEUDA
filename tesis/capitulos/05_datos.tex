@@ -1,0 +1,269 @@
+\chapter{Análisis Estadístico Descriptivo}
+\label{ch:descriptivo}
+
+Previo a la inferencia econométrica causal desarrollada en el Capítulo \ref{ch:resultados}, este capítulo describe la fuente, la construcción, el comportamiento tendencial, la dispersión y las propiedades de integración de las series de tiempo argentinas durante el período 2004--2025 ($n=88$), constituyendo la base empírica sobre la cual se fundamenta la estimación paramétrica de la Función de Reacción Fiscal.
+
+\section{Propiedades Estadísticas de la Muestra y Análisis Descriptivo}
+\label{sec:propiedades_muestra}
+
+Como paso preliminar a cualquier caracterización sustantiva de las series, corresponde examinar sus propiedades distribucionales agregadas, en particular el grado de apartamiento respecto de la normalidad, dado que dicho apartamiento condiciona la elección posterior entre técnicas de inferencia lineal convencionales y técnicas robustas a la asimetría y a la curtosis extrema (Sección \ref{sec:hansen} y Capítulo \ref{ch:discusion}).
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:descriptivos_jb} Estadísticas descriptivas de los vectores empíricos agregados (2004--2025, n=88).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+\textbf{Variable} & \textbf{Media} & \textbf{Mediana} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Jarque-Bera} & \textbf{$p$-valor (JB)} \\
+\midrule
+$pb_t$ (Result. Primario/PIB, \%) & -0.70 & -0.80 & 1.59 & -3.80 & 1.80 & 5.87 & 0.053 \\
+$d_t$ (Deuda/PIB, \%) & 65.93 & 63.00 & 18.68 & 40.00 & 119.00 & 5.64 & 0.060 \\
+$risk_t$ (EMBI+, pb) & 2416.03 & 2250.00 & 876.49 & 561.00 & 5500.00 & 20.71 & 0.00003 \\
+$\tilde{y}_t$ (Brecha del Producto, \%) & -0.02 & -0.80 & 5.54 & -11.15 & 13.86 & 4.89 & 0.087 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv}. Estadístico de Jarque-Bera bajo hipótesis nula de normalidad.
+\end{flushleft}
+\end{table}
+
+El contraste de Jarque-Bera exige una lectura diferenciada. Únicamente el EMBI+ rechaza fuertemente la hipótesis nula de normalidad ($JB=20.71$, $p=0.00003$), resultado esperable dada su naturaleza de cola derecha extrema: los episodios de pánico financiero desplazan el indicador muy por encima de su media. Las tres series restantes ($pb_t$, $d_t$ y $\tilde{y}_t$) exhiben $p$-valores marginales (0.05--0.09) que no permiten un rechazo al 5\% pero tampoco confirman normalidad, ubicándose en una zona de ambigüedad estadística consistente con muestras de tamaño moderado ($n=88$). Esta evidencia respalda la motivación metodológica para las técnicas robustas a la asimetría adoptadas en los capítulos subsiguientes: la regresión de umbral asimétrica de Hansen (Sección \ref{sec:hansen}) y el DSA estocástico no gaussiano (Capítulo \ref{ch:discusion}).
+
+\section{Fuente, Cobertura y Construcción de la Matriz de Datos}
+
+El panel trimestral comprende 88 observaciones (2004T1--2025T4), integrando ocho variables construidas a partir de fuentes secundarias oficiales: el VIX, el EMBI+ argentino, el CER, el TCRM, el PIB real, el Resultado Primario del SPNF (\% PIB), la Deuda Pública del SPNF (\% PIB) y la brecha del producto derivada mediante filtro Hodrick-Prescott ($\lambda=1600$).
+
+Sobre esta última variable corresponde una precisión metodológica. La literatura reciente \citep{hamilton2018} cuestiona el filtro HP en series macroeconómicas, señalando la introducción de ciclos espurios y distorsión sistemática en los extremos de la muestra. No obstante, esta investigación adopta $\lambda=1600$ por criterio de parsimonia y comparabilidad internacional con los manuales DSA del FMI y el BID, que emplean sistemáticamente esta convención. Como chequeo de robustez, se recalculó la brecha mediante el filtro de \citet{hamilton2018} ($h=8$, $p=4$ rezagos): ambas series presentan una correlación de $r=0.72$, un grado de acuerdo sustancial que sugiere que las conclusiones de la tesis no dependen críticamente de esta elección de diseño, aunque la correlación --lejos de la unidad-- confirma que ambos métodos no son intercambiables.
+
+La construcción de la matriz siguió un protocolo en dos etapas, detallado en el \textit{codebook}: obtención de datos desde las APIs de \url{apis.datos.gob.ar}, BCRA y Yahoo Finance, recurriendo a informes alternativos (CEPAL, FMI, JP Morgan, MECON) ante discontinuidades. La deuda pública incorporada en la especificación central corresponde a la deuda bruta del SPNF neta de tenencias intra-sector público (acreencias del FGS de la ANSES), corrección que reduce el ratio bruto publicado habitualmente en prensa entre 15 y 20 puntos porcentuales del PIB según el año, y resulta metodológicamente indispensable para evitar sobreestimar la exposición neta del Tesoro frente a acreedores extra-estatales.
+
+\section{Distribución y Volatilidad de las Variables Base}
+
+La Tabla \ref{tab:descriptivos} sintetiza los estadísticos descriptivos univariados de las siete variables continuas de la matriz de datos.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:descriptivos} Estadísticos descriptivos de las variables macro-fiscales (2004T1--2025T4, n=88).}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Variable} & \textbf{Media} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} \\
+\midrule
+EMBI+ (puntos básicos) & 2416.03 & 876.49 & 561.00 & 5500.00 & 0.95 \\
+Deuda SPNF / PIB (\%) & 65.93 & 18.68 & 40.00 & 119.00 & 0.60 \\
+Resultado Primario / PIB (\%) & -0.70 & 1.59 & -3.80 & 1.80 & -0.01 \\
+TCRM (índice) & 1.89 & 0.29 & 1.44 & 2.40 & 0.02 \\
+Brecha del Producto (\%) & -0.02 & 5.54 & -11.15 & 13.86 & 0.59 \\
+CER (índice acumulado) & 58.01 & 145.79 & 1.46 & 654.29 & 3.06 \\
+VIX (puntos) & 18.98 & 7.48 & 10.31 & 58.60 & 2.46 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, MECON, INDEC, JP Morgan, datos.gob.ar).
+\end{flushleft}
+\end{table}
+
+Tres regularidades son relevantes. Primero, el EMBI+ opera en un orden de magnitud muy superior al de economías emergentes con grado de inversión (150--400 pb), y su asimetría positiva (0.95) confirma la cola derecha propia de los episodios de pánico financiero, frente a fases de compresión del diferencial de riesgo comparativamente más graduales. Segundo, el Resultado Primario exhibe media negativa y asimetría prácticamente nula, compatible con la hipótesis de reacción fiscal débil de $H_{1a}$, mientras que la Deuda/PIB muestra una asimetría moderada que refleja la persistencia de episodios de sobreendeudamiento por encima de la media. Tercero, la asimetría extrema del CER (3.06) no expresa volatilidad financiera, sino la consecuencia mecánica de tratarse de un índice acumulativo de inflación pasada no comparable en niveles entre regímenes monetarios sucesivos, propiedad que la Sección \ref{sec:estacionariedad} somete a contraste formal de integración.
+
+\section{Evolución del Vector de Solvencia: Deuda y Superávit}
+
+El análisis temporal cruzado del ratio Deuda/PIB y el Resultado Primario, presentado en la Figura \ref{fig:dinamica_stocks_flujos}, permite visualizar la inoperancia práctica del teorema lineal de Bohn en la economía argentina.
+
+\begin{figure}[H]
+\centering
+\caption{Dinámica Macrofiscal Agregada e Hitos de Reestructuración Soberana}
+\label{fig:dinamica_stocks_flujos}
+\includegraphics[width=0.95\textwidth]{fig5_1_deuda_resultado_primario.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Promedios anuales del panel trimestral, con ejes duales (deuda: eje izquierdo; resultado primario: eje derecho) y delimitación de los cuatro regímenes macrofiscales sucesivos. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/graficos/generacion\_graficos\_tesis.py}).}
+\end{figure}
+
+La lectura revela cuatro regímenes sucesivos. Entre 2004 y 2011, la ratio de endeudamiento colapsa desde 110\% hasta un piso de 41.50\%, impulsada por la quita del canje de 2005 y por superávits primarios sostenidos (1.10\%--1.65\% del PIB) financiados por términos de intercambio favorables. Entre 2012 y 2017, el resultado primario se deteriora de manera continua hasta un déficit de 3.00\% del PIB en 2016, mientras la ratio de deuda recupera terreno moderadamente (de 43.00\% a 64.75\%). El tercer régimen, 2018--2020, es el más abrupto: la crisis cambiaria de 2018, el acuerdo con el FMI y la pandemia empujan la deuda hasta 94.50\% del PIB en apenas dos años. Finalmente, entre 2021 y 2025, el resultado primario retorna a terreno superavitario (1.58\% en 2024, 0.98\% en 2025) y la ratio de deuda desciende hasta 71.50\% del PIB.
+
+Ninguno de estos cuatro regímenes se explica exclusivamente por el esfuerzo fiscal corriente: la descompresión 2004--2011 combina quita nominal, crecimiento del denominador y términos de intercambio favorables con auge de materias primas; el salto 2018--2020 combina devaluación real, prima de riesgo creciente y contracción del producto. Esta observación constituye la motivación empírica directa para instrumentar el riesgo soberano en el Capítulo \ref{ch:resultados}.
+
+\section{Efecto Hoja de Balance: Tipo de Cambio Real y Variación de Deuda}
+\label{sec:hoja_balance}
+
+Como advierte la literatura sobre economías bimonetarias \citep{sanches2019}, cuando una porción sustancial del pasivo público está denominada en moneda extranjera, una devaluación del tipo de cambio real dispara mecánicamente el numerador de la ratio Deuda/PIB, independientemente del resultado primario contemporáneo. La Figura \ref{fig:hoja_balance} contrasta el nivel anual del TCRM con la variación interanual de la ratio de deuda.
+
+\begin{figure}[H]
+\centering
+\caption{Efecto Hoja de Balance: Tipo de Cambio Real vs. Variación Anual de Deuda}
+\label{fig:hoja_balance}
+\begin{tikzpicture}
+\begin{axis} [
+    xlabel={Tipo de Cambio Real Multilateral (índice)},
+    ylabel={Variación Interanual de la Ratio Deuda/PIB (p.p.)},
+    xmin=1.35, xmax=2.35,
+    ymin=-40, ymax=25,
+    grid=both,
+    grid style={dashed, gray!30},
+    title style={font=\bfseries\small},
+    label style={font=\small},
+    tick label style={font=\scriptsize}
+]
+\addplot[only marks, mark=triangle*, color=teal, mark size=3pt] coordinates {
+    (2.04,-8.0) (1.92,-5.0) (1.81,-3.0) (1.75,1.0) (1.70,-6.0) (1.61,-4.0)
+    (1.53,4.0) (1.47,2.0) (1.53,3.0) (1.49,5.0) (1.75,8.0) (1.57,5.0)
+    (1.80,19.0) (2.10,3.0) (2.27,8.0) (2.25,-17.0) (2.12,1.0) (2.06,9.0)
+    (2.25,-15.0) (2.07,-5.0)
+};
+\addplot[domain=1.4:2.3, red, thick] {28.9*x - 51.3};
+\end{axis}
+\end{tikzpicture}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Impacto de las variaciones del tipo de cambio real sobre el stock de pasivos. Recta de ajuste MCO simple (referencial). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, INDEC).}
+\end{figure}
+
+En términos de variaciones interperiódicas, la correlación empírica entre la primera diferencia del TCRM ($\Delta TCRM_t$) y la variación de la ratio Deuda/PIB ($\Delta d_t$) alcanza $r=0.42$, un valor moderado y positivo: consistente con el mecanismo de hoja de balance, pero lejos de una relación determinística. Esta moderación confirma que la variación del endeudamiento obedece a una combinación de factores (resultado primario, crecimiento, tipo de cambio y ajustes stock-flujo) y que ningún indicador aislado agota su explicación.
+
+\section{Protocolo de Estacionariedad y Pruebas de Raíz Unitaria}
+\label{sec:estacionariedad}
+
+Para evitar el riesgo de regresiones espurias, el protocolo evalúa el orden de integración de cada serie mediante dos contrastes complementarios: el test ADF (hipótesis nula: raíz unitaria) y el test KPSS (hipótesis nula: estacionariedad). La complementariedad de ambos --que testean hipótesis nulas opuestas-- permite identificar con mayor robustez los casos ambiguos, especialmente relevantes en muestras de tamaño moderado ($n=88$) como la presente.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:estacionariedad} Pruebas de raíz unitaria e integración de las series (niveles y primeras diferencias).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Variable} & \textbf{ADF $p$ (nivel)} & \textbf{KPSS $p$ (nivel)} & \textbf{ADF $p$ (dif.)} & \textbf{KPSS $p$ (dif.)} & \textbf{Orden} \\
+\midrule
+Deuda / PIB & 0.113 & 0.041 & 0.000 & 0.035 & Ambiguo / I(1) \\
+Result. Primario / PIB & 0.301 & 0.023 & 0.000 & 0.100 & I(1) \\
+Brecha del Producto & 0.001 & 0.100 & 0.001 & 0.100 & I(0) \\
+EMBI+ & 0.001 & 0.100 & 0.000 & 0.100 & I(0) \\
+TCRM & 0.342 & 0.069 & 0.000 & 0.099 & I(1) \\
+CER & 0.999 & 0.016 & 1.000 & 0.020 & Ambiguo / I(1) \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia. Test ADF bajo hipótesis nula de raíz unitaria; test KPSS bajo hipótesis nula de estacionariedad. p-valores reportados.
+\end{flushleft}
+\end{table}
+
+Los resultados exhiben un panel de integración mixta, con implicancias metodológicas directas. La brecha del producto y el EMBI+ son estacionarias en niveles, I(0): oscilan en torno a una media constante, consistente con su naturaleza de variables cíclicas. El Resultado Primario y el TCRM son I(1): el ADF no rechaza la raíz unitaria en niveles mientras el KPSS rechaza estacionariedad; ambas se estabilizan tras la primera diferencia. Los casos de la Deuda/PIB y del CER producen un diagnóstico ambiguo --síntoma habitual de series estacionarias en torno a una tendencia con quiebre estructural (\textit{trend-stationary with a structural break})-- que la Sección \ref{sec:zivot_andrews} somete a contraste formal.
+
+Como evidencia visual complementaria, la Figura \ref{fig:acf_pacf} presenta los correlogramas ACF y PACF de las cuatro series núcleo. El decaimiento lento de la ACF del Resultado Primario y de la ratio Deuda/PIB --frente al corte abrupto tras el primer rezago de la Brecha del Producto y del EMBI+-- ofrece una confirmación gráfica directa de la distinción entre series persistentes (I(1)) y de reversión rápida a la media (I(0)).
+
+\begin{figure}[H]
+\centering
+\caption{Funciones de Autocorrelación Simple (ACF) y Parcial (PACF) de las Series Núcleo}
+\label{fig:acf_pacf}
+\includegraphics[width=0.85\textwidth]{figura_5_5_acf_pacf.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} ACF (izquierda) y PACF (derecha, método Yule-Walker modificado) para 20 rezagos, con bandas de significatividad al 95\%. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase7\_diagnosticos\_robustez.py}).}
+\end{figure}
+
+\subsection{Contraste de Zivot-Andrews con Quiebre Estructural Endógeno}
+\label{sec:zivot_andrews}
+
+A diferencia de los contrastes con quiebre exógeno (Chow, Perron), el algoritmo de Zivot-Andrews no requiere especificar \textit{a priori} la fecha de ruptura. El procedimiento itera sobre cada fecha candidata $T_B$ dentro de una ventana de recorte del 15\% en cada extremo, estimando para cada una la regresión MCO del Modelo C (quiebre simultáneo en intercepto y pendiente):
+\[
+\Delta d_t = c + \alpha\, d_{t-1} + \beta t + \theta\, DU_t(T_B) + \gamma\, DT_t(T_B) + \sum_{j=1}^{4} \phi_j \Delta d_{t-j} + \varepsilon_t
+\]
+donde $DU_t(T_B)=\mathbb{I}(t>T_B)$ y $DT_t(T_B)=(t-T_B)\cdot\mathbb{I}(t>T_B)$, y selecciona el $T_B$ que minimiza el estadístico $t$ asociado a $\alpha$. El rezago aumentado se fijó en $k=4$ trimestres.
+
+Aplicado a la ratio Deuda/PIB, el algoritmo localiza el quiebre óptimo en 2018T2 --coincidente con el cierre del mercado voluntario de crédito y la aprobación del acuerdo \textit{stand-by} con el FMI en junio de ese año--. El estadístico $t$ obtenido (-2.83) no rechaza la hipótesis nula de raíz unitaria bajo ningún umbral crítico asintótico del Modelo C ($-5.58$ al 1\%, $-5.07$ al 5\%, $-4.83$ al 10\%). La ratio de deuda argentina se comporta como una serie genuinamente integrada de orden uno incluso permitiendo el quiebre más evidente de las últimas dos décadas. La restricción de un único quiebre es, además, insuficiente para una serie atravesada por múltiples reestructuraciones (2005, 2010, 2020) y episodios de interrupción repentina de capitales (\textit{sudden stop}, 2018): la Sección \ref{sec:quiebres_estructurales} extiende el análisis a un marco de quiebres múltiples, y la implicancia metodológica inmediata motiva la batería de pruebas de Johansen y la estimación DOLS desarrolladas en el Capítulo \ref{ch:resultados}.
+
+\subsection{Deuda Consolidada: Incorporación de los Pasivos Remunerados del BCRA}
+\label{sec:deuda_consolidada}
+
+La delimitación del Capítulo \ref{ch:metodologia} circunscribe $d_t$ al SPNF, excluyendo la absorción monetaria del BCRA: LEBAC/NOBAC (2002--2018), LELIQ/NOTALIQ (2018--2024) y la posición neta de pases. El devengamiento de intereses de estos instrumentos constituye un déficit cuasi-fiscal ausente del resultado primario del Tesoro, estimado en el orden del 9\%--10\% del PIB en su pico reciente. Como extensión de robustez, se construyó una serie de pasivos remunerados del BCRA a partir de las series oficiales v4.0 del BCRA (idVariable 1258, 1260 y 1261) y del PIB nominal trimestral de INDEC, sin neteo adicional entre ambos stocks.
+
+La brecha promedio entre ambas definiciones es de 5.5 puntos porcentuales del PIB, con un pico de 10.6\% en el primer trimestre de 2018 y una caída a valores prácticamente nulos desde mediados de 2024, cuando el Tesoro asumió el rol de esterilizador monetario mediante Letras Fiscales de Liquidez (LEFI). La Figura \ref{fig:deuda_consolidada} contrasta ambas series.
+
+\begin{figure}[H]
+\centering
+\caption{Deuda Pública: SPNF vs. Consolidada con Pasivos Remunerados del BCRA}
+\label{fig:deuda_consolidada}
+\includegraphics[width=0.95\textwidth]{figura_8_1_deuda_consolidada.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Elaboración propia en base a series oficiales BCRA v4.0 y PIB nominal INDEC (\texttt{codigo/ingesta\_datos/ingesta\_bcra\_pasivos.py}, \texttt{codigo/modelos/fase8\_deuda\_consolidada.py}).}
+\end{figure}
+
+La serie consolidada conserva el orden de integración de la serie SPNF (ADF no rechaza en niveles, $p=0.169$; rechaza en primera diferencia, $p<0.001$; KPSS rechaza estacionariedad en niveles, $p=0.038$), consistente con I(1). La Sección \ref{sec:quiebres_estructurales} evalúa si la cronología de quiebres estructurales se modifica al incorporar esta capa cuasi-fiscal.
+
+\subsection{Quiebres Estructurales Múltiples de Bai-Perron}
+\label{sec:quiebres_estructurales}
+
+El test de Zivot-Andrews impone la restricción de un único quiebre, insuficiente para una serie atravesada por las reestructuraciones soberanas de 2005, 2010 y 2020 y los episodios de \textit{sudden stop}. \textcite{bai2003} resuelven esta limitación estimando de manera consistente el número y la ubicación de quiebres múltiples sin conocimiento \textit{a priori} de sus fechas, mediante programación dinámica sobre la suma de cuadrados residuales de las particiones factibles, con selección del número de quiebres por el criterio BIC \citep{yao1988}.
+
+El criterio BIC selecciona $m^*=3$ quiebres para la deuda SPNF: 2007T2, 2014T3 y 2018T1. Las medias estimadas por segmento son 76.9\%, 46.8\%, 58.8\% y 82.1\% del PIB. Para la deuda consolidada con pasivos del BCRA, el criterio selecciona $m^*=2$ quiebres en 2007T2 y 2016T4, con medias de 81.8\%, 53.5\% y 86.4\% --una cronología distinta a la de la deuda SPNF sola, consistente con que el peso cuasi-fiscal del BCRA introduce su propia dinámica de régimen--.
+
+\begin{figure}[H]
+\centering
+\caption{Quiebres Estructurales Múltiples de Bai-Perron (Selección por BIC)}
+\label{fig:bai_perron}
+\includegraphics[width=0.95\textwidth]{figura_9_1_bai_perron.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Deuda SPNF vs. deuda consolidada SPNF+BCRA, con quiebres óptimos de Bai-Perron ($m^*=3$ y $m^*=2$ respectivamente) y medias de segmento superpuestas. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase9\_bai\_perron.py}).}
+\end{figure}
+
+Como evidencia exploratoria complementaria, se aplicó sobre el Resultado Primario un algoritmo de detección de quiebres por programación dinámica de costo $L_2$ (paquete \texttt{ruptures} \citep{truong2020}), fijando cuatro particiones para permitir una lectura comparable con los cuatro regímenes macrofiscales de la Figura \ref{fig:dinamica_stocks_flujos}.
+
+\begin{figure}[H]
+\centering
+\caption{Cronología de Quiebres Estructurales Múltiples en el Resultado Primario}
+\label{fig:quiebres_timeline}
+\includegraphics[width=0.95\textwidth]{figura_5_4_quiebres_timeline.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Quiebres detectados mediante programación dinámica (costo $L_2$, \texttt{ruptures}), en el espíritu del enfoque de partición óptima de \textcite{bai2003} (Sección \ref{sec:zivot_andrews}). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/graficos/generacion\_cronologia\_quiebres.py}).}
+\end{figure}
+
+Los cuatro quiebres detectados (2008T3, 2013T2, 2019T1 y 2024T1) se aproximan a los límites de los cuatro regímenes macrofiscales identificados en la Sección anterior, con desfases de entre uno y cuatro trimestres. Esta coincidencia aproximada confirma que los regímenes macrofiscales identificados no son arbitrarios, aunque no coinciden mecánicamente con el punto de quiebre estadísticamente óptimo de la serie de resultado primario aislada.
+
+\section{Matriz de Correlaciones Bivariadas y Diagnóstico de Multicolinealidad}
+\label{sec:correlaciones_vif}
+
+La evaluación de las correlaciones bivariadas arroja tres resultados relevantes para el diseño de la estrategia de instrumentación del Capítulo \ref{ch:resultados}. El VIX y el EMBI+ exhiben una correlación positiva moderada ($r=0.33$), confirmando el canal de fuga hacia la calidad (\textit{flight to quality}) de la literatura de finanzas internacionales, aunque la magnitud moderada advierte que el VIX explica solo una fracción de la varianza del riesgo país. La brecha del producto y el resultado primario muestran una correlación prácticamente nula ($r=0.07$). Esto no debe leerse como evidencia de una política contracíclica ejemplar: advierte, en cambio, que la correlación contemporánea simple no captura relaciones rezagadas, no lineales, ni mediadas por terceras variables, que la estimación multivariada del Capítulo \ref{ch:resultados} sí controla. Finalmente, la correlación entre la primera diferencia del TCRM y de la ratio de deuda ($r=0.42$) es la más robusta de las tres.
+
+La correlación bivariada, no obstante, no permite descartar dependencias lineales entre tres o más regresores simultáneamente. Se complementa por ello con los factores de inflación de la varianza (VIF) y el número de condición de la matriz de regresores estandarizados, calculados sobre las dos especificaciones relevantes para el Capítulo \ref{ch:resultados} y reportados en la Tabla \ref{tab:vif}.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:vif} Diagnóstico de Multicolinealidad: Factores de Inflación de la Varianza y Número de Condición.}
+\begin{tabular}{llrr}
+\toprule
+\textbf{Especificación} & \textbf{Regresor} & \textbf{VIF} & \textbf{Núm. de condición} \\
+\midrule
+\multirow{2}{*}{Núcleo de Bohn (DOLS)} & $d_{t-1}$ & 1.020 & \multirow{2}{*}{1.151} \\
+ & Brecha del producto ($\tilde{y}_t$) & 1.020 & \\
+\midrule
+\multirow{4}{*}{Ampliada (Bohn + EMBI+ + TCRM)} & $d_{t-1}$ & 3.816 & \multirow{4}{*}{3.836} \\
+ & Brecha del producto ($\tilde{y}_t$) & 1.113 & \\
+ & EMBI+ & 1.218 & \\
+ & TCRM & 3.689 & \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} $n=87$ en ambas especificaciones. Umbrales convencionales de alerta: $VIF>10$ y número de condición $>30$. El número de condición se computa sobre los regresores estandarizados, excluyendo la constante. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase12\_diagnosticos\_complementarios.py}).
+\end{flushleft}
+\end{table}
+
+Ninguna de las dos especificaciones exhibe multicolinealidad problemática. En el núcleo de Bohn --la especificación efectivamente estimada por DOLS-- los dos regresores son prácticamente ortogonales ($VIF=1.02$, número de condición $=1.15$). En la especificación ampliada, el VIF más alto corresponde a $d_{t-1}$ ($3.82$) y al TCRM ($3.69$), reflejando el canal de valuación cambiaria sobre el stock de deuda documentado en la Sección \ref{sec:hoja_balance}, pero ambos permanecen holgadamente por debajo del umbral convencional de $10$, y el número de condición ($3.84$) muy por debajo de $30$. La imprecisión de los coeficientes reportada en el Capítulo \ref{ch:resultados} no es, por tanto, atribuible a colinealidad entre regresores.
+
+\section{Dispersión Empírica y la Hipótesis de Fatiga Fiscal}
+
+Como aproximación descriptiva preliminar a la hipótesis central de esta tesis ($H_{1a}$), la Figura \ref{fig:scatter_fatiga} cruza el nivel de deuda heredado ($d_{t-1}$) con el esfuerzo fiscal contemporáneo ($pb_t$) para el panel trimestral completo.
+
+\begin{figure}[H]
+\centering
+\caption{Dispersión Empírica: Esfuerzo Primario vs. Endeudamiento Heredado}
+\label{fig:scatter_fatiga}
+\includegraphics[width=0.85\textwidth]{fig5_3_dispersion_fatiga_fiscal.png}
+\par\vspace{2mm}
+{\footnotesize\textit{Nota.} Dispersión empírica trimestral completa (87 pares $(d_{t-1}, pb_t)$), con ajuste polinómico local de segundo grado e intervalo de confianza del 95\% sombreado. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/graficos/generacion\_graficos\_tesis.py}).}
+\end{figure}
+
+La nube de puntos sugiere, a simple vista, un patrón compatible con la hipótesis de fatiga fiscal: los superávits más altos (en torno a 1.00\%--1.60\% del PIB) se concentran en la región de deuda baja o moderada (40.00\%--70.00\%), mientras que la región de deuda elevada (80.00\%--120.00\%) exhibe mayoritariamente resultados deficitarios, con dos excepciones recientes (2024--2025) que reintroducen superávits modestos bajo un nivel de deuda todavía relativamente alto (79.00\% y 73.00\%). Es necesario, no obstante, evitar inferir un umbral en esta etapa descriptiva bivariada: la dispersión no controla por la brecha del producto, el riesgo soberano contemporáneo ni la dinámica temporal de la serie, todos ellos factores que la especificación de umbral formal de \citet{hansen1999} incorpora explícitamente en el Capítulo \ref{ch:resultados}. Como se mostrará allí, cuando estos controles se introducen, la evidencia estadística del quiebre sugerido visualmente pierde buena parte de su fuerza aparente en la especificación de nivel, aunque una especificación alternativa formalmente más apropiada la recupera (Sección \ref{sec:robustez_hansen_dpb}).
+
+\section{Limitaciones de la Muestra y Advertencias de Inferencia}
+\label{sec:limitaciones_muestra}
+
+Los resultados presentados en este capítulo --y los que se desarrollarán en los Capítulos \ref{ch:resultados} y \ref{ch:discusion}-- deben interpretarse a la luz de las limitaciones inherentes a la muestra. Las 88 observaciones trimestrales (2004T1--2025T4) representan la totalidad del período disponible con cobertura homogénea de las variables núcleo del modelo, pero esta longitud muestral, adecuada para series de tiempo de un único país en condiciones de estacionariedad, limita la potencia estadística de pruebas como el umbral de Hansen y la cointegración de Johansen, especialmente en presencia de quiebres estructurales frecuentes.
+
+El contexto de alta volatilidad estructural y regímenes de política cambiante --documentado en la cronología de Bai-Perron (Sección \ref{sec:quiebres_estructurales})-- agrava esta limitación: cuando la variable de umbral (EMBI+, $\sigma=876$ pb) y la dependiente (resultado primario, $\sigma=1.59$ pp del PIB) están ambas sometidas a perturbaciones de magnitud comparable a la señal buscada, la relación señal-ruido se vuelve desfavorable para la identificación de quiebres discretos. Los tests de robustez implementados (subperíodos, especificaciones alternativas, GARCH/DCC) confirman la fragilidad de inferencias fuertes sobre la significatividad estadística de los coeficientes individuales, lo que refuerza la necesidad de cautela en las proyecciones y de priorizar la consistencia del diagnóstico cualitativo sobre la precisión puntual de los estimadores.

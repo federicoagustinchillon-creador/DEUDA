@@ -1,0 +1,126 @@
+\documentclass[11pt,a4paper,oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{../figuras/}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=1.18}
+\usepackage{caption}
+\captionsetup{labelfont=bf, textfont=it, labelsep=newline, justification=justified, singlelinecheck=false}
+% APA 7 (edicion en espanol) rotula los objetos tabulares como "Tabla", no como "Cuadro".
+% babel-spanish impone "Cuadro" por defecto; se restituye "Tabla" para que el encabezado
+% del objeto, el indice y las remisiones en el cuerpo del texto usen exactamente la misma etiqueta.
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Tabla}%
+  \renewcommand{\listtablename}{Índice de tablas}%
+}
+\usepackage{csquotes}
+\usepackage{mathptmx} % Times New Roman
+\usepackage[left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm,headheight=1.2cm,headsep=0.4cm]{geometry} % Margenes APA 7 (top repartido entre cabecera y margen)
+\usepackage{setspace}
+\onehalfspacing % Interlineado 1.5 (Aceptado en FCE UNCUYO)
+\usepackage{etoolbox}
+\AtBeginEnvironment{table}{\singlespacing} % Interlineado sencillo en tablas (APA 7)
+\AtBeginEnvironment{figure}{\singlespacing} % Interlineado sencillo en figuras (APA 7)
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} % Sangria APA 7 / Catedra FCE
+
+\usepackage{titlesec}
+% Formateo basico APA 7 para capitulos (Centrado, negrita)
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering}{\chaptertitlename\ \thechapter}{12pt}{\Large}
+
+\usepackage{hyperref}
+\usepackage[nohyperlinks]{acronym}
+
+\usepackage[style=apa, backend=biber, natbib=true]{biblatex}
+\addbibresource{referencias.bib}
+
+% Cabecera institucional (logo UNCuyo) en todas las páginas, incluidas las de inicio de capítulo
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{29.68733pt} % suficiente para el logo (0.9cm) + holgura; evita el warning de fancyhdr
+\fancyhf{}
+\fancyhead[C]{\includegraphics[height=0.9cm]{logo_fce_uncuyo.png}}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{\thepage}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[C]{\includegraphics[height=0.9cm]{logo_fce_uncuyo.png}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \fancyfoot[C]{\thepage}
+}
+
+\begin{document}
+\sloppy
+% PORTADA OFICIAL (Tesis Final de Grado)
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+
+    \includegraphics[width=6cm]{logo_fce_uncuyo.png}\\[0.7cm]
+
+    {\large \textbf{UNIVERSIDAD NACIONAL DE CUYO}}\\[0.3cm]
+    {\large \textbf{FACULTAD DE CIENCIAS ECONÓMICAS}}\\[2cm]
+
+    {\LARGE \textbf{La solvencia intertemporal de la deuda consolidada argentina post-2025: proyecciones a partir de sus determinantes macroeconómicos (2004-2025)}}\\[2cm]
+
+    {\large Tesis Final de Grado}\\[2cm]
+
+    \begin{flushleft}
+        \large
+        \textbf{Autores:}\\
+        Páez, Santiago -- Legajo: 34110\\
+        Chillón, Federico -- Legajo: 34394\\
+        Carricondo, Emiliano -- Legajo: 33396\\
+
+    \end{flushleft}
+
+    \vfill
+
+    {\large \textbf{Mendoza, Argentina}}\\
+    {\large \textbf{2026}}
+\end{titlepage}
+
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+\input{../capitulos/00_abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\chapter*{Lista de Acrónimos}
+\addcontentsline{toc}{chapter}{Lista de Acrónimos}
+\input{../capitulos/00_acronimos}
+\newpage
+
+% Nota: se usa \input en lugar de \include porque \include intenta escribir
+% un archivo .aux propio junto a cada capítulo (en ../capitulos/), y MiKTeX
+% bloquea por seguridad la escritura fuera del árbol de la carpeta de
+% compilación. \input no genera ese archivo auxiliar y evita el problema.
+\input{../capitulos/01_introduccion}
+\input{../capitulos/02_estado_del_arte}
+\input{../capitulos/03_marco_teorico}
+\input{../capitulos/04_metodologia}
+\input{../capitulos/05_datos}
+\input{../capitulos/06_resultados}
+\input{../capitulos/07_discusion}
+\input{../capitulos/08_conclusiones}
+
+\appendix
+\input{../capitulos/09_apendice}
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,70 @@
+\chapter{Introducción}
+\label{ch:introduccion}
+
+\section{Contextualización de la Problemática}
+
+La República Argentina representa un caso paradigmático de inestabilidad macroeconómica crónica, caracterizado por episodios recurrentes de \textit{default} (cesación de pagos), reestructuraciones de deuda y una exposición estructural a la restricción de divisas \citep{mendoza2007, derasmo2016}. Tras la crisis de 2001 y la reestructuración de 2005 --con una quita de valor presente neto superior al 65\%-- la ratio Deuda/PIB cayó de 110\% a un piso de 41,5\% hacia 2011, impulsada por el recorte nominal de capital y un ciclo de materias primas (\textit{commodities}) favorable. A partir de 2012 el deterioro fiscal fue continuo: el déficit primario alcanzó 3\% del PIB hacia 2016, el Estado retornó a los mercados internacionales de crédito y, tras el cierre abrupto de esos mercados en 2018 y el acuerdo con el FMI, la ratio de deuda consolidada saltó hasta 94,5\% del PIB.
+
+La percepción de riesgo soberano, medida por el \textit{Emerging Markets Bond Index} (EMBI+), promedió 2.416 puntos básicos durante el período 2004--2025 --con una desviación estándar de 876 puntos--, lo que refleja la incompatibilidad estructural entre las condiciones de financiamiento externo y una trayectoria de deuda estable. Recién en el bienio 2024--2025 un ajuste fiscal pronunciado, que restituye el superávit primario por primera vez desde 2011, coincidió con una compresión del EMBI+ hacia 561--1.100 puntos básicos. Esta trayectoria no puede explicarse exclusivamente por decisiones de política fiscal discrecional: la hoja de balance del Banco Central de la República Argentina (BCRA), la evolución del tipo de cambio real y la restricción de divisas operaron como determinantes simultáneos --a menudo dominantes-- de la ratio Deuda/PIB, y la literatura sobre \textit{fatiga fiscal} advierte que existe un límite económico e institucional para los superávits primarios que una sociedad puede sostener de manera prolongada \citep{ghosh2013}.
+
+\section{Delimitación Científica del Objeto}
+
+En consonancia con la ruptura epistemológica que exige toda construcción de objeto científico \citep{bachelard1938}, esta delimitación se aparta de las prenociones dicotómicas sobre la deuda pública (``buena''/``mala'', ``legítima''/``odiosa''), no operacionalizables en una matriz de datos cuantitativa. Esta tesis define la deuda pública consolidada como una \textbf{restricción presupuestaria intertemporal}, cuya sostenibilidad queda parametrizada por una Función de Reacción Fiscal estimable y por dinámicas estocásticas latentes en los fundamentos macroeconómicos. El riesgo soberano se modela como variable endógena que interactúa con la fatiga fiscal, y no como un factor exógeno aislado ni como resultado de la mera voluntad política del gobierno de turno.
+
+\section{Viabilidad de la Investigación}
+
+El diseño es viable en sus tres dimensiones convencionales: material, dado que la totalidad de las series proviene de organismos oficiales de acceso público y gratuito (BCRA, MECON, INDEC, datos.gob.ar) y de repositorios financieros de uso académico habitual (JP Morgan, Yahoo Finance), sin relevamiento primario ni financiamiento externo; técnica, dado que el instrumental econométrico requerido se encuentra íntegramente disponible en librerías econométricas de código abierto en Python; y temporal, dado que, al tratarse de un panel de series de tiempo de un único país, el cronograma de ejecución (Capítulo \ref{ch:metodologia}) no depende de la coordinación con terceros actores institucionales ni de trabajo de campo.
+
+\section{Planteamiento del Problema}
+
+La evaluación estándar de la sostenibilidad de la deuda pública, basada en la restricción presupuestaria intertemporal de \citet{bohn1998}, sostiene que una política fiscal es sostenible si el Estado incrementa sistemáticamente su superávit primario ante el crecimiento de la ratio Deuda/PIB. Este enfoque asume que el espacio fiscal --formalizado por \citet{ostry2010} como la distancia entre el nivel de deuda vigente y el límite que la capacidad de ajuste permite sostener-- es ilimitado. Dicha presunción colisiona con la realidad de las economías emergentes: modelizaciones empíricas \citep{mendoza2004, mendoza2009, ghosh2013} sugieren que la Función de Reacción Fiscal (FRF) puede exhibir no linealidades, con una reacción atenuada o inexistente bajo niveles elevados de deuda o riesgo soberano. La literatura aplicada a Argentina ha tendido además a excluir el riesgo soberano endógeno de la modelación de la reacción fiscal y a omitir el componente estocástico de las variables macroeconómicas --vacíos que esta tesis aborda directamente.
+
+\section{Trinidad Lógica de la Investigación}
+
+A continuación se sintetiza la correspondencia lógica entre la pregunta problema, el objetivo general y la hipótesis general que vertebra esta investigación.
+
+\begin{itemize}
+    \item \textbf{Pregunta Problema ($P_1$):} ¿En qué medida las trayectorias de los determinantes macroeconómicos (crecimiento del producto, tipo de cambio real, tasa de interés y resultado fiscal primario) condicionaron la solvencia intertemporal de la deuda pública consolidada argentina durante el período 2004--2025, y qué horizontes de probabilidad emergen, a partir de dicha evidencia, para el subperíodo prospectivo 2026--2035?
+    \item \textbf{Objetivo General ($O_G$):} Determinar en qué medida los determinantes macroeconómicos condicionaron la solvencia intertemporal de la deuda pública consolidada argentina (2004--2025) y proyectar su sostenibilidad hacia 2026--2035. Se formaliza en la Sección \ref{sec:objetivos_especificos}.
+    \item \textbf{Hipótesis General ($H_1$):} La solvencia intertemporal de la deuda pública consolidada argentina durante el período 2004--2025 estuvo condicionada por una función de reacción fiscal estructuralmente débil frente al endeudamiento, en un régimen macroeconómico caracterizado por un canal de transmisión del riesgo país (EMBI+) hacia el esfuerzo fiscal efectivo, ambos fenómenos enmarcados por la restricción externa periférica.
+\end{itemize}
+
+Los dos primeros componentes de $H_1$ --la debilidad de la función de reacción fiscal y el canal de transmisión del riesgo país-- se someten a contraste estadístico explícito mediante DOLS, IV-2SLS y el modelo de umbral de Hansen (Capítulo \ref{ch:resultados}). La restricción externa periférica, en cambio, no es un contraste puntual sino el marco paradigmático (Nivel I, Capítulo \ref{ch:marco_teorico}) que enmarca la interpretación de ambos --de allí ``enmarcados'' y no ``determinados''--: un supuesto de fondo, no un tercer contraste independiente.
+
+\section{Objetivos de la Investigación}
+
+\subsection{Objetivo General}
+Determinar en qué medida los determinantes macroeconómicos condicionaron la solvencia intertemporal de la deuda pública consolidada argentina (2004--2025), mediante la estimación de una Función de Reacción Fiscal y la implementación de un Análisis de Sostenibilidad de la Deuda (DSA) estocástico orientado al horizonte 2026--2035.
+
+\subsection{Objetivos Específicos}
+\label{sec:objetivos_especificos}
+Para alcanzar el objetivo general, se plantea el siguiente protocolo analítico-econométrico:
+
+\begin{enumerate}
+    \item \textbf{Analizar} las propiedades estocásticas de las series de tiempo macro-fiscales (2004--2025) mediante pruebas de raíz unitaria (ADF, KPSS) y de quiebre estructural endógeno (Zivot-Andrews).
+    \item \textbf{Verificar} la existencia de relaciones de equilibrio de largo plazo entre la ratio de endeudamiento, el esfuerzo primario, el riesgo soberano y el tipo de cambio real, mediante el contraste de Traza y Máximo Autovalor de Johansen.
+    \item \textbf{Estimar} la Función de Reacción Fiscal histórica mediante Mínimos Cuadrados Ordinarios Dinámicos (DOLS).
+    \item \textbf{Evaluar} la endogeneidad del riesgo soberano (EMBI+) respecto del esfuerzo fiscal, mediante Variables Instrumentales en Dos Etapas (IV-2SLS).
+    \item \textbf{Evaluar} la existencia de no linealidades y regímenes de fatiga fiscal mediante un modelo de umbral para series temporales \citep{hansen1999,hansen2000}.
+    \item \textbf{Proyectar} las trayectorias de la deuda consolidada para el período 2026--2035 bajo escenarios macroeconómicos deterministas, y simular las bandas de probabilidad de un Análisis de Sostenibilidad de la Deuda estocástico mediante el método de Monte Carlo.
+\end{enumerate}
+
+\section{Justificación de la Investigación}
+
+La justificación de esta tesis reside en el vacío de conocimiento que persiste en la literatura sobre sostenibilidad fiscal para el caso argentino. En la dimensión metodológica, la tesis avanza sobre las limitaciones de la ecuación de acumulación clásica en dos direcciones no exploradas conjuntamente para este período: la corrección explícita de la endogeneidad del riesgo soberano mediante instrumentación en dos etapas, y el sometimiento de la hipótesis de fatiga fiscal a un contraste de significatividad estadística formal, en lugar de asumirla por analogía con la literatura internacional. En la dimensión empírica, la consolidación de los pasivos remunerados del BCRA con la deuda del SPNF y la implementación de un DSA estocástico con volatilidad GARCH y correlación condicional dinámica constituyen extensiones que la literatura aplicada al período 2004--2025 no ha desarrollado de manera integrada.
+
+\section{Hipótesis Derivadas}
+
+La Hipótesis General se desagrega en tres hipótesis derivadas --enunciados contrastables, parsimoniosos y no tautológicos--, cada una vinculada a una técnica econométrica específica del protocolo del Capítulo \ref{ch:metodologia}.
+
+\begin{itemize}
+    \item \textbf{$H_{1a}$ (Fatiga Fiscal y Umbrales No Lineales):} La Función de Reacción Fiscal argentina exhibe un umbral crítico de deuda o de riesgo soberano por encima del cual el coeficiente de reacción del superávit primario pierde significatividad estadística, evidenciando fatiga fiscal. Contrastada mediante el modelo de umbral de \citet{hansen1999,hansen2000} (Sección \ref{sec:hansen}).
+    \item \textbf{$H_{1b}$ (Endogeneidad del EMBI+ sobre el Coeficiente de Reacción Fiscal):} El riesgo soberano (EMBI+) no es una variable exógena respecto del esfuerzo fiscal, sino que existe una relación de doble causalidad que sesga la estimación por Mínimos Cuadrados Ordinarios simples. Contrastada mediante Variables Instrumentales en Dos Etapas (IV-2SLS).
+    \item \textbf{$H_{1c}$ (Existencia de Quiebres Estructurales Históricos):} La serie de la ratio Deuda/PIB exhibe al menos un quiebre estructural estadísticamente identificable en el período 2004--2025, asociado a episodios de crisis de financiamiento externo. Contrastada mediante el test de quiebre endógeno de Zivot-Andrews y el procedimiento de quiebres múltiples de Bai-Perron.
+\end{itemize}
+
+Como se desarrolla en el Capítulo \ref{ch:resultados}, la evidencia recogida para estas tres hipótesis derivadas es de magnitud e intensidad estadística heterogénea, y en ningún caso alcanza, con la muestra disponible, una confirmación categórica e inequívoca.
+
+\section{Estructura de la Tesis}
+
+El presente documento se estructura en ocho capítulos. El Capítulo \ref{ch:antecedentes} sistematiza el Estado del Arte y delimita el área de vacancia científica. El Capítulo \ref{ch:marco_teorico} desarrolla el Marco Teórico en sus tres niveles de abstracción (paradigma macroeconómico, teoría general de la solvencia y teoría sustantiva de la fatiga fiscal). El Capítulo \ref{ch:metodologia} presenta el diseño metodológico, la matriz operacional de variables, la unidad de análisis y el protocolo econométrico completo. El Capítulo \ref{ch:descriptivo} ofrece el análisis estadístico descriptivo y las pruebas de integración de las series. El Capítulo \ref{ch:resultados} expone la estimación econométrica de la Función de Reacción Fiscal bajo las cuatro estrategias del protocolo. El Capítulo \ref{ch:discusion} discute dichos resultados a la luz de las hipótesis y desarrolla las proyecciones estocásticas de sostenibilidad. El Capítulo \ref{ch:conclusiones} consolida los hallazgos, reconoce las limitaciones del estudio y propone una agenda de investigación futura.

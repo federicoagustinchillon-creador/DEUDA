@@ -1,0 +1,4 @@
+escenario,prob_calibrado,prob_garch_parcial
+Optimista,5.0,4.0
+Referencia,30.4,31.900000000000002
+Estrés,100.0,100.0

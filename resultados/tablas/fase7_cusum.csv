@@ -1,0 +1,2 @@
+stable_cusum,max_cusumsq_deviation,cusumsq_boundary_5pct,stable_cusumsq
+True,0.3927904851181875,0.5959,True

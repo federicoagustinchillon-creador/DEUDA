@@ -1,0 +1,80 @@
+\chapter{Marco Metodológico y Diseño de Investigación}
+\label{ch:metodologia}
+
+Este capítulo detalla y justifica las elecciones metodológicas, el tipo de diseño, la matriz operacional de variables y las técnicas econométricas que conforman el protocolo de esta investigación.
+
+\section{Enfoque, Tipo y Alcance de la Investigación}
+Siguiendo la clasificación estándar de los diseños de investigación en ciencias sociales \citep{marradi2007, rojas2013} y los criterios de formulación de un proyecto de tesis \citep{bassi2015}, esta investigación adopta un \textbf{enfoque cuantitativo} y un \textbf{alcance descriptivo-\allowbreak{}explicativo}, buscando establecer relaciones estadísticas e inferir umbrales críticos de reacción fiscal. El diseño temporal es \textbf{longitudinal de series de tiempo} (caso único, Argentina 2004--2025, frecuencia trimestral, $n=88$), lo cual permite capturar la volatilidad e inestabilidad macroeconómica local sin el sesgo de promedios multinacionales. Siguiendo una \textbf{lógica deductiva}, se derivan hipótesis contrastables ($H_{1a}$, $H_{1b}$, $H_{1c}$) desde la Restricción Presupuestaria Intertemporal y se someten a contrastación empírica en el Capítulo \ref{ch:resultados}.
+
+\subsection{Unidad de Análisis}
+\label{sec:unidad_analisis}
+La Unidad de Análisis es el \textbf{trimestre macroeconómico consolidado} de Argentina para el período 2004T1--2025T4. Esta frecuencia, frente a la agregación anual tradicional, captura la volatilidad de los flujos fiscales y las oscilaciones del riesgo país sin los suavizamientos de la baja frecuencia anual.
+
+\subsection{Matriz Operacional de Variables}
+\label{sec:matriz_operacional}
+Siguiendo la estructura del dato científico --unidad de análisis, variable, valor e indicador-- propuesta por \citet{samaja1993}, la Tabla \ref{tab:variables_operacional} formaliza la correspondencia entre cada dimensión teórica desarrollada en el Capítulo \ref{ch:marco_teorico}, su variable econométrica simbólica y su indicador operacional efectivamente medido, explicitando además su unidad de medida y su fuente de datos oficial.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:variables_operacional} Matriz de Operacionalización de Variables e Isomorfismo Lógico.}
+\resizebox{\textwidth}{!}{%
+\footnotesize
+\begin{tabular}{p{2.2cm}p{1.1cm}p{3.6cm}p{1.5cm}p{3.4cm}p{2.2cm}}
+\toprule
+\textbf{Dimensión Teórica} & \textbf{Variable} & \textbf{Indicador Operacional / Proxy} & \textbf{Unidad} & \textbf{Transformación Aplicada} & \textbf{Fuente} \\
+\midrule
+Esfuerzo Fiscal Primario Corriente & $pb_t$ & Resultado Primario del SPNF / PIB & \% & Nivel, sin transformar (admite negativos) & Hacienda (MECON) \\
+Stock de Deuda Heredado & $d_{t-1}$ & Stock de Deuda Bruta Consolidada SPNF$_{t-1}$ / PIB & \% & Nivel, rezagado un período & Finanzas (MECON) \\
+Ciclo Macroeconómico & $\tilde{y}_t$ & Brecha del Producto (HP s/ PIB real) & Desv. \% & Filtro HP ($\lambda=1600$), \% de desvío tendencial & INDEC \\
+Perturbaciones de Gasto Extraordinario & $g_{t}^{exp}$ & Gasto primario en crisis real & p.p. PIB & Nivel, sin transformar & MECON \\
+Restricción Financiera Internacional & $risk_t$ & Riesgo País (EMBI+) & pb & Nivel; rezagado como instrumento (Etapas 3 y 5) o contemporáneo como variable endógena (Etapa 4) & BCRA / Bloomberg \\
+Efecto de Valoración Cambiaria & $tc_t^{val}$ & Interacción deuda en moneda extranjera $\times$ variación TCRM & Tasa var. & Tasa de variación interperiódica del TCRM & BCRA / INDEC \\
+Tensión Cambiaria (nivel) & --- & TCR \textbf{Multilateral} (TCRM, base BCRA; no bilateral USD/ARS) & Índice & Nivel; variable de control macroeconómico & BCRA / datos.gob.ar \\
+Precios Relativos & --- & Coef. de Estabilización de Referencia & Índice acum. & Nivel, sin transformar & BCRA \\
+Perturbación Financiera / Riesgo Emergente & --- & VIX (CBOE) y ETF EMB (iShares JPMorgan EMBI) & Puntos / USD & Nivel; instrumentos externos (IV-2SLS) & Yahoo Finance / Bloomberg \\
+\midrule
+Restricción Externa (paradigma marco, Nivel I) & --- & \textit{Sin variable de aproximación propia.} Paradigma (Cap. \ref{ch:marco_teorico}) operacionalizado vía $risk_t$ y $tc_t^{val}$ & N/A & N/A & --- \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia en base al libro de códigos (\textit{codebook}) de la matriz de datos consolidada del proyecto. La Deuda Pública Consolidada corresponde exclusivamente al Sector Público No Financiero (SPNF), excluyendo pasivos remunerados del BCRA (ver aclaración de perímetro institucional a continuación). Fuentes institucionales: Ministerio de Economía --- \url{https://www.economia.gob.ar} ---; INDEC --- \url{https://www.indec.gob.ar} ---; BCRA --- \url{https://www.bcra.gob.ar} ---; Portal de Datos Abiertos --- \url{https://www.datos.gob.ar} ---; Yahoo Finance --- \url{https://finance.yahoo.com} ---.
+\end{flushleft}
+\end{table}
+
+La variable Deuda Pública ($d_t$) corresponde al stock bruto consolidado del Sector Público No Financiero (SPNF), según los estándares del Manual de Estadísticas de Finanzas Públicas del FMI (2014) y la Secretaría de Finanzas (MECON). Se excluyen de la definición central los pasivos remunerados del BCRA (LEBAC, LELIQ y pases), cuya dinámica responde a política monetaria. No obstante, como prueba de robustez (Capítulo \ref{ch:resultados}), se construye una serie consolidada alternativa que suma los pasivos del BCRA al stock del SPNF.
+
+\section{Construcción y Crítica de las Fuentes de Datos}
+El trabajo empírico en Argentina enfrenta el desafío estructural de la calidad y continuidad de las estadísticas públicas. En línea con la exigencia de respaldo empírico de toda afirmación sobre la evolución de las variables \citep{ynoub2007}, esta investigación utiliza exclusivamente \textbf{fuentes secundarias oficiales}, obtenidas mediante un protocolo de ingesta en dos etapas. En primera instancia, se intentó la descarga automatizada vía \textit{Application Programming Interface} (API): la Deuda Pública, el Resultado Primario y el Tipo de Cambio Real Multilateral desde \texttt{apis.datos.gob.ar} (MECON/BCRA/INDEC); el Coeficiente de Estabilización de Referencia desde la API pública del BCRA; y el índice de volatilidad VIX desde Yahoo Finance. En segunda instancia, ante discontinuidades o interrupciones de conectividad, se recurrió a un esquema jerárquico de fuentes de contingencia --informes del BCRA y MECON, series históricas de JP Morgan y CEPAL, y la base \textit{World Economic Outlook} del FMI--, exigiendo en todos los casos el cruce contra un mínimo de dos fuentes independientes antes de su incorporación a la base consolidada, como criterio de confiabilidad instrumental de la matriz de datos \citep{cohen2019}.
+
+\section{Estrategia Econométrica}
+
+La evaluación de la fatiga fiscal requiere un abordaje econométrico secuencial de seis etapas, diseñado para evitar estimadores sesgados o regresiones espurias.
+
+\subsection{Etapa 1: Estacionariedad y Quiebre Estructural Endógeno}
+Se aplican los contrastes de Dickey-Fuller Aumentado (ADF) y Kwiatkowski-Phillips-Schmidt-Shin (KPSS) ---de hipótesis nulas opuestas--- junto con el test de \textit{Dickey-Fuller Generalized Least Squares} (DF-GLS) de \textcite{elliott1996} sobre cada serie en niveles y en primeras diferencias. Para los casos de diagnóstico ambiguo entre dichos contrastes, se implementa adicionalmente el test de quiebre estructural endógeno de \textcite{zivot1992}, que no requiere especificar \textit{a priori} la fecha de ruptura sino que la estima mediante búsqueda secuencial del punto que minimiza el estadístico $t$ del parámetro autorregresivo, permitiendo distinguir series genuinamente integradas de series estacionarias en torno a una tendencia quebrada.
+
+\subsection{Etapa 2: Cointegración de Johansen}
+Antes de estimar cualquier relación de largo plazo, se verifica mediante el procedimiento de máxima verosimilitud de Johansen (contrastes de Traza y Máximo Autovalor) basado en un Modelo de Vectores Autorregresivos de orden dos, VAR(2) ---seleccionado por mayoría de criterios de información (AIC, HQ, FPE)---, si el sistema conformado por la ratio de deuda ($d_t$), el resultado primario ($pb_t$), el riesgo soberano ($risk_t$) y el tipo de cambio real ($tc_t$) admite al menos una combinación lineal estacionaria, condición necesaria para descartar una regresión espuria en niveles.
+
+\subsection{Etapa 3: Mínimos Cuadrados Ordinarios Dinámicos (DOLS)}
+La especificación de la Función de Reacción Fiscal de largo plazo es:
+\begin{equation}
+pb_t = \alpha + \rho\, d_{t-1} + \gamma\, \tilde{y}_t + \sum_{j=-4}^{4} \phi_j \Delta d_{t-j} + \varepsilon_t
+\end{equation}
+Siguiendo a \textcite{stock1993}, se aumenta la ecuación con $m=4$ adelantos y rezagos de la primera diferencia de la deuda ($\Delta d_{t-j}, j \in \{-4,\dots,4\}$) para purgar el estimador de $\rho$ de sesgos de endogeneidad de corto plazo, obteniendo un estimador superconsistente aun ante incertidumbre sobre el rango exacto de cointegración del sistema.
+
+\subsection{Etapa 4: Corrección por Endogeneidad (IV-2SLS)}
+Dado que la teoría económica predice causalidad inversa entre el resultado fiscal y el riesgo soberano, se instrumenta el EMBI+ ($risk_t$) mediante el índice de volatilidad global VIX y un diferencial de riesgo soberano regional (\textit{spread}, variable de aproximación de mercado construida sobre el ETF EMB ---iShares JPMorgan USD Emerging Markets Bond, que replica el JPMorgan EMBI Global Diversified, la misma familia de índices que el EMBI+ argentino---), estimando por Variables Instrumentales en Dos Etapas (IV-2SLS). La fortaleza del diseño instrumental se evalúa mediante el estadístico $F$ de la regresión de primera etapa (exigiendo $F > 10$, \citealp{staiger1997}), junto con el test de endogeneidad de Wu-Hausman y el test de sobreidentificación de Sargan. Una versión preliminar de este ejercicio instrumentó en cambio con el Tipo de Cambio Real Multilateral (TCRM) rezagado; ese instrumento fue descartado por violar la restricción de exclusión (Sección \ref{sec:iv2sls}), al impactar de manera directa sobre la recaudación por retenciones y el costo fiscal de los subsidios indexados al tipo de cambio real.
+
+\subsection{Etapa 5: Modelo de Umbral (Hansen) y Fatiga Fiscal}
+Para evaluar la existencia de fatiga fiscal, se estima una regla de reacción fiscal con efectos de umbral determinados endógenamente por el nivel de riesgo soberano, siguiendo la formulación de \citet{hansen1999}:
+\begin{equation}
+pb_t = \alpha + \beta_1 d_{t-1} \mathbb{I}(\text{EMBI}_t \le \tau) + \beta_2 d_{t-1} \mathbb{I}(\text{EMBI}_t > \tau) + \gamma \tilde{y}_t + \epsilon_t
+\end{equation}
+donde $\mathbb{I}(\cdot)$ es la función indicadora de régimen, $\tau^*$ denota el umbral crítico óptimo de riesgo soberano estimado mediante búsqueda de grilla sobre los percentiles 15--85 de la distribución empírica del EMBI+, y $\tilde{y}_t$ es la brecha del producto como variable de control macroeconómico. La significatividad estadística del quiebre se contrasta mediante el estadístico Sup-LM, cuya distribución bajo la hipótesis nula de linealidad ---no estándar--- se aproxima mediante re-muestreo (\textit{bootstrap}) con 1.000 réplicas, siguiendo a \citet{hansen1999,hansen2000}.
+
+Como exploración preliminar, se aplicó sobre la serie de resultado primario un algoritmo de detección de quiebres múltiples mediante programación dinámica de costo $L_2$ \citep{truong2020}; sus resultados se reportan en el Capítulo \ref{ch:descriptivo}. Sobre esa base se implementó el procedimiento formal de \textcite{bai2003}: programación dinámica exacta sobre la suma de cuadrados residuales de la ratio Deuda/PIB (y su versión consolidada con los pasivos del BCRA), con selección endógena del número de quiebres mediante el criterio BIC \citep{yao1988}. Sus resultados se reportan en el Capítulo \ref{ch:resultados}.
+
+\subsection{Etapa 6: Simulación Estocástica y Análisis de Sostenibilidad de la Deuda (DSA)}
+Para trascender las proyecciones deterministas convencionales, se implementa un Análisis de Sostenibilidad de la Deuda (DSA) estocástico siguiendo el estándar de organismos multilaterales \citep{imf2003,imf2021}. Se simulan tres escenarios deterministas (Optimista, Referencia y Estrés) y una simulación de Monte Carlo de 1.000 iteraciones, en la cual las variables macroeconómicas fundamentales (crecimiento, tasas de interés doméstica y externa, depreciación real y resultado primario) reciben perturbaciones (\textit{shocks}) anuales aleatorias extraídas de una distribución $t$ de Student multivariada con $\nu \approx 5.1$ grados de libertad, calibrada según los órdenes de magnitud de la volatilidad y curtosis observadas en la economía argentina. Para las tres variables con serie histórica propia en la matriz de datos (resultado primario, crecimiento y depreciación real), los desvíos calibrados se reemplazan por desvíos GARCH(1,1) y la matriz de correlación estática se contrasta contra la correlación condicional dinámica de un modelo DCC-GARCH \citep{engle2002}, estimado en dos etapas por Cuasi-Máxima Verosimilitud (QML); las tasas de interés doméstica y externa, sin serie propia en la matriz de datos, permanecen calibradas. Los resultados se visualizan mediante gráficos de abanico (\textit{fan charts}, en la denominación de los informes de política monetaria de bancos centrales de la región), mapeando los percentiles de la distribución empírica de la deuda simulada para estimar la probabilidad de que la ratio supere el umbral crítico de sostenibilidad al cierre del horizonte prospectivo 2026--2035.
