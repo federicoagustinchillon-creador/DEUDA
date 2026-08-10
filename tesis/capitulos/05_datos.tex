@@ -1,7 +1,7 @@
 \chapter{Análisis Estadístico Descriptivo}
 \label{ch:descriptivo}
 
-Previo a la inferencia econométrica causal desarrollada en el Capítulo \ref{ch:resultados}, este capítulo describe la fuente, la construcción, el comportamiento tendencial, la dispersión y las propiedades de integración de las series de tiempo argentinas durante el período 2004--2025 ($n=88$), constituyendo la base empírica sobre la cual se fundamenta la estimación paramétrica de la Función de Reacción Fiscal.
+Previo a la inferencia econométrica causal desarrollada en el Capítulo \ref{ch:resultados}, este capítulo describe la fuente, la construcción, el comportamiento tendencial, la dispersión y las propiedades de integración de las series de tiempo argentinas, constituyendo la base empírica sobre la cual se fundamenta la estimación paramétrica de la Función de Reacción Fiscal. Como se detalla en la Sección \ref{sec:matriz_operacional} del Capítulo \ref{ch:metodologia}, la investigación trabaja con dos ventanas: la original, 2004--2025 ($n=88$), sobre la que se calculan los estadísticos descriptivos y el protocolo de robustez de este capítulo salvo indicación contraria; y la ampliada, 1999--2025 ($n=108$), construida mediante el empalme documentado en la Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia}, que sostiene específicamente la estimación VECM del Capítulo \ref{ch:resultados} y cuyas propiedades de integración se reportan en la Sección \ref{sec:estacionariedad_ampliada} de este capítulo.
 
 \section{Propiedades Estadísticas de la Muestra y Análisis Descriptivo}
 \label{sec:propiedades_muestra}
@@ -37,6 +37,58 @@ El panel trimestral comprende 88 observaciones (2004T1--2025T4), integrando ocho
 Sobre esta última variable corresponde una precisión metodológica. La literatura reciente \citep{hamilton2018} cuestiona el filtro HP en series macroeconómicas, señalando la introducción de ciclos espurios y distorsión sistemática en los extremos de la muestra. No obstante, esta investigación adopta $\lambda=1600$ por criterio de parsimonia y comparabilidad internacional con los manuales DSA del FMI y el BID, que emplean sistemáticamente esta convención. Como chequeo de robustez, se recalculó la brecha mediante el filtro de \citet{hamilton2018} ($h=8$, $p=4$ rezagos): ambas series presentan una correlación de $r=0.72$, un grado de acuerdo sustancial que sugiere que las conclusiones de la tesis no dependen críticamente de esta elección de diseño, aunque la correlación --lejos de la unidad-- confirma que ambos métodos no son intercambiables.
 
 La construcción de la matriz siguió un protocolo en dos etapas, detallado en el \textit{codebook}: obtención de datos desde las APIs de \url{apis.datos.gob.ar}, BCRA y Yahoo Finance, recurriendo a informes alternativos (CEPAL, FMI, JP Morgan, MECON) ante discontinuidades. La deuda pública incorporada en la especificación central corresponde a la deuda bruta del SPNF neta de tenencias intra-sector público (acreencias del FGS de la ANSES), corrección que reduce el ratio bruto publicado habitualmente en prensa entre 15 y 20 puntos porcentuales del PIB según el año, y resulta metodológicamente indispensable para evitar sobreestimar la exposición neta del Tesoro frente a acreedores extra-estatales.
+
+\section{La Ventana Ampliada: Descriptivos e Integración (1999--2025, n=108)}
+\label{sec:ventana_ampliada}
+
+El procedimiento de empalme descrito en la Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia} extiende las cuatro variables del sistema de cointegración --deuda/PIB, resultado primario/PIB, EMBI+ y TCRM-- a una ventana de 108 observaciones trimestrales (1999T1--2025T4), de las cuales 20 (1999T1--2003T4) provienen del empalme y 88 (2004T1--2025T4) de la matriz de datos original. La Tabla \ref{tab:descriptivos_ampliado} resume sus estadísticos sobre la ventana completa.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:descriptivos_ampliado} Estadísticos descriptivos de las variables del sistema VECM (1999T1--2025T4, n=108).}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Variable} & \textbf{Media} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} \\
+\midrule
+Deuda SPNF / PIB (\%) & 68.09 & 26.71 & 26.96 & 157.27 & 1.17 \\
+Resultado Primario / PIB (\%) & -0.29 & 1.80 & -3.80 & 4.08 & 0.17 \\
+EMBI+ (puntos básicos) & 1583.65 & 1628.35 & 210.22 & 6658.98 & 1.78 \\
+TCRM (índice) & 1.68 & 0.45 & 0.98 & 2.76 & 0.35 \\
+Brecha del Producto (\%) & -0.06 & 5.60 & -11.27 & 14.50 & 0.40 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real\_ext.csv} (\texttt{codigo/modelos/fase16\_vecm\_dataset\_ampliado.py}).
+\end{flushleft}
+\end{table}
+
+Frente a la ventana original (Tabla \ref{tab:descriptivos}), la incorporación de 1999--2003 desplaza sensiblemente los extremos: el mínimo de la deuda/PIB baja de 40.00\% a 26.96\% (el piso de la salida de la crisis, no capturado por la ventana original, que arranca ya en el proceso de descompresión posterior al canje) y su máximo sube de 119.00\% a 157.27\% (el pico del default de 2002, previo a la quita de 2005). El EMBI+ exhibe el mismo patrón: la media cae de 2416 a 1584 puntos básicos y la asimetría se acentúa (0.95 a 1.78), reflejando que el pico de riesgo soberano de la crisis de 2001--2002 --ausente en la ventana original, que comienza en 2004, ya en fase de descompresión-- es sustancialmente mayor al de cualquier episodio posterior. Estos desplazamientos no son un artefacto del empalme: son, precisamente, la señal sustantiva de incorporar los ``cambios estructurales extremos'' que motivaron el pedido de ampliar la ventana.
+
+\subsection{Estacionariedad sobre la Ventana Ampliada}
+\label{sec:estacionariedad_ampliada}
+
+La Tabla \ref{tab:estacionariedad_ampliado} repite el protocolo ADF/KPSS de la Sección \ref{sec:estacionariedad} sobre la ventana ampliada, para las cuatro variables del sistema de cointegración y la brecha del producto.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:estacionariedad_ampliado} Pruebas de raíz unitaria e integración, ventana ampliada (1999T1--2025T4, n=108).}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Variable} & \textbf{ADF $p$ (nivel)} & \textbf{KPSS $p$ (nivel)} & \textbf{ADF $p$ (dif.)} & \textbf{KPSS $p$ (dif.)} & \textbf{Orden} \\
+\midrule
+Deuda / PIB & 0.118 & 0.100 & 0.003 & 0.100 & I(1) \\
+Result. Primario / PIB & 0.343 & 0.010 & 0.000 & 0.100 & I(1) \\
+EMBI+ & 0.330 & 0.100 & 0.000 & 0.100 & I(1) \\
+TCRM & 0.272 & 0.054 & 0.000 & 0.100 & I(1) \\
+Brecha del Producto & 0.000 & 0.100 & 0.000 & 0.100 & I(0) \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real\_ext.csv} (\texttt{codigo/modelos/fase16\_vecm\_dataset\_ampliado.py}). Test ADF bajo hipótesis nula de raíz unitaria; test KPSS bajo hipótesis nula de estacionariedad.
+\end{flushleft}
+\end{table}
+
+El resultado es consistente con el diagnóstico de la ventana original (Tabla \ref{tab:estacionariedad}): el resultado primario, el EMBI+ y el TCRM son I(1) en ambas ventanas, y la brecha del producto es I(0) en ambas. La única diferencia es la deuda/PIB, que en la ventana original arroja un diagnóstico ambiguo entre I(0) y I(1) y en la ampliada se clasifica sin ambigüedad como I(1) --el ADF ya no roza el umbral del 10\% (0.118 vs. 0.113 en niveles, prácticamente idéntico, pero el KPSS en niveles pasa de rechazar estacionariedad ($p=0.041$) a no rechazarla claramente en el límite superior tabulado ($p=0.100$))--. La condición previa para tratar las cuatro series como I(1) --requisito para que la cointegración de Johansen (Sección \ref{sec:etapa2_johansen} del Capítulo \ref{ch:metodologia}) tenga sentido-- se sostiene, entonces, en ambas ventanas.
 
 \section{Distribución y Volatilidad de las Variables Base}
 
@@ -267,3 +319,5 @@ La nube de puntos sugiere, a simple vista, un patrón compatible con la hipótes
 Los resultados presentados en este capítulo --y los que se desarrollarán en los Capítulos \ref{ch:resultados} y \ref{ch:discusion}-- deben interpretarse a la luz de las limitaciones inherentes a la muestra. Las 88 observaciones trimestrales (2004T1--2025T4) representan la totalidad del período disponible con cobertura homogénea de las variables núcleo del modelo, pero esta longitud muestral, adecuada para series de tiempo de un único país en condiciones de estacionariedad, limita la potencia estadística de pruebas como el umbral de Hansen y la cointegración de Johansen, especialmente en presencia de quiebres estructurales frecuentes.
 
 El contexto de alta volatilidad estructural y regímenes de política cambiante --documentado en la cronología de Bai-Perron (Sección \ref{sec:quiebres_estructurales})-- agrava esta limitación: cuando la variable de umbral (EMBI+, $\sigma=876$ pb) y la dependiente (resultado primario, $\sigma=1.59$ pp del PIB) están ambas sometidas a perturbaciones de magnitud comparable a la señal buscada, la relación señal-ruido se vuelve desfavorable para la identificación de quiebres discretos. Los tests de robustez implementados (subperíodos, especificaciones alternativas, GARCH/DCC) confirman la fragilidad de inferencias fuertes sobre la significatividad estadística de los coeficientes individuales, lo que refuerza la necesidad de cautela en las proyecciones y de priorizar la consistencia del diagnóstico cualitativo sobre la precisión puntual de los estimadores.
+
+Ampliar la muestra a 108 observaciones (Sección \ref{sec:ventana_ampliada}) no releva de esta cautela: la agrega en otra dimensión. El contraste de Johansen sobre la ventana ampliada resulta sensible al año de inicio de la muestra (Capítulo \ref{ch:resultados}), lo que confirma que una ventana temporal mayor no es, por sí sola, garantía de una identificación más nítida cuando el período incorporado --1999--2003-- concentra el quiebre estructural más severo de toda la serie.

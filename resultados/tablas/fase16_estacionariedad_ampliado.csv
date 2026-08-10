@@ -1,0 +1,6 @@
+Variable,ADF_p (Nivel),KPSS_p (Nivel),ADF_p (Diff),KPSS_p (Diff),Orden Inferido
+deuda_pib,0.1178,0.1,0.0026,0.1,I(1)
+pb_pib,0.3432,0.01,0.0,0.1,I(1)
+EMBI,0.3296,0.1,0.0,0.1,I(1)
+TCRM,0.2721,0.0536,0.0,0.1,I(1)
+g_gap,0.0001,0.1,0.0,0.1,I(0)
