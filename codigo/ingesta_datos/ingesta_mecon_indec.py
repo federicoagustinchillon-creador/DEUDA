@@ -19,6 +19,18 @@ Fallback histórico verificado:
   - Resultado primario: MECON "Sector Público Consolidado", Serie histórica
   - Deuda/PIB: FMI WEO April 2024 + MECON Informes de Deuda Pública
   - PIB: INDEC, Dirección Nacional de Cuentas Nacionales
+
+Nota sobre cobertura real de la vía de contingencia (verificado en auditoría de
+2026-08): los IDs de serie de datos.gob.ar usados para pb_pib y deuda_pib
+(11.3_RDP_0_0_32 y 174.1_DEUDA_PUBLICA_TOTAL_0_0_21) están discontinuados en la
+API pública (devuelven HTTP 400). En la práctica, el 100% de las 88
+observaciones trimestrales de pb_pib y deuda_pib en dataset_consolidado_real.csv
+proviene de PB_PIB_TRIM y DEUDA_PIB_TRIM, no de una llamada API exitosa — no es
+un caso de excepción ocasional, es la vía efectiva completa para estas dos
+variables. PIB_real, en cambio, sí se obtiene en vivo (0% fallback). Spot-check
+de deuda_pib contra IMF WEO (DataMapper, GGXWDG_NGDP, Argentina) para 2023:
+90.0% (este diccionario) vs 88.4% (FMI) — consistente dentro de un margen
+razonable dado el desfase trimestre/promedio-anual.
 """
 
 import pandas as pd
