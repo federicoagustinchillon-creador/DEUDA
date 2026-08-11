@@ -19,15 +19,24 @@ from scipy.stats import multivariate_t
 import seaborn as sns
 sns.set_theme(style="whitegrid")
 
-# Grados de libertad de la t de Student multivariante, estimados empíricamente
-# (MLE, scipy.stats.t.fit) sobre los shocks históricos reales de resultado
-# primario (nu=5.26, curtosis en exceso=23.8) y tipo de cambio real
-# (nu=4.95, curtosis en exceso=14.4) -las dos series con evidencia robusta de
-# colas gordas-. El shock de crecimiento del PIB real no exhibe la misma
-# propiedad (curtosis en exceso=-0.27, aproximadamente gaussiano) y se
-# mantiene, por conservadurismo, bajo el mismo parámetro compartido de la
-# t multivariada (ver script de estimación en el codebook del proyecto).
-DSA_STUDENT_T_NU = 5.1
+# Grados de libertad de la t de Student multivariante, estimados por método
+# de momentos (nu = 4 + 6/curtosis_exceso) sobre los shocks históricos reales
+# de resultado primario (curtosis en exceso=25.3 -> nu=4.24) y tipo de cambio
+# real (curtosis en exceso=4.5 -> nu=5.32) -las dos series con evidencia
+# robusta de colas gordas-, promediados y compartidos con el shock de
+# crecimiento del PIB real (que no exhibe la misma propiedad, curtosis en
+# exceso=-0.27, aproximadamente gaussiano), por el mismo criterio de
+# conservadurismo del ajuste original. Se prefiere el método de momentos al
+# MLE conjunto de los tres parámetros (loc, scale, nu): sobre la serie real
+# de TCRM, el MLE conjunto da nu=1.54 (resultado primario) y nu=2.61 (tipo
+# de cambio real) -por debajo de 2, varianza teóricamente infinita-, una
+# solución de esquina arrastrada por un puñado de trimestres genuinamente
+# extremos (devaluación de 2016, crisis de 2018, ajuste de 2023-2024), no un
+# error de datos, pero sí un patrón de inestabilidad conocido del MLE
+# conjunto sin restringir en muestras chicas con observaciones extremas
+# aisladas. Ver codigo/modelos/fase17_calibracion_nu_dsa.py para el
+# procedimiento completo y ambos estimadores.
+DSA_STUDENT_T_NU = 4.8
 
 # Parámetros estructurales y de escenario, expuestos a nivel de módulo para que
 # scripts complementarios (p.ej. fase7_diagnosticos_robustez.py) los reutilicen por

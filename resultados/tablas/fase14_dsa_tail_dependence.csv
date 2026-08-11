@@ -1,4 +1,4 @@
 especificacion,prob_insolvencia_2035,mediana_2035
-"Copula-t correlacionada (reportada, Tabla 7.3)",30.4,81.3174267545955
-Copula Gaussiana + marginales t (correlacion sin exceso de tail dependence),29.099999999999998,77.97200576259333
-"Marginales t independientes (sin correlacion, sin tail dependence)",26.700000000000003,82.61170987128415
+"Copula-t correlacionada (reportada, Tabla 7.3)",31.2,80.65126397316355
+Copula Gaussiana + marginales t (correlacion sin exceso de tail dependence),29.2,78.07445639194314
+"Marginales t independientes (sin correlacion, sin tail dependence)",24.6,81.12328114590697
