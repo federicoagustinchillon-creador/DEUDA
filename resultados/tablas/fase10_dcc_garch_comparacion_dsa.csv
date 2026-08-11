@@ -1,4 +1,4 @@
 escenario,prob_calibrado,prob_dcc_garch
-Optimista,5.0,2.6
-Referencia,30.4,29.099999999999998
-Estrés,100.0,100.0
+Optimista,5.0,15.9
+Referencia,30.4,30.5
+Estrés,100.0,95.3
