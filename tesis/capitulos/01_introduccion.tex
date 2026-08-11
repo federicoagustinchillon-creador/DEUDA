@@ -29,7 +29,7 @@ A continuación se sintetiza la correspondencia lógica entre la pregunta proble
     \item \textbf{Hipótesis General ($H_1$):} La solvencia intertemporal de la deuda pública consolidada argentina durante el período 2004--2025 estuvo condicionada por una función de reacción fiscal estructuralmente débil frente al endeudamiento, en un régimen macroeconómico caracterizado por un canal de transmisión del riesgo país (EMBI+) hacia el esfuerzo fiscal efectivo, ambos fenómenos enmarcados por la restricción externa periférica.
 \end{itemize}
 
-Los dos primeros componentes de $H_1$ --la debilidad de la función de reacción fiscal y el canal de transmisión del riesgo país-- se someten a contraste estadístico explícito mediante DOLS, IV-2SLS y el modelo de umbral de Hansen (Capítulo \ref{ch:resultados}). La restricción externa periférica, en cambio, no es un contraste puntual sino el marco paradigmático (Nivel I, Capítulo \ref{ch:marco_teorico}) que enmarca la interpretación de ambos --de allí ``enmarcados'' y no ``determinados''--: un supuesto de fondo, no un tercer contraste independiente.
+Los dos primeros componentes de $H_1$ --la debilidad de la función de reacción fiscal y el canal de transmisión del riesgo país-- se someten a contraste estadístico explícito mediante un Modelo de Vectores con Corrección de Error (VECM, técnica de referencia sobre una ventana muestral ampliada por empalme histórico), DOLS e IV-2SLS (como ejercicio de robustez sobre la ventana original) y el modelo de umbral de Hansen (Capítulo \ref{ch:resultados}). La restricción externa periférica, en cambio, no es un contraste puntual sino el marco paradigmático (Nivel I, Capítulo \ref{ch:marco_teorico}) que enmarca la interpretación de ambos --de allí ``enmarcados'' y no ``determinados''--: un supuesto de fondo, no un tercer contraste independiente.
 
 \section{Objetivos de la Investigación}
 
@@ -43,7 +43,7 @@ Para alcanzar el objetivo general, se plantea el siguiente protocolo analítico-
 \begin{enumerate}
     \item \textbf{Analizar} las propiedades estocásticas de las series de tiempo macro-fiscales (2004--2025) mediante pruebas de raíz unitaria (ADF, KPSS) y de quiebre estructural endógeno (Zivot-Andrews).
     \item \textbf{Verificar} la existencia de relaciones de equilibrio de largo plazo entre la ratio de endeudamiento, el esfuerzo primario, el riesgo soberano y el tipo de cambio real, mediante el contraste de Traza y Máximo Autovalor de Johansen.
-    \item \textbf{Estimar} la Función de Reacción Fiscal histórica mediante Mínimos Cuadrados Ordinarios Dinámicos (DOLS).
+    \item \textbf{Estimar} la Función de Reacción Fiscal histórica mediante un Modelo de Vectores con Corrección de Error (VECM), y como ejercicio de robustez mediante Mínimos Cuadrados Ordinarios Dinámicos (DOLS).
     \item \textbf{Evaluar} la endogeneidad del riesgo soberano (EMBI+) respecto del esfuerzo fiscal, mediante Variables Instrumentales en Dos Etapas (IV-2SLS).
     \item \textbf{Evaluar} la existencia de no linealidades y regímenes de fatiga fiscal mediante un modelo de umbral para series temporales \citep{hansen1999,hansen2000}.
     \item \textbf{Proyectar} las trayectorias de la deuda consolidada para el período 2026--2035 bajo escenarios macroeconómicos deterministas, y simular las bandas de probabilidad de un Análisis de Sostenibilidad de la Deuda estocástico mediante el método de Monte Carlo.
