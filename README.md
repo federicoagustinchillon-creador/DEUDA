@@ -1,7 +1,7 @@
 # Sostenibilidad de la Deuda Pública Consolidada Argentina (2004–2025)
 
-[![Licencia](https://img.shields.io/badge/Licencia-CC--BY--4.0-blue.svg)](https.creativecommons.org/licenses/by/4.0/)
-[![Python](https.img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Licencia](https://img.shields.io/badge/Licencia-CC--BY--4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![LaTeX](https://img.shields.io/badge/LaTeX-MiKTeX%20%7C%20TeXLive-green.svg)](https://www.tug.org/texlive/)
 [![Estado](https://img.shields.io/badge/Auditor%C3%ADa-Aprobada-success.svg)](#)
 
@@ -15,14 +15,13 @@ Repositorio y código fuente de la investigación econométrica y tesis de grado
 
 **¿Querés editar el texto de un capítulo?** → [`tesis/capitulos/`](tesis/capitulos/), un `.tex` por capítulo (`00_abstract`, `01_introduccion`, ..., `09_apendice`). Después de editar, compilar según el paso 4 de la sección 3.
 
-**¿Querés ver de dónde sale un número que aparece en la tesis?** → Tres pasos:
-1. Buscá el script que lo generó en la tabla del [Apéndice, Sección "Estructura de la Cadena de Procesamiento de Código"](tesis/capitulos/09_apendice.tex) — ahí está mapeado cada resultado a su script.
-2. El script vive en [`codigo/modelos/faseN_*.py`](codigo/modelos/) (`N` = número de etapa).
-3. Su salida (tabla/número) queda en [`resultados/tablas/faseN_*.csv`](resultados/tablas/).
+**¿Querés ver de dónde sale un número que aparece en la tesis, o recorrer el análisis estadístico paso a paso?** → **[`codigo/modelos/README.md`](codigo/modelos/README.md)** es el índice único y ordenado de las 18 fases: qué hace cada script, qué CSV produce y en qué tabla/sección de la tesis termina. Es la puerta de entrada al análisis completo.
 
-**¿Querés re-correr todo el pipeline desde cero?** → Sección 3 de este README, en orden: entorno virtual → ingesta de datos → fases econométricas → compilar LaTeX.
+**¿Querés entender los datos antes que los modelos?** → **[`datos/README.md`](datos/README.md)**: explica los tres niveles (crudos → procesados → panel consolidado), por qué hay dos versiones del dataset (ventana original de 88 obs. vs. ventana ampliada de 108) y remite al [`codebook.md`](datos/codebook.md) para el detalle de cada variable.
 
-**¿Querés entender la bibliografía?** → [`Bibliografia/`](Bibliografia/): `marco_legal/` (leyes citadas), `descargas_verificacion/` (papers descargados con verificación de que existen y dicen lo que la tesis les atribuye), `busqueda_literatura_refutacion/` (búsqueda activa de trabajos que contradigan los hallazgos, con veredicto).
+**¿Querés re-correr todo el pipeline desde cero?** → [`codigo/README.md`](codigo/README.md) explica el orden de las tres subcarpetas (`ingesta_datos/` → `modelos/` → `graficos/`); Sección 3 de este README tiene los comandos exactos.
+
+**¿Querés entender la bibliografía?** → [`Bibliografia/`](Bibliografia/): `marco_legal/` (leyes citadas), `descargas_verificacion/` (papers descargados con verificación de que existen y dicen lo que la tesis les atribuye), `auditorias/busqueda_literatura_refutacion/` (búsqueda activa de trabajos que contradigan los hallazgos, con veredicto).
 
 **¿Buscás versiones anteriores o el historial de decisiones metodológicas?** → [`historial_proyecto/`](historial_proyecto/).
 
@@ -60,35 +59,32 @@ Para el detalle completo y las cifras exactas de cada estimación, ver `tesis/fu
 
 ```text
 Deuda/
-├── .agents/                         # Reglas de gobernanza
-│   └── AGENTS.md                    # Directivas para colaboradores y asistentes
-├── .github/                         # Configuración GitHub
-│   └── CONTRIBUTING.md              # Guía de contribución
+├── .agents/AGENTS.md                # Directivas para asistentes de IA que colaboren en el repo
 ├── Bibliografia/                    # Acervo bibliográfico y normativo descargado
 │   ├── descargas_verificacion/      # PDFs de los papers efectivamente citados
 │   ├── auditorias/                  # Informes de verificación de citas + búsqueda de literatura refutatoria
 │   ├── marco_legal/                 # Textos oficiales de Leyes (24.156, 24.144, 27.541, 27.612, etc.)
 │   └── material_metodologico_catedra/ # Bibliografía metodológica de referencia
-├── codigo/                          # Código fuente econométrico reproducible
-│   ├── ingesta_datos/               # Extracción y consolidación de series primarias
-│   ├── modelos/                     # Scripts de estimación (Fases 1 a 18)
-│   ├── graficos/                    # Generación de figuras vectoriales para la tesis
+├── codigo/                          # Código fuente econométrico reproducible — ver codigo/README.md
+│   ├── ingesta_datos/               # Paso 1: extracción y consolidación de series primarias
+│   ├── modelos/                     # Paso 2: las 18 fases del análisis — ÍNDICE PRINCIPAL, ver modelos/README.md
+│   ├── graficos/                    # Paso 3: generación de figuras vectoriales para la tesis
 │   ├── codigo_completo_deuda.py     # Script único integrado de lectura secuencial
 │   └── requirements.txt             # Dependencias del entorno Python
-├── datos/                           # Data Pipeline
-│   ├── crudos/                      # Descargas originales y reportes AGN
-│   ├── procesados/                  # Series intermedias neteadas
-│   ├── dataset_consolidado_real.csv # Panel trimestral 2004-2025 auditado (n=88)
+├── datos/                           # Data Pipeline — ver datos/README.md
+│   ├── crudos/                      # Descargas originales sin procesar
+│   ├── procesados/                  # Series intermedias por fuente, ya limpias
+│   ├── dataset_consolidado_real.csv     # Panel ventana original 2004-2025 (n=88)
+│   ├── dataset_consolidado_real_ext.csv # Panel ventana ampliada 1999-2025 (n=108) — referencia actual
 │   └── codebook.md                  # Libro de códigos y metadatos de variables
 ├── historial_proyecto/              # Documentación metodológica y planes de revisión
-├── resultados/                      # Salidas numéricas y tablas econométricas
-│   └── tablas/                      # Exportación CSV de estimaciones y diagnósticos
+├── resultados/tablas/               # Salida CSV de cada fase — ver tablas/README.md
 ├── tesis/                           # Manuscrito completo en LaTeX
 │   ├── capitulos/                   # Archivos TeX por capítulo (00 a 09)
 │   ├── figuras/                     # Gráficos e imágenes institucionales
-│   └── fuente/                      # Documento maestro (Tesis.tex) y referencias.bib
-├── LICENSE                          # Licencia MIT de código y datos
-└── README.md                        # Documento maestro del repositorio
+│   └── fuente/                      # Documento maestro (Tesis.tex, referencias.bib) y Tesis.pdf
+├── LICENSE                          # Licencia CC BY 4.0
+└── README.md                        # Este documento
 ```
 
 
@@ -116,30 +112,35 @@ venv\Scripts\activate
 source venv/bin/activate
 
 # Instalar dependencias
-pip install -r requirements.txt
+pip install -r codigo/requirements.txt
 ```
 
 ### 2. Ingestión de Datos y Construcción del Panel
 
-Para ejecutar el pipeline de descarga de APIS (BCRA, Datos Argentina, Yahoo Finance) y generación de `datos/dataset_consolidado_real.csv`:
+Detalle completo del orden en [`codigo/ingesta_datos/README.md`](codigo/ingesta_datos/README.md). Resumen:
 
 ```bash
+# Panel ventana original (2004-2025, n=88)
 python codigo/ingesta_datos/construccion_dataset.py
+
+# Panel ventana ampliada (1999-2025, n=108) -- técnica de referencia actual
+python codigo/ingesta_datos/construir_dataset_ampliado.py
 ```
 
 ### 3. Ejecución de Modelos Econométricos
 
-Cada fase econométrica puede ejecutarse de manera independiente o integrada:
+Las 18 fases, en orden y con su mapeo a resultados, están documentadas en **[`codigo/modelos/README.md`](codigo/modelos/README.md)**. Para correr todo de una vez:
 
 ```bash
-# Ejecutar la secuencia completa de estimación
 python codigo/codigo_completo_deuda.py
+```
 
-# O ejecutar fases específicas:
-python codigo/modelos/fase1_estacionariedad.py
-python codigo/modelos/fase3_reaccion_fiscal.py
-python codigo/modelos/fase4_variables_instrumentales.py
-python codigo/modelos/fase6_sostenibilidad_deuda.py
+O una fase puntual, por ejemplo:
+
+```bash
+python codigo/modelos/fase16_vecm_dataset_ampliado.py   # VECM, técnica de referencia
+python codigo/modelos/fase3_reaccion_fiscal.py           # DOLS
+python codigo/modelos/fase6_sostenibilidad_deuda.py      # DSA
 ```
 
 ### 4. Compilación del Manuscrito LaTeX
@@ -158,19 +159,22 @@ pdflatex -interaction=nonstopmode Tesis.tex
 
 ## 4. Estructura de Datos y Codebook
 
-El dataset principal [`datos/dataset_consolidado_real.csv`](file:///c:/Users/fedea/Deuda/datos/dataset_consolidado_real.csv) contiene 88 observaciones trimestrales con las siguientes variables clave:
+Hay dos paneles consolidados — ver [`datos/README.md`](datos/README.md) para por qué son distintos. El de referencia actual es [`datos/dataset_consolidado_real_ext.csv`](datos/dataset_consolidado_real_ext.csv) (1999T1–2025T4, n=108). Columnas (nombres reales, tal como aparecen en el CSV):
 
 | Variable | Descripción | Fuente Primaria | Transformación |
 |---|---|---|---|
-| `periodo` | Trimestre de observación (2004Q1–2025Q4) | N/A | Formato `YYYY-MM-DD` |
-| `d_spnf` | Deuda Bruta SPNF / PIB nominal (%) | Secretaría de Finanzas / INDEC | Ratio trimestral |
-| `d_consolidada` | Deuda SPNF + Pasivos BCRA netos / PIB (%) | Sec. Finanzas + BCRA / INDEC | Consolidación activa |
-| `pb_t` | Resultado Primario SPNF / PIB nominal (%) | Secretaría de Hacienda / INDEC | Ratio trimestral |
-| `embi` | Risk-premium EMBI+ Argentina (puntos básicos) | JP Morgan / BCRA | Promedio trimestral |
-| `vix` | CBOE Volatility Index (VIX) | Chicago Board Options Exchange | Promedio trimestral |
-| `emb_br` | Spread ETF iShares J.P. Morgan EMB Brasil | Yahoo Finance / FRED | Instrumento IV-2SLS |
+| `Date` | Trimestre de observación | N/A | Formato fecha |
+| `deuda_pib` | Deuda pública / PIB (%) | Secretaría de Finanzas / MECON | % del PIB, fin de trimestre |
+| `pb_pib` | Resultado primario SPNF / PIB (%) | Secretaría de Hacienda / MECON | % del PIB |
+| `PIB_real` | PIB a precios constantes | INDEC | Índice de volumen |
+| `g_gap` | Brecha del producto (output gap) | Derivado de `PIB_real` | Filtro HP, λ=1600 |
+| `EMBI` | Riesgo país EMBI+ Argentina (puntos básicos) | Ámbito Financiero / BCRA / JP Morgan | Promedio trimestral |
+| `TCRM` | Tipo de Cambio Real Multilateral | BCRA | Índice dic-2001=1, promedio trimestral |
+| `VIX` | CBOE Volatility Index | Chicago Board Options Exchange | Promedio trimestral |
+| `CER` | Coeficiente de Estabilización de Referencia | BCRA | Var. % acumulada trimestral |
+| `es_interpolado` | Marca observaciones del tramo 1999–2003 obtenidas por empalme histórico vs. serie original | N/A | Booleano |
 
-Para mayor detalle sobre definiciones, unidades y tratamientos de datos, consultar el [`datos/codebook.md`](file:///c:/Users/fedea/Deuda/datos/codebook.md).
+Definiciones completas, fuentes de fallback y notas metodológicas: [`datos/codebook.md`](datos/codebook.md).
 
 ---
 
@@ -178,18 +182,15 @@ Para mayor detalle sobre definiciones, unidades y tratamientos de datos, consult
 
 El repositorio incluye la totalidad de las fuentes secundarias y primarias citadas en la tesis:
 
-- **Marco Legal Descargado**: Alojado en [`Bibliografia/marco_legal/`](file:///c:/Users/fedea/Deuda/Bibliografia/marco_legal/), con copias oficiales de la Ley N° 24.156, Ley N° 24.144 (Carta Orgánica BCRA), Ley N° 25.152, Ley N° 27.541 y Ley N° 27.612.
-- **Documentos de Auditoría**: Informe AGN Actuación 294/2023 sobre la deuda con el FMI en [`datos/crudos/descargas_drive/`](file:///c:/Users/fedea/Deuda/datos/crudos/descargas_drive/).
-- **Trazabilidad Bibliográfica**: Manifiesto de verificación exhaustiva de citas en [`Bibliografia/descargas_verificacion/verificacion_bibliografia_completa.md`](file:///c:/Users/fedea/Deuda/Bibliografia/descargas_verificacion/verificacion_bibliografia_completa.md).
+- **Marco Legal Descargado**: Alojado en [`Bibliografia/marco_legal/`](Bibliografia/marco_legal/), con copias oficiales de la Ley N° 24.156, Ley N° 24.144 (Carta Orgánica BCRA) y Ley N° 27.612.
+- **Documentos de Auditoría**: Informe AGN Actuación 294/2023 sobre la deuda con el FMI en [`datos/crudos/descargas_drive/`](datos/crudos/descargas_drive/).
+- **Trazabilidad Bibliográfica**: Manifiesto de verificación exhaustiva de citas en [`Bibliografia/auditorias/verificacion_bibliografia_completa.md`](Bibliografia/auditorias/verificacion_bibliografia_completa.md).
 
 ---
 
-## 6. Reglas de Gobernanza y Colaboración
+## 6. Reglas de Gobernanza
 
-Para mantener la integridad científica del proyecto y permitir que investigadores y colaboradores trabajen de forma segura:
-
-- **Colaboradores Humanos**: Consultar la guía [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md) para conocer las convenciones de Git, pruebas econométricas requeridas y normas PEP8.
-- **Asistentes de Inteligencia Artificial**: Las herramientas y agentes de IA deben ceñirse estrictamente a las directivas normativas definidas en [`.agents/AGENTS.md`](.agents/AGENTS.md).
+Los asistentes de IA que colaboren en este repositorio deben ceñirse a las directivas definidas en [`.agents/AGENTS.md`](.agents/AGENTS.md).
 
 ---
 
