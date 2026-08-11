@@ -18,7 +18,7 @@ Como paso preliminar a cualquier caracterización sustantiva de las series, corr
 \midrule
 $pb_t$ (Result. Primario/PIB, \%) & -0.70 & -0.80 & 1.59 & -3.80 & 1.80 & 5.87 & 0.053 \\
 $d_t$ (Deuda/PIB, \%) & 65.93 & 63.00 & 18.68 & 40.00 & 119.00 & 5.64 & 0.060 \\
-$risk_t$ (EMBI+, pb) & 2416.03 & 2250.00 & 876.49 & 561.00 & 5500.00 & 20.71 & 0.00003 \\
+$risk_t$ (EMBI+, pb) & 1298.21 & 808.80 & 1229.50 & 210.22 & 5626.29 & 128.58 & 0.00000 \\
 $\tilde{y}_t$ (Brecha del Producto, \%) & -0.02 & -0.80 & 5.54 & -11.15 & 13.86 & 4.89 & 0.087 \\
 \bottomrule
 \end{tabular}%
@@ -28,7 +28,7 @@ $\tilde{y}_t$ (Brecha del Producto, \%) & -0.02 & -0.80 & 5.54 & -11.15 & 13.86 
 \end{flushleft}
 \end{table}
 
-El contraste de Jarque-Bera exige una lectura diferenciada. Únicamente el EMBI+ rechaza fuertemente la hipótesis nula de normalidad ($JB=20.71$, $p=0.00003$), resultado esperable dada su naturaleza de cola derecha extrema: los episodios de pánico financiero desplazan el indicador muy por encima de su media. Las tres series restantes ($pb_t$, $d_t$ y $\tilde{y}_t$) exhiben $p$-valores marginales (0.05--0.09) que no permiten un rechazo al 5\% pero tampoco confirman normalidad, ubicándose en una zona de ambigüedad estadística consistente con muestras de tamaño moderado ($n=88$). Esta evidencia respalda la motivación metodológica para las técnicas robustas a la asimetría adoptadas en los capítulos subsiguientes: la regresión de umbral asimétrica de Hansen (Sección \ref{sec:hansen}) y el DSA estocástico no gaussiano (Capítulo \ref{ch:discusion}).
+El contraste de Jarque-Bera exige una lectura diferenciada. El EMBI+ rechaza con contundencia la hipótesis nula de normalidad ($JB=128.58$, $p<0.00001$), resultado esperable dada su naturaleza de cola derecha extrema: los episodios de pánico financiero desplazan el indicador muy por encima de su media, y con la serie real ese rechazo es aún más categórico que el que arrojaba la serie de contingencia utilizada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($JB=20.71$, $p=0.00003$). Las tres series restantes ($pb_t$, $d_t$ y $\tilde{y}_t$) exhiben $p$-valores marginales (0.05--0.09) que no permiten un rechazo al 5\% pero tampoco confirman normalidad, ubicándose en una zona de ambigüedad estadística consistente con muestras de tamaño moderado ($n=88$). Esta evidencia respalda la motivación metodológica para las técnicas robustas a la asimetría adoptadas en los capítulos subsiguientes: la regresión de umbral asimétrica de Hansen (Sección \ref{sec:hansen}) y el DSA estocástico no gaussiano (Capítulo \ref{ch:discusion}).
 
 \section{Fuente, Cobertura y Construcción de la Matriz de Datos}
 
@@ -62,7 +62,7 @@ Brecha del Producto (\%) & -0.06 & 5.60 & -11.27 & 14.50 & 0.40 \\
 \end{flushleft}
 \end{table}
 
-Frente a la ventana original (Tabla \ref{tab:descriptivos}), la incorporación de 1999--2003 desplaza sensiblemente los extremos: el mínimo de la deuda/PIB baja de 40.00\% a 26.96\% (el piso de la salida de la crisis, no capturado por la ventana original, que arranca ya en el proceso de descompresión posterior al canje) y su máximo sube de 119.00\% a 157.27\% (el pico del default de 2002, previo a la quita de 2005). El EMBI+ exhibe el mismo patrón: la media cae de 2416 a 1584 puntos básicos y la asimetría se acentúa (0.95 a 1.78), reflejando que el pico de riesgo soberano de la crisis de 2001--2002 --ausente en la ventana original, que comienza en 2004, ya en fase de descompresión-- es sustancialmente mayor al de cualquier episodio posterior. Estos desplazamientos no son un artefacto del empalme: son, precisamente, la señal sustantiva de incorporar los ``cambios estructurales extremos'' que motivaron el pedido de ampliar la ventana.
+Frente a la ventana original (Tabla \ref{tab:descriptivos}), la incorporación de 1999--2003 desplaza sensiblemente los extremos: el mínimo de la deuda/PIB baja de 40.00\% a 26.96\% (el piso de la salida de la crisis, no capturado por la ventana original, que arranca ya en el proceso de descompresión posterior al canje) y su máximo sube de 119.00\% a 157.27\% (el pico del default de 2002, previo a la quita de 2005). El EMBI+ se desplaza en el mismo sentido pero de forma menos mecánica: su media sube de 1298 a 1584 puntos básicos --la crisis de 2001--2002 empuja el promedio hacia arriba, como es esperable--, pero su asimetría de hecho se atenúa (2.16 a 1.78): 1999--2003 no aporta un único pico aislado sobre una base moderada, sino varios trimestres consecutivos de riesgo soberano elevado, lo que engrosa el cuerpo de la distribución en lugar de alargar únicamente su cola derecha. Estos desplazamientos no son un artefacto del empalme: son, precisamente, la señal sustantiva de incorporar los ``cambios estructurales extremos'' que motivaron el pedido de ampliar la ventana.
 
 \subsection{Estacionariedad sobre la Ventana Ampliada}
 \label{sec:estacionariedad_ampliada}
@@ -101,10 +101,10 @@ La Tabla \ref{tab:descriptivos} sintetiza los estadísticos descriptivos univari
 \toprule
 \textbf{Variable} & \textbf{Media} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} \\
 \midrule
-EMBI+ (puntos básicos) & 2416.03 & 876.49 & 561.00 & 5500.00 & 0.95 \\
+EMBI+ (puntos básicos) & 1298.21 & 1229.50 & 210.22 & 5626.29 & 2.16 \\
 Deuda SPNF / PIB (\%) & 65.93 & 18.68 & 40.00 & 119.00 & 0.60 \\
 Resultado Primario / PIB (\%) & -0.70 & 1.59 & -3.80 & 1.80 & -0.01 \\
-TCRM (índice) & 1.89 & 0.29 & 1.44 & 2.40 & 0.02 \\
+TCRM (índice) & 1.71 & 0.39 & 1.14 & 2.41 & 0.48 \\
 Brecha del Producto (\%) & -0.02 & 5.54 & -11.15 & 13.86 & 0.59 \\
 CER (índice acumulado) & 58.01 & 145.79 & 1.46 & 654.29 & 3.06 \\
 VIX (puntos) & 18.98 & 7.48 & 10.31 & 58.60 & 2.46 \\
@@ -115,7 +115,7 @@ VIX (puntos) & 18.98 & 7.48 & 10.31 & 58.60 & 2.46 \\
 \end{flushleft}
 \end{table}
 
-Tres regularidades son relevantes. Primero, el EMBI+ opera en un orden de magnitud muy superior al de economías emergentes con grado de inversión (150--400 pb), y su asimetría positiva (0.95) confirma la cola derecha propia de los episodios de pánico financiero, frente a fases de compresión del diferencial de riesgo comparativamente más graduales. Segundo, el Resultado Primario exhibe media negativa y asimetría prácticamente nula, compatible con la hipótesis de reacción fiscal débil de $H_{1a}$, mientras que la Deuda/PIB muestra una asimetría moderada que refleja la persistencia de episodios de sobreendeudamiento por encima de la media. Tercero, la asimetría extrema del CER (3.06) no expresa volatilidad financiera, sino la consecuencia mecánica de tratarse de un índice acumulativo de inflación pasada no comparable en niveles entre regímenes monetarios sucesivos, propiedad que la Sección \ref{sec:estacionariedad} somete a contraste formal de integración.
+Tres regularidades son relevantes. Primero, el EMBI+ opera en un orden de magnitud muy superior al de economías emergentes con grado de inversión (150--400 pb), y su asimetría positiva pronunciada (2.16) confirma la cola derecha propia de los episodios de pánico financiero, frente a fases de compresión del diferencial de riesgo comparativamente más graduales. Segundo, el Resultado Primario exhibe media negativa y asimetría prácticamente nula, compatible con la hipótesis de reacción fiscal débil de $H_{1a}$, mientras que la Deuda/PIB muestra una asimetría moderada que refleja la persistencia de episodios de sobreendeudamiento por encima de la media. Tercero, la asimetría extrema del CER (3.06) no expresa volatilidad financiera, sino la consecuencia mecánica de tratarse de un índice acumulativo de inflación pasada no comparable en niveles entre regímenes monetarios sucesivos, propiedad que la Sección \ref{sec:estacionariedad} somete a contraste formal de integración.
 
 \section{Evolución del Vector de Solvencia: Deuda y Superávit}
 
@@ -147,8 +147,8 @@ Como advierte la literatura sobre economías bimonetarias \citep{sanches2019}, c
 \begin{axis} [
     xlabel={Tipo de Cambio Real Multilateral (índice)},
     ylabel={Variación Interanual de la Ratio Deuda/PIB (p.p.)},
-    xmin=1.35, xmax=2.35,
-    ymin=-40, ymax=25,
+    xmin=1.10, xmax=2.45,
+    ymin=-42, ymax=17,
     grid=both,
     grid style={dashed, gray!30},
     title style={font=\bfseries\small},
@@ -156,19 +156,19 @@ Como advierte la literatura sobre economías bimonetarias \citep{sanches2019}, c
     tick label style={font=\scriptsize}
 ]
 \addplot[only marks, mark=triangle*, color=teal, mark size=3pt] coordinates {
-    (2.04,-8.0) (1.92,-5.0) (1.81,-3.0) (1.75,1.0) (1.70,-6.0) (1.61,-4.0)
-    (1.53,4.0) (1.47,2.0) (1.53,3.0) (1.49,5.0) (1.75,8.0) (1.57,5.0)
-    (1.80,19.0) (2.10,3.0) (2.27,8.0) (2.25,-17.0) (2.12,1.0) (2.06,9.0)
-    (2.25,-15.0) (2.07,-5.0)
+    (2.33,-39.2) (2.39,-11.0) (2.32,-6.0) (2.11,-3.5) (2.08,0.5) (1.88,-4.5)
+    (1.76,-5.0) (1.51,1.5) (1.45,2.0) (1.53,3.0) (1.20,4.5) (1.36,6.5)
+    (1.27,5.8) (1.58,13.2) (1.75,7.0) (1.70,9.5) (1.64,-12.2) (1.38,-2.5)
+    (1.40,4.0) (1.37,-5.0) (1.29,-7.2)
 };
-\addplot[domain=1.4:2.3, red, thick] {28.9*x - 51.3};
+\addplot[domain=1.15:2.4, red, thick] {-15.8*x + 24.71};
 \end{axis}
 \end{tikzpicture}
 \par\vspace{2mm}
 {\footnotesize\textit{Nota.} Impacto de las variaciones del tipo de cambio real sobre el stock de pasivos. Recta de ajuste MCO simple (referencial). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, INDEC).}
 \end{figure}
 
-En términos de variaciones interperiódicas, la correlación empírica entre la primera diferencia del TCRM ($\Delta TCRM_t$) y la variación de la ratio Deuda/PIB ($\Delta d_t$) alcanza $r=0.42$, un valor moderado y positivo: consistente con el mecanismo de hoja de balance, pero lejos de una relación determinística. Esta moderación confirma que la variación del endeudamiento obedece a una combinación de factores (resultado primario, crecimiento, tipo de cambio y ajustes stock-flujo) y que ningún indicador aislado agota su explicación.
+El primer punto (TCRM promedio 2005 $=2.33$, $\Delta d = -39.2$ p.p.) corresponde a la quita nominal del canje de deuda de 2005, no a un valor atípico de medición: se conserva en el gráfico por ser información genuina, y explica por sí solo buena parte de la pendiente negativa del ajuste MCO de nivel anual --un resultado que no debe confundirse con el mecanismo de hoja de balance propiamente dicho, que opera sobre \textit{variaciones} del tipo de cambio, no sobre su nivel--. En términos de variaciones interperiódicas trimestrales, la correlación empírica entre la primera diferencia del TCRM ($\Delta TCRM_t$) y la variación de la ratio Deuda/PIB ($\Delta d_t$) alcanza $r=0.14$, positiva pero débil: consistente en signo con el mecanismo de hoja de balance, pero muy lejos de una relación determinística. Esta correlación es sensiblemente más débil que la calculada sobre el TCRM de contingencia utilizado hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($r=0.42$); la brecha ilustra cuánto podía distorsionar una relación bivariada simple el uso de una serie de contingencia suavizada en lugar de la serie real, y refuerza que la variación del endeudamiento obedece a una combinación de factores (resultado primario, crecimiento, tipo de cambio y ajustes stock-flujo), y no a un único indicador aislado.
 
 \section{Protocolo de Estacionariedad y Pruebas de Raíz Unitaria}
 \label{sec:estacionariedad}
@@ -186,8 +186,8 @@ Para evitar el riesgo de regresiones espurias, el protocolo evalúa el orden de 
 Deuda / PIB & 0.113 & 0.041 & 0.000 & 0.035 & Ambiguo / I(1) \\
 Result. Primario / PIB & 0.301 & 0.023 & 0.000 & 0.100 & I(1) \\
 Brecha del Producto & 0.001 & 0.100 & 0.001 & 0.100 & I(0) \\
-EMBI+ & 0.001 & 0.100 & 0.000 & 0.100 & I(0) \\
-TCRM & 0.342 & 0.069 & 0.000 & 0.099 & I(1) \\
+EMBI+ & 0.006 & 0.100 & 0.000 & 0.100 & I(0) \\
+TCRM & 0.511 & 0.010 & 0.000 & 0.100 & I(1) \\
 CER & 0.999 & 0.016 & 1.000 & 0.020 & Ambiguo / I(1) \\
 \bottomrule
 \end{tabular}%
@@ -271,7 +271,7 @@ Los cuatro quiebres detectados (2008T3, 2013T2, 2019T1 y 2024T1) se aproximan a 
 \section{Matriz de Correlaciones Bivariadas y Diagnóstico de Multicolinealidad}
 \label{sec:correlaciones_vif}
 
-La evaluación de las correlaciones bivariadas arroja tres resultados relevantes para el diseño de la estrategia de instrumentación del Capítulo \ref{ch:resultados}. El VIX y el EMBI+ exhiben una correlación positiva moderada ($r=0.33$), confirmando el canal de fuga hacia la calidad (\textit{flight to quality}) de la literatura de finanzas internacionales, aunque la magnitud moderada advierte que el VIX explica solo una fracción de la varianza del riesgo país. La brecha del producto y el resultado primario muestran una correlación prácticamente nula ($r=0.07$). Esto no debe leerse como evidencia de una política contracíclica ejemplar: advierte, en cambio, que la correlación contemporánea simple no captura relaciones rezagadas, no lineales, ni mediadas por terceras variables, que la estimación multivariada del Capítulo \ref{ch:resultados} sí controla. Finalmente, la correlación entre la primera diferencia del TCRM y de la ratio de deuda ($r=0.42$) es la más robusta de las tres.
+La evaluación de las correlaciones bivariadas arroja tres resultados relevantes para el diseño de la estrategia de instrumentación del Capítulo \ref{ch:resultados}. El VIX y el EMBI+ exhiben una correlación positiva pero prácticamente nula ($r=0.08$) en nivel contemporáneo: sobre la serie real de EMBI+, el canal de fuga hacia la calidad (\textit{flight to quality}) de la literatura de finanzas internacionales no se manifiesta en la correlación simple de niveles --a diferencia de lo que sugería la serie de contingencia usada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($r=0.33$)--, lo que no descarta el canal sino que exige una especificación menos ingenua (dinámica, no contemporánea) para detectarlo, motivo adicional para instrumentar el EMBI+ con el VIX en la Etapa 4 (Capítulo \ref{ch:resultados}) en lugar de inferir la relación de una correlación de nivel. La brecha del producto y el resultado primario muestran una correlación prácticamente nula ($r=0.07$). Esto no debe leerse como evidencia de una política contracíclica ejemplar: advierte, en cambio, que la correlación contemporánea simple no captura relaciones rezagadas, no lineales, ni mediadas por terceras variables, que la estimación multivariada del Capítulo \ref{ch:resultados} sí controla. Finalmente, la correlación entre la primera diferencia del TCRM y de la ratio de deuda ($r=0.14$, Sección \ref{sec:hoja_balance}) es positiva pero débil, la más débil de las tres pese a ser --sobre la serie de contingencia previa-- la que se reportaba como más robusta.
 
 La correlación bivariada, no obstante, no permite descartar dependencias lineales entre tres o más regresores simultáneamente. Se complementa por ello con los factores de inflación de la varianza (VIF) y el número de condición de la matriz de regresores estandarizados, calculados sobre las dos especificaciones relevantes para el Capítulo \ref{ch:resultados} y reportados en la Tabla \ref{tab:vif}.
 
@@ -285,10 +285,10 @@ La correlación bivariada, no obstante, no permite descartar dependencias lineal
 \multirow{2}{*}{Núcleo de Bohn (DOLS)} & $d_{t-1}$ & 1.020 & \multirow{2}{*}{1.151} \\
  & Brecha del producto ($\tilde{y}_t$) & 1.020 & \\
 \midrule
-\multirow{4}{*}{Ampliada (Bohn + EMBI+ + TCRM)} & $d_{t-1}$ & 3.816 & \multirow{4}{*}{3.836} \\
- & Brecha del producto ($\tilde{y}_t$) & 1.113 & \\
- & EMBI+ & 1.218 & \\
- & TCRM & 3.689 & \\
+\multirow{4}{*}{Ampliada (Bohn + EMBI+ + TCRM)} & $d_{t-1}$ & 1.869 & \multirow{4}{*}{2.381} \\
+ & Brecha del producto ($\tilde{y}_t$) & 1.025 & \\
+ & EMBI+ & 1.910 & \\
+ & TCRM & 1.046 & \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
@@ -296,7 +296,7 @@ La correlación bivariada, no obstante, no permite descartar dependencias lineal
 \end{flushleft}
 \end{table}
 
-Ninguna de las dos especificaciones exhibe multicolinealidad problemática. En el núcleo de Bohn --la especificación efectivamente estimada por DOLS-- los dos regresores son prácticamente ortogonales ($VIF=1.02$, número de condición $=1.15$). En la especificación ampliada, el VIF más alto corresponde a $d_{t-1}$ ($3.82$) y al TCRM ($3.69$), reflejando el canal de valuación cambiaria sobre el stock de deuda documentado en la Sección \ref{sec:hoja_balance}, pero ambos permanecen holgadamente por debajo del umbral convencional de $10$, y el número de condición ($3.84$) muy por debajo de $30$. La imprecisión de los coeficientes reportada en el Capítulo \ref{ch:resultados} no es, por tanto, atribuible a colinealidad entre regresores.
+Ninguna de las dos especificaciones exhibe multicolinealidad problemática. En el núcleo de Bohn --la especificación efectivamente estimada por DOLS-- los dos regresores son prácticamente ortogonales ($VIF=1.02$, número de condición $=1.15$). En la especificación ampliada, con la serie real de TCRM y EMBI+, los cuatro regresores permanecen igualmente cerca de la ortogonalidad ($VIF$ entre $1.02$ y $1.91$, número de condición $=2.38$), muy por debajo tanto del umbral convencional de $10$ como del número de condición de $30$. Sobre la serie de contingencia utilizada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia}, el VIF de $d_{t-1}$ y de TCRM llegaba a $3.82$ y $3.69$ respectivamente (número de condición $3.84$): también por debajo de los umbrales de alerta, pero sensiblemente más alto que con la serie real, un indicio adicional de que la serie de contingencia introducía una colinealidad artificial con la trayectoria de la deuda que la serie real no reproduce. La imprecisión de los coeficientes reportada en el Capítulo \ref{ch:resultados} no es, en ningún caso, atribuible a colinealidad entre regresores.
 
 \section{Dispersión Empírica y la Hipótesis de Fatiga Fiscal}
 
