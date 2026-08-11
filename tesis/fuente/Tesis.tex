@@ -1,5 +1,11 @@
 \documentclass[11pt,a4paper,oneside]{report}
 \usepackage[utf8]{inputenc}
+% T1 obligatorio: bajo XeLaTeX, sin esto mathptmx busca sus variantes en
+% codificacion TU (Unicode) donde no existen (p. ej. "TU/ptm/b/n undefined"),
+% y LaTeX sustituye silenciosamente la negrita por texto regular. Con T1,
+% mathptmx encuentra sus formas T1/ptm/b/n reales y \bfseries/\textbf
+% funcionan en todo el documento (titulos de capitulo, leyendas en negrita).
+\usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
