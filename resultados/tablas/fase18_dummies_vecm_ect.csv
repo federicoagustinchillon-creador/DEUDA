@@ -1,0 +1,26 @@
+                      OLS Regression Results                     
+Dep. Variable:   ,d_pb            ,  R-squared:         ,   0.128
+Model:           ,OLS             ,  Adj. R-squared:    ,   0.051
+Method:          ,Least Squares   ,  F-statistic:       ,   4.504
+Date:            ,Tue, 11 Aug 2026,  Prob (F-statistic):,0.000290
+Time:            ,18:54:49        ,  Log-Likelihood:    , -80.867
+No. Observations:,    87          ,  AIC:               ,   177.7
+Df Residuals:    ,    79          ,  BIC:               ,   197.5
+Df Model:        ,     7          ,                     ,        
+Covariance Type: ,HAC             ,                     ,        
+                ,   coef   , std err ,    z    ,P>|z| ,  [0.025 ,  0.975] 
+const           ,    0.0442,    0.126,    0.352, 0.725,   -0.202,    0.290
+ect_lag1        ,   -0.0002,    0.001,   -0.168, 0.867,   -0.002,    0.002
+g_gap           ,   -0.0065,    0.014,   -0.475, 0.635,   -0.033,    0.020
+pres_cfk1_x_ect ,    0.0081,    0.005,    1.522, 0.128,   -0.002,    0.019
+pres_cfk2_x_ect ,    0.0046,    0.006,    0.771, 0.440,   -0.007,    0.016
+pres_macri_x_ect,    0.0039,    0.005,    0.825, 0.410,   -0.005,    0.013
+pres_af_x_ect   ,    0.0242,    0.007,    3.255, 0.001,    0.010,    0.039
+pres_milei_x_ect,    0.0176,    0.011,    1.578, 0.115,   -0.004,    0.039
+Omnibus:      ,98.596,  Durbin-Watson:     ,   2.252
+Prob(Omnibus):, 0.000,  Jarque-Bera (JB):  ,2358.088
+Skew:         , 3.294,  Prob(JB):          ,    0.00
+Kurtosis:     ,27.640,  Cond. No.          ,    58.4
+
+Notes:
+[1] Standard Errors are heteroscedasticity and autocorrelation robust (HAC) using 4 lags and without small sample correction
