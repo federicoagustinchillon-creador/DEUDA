@@ -49,6 +49,10 @@ ENV/
 *.toc
 *.synctex.gz
 tesis/fuente/build/
+# El PDF de trabajo que xelatex escribe junto al .tex es un artefacto de
+# build, no el entregable. El PDF oficial, versionado, vive en tesis/Tesis.pdf
+# (se copia ahi despues de cada compilacion -- ver tesis/fuente/README.md).
+tesis/fuente/Tesis.pdf
 
 # Operating System files
 .DS_Store

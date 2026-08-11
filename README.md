@@ -11,7 +11,7 @@ Repositorio y código fuente de la investigación econométrica y tesis de grado
 
 ## 0. Guía Rápida: qué mirar primero y en qué orden
 
-**¿Solo querés leer la tesis?** → [`tesis/fuente/Tesis.pdf`](tesis/fuente/Tesis.pdf). No hace falta tocar nada más.
+**¿Solo querés leer la tesis?** → [`tesis/Tesis.pdf`](tesis/Tesis.pdf). No hace falta tocar nada más.
 
 **¿Querés editar el texto de un capítulo?** → [`tesis/capitulos/`](tesis/capitulos/), un `.tex` por capítulo (`00_abstract`, `01_introduccion`, ..., `09_apendice`). Después de editar, compilar según el paso 4 de la sección 3.
 
@@ -31,7 +31,7 @@ Repositorio y código fuente de la investigación econométrica y tesis de grado
 
 **Dentro de `Bibliografia/`**: `descargas_verificacion/` tiene los PDFs de los papers efectivamente citados. `auditorias/` tiene los informes de verificación (qué se chequeó de cada cita, y la búsqueda de literatura que pudiera refutar el trabajo). `marco_legal/` tiene las leyes citadas. `material_metodologico_catedra/` es bibliografía metodológica de referencia (Marradi, plantilla de DSA).
 
-**Un solo PDF de la tesis, sin ambigüedad**: `tesis/fuente/Tesis.pdf` es el único PDF de la tesis en el repositorio (se eliminó una copia duplicada y desactualizada que había quedado suelta en `tesis/`).
+**Un solo PDF de la tesis, sin ambigüedad**: `tesis/Tesis.pdf` es el único PDF versionado del repositorio, visible apenas entrás a la carpeta `tesis/`. El código fuente LaTeX vive en `tesis/fuente/` (`Tesis.tex`, `referencias.bib`); ahí también se genera una copia de trabajo del PDF al compilar, pero esa es solo un artefacto de build (`.gitignore`), no la oficial.
 
 ---
 
@@ -51,7 +51,7 @@ Este proyecto evalúa empíricamente la sostenibilidad fiscal e intertemporal de
 - **Quiebres Estructurales Múltiples**: Bai & Perron (2003) identifica quiebres en 2007T2, 2014T3 y 2018T1 (deuda SPNF) y en 2007T2 y 2016T4 (deuda consolidada).
 - **Riesgo estocástico de insolvencia**: el DSA estocástico proyecta a 2035 una probabilidad de superar el 100% del PIB del $31.2\%$ (escenario de Referencia).
 
-Para el detalle completo y las cifras exactas de cada estimación, ver `tesis/fuente/Tesis.pdf` — este resumen es orientativo, no reemplaza al documento.
+Para el detalle completo y las cifras exactas de cada estimación, ver [`tesis/Tesis.pdf`](tesis/Tesis.pdf) — este resumen es orientativo, no reemplaza al documento.
 
 ---
 
@@ -80,9 +80,10 @@ Deuda/
 ├── historial_proyecto/              # Documentación metodológica y planes de revisión
 ├── resultados/tablas/               # Salida CSV de cada fase — ver tablas/README.md
 ├── tesis/                           # Manuscrito completo en LaTeX
+│   ├── Tesis.pdf                    # EL PDF PARA LEER — único, versionado, acá arriba de todo
 │   ├── capitulos/                   # Archivos TeX por capítulo (00 a 09)
 │   ├── figuras/                     # Gráficos e imágenes institucionales
-│   └── fuente/                      # Documento maestro (Tesis.tex, referencias.bib) y Tesis.pdf
+│   └── fuente/                      # Código fuente LaTeX (Tesis.tex, referencias.bib) -- NO el PDF final
 ├── LICENSE                          # Licencia CC BY 4.0
 └── README.md                        # Este documento
 ```
@@ -145,14 +146,14 @@ python codigo/modelos/fase6_sostenibilidad_deuda.py      # DSA
 
 ### 4. Compilación del Manuscrito LaTeX
 
-Para generar el archivo PDF de la tesis (`Tesis.pdf`):
-
 ```bash
 cd tesis/fuente
-pdflatex -interaction=nonstopmode Tesis.tex
+xelatex -interaction=nonstopmode Tesis.tex
 biber Tesis
-pdflatex -interaction=nonstopmode Tesis.tex
-pdflatex -interaction=nonstopmode Tesis.tex
+xelatex -interaction=nonstopmode Tesis.tex
+xelatex -interaction=nonstopmode Tesis.tex
+cd ..
+cp fuente/Tesis.pdf Tesis.pdf   # el compilador escribe en fuente/; el oficial va un nivel arriba
 ```
 
 ---
