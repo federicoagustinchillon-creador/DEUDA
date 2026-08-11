@@ -9,19 +9,46 @@ Repositorio y código fuente de la investigación econométrica y tesis de grado
 
 ---
 
+## 0. Guía Rápida: qué mirar primero y en qué orden
+
+**¿Solo querés leer la tesis?** → [`tesis/fuente/Tesis.pdf`](tesis/fuente/Tesis.pdf). No hace falta tocar nada más.
+
+**¿Querés editar el texto de un capítulo?** → [`tesis/capitulos/`](tesis/capitulos/), un `.tex` por capítulo (`00_abstract`, `01_introduccion`, ..., `09_apendice`). Después de editar, compilar según el paso 4 de la sección 3.
+
+**¿Querés ver de dónde sale un número que aparece en la tesis?** → Tres pasos:
+1. Buscá el script que lo generó en la tabla del [Apéndice, Sección "Estructura de la Cadena de Procesamiento de Código"](tesis/capitulos/09_apendice.tex) — ahí está mapeado cada resultado a su script.
+2. El script vive en [`codigo/modelos/faseN_*.py`](codigo/modelos/) (`N` = número de etapa).
+3. Su salida (tabla/número) queda en [`resultados/tablas/faseN_*.csv`](resultados/tablas/).
+
+**¿Querés re-correr todo el pipeline desde cero?** → Sección 3 de este README, en orden: entorno virtual → ingesta de datos → fases econométricas → compilar LaTeX.
+
+**¿Querés entender la bibliografía?** → [`Bibliografia/`](Bibliografia/): `marco_legal/` (leyes citadas), `descargas_verificacion/` (papers descargados con verificación de que existen y dicen lo que la tesis les atribuye), `busqueda_literatura_refutacion/` (búsqueda activa de trabajos que contradigan los hallazgos, con veredicto).
+
+**¿Buscás versiones anteriores o el historial de decisiones metodológicas?** → [`historial_proyecto/`](historial_proyecto/).
+
+**Ramas de git**: `main` conserva la versión original de la tesis (DOLS como técnica de referencia, ventana 2004-2025) como respaldo. `revision-var-vecm` es la versión vigente (VECM como técnica de referencia sobre ventana ampliada 1999-2025, DOLS como robustez) — es la que hay que mirar salvo que se busque explícitamente el original.
+
+**Carpetas que NO son parte de la tesis** (para no perder tiempo buscando ahí): `material_cursada_TP3/` es material de la cursada (consignas de TP, no insumo de la investigación). `_snapshot_pre_rerun/` es un respaldo interno vacío/transitorio de una re-corrida de pipeline; se puede ignorar o borrar sin afectar nada.
+
+---
+
 ## 1. Resumen Ejecutivo
 
-Este proyecto evalúa empíricamente la sostenibilidad fiscal e intertemporal de la deuda pública soberana de la República Argentina para el período trimestral 2004T1–2025T4 ($n=88$ observaciones). Se extiende la metodología econométrica tradicional mediante dos contribuciones centrales:
+Este proyecto evalúa empíricamente la sostenibilidad fiscal e intertemporal de la deuda pública soberana de la República Argentina, sobre dos ventanas muestrales: la original, 2004T1–2025T4 ($n=88$), y una ampliada por empalme histórico, 1999T1–2025T4 ($n=108$). Se extiende la metodología econométrica tradicional mediante tres contribuciones centrales:
 
-1. **Consolidación del Sector Público**: Integración de la deuda del Sector Público No Financiero (SPNF) con las pasivos monetarios y remunerados (LELIQ, NOTALIQ y Pases Pasivos) del Banco Central de la República Argentina (BCRA).
-2. **Función de Reacción Fiscal Dinámica y DSA**: Estimación de la regla de reacción fiscal de Bohn (1998) mediante *Dynamic OLS* (DOLS) con corrección de endogeneidad por Variables Instrumentales (IV-2SLS), acompañada de un Análisis de Sostenibilidad de Deuda (DSA) estocástico con calibración multivariada $t$-Student ($\nu \approx 5.1$) y matrices de varianza-covarianza dinámica DCC-GARCH.
+1. **Consolidación del Sector Público**: Integración de la deuda del Sector Público No Financiero (SPNF) con los pasivos monetarios y remunerados (LELIQ, NOTALIQ y Pases Pasivos) del Banco Central de la República Argentina (BCRA).
+2. **VECM como técnica de referencia**: Estimación de la Función de Reacción Fiscal de Bohn (1998) mediante un Modelo de Vectores con Corrección de Error (VECM) sobre la ventana ampliada, que trata la endogeneidad del sistema completo (deuda, resultado primario, riesgo soberano, tipo de cambio) de forma estructural. DOLS con corrección IV-2SLS se conserva como ejercicio de robustez sobre la ventana original.
+3. **DSA estocástico**: Análisis de Sostenibilidad de Deuda con calibración multivariada $t$-Student ($\nu \approx 4.8$, por método de momentos) y matrices de varianza-covarianza dinámica DCC-GARCH.
 
 ### Principales Hallazgos Empíricos
 
-- **Reacción Fiscal Débil**: El coeficiente de respuesta del resultado primario ante la deuda acumulada es estadísticamente no significativo ($\rho = -0.0071$, $p = 0.564$), confirmando la inoperancia de la regla de Bohn en el período analizado.
-- **Identificación Instrumental Robusta**: La estimación IV-2SLS utilizando el spread soberano del ETF EMB Brasil como instrumento externo muestra relevancia estricta ($F_{IV} = 23.39 > 10$) y validez de sobreidentificación (Sargan $p = 0.576$).
-- **Quiebres Estructurales Múltiples**: El procedimiento de Bai & Perron (2003) identifica quiebres significativos en 2007T2, 2014T3 y 2018T1 para la deuda SPNF, y en 2007T2 y 2016T4 para la deuda consolidada.
-- **Riesgo Estocástico de Insolvencia**: El DSA estocástico proyecta a 2035 una probabilidad de que la relación Deuda/PIB supere el 100% igual al $30.4\%$ bajo la especificación base de colas pesadas ($t$-multivariada), con robusteces del $31.9\%$ bajo GARCH(1,1) y $29.1\%$ bajo DCC-GARCH.
+- **Reacción Fiscal Débil, convergente entre técnicas**: Ni DOLS ($\rho=-0.0071$, $p=0.564$) ni el VECM sobre ninguna de las dos ventanas ($\alpha_{pb}=0.0044$, $p=0.204$ ampliada; $\alpha_{pb}=0.0014$, $p=0.559$ original) encuentran una reacción fiscal de largo plazo significativa.
+- **Umbral de fatiga fiscal mixto**: marginal en niveles (Sup-LM $p=0.076$, partición muestral desigual) y sólido en primera diferencia ($p<0.001$).
+- **Identificación instrumental robusta**: IV-2SLS con el spread soberano del ETF EMB Brasil como instrumento muestra relevancia de primera etapa ($F=13.00>10$) y no rechaza la validez de sobreidentificación (Sargan $p=0.436$).
+- **Quiebres Estructurales Múltiples**: Bai & Perron (2003) identifica quiebres en 2007T2, 2014T3 y 2018T1 (deuda SPNF) y en 2007T2 y 2016T4 (deuda consolidada).
+- **Riesgo estocástico de insolvencia**: el DSA estocástico proyecta a 2035 una probabilidad de superar el 100% del PIB del $31.2\%$ (escenario de Referencia).
+
+Para el detalle completo y las cifras exactas de cada estimación, ver `tesis/fuente/Tesis.pdf` — este resumen es orientativo, no reemplaza al documento.
 
 ---
 
@@ -38,7 +65,7 @@ Deuda/
 │   └── marco_legal/                 # Textos oficiales de Leyes (24.156, 24.144, 27.612, etc.)
 ├── codigo/                          # Código fuente econométrico reproducible
 │   ├── ingesta_datos/               # Extracción y consolidación de series primarias
-│   ├── modelos/                     # Scripts de estimación (Fases 1 a 15)
+│   ├── modelos/                     # Scripts de estimación (Fases 1 a 18)
 │   ├── graficos/                    # Generación de figuras vectoriales para la tesis
 │   ├── codigo_completo_deuda.py     # Script único integrado de lectura secuencial
 │   └── requirements.txt             # Dependencias del entorno Python
