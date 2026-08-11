@@ -28,7 +28,11 @@ Repositorio y código fuente de la investigación econométrica y tesis de grado
 
 **Ramas de git**: `main` conserva la versión original de la tesis (DOLS como técnica de referencia, ventana 2004-2025) como respaldo. `revision-var-vecm` es la versión vigente (VECM como técnica de referencia sobre ventana ampliada 1999-2025, DOLS como robustez) — es la que hay que mirar salvo que se busque explícitamente el original.
 
-**Carpetas que NO son parte de la tesis** (para no perder tiempo buscando ahí): `material_cursada_TP3/` es material de la cursada (consignas de TP, no insumo de la investigación). `_snapshot_pre_rerun/` es un respaldo interno vacío/transitorio de una re-corrida de pipeline; se puede ignorar o borrar sin afectar nada.
+**Carpetas que NO son parte de la tesis** (para no perder tiempo buscando ahí): `_material_cursada_NO_es_parte_de_la_tesis/` es material de la cursada (consignas de TP, no insumo de la investigación) — el prefijo `_` es a propósito, para que no se confunda con las carpetas de la investigación.
+
+**Dentro de `Bibliografia/`**: `descargas_verificacion/` tiene los PDFs de los papers efectivamente citados. `auditorias/` tiene los informes de verificación (qué se chequeó de cada cita, y la búsqueda de literatura que pudiera refutar el trabajo). `marco_legal/` tiene las leyes citadas. `material_metodologico_catedra/` es bibliografía metodológica de referencia (Marradi, plantilla de DSA).
+
+**Un solo PDF de la tesis, sin ambigüedad**: `tesis/fuente/Tesis.pdf` es el único PDF de la tesis en el repositorio (se eliminó una copia duplicada y desactualizada que había quedado suelta en `tesis/`).
 
 ---
 
@@ -61,8 +65,10 @@ Deuda/
 ├── .github/                         # Configuración GitHub
 │   └── CONTRIBUTING.md              # Guía de contribución
 ├── Bibliografia/                    # Acervo bibliográfico y normativo descargado
-│   ├── descargas_verificacion/      # Papers académicos y documentos oficiales en PDF
-│   └── marco_legal/                 # Textos oficiales de Leyes (24.156, 24.144, 27.612, etc.)
+│   ├── descargas_verificacion/      # PDFs de los papers efectivamente citados
+│   ├── auditorias/                  # Informes de verificación de citas + búsqueda de literatura refutatoria
+│   ├── marco_legal/                 # Textos oficiales de Leyes (24.156, 24.144, 27.541, 27.612, etc.)
+│   └── material_metodologico_catedra/ # Bibliografía metodológica de referencia
 ├── codigo/                          # Código fuente econométrico reproducible
 │   ├── ingesta_datos/               # Extracción y consolidación de series primarias
 │   ├── modelos/                     # Scripts de estimación (Fases 1 a 18)

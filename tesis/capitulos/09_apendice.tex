@@ -18,7 +18,7 @@ La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas r
 \midrule
 (ii) Autocorrelación residual DOLS (DW$=0.321$) & Inherente a la dinámica fiscal AR & Errores HAC Newey-West en toda la inferencia; test Breusch-Godfrey (4 rezagos); interpretación como evidencia de inercia estructural presupuestaria \\
 \midrule
-(iii) Calibración (no estimación) de 2 de 5 shocks DSA ($r_d$, $r_f$) & Superable & Reestimación GARCH(1,1) de los 3 shocks con serie propia; DCC-GARCH de correlaciones; comparación en Tablas \ref{tab:garch_stddevs}--\ref{tab:garch_dsa_comparacion} \\
+(iii) Calibración (no estimación) de 2 de 5 shocks DSA ($r_d$, $r_f$) & Superable & Reestimación GARCH(1,1) de los 3 shocks con serie propia; DCC-GARCH de correlaciones; comparación en Tablas \ref{tab:garch_desvios}--\ref{tab:garch_dsa_comparacion} \\
 \midrule
 (iv) Heterocedasticidad condicional ARCH-LM ($p=0.0009$) & Inherente a la volatilidad estructural AR & Errores HAC; robustez GARCH; interpretación como confirmación de la motivación para el DSA estocástico no gaussiano \\
 \midrule
@@ -87,7 +87,7 @@ La totalidad de los resultados cuantitativos reportados en esta tesis (estadíst
 2.4 & \url{fase4_variables_instrumentales.py} & IV-2SLS (VIX + spread regional), F de primera etapa, Wu-Hausman, Sargan & Tabla \ref{tab:iv2sls} \\
 2.5 & \url{fase5_umbral_hansen.py} & Umbral de Hansen, \textit{bootstrap} Sup-LM & Tabla \ref{tab:hansen} \\
 2.6 & \url{fase6_sostenibilidad_deuda.py} & DSA determinista y Monte Carlo (t de Student) & Tabla \ref{tab:dsa_determinista}, Figura \ref{fig:fan_chart_final} \\
-2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario, causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figuras \ref{fig:acf_pacf}, \ref{fig:cusum}; Tablas \ref{tab:sensibilidad_temporal}, \ref{tab:probabilidad_escenarios}, \ref{tab:engle_granger}, \ref{tab:garch_stddevs}, \ref{tab:garch_dsa_comparacion} \\
+2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario, causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figuras \ref{fig:acf_pacf}, \ref{fig:cusum}; Tablas \ref{tab:sensibilidad_temporal}, \ref{tab:probabilidad_escenarios}, \ref{tab:engle_granger}, \ref{tab:garch_desvios}, \ref{tab:garch_dsa_comparacion} \\
 2.8 & \url{fase8_deuda_consolidada.py} & Consolida deuda SPNF + pasivos BCRA, Mejora Dim. IV & Figura \ref{fig:deuda_consolidada}, Tabla \ref{tab:probabilidad_escenarios} (Sección \ref{sec:deuda_consolidada}) \\
 2.9 & \url{bai_perron.py} \newline \url{fase9_bai_perron.py} & Quiebres estructurales múltiples (DP + BIC), Mejora Dim. I & Figura \ref{fig:bai_perron} (Sección \ref{sec:quiebres_estructurales}) \\
 2.10 & \url{dcc_garch.py} \newline \url{fase10_dcc_garch.py} & DCC-GARCH, correlación condicional dinámica, Mejora Dim. II & Sección \ref{sec:dcc_garch} \\
