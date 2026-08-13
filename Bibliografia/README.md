@@ -102,3 +102,17 @@ Se recopiló un acervo de más de 100 documentos empíricos y metodológicos de 
 - Reestructuraciones y dinámica de deuda soberana en Argentina (Chamon, Nemiña, Aruguete, Cantamutto, Rodríguez).
 
 Para el análisis bibliométrico detallado y la red de citas cruzadas, consultar [`auditorias/analisis_bibliometrico_red_citas.md`](auditorias/analisis_bibliometrico_red_citas.md).
+
+---
+
+## 3. Acervo Especializado de Análisis de Deuda en Argentina (Multienfoque)
+
+En la carpeta [`analisis_deuda_argentina_multienfoque/`](analisis_deuda_argentina_multienfoque/) se aloja un acervo exhaustivo de más de 50 documentos descargados y catalogados que abarcan las distintas escuelas de pensamiento económico y aproximaciones metodológicas sobre la deuda pública argentina (2001–2025):
+- **Pilar I**: Macrofiscal y Econometría de Series de Tiempo (Bohn, DOLS, VECM, DSA).
+- **Pilar II**: Balance Consolidado y Pasivos Remunerados del BCRA (LEBAC, LELIQ, Pases, Déficit Cuasifiscal).
+- **Pilar III**: Restricción Externa, Descalce de Monedas y Fuga de Capitales (Pecado Original, Sudden Stops, Formación de Activos Externos).
+- **Pilar IV**: Economía Política, Reestructuraciones Soberanas y Acuerdos con el FMI (Canjes 2005/2010/2020, Fondos Buitre, Stand-By 2018 y EFF 2022).
+- **Pilar V**: Tesis Universitarias y Producción de Posgrado (UTDT, UBA, UNLP, UdeSA, UNR, UNCuyo).
+
+Consultar [`analisis_deuda_argentina_multienfoque/README.md`](analisis_deuda_argentina_multienfoque/README.md) para el detalle taxonómico.
+
