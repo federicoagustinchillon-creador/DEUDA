@@ -59,11 +59,12 @@ Para el detalle completo y las cifras exactas de cada estimación, ver [`tesis/T
 
 ```text
 Deuda/
-├── .agents/AGENTS.md                # Directivas para asistentes de IA que colaboren en el repo
-├── Bibliografia/                    # Acervo bibliográfico y normativo descargado — ver Bibliografia/README.md (índice de las 64 citas)
-│   ├── descargas_verificacion/      # PDFs de los papers efectivamente citados
-│   ├── auditorias/                  # Informes de verificación de citas + búsqueda de literatura refutatoria
-│   ├── marco_legal/                 # Textos oficiales de Leyes (24.156, 24.144, 27.612; falta 27.541, ver Bibliografia/README.md)
+├── .agents/AGENTS.md                # Directivas de gobernanza científica para asistentes de IA
+├── Bibliografia/                    # Acervo bibliográfico y normativo completo — ver Bibliografia/README.md
+│   ├── descargas_verificacion/      # PDFs de los papers centrales y metodología de frontera
+│   ├── analisis_deuda_argentina_multienfoque/ # Acervo exhaustivo de análisis de deuda en Argentina (5 pilares)
+│   ├── auditorias/                  # Informes de verificación de citas + análisis bibliométrico y red de citas
+│   ├── marco_legal/                 # Textos oficiales de Leyes (24.144, 24.156, 25.152, 27.541, 27.612)
 │   └── material_metodologico_catedra/ # Bibliografía metodológica de referencia
 ├── codigo/                          # Código fuente econométrico reproducible — ver codigo/README.md
 │   ├── ingesta_datos/               # Paso 1: extracción y consolidación de series primarias
@@ -77,14 +78,14 @@ Deuda/
 │   ├── dataset_consolidado_real.csv     # Panel ventana original 2004-2025 (n=88)
 │   ├── dataset_consolidado_real_ext.csv # Panel ventana ampliada 1999-2025 (n=108) — referencia actual
 │   └── codebook.md                  # Libro de códigos y metadatos de variables
-├── historial_proyecto/              # Archivo histórico (planes, decisiones) -- NO la especificación vigente, ver historial_proyecto/README.md
-├── resultados/tablas/               # Salida CSV de cada fase — ver tablas/README.md
+├── historial_proyecto/              # Archivo histórico (planes, decisiones) -- NO la especificación vigente
+├── resultados/tablas/               # Salida CSV de cada fase econométrica — ver tablas/README.md
 ├── tesis/                           # Manuscrito completo en LaTeX
-│   ├── Tesis.pdf                    # EL PDF PARA LEER — único, versionado, acá arriba de todo
+│   ├── Tesis.pdf                    # EL PDF PARA LEER — único entregable oficial, versionado
 │   ├── capitulos/                   # Archivos TeX por capítulo (00 a 09)
 │   ├── figuras/                     # Gráficos e imágenes institucionales
-│   └── fuente/                      # Código fuente LaTeX (Tesis.tex, referencias.bib) -- NO el PDF final
-├── _material_cursada_NO_es_parte_de_la_tesis/ # Apuntes/parciales de la cursada que originó el proyecto -- no es la tesis
+│   └── fuente/                      # Código fuente LaTeX (Tesis.tex, referencias.bib)
+├── _material_cursada_NO_es_parte_de_la_tesis/ # Apuntes/parciales de cursada previa -- no es la tesis
 ├── LICENSE                          # Licencia CC BY 4.0
 └── README.md                        # Este documento
 ```
