@@ -1,0 +1,330 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{top=2.2cm, bottom=2.2cm, left=2.2cm, right=2.2cm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!80!black,
+    citecolor=blue!80!black,
+    urlcolor=blue!80!black
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \textbf{Guía Maestra de Defensa: Sostenibilidad de la Deuda Argentina}}
+\fancyhead[R]{\small \thepage}
+\fancyfoot[C]{\small Facultad de Ciencias Económicas --- Universidad Nacional de Cuyo}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{blue!80!black}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{black!90}}{\thesubsection.}{0.5em}{}
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{infobox}{
+    linecolor=blue!70!black,
+    outerlinewidth=1pt,
+    roundcorner=4pt,
+    innertopmargin=8pt,
+    innerbottommargin=8pt,
+    innerrightmargin=10pt,
+    innerleftmargin=10pt,
+    backgroundcolor=blue!4!white
+}
+
+\mdfdefinestyle{mathbox}{
+    linecolor=gray!70!black,
+    outerlinewidth=0.8pt,
+    roundcorner=3pt,
+    innertopmargin=6pt,
+    innerbottommargin=6pt,
+    innerrightmargin=8pt,
+    innerleftmargin=8pt,
+    backgroundcolor=gray!3!white
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.35\textwidth]{figuras/logo_fce_uncuyo.png}\\[1.5cm]
+    {\LARGE \textbf{MANUAL MAESTRO DE DEFENSA Y DOMINIO TÉCNICO}}\\[0.5cm]
+    {\large \textbf{Sostenibilidad de la Deuda Pública Consolidada en Argentina (1999--2025)}}\\[0.3cm]
+    {\normalsize \textit{Guía Estratégica, Derivaciones de Frontera y Respuestas a Preguntas Críticas}}\\[2cm]
+
+    \begin{minipage}{0.85\textwidth}
+        \begin{mdframed}[style=infobox]
+            \textbf{Propósito del Documento:}\\
+            Este manual condensa todos los fundamentos matemáticos, diagnósticos econométricos, decisiones de empalme, figuras empíricas y extensiones cuantitativas avanzadas (modelos de difusión CIR de 1 y 2 factores, saltos de Merton y Threshold VECM) requeridos para fundamentar la tesis ante evaluadores de máxima exigencia.
+        \end{mdframed}
+    \end{minipage}
+
+    \vfill
+    {\small \textbf{Autores:} Santiago Páez --- Federico Chillón --- Emiliano Carricondo\\[0.1cm]
+    Facultad de Ciencias Económicas --- Universidad Nacional de Cuyo\\[0.1cm]
+    Mendoza, Argentina --- Agosto de 2026}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Resumen Ejecutivo de la Arquitectura Econométrica}
+
+El manuscrito principal de la tesis (compilado a 84 páginas en \texttt{tesis/Tesis.pdf}) descansa sobre una estrategia de estimación dual e integrada, estructurada para responder con rigor al director de tesis:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{l p{4.5cm} p{4cm} X}
+\toprule
+\textbf{Técnica} & \textbf{Ventana Muestral} & \textbf{Especificación / Variables} & \textbf{Diagnóstico Central} \\
+\midrule
+\textbf{VECM} & 1999T1--2025T4 ($n=108$) (Ventana Ampliada) & Sistema multivariado: $d_t$, $pb_t$, $\text{EMBI}_t$, $\text{TCRM}_t$, brecha $\tilde{y}_t$ & $\alpha_{pb} = 0.0044$ ($p=0.204$). Inoperancia de regla activa en el sistema. \\
+\midrule
+\textbf{VECM} & 2004T1--2025T4 ($n=87$) (Muestra Homogénea) & Mismo sistema con series reales primarias completas & $\alpha_{pb} = 0.0014$ ($p=0.559$). Cointegración $r=1$ endógena unánime. \\
+\midrule
+\textbf{DOLS} & 2004T1--2025T4 ($n=88$) (Ecuación Única) & $m=4$ adelantos/rezagos, corrección HAC Newey-West & $\rho = -0.0071$ ($p=0.564$). Ausencia de reacción lineal activa. \\
+\midrule
+\textbf{IV-2SLS} & 2004T1--2025T4 ($n=73$) (Endogeneidad) & EMBI instrumentado con VIX y diferencial EMB & $F = 13.00 > 10$, Wu-Hausman $p=0.009$, Sargan $p=0.436$. $\beta_{\text{EMBI}} = 0.0017$ ($p=0.076$). \\
+\midrule
+\textbf{Bai-Perron} & 2004T1--2025T4 & Quiebres múltiples en SPNF y Deuda Consolidada & SPNF: 2007T2, 2014T3, 2018T1. Consolidada: 2007T2, 2016T4. \\
+\midrule
+\textbf{Hansen} & 2004T1--2025T4 & Regresión de umbral en $\Delta pb_t$ & $\tau^* = 2083$ pb ($p < 0.001$). $\beta_1 = 0.0184$ vs $\beta_2 = 0.0077$. \\
+\midrule
+\textbf{DSA} & Proyección 2026--2035 & Monte Carlo con cópula $t$-Student ($\nu=4.8$) & $P(d_{2035} > 100\%) = 31.2\%$ (Referencia). Robustez: $30.4\%$ a $31.9\%$. \\
+\bottomrule
+\end{tabularx}
+\caption{Matriz Síntesis de Resultados Econométricos de la Tesis.}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figuras/fig5_1_deuda_resultado_primario.png}
+\caption{Trayectoria Trimestral de la Deuda Pública sobre PIB y el Resultado Primario en Argentina (2004--2025).}
+\label{fig:deuda_primario}
+\end{figure}
+
+---
+
+\section{Fundamentos Matemáticos y Decisiones de Implementación}
+
+\subsection{Desagregación Temporal de Denton (1971) sin Indicador}
+Para construir la ventana ampliada 1999--2003 sin distorsionar la varianza, se aplicó la técnica de Denton en primeras diferencias:
+
+\begin{equation}
+\min_{y} \, (D y)^\top (D y) \quad \text{sujeto a} \quad C y = Y_A
+\end{equation}
+
+Donde $D$ es la matriz de primeras diferencias de dimensión $(T-1) \times T$, $C$ es la matriz agregadora anual ($M \times T$, con bloques $[1, 1, 1, 1]$), y $Y_A$ es el vector anual auditado del \textit{Compendio Fiscal de Hacienda}. La solución analítica exacta de mínimos cuadrados restringidos es:
+
+\begin{equation}
+y = (D^\top D)^{-1} C^\top \left[ C (D^\top D)^{-1} C^\top \right]^{-1} Y_A
+\end{equation}
+
+\textbf{Defensa}: Esta solución no introduce estacionalidad ficticia y minimiza la curvatura entre trimestres adyacentes respetando la restricción de balance contable interanual.
+
+\subsection{Consolidación del Balance Cuasifiscal del BCRA}
+La deuda pública relevante para la solvencia intertemporal no es únicamente la del Sector Público No Financiero (SPNF), sino la deuda pública consolidada neta:
+
+\begin{equation}
+D_t^{\text{cons}} = D_t^{\text{SPNF}} + \text{Pasivos Remunerados del BCRA}_t - \text{Títulos Públicos en Activo del BCRA}_t
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figuras/figura_8_1_deuda_consolidada.png}
+\caption{Comparación entre Deuda SPNF y Deuda Consolidada con Pasivos del BCRA (LELIQ/Pases).}
+\label{fig:deuda_consolidada}
+\end{figure}
+
+\subsection{El Sistema VECM y el Teorema de Representación de Granger}
+Ante variables no estacionarias $I(1)$ cointegradas, un VAR en diferencias ignora el atractor de largo plazo. El VECM resuelve esta omisión:
+
+\begin{equation}
+\Delta Y_t = \mu + \alpha \beta^\top Y_{t-1} + \sum_{i=1}^{p-1} \Gamma_i \Delta Y_{t-i} + \Phi \tilde{y}_t + \varepsilon_t
+\end{equation}
+
+Donde $\beta^\top Y_{t-1}$ representa el término de corrección de error (ECT). La velocidad de ajuste del superávit primario hacia el equilibrio intertemporal es:
+\begin{itemize}
+    \item $\alpha_{pb} = 0.0044$ ($p = 0.204$) en la ventana ampliada ($n=108$).
+    \item $\alpha_{pb} = 0.0014$ ($p = 0.559$) en la ventana homogénea ($n=87$).
+\end{itemize}
+
+\subsection{Quiebres Estructurales Múltiples de Bai y Perron (2003)}
+El algoritmo de partición óptima resuelve por programación dinámica:
+
+\begin{equation}
+(\hat{T}_1, \dots, \hat{T}_m) = \arg\min_{(T_1, \dots, T_m)} \sum_{j=1}^{m+1} \sum_{t=T_{j-1}+1}^{T_j} \left( y_t - z_t^\top \delta_j \right)^2
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figuras/figura_9_1_bai_perron.png}
+\caption{Identificación de Quiebres Estructurales Múltiples mediante el Algoritmo de Bai y Perron.}
+\label{fig:bai_perron}
+\end{figure}
+
+\subsection{Test de Umbral de Hansen (1999, 2000) y Fatiga Fiscal}
+La estimación del modelo de umbral en primera diferencia $\Delta pb_t$ (estacionaria) arrojó:
+
+\begin{equation}
+\Delta pb_t = \beta_1 d_{t-1} \cdot \mathbb{I}(\text{EMBI}_{t-1} \le \tau^*) + \beta_2 d_{t-1} \cdot \mathbb{I}(\text{EMBI}_{t-1} > \tau^*) + \gamma X_t + \varepsilon_t
+\end{equation}
+
+Con umbral estimado en $\tau^* = 2083$ pb ($p < 0.001$ mediante remuestreo Sup-LM con 1.000 réplicas).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figuras/fig5_3_dispersion_fatiga_fiscal.png}
+\caption{Diagrama de Dispersión y Ajuste No Lineal de Fatiga Fiscal frente al Riesgo Soberano.}
+\label{fig:fatiga_fiscal}
+\end{figure}
+
+\subsection{Instrumentación IV-2SLS frente a la Endogeneidad del Riesgo}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figuras/fig6_1_diagnostico_primera_etapa.png}
+\caption{Diagnóstico de Primera Etapa IV-2SLS: Relevancia y Ortogonalidad de Instrumentos.}
+\label{fig:iv_2sls}
+\end{figure}
+
+---
+
+\section{Análisis de Sostenibilidad de Deuda (DSA) Estocástico}
+
+La ecuación dinámica no lineal de acumulación de deuda sobre PIB se expresa como:
+
+\begin{equation}
+d_t = d_{t-1} \left( \frac{1 + r_t}{1 + g_t} \right) - pb_t + sft_t
+\end{equation}
+
+Donde la tasa efectiva real pondera moneda doméstica y extranjera:
+
+\begin{equation}
+r_t = \alpha_d r_{d,t} + (1 - \alpha_d) \left[ (1 + r_{f,t})(1 + \Delta tc_t) - 1 \right]
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figuras/figura_10_1_dcc_correlacion_dinamica.png}
+\caption{Evolución Temporal de las Correlaciones Dinámicas Condicionales (DCC-GARCH).}
+\label{fig:dcc_garch}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figuras/dsa_grafico_abanico.png}
+\caption{Proyecciones Estocásticas de Sostenibilidad de la Deuda Argentina hacia 2035 (Gráfico en Abanico de Probabilidades).}
+\label{fig:dsa_abanico}
+\end{figure}
+
+---
+
+\section{Propuestas Cuantitativas de Vanguardia para Discutir con el Jurado}
+
+\subsection{Propuesta 1: Proceso de Difusión Estocástica Cox-Ingersoll-Ross (CIR)}
+
+Para evitar calibraciones estáticas de la tasa externa $r_{f,t}$, modelamos el EMBI+ como una ecuación diferencial estocástica afín con reversión a la media:
+
+\begin{equation}
+d(risk_t) = \kappa (\theta - risk_t) dt + \sigma \sqrt{risk_t} \, dW_t
+\end{equation}
+
+\begin{mdframed}[style=mathbox]
+\textbf{Condición de Feller (No Negatividad Estricta):}
+\begin{equation}
+2\kappa\theta > \sigma^2 \quad \Longleftrightarrow \quad \text{Ratio de Feller} = \frac{2\kappa\theta}{\sigma^2} > 1
+\end{equation}
+Si el ratio supera la unidad, la frontera en cero es inaccesible con probabilidad 1.
+\end{mdframed}
+
+\textbf{Función de Transición Exacta (Chi-Cuadrado no central)}:
+
+\begin{equation}
+f(risk_{t+\Delta t} \mid risk_t) = c \, e^{-u - v} \left(\frac{v}{u}\right)^{q/2} I_q\left(2\sqrt{uv}\right)
+\end{equation}
+
+Donde $c = \frac{2\kappa}{\sigma^2 (1 - e^{-\kappa \Delta t})}$, $u = c \cdot risk_t e^{-\kappa \Delta t}$, $v = c \cdot risk_{t+\Delta t}$, $q = \frac{2\kappa\theta}{\sigma^2} - 1$, e $I_q(\cdot)$ es la función modificada de Bessel de primera especie.
+
+\textbf{Extensión a 2 Factores (Corto y Largo Plazo)}:
+\begin{align}
+risk_t &= \xi_t + \chi_t \\
+d\xi_t &= -\kappa_\xi \xi_t dt + \sigma_\xi \sqrt{\xi_t} \, dW_t^{(1)} \quad (\text{Shock de liquidez global transitorio, } \kappa_\xi > 1.5) \\
+d\chi_t &= \kappa_\chi (\theta_\chi - \chi_t) dt + \sigma_\chi \sqrt{\chi_t} \, dW_t^{(2)} \quad (\text{Solvencia estructural local, } \kappa_\chi \approx 0.2)
+\end{align}
+
+\subsection{Propuesta 2: Difusión con Saltos de Merton y Variación Bipotencia}
+
+Para modelar los eventos de corte súbito de crédito (*sudden stops*) y crisis de balanza de pagos:
+
+\begin{equation}
+\frac{d(risk_t)}{risk_t} = (\mu - \lambda \kappa_J) dt + \sigma dW_t + (J_t - 1) dN_t
+\end{equation}
+
+Donde $N_t \sim \text{Poisson}(\lambda)$ y $\ln(J_t) \sim \mathcal{N}(\mu_J, \sigma_J^2)$. La separación de la volatilidad continua de los saltos discretos se realiza mediante la **Variación Bipotencia de Barndorff-Nielsen y Shephard (2004)**:
+
+\begin{equation}
+BV = \frac{\pi}{2} \sum_{t=2}^{T} |r_t| |r_{t-1}| \xrightarrow{p} \int_0^T \sigma_s^2 ds
+\end{equation}
+
+\subsection{Propuesta 3: Threshold VECM Multivariado (Hansen y Seo, 2002)}
+
+\begin{equation}
+\Delta Y_t = \begin{cases}
+\mu_1 + \alpha_1 \beta^\top Y_{t-1} + \sum_{i=1}^{p-1} \Gamma_{1,i} \Delta Y_{t-i} + \varepsilon_t & \text{si } risk_{t-1} \le \tau^* \\
+\mu_2 + \alpha_2 \beta^\top Y_{t-1} + \sum_{i=1}^{p-1} \Gamma_{2,i} \Delta Y_{t-i} + \varepsilon_t & \text{si } risk_{t-1} > \tau^*
+\end{cases}
+\end{equation}
+
+---
+
+\section{Guion de Defensa Estratégica ante el Profesor}
+
+\begin{mdframed}[style=infobox]
+\textbf{1. Pregunta sobre el coeficiente nulo ($\rho = -0.0071$, $\alpha_{pb} = 0.0044$):}\\
+\textit{Respuesta}: No es un fallo muestral ni econométrico, sino el hallazgo central: Argentina careció de una regla fiscal activa en el período post-convertibilidad. El ajuste de solvencia no operó por esfuerzo primario presupuestario, sino por canales pasivos de licuación (devaluaciones del TCRM, inflación) y quitas de deuda en reestructuraciones soberanas.
+
+\vspace{0.2cm}
+\textbf{2. Pregunta sobre la sensibilidad del test de Johansen al año 1999:}\\
+\textit{Respuesta}: Los quiebres extremos de 2001--2002 reducen la potencia del test de Traza (Johansen et al., 2000). Por eso reportamos la sensibilidad con transparencia e imponemos $r=1$ por fundamento teórico de Bohn (1998), demostrando que en la submuestra 2004--2025 Johansen confirma $r=1$ de forma endógena con el mismo resultado nulo.
+
+\vspace{0.2cm}
+\textbf{3. Pregunta sobre el test de Hansen en niveles vs diferencias:}\\
+\textit{Respuesta}: Dado que $pb_t$ es $I(1)$, la estimación en niveles viola el supuesto de estacionariedad estricta de Hansen (2000). Por eso se reestimó en $\Delta pb_t$ (estacionaria), donde el test por remuestreo Sup-LM arroja $p < 0.001$ y confirma fatiga fiscal nítida a partir de 2083 pb.
+\end{mdframed}
+
+---
+
+\section{Red Bibliográfica de Frontera}
+
+\begin{enumerate}
+    \item \textbf{Bohn, H. (1998)}. \textit{The Behavior of U.S. Public Debt and Deficits}. The Quarterly Journal of Economics, 113(3), 949--963.
+    \item \textbf{Bohn, H. (2007)}. \textit{Are stationarity and cointegration tests necessary to test sustainability?} Journal of Monetary Economics, 54(7), 1837--1847.
+    \item \textbf{Ghosh, A. R., et al. (2013)}. \textit{Fiscal fatigue, fiscal space and debt sustainability in advanced economies}. The Economic Journal, 123(566), F4--F30.
+    \item \textbf{Mendoza, E. G., y Oviedo, P. M. (2006, 2009)}. \textit{Public debt, fiscal solvency and macroeconomic uncertainty in Latin America}. Economía Mexicana, 18(2), 133--177.
+    \item \textbf{Stock, J. H., y Watson, M. W. (1993)}. \textit{A simple estimator of cointegrating vectors in higher order integrated systems}. Econometrica, 61(4), 783--820.
+    \item \textbf{Johansen, S., Mosconi, R., y Nielsen, B. (2000)}. \textit{Cointegration analysis in the presence of structural breaks in the deterministic trend}. The Econometrics Journal, 3(2), 216--249.
+    \item \textbf{Bai, J., y Perron, P. (2003)}. \textit{Computation and analysis of multiple structural change models}. Journal of Applied Econometrics, 18(1), 1--22.
+    \item \textbf{Hansen, B. E. (2000)}. \textit{Sample splitting and threshold estimation}. Econometrica, 68(3), 575--603.
+    \item \textbf{Caner, M., y Hansen, B. E. (2004)}. \textit{Instrumental variable estimation of a threshold model}. Econometric Theory, 20(5), 813--843.
+    \item \textbf{Hansen, B. E., y Seo, B. (2002)}. \textit{Testing for two-regime threshold cointegration in vector error-correction models}. Journal of Econometrics, 110(2), 293--318.
+    \item \textbf{Cox, J. C., Ingersoll, J. E., y Ross, S. A. (1985)}. \textit{A theory of the term structure of interest rates}. Econometrica, 53(2), 385--407.
+    \item \textbf{Barndorff-Nielsen, O. E., y Shephard, N. (2004)}. \textit{Power and bipower variation with stochastic volatility and jumps}. Journal of Financial Econometrics, 2(1), 1--37.
+    \item \textbf{Celasun, O., Debrun, X., y Ostry, J. D. (2006)}. \textit{Primary Surplus Behavior and Risks to Fiscal Sustainability in Emerging Market Countries}. IMF Staff Papers, 53(3), 401--425.
+    \item \textbf{Engle, R. (2002)}. \textit{Dynamic conditional correlation}. Journal of Business \& Economic Statistics, 20(3), 339--350.
+\end{enumerate}
+
+\end{document}
