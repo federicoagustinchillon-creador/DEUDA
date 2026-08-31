@@ -6,7 +6,7 @@ La modelización de la sostenibilidad de la deuda pública en economías emergen
 
 Los resultados empíricos de dicho documento revelaron debilidades estadísticas que reflejan la volatilidad intrínseca del objeto de estudio: la estimación DOLS arrojó un coeficiente de reacción fiscal negativo y no significativo ($\rho=-0,0071$, $p=0,564$), evidenciando la inoperancia práctica de la regla lineal clásica. Asimismo, el contraste de umbral de Hansen para la detección de fatiga fiscal no logró rechazar la hipótesis nula de linealidad ($p=0,383$ mediante contraste bootstrap del estadístico Sup-LM), y la instrumentación del riesgo soberano (EMBI+) mediante el índice VIX y el Tipo de Cambio Real Multilateral (TCRM) rezagado sufrió un rechazo categórico de su validez conjunta en el test de sobreidentificación de Sargan ($p<0,001$). Finalmente, el Análisis de Sostenibilidad de la Deuda (DSA) estocástico debió recurrir a una calibración estática de la volatilidad histórica, limitando la capacidad predictiva del modelo.
 
-Frente a estas limitaciones estructurales, se ha propuesto la integración de cinco mejoras fundamentales. Cuatro de ellas son de carácter estrictamente econométrico: contraste de quiebres estructurales múltiples de Bai-Perron, volatilidad multivariada (DCC-GARCH), spreads regionales como nuevos instrumentos, y la inclusión de los pasivos remunerados del Banco Central de la República Argentina (BCRA). La quinta mejora es de carácter estructural-estilístico, orientada a blindar el manuscrito frente al tribunal: la depuración algorítmica del exceso de andamiaje epistemológico y la eliminación del tono defensivo en la redacción de los resultados empíricos.
+Frente a estas limitaciones estructurales, se ha propuesto la integración de cinco mejoras fundamentales. Cuatro de ellas son de carácter estrictamente econométrico: contraste de quiebres estructurales múltiples de Bai-Perron, volatilidad multivariada ([[dcc-garch-dynamic-correlation|DCC-GARCH]]), spreads regionales como nuevos instrumentos, y la inclusión de los pasivos remunerados del Banco Central de la República Argentina (BCRA). La quinta mejora es de carácter estructural-estilístico, orientada a blindar el manuscrito frente al tribunal: la depuración algorítmica del exceso de andamiaje epistemológico y la eliminación del tono defensivo en la redacción de los resultados empíricos.
 
 El presente informe formula un plan de implementación determinístico, algorítmico y cien por ciento científico, orquestado a través del agente de línea de comandos Claude Code de Anthropic, detallando los protocolos exactos de utilización, ejecución y terminación, garantizando la excelencia del trabajo (nivel sobresaliente) sin incluir prescripciones de política económica.
 
@@ -26,17 +26,17 @@ El protocolo original de la investigación intentó aislar los cambios de régim
 
 ## Dimensión II: Volatilidad Condicional mediante GARCH Multivariado (DCC)
 
-El modelo inicial empleó simulaciones de Monte Carlo estáticas extrayendo perturbaciones de una distribución $t$ de Student parametrizada con volatilidades históricas invariantes. Esta arquitectura estacionaria viola la evidencia empírica del agrupamiento de la volatilidad (volatility clustering) y omite la transmisión dinámica de shocks en escenarios de crisis. La implementación de un modelo de Correlación Condicional Dinámica (DCC-GARCH) permite estimar matrices de varianzas y covarianzas condicionales en el tiempo, refinando drásticamente el cálculo de probabilidades del DSA.
+El modelo inicial empleó simulaciones de Monte Carlo estáticas extrayendo perturbaciones de una distribución $t$ de Student parametrizada con volatilidades históricas invariantes. Esta arquitectura estacionaria viola la evidencia empírica del agrupamiento de la volatilidad (volatility clustering) y omite la transmisión dinámica de shocks en escenarios de crisis. La implementación de un modelo de Correlación Condicional Dinámica ([[dcc-garch-dynamic-correlation|DCC-GARCH]]) permite estimar matrices de varianzas y covarianzas condicionales en el tiempo, refinando drásticamente el cálculo de probabilidades del DSA.
 
 ### Evaluación Multidimensional de Viabilidad
 
 | Dimensión Analítica | Descripción y Evaluación del Estado de Viabilidad | Nivel de Viabilidad |
 |---|---|---|
-| Viabilidad Física | La estimación QML en dos etapas de un sistema DCC-GARCH es de procesamiento trivial en equipos modernos para $T=88$. | Alta |
+| Viabilidad Física | La estimación QML en dos etapas de un sistema [[dcc-garch-dynamic-correlation|DCC-GARCH]] es de procesamiento trivial en equipos modernos para $T=88$. | Alta |
 | Obtención de Material | Se utilizan las variaciones intertemporales de las series estructurales ya construidas en el dataset consolidado de la tesis. | Alta |
 | Viabilidad Computacional | Las bibliotecas nativas de Python para modelos GARCH están limitadas a procesos univariados o carecen de mantenimiento. Se debe invocar a los paquetes rugarch y rmgarch de R mediante rpy2, requiriendo un manejo cuidadoso de las coerción de matrices. | Media-Baja |
 | Viabilidad Cultural | Su aplicación para capturar spillover effects es un imperativo categórico en la econometría moderna. | Alta |
-| Nivel de Grado | La especificación de un modelo DCC-GARCH excede de manera pronunciada el plan de estudios habitual. Demanda una madurez analítica significativa. | Baja |
+| Nivel de Grado | La especificación de un modelo [[dcc-garch-dynamic-correlation|DCC-GARCH]] excede de manera pronunciada el plan de estudios habitual. Demanda una madurez analítica significativa. | Baja |
 
 ## Dimensión III: Nuevos Instrumentos (Spreads Regionales) para el Análisis IV-2SLS
 
@@ -95,10 +95,10 @@ La inicialización del pipeline define las políticas de control sobre el manusc
 1. **Consolidación del BCRA**: Modificación de `codigo/ingesta_datos/ingesta_bcra_pasivos.py` para procesar pasivos remunerados (LELIQ, NOTALIQ, Pases) y netear activo/pasivo del BCRA + SPNF.
 2. **Obtención de Spreads Regionales**: Ingestión de series del ETF EMB Brasil en `codigo/ingesta_datos/ingesta_spread_regional.py` como instrumento de variables instrumentales.
 
-### Fase III: Estimación de Quiebres Estructurales (Bai-Perron) y Volatilidad (DCC-GARCH)
+### Fase III: Estimación de Quiebres Estructurales (Bai-Perron) y Volatilidad ([[dcc-garch-dynamic-correlation|DCC-GARCH]])
 
 1. **Quiebres Estructurales Múltiples**: Implementación del test de Bai & Perron (2003) en `codigo/modelos/fase9_bai_perron.py` utilizando `ruptures` y selección por BIC.
-2. **Correlación Condicional Dinámica**: Rutina DCC-GARCH en `codigo/modelos/fase10_dcc_garch.py` usando `arch` / `mgarch` para analizar la co-evolución del riesgo soberano y el resultado fiscal.
+2. **Correlación Condicional Dinámica**: Rutina [[dcc-garch-dynamic-correlation|DCC-GARCH]] en `codigo/modelos/fase10_dcc_garch.py` usando `arch` / `mgarch` para analizar la co-evolución del riesgo soberano y el resultado fiscal.
 
 ### Fase IV: Estimación IV-2SLS y Auditoría Analítica
 
@@ -112,4 +112,4 @@ La inicialización del pipeline define las políticas de control sobre el manusc
 
 ## Síntesis Evaluativa
 
-La instrumentación de este plan garantiza un abordaje absoluto del 100% de las falencias y áreas de mejora del documento original. Se resuelven los cuellos de botella computacionales introduciendo sofisticación econométrica de frontera (Bai-Perron, DCC-GARCH, IV-2SLS modificado y consolidación de pasivos del BCRA) de forma totalmente automatizada. El resultado de ejecutar este pipeline es un trabajo de tesis incontrovertible en sus matemáticas y asertivo en su literatura, reuniendo todas las condiciones científicas requeridas para alcanzar la calificación de excelencia frente al tribunal, manteniéndose estrictamente en el terreno del análisis económico sin adentrarse en recomendaciones de orden político.
+La instrumentación de este plan garantiza un abordaje absoluto del 100% de las falencias y áreas de mejora del documento original. Se resuelven los cuellos de botella computacionales introduciendo sofisticación econométrica de frontera (Bai-Perron, [[dcc-garch-dynamic-correlation|DCC-GARCH]], IV-2SLS modificado y consolidación de pasivos del BCRA) de forma totalmente automatizada. El resultado de ejecutar este pipeline es un trabajo de tesis incontrovertible en sus matemáticas y asertivo en su literatura, reuniendo todas las condiciones científicas requeridas para alcanzar la calificación de excelencia frente al tribunal, manteniéndose estrictamente en el terreno del análisis económico sin adentrarse en recomendaciones de orden político.

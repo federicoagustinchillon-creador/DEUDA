@@ -41,7 +41,7 @@ Analiza la solvencia mediante la restricción presupuestaria intertemporal, func
   - **Stock, J. H. & Watson, M. W. (1993)**: *A Simple Estimator of Cointegrating Vectors in Higher Order Integrated Systems (DOLS)*. Econometrica.
   - **Bai, J. & Perron, P. (1998/2003)**: *Computation and Analysis of Multiple Structural Change Models*. Econometrica / JAE.
   - **Hansen, B. E. (1999/2000)**: *Threshold Effects in Non-Dynamic Panels* y *Sample Splitting and Threshold Estimation*. Econometrica.
-  - **Engle, R. F. (2001/2002)**: *Dynamic Conditional Correlation (DCC-GARCH)*. JBES.
+  - **Engle, R. F. (2001/2002)**: *Dynamic Conditional Correlation ([[dcc-garch-dynamic-correlation|DCC-GARCH]])*. JBES.
 
 ### Pilar II: Enfoque de Balance Consolidado, Déficit Cuasifiscal y Pasivos del BCRA
 Examina la deuda del Sector Público Consolidado (Tesoro Nacional + Banco Central), evaluando el impacto de los pasivos remunerados (LEBACs, LELIQs, Pases Pasivos), el déficit cuasifiscal y la interacción entre dominancia fiscal y dominancia monetaria.

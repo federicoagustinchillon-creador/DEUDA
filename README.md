@@ -41,7 +41,7 @@ Este proyecto evalúa empíricamente la sostenibilidad fiscal e intertemporal de
 
 1. **Consolidación del Sector Público**: Integración de la deuda del Sector Público No Financiero (SPNF) con los pasivos monetarios y remunerados (LELIQ, NOTALIQ y Pases Pasivos) del Banco Central de la República Argentina (BCRA).
 2. **VECM como técnica de referencia**: Estimación de la Función de Reacción Fiscal de Bohn (1998) mediante un Modelo de Vectores con Corrección de Error (VECM) sobre la ventana ampliada, que trata la endogeneidad del sistema completo (deuda, resultado primario, riesgo soberano, tipo de cambio) de forma estructural. DOLS con corrección IV-2SLS se conserva como ejercicio de robustez sobre la ventana original.
-3. **DSA estocástico**: Análisis de Sostenibilidad de Deuda con calibración multivariada $t$-Student ($\nu \approx 4.8$, por método de momentos) y matrices de varianza-covarianza dinámica DCC-GARCH.
+3. **DSA estocástico**: Análisis de Sostenibilidad de Deuda con calibración multivariada $t$-Student ($\nu \approx 4.8$, por método de momentos) y matrices de varianza-covarianza dinámica [[dcc-garch-dynamic-correlation|DCC-GARCH]].
 
 ### Principales Hallazgos Empíricos
 

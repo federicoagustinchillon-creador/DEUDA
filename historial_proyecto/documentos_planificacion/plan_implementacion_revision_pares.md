@@ -455,7 +455,7 @@ parecen ser \textit{establemente} débiles a lo largo de todo el período, y no 
 
 #### Descripción
 
-La distribución $t$ de Student multivariada con $\nu\approx5.1$ impone tail dependence por construcción (Demarta & McNeil, 2005). El coeficiente teórico es $\lambda = 2 \cdot T_{\nu+1}\!\left(-\sqrt{(\nu+1)(1-\rho)/(1+\rho)}\right)$. Para $\nu=5.1$ y $\rho=0.11$ (correlación QML del DCC-GARCH), $\lambda\approx0.15$. Esto significa que hay un 15% de probabilidad de shocks simultáneos extremos en todas las variables, incluso con correlación baja. Las tres robusteces reportadas (30.4%, 31.9%, 29.1%) no testeen la sensibilidad a esta estructura de dependencia —todas mantienen la distribución $t$ multivariada.
+La distribución $t$ de Student multivariada con $\nu\approx5.1$ impone tail dependence por construcción (Demarta & McNeil, 2005). El coeficiente teórico es $\lambda = 2 \cdot T_{\nu+1}\!\left(-\sqrt{(\nu+1)(1-\rho)/(1+\rho)}\right)$. Para $\nu=5.1$ y $\rho=0.11$ (correlación QML del [[dcc-garch-dynamic-correlation|DCC-GARCH]]), $\lambda\approx0.15$. Esto significa que hay un 15% de probabilidad de shocks simultáneos extremos en todas las variables, incluso con correlación baja. Las tres robusteces reportadas (30.4%, 31.9%, 29.1%) no testeen la sensibilidad a esta estructura de dependencia —todas mantienen la distribución $t$ multivariada.
 
 #### Fundamentación
 
@@ -858,7 +858,7 @@ Verificar que las siguientes cifras aparecen idénticas antes y después de la i
 | F primera etapa | $23.39$ | `tab:iv2sls`, Abstract |
 | DSA Referencia | $30.4\%$ | `fig:fan_chart_final`, Abstract |
 | DSA GARCH parcial | $31.9\%$ | `tab:garch_dsa_comparacion` |
-| DSA DCC-GARCH | $29.1\%$ | `07_discusion.tex` línea 157 |
+| DSA [[dcc-garch-dynamic-correlation|DCC-GARCH]] | $29.1\%$ | `07_discusion.tex` línea 157 |
 | n DOLS | $n=78$ | `tab:dols` |
 | n IV-2SLS | $n=73$ | `tab:iv2sls` |
 

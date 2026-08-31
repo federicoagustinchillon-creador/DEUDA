@@ -29,7 +29,7 @@ Si querés entender "cómo se llegó a tal número de la tesis", este es el punt
 | 2.7 | `fase7_diagnosticos_robustez.py` | ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, causalidad de Granger, filtro de Hamilton, covarianza GARCH(1,1) | Cap. 6, Figuras `fig:acf_pacf`/`fig:cusum`, varias tablas |
 | 2.8 | `fase8_deuda_consolidada.py` | Consolida deuda SPNF + pasivos remunerados del BCRA (LELIQ/NOTALIQ/Pases) | Cap. 6, Figura `fig:deuda_consolidada` |
 | 2.9 | `bai_perron.py` + `fase9_bai_perron.py` | Quiebres estructurales múltiples (Bai & Perron 2003, DP + BIC) | Cap. 6, Figura `fig:bai_perron` |
-| 2.10 | `dcc_garch.py` + `fase10_dcc_garch.py` | DCC-GARCH: correlación condicional dinámica entre shocks del DSA | Cap. 6, §DCC-GARCH |
+| 2.10 | `dcc_garch.py` + `fase10_dcc_garch.py` | [[dcc-garch-dynamic-correlation|DCC-GARCH]]: correlación condicional dinámica entre shocks del DSA | Cap. 6, §[[dcc-garch-dynamic-correlation|DCC-GARCH]] |
 | 2.11 | `fase11_dols_subperiodos.py` | DOLS por subperíodo (Kirchnerismo/Macri-AF) frente a MCO estático | Cap. 6, Tabla `tab:sensibilidad_temporal` |
 | 2.12 | `fase12_diagnosticos_complementarios.py` | Orden de rezagos del VAR (AIC/BIC/HQ/FPE), sensibilidad del rango de Johansen, VIF, número de condición | Cap. 6, Tablas `tab:rezagos_var`, `tab:vif` |
 | 2.13 | `fase13_robustez_hansen_dpb.py` | Robustez del umbral de Hansen usando $\Delta pb_t$ (I(0)) como dependiente | Cap. 6, Tabla `tab:hansen_dpb` |
