@@ -1,14 +1,18 @@
-# Sostenibilidad de la Deuda Pública Consolidada Argentina (2004–2025)
+# Sostenibilidad de la Deuda Pública Consolidada en Argentina (2004–2023)
 
 [![Licencia](https://img.shields.io/badge/Licencia-CC--BY--4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![LaTeX](https://img.shields.io/badge/LaTeX-MiKTeX%20%7C%20TeXLive-green.svg)](https://www.tug.org/texlive/)
 [![Estado](https://img.shields.io/badge/Auditor%C3%ADa-Aprobada-success.svg)](#)
 
-Repositorio y código fuente de la investigación econométrica y tesis de grado: **"La solvencia intertemporal de la deuda pública consolidada argentina post-2025: proyecciones a partir de sus determinantes macroeconómicos (2004–2025)"**, desarrollada en la Facultad de Ciencias Económicas de la Universidad Nacional de Cuyo (UNCuyo).
+Investigación econométrica y tesis de grado orientada a determinar la sostenibilidad de la deuda pública consolidada argentina integrando los pasivos remunerados del Banco Central (LELIQ/Pases), estimación VECM multivariada, modelos no lineales de umbral (Hansen) y simulación estocástica DSA.
 
----
+## 📌 Metodología Econométrica
 
+- **Consolidación del Balance Público:** Integración de la deuda del Sector Público Nacional No Financiero (SPNF) con el balance cuasifiscal del BCRA.
+- **Cointegración y Relaciones de Largo Plazo:** Estimación por Mínimos Cuadrados Ordinarios Dinámicos (DOLS) y corrección de endogeneidad por Variables Instrumentales / Mínimos Cuadrados en Dos Etapas (IV-2SLS).
+- **Quiebres Estructurales Endógenos:** Test de Bai-Perron para identificar regímenes de política fiscal y monetaria sin sesgo de selección previa.
+- **Efectos de Umbral No Lineales:** Modelos de umbral de Hansen para evaluar el ratio deuda/PBI crítico a partir del cual el costo de financiamiento se vuelve insostenible.
 ## 0. Guía Rápida: qué mirar primero y en qué orden
 
 **¿Solo querés leer la tesis?** → [`tesis/Tesis.pdf`](tesis/Tesis.pdf). No hace falta tocar nada más.
