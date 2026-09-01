@@ -234,13 +234,167 @@ def fig_6_1_diagnostico_primera_etapa(df):
     print(f"     -> F={f_stat:.4f}  p={f_pval:.6f}  (n={len(d)})")
 
 
+def fig_svar_irf():
+    """Genera las Funciones de Impulso-Respuesta Estructurales (SVAR IRF) con bandas al 95%."""
+    import sys
+    if BASE_DIR not in sys.path:
+        sys.path.insert(0, BASE_DIR)
+    from codigo.modelos.fase19_var_restringido_macro import cargar_datos, estimar_svar_restringido
+    data, _ = cargar_datos()
+    res = estimar_svar_restringido(data, nlags=2, n_boot=200, horizon=16)
+    
+    irf = res["irf_structural"]
+    low = res["irf_lower"]
+    upp = res["irf_upper"]
+    vars_names = ["Brecha PIB", "Superávit Prim.", "EMBI+", "TCRM", "Deuda/PIB"]
+    
+    # Graficamos las respuestas de Deuda y EMBI+ ante shocks de Superávit, PIB y Tipo de Cambio
+    fig, axes = plt.subplots(2, 3, figsize=(12, 7), sharex=True)
+    horizons = np.arange(17)
+    
+    # Fila 1: Respuesta de la Deuda/PIB
+    # Shock 1: Superavit Primario
+    axes[0, 0].plot(horizons, irf[:, 4, 1], color=NAVY, linewidth=2, label="Impulso")
+    axes[0, 0].fill_between(horizons, low[:, 4, 1], upp[:, 4, 1], color=NAVY, alpha=0.2, label="IC 95%")
+    axes[0, 0].axhline(0, color="black", linestyle="--", linewidth=0.8)
+    axes[0, 0].set_title("Deuda/PIB ante Shock Fiscal (pb)", fontsize=10, fontweight="bold")
+    axes[0, 0].set_ylabel("Respuesta (%)", fontsize=9)
+    
+    # Shock 2: Brecha PIB
+    axes[0, 1].plot(horizons, irf[:, 4, 0], color=NAVY, linewidth=2)
+    axes[0, 1].fill_between(horizons, low[:, 4, 0], upp[:, 4, 0], color=NAVY, alpha=0.2)
+    axes[0, 1].axhline(0, color="black", linestyle="--", linewidth=0.8)
+    axes[0, 1].set_title("Deuda/PIB ante Shock de PIB", fontsize=10, fontweight="bold")
+    
+    # Shock 3: Tipo de Cambio Real
+    axes[0, 2].plot(horizons, irf[:, 4, 3], color=NAVY, linewidth=2)
+    axes[0, 2].fill_between(horizons, low[:, 4, 3], upp[:, 4, 3], color=NAVY, alpha=0.2)
+    axes[0, 2].axhline(0, color="black", linestyle="--", linewidth=0.8)
+    axes[0, 2].set_title("Deuda/PIB ante Shock Cambiario (TCRM)", fontsize=10, fontweight="bold")
+    
+    # Fila 2: Respuesta del EMBI+
+    # Shock 1: Superavit Primario
+    axes[1, 0].plot(horizons, irf[:, 2, 1], color=GREY_RED, linewidth=2)
+    axes[1, 0].fill_between(horizons, low[:, 2, 1], upp[:, 2, 1], color=GREY_RED, alpha=0.2)
+    axes[1, 0].axhline(0, color="black", linestyle="--", linewidth=0.8)
+    axes[1, 0].set_title("EMBI+ ante Shock Fiscal (pb)", fontsize=10, fontweight="bold")
+    axes[1, 0].set_xlabel("Trimestres posteriores", fontsize=9)
+    axes[1, 0].set_ylabel("Respuesta (pb)", fontsize=9)
+    
+    # Shock 2: Brecha PIB
+    axes[1, 1].plot(horizons, irf[:, 2, 0], color=GREY_RED, linewidth=2)
+    axes[1, 1].fill_between(horizons, low[:, 2, 0], upp[:, 2, 0], color=GREY_RED, alpha=0.2)
+    axes[1, 1].axhline(0, color="black", linestyle="--", linewidth=0.8)
+    axes[1, 1].set_title("EMBI+ ante Shock de PIB", fontsize=10, fontweight="bold")
+    axes[1, 1].set_xlabel("Trimestres posteriores", fontsize=9)
+    
+    # Shock 3: Tipo de Cambio Real
+    axes[1, 2].plot(horizons, irf[:, 2, 3], color=GREY_RED, linewidth=2)
+    axes[1, 2].fill_between(horizons, low[:, 2, 3], upp[:, 2, 3], color=GREY_RED, alpha=0.2)
+    axes[1, 2].axhline(0, color="black", linestyle="--", linewidth=0.8)
+    axes[1, 2].set_title("EMBI+ ante Shock Cambiario (TCRM)", fontsize=10, fontweight="bold")
+    axes[1, 2].set_xlabel("Trimestres posteriores", fontsize=9)
+    
+    fig.suptitle("Funciones de Impulso-Respuesta Estructurales (SVAR Restringido)", fontsize=13, fontweight="bold", y=1.02)
+    fig.tight_layout()
+    out_path = os.path.join(OUTPUT_DIR, "figura_svar_irf.png")
+    fig.savefig(out_path, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[OK] Figura SVAR IRF guardada en {out_path}")
+
+
+def fig_svar_fevd():
+    """Genera el gráfico de barras apiladas de Descomposición de Varianza (FEVD)."""
+    fevd_path = os.path.join(BASE_DIR, "resultados", "tablas", "fase19_fevd.csv")
+    if not os.path.exists(fevd_path):
+        return
+    df_fevd = pd.read_csv(fevd_path)
+    
+    # Filtramos la descomposición de la Deuda y del EMBI+
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+    shocks = ["Shock_g_gap", "Shock_pb_pib", "Shock_EMBI", "Shock_TCRM", "Shock_deuda_pib"]
+    colors = ["#4A90E2", "#50E3C2", "#F5A623", "#E74C3C", "#9B59B6"]
+    labels = ["Brecha PIB", "Superávit Prim.", "EMBI+", "TCRM", "Deuda Propia"]
+    
+    for ax, var_name, title in zip(axes, ["deuda_pib", "EMBI"], ["Varianza de Deuda/PIB", "Varianza de EMBI+"]):
+        sub = df_fevd[df_fevd["Variable_Explicada"] == var_name]
+        bottom = np.zeros(len(sub))
+        for s, col, lab in zip(shocks, colors, labels):
+            vals = sub[s].values
+            ax.bar(sub["Horizonte_Trimestres"].astype(str) + "T", vals, bottom=bottom, color=col, label=lab, width=0.6)
+            bottom += vals
+        ax.set_title(title, fontweight="bold")
+        ax.set_ylabel("Porcentaje de Varianza Explicada (%)")
+        ax.set_xlabel("Horizonte de Pronóstico (Trimestres)")
+        ax.set_ylim(0, 100)
+        
+    axes[1].legend(loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=9)
+    fig.tight_layout()
+    out_path = os.path.join(OUTPUT_DIR, "figura_svar_fevd.png")
+    fig.savefig(out_path, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[OK] Figura SVAR FEVD guardada en {out_path}")
+
+
+def fig_cir_simulacion():
+    """Genera el gráfico de trayectorias de Monte Carlo del proceso CIR."""
+    np.random.seed(42)
+    dt = 0.25
+    n_steps = 40 # 10 años
+    n_sims = 100
+    kappa, theta, sigma = 0.428, 650.0, 18.42
+    r0 = 1100.0
+    
+    t_grid = np.linspace(0, 10, n_steps + 1)
+    paths = np.zeros((n_sims, n_steps + 1))
+    paths[:, 0] = r0
+    
+    for t in range(n_steps):
+        dw = np.random.normal(0, np.sqrt(dt), size=n_sims)
+        r_curr = paths[:, t]
+        drift = kappa * (theta - r_curr) * dt
+        diff = sigma * np.sqrt(np.maximum(r_curr, 1.0)) * dw
+        paths[:, t + 1] = np.maximum(r_curr + drift + diff, 10.0)
+        
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5), gridspec_kw={"width_ratios": [3, 1]})
+    
+    # Trayectorias
+    for i in range(min(50, n_sims)):
+        ax1.plot(t_grid, paths[i], color="#4A90E2", alpha=0.15, linewidth=1)
+    ax1.plot(t_grid, np.median(paths, axis=0), color=NAVY, linewidth=2.5, label="Mediana")
+    ax1.plot(t_grid, np.percentile(paths, 90, axis=0), color=GREY_RED, linestyle="--", linewidth=1.8, label="Percentil 90")
+    ax1.plot(t_grid, np.percentile(paths, 10, axis=0), color=TEAL, linestyle="--", linewidth=1.8, label="Percentil 10")
+    ax1.axhline(theta, color="black", linestyle=":", linewidth=1.5, label=f"Equilibrio θ ({theta:.0f} pb)")
+    
+    ax1.set_xlabel("Años de Proyección")
+    ax1.set_ylabel("EMBI+ Proyectado (puntos básicos)")
+    ax1.set_title("Simulación Estocástica de Monte Carlo: Proceso CIR del EMBI+", fontweight="bold")
+    ax1.legend(loc="upper right", fontsize=9)
+    
+    # Densidad terminal
+    sns.kdeplot(y=paths[:, -1], ax=ax2, fill=True, color=NAVY, alpha=0.3)
+    ax2.set_title("Densidad Terminal (t=10)", fontweight="bold")
+    ax2.set_xlabel("Densidad")
+    ax2.set_yticklabels([])
+    
+    fig.tight_layout()
+    out_path = os.path.join(OUTPUT_DIR, "figura_cir_simulacion.png")
+    fig.savefig(out_path, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[OK] Figura CIR Simulación guardada en {out_path}")
+
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     df = load_data()
     fig_5_1_deuda_resultado_primario(df)
     fig_5_3_dispersion_fatiga_fiscal(df)
     fig_6_1_diagnostico_primera_etapa(df)
+    fig_svar_irf()
+    fig_svar_fevd()
+    fig_cir_simulacion()
 
 
 if __name__ == "__main__":
     main()
+

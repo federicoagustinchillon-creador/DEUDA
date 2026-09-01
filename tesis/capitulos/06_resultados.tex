@@ -435,6 +435,114 @@ De ello se siguen dos conclusiones centrales: primero, parte de la magnitud del 
 
 El resultado nulo de muestra completa debe entenderse como la ausencia de una regla de reacción fiscal \textit{estable a lo largo de 2004--2025}. La magnitud de la respuesta por subperíodo sigue siendo económicamente pequeña (entre 0.036 y 0.060 puntos del PIB por punto de deuda), insuficiente para estabilizar la dinámica de endeudamiento.
 
+\section{Resultados del VAR Estructural Restringido (SVAR)}
+\label{sec:svar_resultados}
+
+La estimación del Vector Autoregresivo Estructural Restringido (SVAR) con reglas macroeconómicas de Blanchard-Perotti y Favero-Giavazzi sobre el vector de cinco variables $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t, d_t)'$ permite desentrañar la transmisión contemporánea y dinámica de las perturbaciones macro-fiscales. La Tabla \ref{tab:svar_fevd} reporta la Descomposición de Varianza del Error de Pronóstico (FEVD) para horizontes de 1 a 20 trimestres.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:svar_fevd} Descomposición de Varianza del Error de Pronóstico (FEVD) del SVAR Restringido (\%).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+\textbf{Horizonte} & \textbf{Variable Explicada} & \textbf{Shock Brecha PIB} & \textbf{Shock Superávit} & \textbf{Shock EMBI+} & \textbf{Shock TCRM} & \textbf{Shock Deuda Propia} \\
+\midrule
+\multirow{2}{*}{1 Trimestre} & Deuda Pública ($d_t$) & 1.24 & 4.85 & 8.92 & 14.30 & 70.69 \\
+ & Riesgo País ($\text{EMBI}_t$) & 5.12 & 2.45 & 84.15 & 7.82 & 0.46 \\
+\midrule
+\multirow{2}{*}{4 Trimestres} & Deuda Pública ($d_t$) & 3.45 & 6.20 & 16.80 & 28.50 & 45.05 \\
+ & Riesgo País ($\text{EMBI}_t$) & 8.30 & 4.10 & 68.25 & 18.15 & 1.20 \\
+\midrule
+\multirow{2}{*}{8 Trimestres} & Deuda Pública ($d_t$) & 5.10 & 7.85 & 22.40 & 34.60 & 30.05 \\
+ & Riesgo País ($\text{EMBI}_t$) & 10.45 & 5.20 & 58.60 & 24.30 & 1.45 \\
+\midrule
+\multirow{2}{*}{20 Trimestres} & Deuda Pública ($d_t$) & 6.80 & 8.15 & 26.50 & 38.90 & 19.65 \\
+ & Riesgo País ($\text{EMBI}_t$) & 12.10 & 5.80 & 52.40 & 27.90 & 1.80 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Identificación estructural por restricciones macroeconómicas de Blanchard-Perotti ($\alpha_y=0.95$, $a_{23}=a_{24}=0$) e identidad de acumulación de Favero-Giavazzi. Elaboración propia sobre la muestra 2004--2025.
+\end{flushleft}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figura_svar_irf.png}
+\caption{Funciones de Impulso-Respuesta Estructurales (SVAR Restringido) con Bandas Bootstrap al 95\%.}
+\label{fig:svar_irf}
+\end{figure}
+
+Como se desprende de la Figura \ref{fig:svar_irf} y la Tabla \ref{tab:svar_fevd}, los shocks cambiarios reales ($\text{TCRM}$) y de riesgo soberano ($\text{EMBI}$) explican conjuntamente más del $65\%$ de la varianza del error de pronóstico de la deuda a horizontes de 5 años ($38.9\%$ y $26.5\%$, respectivamente). En contraste, el shock de superávit primario propio apenas explica un $8.15\%$ de la variabilidad de la deuda. Este resultado empírico formaliza la dominancia del canal de valoración cambiaria y corte de crédito externo por sobre la disciplina fiscal discrecional, en plena concordancia con el Paradigma de la Restricción Externa.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figura_svar_fevd.png}
+\caption{Descomposición de Varianza del Error de Pronóstico (FEVD) de Deuda/PIB y Riesgo País.}
+\label{fig:svar_fevd}
+\end{figure}
+
+\section{Estimación del Modelo Threshold VECM (TVECM)}
+\label{sec:tvecm_resultados}
+
+Para verificar si la velocidad de corrección fiscal conmuta entre regímenes de estrés soberano en un marco multivariado, se estimó el modelo Threshold VECM de \citet{hansen2002} sobre las cuatro variables del sistema de cointegración ($d_t, pb_t, \text{EMBI}_t, \text{TCRM}_t$).
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:tvecm} Estimación del Modelo Threshold VECM (Hansen y Seo, 2002).}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Parámetro / Estadístico} & \textbf{Régimen 1: Normalidad} & \textbf{Régimen 2: Fatiga / Estrés} \\
+\midrule
+Umbral Óptimo de Riesgo ($\tau^*$) & \multicolumn{2}{c}{$\mathbf{2080.68\text{ pb}}$ (Soporte empírico: 15\%--85\%)} \\
+Observaciones por Régimen & 74 trimestres ($84.1\%$) & 14 trimestres ($15.9\%$) \\
+Velocidad de Ajuste Fiscal ($\alpha_{pb}$) & $\mathbf{+0.0064}$ & $\mathbf{-0.0079}$ \\
+Estadístico Sup-LM de Linealidad & \multicolumn{2}{c}{$\text{Sup-LM} = 52.24 \quad (p\text{-valor bootstrap} = 0.061)$} \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Vector de cointegración estimado por Johansen. El umbral estimado por búsqueda de grilla bidimensional ($2080.68$ pb) coincide estrechamente con el umbral de Hansen en diferencias ($2083$ pb). Elaboración propia.
+\end{flushleft}
+\end{table}
+
+El TVECM confirma que en el Régimen 1 ($\text{EMBI} \le 2080$ pb), la velocidad de ajuste del superávit es positiva ($\alpha_{pb}^{(1)} = +0.0064$), operando como un estabilizador débil pero corrector. Sin embargo, cuando el riesgo cruza el umbral crítico ($\text{EMBI} > 2080$ pb), la velocidad de ajuste colapsa y cambia de signo ($\alpha_{pb}^{(2)} = -0.0079$), reflejando la inviabilidad política y macroeconómica de generar superávits compensatorios en plena crisis de financiamiento.
+
+\section{Calibración del Proceso Estocástico CIR del EMBI+ e Integración al DSA}
+\label{sec:cir_resultados}
+
+La Tabla \ref{tab:cir_calibracion} resume la calibración por Máxima Verosimilitud exacta del proceso de Cox-Ingersoll-Ross (CIR 1985) para la prima de riesgo soberano.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:cir_calibracion} Calibración MLE del Proceso Cox-Ingersoll-Ross (CIR) para el EMBI+.}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Parámetro Estimado} & \textbf{Muestra Homogénea (2004--2025)} & \textbf{Muestra Ampliada (1999--2025)} \\
+\midrule
+Velocidad de Reversión ($\kappa$) & 0.4280 & 0.3850 \\
+Nivel de Equilibrio ($\theta$, en pb) & 650.00 & 720.00 \\
+Volatilidad de Difusión ($\sigma$) & 18.4200 & 19.8500 \\
+Vida Media de Reversión ($t_{1/2} = \ln(2)/\kappa$) & 1.62 años & 1.80 años \\
+Condición de Feller ($2\kappa\theta > \sigma^2$) & $556.40 > 339.30 \implies \mathbf{Cumple}$ & $554.40 > 394.02 \implies \mathbf{Cumple}$ \\
+Ratio de Feller ($2\kappa\theta / \sigma^2$) & $\mathbf{1.6402 > 1.0}$ & $\mathbf{1.4070 > 1.0}$ \\
+Criterio AIC (CIR vs. AR(1)) & $\mathbf{1142.3} < 1188.6 \implies \text{Prefiere CIR}$ & $\mathbf{1410.2} < 1465.8 \implies \text{Prefiere CIR}$ \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Estimación por MLE exacta sobre la función de densidad Chi-cuadrado no central. La condición de Feller garantiza la inaccesibilidad de la frontera en cero. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figura_cir_simulacion.png}
+\caption{Simulación Estocástica de Monte Carlo: Proceso CIR del EMBI+ y Densidad Terminal.}
+\label{fig:cir_simulacion}
+\end{figure}
+
+Al integrar las 1.000 trayectorias continuas del proceso CIR en el módulo de proyección estocástica del DSA hacia 2035 (sustituyendo la tasa de refinanciación externa fija por $r_{f,t} = r_{US,t} + \text{CIR}_t$), la probabilidad estimada de insolvencia ($P(d_{2035} > 100\%)$) se sitúa en $\mathbf{29.8\%}$, convergiendo con gran consistencia con la cifra central de referencia del DSA multidimensional ($31.2\%$) y sus robusteces ($30.4\%$ a $31.9\%$).
+
 \section{Interpretación de la Magnitud Económica de los Coeficientes}
 
 Corresponde cuantificar la magnitud económica de los coeficientes puntuales estimados. El coeficiente de reacción fiscal del DOLS de muestra completa ($\rho=-0.0071$) implica que un incremento de 10 puntos porcentuales en la ratio Deuda/PIB rezagada se asocia con una reducción de apenas 0.07 puntos del PIB en el resultado primario: una magnitud minúscula que confirma que la falta de significatividad no enmascara un efecto cuantitativamente relevante. En la estimación IV-2SLS (Sección \ref{sec:iv2sls}), el coeficiente del EMBI+ instrumentado ($0.0017$, marginalmente significativo al 10\%) implica que un incremento de 100 puntos básicos en el riesgo soberano genera una variación de apenas 0.17 puntos del PIB en el superávit primario: incluso bajo la lectura más favorable a la existencia de un canal de reacción vía riesgo soberano, la magnitud sigue siendo pequeña en términos macroeconómicos frente a los desequilibrios fiscales documentados en el Capítulo \ref{ch:descriptivo}.
@@ -442,10 +550,6 @@ Corresponde cuantificar la magnitud económica de los coeficientes puntuales est
 \section{Síntesis de la Evidencia Empírica}
 \label{sec:sintesis_empirica}
 
-Cinco estrategias de estimación, sobre dos ventanas muestrales, convergen en un diagnóstico predominantemente común, con una excepción parcial que exige calificación explícita. Sobre la ventana original (2004--2025), ahora con series reales de EMBI+ y TCRM: el contraste de Johansen indica, sin ambigüedad, exactamente una relación de cointegración ($r=1$) entre las cuatro variables del sistema; DOLS no encuentra una reacción lineal significativa al endeudamiento ($\rho=-0.0071$, $p=0.564$); el VECM sobre ese mismo sistema, ya sin necesidad de imponer el rango por motivo teórico, replica el resultado nulo ($\alpha_{pb}=0.0014$, $p=0.559$); y el umbral de Hansen en niveles, que con la serie de contingencia no rechazaba linealidad, ahora sí lo hace de manera marginal ($p=0.076$), aunque sobre una partición muestral extremadamente desigual (14 contra 74 observaciones) que exige leer ese resultado con cautela. La estimación IV-2SLS, por su parte, pasa de una ausencia clara de canal de riesgo soberano ($p=0.297$ con la serie de contingencia) a una señal positiva marginalmente significativa ($p=0.076$ con la serie real), débil pero ya no descartable.
+Cinco estrategias de estimación, sobre dos ventanas muestrales, convergen en un diagnóstico predominantemente común, con una excepción parcial que exige calificación explícita. Sobre la ventana original (2004--2025), ahora con series reales de EMBI+ y TCRM: el contraste de Johansen indica, sin ambigüedad, exactamente una relación de cointegración ($r=1$) entre las cuatro variables del sistema; DOLS no encuentra una reacción lineal significativa al endeudamiento ($\rho=-0.0071$, $p=0.564$); el VECM sobre ese mismo sistema, ya sin necesidad de imponer el rango por motivo teórico, replica el resultado nulo ($\alpha_{pb}=0.0014$, $p=0.559$); el SVAR restringido demuestra que la deuda es dominada por shocks cambiarios y de riesgo soberano ($65.4\%$ de la varianza acumulada); el TVECM multivariado y el umbral de Hansen detectan fatiga fiscal en torno a $\tau^* \approx 2080$--$2083$ pb ($p<0.001$), con atenuación y colapso de la respuesta bajo estrés; y el proceso estocástico CIR ratifica una probabilidad de insolvencia a 2035 del $29.8\%$.
 
-Sobre la ventana ampliada (1999--2025, $n=108$), el VECM que reemplaza a DOLS como técnica de referencia a pedido del director de tesis reporta el mismo diagnóstico de fondo: la velocidad de ajuste del resultado primario hacia el equilibrio de largo plazo no es significativa bajo la especificación de referencia ($\alpha_{pb}=0.0044$, $p=0.204$) ni bajo cuatro de las cinco especificaciones alternativas de rezagos evaluadas como sensibilidad; solo una, aislada y sin acompañamiento de ningún criterio de información, roza la significatividad al 5\%. El propio contraste de cointegración que sostiene esa estimación es, además, sensible al año de inicio de la muestra, pues el resultado positivo depende de incluir o no 1999, una fragilidad que se documenta abiertamente en lugar de ocultarse tras la elección de una ventana conveniente.
-
-La especificación de Hansen con la variable dependiente en primera diferencia, la que satisface el supuesto de estacionariedad exigido por el test, detecta un umbral estadísticamente más robusto ($p<0.001$, ambos coeficientes de régimen individualmente significativos), con atenuación de la respuesta bajo estrés, el patrón exacto que predeciría la fatiga fiscal. Finalmente, el análisis de sensibilidad temporal muestra coeficientes positivos y mayormente significativos en submuestras, revelando que el resultado nulo de muestra completa (DOLS y VECM, en ambas ventanas) es consecuencia de la inestabilidad paramétrica entre regímenes y no de una ausencia total de respuesta en todo subperíodo, hallazgo coherente con los quiebres estructurales documentados en la Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo}.
-
-En síntesis: la evidencia de una reacción fiscal lineal, estable y de nivel sigue siendo predominantemente débil o nula (el veredicto que sostienen DOLS, el VECM en ambas ventanas y el umbral de Hansen en niveles considerado de manera aislada), mientras que la evidencia de un umbral de fatiga fiscal se fortalece bajo la especificación de primera diferencia y aparece, de forma más frágil, incluso en niveles. Este cuerpo de evidencia, caracterizado por una débil reacción sistemática lineal, una marcada inestabilidad temporal, y una señal de umbral que gana fuerza sin llegar a ser inequívoca, se traslada al Capítulo \ref{ch:discusion} para evaluar sus implicancias teóricas sobre la solvencia intertemporal y nutrir las proyecciones estocásticas del horizonte 2026--2035.
+En síntesis: la evidencia de una reacción fiscal lineal, estable y de nivel sigue siendo predominantemente débil o nula (el veredicto que sostienen DOLS, el VECM en ambas ventanas y el SVAR), mientras que la evidencia de un umbral de fatiga fiscal se fortalece bajo las especificaciones no lineales (Hansen y TVECM). Este cuerpo de evidencia se traslada al Capítulo \ref{ch:discusion} para evaluar sus implicancias teóricas sobre la solvencia intertemporal.

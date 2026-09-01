@@ -1,0 +1,3 @@
+Muestra,kappa,theta_pb,sigma,feller_stat,feller_crit,feller_ratio,cumple_feller,half_life_anios,log_lik_cir,aic_cir,aic_ar1,cir_preferido_aic,n_obs
+"Homogénea (2004-2025, n=87)",0.9229,1032.25,26.9175,1905.3,724.55,2.6296,True,0.75,-636.35,1278.69,1342.34,True,87
+"Ampliada (1999-2025, n=108)",0.4279,1590.41,26.4954,1361.14,702.0,1.9389,True,1.62,-794.42,1594.84,1673.14,True,107
