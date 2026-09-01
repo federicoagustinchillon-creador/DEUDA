@@ -534,6 +534,22 @@ Duffie, D., \& Kan, R. (1996). A yield-factor model of interest rates. \textit{M
 \vspace{0.2cm}
 \textbf{3. Pregunta sobre la coexistencia de VECM y DOLS:}\\
 \textit{Respuesta}: «El VECM resuelve la endogeneidad de manera estructural a nivel de sistema. DOLS e IV-2SLS la tratan en un marco de ecuación única. Mantener ambos enfoques responde al principio de Bohn (2007): verificar que la inoperancia de la regla lineal de Bohn es un resultado robusto e independiente del método de identificación econométrica.»
+
+\vspace{0.2cm}
+\textbf{4. Pregunta sobre la omisión de los pasivos remunerados del BCRA en el sistema principal:}\\
+\textit{Respuesta}: «En el Capítulo 5 y la Fase 8 auditamos la deuda consolidada del Sector Público Argentino ($d^{\text{cons}}_t = d^{\text{SPNF}}_t + \text{pasivos\_bcra}_t$). La serie consolidada tiene una correlación del $97.8\%$ con la del SPNF, comparte los mismos quiebres estructurales de Bai-Perron (2007T2 y 2016T4) y es integrada de orden 1 (ADF $p=0.1690$ en niveles, $p=3.38 \times 10^{-8}$ en diferencias). El DSA estocástico bajo deuda consolidada arroja una probabilidad de insolvencia a 2035 del $30.4\%$ (frente al $31.2\%$ de referencia), confirmando que la dinámica macrofiscal está dominada por el stock del Tesoro y la exposición cambiaria.»
+
+\vspace{0.2cm}
+\textbf{5. Pregunta sobre la diferencia del test Sup-LM entre el TVECM ($p=0.625$) y Hansen univariado ($p < 0.001$):}\\
+\textit{Respuesta}: «La diferencia radica en la potencia en muestra finita frente a la dimensionalidad del modelo. El TVECM de Hansen y Seo (2002) estima 48 parámetros sobre $T=86$ observaciones, divididas en 73 trimestres de normalidad y solo 13 de estrés, perdiendo potencia en el test multivariado Sup-LM. No obstante, el estimador TVECM converge exactamente al mismo umbral óptimo de fatiga fiscal ($\tau^* = 2080.68\text{ pb}$ vs $2083.03\text{ pb}$ univariado) y muestra una inversión radical en la velocidad de ajuste: $\alpha_{pb}^{(1)} = +0.0064$ bajo normalidad frente a $\alpha_{pb}^{(2)} = -0.0079$ bajo estrés crediticio.»
+
+\vspace{0.2cm}
+\textbf{6. Pregunta sobre la velocidad de reversión a la media del proceso CIR del EMBI+:}\\
+\textit{Respuesta}: «Estimamos el proceso CIR mediante Máxima Verosimilitud exacta con densidad Chi-cuadrado no central. En la muestra homogénea (2004--2025), la vida media es de $0.75$ años ($\kappa = 0.9229$), reflejando las rápidas compresiones de spread post-canje (2005, 2010 y 2016). En la muestra ampliada (1999--2025), la vida media se extiende a $1.62$ años ($\kappa = 0.4279$). En ambos casos se cumple holgadamente la condición de Feller ($2\kappa\theta > \sigma^2$, con ratios de $2.63$ y $1.94$), garantizando la positividad estricta de la prima soberana.»
+
+\vspace{0.2cm}
+\textbf{7. Pregunta sobre la dominancia de shocks en el SVAR Restringido:}\\
+\textit{Respuesta}: «Siguiendo a Blanchard y Perotti (2002) y Favero y Giavazzi (2007, 2012), impusimos la semi-elasticidad fiscal intra-trimestral de la OCDE ($\eta_{pb}=0.25$) y la rigidez de decisiones del superávit ($a_{23}=a_{24}=0$). La descomposición de varianza del error de pronóstico (FEVD) a 20 trimestres demuestra que el superávit primario propio ($47.53\%$) y la brecha del PIB ($28.56\%$) determinan la trayectoria de la deuda, mientras que los shocks cambiarios y de spread soberano explican el $11.48\%$ restante, validando formalmente la restricción macro-fiscal contemporánea.»
 \end{mdframed}
 
 ---
