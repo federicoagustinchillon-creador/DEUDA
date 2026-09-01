@@ -434,10 +434,48 @@ Q_t = (1 - a - b)\bar{Q} + a (\epsilon_{t-1} \epsilon_{t-1}^\top) + b Q_{t-1}
 
 ---
 
+\subsection{Vector Autoregresivo Estructural Restringido (SVAR) con Reglas Macroeconómicas}
+
+\subsubsection{1. ¿Para qué sirve?}
+Permite descomponer las innovaciones del sistema macro-fiscal en perturbaciones estructurales ortogonales con significado económico directo, evaluando la respuesta dinámica de la deuda y el riesgo soberano ante shocks de superávit primario, ciclo del PIB y tipo de cambio real.
+
+\subsubsection{2. ¿Por qué se utiliza frente a un ordenamiento de Cholesky recursivo?}
+El ordenamiento de Cholesky impone una causalidad triangular arbitraria dependiente del orden de las variables. El SVAR restringido sigue a Blanchard y Perotti (2002) y Favero y Giavazzi (2007, 2012), modelando la rigidez institucional de las decisiones presupuestarias ($\eta_{pb} = 0.25$, $a_{23}=a_{24}=0$) y la ley de movimiento no lineal de la deuda.
+
+\subsubsection{3. ¿De dónde sale? (Referencia APA 7)}
+\begin{mdframed}[style=apabox]
+Blanchard, O., \& Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. \textit{The Quarterly Journal of Economics}, 117(4), 1329--1368. \url{https://doi.org/10.1162/003355302320935043}\\
+Favero, C., \& Giavazzi, F. (2007). \textit{Debt and the effects of fiscal policy} (NBER Working Paper No. 12822). National Bureau of Economic Research. \url{https://doi.org/10.3386/w12822}
+\end{mdframed}
+
+\subsubsection{4. Formulación y Resultados Empíricos}
+Para el vector $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t, d_t)'$, la relación contemporánea es $A_0 \mathbf{u}_t = B \mathbf{e}_t$. La Descomposición de Varianza (FEVD) a 20 trimestres (\texttt{fase19\_fevd.csv}) revela:
+\begin{itemize}
+    \item Shocks de Superávit Primario explican el **$47.53\%$** de la varianza de la deuda.
+    \item Shocks de Brecha del PIB explican el **$28.56\%$** de la deuda.
+    \item Shocks Cambiarios (TCRM) y de Riesgo Soberano (EMBI+) explican conjuntamente el **$11.48\%$** del error de pronóstico de la deuda.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figuras/figura_svar_irf.png}
+\caption{Funciones de Impulso-Respuesta Estructurales (SVAR Restringido) con Bandas Bootstrap al 95\%.}
+\label{fig:guia_svar_irf}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figuras/figura_svar_fevd.png}
+\caption{Descomposición de Varianza del Error de Pronóstico (FEVD) del SVAR.}
+\label{fig:guia_svar_fevd}
+\end{figure}
+
+---
+
 \subsection{Threshold VECM (TVECM) Multivariado de Hansen y Seo (2002)}
 
 \subsubsection{1. ¿Para qué sirve?}
-Permite unificar la estimación multivariada del VECM y la teoría de umbrales no lineales en un único sistema matricial, evaluando si el vector de velocidades de ajuste ($\alpha$) y la relación de cointegración conmuta de régimen entre períodos normales y períodos de estrés de riesgo soberano.
+Permite unificar la estimación multivariada del VECM y la teoría de umbrales no lineales en un único sistema matricial, evaluando si el vector de velocidades de ajuste ($\alpha$) conmuta de régimen entre períodos normales y períodos de estrés de riesgo soberano.
 
 \subsubsection{2. ¿Por qué se utiliza frente a un VECM lineal tradicional?}
 Un VECM lineal tradicional asume que la velocidad de corrección hacia el equilibrio fiscal de largo plazo es constante e idéntica tanto si el riesgo país es de 400 puntos básicos como si es de 2.500 puntos básicos. El TVECM permite que la dinámica de ajuste sea discontinua y dependa del estado del mercado de crédito internacional.
@@ -447,113 +485,39 @@ Un VECM lineal tradicional asume que la velocidad de corrección hacia el equili
 Hansen, B. E., \& Seo, B. (2002). Testing for two-regime threshold cointegration in vector error-correction models. \textit{Journal of Econometrics}, 110(2), 293--318. \url{https://doi.org/10.1016/S0304-4076(01)00097-4}
 \end{mdframed}
 
-\subsubsection{4. Formulación Matemática Rigurosa}
-Sea $Y_t = [d_t, pb_t, \text{EMBI}_t, \text{TCRM}_t]^\top$. El modelo TVECM de dos regímenes con variable de umbral $w_{t-1} = \text{EMBI}_{t-1}$ y vector de cointegración $\beta$ se expresa como:
-
-\begin{equation}
-\Delta Y_t = \begin{cases}
-\mu_1 + \alpha_1 \beta^\top Y_{t-1} + \sum_{i=1}^{p-1} \Gamma_{1,i} \Delta Y_{t-i} + \varepsilon_t & \text{si } w_{t-1} \le \tau^* \quad (\text{Régimen 1: Normalidad}) \\
-\mu_2 + \alpha_2 \beta^\top Y_{t-1} + \sum_{i=1}^{p-1} \Gamma_{2,i} \Delta Y_{t-i} + \varepsilon_t & \text{si } w_{t-1} > \tau^* \quad (\text{Régimen 2: Fatiga / Estrés})
-\end{cases}
-\end{equation}
-
-El algoritmo de estimación resuelve una búsqueda en grilla bidimensional sobre el espacio de parámetros $(\beta, \tau^*)$ maximizando el log-likelihood concentrado:
-\begin{equation}
-\ln L(\beta, \tau^*) = -\frac{T}{2} \ln |\hat{\Sigma}(\beta, \tau^*)|
-\end{equation}
-El test de linealidad contrasta la hipótesis nula de cointegración lineal estándar:
-\begin{equation}
-H_0: \alpha_1 = \alpha_2, \quad \Gamma_{1,i} = \Gamma_{2,i} \quad (\forall i)
-\end{equation}
-Mediante el estadístico $\text{Sup-LM} = \sup_{\tau^* \in \mathcal{T}} \text{LM}(\tau^*)$, cuyo valor $p$ asintótico se aproxima por remuestreo estocástico residual de multiplicadores de Lagrange.
-
-\subsubsection{5. Aplicación e Interpretación sobre la Deuda Argentina}
-Permite contrastar si en el Régimen 1 ($w_{t-1} \le 2083$ pb) el superávit primario reacciona estabilizando la deuda ($\alpha_{1,pb} > 0$), mientras que en el Régimen 2 ($w_{t-1} > 2083$ pb) el ajuste fiscal colapsa ($\alpha_{2,pb} \le 0$), confirmando que la fatiga fiscal no es solo un fenómeno de ecuación única sino una propiedad estructural del sistema macrofiscal completo.
+\subsubsection{4. Resultados Empíricos Auditados (\texttt{fase21\_tvecm\_resultados.csv})}
+\begin{itemize}
+    \item **Umbral Óptimo Estimado**: $\tau^* = \mathbf{2080.68\text{ pb}}$ (coincidente con el umbral univariado de $2083$ pb).
+    \item **Régimen 1 ($\text{EMBI} \le 2080$ pb)**: 73 trimestres ($84.9\%$), $\alpha_{pb} = \mathbf{+0.0064}$ (estabilizador positivo).
+    \item **Régimen 2 ($\text{EMBI} > 2080$ pb)**: 13 trimestres ($15.1\%$), $\alpha_{pb} = \mathbf{-0.0079}$ (colapso del ajuste fiscal).
+    \item **Estadístico Sup-LM**: $52.238$ ($p\text{-valor bootstrap} = 0.625$).
+\end{itemize}
 
 ---
 
 \subsection{Proceso Cox-Ingersoll-Ross (CIR) de 1 y 2 Factores para el EMBI+}
 
 \subsubsection{1. ¿Para qué sirve?}
-Modela y simula estocásticamente la prima de riesgo soberano de Argentina ($\text{EMBI}_t$) en tiempo continuo mediante ecuaciones diferenciales estocásticas afines con reversión a la media, garantizando matemáticamente que el riesgo país sea estrictamente positivo y modelando la heterocedasticidad observada en los datos diarios.
+Modela y simula estocásticamente la prima de riesgo soberano de Argentina ($\text{EMBI}_t$) en tiempo continuo mediante ecuaciones diferenciales estocásticas afines con reversión a la media, garantizando la no negatividad del spread y reproduciendo la heterocedasticidad observada en los datos.
 
-\subsubsection{2. ¿Por qué se utiliza frente a un paseo aleatorio o un AR(1) lineal?}
-Un modelo autorregresivo lineal o un movimiento browniano geométrico permite que el riesgo tome valores negativos o diverge sin límite. El proceso CIR introduce una fuerza de gravedad hacia el equilibrio fundamental ($\theta$) y hace que la volatilidad sea proporcional a $\sqrt{risk_t}$, reproduciendo el hecho estilizado de que en momentos de pánico financiero la volatilidad del spread se multiplica exponencialmente.
-
-\subsubsection{3. ¿De dónde sale? (Referencia APA 7)}
+\subsubsection{2. ¿De dónde sale? (Referencia APA 7)}
 \begin{mdframed}[style=apabox]
 Cox, J. C., Ingersoll, J. E., \& Ross, S. A. (1985). A theory of the term structure of interest rates. \textit{Econometrica}, 53(2), 385--407. \url{https://doi.org/10.2307/1911242}\\
-Duffie, D., \& Kan, R. (1996). A yield-factor model of interest rates. \textit{Mathematical Finance}, 6(4), 379--406. \url{https://doi.org/10.1111/j.1467-9965.1996.tb00123.x}\\
-Longstaff, F. A., Pan, J., Pedersen, L. H., \& Singleton, K. J. (2011). How sovereign is sovereign credit risk? \textit{American Economic Journal: Macroeconomics}, 3(2), 75--103. \url{https://doi.org/10.1257/mac.3.2.75}
+Duffie, D., \& Kan, R. (1996). A yield-factor model of interest rates. \textit{Mathematical Finance}, 6(4), 379--406. \url{https://doi.org/10.1111/j.1467-9965.1996.tb00123.x}
 \end{mdframed}
 
-\subsubsection{4. Formulación Matemática del Modelo CIR Unifactorial}
-La ecuación diferencial estocástica en el espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ es:
+\subsubsection{3. Parámetros Calibrados por MLE Exacta (\texttt{fase20\_cir\_calibracion.csv})}
+\begin{itemize}
+    \item **Muestra Homogénea (2004--2025, $n=87$)**: $\kappa = 0.9229$, $\theta = 1032.25$ pb, $\sigma = 26.9175$, $t_{1/2} = 0.75$ años. Condición de Feller: $1905.30 > 724.55 \implies \mathbf{Ratio = 2.63 > 1.0}$. $\text{AIC}_{\text{CIR}} = 1278.69 < \text{AIC}_{\text{AR(1)}} = 1342.34$.
+    \item **Muestra Ampliada (1999--2025, $n=108$)**: $\kappa = 0.4279$, $\theta = 1590.41$ pb, $\sigma = 26.4954$, $t_{1/2} = 1.62$ años. Condición de Feller: $1361.14 > 702.00 \implies \mathbf{Ratio = 1.94 > 1.0}$. $\text{AIC}_{\text{CIR}} = 1594.84 < \text{AIC}_{\text{AR(1)}} = 1673.14$.
+\end{itemize}
 
-\begin{equation}
-d(risk_t) = \kappa (\theta - risk_t) dt + \sigma \sqrt{risk_t} \, dW_t
-\end{equation}
-
-\begin{mdframed}[style=mathbox]
-\textbf{Condición de Feller (No Negatividad Estricta):}
-\begin{equation}
-2\kappa\theta > \sigma^2 \quad \Longleftrightarrow \quad \text{Ratio de Feller} = \frac{2\kappa\theta}{\sigma^2} > 1
-\end{equation}
-Garantiza que la frontera en cero sea inaccesible con probabilidad 1.
-\end{mdframed}
-
-\textbf{Densidad de Transición Exacta (Chi-cuadrado no central)}:
-\begin{equation}
-f(risk_{t+\Delta t} \mid risk_t) = c \, e^{-u - v} \left(\frac{v}{u}\right)^{q/2} I_q\left(2\sqrt{uv}\right)
-\end{equation}
-Donde $c = \frac{2\kappa}{\sigma^2 (1 - e^{-\kappa \Delta t})}$, $u = c \cdot risk_t e^{-\kappa \Delta t}$, $v = c \cdot risk_{t+\Delta t}$, $q = \frac{2\kappa\theta}{\sigma^2} - 1$, e $I_q(z)$ es la función modificada de Bessel de primera especie:
-\begin{equation}
-I_q(z) = \sum_{k=0}^{\infty} \frac{1}{k! \, \Gamma(k + q + 1)} \left( \frac{z}{2} \right)^{2k + q}
-\end{equation}
-
-\subsubsection{5. Extensión a 2 Factores (Schwartz \& Smith / Duffie \& Kan)}
-Descompone el riesgo en dos componentes ortogonales:
-\begin{align}
-risk_t &= \xi_t + \chi_t \\
-d\xi_t &= -\kappa_\xi \xi_t dt + \sigma_\xi \sqrt{\xi_t} \, dW_t^{(1)} \quad (\text{Factor transitorio de liquidez global, } \kappa_\xi > 1.5) \\
-d\chi_t &= \kappa_\chi (\theta_\chi - \chi_t) dt + \sigma_\chi \sqrt{\chi_t} \, dW_t^{(2)} \quad (\text{Factor estructural de solvencia argentina, } \kappa_\chi \approx 0.2)
-\end{align}
-Con correlación $\mathbb{E}[dW_t^{(1)} dW_t^{(2)}] = \rho_{\xi\chi} dt$.
-
-\subsubsection{6. Aplicación al DSA de la Tesis}
-Permite generar las 1.000 trayectorias estocásticas de la tasa de refinanciación externa $r_{f,t} = r_{US,t} + risk_t$ en el DSA, eliminando la calibración fija tradicional y dotando a la simulación de consistencia en estructura temporal.
-
----
-
-\subsection{Proceso de Difusión con Saltos de Merton (1976) y Variación Bipotencia}
-
-\subsubsection{1. ¿Para qué sirve?}
-Modela los shocks discontinuos de corte de crédito (*sudden stops*), elecciones presidenciales sorpresivas o eventos de default que generan saltos discretos en el riesgo país que no pueden explicarse por un proceso browniano continuo.
-
-\subsubsection{2. ¿Por qué se utiliza la Variación Bipotencia?}
-Si se estima un modelo de saltos directamente por máxima verosimilitud sin restricciones, la volatilidad de difusión continua ($\sigma$) y la intensidad de los saltos ($\lambda$) compiten por explicar la misma curtosis, haciendo que el optimizador diverja (Aït-Sahalia, 2004). La Variación Bipotencia aísla de forma no paramétrica la varianza continua pura antes de estimar los saltos.
-
-\subsubsection{3. ¿De dónde sale? (Referencia APA 7)}
-\begin{mdframed}[style=apabox]
-Merton, R. C. (1976). Option pricing when underlying stock returns are discontinuous. \textit{Journal of Financial Economics}, 3(1--2), 125--144. \url{https://doi.org/10.1016/0304-405X(76)90022-2}\\
-Barndorff-Nielsen, O. E., \& Shephard, N. (2004). Power and bipower variation with stochastic volatility and jumps. \textit{Journal of Financial Econometrics}, 2(1), 1--37. \url{https://doi.org/10.1093/jjfinec/nbh001}
-\end{mdframed}
-
-\subsubsection{4. Formulación Matemática}
-La dinámica del riesgo soberano sigue:
-
-\begin{equation}
-\frac{d(risk_t)}{risk_t} = (\mu - \lambda \bar{k}) dt + \sigma dW_t + (J_t - 1) dN_t
-\end{equation}
-
-Donde:
-* $N_t$ es un proceso de Poisson homogéneo con intensidad $\lambda$ (frecuencia anual de crisis).
-* $\ln(J_t) \sim \mathcal{N}(\mu_J, \sigma_J^2)$ es el tamaño log-normal del salto, con $\bar{k} = \mathbb{E}[J_t - 1] = \exp(\mu_J + \sigma_J^2/2) - 1$.
-* **Variación Bipotencia no paramétrica**:
-\begin{equation}
-BV_t = \frac{\pi}{2} \sum_{i=2}^{M} |r_{t,i}| |r_{t,i-1}| \xrightarrow{p} \int_{t-1}^t \sigma_s^2 ds
-\end{equation}
-Aislando la volatilidad integrada de la difusión sin contaminación por los saltos discretos.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figuras/figura_cir_simulacion.png}
+\caption{Simulación Estocástica de Monte Carlo: Proceso CIR del EMBI+ y Densidad Terminal.}
+\label{fig:guia_cir_simulacion}
+\end{figure}
 
 ---
 

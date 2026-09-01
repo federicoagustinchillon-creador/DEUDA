@@ -80,7 +80,10 @@ def estimar_svar_restringido(data, nlags=2, n_boot=500, horizon=20):
     # u_tcrm = delta_y * u_y + delta_pb * u_pb + delta_embi * u_embi + e_tcrm
     # u_d    = theta_y * u_y + theta_pb * u_pb + theta_embi * u_embi + theta_tc * u_tcrm + e_d
     
-    alpha_y = 0.95
+    # Semi-elasticidad cíclica del resultado primario (% del PIB) según
+    # el estándar de la OCDE / FMI (Girouard & André, 2005; Daude et al., 2010; Alberola et al., 2014):
+    # eta_pb = 0.25 (un shock de 1 p.p. en la brecha genera ~0.25 p.p. de superávit automático)
+    alpha_y = 0.25
     u_y = residuals["g_gap"].values
     u_pb = residuals["pb_pib"].values
     u_embi = residuals["EMBI"].values

@@ -429,8 +429,6 @@ Como ejercicio de robustez adicional, se reestimó la relación entre el Resulta
 \end{flushleft}
 \end{table}
 
-Bajo la especificación estática, ambos subperíodos exhiben un coeficiente $\rho$ positivo y significativo al 1\% (0.0373 y 0.0530). Al introducir la ampliación dinámica, ese resultado se atenúa pero no desaparece: el coeficiente conserva el signo positivo en las cuatro estimaciones DOLS, y su significatividad se degrada de manera gradual --al 10\% en 2004--2014 con $m=1$ ($p=0.063$), al 5\% en 2015--2025 con $m=1$ ($p=0.038$), y al borde del 5\% con $m=2$ en el segundo subperíodo ($p=0.051$)--, perdiéndose únicamente en 2004--2014 con $m=2$ ($p=0.140$).
-
 De ello se siguen dos conclusiones centrales: primero, parte de la magnitud del coeficiente estático responde al sesgo de simultaneidad de corto plazo que la ampliación de Stock-Watson corrige (en el segundo subperíodo cae de 0.0530 a 0.0364); segundo, el signo positivo no es un mero artefacto estático. La discrepancia con el DOLS de muestra completa ($\rho=-0.0071$) responde a la inestabilidad paramétrica de la relación a lo largo del tiempo: dos submuestras con coeficiente positivo coexisten con un coeficiente agregado nulo si el parámetro no es constante, en consonancia con los quiebres estructurales múltiples de Bai-Perron documentados en la Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo}.
 
 El resultado nulo de muestra completa debe entenderse como la ausencia de una regla de reacción fiscal \textit{estable a lo largo de 2004--2025}. La magnitud de la respuesta por subperíodo sigue siendo económicamente pequeña (entre 0.036 y 0.060 puntos del PIB por punto de deuda), insuficiente para estabilizar la dinámica de endeudamiento.
@@ -438,7 +436,7 @@ El resultado nulo de muestra completa debe entenderse como la ausencia de una re
 \section{Resultados del VAR Estructural Restringido (SVAR)}
 \label{sec:svar_resultados}
 
-La estimación del Vector Autoregresivo Estructural Restringido (SVAR) con reglas macroeconómicas de Blanchard-Perotti y Favero-Giavazzi sobre el vector de cinco variables $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t, d_t)'$ permite desentrañar la transmisión contemporánea y dinámica de las perturbaciones macro-fiscales. La Tabla \ref{tab:svar_fevd} reporta la Descomposición de Varianza del Error de Pronóstico (FEVD) para horizontes de 1 a 20 trimestres.
+La estimación del Vector Autoregresivo Estructural Restringido (SVAR) con reglas macroeconómicas de Blanchard-Perotti ($\eta_{pb} = 0.25$, $a_{23}=a_{24}=0$) y Favero-Giavazzi sobre el vector de cinco variables $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t, d_t)'$ permite desentrañar la transmisión contemporánea y dinámica de las perturbaciones macro-fiscales. La Tabla \ref{tab:svar_fevd} reporta la Descomposición de Varianza del Error de Pronóstico (FEVD) para horizontes de 1 a 20 trimestres.
 
 \begin{table}[H]
 \centering
@@ -448,22 +446,22 @@ La estimación del Vector Autoregresivo Estructural Restringido (SVAR) con regla
 \toprule
 \textbf{Horizonte} & \textbf{Variable Explicada} & \textbf{Shock Brecha PIB} & \textbf{Shock Superávit} & \textbf{Shock EMBI+} & \textbf{Shock TCRM} & \textbf{Shock Deuda Propia} \\
 \midrule
-\multirow{2}{*}{1 Trimestre} & Deuda Pública ($d_t$) & 1.24 & 4.85 & 8.92 & 14.30 & 70.69 \\
- & Riesgo País ($\text{EMBI}_t$) & 5.12 & 2.45 & 84.15 & 7.82 & 0.46 \\
+\multirow{2}{*}{1 Trimestre} & Deuda Pública ($d_t$) & 32.86 & 39.09 & 0.74 & 1.39 & 25.93 \\
+ & Riesgo País ($\text{EMBI}_t$) & 10.48 & 16.14 & 73.37 & 0.00 & 0.00 \\
 \midrule
-\multirow{2}{*}{4 Trimestres} & Deuda Pública ($d_t$) & 3.45 & 6.20 & 16.80 & 28.50 & 45.05 \\
- & Riesgo País ($\text{EMBI}_t$) & 8.30 & 4.10 & 68.25 & 18.15 & 1.20 \\
+\multirow{2}{*}{4 Trimestres} & Deuda Pública ($d_t$) & 29.44 & 46.78 & 1.73 & 0.49 & 21.56 \\
+ & Riesgo País ($\text{EMBI}_t$) & 14.68 & 23.15 & 60.65 & 0.55 & 0.97 \\
 \midrule
-\multirow{2}{*}{8 Trimestres} & Deuda Pública ($d_t$) & 5.10 & 7.85 & 22.40 & 34.60 & 30.05 \\
- & Riesgo País ($\text{EMBI}_t$) & 10.45 & 5.20 & 58.60 & 24.30 & 1.45 \\
+\multirow{2}{*}{8 Trimestres} & Deuda Pública ($d_t$) & 28.51 & 48.13 & 4.39 & 0.61 & 18.35 \\
+ & Riesgo País ($\text{EMBI}_t$) & 17.62 & 29.92 & 49.68 & 0.49 & 2.28 \\
 \midrule
-\multirow{2}{*}{20 Trimestres} & Deuda Pública ($d_t$) & 6.80 & 8.15 & 26.50 & 38.90 & 19.65 \\
- & Riesgo País ($\text{EMBI}_t$) & 12.10 & 5.80 & 52.40 & 27.90 & 1.80 \\
+\multirow{2}{*}{20 Trimestres} & Deuda Pública ($d_t$) & 28.56 & 47.53 & 4.22 & 7.26 & 12.43 \\
+ & Riesgo País ($\text{EMBI}_t$) & 21.58 & 36.49 & 36.11 & 1.80 & 4.02 \\
 \bottomrule
 \end{tabular}%
 }
 \begin{flushleft}
-\footnotesize \textit{Nota.} Identificación estructural por restricciones macroeconómicas de Blanchard-Perotti ($\alpha_y=0.95$, $a_{23}=a_{24}=0$) e identidad de acumulación de Favero-Giavazzi. Elaboración propia sobre la muestra 2004--2025.
+\footnotesize \textit{Nota.} Identificación estructural por restricciones macroeconómicas de Blanchard-Perotti ($\eta_{pb}=0.25$, rigidez intra-trimestral en superávit) e identidad de acumulación de Favero-Giavazzi. Valores extraídos directamente de \texttt{resultados/tablas/fase19\_fevd.csv}.
 \end{flushleft}
 \end{table}
 
@@ -473,8 +471,6 @@ La estimación del Vector Autoregresivo Estructural Restringido (SVAR) con regla
 \caption{Funciones de Impulso-Respuesta Estructurales (SVAR Restringido) con Bandas Bootstrap al 95\%.}
 \label{fig:svar_irf}
 \end{figure}
-
-Como se desprende de la Figura \ref{fig:svar_irf} y la Tabla \ref{tab:svar_fevd}, los shocks cambiarios reales ($\text{TCRM}$) y de riesgo soberano ($\text{EMBI}$) explican conjuntamente más del $65\%$ de la varianza del error de pronóstico de la deuda a horizontes de 5 años ($38.9\%$ y $26.5\%$, respectivamente). En contraste, el shock de superávit primario propio apenas explica un $8.15\%$ de la variabilidad de la deuda. Este resultado empírico formaliza la dominancia del canal de valoración cambiaria y corte de crédito externo por sobre la disciplina fiscal discrecional, en plena concordancia con el Paradigma de la Restricción Externa.
 
 \begin{figure}[H]
 \centering
@@ -496,17 +492,15 @@ Para verificar si la velocidad de corrección fiscal conmuta entre regímenes de
 \textbf{Parámetro / Estadístico} & \textbf{Régimen 1: Normalidad} & \textbf{Régimen 2: Fatiga / Estrés} \\
 \midrule
 Umbral Óptimo de Riesgo ($\tau^*$) & \multicolumn{2}{c}{$\mathbf{2080.68\text{ pb}}$ (Soporte empírico: 15\%--85\%)} \\
-Observaciones por Régimen & 74 trimestres ($84.1\%$) & 14 trimestres ($15.9\%$) \\
+Observaciones Efectivas por Régimen & 73 trimestres ($84.9\%$) & 13 trimestres ($15.1\%$) \\
 Velocidad de Ajuste Fiscal ($\alpha_{pb}$) & $\mathbf{+0.0064}$ & $\mathbf{-0.0079}$ \\
-Estadístico Sup-LM de Linealidad & \multicolumn{2}{c}{$\text{Sup-LM} = 52.24 \quad (p\text{-valor bootstrap} = 0.061)$} \\
+Estadístico Sup-LM de Linealidad & \multicolumn{2}{c}{$\text{Sup-LM} = 52.24 \quad (p\text{-valor bootstrap} = 0.625)$} \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
-\footnotesize \textit{Nota.} Vector de cointegración estimado por Johansen. El umbral estimado por búsqueda de grilla bidimensional ($2080.68$ pb) coincide estrechamente con el umbral de Hansen en diferencias ($2083$ pb). Elaboración propia.
+\footnotesize \textit{Nota.} Vector de cointegración estimado por Johansen. Datos provenientes de \texttt{resultados/tablas/fase21\_tvecm\_resultados.csv}.
 \end{flushleft}
 \end{table}
-
-El TVECM confirma que en el Régimen 1 ($\text{EMBI} \le 2080$ pb), la velocidad de ajuste del superávit es positiva ($\alpha_{pb}^{(1)} = +0.0064$), operando como un estabilizador débil pero corrector. Sin embargo, cuando el riesgo cruza el umbral crítico ($\text{EMBI} > 2080$ pb), la velocidad de ajuste colapsa y cambia de signo ($\alpha_{pb}^{(2)} = -0.0079$), reflejando la inviabilidad política y macroeconómica de generar superávits compensatorios en plena crisis de financiamiento.
 
 \section{Calibración del Proceso Estocástico CIR del EMBI+ e Integración al DSA}
 \label{sec:cir_resultados}
@@ -520,17 +514,17 @@ La Tabla \ref{tab:cir_calibracion} resume la calibración por Máxima Verosimili
 \toprule
 \textbf{Parámetro Estimado} & \textbf{Muestra Homogénea (2004--2025)} & \textbf{Muestra Ampliada (1999--2025)} \\
 \midrule
-Velocidad de Reversión ($\kappa$) & 0.4280 & 0.3850 \\
-Nivel de Equilibrio ($\theta$, en pb) & 650.00 & 720.00 \\
-Volatilidad de Difusión ($\sigma$) & 18.4200 & 19.8500 \\
-Vida Media de Reversión ($t_{1/2} = \ln(2)/\kappa$) & 1.62 años & 1.80 años \\
-Condición de Feller ($2\kappa\theta > \sigma^2$) & $556.40 > 339.30 \implies \mathbf{Cumple}$ & $554.40 > 394.02 \implies \mathbf{Cumple}$ \\
-Ratio de Feller ($2\kappa\theta / \sigma^2$) & $\mathbf{1.6402 > 1.0}$ & $\mathbf{1.4070 > 1.0}$ \\
-Criterio AIC (CIR vs. AR(1)) & $\mathbf{1142.3} < 1188.6 \implies \text{Prefiere CIR}$ & $\mathbf{1410.2} < 1465.8 \implies \text{Prefiere CIR}$ \\
+Velocidad de Reversión ($\kappa$) & 0.9229 & 0.4279 \\
+Nivel de Equilibrio ($\theta$, en pb) & 1032.25 & 1590.41 \\
+Volatilidad de Difusión ($\sigma$) & 26.9175 & 26.4954 \\
+Vida Media de Reversión ($t_{1/2} = \ln(2)/\kappa$) & 0.75 años & 1.62 años \\
+Condición de Feller ($2\kappa\theta > \sigma^2$) & $1905.30 > 724.55 \implies \mathbf{Cumple}$ & $1361.14 > 702.00 \implies \mathbf{Cumple}$ \\
+Ratio de Feller ($2\kappa\theta / \sigma^2$) & $\mathbf{2.6296 > 1.0}$ & $\mathbf{1.9389 > 1.0}$ \\
+Criterio AIC (CIR vs. AR(1)) & $\mathbf{1278.69} < 1342.34 \implies \text{Prefiere CIR}$ & $\mathbf{1594.84} < 1673.14 \implies \text{Prefiere CIR}$ \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
-\footnotesize \textit{Nota.} Estimación por MLE exacta sobre la función de densidad Chi-cuadrado no central. La condición de Feller garantiza la inaccesibilidad de la frontera en cero. Elaboración propia.
+\footnotesize \textit{Nota.} Estimación por MLE exacta sobre la función de densidad Chi-cuadrado no central. Datos provenientes de \texttt{resultados/tablas/fase20\_cir\_calibracion.csv}.
 \end{flushleft}
 \end{table}
 
