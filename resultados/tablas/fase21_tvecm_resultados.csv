@@ -1,2 +1,2 @@
 best_tau_pb,sup_lm_stat,p_val_sup_lm,alpha_pb_regimen1,alpha_pb_regimen2,n_obs_regimen1,n_obs_regimen2,n_total
-2080.68,52.238,0.61,0.0064,-0.0079,73,13,86
+2080.68,52.238,0.625,0.0064,-0.0079,73,13,86
