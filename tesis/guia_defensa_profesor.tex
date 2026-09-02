@@ -477,19 +477,25 @@ Para el vector $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t,
 \subsubsection{1. ¿Para qué sirve?}
 Permite unificar la estimación multivariada del VECM y la teoría de umbrales no lineales en un único sistema matricial, evaluando si el vector de velocidades de ajuste ($\alpha$) conmuta de régimen entre períodos normales y períodos de estrés de riesgo soberano.
 
-\subsubsection{2. ¿Por qué se utiliza frente a un VECM lineal tradicional?}
-Un VECM lineal tradicional asume que la velocidad de corrección hacia el equilibrio fiscal de largo plazo es constante e idéntica tanto si el riesgo país es de 400 puntos básicos como si es de 2.500 puntos básicos. El TVECM permite que la dinámica de ajuste sea discontinua y dependa del estado del mercado de crédito internacional.
+\subsubsection{4. Formulación Matemática Rigurosa del TVECM}
+Siguiendo a Hansen y Seo (2002), el modelo Vectorial con Corrección de Error de Umbral bipartito se formula como:
+\begin{equation}
+\Delta Y_t = \begin{cases} 
+\mu^{(1)} + \alpha^{(1)} w_{t-1}(\beta) + \sum_{i=1}^{p-1} \Gamma_i^{(1)} \Delta Y_{t-i} + \varepsilon_t^{(1)} & \text{si } z_{t-1} \le \tau \\
+\mu^{(2)} + \alpha^{(2)} w_{t-1}(\beta) + \sum_{i=1}^{p-1} \Gamma_i^{(2)} \Delta Y_{t-i} + \varepsilon_t^{(2)} & \text{si } z_{t-1} > \tau 
+\end{cases}
+\end{equation}
+donde $Y_t = [d_t, pb_t, \text{EMBI}_t, \text{TCRM}_t]^\top$, $w_{t-1}(\beta) = \beta^\top Y_{t-1}$ es el término de corrección de error, $z_{t-1} = \text{EMBI}_{t-1}$ es la variable de transición observable, y $\tau$ es el umbral endógeno. Los parámetros $(\tau, \beta)$ se estiman conjuntamente por Máxima Verosimilitud concentrada:
+\begin{equation}
+(\hat{\tau}, \hat{\beta}) = \arg\min_{\tau, \beta} \left\{ \frac{n_1}{n} \ln |\hat{\Sigma}_1(\tau, \beta)| + \frac{n_2}{n} \ln |\hat{\Sigma}_2(\tau, \beta)| \right\}
+\end{equation}
+El contraste de linealidad emplea el estadístico $\text{Sup-LM} = \sup_{\tau \in [\tau_L, \tau_U]} \text{LM}(\tau, \hat{\beta})$, cuya distribución asintótica no estándar se aproxima mediante remuestreo bootstrap residual (Hansen y Seo, 2002).
 
-\subsubsection{3. ¿De dónde sale? (Referencia APA 7)}
-\begin{mdframed}[style=apabox]
-Hansen, B. E., \& Seo, B. (2002). Testing for two-regime threshold cointegration in vector error-correction models. \textit{Journal of Econometrics}, 110(2), 293--318. \url{https://doi.org/10.1016/S0304-4076(01)00097-4}
-\end{mdframed}
-
-\subsubsection{4. Resultados Empíricos Auditados (\texttt{fase21\_tvecm\_resultados.csv})}
+\subsubsection{5. Resultados Empíricos Auditados (\texttt{fase21\_tvecm\_resultados.csv})}
 \begin{itemize}
     \item **Umbral Óptimo Estimado**: $\tau^* = \mathbf{2080.68\text{ pb}}$ (coincidente con el umbral univariado de $2083$ pb).
-    \item **Régimen 1 ($\text{EMBI} \le 2080$ pb)**: 73 trimestres ($84.9\%$), $\alpha_{pb} = \mathbf{+0.0064}$ (estabilizador positivo).
-    \item **Régimen 2 ($\text{EMBI} > 2080$ pb)**: 13 trimestres ($15.1\%$), $\alpha_{pb} = \mathbf{-0.0079}$ (colapso del ajuste fiscal).
+    \item **Régimen 1 ($\text{EMBI} \le 2080$ pb)**: 73 trimestres ($84.9\%$), $\alpha_{pb}^{(1)} = \mathbf{+0.0064}$ (ajuste estabilizador positivo).
+    \item **Régimen 2 ($\text{EMBI} > 2080$ pb)**: 13 trimestres ($15.1\%$), $\alpha_{pb}^{(2)} = \mathbf{-0.0079}$ (colapso del ajuste fiscal y divergencia).
     \item **Estadístico Sup-LM**: $52.238$ ($p\text{-valor bootstrap} = 0.625$).
 \end{itemize}
 
@@ -506,7 +512,31 @@ Cox, J. C., Ingersoll, J. E., \& Ross, S. A. (1985). A theory of the term struct
 Duffie, D., \& Kan, R. (1996). A yield-factor model of interest rates. \textit{Mathematical Finance}, 6(4), 379--406. \url{https://doi.org/10.1111/j.1467-9965.1996.tb00123.x}
 \end{mdframed}
 
-\subsubsection{3. Parámetros Calibrados por MLE Exacta (\texttt{fase20\_cir\_calibracion.csv})}
+\subsubsection{3. Formulación Matemática Rigurosa}
+La dinámica del spread soberano $r_t = \text{EMBI}_t$ bajo la medida física sigue la Ecuación Diferencial Estocástica (SDE):
+\begin{equation}
+dr_t = \kappa (\theta - r_t) dt + \sigma \sqrt{r_t} \, dW_t
+\end{equation}
+donde $\kappa > 0$ representa la velocidad de reversión a la media, $\theta > 0$ es el nivel incondicional de largo plazo, $\sigma > 0$ es el parámetro de volatilidad de difusión, y $W_t$ es un movimiento browniano estándar unidimensional.
+
+La densidad de transición condicional exacta entre observaciones discretas separadas por $\Delta t$ es una distribución Chi-cuadrado no central escalada:
+\begin{equation}
+f(r_{t+\Delta t} \mid r_t) = c \, e^{-u - v} \left( \frac{v}{u} \right)^{q/2} I_q(2 \sqrt{uv})
+\end{equation}
+donde:
+\begin{equation}
+c = \frac{2\kappa}{\sigma^2 (1 - e^{-\kappa \Delta t})}, \quad u = c \, r_t \, e^{-\kappa \Delta t}, \quad v = c \, r_{t+\Delta t}, \quad q = \frac{2\kappa\theta}{\sigma^2} - 1
+\end{equation}
+siendo $I_q(\cdot)$ la función modificada de Bessel de primera especie de orden $q$.
+
+\textbf{Condición de Regularidad de Feller}: Para asegurar que el spread soberano sea estrictamente positivo en todo momento y que la frontera en cero sea inaccesible con probabilidad 1 ($\mathbb{P}(r_t > 0) = 1, \forall t$), los parámetros deben satisfacer:
+\begin{equation}
+2\kappa\theta > \sigma^2 \iff \frac{2\kappa\theta}{\sigma^2} > 1.0
+\end{equation}
+
+La vida media del proceso de reversión a la media se calcula como $t_{1/2} = \frac{\ln(2)}{\kappa}$.
+
+\subsubsection{4. Parámetros Calibrados por MLE Exacta (\texttt{fase20\_cir\_calibracion.csv})}
 \begin{itemize}
     \item **Muestra Homogénea (2004--2025, $n=87$)**: $\kappa = 0.9229$, $\theta = 1032.25$ pb, $\sigma = 26.9175$, $t_{1/2} = 0.75$ años. Condición de Feller: $1905.30 > 724.55 \implies \mathbf{Ratio = 2.63 > 1.0}$. $\text{AIC}_{\text{CIR}} = 1278.69 < \text{AIC}_{\text{AR(1)}} = 1342.34$.
     \item **Muestra Ampliada (1999--2025, $n=108$)**: $\kappa = 0.4279$, $\theta = 1590.41$ pb, $\sigma = 26.4954$, $t_{1/2} = 1.62$ años. Condición de Feller: $1361.14 > 702.00 \implies \mathbf{Ratio = 1.94 > 1.0}$. $\text{AIC}_{\text{CIR}} = 1594.84 < \text{AIC}_{\text{AR(1)}} = 1673.14$.
@@ -586,6 +616,26 @@ Kehoe, T. J., \& Nicolini, J. P. (2021). \textit{A Monetary and Fiscal History o
 \vspace{0.2cm}
 \textbf{7. Pregunta sobre la dominancia de shocks en el SVAR Restringido:}\\
 \textit{Respuesta}: «Siguiendo a Blanchard y Perotti (2002) y Favero y Giavazzi (2007, 2012), impusimos la semi-elasticidad fiscal intra-trimestral de la OCDE ($\eta_{pb}=0.25$) y la rigidez de decisiones del superávit ($a_{23}=a_{24}=0$). La descomposición de varianza del error de pronóstico (FEVD) a 20 trimestres demuestra que el superávit primario propio ($47.53\%$) y la brecha del PIB ($28.56\%$) determinan la trayectoria de la deuda, mientras que los shocks cambiarios y de spread soberano explican el $11.48\%$ restante, validando formalmente la restricción macro-fiscal contemporánea.»
+
+\vspace{0.2cm}
+\textbf{8. Pregunta sobre el Ajuste Stock-Flujo ($SF_t$) frente a devaluaciones y canjes:}\\
+\textit{Respuesta}: «En la Fase 15 desglosamos analíticamente el residuo stock-flujo ($SF_t$). En 2005 y 2010, $SF_t$ es marcadamente negativo por las quitas de capital del $65\%$, mientras que en 2018 es positivo por el desembolso del FMI ($44.000$ millones de USD) y la absorción de pasivos del BCRA. Para que el DSA estocástico no quede contaminado por estos residuos, desagregamos analíticamente la deuda entre componente doméstico ($\alpha_d$) y externo ($1 - \alpha_d$): el impacto de las devaluaciones del TCRM ($\Delta e_t$) ingresa de forma explícita en el costo ponderado del servicio de la deuda, aislando las variaciones contables de los flujos genuinamente primarios.»
+
+\vspace{0.2cm}
+\textbf{9. Pregunta sobre la no descomposición de Ingresos vs. Gastos y el Efecto Voracidad:}\\
+\textit{Respuesta}: «Bohn (1998, 2007) demuestra que la condición necesaria y suficiente para la solvencia intertemporal radica en el resultado primario neto consolidado. Si la recaudación responde positivamente a la deuda pero el gasto público se expande al mismo ritmo por el efecto voracidad (Tornell y Lane, 1999), el balance primario no estabiliza la deuda acumulada y la restricción presupuestaria intertemporal se vulnera igualmente. En el SVAR aislamos la respuesta cíclica de la discrecional mediante $\eta_{pb} = 0.25$, corroborando que la inoperancia es producto de la rigidez estructural del gasto primario.»
+
+\vspace{0.2cm}
+\textbf{10. Pregunta sobre la Cópula-t ($\nu = 4.8$) frente a una distribución Normal multivariada en el DSA:}\\
+\textit{Respuesta}: «En la Fase 14 contrastamos formalmente la sensibilidad a la estructura de dependencia: la Cópula Gaussiana arroja $P(d_{2035} > 100\%) = 29.2\%$, mientras que la Cópula-t con $\nu = 4.8$ grados de libertad arroja $31.2\%$. La brecha es de solo $2.0$ puntos porcentuales. No obstante, los residuos estandarizados de las cuatro variables macrofiscales rechazan categóricamente la normalidad multivariada (curtosis de Jarque-Bera $> 5.0$, ARCH-LM $p < 0.001$). Imponer normalidad ignoraría la correlación en colas pesadas observada en los datos reales, donde las devaluaciones bruscas coinciden sistemáticamente con picos del riesgo país y caídas del producto.»
+
+\vspace{0.2cm}
+\textbf{11. Pregunta sobre el recorte temporal del ETF EMB regional a 2007T4 ($n=73$) en el IV-2SLS:}\\
+\textit{Respuesta}: «El fondo cotizado iShares JP Morgan USD Emerging Markets Bond ETF (EMB) inició sus operaciones en diciembre de 2007, por lo que no existe una serie previa de mercado líquido representativa de deuda emergente regional. El estimador DOLS sobre la muestra completa ($n=78$ observaciones efectivas, $\rho = -0.0071, p=0.564$) coincide plenamente con el estimador IV-2SLS sobre la submuestra ($n=73, \rho = -0.0364, p=0.130$). Ambos arrojan coeficientes no significativos, ratificando que el resultado es robusto a la ventana de estimación y que la instrumentación resuelve con éxito la endogeneidad contemporánea ($F_{1ra} = 13.00$, Wu-Hausman $p=0.009$, Sargan $p=0.436$).»
+
+\vspace{0.2cm}
+\textbf{12. Pregunta sobre los vencimientos masivos post-2025: Distinción entre iliquidez y solvencia:}\\
+\textit{Respuesta}: «En el Capítulo 7 delimitamos con rigor conceptual la diferencia entre iliquidez de corto plazo e insolvencia intertemporal. El umbral empírico de fatiga fiscal ($\tau^* \approx 2080\text{ pb}$) modela precisamente el límite de acceso al mercado voluntario: cuando el spread supera dicho umbral, los mercados externos se cierran, transformando un problema de iliquidez en dominancia fiscal y forzando al Tesoro a recurrir a emisión monetaria o colocaciones compulsivas locales, lo que retroalimenta la inflación, revalúa la deuda externa vía depreciación cambiaria y conduce a la insolvencia proyectada por el DSA.»
 \end{mdframed}
 
 ---

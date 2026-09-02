@@ -23,7 +23,11 @@ $H_{1b}$ --- Endogeneidad del riesgo soberano & $pb_t$, EMBI+ instrumentado con 
 \midrule
 $H_{1c}$ --- Quiebres estructurales & $d_t$, $d_t$ consolidada & Zivot-Andrews (quiebre único); Bai-Perron (múltiples, BIC) & Z-A no significativo ($t=-2.83$); Bai-Perron: 3 quiebres (SPNF) y 2 (consolidada) & \textbf{Verificada} en su versión de quiebres múltiples \\
 \midrule
-Extensión --- Solvencia prospectiva & $d_t$, $pb_t$, $g_t$, $r_t$, $\Delta e_t$ & DSA Monte Carlo, $t$ de Student ($\nu\approx 4.8$, $\lambda\approx 0.076$), GARCH/DCC & $P(d_{2035}>100\%)=31.2\%$ (32.5\% con DCC-GARCH) & \textbf{Riesgo de cola relevante}, no desenlace modal \\
+Extensión --- SVAR Restringido & $\tilde{y}_t$, $pb_t$, EMBI+, TCRM, $d_t$ & SVAR con retardos presupuestarios ($\eta_{pb}=0.25$, $a_{23}=a_{24}=0$), FEVD & Deuda explicada en $47.53\%$ por $pb$, $28.56\%$ por $\tilde{y}$, $11.48\%$ por TCRM/EMBI+ & \textbf{Validación estructural}: dominancia de desbalances primarios y shocks externos \\
+\midrule
+Extensión --- Spread Histórico (1983--2025) & Spread Bonex, Brady y EMBI+ ($n=169$) & Bai-Perron (5 quiebres) y Proceso Continuo CIR (MLE) & $\kappa = 0.4630$, $\theta = 1456.98$ pb, Feller $= 2.1974 > 1.0$. Umbral $\tau^* \approx 2080$ pb verificado & \textbf{Regularidad estructural}: restricción externa y fatiga invariantes en 42 años \\
+\midrule
+Extensión --- Solvencia prospectiva & $d_t$, $pb_t$, $g_t$, $r_t$, $\Delta e_t$ & DSA Monte Carlo, $t$ de Student ($\nu\approx 4.8$, $\lambda\approx 0.076$), GARCH/DCC & $P(d_{2035}>100\%)=31.2\%$ (32.5\% con DCC-GARCH, $29.8\%$ con CIR) & \textbf{Riesgo de cola relevante}, no desenlace modal \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
