@@ -1,0 +1,7 @@
+Segmento,Fecha_Inicio,Fecha_Fin,N_Obs,Media_Spread_pb,Desvio_Spread_pb,Fecha_Quiebre,Hito_Asociado
+Régimen 1,1983-12-31,1988-12-31,21,797.84,359.44,1988-12-31,Agotamiento de reservas del BCRA
+Régimen 2,1989-03-31,1990-12-31,8,3573.76,1255.84,1990-12-31,Reversión paulatina de la desconfianza
+Régimen 3,1991-03-31,2001-12-31,44,831.66,427.31,2001-12-31,Declaración de Default y Fin de la Convertibilidad
+Régimen 4,2002-03-31,2005-06-30,14,5431.33,638.09,2005-06-30,Canje de Deuda 2005 y Cancelación FMI
+Régimen 5,2005-09-30,2019-06-30,56,683.54,326.6,2019-06-30,Crisis Cambiaria y Acuerdo Stand-By FMI
+Régimen 6,2019-09-30,2025-12-31,26,1732.05,632.45,Fin de Muestra,Cierre 2025

@@ -1,0 +1,2 @@
+Muestra,N_Obs,kappa,theta_pb,sigma,feller_stat,feller_crit,feller_ratio,cumple_feller,half_life_anios,log_lik_cir,aic_cir,aic_ar1,cir_preferido_aic
+"Ultra-Larga (42 Años, 1983-2025)",169,0.463,1456.98,24.7781,1349.08,613.96,2.1974,True,1.5,-1230.28,2466.56,2612.53,True

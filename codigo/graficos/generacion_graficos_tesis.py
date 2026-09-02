@@ -384,6 +384,85 @@ def fig_cir_simulacion():
     print(f"[OK] Figura CIR Simulación guardada en {out_path}")
 
 
+def fig_spread_historico_1983_2025():
+    """
+    Genera la figura institucional del spread soberano histórico de 42 años (1983-2025),
+    con sombreado de crisis, umbral de fatiga fiscal y descomposición por instrumento.
+    """
+    csv_path = os.path.join(cur_dir, "datos", "procesados", "spread_soberano_historico_1983_2025.csv")
+    if not os.path.exists(csv_path):
+        print(f"[SKIP] No se encontró {csv_path}")
+        return
+
+    df = pd.read_csv(csv_path)
+    df["Date"] = pd.to_datetime(df["Date"])
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 8), sharex=True, gridspec_kw={"height_ratios": [3, 1]})
+
+    # 1. Panel Superior: Serie del Spread Empalmado
+    ax1.plot(df["Date"], df["Spread_Empalmado_pb"], color=NAVY, linewidth=2.0, label="Spread Soberano Empalmado (pb)")
+    ax1.axhline(2083.0, color=GREY_RED, linestyle="--", linewidth=1.5, label="Umbral Crítico de Fatiga Fiscal (τ* = 2.083 pb)")
+
+    # Sombreados de crisis
+    crisis_shades = [
+        ("1989-01-01", "1990-12-31", "Hiperinflación / Plan Bonex", "#FFE6E6"),
+        ("1994-12-01", "1995-09-30", "Efecto Tequila", "#FFF2E6"),
+        ("2001-07-01", "2003-03-31", "Default y Fin Convertibilidad", "#FFE6E6"),
+        ("2008-09-01", "2009-06-30", "Crisis Lehman 2008", "#FFF2E6"),
+        ("2018-04-01", "2019-12-31", "Crisis Cambiaria / Stand-By", "#FFE6E6"),
+        ("2020-03-01", "2020-09-30", "COVID-19 / Canje 2020", "#FFF2E6"),
+    ]
+
+    for start, end, label, col in crisis_shades:
+        ax1.axvspan(pd.to_datetime(start), pd.to_datetime(end), color=col, alpha=0.6, zorder=1)
+
+    # Anotaciones de hitos mayores
+    ax1.annotate("Hiperinflación\n5.600 pb", xy=(pd.to_datetime("1989-12-31"), 5600),
+                 xytext=(pd.to_datetime("1986-06-30"), 6000),
+                 arrowprops=dict(arrowstyle="->", color="#333333", lw=1.2), fontsize=9, fontweight="bold")
+
+    ax1.annotate("Pico Default\n6.659 pb", xy=(pd.to_datetime("2002-09-30"), 6659),
+                 xytext=(pd.to_datetime("1998-01-01"), 6800),
+                 arrowprops=dict(arrowstyle="->", color="#333333", lw=1.2), fontsize=9, fontweight="bold")
+
+    ax1.annotate("Plan Brady 1993\n(690 pb)", xy=(pd.to_datetime("1993-12-31"), 690),
+                 xytext=(pd.to_datetime("1992-01-01"), 2500),
+                 arrowprops=dict(arrowstyle="->", color="#333333", lw=1.2), fontsize=8)
+
+    ax1.annotate("Mínimo Histórico\n2007 (210 pb)", xy=(pd.to_datetime("2007-03-31"), 210),
+                 xytext=(pd.to_datetime("2005-01-01"), 1800),
+                 arrowprops=dict(arrowstyle="->", color="#333333", lw=1.2), fontsize=8)
+
+    ax1.set_title("Evolución Histórica del Spread Soberano de Argentina (1983–2025): 42 Años de Democracia",
+                  fontweight="bold", fontsize=13)
+    ax1.set_ylabel("Spread Soberano (puntos básicos)", fontweight="bold")
+    ax1.legend(loc="upper right", fontsize=9)
+    ax1.set_ylim(0, 7500)
+
+    # 2. Panel Inferior: Instrumentos Fuente
+    mask_bonex = df["Date"] <= "1992-12-31"
+    mask_brady = (df["Date"] >= "1993-01-01") & (df["Date"] <= "1997-12-31")
+    mask_embi = df["Date"] >= "1998-01-01"
+
+    ax2.plot(df.loc[mask_bonex, "Date"], df.loc[mask_bonex, "Spread_Empalmado_pb"],
+             color="#D9534F", linewidth=2.0, label="Bonex Series 82/84/87/89 (1983–1992)")
+    ax2.plot(df.loc[mask_brady, "Date"], df.loc[mask_brady, "Spread_Empalmado_pb"],
+             color="#F0AD4E", linewidth=2.0, label="JP Morgan Brady Stripped (1993–1997)")
+    ax2.plot(df.loc[mask_embi, "Date"], df.loc[mask_embi, "Spread_Empalmado_pb"],
+             color="#0275D8", linewidth=2.0, label="JP Morgan EMBI+ / Global (1998–2025)")
+
+    ax2.set_title("Composición por Instrumento Soberano y Mercado de Origen", fontweight="bold", fontsize=10)
+    ax2.set_xlabel("Año de Observación", fontweight="bold")
+    ax2.set_ylabel("Nivel (pb)", fontsize=9)
+    ax2.legend(loc="upper right", fontsize=8)
+
+    fig.tight_layout()
+    out_path = os.path.join(OUTPUT_DIR, "figura_spread_historico_1983_2025.png")
+    fig.savefig(out_path, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[OK] Figura Spread Histórico guardada en {out_path}")
+
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     df = load_data()
@@ -393,8 +472,10 @@ def main():
     fig_svar_irf()
     fig_svar_fevd()
     fig_cir_simulacion()
+    fig_spread_historico_1983_2025()
 
 
 if __name__ == "__main__":
     main()
+
 

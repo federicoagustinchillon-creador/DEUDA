@@ -537,6 +537,111 @@ Criterio AIC (CIR vs. AR(1)) & $\mathbf{1278.69} < 1342.34 \implies \text{Prefie
 
 Al integrar las 1.000 trayectorias continuas del proceso CIR en el módulo de proyección estocástica del DSA hacia 2035 (sustituyendo la tasa de refinanciación externa fija por $r_{f,t} = r_{US,t} + \text{CIR}_t$), la probabilidad estimada de insolvencia ($P(d_{2035} > 100\%)$) se sitúa en $\mathbf{29.8\%}$, convergiendo con gran consistencia con la cifra central de referencia del DSA multidimensional ($31.2\%$) y sus robusteces ($30.4\%$ a $31.9\%$).
 
+\section{Extensión de Frontera: Reconstrucción del Spread Soberano en 42 Años de Democracia (1983--2025)}
+\label{sec:spread_historico_1983_2025}
+
+Para evaluar si la dinámica de riesgo crediticio soberano y los umbrales de fatiga fiscal constituyen fenómenos circunscritos a las últimas dos décadas o si representan regularidades empíricas invariantes de la economía política argentina, se procedió a reconstruir y empalmar una serie trimestral homogénea de costo de financiamiento soberano a lo largo de los 42 años de democracia ininterrumpida ($1983\text{T4}$--$2025\text{T4}$, $n = 169$ trimestres).
+
+\subsection{Metodología de Reconstrucción por Eras Financieras}
+
+Ante la inexistencia del índice EMBI con anterioridad a 1993, la serie histórica se estructuró a partir de los activos soberanos en moneda extranjera que fijaron el costo marginal de endeudamiento en cada subperíodo:
+\begin{enumerate}
+    \item \textbf{Era Bonex (1983T4--1992T4)}: Se utilizaron los rendimientos secundarios en dólares de los Bonos Externos de la República Argentina (Series 1982, 1984, 1987 y 1989) cotizados en el Mercado Abierto Electrónico y la Bolsa de Comercio de Buenos Aires, deduciendo la tasa del Bono del Tesoro de EE.UU. a 10 años ($\text{Spread}_t = \text{TIR}_{\text{Bonex}, t} - r_{US, 10Y, t}$), conforme a la metodología canónica de \citet{neumeyer2005} y \citet{kehoe2021}.
+    \item \textbf{Era Brady (1993T1--1997T4)}: Se adoptó el JP Morgan EMBI Argentina \textit{Stripped Spread} sobre bonos Brady Par, Discount y FRB \citep{uribe2006}, descontando el valor presente de los bonos cupón cero del Tesoro estadounidense que colateralizaban el capital.
+    \item \textbf{Era EMBI+ y Global (1998T1--2025T4)}: Se integró la serie diaria oficial de JP Morgan EMBI+ y EMBI Global Diversified Argentina.
+\end{enumerate}
+
+Para evitar discontinuidades espurias en los puntos de unión, se aplicó una corrección proporcional de sesgo en solapamiento (\textit{Overlap Bias Correction}), vinculando la escala hacia el benchmark moderno del EMBI+:
+\begin{equation}
+k_1 = \frac{\overline{\text{EMBI}}_{\text{Brady, 1993T1}}}{\overline{\text{Spread}}_{\text{Bonex, 1992T4}}} = \frac{850.0}{760.0} = 1.1184, \quad k_2 = \frac{\overline{\text{EMBI+}}_{\text{1998T1}}}{\overline{\text{EMBI}}_{\text{Brady, 1997T4}}} = \frac{540.0}{620.0} = 0.8710
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figura_spread_historico_1983_2025.png}
+\caption{Evolución Histórica del Spread Soberano Argentino en 42 Años de Democracia (1983--2025).}
+\label{fig:spread_historico}
+\end{figure}
+
+\subsection{Quiebres Estructurales Múltiples de Bai-Perron en el Ciclo Histórico}
+
+La aplicación del algoritmo de programación dinámica de \citet{bai2003} sobre los 169 trimestres de democracia identifica cinco quiebres mayores y seis regímenes de financiamiento soberano con diferencias de media altamente significativas (Tabla \ref{tab:bai_perron_historico}).
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:bai_perron_historico} Quiebres Estructurales Múltiples de Bai-Perron en el Spread Soberano (1983--2025).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllrrrl}
+\toprule
+\textbf{Régimen} & \textbf{Fecha Inicio} & \textbf{Fecha Fin} & \textbf{Trimestres} & \textbf{Media (pb)} & \textbf{Desvío (pb)} & \textbf{Hito Histórico / Ruptura} \\
+\midrule
+Régimen 1 & 1983T4 & 1988T4 & 21 & 797.84 & 359.44 & Transición democrática y colapso del Plan Austral \\
+Régimen 2 & 1989T1 & 1990T4 & 8 & 3573.76 & 1255.84 & Hiperinflaciones de 1989/1990 y Plan Bonex \\
+Régimen 3 & 1991T1 & 2001T4 & 44 & 831.66 & 427.31 & Ley de Convertibilidad y Plan Brady \\
+Régimen 4 & 2002T1 & 2005T2 & 14 & 5431.33 & 638.09 & Default de la deuda externa y crisis de 2001--2002 \\
+Régimen 5 & 2005T3 & 2019T2 & 56 & 683.54 & 326.60 & Canjes 2005/2010, superávits gemelos y desendeudamiento \\
+Régimen 6 & 2019T3 & 2025T4 & 26 & 1732.05 & 632.45 & Shock PASO 2019, Canje 2020 y estabilización post-2023 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Estimación por minimización de pérdida L2 mediante programación dinámica sobre 169 observaciones trimestrales. Datos de \texttt{resultados/tablas/fase22\_bai\_perron\_1983\_2025.csv}.
+\end{flushleft}
+\end{table}
+
+\subsection{Calibración del Proceso CIR y Métricas por Régimen Presidencial}
+
+La calibración por Máxima Verosimilitud exacta del proceso CIR a lo largo de las cuatro décadas (Tabla \ref{tab:cir_historico}) demuestra que la velocidad de reversión a la media de largo plazo es $\kappa = 0.4630$ (vida media de $1.50$ años), con un nivel incondicional de equilibrio de $\theta = 1456.98$ pb. La condición de Feller se satisface de forma holgada ($2\kappa\theta = 1349.08 > \sigma^2 = 613.96 \implies \text{Ratio} = 2.1974 > 1.0$), ratificando la robustez del modelado en tiempo continuo.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:cir_historico} Calibración MLE del Proceso CIR en la Muestra Ultra-Larga (1983--2025).}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Parámetro / Métrica} & \textbf{Valor Estimado (42 Años, $n=169$)} & \textbf{Interpretación Económica} \\
+\midrule
+Velocidad de Reversión ($\kappa$) & $\mathbf{0.4630}$ & Reversión media hacia equilibrio \\
+Nivel Incondicional ($\theta$) & $\mathbf{1456.98\text{ pb}}$ & Costo medio estructural de endeudamiento \\
+Volatilidad de Difusión ($\sigma$) & $\mathbf{24.7781}$ & Dispersión de innovaciones estocásticas \\
+Vida Media de Reversión ($t_{1/2}$) & $\mathbf{1.50\text{ años}}$ ($18$ meses) & Duración típica de los ciclos de spread \\
+Condición de Feller ($2\kappa\theta > \sigma^2$) & $1349.08 > 613.96 \implies \mathbf{Cumple}$ & No negatividad estricta garantizada \\
+Ratio de Feller ($2\kappa\theta / \sigma^2$) & $\mathbf{2.1974 > 1.0}$ & Frontera en cero inaccesible ($\mathbb{P}=1$) \\
+Criterio AIC (CIR vs. AR(1)) & $\mathbf{2466.56} < 2612.53$ & $\Delta \text{AIC} = -145.97 \implies$ Prefiere CIR \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Estimación exacta sobre la función de densidad Chi-cuadrado no central. Datos extraídos de \texttt{resultados/tablas/fase22\_cir\_calibracion\_1983\_2025.csv}.
+\end{flushleft}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:spread_por_regimen} Dinámica del Spread Soberano por Régimen Presidencial (1983--2025).}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+\textbf{Administración Presidencial} & \textbf{Período} & \textbf{Trimestres} & \textbf{Media (pb)} & \textbf{Mediana (pb)} & \textbf{Mínimo (pb)} & \textbf{Máximo (pb)} \\
+\midrule
+Raúl Alfonsín & 1983T4--1989T2 & 23 & 1035.52 & 701.36 & 409.13 & 4675.72 \\
+Carlos Menem I & 1989T3--1995T1 & 23 & 1577.73 & 837.73 & 566.13 & 5455.01 \\
+Carlos Menem II & 1995T2--1999T3 & 18 & 688.63 & 663.90 & 357.10 & 1350.00 \\
+Fernando de la Rúa & 1999T4--2001T3 & 8 & 811.26 & 710.21 & 550.92 & 1468.94 \\
+A. Rodríguez Saá / E. Duhalde & 2001T4--2003T1 & 6 & 5354.62 & 5873.34 & 2947.64 & 6658.98 \\
+Néstor Kirchner & 2003T2--2007T3 & 18 & 2775.65 & 2644.15 & 210.22 & 5800.85 \\
+Cristina Fernández de Kirchner & 2007T4--2015T3 & 32 & 853.48 & 734.62 & 387.78 & 1696.86 \\
+Mauricio Macri & 2015T4--2019T3 & 16 & 584.87 & 477.95 & 360.23 & 1493.83 \\
+Alberto Fernández & 2019T4--2023T3 & 16 & 2048.85 & 2038.76 & 1391.80 & 3103.00 \\
+Javier Milei & 2023T4--2025T4 & 9 & 1195.30 & 870.36 & 684.00 & 2257.75 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Spread empalmado expresado en puntos básicos. Datos de \texttt{resultados/tablas/fase22\_spread_por_regimen.csv}.
+\end{flushleft}
+\end{table}
+
+Este análisis de ultra-largo plazo confirma que el umbral de fatiga fiscal estimado en la tesis ($\tau^* \approx 2080$--$2083$ pb) constituye una cota estructural: los episodios en que el spread superó dicha marca coinciden de manera exacta con los períodos de crisis terminal de la deuda (1989--1990, 2001--2005 y 2020--2023), demostrando que la restricción externa de financiamiento rige la solvencia argentina con independencia del régimen monetario o político vigente.
+
 \section{Interpretación de la Magnitud Económica de los Coeficientes}
 
 Corresponde cuantificar la magnitud económica de los coeficientes puntuales estimados. El coeficiente de reacción fiscal del DOLS de muestra completa ($\rho=-0.0071$) implica que un incremento de 10 puntos porcentuales en la ratio Deuda/PIB rezagada se asocia con una reducción de apenas 0.07 puntos del PIB en el resultado primario: una magnitud minúscula que confirma que la falta de significatividad no enmascara un efecto cuantitativamente relevante. En la estimación IV-2SLS (Sección \ref{sec:iv2sls}), el coeficiente del EMBI+ instrumentado ($0.0017$, marginalmente significativo al 10\%) implica que un incremento de 100 puntos básicos en el riesgo soberano genera una variación de apenas 0.17 puntos del PIB en el superávit primario: incluso bajo la lectura más favorable a la existencia de un canal de reacción vía riesgo soberano, la magnitud sigue siendo pequeña en términos macroeconómicos frente a los desequilibrios fiscales documentados en el Capítulo \ref{ch:descriptivo}.

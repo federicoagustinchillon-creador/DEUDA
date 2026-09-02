@@ -521,6 +521,42 @@ Duffie, D., \& Kan, R. (1996). A yield-factor model of interest rates. \textit{M
 
 ---
 
+\subsection{Reconstrucción del Spread Soberano Histórico (1983--2025: 42 Años de Democracia)}
+
+\subsubsection{1. ¿Para qué sirve?}
+Permite extender la serie trimestral del costo de financiamiento externo hacia el momento mismo de la recuperación democrática ($1983\text{T4}$--$2025\text{T4}$, $n = 169$ trimestres), evaluando la persistencia estructural del riesgo país y contrastando si la fatiga fiscal es un rasgo transitorio o una constante de cuatro décadas.
+
+\subsubsection{2. ¿De dónde sale? (Referencia APA 7)}
+\begin{mdframed}[style=apabox]
+Neumeyer, P. A., \& Perri, F. (2005). Business cycles in emerging economies: The role of interest rates. \textit{Journal of Monetary Economics}, 52(2), 345--380. \url{https://doi.org/10.1016/j.jmoneco.2004.04.011}\\
+Uribe, M., \& Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? \textit{Journal of International Economics}, 69(1), 6--36. \url{https://doi.org/10.1016/j.jinteco.2005.04.003}\\
+Kehoe, T. J., \& Nicolini, J. P. (2021). \textit{A Monetary and Fiscal History of Latin America, 1960--2017}. University of Minnesota Press. \url{https://doi.org/10.5749/9781452965642}
+\end{mdframed}
+
+\subsubsection{3. Metodología de Empalme por Eras Financieras}
+\begin{itemize}
+    \item **1983T4--1992T4 (Era Bonex)**: $\text{Spread}_t = \text{TIR}_{\text{Bonex}, t} - r_{US, 10Y, t}$ sobre Bonex Series 1982, 1984, 1987 y 1989.
+    \item **1993T1--1997T4 (Era Brady)**: JP Morgan EMBI Argentina Stripped Spread sobre bonos Par y Discount (libre de colateral de EE.UU.).
+    \item **1998T1--2025T4 (Era EMBI+)**: Serie oficial JP Morgan EMBI+ / Global Diversified.
+    \item **Overlap Bias Correction**: Factores multiplicativos $k_1 = 1.1184$ (en 1993T1) y $k_2 = 0.8710$ (en 1998T1).
+\end{itemize}
+
+\subsubsection{4. Resultados Clave Auditados (42 Años)}
+\begin{itemize}
+    \item **Media y Rango**: Media histórica de $1427.74\text{ pb}$, con mínimo histórico en 2007T1 ($210.22\text{ pb}$) y máximo durante el default en 2002T3 ($6658.98\text{ pb}$).
+    \item **Quiebres Bai-Perron**: Detecta 5 quiebres mayores: 1988T4 (colapso Plan Austral), 1990T4 (fin hiperinflación/Plan Bonex), 2001T4 (default Convertibilidad), 2005T2 (canje de deuda) y 2019T2 (crisis Macri/FMI).
+    \item **Calibración CIR 1983--2025**: $\kappa = 0.4630$, $\theta = 1456.98\text{ pb}$, $\sigma = 24.7781$, Condición de Feller verificada ($2.1974 > 1.0$), $t_{1/2} = 1.50\text{ años}$.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figuras/figura_spread_historico_1983_2025.png}
+\caption{Evolución Histórica del Spread Soberano Argentino en 42 Años de Democracia (1983--2025).}
+\label{fig:guia_spread_historico}
+\end{figure}
+
+---
+
 \section{Guion Estratégico de Respuestas para el Examen / Reunión}
 
 \begin{mdframed}[style=infobox]
