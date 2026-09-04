@@ -121,30 +121,15 @@ def main():
     ax.fill_between(df.index, df["deuda_pib"], df["deuda_consolidada_pib"],
                     color="#8B1E1E", alpha=0.12, label="Brecha cuasi-fiscal (pasivos remunerados BCRA)")
     
-    # Leyenda ubicada en zona despejada de baja deuda (2007-2015)
     ax.legend(frameon=True, facecolor="white", edgecolor="#E2E8F0", fontsize=8.8,
-              loc="upper left", bbox_to_anchor=(0.15, 0.95))
+              loc="upper left")
 
-    # Anotación directa del pico histórico de COVID (2020-T4)
-    p2020 = df.loc["2020-09-30":"2020-12-31"]
-    if not p2020.empty:
-        max_idx = p2020["deuda_consolidada_pib"].idxmax()
-        val_spnf = df.loc[max_idx, "deuda_pib"]
-        val_cons = df.loc[max_idx, "deuda_consolidada_pib"]
-        ax.annotate(f"Pico COVID (2020-T4)\nSPNF: {val_spnf:.1f}% | Consolidada: {val_cons:.1f}%\nBrecha: {val_cons - val_spnf:.1f} p.p. del PIB",
-                    xy=(max_idx, val_cons), xytext=(pd.to_datetime("2021-08-01"), 115),
-                    arrowprops=dict(arrowstyle="->", color="#2D3748", lw=0.7),
-                    fontsize=8.5, fontfamily='serif',
-                    bbox=dict(boxstyle="square,pad=0.4", facecolor="white", edgecolor="#CBD5E1", alpha=0.95))
-
-    ax.set_title("Deuda Pública Argentina: SPNF vs. Deuda Consolidada con Pasivos del BCRA (2004–2025)",
-                 fontsize=11.5, fontfamily='serif', pad=12)
     ax.set_xlabel("Trimestre", fontsize=10, fontfamily='serif')
     ax.set_ylabel("% del PIB", fontsize=10, fontfamily='serif')
     ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0")
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_ylim(35, 125)
+    ax.set_ylim(30, 125)
 
     plt.tight_layout()
     out_fig = LATEX_DIR / "figura_8_1_deuda_consolidada.png"

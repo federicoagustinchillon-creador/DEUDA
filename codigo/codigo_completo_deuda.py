@@ -2235,22 +2235,35 @@ def main():
     os.makedirs(tables_dir, exist_ok=True)
     df_det.to_csv(os.path.join(tables_dir, 'fase6_dsa_determinista.csv'), index=False)
     
-    # Gráfico Determinista
-    plt.figure(figsize=(10, 6))
-    plt.plot(years, d_opt * 100, label='Optimista (Superávit 2.5%, Crecimiento 4.5%)', color='green', marker='o')
-    plt.plot(years, d_ref * 100, label='Referencia (Superávit 1.5%, Crecimiento 3.5%)', color='blue', marker='s')
-    plt.plot(years, d_est * 100, label='Estrés (Contracción, Shock Cambiario)', color='red', marker='^')
-    plt.axhline(100, color='black', linestyle='--', alpha=0.5, label='Frontera Crítica (100%)')
-    plt.title('DSA Determinista: Deuda Pública Consolidada Neta (% PIB)')
-    plt.xlabel('Año')
-    plt.ylabel('% PIB')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
+    # ------------------------------------------------------------------
+    # 1. DSA DETERMINISTA (UN SOLO PANEL ACADÉMICO AUSTERO)
+    # ------------------------------------------------------------------
+    fig, ax = plt.subplots(figsize=(9.0, 5.5))
+
+    col_opt = "#1E6B38"  # Verde bosque académico
+    col_ref = "#1B365D"  # Deep Navy institucional
+    col_est = "#8B1E1E"  # Carmesí académico
+
+    ax.plot(years, d_opt * 100, label=r'Optimista ($pb=2.5\%$, $g=4.5\%$)',
+            color=col_opt, marker='o', markersize=4.5, linewidth=2.0)
+    ax.plot(years, d_ref * 100, label=r'Referencia ($pb=1.5\%$, $g=3.5\%$)',
+            color=col_ref, marker='s', markersize=4.5, linewidth=2.0)
+    ax.plot(years, d_est * 100, label=r'Estrés (Contracción, Shock Cambiario)',
+            color=col_est, marker='^', markersize=4.5, linewidth=2.0)
+    ax.axhline(100, color='#64748B', linestyle='--', linewidth=1.2, alpha=0.85, label='Frontera Crítica (100% PIB)')
+
+    ax.set_xlabel('Año de Proyección', fontsize=10)
+    ax.set_ylabel('Deuda Pública Consolidada Neta (% PIB)', fontsize=10)
+    ax.set_xlim(years[0] - 0.2, years[-1] + 0.2)
+    ax.legend(loc='upper left', frameon=False, fontsize=8.8)
+    ax.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
+
+    fig.tight_layout()
     plt.savefig(os.path.join(output_dir, 'dsa_determinista.png'), dpi=300, bbox_inches='tight')
     plt.close()
     
     # ------------------------------------------------------------------
-    # 2. DSA ESTOCÁSTICO (GRÁFICO DE ABANICO)
+    # 2. DSA ESTOCÁSTICO (GRÁFICO DE ABANICO CLÁSICO FMI / BOE)
     # ------------------------------------------------------------------
     print("\n[2/2] Ejecutando DSA Estocástico (Monte Carlo - 1000 simulaciones)...")
 
@@ -2267,22 +2280,29 @@ def main():
     p75 = np.percentile(d_paths, 75, axis=0) * 100
     p90 = np.percentile(d_paths, 90, axis=0) * 100
     
-    # Gráfico de abanico
-    plt.figure(figsize=(10, 6))
-    
-    # Rellenar áreas
-    plt.fill_between(years, p10, p90, color='blue', alpha=0.1, label='Intervalo 10-90%')
-    plt.fill_between(years, p25, p75, color='blue', alpha=0.3, label='Intervalo 25-75%')
-    
+    fig, ax = plt.subplots(figsize=(9.0, 5.5))
+    NAVY = "#1B365D"
+    CRIMSON = "#8B1E1E"
+
+    # Rellenar áreas de abanico con degradé académico
+    ax.fill_between(years, p10, p90, color=NAVY, alpha=0.12, label='Intervalo 10%–90%')
+    ax.fill_between(years, p25, p75, color=NAVY, alpha=0.25, label='Intervalo 25%–75%')
+
     # Mediana y frontera
-    plt.plot(years, p50, color='darkblue', linewidth=2, label='Mediana (Proyección Base)')
-    plt.axhline(100, color='red', linestyle='--', alpha=0.7, label='Frontera Crítica (100%)')
-    
-    plt.title('DSA Estocástico (Gráfico de Abanico): Riesgo de Sostenibilidad (2026-2035)')
-    plt.xlabel('Año')
-    plt.ylabel('% PIB')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
+    ax.plot(years, p50, color=NAVY, linewidth=2.4, label=f'Mediana Base ({p50[-1]:.1f}% en 2035)')
+    ax.axhline(100, color=CRIMSON, linestyle='--', linewidth=1.5, label='Frontera Crítica (100% PIB)')
+
+    # Marcador final de mediana
+    ax.scatter([years[-1]], [p50[-1]], color=NAVY, s=35, zorder=5)
+
+    ax.set_xlabel('Año de Proyección', fontsize=10)
+    ax.set_ylabel('Deuda Pública Consolidada Neta (% PIB)', fontsize=10)
+    ax.legend(loc='upper left', frameon=False, fontsize=9.0)
+    ax.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
+    ax.set_xlim(years[0], years[-1])
+    ax.set_ylim(35, 145)
+
+    fig.tight_layout()
     plt.savefig(os.path.join(output_dir, 'dsa_grafico_abanico.png'), dpi=300, bbox_inches='tight')
     plt.close()
     
@@ -2849,30 +2869,15 @@ def main():
     ax.fill_between(df.index, df["deuda_pib"], df["deuda_consolidada_pib"],
                     color="#8B1E1E", alpha=0.12, label="Brecha cuasi-fiscal (pasivos remunerados BCRA)")
     
-    # Leyenda ubicada en zona despejada de baja deuda (2007-2015)
     ax.legend(frameon=True, facecolor="white", edgecolor="#E2E8F0", fontsize=8.8,
-              loc="upper left", bbox_to_anchor=(0.15, 0.95))
+              loc="upper left")
 
-    # Anotación directa del pico histórico de COVID (2020-T4)
-    p2020 = df.loc["2020-09-30":"2020-12-31"]
-    if not p2020.empty:
-        max_idx = p2020["deuda_consolidada_pib"].idxmax()
-        val_spnf = df.loc[max_idx, "deuda_pib"]
-        val_cons = df.loc[max_idx, "deuda_consolidada_pib"]
-        ax.annotate(f"Pico COVID (2020-T4)\nSPNF: {val_spnf:.1f}% | Consolidada: {val_cons:.1f}%\nBrecha: {val_cons - val_spnf:.1f} p.p. del PIB",
-                    xy=(max_idx, val_cons), xytext=(pd.to_datetime("2021-08-01"), 115),
-                    arrowprops=dict(arrowstyle="->", color="#2D3748", lw=0.7),
-                    fontsize=8.5, fontfamily='serif',
-                    bbox=dict(boxstyle="square,pad=0.4", facecolor="white", edgecolor="#CBD5E1", alpha=0.95))
-
-    ax.set_title("Deuda Pública Argentina: SPNF vs. Deuda Consolidada con Pasivos del BCRA (2004–2025)",
-                 fontsize=11.5, fontfamily='serif', pad=12)
     ax.set_xlabel("Trimestre", fontsize=10, fontfamily='serif')
     ax.set_ylabel("% del PIB", fontsize=10, fontfamily='serif')
     ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0")
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_ylim(35, 125)
+    ax.set_ylim(30, 125)
 
     plt.tight_layout()
     out_fig = LATEX_DIR / "figura_8_1_deuda_consolidada.png"
@@ -3138,27 +3143,44 @@ def main():
     result_cons["medias_segmento"].assign(serie="deuda_consolidada_pib").to_csv(
         TABLES_DIR / "fase9_bai_perron_segmentos_deuda_consolidada.csv", index=False)
 
-    # --- Gráfico ---
-    fig, ax = plt.subplots(figsize=(11, 6))
-    ax.plot(df.index, df["deuda_pib"], color="#0B3C5D", linewidth=1.6, label="Deuda SPNF / PIB")
-    ax.plot(df.index, df["deuda_consolidada_pib"], color="#B33951", linewidth=1.6,
-            linestyle="--", label="Deuda Consolidada SPNF + BCRA / PIB")
+    # --- Gráfico en Panel Único (SPNF vs Consolidada) ---
+    fig, ax = plt.subplots(figsize=(10.5, 5.2), dpi=300)
+    NAVY = "#1B365D"
+    CRIMSON = "#8B1E1E"
 
+    ax.plot(df.index, df["deuda_pib"], color=NAVY, linewidth=2.0, label="Deuda SPNF / PIB")
+    ax.plot(df.index, df["deuda_consolidada_pib"], color=CRIMSON, linewidth=2.0,
+            linestyle="--", label="Deuda consolidada (SPNF + Pasivos BCRA) / PIB")
+
+    # Medias de segmento
     for seg in result_spnf["medias_segmento"].itertuples():
-        ax.hlines(seg.media, seg.inicio, seg.fin, color="#0B3C5D", linewidth=3, alpha=0.35)
+        ax.hlines(seg.media, seg.inicio, seg.fin, color=NAVY, linewidth=2.8, alpha=0.45)
+    for seg in result_cons["medias_segmento"].itertuples():
+        ax.hlines(seg.media, seg.inicio, seg.fin, color=CRIMSON, linewidth=2.2, alpha=0.45, linestyle=":")
+
+    y_max = max(df["deuda_pib"].max(), df["deuda_consolidada_pib"].max()) * 1.12
+    ax.set_ylim(20, y_max)
+
+    # Fechas de quiebre discretas
     for d in result_spnf["fechas_quiebre"]:
-        ax.axvline(d, color="#0B3C5D", linestyle=":", alpha=0.6)
-        ax.text(d, ax.get_ylim()[1] * 0.97, pd.Timestamp(d).strftime("%Y-%m"),
-                rotation=90, fontsize=8, color="#0B3C5D", va="top", ha="right")
+        ts = pd.Timestamp(d)
+        q_label = f"SPNF: {ts.year}-T{ts.quarter}"
+        ax.axvline(d, color=NAVY, linestyle=":", alpha=0.7, linewidth=1.2)
+        ax.text(d, y_max * 0.94, q_label, rotation=90, fontsize=8, color=NAVY,
+                va="top", ha="right", style="italic")
 
     for d in result_cons["fechas_quiebre"]:
-        ax.axvline(d, color="#B33951", linestyle=":", alpha=0.4)
+        ts = pd.Timestamp(d)
+        q_label = f"Consolidada: {ts.year}-T{ts.quarter}"
+        ax.axvline(d, color=CRIMSON, linestyle="-.", alpha=0.6, linewidth=1.1)
+        ax.text(d, y_max * 0.78, q_label, rotation=90, fontsize=8, color=CRIMSON,
+                va="top", ha="left", style="italic")
 
-    ax.set_title("Quiebres Estructurales Múltiples de Bai-Perron (selección por BIC)")
-    ax.set_xlabel("Trimestre")
-    ax.set_ylabel("% del PIB")
-    ax.legend(fontsize=9, loc="upper left")
-    ax.grid(True, alpha=0.3)
+    ax.set_xlabel("Trimestre", fontsize=10)
+    ax.set_ylabel("% del PIB", fontsize=10)
+    ax.legend(fontsize=8.5, loc="upper right", frameon=True, facecolor="white", edgecolor="#E2E8F0")
+    ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0", axis="y")
+
     fig.tight_layout()
     out_path = LATEX_DIR / "figura_9_1_bai_perron.png"
     fig.savefig(out_path, dpi=300)
@@ -3443,16 +3465,44 @@ def main():
 
     pd.DataFrame(rows).to_csv(TABLES_DIR / "fase10_dcc_garch_comparacion_dsa.csv", index=False)
 
-    # --- Gráfico: correlación dinámica en el tiempo ---
-    fig, ax = plt.subplots(figsize=(10, 5))
-    for i, j, name in pairs:
-        ax.plot(shocks.index, R_path[:, i, j], label=f"$\\rho$({name})", linewidth=1.4)
-    ax.axhline(0, color="black", linewidth=0.6)
-    ax.set_title(f"Correlación Condicional Dinámica DCC(1,1) — a={a:.3f}, b={b:.3f}")
-    ax.set_xlabel("Trimestre")
-    ax.set_ylabel("Correlación condicional")
-    ax.legend(fontsize=9)
-    ax.grid(True, alpha=0.3)
+    # --- Gráfico: 3 Paneles Sincronizados (Small Multiples) ---
+    fig, axes = plt.subplots(3, 1, figsize=(11.5, 8.2), sharex=True, gridspec_kw={'hspace': 0.26})
+    NAVY = "#1B365D"
+    CRIMSON = "#8B1E1E"
+
+    pair_metadata = [
+        ("pb-g", r"(a) Superávit Primario ($pb$) vs. Crecimiento del PIB ($g$)", 0, 1),
+        ("pb-delta_e", r"(b) Superávit Primario ($pb$) vs. Depreciación Real ($\Delta e$)", 0, 2),
+        ("g-delta_e", r"(c) Crecimiento del PIB ($g$) vs. Depreciación Real ($\Delta e$)", 1, 2)
+    ]
+
+    for idx, (p_code, p_title, i, j) in enumerate(pair_metadata):
+        ax = axes[idx]
+        dcc_val = R_path[0, i, j]
+        s_i = shocks.iloc[:, i]
+        s_j = shocks.iloc[:, j]
+        rolling_corr = s_i.rolling(window=8, min_periods=4).corr(s_j)
+
+        # Línea horizontal neutral
+        ax.axhline(0, color="#94A3B8", linewidth=0.8, linestyle=":")
+
+        # Correlación móvil empírica (ventana de 8 trimestres)
+        ax.plot(shocks.index, rolling_corr, color=CRIMSON, linestyle="-", linewidth=1.3, alpha=0.85,
+                label=r"Correlación móvil empírica (8 trimestres)")
+        ax.fill_between(shocks.index, 0, rolling_corr, color=CRIMSON, alpha=0.06)
+
+        # Nivel constante DCC (colapso a CCC)
+        ax.axhline(dcc_val, color=NAVY, linewidth=2.0,
+                   label=rf"DCC / CCC constante: $\rho = {dcc_val:.3f}$")
+
+        ax.set_title(p_title, fontsize=10, fontweight='bold', loc='left', color='#0F172A', pad=5)
+        ax.set_ylabel(r"$\rho_{ij,t}$", fontsize=9.5, fontweight='bold')
+        ax.set_ylim(-0.85, 0.85)
+        ax.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
+        ax.legend(loc="lower right", frameon=False, fontsize=8.5, ncol=2)
+
+    axes[-1].set_xlabel("Trimestre", fontsize=10, fontweight='bold')
+
     fig.tight_layout()
     out_path = LATEX_DIR / "figura_10_1_dcc_correlacion_dinamica.png"
     fig.savefig(out_path, dpi=300)
@@ -4096,10 +4146,10 @@ plt.rcParams.update({
     "legend.frameon": False,
 })
 
-NAVY = "#0B3D66"      # Deuda / series principal de solvencia
-GREY_RED = "#B04A4A"  # Resultado primario / series de contraste
-TEAL = "#1C7C74"      # Elementos auxiliares (línea de ajuste, referencia)
-LIGHT_GREY = "#8c8c8c"
+NAVY = "#1B365D"       # Deuda / series principal de solvencia
+CRIMSON = "#8B1E1E"    # Resultado primario / series de contraste
+SLATE = "#334155"      # Puntos de dispersión / anotaciones discretas
+LIGHT_GREY = "#CBD5E1" # Líneas de corte de regímenes
 
 current_file_path = os.path.abspath(__file__)
 cur_dir = os.path.dirname(current_file_path)
@@ -4130,48 +4180,59 @@ def load_data():
 
 
 def fig_5_1_deuda_resultado_primario(df):
-    """Figura 5.1 (rediseñada): Deuda/PIB vs Resultado Primario, ejes duales,
-    con líneas verticales delimitando los cuatro regímenes macrofiscales."""
-    annual = df.groupby("year").agg(deuda_pib=("deuda_pib", "mean"),
-                                     pb_pib=("pb_pib", "mean")).reset_index()
+    """Figura 5.1 (estándar académico AER / Econometrica / FMI):
+    Ejes duales (twinx) unificados (Deuda Consolidada eje izq., Resultado Primario eje der.),
+    con marcadores discretos para promedios anuales, delimitación sutil de regímenes
+    y leyenda inferior centrada. Coincide exactamente con el texto de 05_datos.tex."""
+    annual = df.groupby("year").agg(
+        deuda_pib=("deuda_pib", "mean"),
+        pb_pib=("pb_pib", "mean")
+    ).reset_index()
 
-    fig, ax1 = plt.subplots(figsize=(10, 6))
+    fig, ax1 = plt.subplots(figsize=(10, 5.5))
     ax2 = ax1.twinx()
 
-    ax1.plot(annual["year"], annual["deuda_pib"], color=NAVY, marker="o",
-              markersize=5, linewidth=2.2, label="Deuda Pública Consolidada / PIB (%)")
-    ax2.plot(annual["year"], annual["pb_pib"], color=GREY_RED, marker="s",
-              markersize=5, linewidth=1.8, linestyle="--",
-              label="Resultado Primario / PIB (%)")
+    # Serie 1: Deuda Consolidada (Eje Izquierdo)
+    l1 = ax1.plot(annual["year"], annual["deuda_pib"], color=NAVY, linewidth=2.0,
+                  marker="o", markersize=5, label="Deuda Pública Consolidada / PIB (%)")
+    ax1.set_ylabel("Deuda Pública Consolidada / PIB (%)", color=NAVY, fontsize=10)
+    ax1.tick_params(axis="y", labelcolor=NAVY)
+    ax1.set_ylim(35, 115)
+    ax1.set_xlabel("Año", fontsize=10)
 
-    ax1.set_xlabel("Año")
-    ax1.set_ylabel("Deuda Pública Consolidada / PIB (%)", color=NAVY, fontweight="bold")
-    ax2.set_ylabel("Resultado Primario / PIB (%)", color=GREY_RED, fontweight="bold")
-    ax1.tick_params(axis="y", colors=NAVY)
-    ax2.tick_params(axis="y", colors=GREY_RED)
-    ax2.grid(False)
+    # Serie 2: Resultado Primario (Eje Derecho)
+    l2 = ax2.plot(annual["year"], annual["pb_pib"], color=CRIMSON, linewidth=2.0,
+                  linestyle="--", marker="s", markersize=5, label="Resultado Primario / PIB (%)")
+    ax2.axhline(0, color="#718096", linewidth=0.8, linestyle=":")
+    ax2.set_ylabel("Resultado Primario / PIB (%)", color=CRIMSON, fontsize=10)
+    ax2.tick_params(axis="y", labelcolor=CRIMSON)
+    ax2.set_ylim(-3.5, 2.0)
 
-    # Regímenes: líneas verticales punteadas en los límites + sombreado alterno
-    for boundary in REGIME_BOUNDARIES[1:-1]:
-        ax1.axvline(boundary - 0.5, color=LIGHT_GREY, linestyle=":", linewidth=1.3, zorder=1)
-
-    shade_colors = ["#eef2f7", "#ffffff", "#eef2f7", "#ffffff"]
-    ymin, ymax = ax1.get_ylim()
-    for i in range(len(REGIME_BOUNDARIES) - 1):
-        start, end = REGIME_BOUNDARIES[i] - 0.5, REGIME_BOUNDARIES[i + 1] - 0.5
-        ax1.axvspan(start, end, color=shade_colors[i], zorder=0, alpha=0.6)
+    # Regímenes macrofiscales con delimitación sutil
+    regime_info = [
+        (2004, 2011, "2004–2011\nDescompresión"),
+        (2011, 2017, "2012–2017\nDeterioro gradual"),
+        (2017, 2020.5, "2018–2020\nCrisis y FMI"),
+        (2020.5, 2025, "2021–2025\nConsolidación"),
+    ]
+    for start, end, label in regime_info:
         mid = (start + end) / 2
-        ax1.text(mid, ymax - (ymax - ymin) * 0.04, REGIME_LABELS[i],
-                  ha="center", va="top", fontsize=8.5, color="#333333")
-    ax1.set_ylim(ymin, ymax)
-    ax1.set_xlim(REGIME_BOUNDARIES[0] - 0.5, REGIME_BOUNDARIES[-1] - 1.5)
+        ax1.text(mid, 112, label, ha="center", va="top", fontsize=8, color="#4A5568")
 
-    lines1, labels1 = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax1.legend(lines1 + lines2, labels1 + labels2, loc="upper center",
-               bbox_to_anchor=(0.5, -0.12), ncol=2)
+    for boundary in [2011.5, 2017.5, 2020.5]:
+        ax1.axvline(boundary, color=LIGHT_GREY, linestyle=":", linewidth=1.0, zorder=1)
 
-    ax1.set_title("Dinámica Macrofiscal Agregada: Deuda Consolidada y Resultado Primario (2004-2025)")
+    ax1.set_xlim(2003.5, 2025.5)
+    ax1.xaxis.set_major_locator(mticker.MultipleLocator(2))
+    ax1.xaxis.set_major_formatter(mticker.FormatStrFormatter('%d'))
+    ax1.grid(True, axis="y", alpha=0.3)
+
+    # Leyenda combinada al pie
+    lines = l1 + l2
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc="upper center", bbox_to_anchor=(0.5, -0.12),
+               ncol=2, frameon=False, fontsize=9)
+
     fig.tight_layout()
     out_path = os.path.join(OUTPUT_DIR, "fig5_1_deuda_resultado_primario.png")
     fig.savefig(out_path, bbox_inches="tight")
@@ -4180,22 +4241,31 @@ def fig_5_1_deuda_resultado_primario(df):
 
 
 def fig_5_3_dispersion_fatiga_fiscal(df):
-    """Figura 5.3 (rediseñada): dispersión completa (d_{t-1}, pb_t) con ajuste
-    polinómico de segundo grado e intervalo de confianza sombreado (95%)."""
+    """Figura 5.3 (estándar académico): Dispersión empírica (d_{t-1}, pb_t) con ajuste
+    polinómico cuadrático e intervalo de confianza del 95% sombreado, sin inferencia espuria
+    de umbrales ni fórmulas decorativas en el canvas (fiel a 05_datos.tex)."""
     d = df.copy()
     d["d_lag1"] = d["deuda_pib"].shift(1)
     d = d.dropna(subset=["d_lag1", "pb_pib"])
 
-    fig, ax = plt.subplots(figsize=(9, 6.5))
-    sns.regplot(
-        x="d_lag1", y="pb_pib", data=d, order=2, ci=95, ax=ax,
-        scatter_kws={"color": NAVY, "alpha": 0.65, "s": 32, "edgecolor": "white", "linewidths": 0.4},
-        line_kws={"color": GREY_RED, "linewidth": 2.2},
-    )
-    ax.set_xlabel(r"Ratio Deuda Pública / PIB rezagada ($d_{t-1}$, %)")
-    ax.set_ylabel(r"Resultado Primario / PIB ($pb_t$, %)")
-    ax.set_title("Dispersión Empírica: Esfuerzo Primario vs. Endeudamiento Heredado\n(ajuste polinómico de 2do grado, IC 95%, panel completo n={})".format(len(d)))
-    ax.axhline(0, color="#999999", linewidth=0.8, linestyle="-")
+    fig, ax = plt.subplots(figsize=(8.5, 5.5))
+
+    # Puntos de dispersión trimestrales
+    ax.scatter(d["d_lag1"], d["pb_pib"], color=SLATE, alpha=0.60, s=26,
+               edgecolor="white", linewidth=0.4, label=rf"Observaciones trimestrales ($n={len(d)}$)")
+
+    # Ajuste polinómico cuadrático con banda de confianza del 95% (bootstrap estándar)
+    sns.regplot(data=d, x="d_lag1", y="pb_pib", order=2, ax=ax, scatter=False,
+                color=CRIMSON, line_kws={"linewidth": 2.2, "label": "Ajuste polinómico de 2do grado (IC 95%)"},
+                ci=95)
+
+    # Línea horizontal cero
+    ax.axhline(0, color="#718096", linewidth=0.8, linestyle=":")
+
+    ax.set_xlabel(r"Ratio Deuda Pública / PIB rezagada ($d_{t-1}$, %)", fontsize=10)
+    ax.set_ylabel(r"Resultado Primario / PIB ($pb_t$, %)", fontsize=10)
+    ax.legend(loc="lower left", frameon=False, fontsize=8.8)
+    ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0")
 
     fig.tight_layout()
     out_path = os.path.join(OUTPUT_DIR, "fig5_3_dispersion_fatiga_fiscal.png")
@@ -4205,11 +4275,8 @@ def fig_5_3_dispersion_fatiga_fiscal(df):
 
 
 def fig_6_1_diagnostico_primera_etapa(df):
-    """Figura 6.1: proyección de la primera etapa del IV-2SLS (EMBI+ real vs.
-    EMBI+ ajustado por d_{t-1}, brecha del producto, VIX y EMBI_BRASIL -spread
-    soberano regional, Mejora Dimensión III, en reemplazo del TCRM_{t-1}
-    original, rechazado por Sargan-), con el estadístico F de relevancia de
-    primera etapa."""
+    """Figura 6.1 (estándar académico): Diagnóstico de instrumentos IV-2SLS (EMBI+ real vs.
+    ajustado en primera etapa) con línea de 45° de ajuste perfecto y reporte sobrio."""
     d = df.copy()
     d["d_t_1"] = d["deuda_pib"].shift(1)
     if "EMBI_BRASIL" not in d.columns or d["EMBI_BRASIL"].dropna().empty:
@@ -4227,16 +4294,11 @@ def fig_6_1_diagnostico_primera_etapa(df):
     subset_cols = ["pb_pib", "d_t_1", "g_gap", "EMBI", "VIX", "EMBI_BRASIL"]
     d = d.dropna(subset=subset_cols)
 
-
-
-    # Valores ajustados de la primera etapa (idénticos bajo OLS clásico o robusto)
     y = d["EMBI"]
     X_full = sm.add_constant(d[["d_t_1", "g_gap", "VIX", "EMBI_BRASIL"]])
     full_model = sm.OLS(y, X_full).fit()
     fitted = full_model.fittedvalues
 
-    # Estadístico F de relevancia de primera etapa (HAC/kernel), replicando
-    # exactamente el diagnóstico de codigo/modelos/fase4_variables_instrumentales.py
     iv_exog = sm.add_constant(d[["d_t_1", "g_gap"]])
     iv_endog = d[["EMBI"]]
     iv_instr = d[["VIX", "EMBI_BRASIL"]]
@@ -4246,34 +4308,29 @@ def fig_6_1_diagnostico_primera_etapa(df):
     f_pval = iv_res.first_stage.diagnostics.loc["EMBI", "f.pval"]
     sargan = iv_res.sargan
 
-    fig, ax = plt.subplots(figsize=(8.5, 7))
-    ax.scatter(fitted, y, color=NAVY, alpha=0.65, s=34, edgecolor="white", linewidth=0.4,
-               label="Observaciones trimestrales (n={})".format(len(d)))
+    fig, ax = plt.subplots(figsize=(8.0, 5.8))
+    ax.scatter(fitted, y, color=NAVY, alpha=0.60, s=28, edgecolor="white", linewidth=0.4,
+               label=rf"Observaciones trimestrales ($n={len(d)}$)")
 
-    lo = min(fitted.min(), y.min())
-    hi = max(fitted.max(), y.max())
-    ax.plot([lo, hi], [lo, hi], color=LIGHT_GREY, linestyle=":", linewidth=1.4,
-            label="Referencia 45° (ajuste perfecto)")
+    lo = min(fitted.min(), y.min()) - 50
+    hi = max(fitted.max(), y.max()) + 50
+    ax.plot([lo, hi], [lo, hi], color=CRIMSON, linestyle="--", linewidth=1.4,
+            label="Línea de 45° (ajuste teórico perfecto)")
 
-    fit_line = np.polyfit(fitted, y, 1)
-    xs = np.linspace(lo, hi, 100)
-    ax.plot(xs, fit_line[0] * xs + fit_line[1], color=GREY_RED, linewidth=2.2,
-            label="Recta de ajuste (EMBI+ real ~ EMBI+ ajustado)")
+    ax.set_xlabel(r"EMBI+ Ajustado por $d_{t-1}$, Brecha PIB, VIX y EMBI$_{\mathrm{Brasil}}$ (pb)", fontsize=10)
+    ax.set_ylabel("EMBI+ Observado (puntos básicos)", fontsize=10)
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
+    ax.legend(loc="upper left", frameon=False, fontsize=8.8)
+    ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0")
 
-    ax.set_xlabel(r"EMBI+ ajustado por $d_{t-1}$, brecha del producto, VIX y EMBI$_{Brasil}$ (primera etapa)")
-    ax.set_ylabel("EMBI+ real (puntos básicos)")
-    ax.set_title("Diagnóstico de Primera Etapa: EMBI+ Real vs. Ajustado\n(instrumentos: VIX, EMBI$_{Brasil}$)")
-    ax.legend(loc="upper left", fontsize=9)
-
-    textbox = (
-        f"F (relevancia, instrumentos excluidos) = {f_stat:.2f}\n"
-        f"$p$-valor < 0.001\n"
-        f"Umbral de referencia (Staiger-Stock) = 10\n"
-        f"Sargan (sobreidentificación) = {sargan.stat:.3f}, $p={sargan.pval:.3f}$"
+    # Diagnósticos econométricos discretos sin caja invasiva
+    diag_text = (
+        rf"$F_{{\mathrm{{IV}}}} = {f_stat:.2f} \quad (p < 0.001)$" + "\n" +
+        rf"$\text{{Sargan: }} S = {sargan.stat:.3f} \quad (p = {sargan.pval:.3f})$"
     )
-    ax.text(0.98, 0.03, textbox, transform=ax.transAxes, ha="right", va="bottom",
-            fontsize=9.5, family="monospace",
-            bbox=dict(boxstyle="round,pad=0.5", facecolor="#f7f7f7", edgecolor="#4d4d4d"))
+    ax.text(0.95, 0.06, diag_text, transform=ax.transAxes, ha="right", va="bottom",
+            fontsize=9, linespacing=1.4, color=SLATE)
 
     fig.tight_layout()
     out_path = os.path.join(OUTPUT_DIR, "fig6_1_diagnostico_primera_etapa.png")

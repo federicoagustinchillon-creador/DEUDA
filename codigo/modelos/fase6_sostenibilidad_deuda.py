@@ -190,62 +190,34 @@ def main():
     })
 
     # ------------------------------------------------------------------
-    # 1. DSA DETERMINISTA (DOS PANELES: ZOOM VIABLE Y DINÁMICA GLOBAL)
+    # 1. DSA DETERMINISTA (UN SOLO PANEL ACADÉMICO AUSTERO)
     # ------------------------------------------------------------------
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5), gridspec_kw={'width_ratios': [1, 1]})
+    fig, ax = plt.subplots(figsize=(9.0, 5.5))
 
     col_opt = "#1E6B38"  # Verde bosque académico
     col_ref = "#1B365D"  # Deep Navy institucional
     col_est = "#8B1E1E"  # Carmesí académico
 
-    # Panel 1: Escenarios de Viabilidad Institucional (Optimista vs Referencia)
-    ax1.plot(years, d_opt * 100, label=r'Optimista ($pb=2.5\%$, $g=4.5\%$)',
-             color=col_opt, linewidth=2.2)
-    ax1.plot(years, d_ref * 100, label=r'Referencia ($pb=1.5\%$, $g=3.5\%$)',
-             color=col_ref, linewidth=2.2)
-    ax1.axhline(100, color='#64748B', linestyle='--', linewidth=1.2, alpha=0.85, label='Frontera Crítica (100% PIB)')
+    ax.plot(years, d_opt * 100, label=r'Optimista ($pb=2.5\%$, $g=4.5\%$)',
+            color=col_opt, marker='o', markersize=4.5, linewidth=2.0)
+    ax.plot(years, d_ref * 100, label=r'Referencia ($pb=1.5\%$, $g=3.5\%$)',
+            color=col_ref, marker='s', markersize=4.5, linewidth=2.0)
+    ax.plot(years, d_est * 100, label=r'Estrés (Contracción, Shock Cambiario)',
+            color=col_est, marker='^', markersize=4.5, linewidth=2.0)
+    ax.axhline(100, color='#64748B', linestyle='--', linewidth=1.2, alpha=0.85, label='Frontera Crítica (100% PIB)')
 
-    # Anotaciones terminales directas (sin recuadros flotantes)
-    ax1.scatter([years[-1]], [d_opt[-1] * 100], color=col_opt, s=35, zorder=5)
-    ax1.text(years[-1] + 0.15, d_opt[-1] * 100, f"{d_opt[-1]*100:.1f}%",
-             fontweight='bold', color=col_opt, fontsize=9.5, va='center')
-    ax1.scatter([years[-1]], [d_ref[-1] * 100], color=col_ref, s=35, zorder=5)
-    ax1.text(years[-1] + 0.15, d_ref[-1] * 100, f"{d_ref[-1]*100:.1f}%",
-             fontweight='bold', color=col_ref, fontsize=9.5, va='center')
+    ax.set_xlabel('Año de Proyección', fontsize=10)
+    ax.set_ylabel('Deuda Pública Consolidada Neta (% PIB)', fontsize=10)
+    ax.set_xlim(years[0] - 0.2, years[-1] + 0.2)
+    ax.legend(loc='upper left', frameon=False, fontsize=8.8)
+    ax.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
 
-    ax1.set_title('A. Trayectorias Viables (Zoom 40%–100% PIB)', fontweight='bold', fontsize=11, pad=10)
-    ax1.set_xlabel('Año de Proyección', fontsize=10)
-    ax1.set_ylabel('Deuda Pública Consolidada Neta (% PIB)', fontsize=10)
-    ax1.set_xlim(years[0] - 0.2, years[-1] + 1.2)
-    ax1.set_ylim(40, 108)
-    ax1.legend(loc='upper left', frameon=False, fontsize=8.8)
-    ax1.grid(True, linestyle='--', alpha=0.6, axis='y')
-
-    # Panel 2: Dinámica Global Comparada (con Shock de Estrés Severo)
-    ax2.plot(years, d_opt * 100, color=col_opt, linewidth=1.6, linestyle=':', label='Optimista (47.1% en 2035)')
-    ax2.plot(years, d_ref * 100, color=col_ref, linewidth=1.8, linestyle='--', label='Referencia (82.8% en 2035)')
-    ax2.plot(years, d_est * 100, color=col_est, linewidth=2.4, label='Estrés severo (992.1% en 2035)')
-    ax2.axhline(100, color='#64748B', linestyle='--', linewidth=1.2, alpha=0.85, label='Frontera Crítica (100%)')
-
-    # Rótulo directo de estrés sin flechas infantiles ni cajas monoespaciadas
-    ax2.scatter([years[-1]], [d_est[-1] * 100], color=col_est, s=40, zorder=5)
-    ax2.text(years[-1] - 0.2, d_est[-1] * 100 * 0.93,
-             f"{d_est[-1]*100:.1f}% (2035)\nDivergencia explosiva",
-             color=col_est, fontsize=9, fontweight='bold', ha='right', va='top')
-
-    ax2.set_title('B. Dinámica Global con Estrés Cambiario y Contracción', fontweight='bold', fontsize=11, pad=10)
-    ax2.set_xlabel('Año de Proyección', fontsize=10)
-    ax2.set_ylabel('% del PIB', fontsize=10)
-    ax2.legend(loc='upper left', frameon=False, fontsize=8.8)
-    ax2.grid(True, linestyle='--', alpha=0.6, axis='y')
-
-    fig.suptitle('Análisis de Sostenibilidad de la Deuda (DSA) Determinista (2026–2035)', fontweight='bold', fontsize=12, y=0.98)
     fig.tight_layout()
     plt.savefig(os.path.join(output_dir, 'dsa_determinista.png'), dpi=300, bbox_inches='tight')
     plt.close()
 
     # ------------------------------------------------------------------
-    # 2. DSA ESTOCÁSTICO (GRÁFICO DE ABANICO + DENSIDAD TERMINAL)
+    # 2. DSA ESTOCÁSTICO (GRÁFICO DE ABANICO CLÁSICO FMI / BANCO DE INGLATERRA)
     # ------------------------------------------------------------------
     print("\n[2/2] Ejecutando DSA Estocástico (Monte Carlo - 1000 simulaciones)...")
 
@@ -264,57 +236,27 @@ def main():
 
     prob_crisis_final = np.mean(d_paths[:, -1] > 1.0) * 100
 
-    # Gráfico de abanico acoplado a la derecha con densidad terminal en 2035 (Estándar FMI MAC-DSA)
-    import scipy.stats as stats
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6), gridspec_kw={'width_ratios': [3.5, 1]}, sharey=True)
-
+    fig, ax = plt.subplots(figsize=(9.0, 5.5))
     NAVY = "#1B365D"
     CRIMSON = "#8B1E1E"
 
     # Rellenar áreas de abanico con degradé académico
-    ax1.fill_between(years, p10, p90, color=NAVY, alpha=0.14, label='Intervalo 10%–90%')
-    ax1.fill_between(years, p25, p75, color=NAVY, alpha=0.28, label='Intervalo 25%–75%')
+    ax.fill_between(years, p10, p90, color=NAVY, alpha=0.12, label='Intervalo 10%–90%')
+    ax.fill_between(years, p25, p75, color=NAVY, alpha=0.25, label='Intervalo 25%–75%')
 
     # Mediana y frontera
-    ax1.plot(years, p50, color=NAVY, linewidth=2.4, label=f'Mediana Base ({p50[-1]:.1f}% en 2035)')
-    ax1.axhline(100, color=CRIMSON, linestyle='--', linewidth=1.6, label='Frontera Crítica (100% PIB)')
+    ax.plot(years, p50, color=NAVY, linewidth=2.4, label=f'Mediana Base ({p50[-1]:.1f}% en 2035)')
+    ax.axhline(100, color=CRIMSON, linestyle='--', linewidth=1.5, label='Frontera Crítica (100% PIB)')
 
     # Marcador final de mediana
-    ax1.scatter([years[-1]], [p50[-1]], color=NAVY, s=35, zorder=5)
+    ax.scatter([years[-1]], [p50[-1]], color=NAVY, s=35, zorder=5)
 
-    ax1.set_title('DSA Estocástico: Distribución Predictiva del Ratio Deuda/PIB (2026–2035)', fontweight='bold', fontsize=12, pad=10)
-    ax1.set_xlabel('Año de Proyección', fontsize=10)
-    ax1.set_ylabel('Deuda Pública Consolidada Neta (% PIB)', fontsize=10)
-    ax1.legend(loc='upper left', frameon=False, fontsize=9.2)
-    ax1.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
-    ax1.set_xlim(years[0], years[-1])
-    ax1.set_ylim(20, 180)
-
-    # Panel de Densidad Terminal en 2035 (ax2)
-    d_terminal = d_paths[:, -1] * 100
-    kde = stats.gaussian_kde(d_terminal)
-    y_grid = np.linspace(20, 180, 400)
-    density = kde(y_grid)
-
-    ax2.plot(density, y_grid, color=NAVY, linewidth=1.8)
-    ax2.fill_betweenx(y_grid, 0, density, color=NAVY, alpha=0.15)
-
-    # Sombrear la cola crítica (d > 100%)
-    mask_tail = y_grid >= 100
-    ax2.fill_betweenx(y_grid[mask_tail], 0, density[mask_tail], color=CRIMSON, alpha=0.40)
-    ax2.axhline(100, color=CRIMSON, linestyle='--', linewidth=1.6)
-    ax2.axhline(p50[-1], color=NAVY, linestyle=':', linewidth=1.2)
-
-    # Notación de probabilidad limpia sin caja rosa estilo notificación
-    badge_tail = rf"$\mathbb{{P}}(d_{{2035}} > 100\%) = {prob_crisis_final:.1f}\%$"
-    ax2.text(0.5, 0.94, badge_tail, transform=ax2.transAxes, ha='center', va='top',
-             fontsize=9.5, fontweight='bold', color=CRIMSON)
-
-    ax2.set_title('Densidad Terminal\n(Año 2035)', fontweight='bold', fontsize=10, pad=8)
-    ax2.set_xticks([])  # Eliminar ticks decimales confusos en el eje horizontal
-    ax2.set_xlabel('Densidad', fontsize=9)
-    ax2.spines['left'].set_visible(False)
-    ax2.grid(True, linestyle='--', alpha=0.4, color='#E2E8F0', axis='y')
+    ax.set_xlabel('Año de Proyección', fontsize=10)
+    ax.set_ylabel('Deuda Pública Consolidada Neta (% PIB)', fontsize=10)
+    ax.legend(loc='upper left', frameon=False, fontsize=9.0)
+    ax.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
+    ax.set_xlim(years[0], years[-1])
+    ax.set_ylim(35, 145)
 
     fig.tight_layout()
     plt.savefig(os.path.join(output_dir, 'dsa_grafico_abanico.png'), dpi=300, bbox_inches='tight')

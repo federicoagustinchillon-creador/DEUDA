@@ -222,18 +222,7 @@ def main():
 
     axes[-1].set_xlabel("Trimestre", fontsize=10, fontweight='bold')
 
-    fig.suptitle("Evolución de las Correlaciones Condicionales Dinámicas DCC(1,1) vs. Móvil Empírica\n"
-                 rf"($a = {a:.3f}, b = {b:.3f} \rightarrow$ Convergencia a Correlación Condicional Constante CCC, Bollerslev 1990)",
-                 fontweight="bold", fontsize=11.5, y=0.98)
-
-    # Nota metodológica sobria al pie
-    fig.text(0.08, 0.012,
-             "Nota: Estimación DCC(1,1) de Engle (2002) sobre residuos estandarizados GARCH(1,1). "
-             r"El colapso paramétrico ($a=0.000, b=0.000$) corrobora que la estructura de" + "\n"
-             "comovimiento condicional converge al modelo CCC, mientras que las trayectorias rojas capturan la dispersión móvil muestral.",
-             fontsize=8, color="#475569", style="italic")
-
-    fig.tight_layout(rect=[0, 0.045, 1, 0.95])
+    fig.tight_layout()
     out_path = LATEX_DIR / "figura_10_1_dcc_correlacion_dinamica.png"
     fig.savefig(out_path, dpi=300)
     plt.close(fig)

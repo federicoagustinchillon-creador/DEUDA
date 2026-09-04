@@ -105,72 +105,45 @@ def main():
         'axes.unicode_minus': False
     })
 
-    # --- Gráfico en Dos Paneles Sincronizados (SPNF vs Consolidada) ---
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(11.5, 7.8), sharex=True, gridspec_kw={'hspace': 0.24})
+    # --- Gráfico en Panel Único (SPNF vs Consolidada) ---
+    fig, ax = plt.subplots(figsize=(10.5, 5.2), dpi=300)
     NAVY = "#1B365D"
     CRIMSON = "#8B1E1E"
 
-    # Panel A: Deuda SPNF
-    ax1.plot(df.index, df["deuda_pib"], color=NAVY, linewidth=2.0, label="Deuda SPNF / PIB")
-    for seg in result_spnf["medias_segmento"].itertuples():
-        ax1.hlines(seg.media, seg.inicio, seg.fin, color=NAVY, linewidth=2.6, alpha=0.65)
-        mid_date = seg.inicio + (seg.fin - seg.inicio) / 2
-        ax1.text(mid_date, seg.media + 2.2, rf"$\bar{{d}} = {seg.media:.1f}\%$",
-                 color=NAVY, fontsize=8.5, fontweight='bold', ha='center', va='bottom',
-                 bbox=dict(boxstyle='square,pad=0.15', facecolor='white', edgecolor='none', alpha=0.85))
+    ax.plot(df.index, df["deuda_pib"], color=NAVY, linewidth=2.0, label="Deuda SPNF / PIB")
+    ax.plot(df.index, df["deuda_consolidada_pib"], color=CRIMSON, linewidth=2.0,
+            linestyle="--", label="Deuda consolidada (SPNF + Pasivos BCRA) / PIB")
 
+    # Medias de segmento
+    for seg in result_spnf["medias_segmento"].itertuples():
+        ax.hlines(seg.media, seg.inicio, seg.fin, color=NAVY, linewidth=2.8, alpha=0.45)
+    for seg in result_cons["medias_segmento"].itertuples():
+        ax.hlines(seg.media, seg.inicio, seg.fin, color=CRIMSON, linewidth=2.2, alpha=0.45, linestyle=":")
+
+    y_max = max(df["deuda_pib"].max(), df["deuda_consolidada_pib"].max()) * 1.12
+    ax.set_ylim(20, y_max)
+
+    # Fechas de quiebre discretas
     for d in result_spnf["fechas_quiebre"]:
         ts = pd.Timestamp(d)
-        q_label = f"{ts.year}-T{ts.quarter}"
-        ax1.axvline(d, color="#64748B", linestyle="--", alpha=0.75, linewidth=1.1)
-        ax1.text(d, 114, f"Quiebre:\n{q_label}", color="#334155", fontsize=8,
-                 ha="center", va="top", fontweight="bold",
-                 bbox=dict(boxstyle='square,pad=0.15', facecolor='white', edgecolor='#CBD5E1', alpha=0.9))
-
-    ax1.set_title("A. Deuda Pública del SPNF / PIB — Cronología de Quiebres Óptimos por BIC ($m^* = 3$)",
-                  fontweight="bold", fontsize=10.5, pad=8, color="#0F172A", loc="left")
-    ax1.set_ylabel("% del PIB", fontweight="bold", fontsize=9.5)
-    ax1.set_ylim(20, 126)
-    ax1.legend(fontsize=8.5, loc="lower left", frameon=False)
-    ax1.grid(True, linestyle="--", alpha=0.5, color="#E2E8F0", axis="y")
-
-    # Panel B: Deuda Consolidada
-    ax2.plot(df.index, df["deuda_consolidada_pib"], color=CRIMSON, linewidth=2.0,
-             label="Deuda Consolidada SPNF + Pasivos BCRA / PIB")
-    for seg in result_cons["medias_segmento"].itertuples():
-        ax2.hlines(seg.media, seg.inicio, seg.fin, color=CRIMSON, linewidth=2.6, alpha=0.65)
-        mid_date = seg.inicio + (seg.fin - seg.inicio) / 2
-        ax2.text(mid_date, seg.media + 2.2, rf"$\bar{{d}} = {seg.media:.1f}\%$",
-                 color=CRIMSON, fontsize=8.5, fontweight='bold', ha='center', va='bottom',
-                 bbox=dict(boxstyle='square,pad=0.15', facecolor='white', edgecolor='none', alpha=0.85))
+        q_label = f"SPNF: {ts.year}-T{ts.quarter}"
+        ax.axvline(d, color=NAVY, linestyle=":", alpha=0.7, linewidth=1.2)
+        ax.text(d, y_max * 0.94, q_label, rotation=90, fontsize=8, color=NAVY,
+                va="top", ha="right", style="italic")
 
     for d in result_cons["fechas_quiebre"]:
         ts = pd.Timestamp(d)
-        q_label = f"{ts.year}-T{ts.quarter}"
-        ax2.axvline(d, color="#64748B", linestyle="--", alpha=0.75, linewidth=1.1)
-        ax2.text(d, 126, f"Quiebre:\n{q_label}", color="#334155", fontsize=8,
-                 ha="center", va="top", fontweight="bold",
-                 bbox=dict(boxstyle='square,pad=0.15', facecolor='white', edgecolor='#CBD5E1', alpha=0.9))
+        q_label = f"Consolidada: {ts.year}-T{ts.quarter}"
+        ax.axvline(d, color=CRIMSON, linestyle="-.", alpha=0.6, linewidth=1.1)
+        ax.text(d, y_max * 0.78, q_label, rotation=90, fontsize=8, color=CRIMSON,
+                va="top", ha="left", style="italic")
 
-    ax2.set_title("B. Deuda Pública Consolidada (SPNF + Pasivos BCRA) / PIB — Quiebres Óptimos por BIC ($m^* = 2$)",
-                  fontweight="bold", fontsize=10.5, pad=8, color="#0F172A", loc="left")
-    ax2.set_xlabel("Trimestre", fontweight="bold", fontsize=10)
-    ax2.set_ylabel("% del PIB", fontweight="bold", fontsize=9.5)
-    ax2.set_ylim(20, 138)
-    ax2.legend(fontsize=8.5, loc="lower left", frameon=False)
-    ax2.grid(True, linestyle="--", alpha=0.5, color="#E2E8F0", axis="y")
+    ax.set_xlabel("Trimestre", fontsize=10)
+    ax.set_ylabel("% del PIB", fontsize=10)
+    ax.legend(fontsize=8.5, loc="upper right", frameon=True, facecolor="white", edgecolor="#E2E8F0")
+    ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0", axis="y")
 
-    fig.suptitle("Detección de Quiebres Estructurales Múltiples de Bai-Perron (2004–2025)",
-                 fontweight="bold", fontsize=12, y=0.98)
-
-    # Nota metodológica elegante al pie
-    fig.text(0.08, 0.012,
-             "Nota: Algoritmo de programación dinámica de Bai y Perron (2003) con recorte h=13 (15% muestral). "
-             "Las líneas punteadas verticales indican las fechas estimadas de quiebre;\n"
-             "las barras horizontales identifican la media del ratio de deuda correspondiente a cada segmento macrofiscal estable.",
-             fontsize=8, color="#475569", style="italic")
-
-    fig.tight_layout(rect=[0, 0.04, 1, 0.95])
+    fig.tight_layout()
     out_path = LATEX_DIR / "figura_9_1_bai_perron.png"
     fig.savefig(out_path, dpi=300)
     plt.close(fig)
