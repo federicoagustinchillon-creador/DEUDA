@@ -167,40 +167,73 @@ def main():
 
     pd.DataFrame(rows).to_csv(TABLES_DIR / "fase10_dcc_garch_comparacion_dsa.csv", index=False)
 
-    # --- Gráfico: correlación dinámica en el tiempo vs móvil empírica ---
-    fig, ax = plt.subplots(figsize=(11.5, 5.5))
-    colors_pairs = ["#0B3D66", "#9E2A2B", "#C27D38"]
-    for idx_p, (i, j, name) in enumerate(pairs):
-        col = colors_pairs[idx_p % len(colors_pairs)]
-        # Nivel constante DCC (colapso a CCC)
-        ax.plot(shocks.index, R_path[:, i, j], color=col, linewidth=2.2,
-                label=rf"DCC $\rho$({name}) = {R_path[0, i, j]:.3f}")
-        # Correlación móvil empírica (ventana de 8 trimestres)
+    # ------------------------------------------------------------------
+    # CONFIGURACIÓN TIPOGRÁFICA Y EDITORIAL ACADÉMICA (AER / FMI)
+    # ------------------------------------------------------------------
+    plt.rcParams.update({
+        'font.family': 'serif',
+        'font.serif': ['Times New Roman', 'DejaVu Serif', 'cmr10'],
+        'mathtext.fontset': 'cm',
+        'axes.edgecolor': '#475569',
+        'axes.linewidth': 0.8,
+        'grid.color': '#E2E8F0',
+        'grid.linewidth': 0.5,
+        'grid.alpha': 0.7,
+        'axes.spines.top': False,
+        'axes.spines.right': False,
+        'axes.unicode_minus': False
+    })
+
+    # --- Gráfico: 3 Paneles Sincronizados (Small Multiples) ---
+    fig, axes = plt.subplots(3, 1, figsize=(11.5, 8.2), sharex=True, gridspec_kw={'hspace': 0.26})
+    NAVY = "#1B365D"
+    CRIMSON = "#8B1E1E"
+
+    pair_metadata = [
+        ("pb-g", r"(a) Superávit Primario ($pb$) vs. Crecimiento del PIB ($g$)", 0, 1),
+        ("pb-delta_e", r"(b) Superávit Primario ($pb$) vs. Depreciación Real ($\Delta e$)", 0, 2),
+        ("g-delta_e", r"(c) Crecimiento del PIB ($g$) vs. Depreciación Real ($\Delta e$)", 1, 2)
+    ]
+
+    for idx, (p_code, p_title, i, j) in enumerate(pair_metadata):
+        ax = axes[idx]
+        dcc_val = R_path[0, i, j]
         s_i = shocks.iloc[:, i]
         s_j = shocks.iloc[:, j]
         rolling_corr = s_i.rolling(window=8, min_periods=4).corr(s_j)
-        ax.plot(shocks.index, rolling_corr, color=col, linestyle="--", linewidth=1.2, alpha=0.6,
-                label=rf"Móvil 8T $\rho$({name})")
 
-    ax.axhline(0, color="black", linewidth=0.8, linestyle=":")
-    ax.set_title(f"Correlación Condicional Dinámica DCC(1,1) vs. Correlación Móvil Empírica\n"
-                 rf"($a = {a:.3f}, b = {b:.3f} \rightarrow$ Convergencia a Correlación Condicional Constante - CCC)",
-                 fontweight="bold", fontsize=11)
-    ax.set_xlabel("Trimestre", fontweight="bold")
-    ax.set_ylabel(r"Correlación condicional $\rho_{ij,t}$", fontweight="bold")
-    ax.legend(fontsize=8, loc="lower right", ncol=2, framealpha=0.9)
-    ax.grid(True, alpha=0.3)
-    ax.set_ylim(-1.0, 1.0)
+        # Línea horizontal neutral
+        ax.axhline(0, color="#94A3B8", linewidth=0.8, linestyle=":")
 
-    note = (
-        "Nota metodológica: El estimador de Engle (2002) arroja a=0.000, b=0.000,\n"
-        "colapsando la especificación dinámica en el modelo de Bollerslev (1990) CCC.\n"
-        "Las líneas punteadas reflejan la dispersión móvil muestral alrededor del nivel incondicional."
-    )
-    ax.text(0.02, 0.95, note, transform=ax.transAxes, ha="left", va="top",
-            fontsize=8, bbox=dict(boxstyle="round,pad=0.4", facecolor="#F8FAFC", edgecolor="#CBD5E1", alpha=0.9))
+        # Correlación móvil empírica (ventana de 8 trimestres)
+        ax.plot(shocks.index, rolling_corr, color=CRIMSON, linestyle="-", linewidth=1.3, alpha=0.85,
+                label=r"Correlación móvil empírica (8 trimestres)")
+        ax.fill_between(shocks.index, 0, rolling_corr, color=CRIMSON, alpha=0.06)
 
-    fig.tight_layout()
+        # Nivel constante DCC (colapso a CCC)
+        ax.axhline(dcc_val, color=NAVY, linewidth=2.0,
+                   label=rf"DCC / CCC constante: $\rho = {dcc_val:.3f}$")
+
+        ax.set_title(p_title, fontsize=10, fontweight='bold', loc='left', color='#0F172A', pad=5)
+        ax.set_ylabel(r"$\rho_{ij,t}$", fontsize=9.5, fontweight='bold')
+        ax.set_ylim(-0.85, 0.85)
+        ax.grid(True, linestyle='--', alpha=0.5, color='#E2E8F0', axis='y')
+        ax.legend(loc="lower right", frameon=False, fontsize=8.5, ncol=2)
+
+    axes[-1].set_xlabel("Trimestre", fontsize=10, fontweight='bold')
+
+    fig.suptitle("Evolución de las Correlaciones Condicionales Dinámicas DCC(1,1) vs. Móvil Empírica\n"
+                 rf"($a = {a:.3f}, b = {b:.3f} \rightarrow$ Convergencia a Correlación Condicional Constante CCC, Bollerslev 1990)",
+                 fontweight="bold", fontsize=11.5, y=0.98)
+
+    # Nota metodológica sobria al pie
+    fig.text(0.08, 0.012,
+             "Nota: Estimación DCC(1,1) de Engle (2002) sobre residuos estandarizados GARCH(1,1). "
+             r"El colapso paramétrico ($a=0.000, b=0.000$) corrobora que la estructura de" + "\n"
+             "comovimiento condicional converge al modelo CCC, mientras que las trayectorias rojas capturan la dispersión móvil muestral.",
+             fontsize=8, color="#475569", style="italic")
+
+    fig.tight_layout(rect=[0, 0.045, 1, 0.95])
     out_path = LATEX_DIR / "figura_10_1_dcc_correlacion_dinamica.png"
     fig.savefig(out_path, dpi=300)
     plt.close(fig)

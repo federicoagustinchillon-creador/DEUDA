@@ -82,17 +82,39 @@ def build_dols(df, max_m=4):
 
 def section_1_acf_pacf(df):
     print("\n[1/9] ACF/PACF de las 4 series nucleo...")
+    plt.rcParams.update({
+        'font.family': 'serif',
+        'font.serif': ['Times New Roman', 'DejaVu Serif', 'Liberation Serif'],
+        'mathtext.fontset': 'cm',
+    })
     series = {
         'Resultado Primario / PIB ($pb_t$)': df['pb_pib'],
         'Deuda Publica / PIB ($d_t$)': df['deuda_pib'],
         'Riesgo Pais - EMBI+ ($risk_t$)': df['EMBI'],
         'Brecha del Producto ($\\tilde{y}_t$)': df['g_gap'],
     }
-    fig, axes = plt.subplots(4, 2, figsize=(10, 14))
+    fig, axes = plt.subplots(4, 2, figsize=(9.5, 11), dpi=300)
     for i, (name, s) in enumerate(series.items()):
         s = s.dropna()
-        plot_acf(s, ax=axes[i, 0], lags=20, title=f'ACF: {name}')
-        plot_pacf(s, ax=axes[i, 1], lags=20, method='ywm', title=f'PACF: {name}')
+        ax_acf = axes[i, 0]
+        ax_pacf = axes[i, 1]
+        plot_acf(s, ax=ax_acf, lags=20, title=f'ACF: {name}', alpha=0.05, color='#1B365D', vlines_kwargs={'colors': '#1B365D', 'linewidth': 1.2})
+        plot_pacf(s, ax=ax_pacf, lags=20, method='ywm', title=f'PACF: {name}', alpha=0.05, color='#1B365D', vlines_kwargs={'colors': '#1B365D', 'linewidth': 1.2})
+        
+        for ax in (ax_acf, ax_pacf):
+            ax.spines['top'].set_visible(False)
+            ax.spines['right'].set_visible(False)
+            ax.grid(True, linestyle='--', alpha=0.4, color='#E2E8F0')
+            ax.set_ylim(-1.05, 1.05)
+            ax.set_title(ax.get_title(), fontsize=10, fontfamily='serif')
+            ax.tick_params(labelsize=8.5)
+            for line in ax.lines:
+                if len(line.get_ydata()) > 2 and np.all(line.get_ydata() == 0):
+                    line.set_color('#2D3748')
+                    line.set_linewidth(0.8)
+            for coll in ax.collections:
+                coll.set_color('#1B365D')
+                coll.set_alpha(0.12)
     plt.tight_layout()
     out_path = LATEX_DIR / 'figura_5_5_acf_pacf.png'
     plt.savefig(out_path, dpi=300)
@@ -121,25 +143,34 @@ def section_3_cusum(model_ols, y, X):
     idx = np.arange(1, n_r + 1)
     idx_ci = np.arange(n_r - n_ci + 1, n_r + 1)
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    axes[0].plot(idx, rcusum, color='#0B3C5D', label='CUSUM')
-    axes[0].axhline(0, color='black', linewidth=0.8)
-    axes[0].plot(idx_ci, rcusumci[0, :], 'r--', linewidth=1, label='Banda 95%')
-    axes[0].plot(idx_ci, rcusumci[1, :], 'r--', linewidth=1)
-    axes[0].set_title('CUSUM (Estabilidad Estructural, DOLS)')
-    axes[0].set_xlabel('Observación recursiva')
-    axes[0].legend(fontsize=8)
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.2), dpi=300)
+    axes[0].plot(idx, rcusum, color='#1B365D', linewidth=1.6, label='CUSUM')
+    axes[0].axhline(0, color='#64748B', linewidth=0.7, linestyle=':')
+    axes[0].plot(idx_ci, rcusumci[0, :], color='#8B1E1E', linestyle='--', linewidth=1.1, label='Banda 95%')
+    axes[0].plot(idx_ci, rcusumci[1, :], color='#8B1E1E', linestyle='--', linewidth=1.1)
+    axes[0].set_title('CUSUM: Estabilidad de Coeficientes (DOLS)', fontsize=10.5, fontfamily='serif')
+    axes[0].set_xlabel('Observación recursiva ($t$)', fontsize=9.5, fontfamily='serif')
+    axes[0].set_ylabel('Estadístico CUSUM', fontsize=9.5, fontfamily='serif')
+    axes[0].spines['top'].set_visible(False)
+    axes[0].spines['right'].set_visible(False)
+    axes[0].grid(True, linestyle='--', alpha=0.4, color='#E2E8F0')
+    axes[0].legend(frameon=True, facecolor='white', edgecolor='#E2E8F0', fontsize=8.5, loc='upper left')
 
     rresid_scaled_aligned = rresid_scaled[-n_r:]
     cusumsq = np.cumsum(rresid_scaled_aligned ** 2) / np.sum(rresid_scaled_aligned ** 2)
     frac = np.arange(1, n_r + 1) / n_r
     c95 = 0.5959  # límite aproximado al 5% (Harvey, 1990) para muestras moderadas
-    axes[1].plot(idx, cusumsq, color='#0B3C5D', label='CUSUMSQ')
-    axes[1].plot(idx, np.clip(frac + c95, 0, 1.3), 'r--', linewidth=1, label='Banda 95%')
-    axes[1].plot(idx, np.clip(frac - c95, -0.3, 1), 'r--', linewidth=1)
-    axes[1].set_title('CUSUMSQ (Estabilidad Estructural, DOLS)')
-    axes[1].set_xlabel('Observación recursiva')
-    axes[1].legend(fontsize=8)
+    axes[1].plot(idx, cusumsq, color='#1B365D', linewidth=1.6, label='CUSUMSQ')
+    axes[1].plot(idx, np.clip(frac + c95, 0, 1.3), color='#8B1E1E', linestyle='--', linewidth=1.1, label='Banda 95%')
+    axes[1].plot(idx, np.clip(frac - c95, -0.3, 1), color='#8B1E1E', linestyle='--', linewidth=1.1)
+    axes[1].plot(idx, frac, color='#64748B', linestyle=':', linewidth=0.8, label='Esperanza teórica')
+    axes[1].set_title('CUSUMSQ: Varianza de Residuos (DOLS)', fontsize=10.5, fontfamily='serif')
+    axes[1].set_xlabel('Observación recursiva ($t$)', fontsize=9.5, fontfamily='serif')
+    axes[1].set_ylabel('Suma acumulada de cuadrados', fontsize=9.5, fontfamily='serif')
+    axes[1].spines['top'].set_visible(False)
+    axes[1].spines['right'].set_visible(False)
+    axes[1].grid(True, linestyle='--', alpha=0.4, color='#E2E8F0')
+    axes[1].legend(frameon=True, facecolor='white', edgecolor='#E2E8F0', fontsize=8.5, loc='upper left')
 
     plt.tight_layout()
     out_path = LATEX_DIR / 'figura_6_2_cusum.png'

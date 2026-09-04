@@ -59,28 +59,31 @@ def main():
     for d in break_dates:
         print(" ->", d.strftime("%Y-%m"))
 
-    fig, ax = plt.subplots(figsize=(10, 4.5))
-    ax.plot(pd.to_datetime(["2004-01-01", "2025-12-31"]), [0, 0], color="#2C3E50", linewidth=2, zorder=1)
+    fig, ax = plt.subplots(figsize=(10, 4.5), dpi=300)
+    ax.plot(pd.to_datetime(["2004-01-01", "2025-12-31"]), [0, 0], color="#1B365D", linewidth=2.2, zorder=2)
 
     levels = [1, -1, 1.2, -1.2]
     for i, d in enumerate(break_dates):
         key = d.strftime("%Y-%m")
         label = EVENT_LABELS.get(key, f"Quiebre detectado\n{key}")
-        ax.scatter(d, 0, color="#D9534F", s=100, zorder=2, edgecolor="black")
-        ax.vlines(d, 0, levels[i], color="#D9534F", linestyle="--", linewidth=1)
-        ax.text(d, levels[i] + (0.05 if levels[i] > 0 else -0.15), label,
+        ax.scatter(d, 0, color="#8B1E1E", s=90, zorder=3, edgecolor="white", linewidth=1.5)
+        ax.vlines(d, 0, levels[i], color="#8B1E1E", linestyle="--", linewidth=1.0, alpha=0.85)
+        ax.text(d, levels[i] + (0.06 if levels[i] > 0 else -0.16), label,
                 horizontalalignment="center", verticalalignment="center",
-                bbox=dict(boxstyle="round,pad=0.4", facecolor="#F8F9F9", edgecolor="gainsboro", alpha=0.9),
-                fontsize=9, fontname="serif")
+                bbox=dict(boxstyle="square,pad=0.5", facecolor="white", edgecolor="#CBD5E1", alpha=0.98),
+                fontsize=8.8, fontfamily="serif")
 
-    ax.set_xlim(pd.to_datetime("2003-01-01"), pd.to_datetime("2026-12-31"))
-    ax.set_ylim(-1.8, 1.8)
+    ax.set_xlim(pd.to_datetime("2003-06-01"), pd.to_datetime("2026-06-30"))
+    ax.set_ylim(-1.85, 1.85)
     ax.yaxis.grid(False)
-    ax.xaxis.grid(True, linestyle=":", alpha=0.6)
+    ax.xaxis.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0")
     for spine in ["left", "right", "top"]:
         ax.spines[spine].set_visible(False)
+    ax.spines["bottom"].set_color("#64748B")
+    ax.spines["bottom"].set_linewidth(0.8)
     ax.get_yaxis().set_visible(False)
-    ax.set_xlabel("Año")
+    ax.set_xlabel("Año", fontsize=10, fontfamily="serif")
+    ax.tick_params(axis='x', labelsize=9.5)
 
     fig.tight_layout()
     out_path = os.path.join(OUTPUT_DIR, "figura_5_4_quiebres_timeline.png")

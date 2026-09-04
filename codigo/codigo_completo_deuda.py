@@ -2396,11 +2396,33 @@ def section_1_acf_pacf(df):
         'Riesgo Pais - EMBI+ ($risk_t$)': df['EMBI'],
         'Brecha del Producto ($\\tilde{y}_t$)': df['g_gap'],
     }
-    fig, axes = plt.subplots(4, 2, figsize=(10, 14))
+    plt.rcParams.update({
+        'font.family': 'serif',
+        'font.serif': ['Times New Roman', 'DejaVu Serif', 'Liberation Serif'],
+        'mathtext.fontset': 'cm',
+    })
+    fig, axes = plt.subplots(4, 2, figsize=(9.5, 11), dpi=300)
     for i, (name, s) in enumerate(series.items()):
         s = s.dropna()
-        plot_acf(s, ax=axes[i, 0], lags=20, title=f'ACF: {name}')
-        plot_pacf(s, ax=axes[i, 1], lags=20, method='ywm', title=f'PACF: {name}')
+        ax_acf = axes[i, 0]
+        ax_pacf = axes[i, 1]
+        plot_acf(s, ax=ax_acf, lags=20, title=f'ACF: {name}', alpha=0.05, color='#1B365D', vlines_kwargs={'colors': '#1B365D', 'linewidth': 1.2})
+        plot_pacf(s, ax=ax_pacf, lags=20, method='ywm', title=f'PACF: {name}', alpha=0.05, color='#1B365D', vlines_kwargs={'colors': '#1B365D', 'linewidth': 1.2})
+        
+        for ax in (ax_acf, ax_pacf):
+            ax.spines['top'].set_visible(False)
+            ax.spines['right'].set_visible(False)
+            ax.grid(True, linestyle='--', alpha=0.4, color='#E2E8F0')
+            ax.set_ylim(-1.05, 1.05)
+            ax.set_title(ax.get_title(), fontsize=10, fontfamily='serif')
+            ax.tick_params(labelsize=8.5)
+            for line in ax.lines:
+                if len(line.get_ydata()) > 2 and np.all(line.get_ydata() == 0):
+                    line.set_color('#2D3748')
+                    line.set_linewidth(0.8)
+            for coll in ax.collections:
+                coll.set_color('#1B365D')
+                coll.set_alpha(0.12)
     plt.tight_layout()
     out_path = LATEX_DIR / 'figura_5_5_acf_pacf.png'
     plt.savefig(out_path, dpi=300)
@@ -2429,25 +2451,34 @@ def section_3_cusum(model_ols, y, X):
     idx = np.arange(1, n_r + 1)
     idx_ci = np.arange(n_r - n_ci + 1, n_r + 1)
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    axes[0].plot(idx, rcusum, color='#0B3C5D', label='CUSUM')
-    axes[0].axhline(0, color='black', linewidth=0.8)
-    axes[0].plot(idx_ci, rcusumci[0, :], 'r--', linewidth=1, label='Banda 95%')
-    axes[0].plot(idx_ci, rcusumci[1, :], 'r--', linewidth=1)
-    axes[0].set_title('CUSUM (Estabilidad Estructural, DOLS)')
-    axes[0].set_xlabel('Observación recursiva')
-    axes[0].legend(fontsize=8)
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.2), dpi=300)
+    axes[0].plot(idx, rcusum, color='#1B365D', linewidth=1.6, label='CUSUM')
+    axes[0].axhline(0, color='#64748B', linewidth=0.7, linestyle=':')
+    axes[0].plot(idx_ci, rcusumci[0, :], color='#8B1E1E', linestyle='--', linewidth=1.1, label='Banda 95%')
+    axes[0].plot(idx_ci, rcusumci[1, :], color='#8B1E1E', linestyle='--', linewidth=1.1)
+    axes[0].set_title('CUSUM: Estabilidad de Coeficientes (DOLS)', fontsize=10.5, fontfamily='serif')
+    axes[0].set_xlabel('Observación recursiva ($t$)', fontsize=9.5, fontfamily='serif')
+    axes[0].set_ylabel('Estadístico CUSUM', fontsize=9.5, fontfamily='serif')
+    axes[0].spines['top'].set_visible(False)
+    axes[0].spines['right'].set_visible(False)
+    axes[0].grid(True, linestyle='--', alpha=0.4, color='#E2E8F0')
+    axes[0].legend(frameon=True, facecolor='white', edgecolor='#E2E8F0', fontsize=8.5, loc='upper left')
 
     rresid_scaled_aligned = rresid_scaled[-n_r:]
     cusumsq = np.cumsum(rresid_scaled_aligned ** 2) / np.sum(rresid_scaled_aligned ** 2)
     frac = np.arange(1, n_r + 1) / n_r
     c95 = 0.5959  # límite aproximado al 5% (Harvey, 1990) para muestras moderadas
-    axes[1].plot(idx, cusumsq, color='#0B3C5D', label='CUSUMSQ')
-    axes[1].plot(idx, np.clip(frac + c95, 0, 1.3), 'r--', linewidth=1, label='Banda 95%')
-    axes[1].plot(idx, np.clip(frac - c95, -0.3, 1), 'r--', linewidth=1)
-    axes[1].set_title('CUSUMSQ (Estabilidad Estructural, DOLS)')
-    axes[1].set_xlabel('Observación recursiva')
-    axes[1].legend(fontsize=8)
+    axes[1].plot(idx, cusumsq, color='#1B365D', linewidth=1.6, label='CUSUMSQ')
+    axes[1].plot(idx, np.clip(frac + c95, 0, 1.3), color='#8B1E1E', linestyle='--', linewidth=1.1, label='Banda 95%')
+    axes[1].plot(idx, np.clip(frac - c95, -0.3, 1), color='#8B1E1E', linestyle='--', linewidth=1.1)
+    axes[1].plot(idx, frac, color='#64748B', linestyle=':', linewidth=0.8, label='Esperanza teórica')
+    axes[1].set_title('CUSUMSQ: Varianza de Residuos (DOLS)', fontsize=10.5, fontfamily='serif')
+    axes[1].set_xlabel('Observación recursiva ($t$)', fontsize=9.5, fontfamily='serif')
+    axes[1].set_ylabel('Suma acumulada de cuadrados', fontsize=9.5, fontfamily='serif')
+    axes[1].spines['top'].set_visible(False)
+    axes[1].spines['right'].set_visible(False)
+    axes[1].grid(True, linestyle='--', alpha=0.4, color='#E2E8F0')
+    axes[1].legend(frameon=True, facecolor='white', edgecolor='#E2E8F0', fontsize=8.5, loc='upper left')
 
     plt.tight_layout()
     out_path = LATEX_DIR / 'figura_6_2_cusum.png'
@@ -2797,19 +2828,52 @@ def main():
     }]).to_csv(TABLES_DIR / "fase8_deuda_consolidada_diagnosticos.csv", index=False)
     print(f" -> Tabla comparativa: {TABLES_DIR / 'fase8_deuda_consolidada.csv'}")
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(df.index, df["deuda_pib"], label="Deuda SPNF / PIB (original)",
-              color="#0B3C5D", linewidth=1.8)
-    plt.plot(df.index, df["deuda_consolidada_pib"],
-              label="Deuda consolidada SPNF + Pasivos Remunerados BCRA / PIB",
-              color="#B33951", linewidth=1.8, linestyle="--")
-    plt.fill_between(df.index, df["deuda_pib"], df["deuda_consolidada_pib"],
-                      color="#B33951", alpha=0.15, label="Brecha cuasi-fiscal (BCRA)")
-    plt.title("Deuda Pública: SPNF vs. Consolidada con Pasivos Remunerados del BCRA")
-    plt.xlabel("Trimestre")
-    plt.ylabel("% del PIB")
-    plt.legend(fontsize=9)
-    plt.grid(True, alpha=0.3)
+    # Configuración de estilo editorial académico
+    plt.rcParams.update({
+        'font.family': 'serif',
+        'font.serif': ['Times New Roman', 'DejaVu Serif', 'Liberation Serif'],
+        'mathtext.fontset': 'cm',
+        'axes.edgecolor': '#2D3748',
+        'axes.linewidth': 0.8,
+        'grid.color': '#E2E8F0',
+        'grid.linestyle': '--',
+        'grid.linewidth': 0.5,
+    })
+
+    fig, ax = plt.subplots(figsize=(9.5, 4.8), dpi=300)
+    ax.plot(df.index, df["deuda_pib"], label="Deuda SPNF / PIB (definición base)",
+            color="#1B365D", linewidth=2.0)
+    ax.plot(df.index, df["deuda_consolidada_pib"],
+            label="Deuda consolidada: SPNF + Pasivos BCRA / PIB",
+            color="#8B1E1E", linewidth=2.0, linestyle="--")
+    ax.fill_between(df.index, df["deuda_pib"], df["deuda_consolidada_pib"],
+                    color="#8B1E1E", alpha=0.12, label="Brecha cuasi-fiscal (pasivos remunerados BCRA)")
+    
+    # Leyenda ubicada en zona despejada de baja deuda (2007-2015)
+    ax.legend(frameon=True, facecolor="white", edgecolor="#E2E8F0", fontsize=8.8,
+              loc="upper left", bbox_to_anchor=(0.15, 0.95))
+
+    # Anotación directa del pico histórico de COVID (2020-T4)
+    p2020 = df.loc["2020-09-30":"2020-12-31"]
+    if not p2020.empty:
+        max_idx = p2020["deuda_consolidada_pib"].idxmax()
+        val_spnf = df.loc[max_idx, "deuda_pib"]
+        val_cons = df.loc[max_idx, "deuda_consolidada_pib"]
+        ax.annotate(f"Pico COVID (2020-T4)\nSPNF: {val_spnf:.1f}% | Consolidada: {val_cons:.1f}%\nBrecha: {val_cons - val_spnf:.1f} p.p. del PIB",
+                    xy=(max_idx, val_cons), xytext=(pd.to_datetime("2021-08-01"), 115),
+                    arrowprops=dict(arrowstyle="->", color="#2D3748", lw=0.7),
+                    fontsize=8.5, fontfamily='serif',
+                    bbox=dict(boxstyle="square,pad=0.4", facecolor="white", edgecolor="#CBD5E1", alpha=0.95))
+
+    ax.set_title("Deuda Pública Argentina: SPNF vs. Deuda Consolidada con Pasivos del BCRA (2004–2025)",
+                 fontsize=11.5, fontfamily='serif', pad=12)
+    ax.set_xlabel("Trimestre", fontsize=10, fontfamily='serif')
+    ax.set_ylabel("% del PIB", fontsize=10, fontfamily='serif')
+    ax.grid(True, linestyle="--", alpha=0.4, color="#E2E8F0")
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_ylim(35, 125)
+
     plt.tight_layout()
     out_fig = LATEX_DIR / "figura_8_1_deuda_consolidada.png"
     plt.savefig(out_fig, dpi=300)
