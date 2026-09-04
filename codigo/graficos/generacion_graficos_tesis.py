@@ -116,6 +116,8 @@ def fig_5_1_deuda_resultado_primario(df):
                   ha="center", va="top", fontsize=8.5, color="#333333")
     ax1.set_ylim(ymin, ymax)
     ax1.set_xlim(REGIME_BOUNDARIES[0] - 0.5, REGIME_BOUNDARIES[-1] - 1.5)
+    ax1.xaxis.set_major_locator(mticker.MultipleLocator(2))
+    ax1.xaxis.set_major_formatter(mticker.FormatStrFormatter('%d'))
 
     lines1, labels1 = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
@@ -147,6 +149,22 @@ def fig_5_3_dispersion_fatiga_fiscal(df):
     ax.set_ylabel(r"Resultado Primario / PIB ($pb_t$, %)")
     ax.set_title("Dispersión Empírica: Esfuerzo Primario vs. Endeudamiento Heredado\n(ajuste polinómico de 2do grado, IC 95%, panel completo n={})".format(len(d)))
     ax.axhline(0, color="#999999", linewidth=0.8, linestyle="-")
+
+    p_coefs = np.polyfit(d["d_lag1"], d["pb_pib"], 2)
+    p_poly = np.poly1d(p_coefs)
+    y_pred = p_poly(d["d_lag1"])
+    ss_tot = np.sum((d["pb_pib"] - d["pb_pib"].mean()) ** 2)
+    ss_res = np.sum((d["pb_pib"] - y_pred) ** 2)
+    r2 = 1 - ss_res / ss_tot
+    d_star = -p_coefs[1] / (2 * p_coefs[0])
+
+    badge = (
+        f"$pb_t = {p_coefs[2]:.2f} {p_coefs[1]:+.3f} d_{{t-1}} {p_coefs[0]:+.4f} d_{{t-1}}^2$\n"
+        f"$R^2 = {r2:.3f} \\quad (n = {len(d)})$\n"
+        f"Vértice de fatiga: $d^* = {d_star:.1f}\\%$ del PIB"
+    )
+    ax.text(0.97, 0.95, badge, transform=ax.transAxes, ha="right", va="top",
+            fontsize=9.5, bbox=dict(boxstyle="round,pad=0.5", facecolor="#F8FAFC", edgecolor="#CBD5E1", alpha=0.95))
 
     fig.tight_layout()
     out_path = os.path.join(OUTPUT_DIR, "fig5_3_dispersion_fatiga_fiscal.png")
@@ -313,7 +331,7 @@ def fig_svar_fevd():
     # Filtramos la descomposición de la Deuda y del EMBI+
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     shocks = ["Shock_g_gap", "Shock_pb_pib", "Shock_EMBI", "Shock_TCRM", "Shock_deuda_pib"]
-    colors = ["#4A90E2", "#50E3C2", "#F5A623", "#E74C3C", "#9B59B6"]
+    colors = ["#0B3D66", "#4A6984", "#C27D38", "#9E2A2B", "#5E6472"]
     labels = ["Brecha PIB", "Superávit Prim.", "EMBI+", "TCRM", "Deuda Propia"]
     
     for ax, var_name, title in zip(axes, ["deuda_pib", "EMBI"], ["Varianza de Deuda/PIB", "Varianza de EMBI+"]):
@@ -337,46 +355,77 @@ def fig_svar_fevd():
 
 
 def fig_cir_simulacion():
-    """Genera el gráfico de trayectorias de Monte Carlo del proceso CIR."""
+    """Genera el gráfico de trayectorias de Monte Carlo del proceso CIR calibrado
+    rigurosamente a partir de resultados/tablas/fase20_cir_calibracion.csv."""
+    calib_path = os.path.join(BASE_DIR, "resultados", "tablas", "fase20_cir_calibracion.csv")
+    if os.path.exists(calib_path):
+        df_calib = pd.read_csv(calib_path)
+        row = df_calib.iloc[0]  # Muestra homogénea 2004-2025
+        kappa = float(row["kappa"])
+        theta = float(row["theta_pb"])
+        sigma = float(row["sigma"])
+    else:
+        kappa, theta, sigma = 0.9229, 1032.25, 26.9175
+
+    data_path = os.path.join(BASE_DIR, "datos", "dataset_consolidado_real.csv")
+    if os.path.exists(data_path):
+        df_data = pd.read_csv(data_path)
+        r0 = float(df_data["EMBI"].dropna().iloc[-1])
+    else:
+        r0 = 745.03
+
     np.random.seed(42)
     dt = 0.25
-    n_steps = 40 # 10 años
-    n_sims = 100
-    kappa, theta, sigma = 0.428, 650.0, 18.42
-    r0 = 1100.0
-    
+    n_steps = 40  # 10 años (40 trimestres)
+    n_sims = 5000
+
     t_grid = np.linspace(0, 10, n_steps + 1)
     paths = np.zeros((n_sims, n_steps + 1))
     paths[:, 0] = r0
-    
+
     for t in range(n_steps):
         dw = np.random.normal(0, np.sqrt(dt), size=n_sims)
         r_curr = paths[:, t]
         drift = kappa * (theta - r_curr) * dt
         diff = sigma * np.sqrt(np.maximum(r_curr, 1.0)) * dw
         paths[:, t + 1] = np.maximum(r_curr + drift + diff, 10.0)
-        
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5), gridspec_kw={"width_ratios": [3, 1]})
-    
-    # Trayectorias
-    for i in range(min(50, n_sims)):
-        ax1.plot(t_grid, paths[i], color="#4A90E2", alpha=0.15, linewidth=1)
-    ax1.plot(t_grid, np.median(paths, axis=0), color=NAVY, linewidth=2.5, label="Mediana")
-    ax1.plot(t_grid, np.percentile(paths, 90, axis=0), color=GREY_RED, linestyle="--", linewidth=1.8, label="Percentil 90")
-    ax1.plot(t_grid, np.percentile(paths, 10, axis=0), color=TEAL, linestyle="--", linewidth=1.8, label="Percentil 10")
-    ax1.axhline(theta, color="black", linestyle=":", linewidth=1.5, label=f"Equilibrio θ ({theta:.0f} pb)")
-    
-    ax1.set_xlabel("Años de Proyección")
-    ax1.set_ylabel("EMBI+ Proyectado (puntos básicos)")
-    ax1.set_title("Simulación Estocástica de Monte Carlo: Proceso CIR del EMBI+", fontweight="bold")
-    ax1.legend(loc="upper right", fontsize=9)
-    
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.5, 5.5), gridspec_kw={"width_ratios": [3.2, 1]}, sharey=True)
+
+    # 50 trayectorias individuales tenues de fondo
+    for i in range(50):
+        ax1.plot(t_grid, paths[i], color="#4A6984", alpha=0.10, linewidth=0.8)
+
+    mediana = np.median(paths, axis=0)
+    p90 = np.percentile(paths, 90, axis=0)
+    p10 = np.percentile(paths, 10, axis=0)
+    p75 = np.percentile(paths, 75, axis=0)
+    p25 = np.percentile(paths, 25, axis=0)
+
+    ax1.fill_between(t_grid, p10, p90, color=NAVY, alpha=0.12, label="Banda 10%-90%")
+    ax1.fill_between(t_grid, p25, p75, color=NAVY, alpha=0.22, label="Banda 25%-75%")
+    ax1.plot(t_grid, mediana, color=NAVY, linewidth=2.4, label=f"Mediana proyectada ({mediana[-1]:.0f} pb)")
+    ax1.axhline(theta, color="#9E2A2B", linestyle="--", linewidth=1.6,
+                label=rf"Equilibrio LP $\theta = {theta:.0f}$ pb")
+    ax1.scatter([0], [r0], color="#9E2A2B", s=45, zorder=5, label=f"Condición inicial $r_0 = {r0:.0f}$ pb")
+
+    ax1.set_xlabel("Años de Proyección (2026–2035)", fontweight="bold")
+    ax1.set_ylabel("EMBI+ Proyectado (puntos básicos)", fontweight="bold")
+    ax1.set_title(f"Simulación Monte Carlo: Proceso CIR del EMBI+ (N=5.000 trayectorias)\n"
+                  rf"$\kappa = {kappa:.4f}$ (vida media 0.75 a), $\theta = {theta:.0f}$ pb, $\sigma = {sigma:.2f}$ (Feller ratio = 2.63)",
+                  fontweight="bold", fontsize=11)
+    ax1.legend(loc="upper right", fontsize=8.5, framealpha=0.9)
+    ax1.set_xlim(0, 10)
+    ax1.set_ylim(0, max(2500, p90.max() * 1.08))
+
     # Densidad terminal
-    sns.kdeplot(y=paths[:, -1], ax=ax2, fill=True, color=NAVY, alpha=0.3)
-    ax2.set_title("Densidad Terminal (t=10)", fontweight="bold")
-    ax2.set_xlabel("Densidad")
-    ax2.set_yticklabels([])
-    
+    sns.kdeplot(y=paths[:, -1], ax=ax2, fill=True, color=NAVY, alpha=0.35, linewidth=1.5)
+    ax2.axhline(theta, color="#9E2A2B", linestyle="--", linewidth=1.6)
+    ax2.axhline(mediana[-1], color=NAVY, linestyle=":", linewidth=1.4)
+    ax2.set_title("Densidad Terminal\n($t=10$, 2035)", fontweight="bold", fontsize=10)
+    ax2.set_xlabel("Densidad", fontsize=9)
+    ax2.xaxis.set_major_locator(mticker.MaxNLocator(3))
+
     fig.tight_layout()
     out_path = os.path.join(OUTPUT_DIR, "figura_cir_simulacion.png")
     fig.savefig(out_path, bbox_inches="tight")
@@ -430,7 +479,7 @@ def fig_spread_historico_1983_2025():
                  arrowprops=dict(arrowstyle="->", color="#333333", lw=1.2), fontsize=8)
 
     ax1.annotate("Mínimo Histórico\n2007 (210 pb)", xy=(pd.to_datetime("2007-03-31"), 210),
-                 xytext=(pd.to_datetime("2005-01-01"), 1800),
+                 xytext=(pd.to_datetime("2004-06-30"), 1100),
                  arrowprops=dict(arrowstyle="->", color="#333333", lw=1.2), fontsize=8)
 
     ax1.set_title("Evolución Histórica del Spread Soberano de Argentina (1983–2025): 42 Años de Democracia",
@@ -445,11 +494,11 @@ def fig_spread_historico_1983_2025():
     mask_embi = df["Date"] >= "1998-01-01"
 
     ax2.plot(df.loc[mask_bonex, "Date"], df.loc[mask_bonex, "Spread_Empalmado_pb"],
-             color="#D9534F", linewidth=2.0, label="Bonex Series 82/84/87/89 (1983–1992)")
+             color="#9E2A2B", linewidth=2.0, label="Bonex Series 82/84/87/89 (1983–1992)")
     ax2.plot(df.loc[mask_brady, "Date"], df.loc[mask_brady, "Spread_Empalmado_pb"],
-             color="#F0AD4E", linewidth=2.0, label="JP Morgan Brady Stripped (1993–1997)")
+             color="#C27D38", linewidth=2.0, label="JP Morgan Brady Stripped (1993–1997)")
     ax2.plot(df.loc[mask_embi, "Date"], df.loc[mask_embi, "Spread_Empalmado_pb"],
-             color="#0275D8", linewidth=2.0, label="JP Morgan EMBI+ / Global (1998–2025)")
+             color="#0B3D66", linewidth=2.0, label="JP Morgan EMBI+ / Global (1998–2025)")
 
     ax2.set_title("Composición por Instrumento Soberano y Mercado de Origen", fontweight="bold", fontsize=10)
     ax2.set_xlabel("Año de Observación", fontweight="bold")

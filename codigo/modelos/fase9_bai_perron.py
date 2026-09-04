@@ -56,6 +56,15 @@ def main():
     print("=" * 75)
 
     df = pd.read_csv(CSV_PATH, parse_dates=["Date"], index_col="Date")
+    if "deuda_consolidada_pib" not in df.columns:
+        if "pasivos_bcra_pib" in df.columns:
+            df["deuda_consolidada_pib"] = df["deuda_pib"] + df["pasivos_bcra_pib"]
+        else:
+            bcra_path = BASE_DIR / "datos" / "procesados" / "bcra_pasivos_trimestral.csv"
+            if bcra_path.exists():
+                bcra = pd.read_csv(bcra_path, parse_dates=["fecha"], index_col="fecha")
+                df["pasivos_bcra_pib"] = bcra["pasivos_bcra_pib"]
+                df["deuda_consolidada_pib"] = df["deuda_pib"] + df["pasivos_bcra_pib"].fillna(0)
 
     result_spnf = analyze_series(df, "deuda_pib", "Deuda SPNF / PIB (original)")
     result_cons = analyze_series(df, "deuda_consolidada_pib",
@@ -80,25 +89,33 @@ def main():
         TABLES_DIR / "fase9_bai_perron_segmentos_deuda_consolidada.csv", index=False)
 
     # --- Gráfico ---
-    fig, ax = plt.subplots(figsize=(11, 6))
-    ax.plot(df.index, df["deuda_pib"], color="#0B3C5D", linewidth=1.6, label="Deuda SPNF / PIB")
-    ax.plot(df.index, df["deuda_consolidada_pib"], color="#B33951", linewidth=1.6,
-            linestyle="--", label="Deuda Consolidada SPNF + BCRA / PIB")
+    fig, ax = plt.subplots(figsize=(11.5, 6))
+    ax.plot(df.index, df["deuda_pib"], color="#0B3D66", linewidth=1.8, label="Deuda SPNF / PIB")
+    ax.plot(df.index, df["deuda_consolidada_pib"], color="#9E2A2B", linewidth=1.8,
+            linestyle="--", label="Deuda Consolidada SPNF + Pasivos BCRA / PIB")
 
     for seg in result_spnf["medias_segmento"].itertuples():
-        ax.hlines(seg.media, seg.inicio, seg.fin, color="#0B3C5D", linewidth=3, alpha=0.35)
+        ax.hlines(seg.media, seg.inicio, seg.fin, color="#0B3D66", linewidth=3.2, alpha=0.40)
+    for seg in result_cons["medias_segmento"].itertuples():
+        ax.hlines(seg.media, seg.inicio, seg.fin, color="#9E2A2B", linewidth=2.5, alpha=0.35, linestyle=":")
+
+    y_max = max(df["deuda_pib"].max(), df["deuda_consolidada_pib"].max()) * 1.15
+    ax.set_ylim(0, y_max)
+
     for d in result_spnf["fechas_quiebre"]:
-        ax.axvline(d, color="#0B3C5D", linestyle=":", alpha=0.6)
-        ax.text(d, ax.get_ylim()[1] * 0.97, pd.Timestamp(d).strftime("%Y-%m"),
-                rotation=90, fontsize=8, color="#0B3C5D", va="top", ha="right")
+        ax.axvline(d, color="#0B3D66", linestyle=":", alpha=0.7, linewidth=1.2)
+        ax.text(d, y_max * 0.94, f"SPNF: {pd.Timestamp(d).strftime('%Y-%m')}",
+                rotation=90, fontsize=8, color="#0B3D66", va="top", ha="right", fontweight="bold")
 
     for d in result_cons["fechas_quiebre"]:
-        ax.axvline(d, color="#B33951", linestyle=":", alpha=0.4)
+        ax.axvline(d, color="#9E2A2B", linestyle="-.", alpha=0.6, linewidth=1.2)
+        ax.text(d, y_max * 0.78, f"Consolidada: {pd.Timestamp(d).strftime('%Y-%m')}",
+                rotation=90, fontsize=8, color="#9E2A2B", va="top", ha="left")
 
-    ax.set_title("Quiebres Estructurales Múltiples de Bai-Perron (selección por BIC)")
-    ax.set_xlabel("Trimestre")
-    ax.set_ylabel("% del PIB")
-    ax.legend(fontsize=9, loc="upper left")
+    ax.set_title("Quiebres Estructurales Múltiples de Bai-Perron (Selección Óptima por BIC)", fontweight="bold", fontsize=12)
+    ax.set_xlabel("Trimestre", fontweight="bold")
+    ax.set_ylabel("% del PIB", fontweight="bold")
+    ax.legend(fontsize=9, loc="upper right", framealpha=0.9)
     ax.grid(True, alpha=0.3)
     fig.tight_layout()
     out_path = LATEX_DIR / "figura_9_1_bai_perron.png"

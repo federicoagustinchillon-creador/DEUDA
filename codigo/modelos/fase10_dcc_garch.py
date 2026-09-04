@@ -167,16 +167,39 @@ def main():
 
     pd.DataFrame(rows).to_csv(TABLES_DIR / "fase10_dcc_garch_comparacion_dsa.csv", index=False)
 
-    # --- Gráfico: correlación dinámica en el tiempo ---
-    fig, ax = plt.subplots(figsize=(10, 5))
-    for i, j, name in pairs:
-        ax.plot(shocks.index, R_path[:, i, j], label=f"$\\rho$({name})", linewidth=1.4)
-    ax.axhline(0, color="black", linewidth=0.6)
-    ax.set_title(f"Correlación Condicional Dinámica DCC(1,1) — a={a:.3f}, b={b:.3f}")
-    ax.set_xlabel("Trimestre")
-    ax.set_ylabel("Correlación condicional")
-    ax.legend(fontsize=9)
+    # --- Gráfico: correlación dinámica en el tiempo vs móvil empírica ---
+    fig, ax = plt.subplots(figsize=(11.5, 5.5))
+    colors_pairs = ["#0B3D66", "#9E2A2B", "#C27D38"]
+    for idx_p, (i, j, name) in enumerate(pairs):
+        col = colors_pairs[idx_p % len(colors_pairs)]
+        # Nivel constante DCC (colapso a CCC)
+        ax.plot(shocks.index, R_path[:, i, j], color=col, linewidth=2.2,
+                label=rf"DCC $\rho$({name}) = {R_path[0, i, j]:.3f}")
+        # Correlación móvil empírica (ventana de 8 trimestres)
+        s_i = shocks.iloc[:, i]
+        s_j = shocks.iloc[:, j]
+        rolling_corr = s_i.rolling(window=8, min_periods=4).corr(s_j)
+        ax.plot(shocks.index, rolling_corr, color=col, linestyle="--", linewidth=1.2, alpha=0.6,
+                label=rf"Móvil 8T $\rho$({name})")
+
+    ax.axhline(0, color="black", linewidth=0.8, linestyle=":")
+    ax.set_title(f"Correlación Condicional Dinámica DCC(1,1) vs. Correlación Móvil Empírica\n"
+                 rf"($a = {a:.3f}, b = {b:.3f} \rightarrow$ Convergencia a Correlación Condicional Constante - CCC)",
+                 fontweight="bold", fontsize=11)
+    ax.set_xlabel("Trimestre", fontweight="bold")
+    ax.set_ylabel(r"Correlación condicional $\rho_{ij,t}$", fontweight="bold")
+    ax.legend(fontsize=8, loc="lower right", ncol=2, framealpha=0.9)
     ax.grid(True, alpha=0.3)
+    ax.set_ylim(-1.0, 1.0)
+
+    note = (
+        "Nota metodológica: El estimador de Engle (2002) arroja a=0.000, b=0.000,\n"
+        "colapsando la especificación dinámica en el modelo de Bollerslev (1990) CCC.\n"
+        "Las líneas punteadas reflejan la dispersión móvil muestral alrededor del nivel incondicional."
+    )
+    ax.text(0.02, 0.95, note, transform=ax.transAxes, ha="left", va="top",
+            fontsize=8, bbox=dict(boxstyle="round,pad=0.4", facecolor="#F8FAFC", edgecolor="#CBD5E1", alpha=0.9))
+
     fig.tight_layout()
     out_path = LATEX_DIR / "figura_10_1_dcc_correlacion_dinamica.png"
     fig.savefig(out_path, dpi=300)
