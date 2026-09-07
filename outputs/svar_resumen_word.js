@@ -1,24 +1,24 @@
 /**
- * Genera la nota metodológica en Word del componente econométrico de la tesis
- * "Deuda Pública Consolidada y Fatiga Fiscal en Argentina (2004–2025)".
+ * Nota metodológica en Word — tesis "Deuda Pública Consolidada y Fatiga Fiscal
+ * en Argentina (2004–2025)".
  *
- * El documento reúne, con las ecuaciones del protocolo y las cifras estimadas,
- * el modelo SVAR restringido, los contrastes de umbral (Hansen y TVECM), la
- * reconstrucción del spread soberano 1983–2025 y el análisis de sostenibilidad
- * estocástico. Todas las cifras provienen de resultados/tablas/ y de los
- * capítulos 4 a 8 de la tesis; no hay valores fabricados.
+ * Objeto del documento: reunir los RESULTADOS DE LOS TESTS de los dos
+ * componentes que todavía hay que decidir cómo entran en la tesis final —
+ * (A) el VAR estructural restringido y (B) el empalme de series para un proxy
+ * de largo plazo del EMBI+ — y, para cada uno, explicar para qué sirve, de modo
+ * de poder elegir después qué versión se usa.
  *
- * Formato: una sola tipografía (Calibri), sin saltos de página. Las ecuaciones
- * se incrustan como imagen renderizada con Computer Modern (LaTeX) por
- * render_eqs.py, para que se vean igual en cualquier versión de Word.
- * Ejecutar antes: python outputs/render_eqs.py
+ * Todas las cifras provienen de resultados/tablas/ y de los capítulos 4–8 de la
+ * tesis. No hay valores fabricados.
  *
- * Autores: Federico Chillón · Santiago Páez · Emiliano Carricondo
- * Facultad de Ciencias Económicas — Universidad Nacional de Cuyo
+ * Formato: tipografía única (Calibri), sin saltos de página. Ecuaciones nativas
+ * de Word (OMML), no imágenes.
  *
- * Salida: outputs/SVAR_Metodologia_Resultados_Accesible.docx
+ * Autores: Federico Chillón · Santiago Páez · Emiliano Carricondo — FCE UNCUYO
+ * Salida:  outputs/SVAR_Metodologia_Resultados_Accesible.docx
  */
 
+const docx = require("docx");
 const {
   Document,
   Packer,
@@ -34,48 +34,40 @@ const {
   LevelFormat,
   PageNumber,
   Footer,
-  ImageRun,
+  MathRun,
+  MathSubScript,
+  MathSuperScript,
+  MathFraction,
+  MathRadical,
+  MathSum,
   convertInchesToTwip,
-} = require("docx");
+} = docx;
+const MathBlock = docx.Math; // evita sombrear el global Math (Math.round)
 const fs = require("fs");
 const path = require("path");
 
-// Manifiesto de imágenes de ecuaciones (generado por render_eqs.py, tipografía
-// Computer Modern, DPI 240). Se incrustan como imagen para que rendericen con
-// calidad LaTeX de forma idéntica en cualquier versión de Word.
-const EQ_DIR = path.join(__dirname, "eq_img");
-const EQ_MANIFEST = JSON.parse(
-  fs.readFileSync(path.join(EQ_DIR, "manifest.json"), "utf-8")
-);
-const EQ_SOURCE_DPI = 240;
-const EQ_DISPLAY_DPI = 150; // efectivo: cuanto mayor, más pequeña la ecuación
-const EQ_MAX_WIDTH_PX = 600; // ancho de caja de texto de la página, a 96 DPI
-
-// ───────────────────────── Parámetros de estilo ─────────────────────────────
-
+// ───────────────────────── Estilo ──────────────────────────────────────────
 const FONT = "Calibri";
 const BODY = 22; // 11 pt
 const SMALL = 19; // 9.5 pt
 const RULE = "000000";
 
-// ───────────────────────── Helpers de párrafo ───────────────────────────────
-
-const H1 = (text) =>
+// ───────────────────────── Párrafos ────────────────────────────────────────
+const H1 = (t) =>
   new Paragraph({
     heading: HeadingLevel.HEADING_1,
-    spacing: { before: 340, after: 130 },
-    children: [new TextRun({ text, bold: true, font: FONT, size: 26 })],
+    spacing: { before: 360, after: 130 },
+    children: [new TextRun({ text: t, bold: true, font: FONT, size: 27 })],
   });
 
-const H2 = (text) =>
+const H2 = (t) =>
   new Paragraph({
     heading: HeadingLevel.HEADING_2,
-    spacing: { before: 240, after: 100 },
-    children: [new TextRun({ text, bold: true, font: FONT, size: 23 })],
+    spacing: { before: 260, after: 100 },
+    children: [new TextRun({ text: t, bold: true, font: FONT, size: 23 })],
   });
 
-// Prosa corrida. Acepta un array de fragmentos {t, i?, b?} o un string.
-const P = (content, opts = {}) => {
+const P = (content) => {
   const runs = (Array.isArray(content) ? content : [{ t: content }]).map(
     (f) =>
       new TextRun({
@@ -89,18 +81,27 @@ const P = (content, opts = {}) => {
   return new Paragraph({
     alignment: AlignmentType.JUSTIFIED,
     spacing: { after: 140, line: 300 },
-    indent:
-      opts.firstLine === false
-        ? undefined
-        : { firstLine: convertInchesToTwip(0.3) },
     children: runs,
   });
 };
 
+// bloque "Para la tesis final:" — sangría y barra a la izquierda
+const DECISION = (text) =>
+  new Paragraph({
+    alignment: AlignmentType.JUSTIFIED,
+    spacing: { before: 60, after: 200, line: 288 },
+    indent: { left: convertInchesToTwip(0.3) },
+    border: { left: { style: BorderStyle.SINGLE, size: 12, color: RULE, space: 10 } },
+    children: [
+      new TextRun({ text: "Para la tesis final. ", bold: true, font: FONT, size: SMALL }),
+      new TextRun({ text, font: FONT, size: SMALL }),
+    ],
+  });
+
 const NOTE = (text) =>
   new Paragraph({
     alignment: AlignmentType.JUSTIFIED,
-    spacing: { before: 40, after: 200 },
+    spacing: { before: 30, after: 190 },
     children: [
       new TextRun({ text: "Nota. ", italics: true, font: FONT, size: SMALL }),
       new TextRun({ text, italics: true, font: FONT, size: SMALL }),
@@ -109,14 +110,7 @@ const NOTE = (text) =>
 
 const BULLET = (content) => {
   const runs = (Array.isArray(content) ? content : [{ t: content }]).map(
-    (f) =>
-      new TextRun({
-        text: f.t,
-        italics: !!f.i,
-        bold: !!f.b,
-        font: FONT,
-        size: BODY,
-      })
+    (f) => new TextRun({ text: f.t, italics: !!f.i, bold: !!f.b, font: FONT, size: BODY })
   );
   return new Paragraph({
     numbering: { reference: "vinetas", level: 0 },
@@ -130,103 +124,81 @@ const REF = (text) =>
   new Paragraph({
     alignment: AlignmentType.JUSTIFIED,
     spacing: { after: 90, line: 264 },
-    indent: {
-      left: convertInchesToTwip(0.35),
-      hanging: convertInchesToTwip(0.35),
-    },
+    indent: { left: convertInchesToTwip(0.35), hanging: convertInchesToTwip(0.35) },
     children: [new TextRun({ text, font: FONT, size: SMALL })],
   });
 
-// ── Ecuación: imagen Computer Modern centrada, escalada a la página ─────────
-const EQ = (key) => {
-  const m = EQ_MANIFEST[key];
-  if (!m) throw new Error("ecuación no encontrada en el manifiesto: " + key);
-  let w = (m.w * 96) / EQ_DISPLAY_DPI;
-  let h = (m.h * 96) / EQ_DISPLAY_DPI;
-  if (w > EQ_MAX_WIDTH_PX) {
-    const f = EQ_MAX_WIDTH_PX / w;
-    w *= f;
-    h *= f;
-  }
-  return new Paragraph({
+const GAP = () => new Paragraph({ text: "", spacing: { after: 60 } });
+
+// ───────────────────────── Ecuaciones OMML ─────────────────────────────────
+const arr = (x) =>
+  x == null
+    ? []
+    : Array.isArray(x)
+    ? x.flatMap(arr)
+    : typeof x === "string"
+    ? [new MathRun(x)]
+    : [x];
+
+const mr = (t) => new MathRun(t);
+const sub = (b, s) => new MathSubScript({ children: arr(b), subScript: arr(s) });
+const sup = (b, s) => new MathSuperScript({ children: arr(b), superScript: arr(s) });
+const frac = (n, d) => new MathFraction({ numerator: arr(n), denominator: arr(d) });
+const rad = (x) => new MathRadical({ children: arr(x) });
+const nary = (child, lo, hi) =>
+  new MathSum({ children: arr(child), subScript: arr(lo), superScript: arr(hi) });
+
+const EQ = (...parts) =>
+  new Paragraph({
     alignment: AlignmentType.CENTER,
-    spacing: { before: 140, after: 170 },
-    children: [
-      new ImageRun({
-        type: "png",
-        data: fs.readFileSync(path.join(EQ_DIR, m.file)),
-        transformation: { width: Math.round(w), height: Math.round(h) },
-      }),
-    ],
+    spacing: { before: 130, after: 160 },
+    children: [new MathBlock({ children: parts.flatMap(arr) })],
   });
-};
 
-// ───────────────────────── Tabla sobria (solo reglas horizontales) ──────────
-
+// ───────────────────────── Tabla académica ─────────────────────────────────
 function academicTable(headers, rows, widths, aligns) {
-  const noBorder = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
+  const nb = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
   const thin = { style: BorderStyle.SINGLE, size: 4, color: RULE };
   const thick = { style: BorderStyle.SINGLE, size: 8, color: RULE };
-
-  const mkCell = (
-    txt,
-    i,
-    { bold = false, top = noBorder, bottom = noBorder } = {}
-  ) =>
+  const cell = (txt, i, { bold = false, top = nb, bottom = nb } = {}) =>
     new TableCell({
       width: { size: widths[i], type: WidthType.DXA },
-      borders: { top, bottom, left: noBorder, right: noBorder },
+      borders: { top, bottom, left: nb, right: nb },
       margins: { top: 40, bottom: 40, left: 80, right: 80 },
       children: [
         new Paragraph({
-          alignment:
-            aligns[i] === "l" ? AlignmentType.LEFT : AlignmentType.RIGHT,
+          alignment: aligns[i] === "l" ? AlignmentType.LEFT : AlignmentType.RIGHT,
           spacing: { after: 0 },
-          children: [
-            new TextRun({ text: String(txt), bold, font: FONT, size: SMALL }),
-          ],
+          children: [new TextRun({ text: String(txt), bold, font: FONT, size: SMALL })],
         }),
       ],
     });
-
-  const headerRow = new TableRow({
+  const head = new TableRow({
     tableHeader: true,
-    children: headers.map((h, i) =>
-      mkCell(h, i, { bold: true, top: thick, bottom: thin })
-    ),
+    children: headers.map((h, i) => cell(h, i, { bold: true, top: thick, bottom: thin })),
   });
-
-  const bodyRows = rows.map(
+  const body = rows.map(
     (r, ri) =>
       new TableRow({
         children: r.map((c, i) =>
-          mkCell(c, i, {
-            bottom: ri === rows.length - 1 ? thick : noBorder,
-          })
+          cell(c, i, { bottom: ri === rows.length - 1 ? thick : nb })
         ),
       })
   );
-
   return new Table({
     columnWidths: widths,
-    width: {
-      size: widths.reduce((a, b) => a + b, 0),
-      type: WidthType.DXA,
-    },
-    rows: [headerRow, ...bodyRows],
+    width: { size: widths.reduce((a, b) => a + b, 0), type: WidthType.DXA },
+    rows: [head, ...body],
   });
 }
 
-const GAP = () => new Paragraph({ text: "", spacing: { after: 60 } });
+// ═══════════════════════════════════════════════════════════════════════════
+const C = [];
 
-// ═══════════════════════════ CUERPO DEL DOCUMENTO ═══════════════════════════
-
-const children = [];
-
-// ── Encabezado del documento ───────────────────────────────────────────────
-children.push(
+// ── Encabezado ─────────────────────────────────────────────────────────────
+C.push(
   new Paragraph({
-    spacing: { before: 0, after: 120 },
+    spacing: { after: 110 },
     children: [
       new TextRun({
         text: "Deuda Pública Consolidada y Fatiga Fiscal en Argentina, 2004–2025",
@@ -237,12 +209,12 @@ children.push(
     ],
   }),
   new Paragraph({
-    spacing: { after: 220 },
+    spacing: { after: 210 },
     children: [
       new TextRun({
         text:
-          "Nota metodológica: función de reacción fiscal, VAR estructural restringido, " +
-          "umbrales de fatiga fiscal y sostenibilidad estocástica",
+          "Nota metodológica — resultados de los tests del VAR estructural restringido y del " +
+          "empalme de series para un proxy de largo plazo del EMBI+",
         italics: true,
         font: FONT,
         size: 24,
@@ -252,19 +224,14 @@ children.push(
   new Paragraph({
     spacing: { after: 40 },
     children: [
-      new TextRun({
-        text: "Santiago Páez  ·  Emiliano Carricondo  ·  Federico Chillón",
-        font: FONT,
-        size: 22,
-      }),
+      new TextRun({ text: "Santiago Páez  ·  Emiliano Carricondo  ·  Federico Chillón", font: FONT, size: 22 }),
     ],
   }),
   new Paragraph({
-    spacing: { after: 260 },
+    spacing: { after: 240 },
     children: [
       new TextRun({
-        text:
-          "Facultad de Ciencias Económicas — Universidad Nacional de Cuyo · Mendoza, 2026",
+        text: "Facultad de Ciencias Económicas — Universidad Nacional de Cuyo · Mendoza, 2026",
         font: FONT,
         size: 20,
       }),
@@ -272,7 +239,7 @@ children.push(
   }),
   new Paragraph({
     alignment: AlignmentType.JUSTIFIED,
-    spacing: { after: 160, line: 300 },
+    spacing: { after: 150, line: 300 },
     border: {
       top: { style: BorderStyle.SINGLE, size: 4, color: RULE },
       bottom: { style: BorderStyle.SINGLE, size: 4, color: RULE },
@@ -280,12 +247,13 @@ children.push(
     children: [
       new TextRun({
         text:
-          "Este documento resume, con las ecuaciones del protocolo y las cifras estimadas, el " +
-          "componente econométrico de la tesis. Acompaña al texto completo y a la guía de defensa; " +
-          "su propósito es que cualquiera de los tres autores y el director puedan seguir de " +
-          "principio a fin qué se estimó, con qué datos y qué arrojó cada modelo. Las series, tablas " +
-          "y coeficientes que se citan están en el repositorio del proyecto, en resultados/tablas/, y " +
-          "se corresponden con los capítulos 4 a 8 de la tesis.",
+          "Este documento reúne los resultados de los contrastes econométricos de dos componentes de " +
+          "la tesis que todavía hay que decidir cómo entran en la versión final: el VAR estructural " +
+          "restringido (Parte A) y el empalme de series para reconstruir un proxy de largo plazo del " +
+          "riesgo soberano (Parte B). Para cada test se indica qué mide, qué resultado dio y para qué " +
+          "sirve al momento de elegir la especificación. La Parte C sintetiza la decisión; la Parte D " +
+          "deja registrado el resto del protocolo. Toda cifra proviene de resultados/tablas/ y de los " +
+          "capítulos 4 a 8.",
         font: FONT,
         size: BODY,
       }),
@@ -293,383 +261,111 @@ children.push(
   })
 );
 
-// ── 1. Objeto y preguntas ──────────────────────────────────────────────────
-children.push(H1("1. Objeto de estudio y preguntas"));
-children.push(
-  P(
-    "La pregunta que ordena el trabajo es si el comportamiento fiscal argentino del período " +
-      "2004–2025 satisface la restricción presupuestaria intertemporal del gobierno, o si, por el " +
-      "contrario, la trayectoria de la deuda es insostenible en un sentido estadístico verificable. " +
-      "Es una pregunta empíricamente falseable: el coeficiente de reacción fiscal puede resultar no " +
-      "significativo o negativo, y de hecho así resulta en la especificación lineal de muestra completa."
-  )
-);
-children.push(
-  P(
-    "Argentina ofrece un caso poco común. La historia fiscal reciente concentra la salida del default " +
-      "de 2001, las reestructuraciones de 2005 y 2010, el default técnico con holdouts de 2014, el " +
-      "programa con el Fondo Monetario Internacional de 2018, la reestructuración de 2020 y la " +
-      "consolidación fiscal iniciada en 2024. El riesgo país medido por el EMBI+ promedió 2.416 puntos " +
-      "básicos en el período, con un desvío estándar de 876 puntos, y recién en 2024–2025 comprimió " +
-      "hacia el rango de 561 a 1.100 puntos. Esa variabilidad de régimen es, a la vez, el principal " +
-      "obstáculo econométrico y el objeto que el trabajo se propone modelar."
-  )
-);
-children.push(H2("Preguntas específicas"));
-children.push(
-  BULLET(
-    "¿El coeficiente de reacción del resultado primario ante el stock de deuda rezagado es positivo y " +
-      "significativo, una vez controlado el ciclo económico?"
-  )
-);
-children.push(
-  BULLET(
-    "¿La corrección de la endogeneidad del riesgo soberano mediante variables instrumentales modifica " +
-      "esa conclusión respecto de la estimación por mínimos cuadrados?"
-  )
-);
-children.push(
-  BULLET(
-    "¿Existen quiebres estructurales múltiples en la ratio de deuda, detectados de forma endógena, que " +
-      "invaliden un modelo de parámetros constantes para todo el período?"
-  )
-);
-children.push(
-  BULLET(
-    "¿Hay un umbral de riesgo soberano por encima del cual la respuesta fiscal se atenúa o se invierte " +
-      "—fatiga fiscal—, y en qué nivel se sitúa?"
-  )
-);
-children.push(
-  BULLET(
-    "¿Cuál es la probabilidad de que la deuda supere el 100 % del PIB hacia 2035, bajo distintos " +
-      "escenarios macroeconómicos y con perturbaciones de colas pesadas?"
-  )
-);
+// ═══════════════════════ PARTE A — VAR ESTRUCTURAL RESTRINGIDO ══════════════
+C.push(H1("A. VAR estructural restringido (SVAR)"));
 
-// ── 2. Datos y variables ───────────────────────────────────────────────────
-children.push(H1("2. Datos y variables"));
-children.push(
+C.push(H2("A.1. Qué es y qué decide"));
+C.push(
   P(
-    "La unidad de análisis es el trimestre macroeconómico consolidado de Argentina. Se trabaja con dos " +
-      "ventanas muestrales complementarias. La ventana original, 2004T1–2025T4 (88 observaciones), tiene " +
-      "cobertura primaria homogénea de todas las variables y sostiene la estimación DOLS de referencia " +
-      "junto con el resto del protocolo de robustez. La ventana ampliada, 1999T1–2025T4 (108 " +
-      "observaciones), incorpora un tramo empalmado 1996–2003 mediante coeficiente de enlace y " +
-      "desagregación de Denton, y sostiene la estimación del sistema de vectores con corrección de " +
-      "error, que reemplaza a DOLS como técnica de referencia para la relación de largo plazo, a pedido " +
-      "del director."
+    "Un VAR reducido describe cómo cada variable depende de los rezagos de todas las demás, pero sus " +
+      "innovaciones están correlacionadas entre sí y no pueden interpretarse como shocks económicos. " +
+      "Para pasar de esas innovaciones a shocks estructurales hace falta imponer restricciones. El " +
+      "ordenamiento de Cholesky lo hace de forma puramente estadística —según el orden en que se listan " +
+      "las variables— y es arbitrario. El SVAR restringido reemplaza ese orden por tres restricciones " +
+      "con fundamento económico, sobre el vector de cinco variables:"
   )
 );
-children.push(
-  P(
-    "La deuda pública corresponde al stock bruto consolidado del Sector Público No Financiero, según " +
-      "los estándares del Manual de Estadísticas de Finanzas Públicas del FMI. Se excluyen de la " +
-      "definición central los pasivos remunerados del BCRA (LEBAC, LELIQ y pases), que se suman en una " +
-      "serie consolidada alternativa como prueba de robustez: en promedio añaden 5,5 puntos del PIB, con " +
-      "un pico de 10,6 % en 2018."
-  )
-);
-children.push(GAP());
-children.push(
-  academicTable(
-    ["Variable", "Símbolo", "Indicador operacional", "Fuente"],
-    [
-      ["Esfuerzo fiscal primario", "pb(t)", "Resultado primario del SPNF sobre PIB nominal (admite negativos)", "Hacienda (MECON)"],
-      ["Stock de deuda heredado", "d(t−1)", "Deuda bruta consolidada del SPNF sobre PIB, rezagada un trimestre", "Finanzas (MECON)"],
-      ["Ciclo macroeconómico", "ỹ(t)", "Brecha del producto, filtro HP (λ = 1600) sobre PIB real", "INDEC"],
-      ["Riesgo soberano", "EMBI(t)", "Riesgo país EMBI+, promedio trimestral, en puntos básicos", "BCRA / Bloomberg"],
-      ["Tipo de cambio real", "TCRM(t)", "Índice de tipo de cambio real multilateral (base BCRA)", "BCRA / datos.gob.ar"],
-      ["Instrumentos externos", "—", "VIX (CBOE) y diferencial de riesgo soberano regional (ETF EMB)", "Yahoo Finance / Bloomberg"],
-    ],
-    [1900, 1000, 4100, 1800],
-    ["l", "l", "l", "l"]
-  )
-);
-children.push(GAP());
-children.push(
-  NOTE(
-    "Un chequeo de trazabilidad reveló que, en la matriz original de 88 observaciones, el EMBI+ y el " +
-      "TCRM provenían en su totalidad de fuentes de contingencia y no de una consulta API exitosa. La " +
-      "matriz ampliada los reemplaza por las series reales del BCRA y de Ámbito Financiero en toda su " +
-      "cobertura 1999–2025. El detalle está en la Sección 4.2.2 de la tesis."
-  )
-);
-
-// ── 3. Marco formal ────────────────────────────────────────────────────────
-children.push(H1("3. Marco formal de la sostenibilidad"));
-children.push(
-  P(
-    "El punto de partida es la restricción presupuestaria intertemporal del gobierno. La condición de " +
-      "solvencia exige que el valor presente descontado de los superávits primarios futuros iguale, al " +
-      "menos, al stock de deuda vigente:"
-  )
-);
-children.push(
-  EQ("igbc")
-);
-children.push(
-  P(
-    "Esta condición no es directamente contrastable. Bohn (1998, 2007) propone una condición suficiente " +
-      "que sí lo es: si el resultado primario responde positivamente al stock de deuda rezagado, la " +
-      "restricción intertemporal se cumple de forma asintótica, sin necesidad de suponer una tasa de " +
-      "descuento ni de proyectar a infinito, y sin exigir estacionariedad de las series. La función de " +
-      "reacción fiscal, en su forma canónica, es:"
-  )
-);
-children.push(
-  EQ("bohn")
-);
-children.push(
-  P([
-    { t: "La hipótesis de sostenibilidad exige " },
-    { t: "ρ > 0", i: true },
-    { t: " con significatividad estadística. La proyección de trayectorias se apoya en la ecuación de movimiento de la ratio de deuda (Blanchard, 2019), donde el término " },
-    { t: "(r − g)", i: true },
-    { t: " gobierna el efecto de bola de nieve:" },
-  ])
-);
-children.push(
-  EQ("blanchard")
-);
-children.push(
-  P(
-    "El modelo de Ghosh et al. (2013) advierte que esta regla lineal esconde un límite: si la reacción " +
-      "es positiva a niveles bajos de deuda o de riesgo, pero se anula o se vuelve negativa por encima " +
-      "de cierto umbral, el contraste lineal informa sostenibilidad donde en realidad hay fatiga fiscal. " +
-      "De ahí que el protocolo incluya modelos de umbral con punto de quiebre estimado de forma endógena."
-  )
-);
-
-// ── 4. Estrategia econométrica ─────────────────────────────────────────────
-children.push(H1("4. Estrategia econométrica"));
-children.push(
-  P(
-    "El protocolo tiene seis etapas encadenadas, cada una diseñada para neutralizar un sesgo concreto " +
-      "de la anterior: raíces unitarias y regresión espuria, endogeneidad de corto plazo, endogeneidad " +
-      "del riesgo soberano, no linealidad de umbral y, finalmente, incertidumbre de escenario."
-  )
-);
-
-children.push(H2("4.1. Estacionariedad y quiebres"));
-children.push(
-  P(
-    "Sobre cada serie se aplican los contrastes ADF y KPSS, de hipótesis nulas opuestas, más el DF-GLS " +
-      "de Elliott, Rothenberg y Stock (1996), de mayor potencia en muestras de este tamaño. Ante " +
-      "diagnóstico ambiguo se añade el test de quiebre endógeno de Zivot y Andrews (1992), que estima la " +
-      "fecha de ruptura por búsqueda del punto que minimiza el estadístico t del parámetro " +
-      "autorregresivo. Sobre la ratio de deuda se implementa además el procedimiento de Bai y Perron " +
-      "(2003): programación dinámica exacta sobre la suma de cuadrados residuales, con selección del " +
-      "número de quiebres por criterio BIC."
-  )
-);
-
-children.push(H2("4.2. Cointegración y vector con corrección de error"));
-children.push(
-  P(
-    "El procedimiento de máxima verosimilitud de Johansen verifica si el sistema formado por la ratio " +
-      "de deuda, el resultado primario, el riesgo soberano y el tipo de cambio real admite al menos una " +
-      "combinación lineal estacionaria. El sistema se estima como vector con corrección de error:"
-  )
-);
-children.push(
-  EQ("vecm")
-);
-children.push(
-  P([
-    { t: "El vector " },
-    { t: "β", i: true },
-    { t: " recoge la relación de largo plazo, normalizada sobre la deuda; el vector " },
-    { t: "α", i: true },
-    { t: " contiene las velocidades de ajuste de cada variable hacia el equilibrio. La brecha del producto entra como variable exógena estacionaria. El rango de cointegración se fija en uno; en la ventana ampliada esa imposición no es neutral, porque el contraste de Johansen es sensible a incluir o no el año 1999, y esa fragilidad se documenta en lugar de ocultarse." },
-  ])
-);
-
-children.push(H2("4.3. VAR estructural restringido"));
-children.push(
-  P(
-    "Para identificar la transmisión de perturbaciones sin recurrir a un ordenamiento de Cholesky " +
-      "arbitrario, se estima un VAR estructural restringido sobre el vector de cinco variables, " +
-      "siguiendo el esquema de identificación contemporánea de Blanchard y Perotti (2002) y la " +
-      "restricción de acumulación de deuda de Favero y Giavazzi (2007). El sistema estructural es:"
-  )
-);
-children.push(
-  EQ("svar")
-);
-children.push(P("Las restricciones, todas con fundamento teórico, son tres:"));
-children.push(
+C.push(EQ(sub("A", "0"), " ", sub("u", "t"), " = B ", sub("e", "t"), "        ",
+  sub("Y", "t"), " = ( ", sub("ỹ", "t"), ", ", sub("pb", "t"), ", ",
+  sub("EMBI", "t"), ", ", sub("TCRM", "t"), ", ", sub("d", "t"), " )"));
+C.push(
   BULLET([
-    { t: "Rigidez de la decisión presupuestaria. El resultado primario reacciona dentro del trimestre a la brecha del producto solo a través de la semi-elasticidad cíclica automática de la recaudación, " },
-    { t: "αy = 0,25", i: true },
-    { t: " (estándar OCDE/FMI para Argentina: Girouard y André, 2005; Daude et al., 2011; Alberola et al., 2016), y es rígido frente a shocks de riesgo y de tipo de cambio en el mismo trimestre." },
-  ])
-);
-children.push(
-  BULLET(
-    "Ajuste inmediato de los precios financieros. El riesgo soberano y el tipo de cambio real absorben " +
-      "contemporáneamente las perturbaciones macroeconómicas y fiscales del período."
-  )
-);
-children.push(
-  BULLET(
-    "Identidad dinámica de acumulación. La deuda evoluciona restringida por la identidad de Favero y Giavazzi:"
-  )
-);
-children.push(
-  EQ("favero")
-);
-children.push(
-  P([
-    { t: "A partir de la matriz de impacto estructural estimada " },
-    { t: "S = A0⁻¹ B", i: true },
-    { t: " se calculan las funciones de impulso-respuesta con bandas bootstrap al 95 % (1.000 réplicas) y la descomposición de varianza del error de pronóstico." },
-  ])
-);
-children.push(
-  P(
-    "DOLS no se descarta: se conserva como comparación metodológica sobre la ventana original, con la " +
-      "especificación de Stock y Watson (1993), aumentada con cuatro adelantos y rezagos de la primera " +
-      "diferencia de la deuda:"
-  )
-);
-children.push(
-  EQ("dols")
-);
-
-children.push(H2("4.4. Corrección de la endogeneidad del riesgo soberano"));
-children.push(
-  P(
-    "La teoría predice causalidad inversa entre el resultado fiscal y el riesgo soberano: un deterioro " +
-      "fiscal eleva la prima que exigen los acreedores, y una suba exógena del EMBI+ encarece el " +
-      "financiamiento y presiona las cuentas públicas. Se instrumenta el EMBI+ con el índice de " +
-      "volatilidad global VIX y un diferencial de riesgo soberano regional, y se estima por variables " +
-      "instrumentales en dos etapas. La fuerza del diseño se evalúa con el estadístico F de primera " +
-      "etapa (umbral de Staiger y Stock: mayor que 10), el test de endogeneidad de Wu-Hausman y el test " +
-      "de sobreidentificación de Sargan."
-  )
-);
-
-children.push(H2("4.5. Modelos de umbral y fatiga fiscal"));
-children.push(
-  P(
-    "El contraste canónico de fatiga fiscal es el modelo de umbral de Hansen (1999), con punto de " +
-      "quiebre determinado por el nivel de riesgo soberano:"
-  )
-);
-children.push(
-  EQ("hansen")
-);
-children.push(
-  P([
-    { t: "El umbral óptimo " },
-    { t: "τ*", i: true },
-    { t: " se estima por mínima suma de cuadrados residuales sobre una grilla de percentiles de la distribución empírica del EMBI+. La significatividad del quiebre se contrasta con el estadístico Sup-LM, cuya distribución bajo linealidad se aproxima por remuestreo con 1.000 réplicas (Hansen, 2000). El análisis se extiende al marco multivariado con el Threshold VECM de Hansen y Seo (2002), que permite que las velocidades de ajuste del vector " },
+    { t: "Rigidez de la decisión presupuestaria. El superávit primario solo reacciona dentro del trimestre a la brecha del producto a través de la semi-elasticidad cíclica automática de la recaudación, " },
     { t: "α", i: true },
-    { t: " conmuten de régimen según el estado del mercado financiero." },
+    { t: "y", i: true },
+    { t: " = 0,25 (estándar OCDE/FMI: Girouard y André 2005; Daude et al. 2011; Alberola et al. 2016). No reacciona dentro del trimestre a shocks de riesgo ni de tipo de cambio." },
   ])
 );
-
-children.push(H2("4.6. Simulación estocástica y proceso CIR"));
-children.push(
-  P(
-    "El análisis de sostenibilidad se resuelve con una simulación de Monte Carlo de 1.000 iteraciones " +
-      "en la que las variables fundamentales reciben perturbaciones de una distribución t de Student " +
-      "multivariada con ν ≈ 4,8 grados de libertad —colas pesadas, calibradas a partir de la curtosis " +
-      "histórica— acopladas a correlaciones dinámicas. La tasa de refinanciación externa se dota de " +
-      "consistencia con la teoría de estructura temporal modelando el riesgo soberano como un proceso de " +
-      "difusión con reversión a la media (Cox, Ingersoll y Ross, 1985):"
+C.push(
+  BULLET(
+    "Ajuste financiero inmediato. El riesgo soberano y el tipo de cambio real, como precios de mercado, " +
+      "absorben contemporáneamente todas las perturbaciones del período."
   )
 );
-children.push(
-  EQ("cir")
-);
-children.push(
-  P([
-    { t: "El parámetro " },
-    { t: "κ", i: true },
-    { t: " es la velocidad de reversión, " },
-    { t: "θ", i: true },
-    { t: " el nivel de equilibrio de largo plazo y " },
-    { t: "σ", i: true },
-    { t: " la volatilidad de difusión. La no negatividad estricta del spread queda garantizada si se satisface la condición de Feller, " },
-    { t: "2 κ θ > σ²", i: true },
-    { t: ". La calibración se realiza por máxima verosimilitud exacta sobre la densidad de transición Chi-cuadrado no central." },
-  ])
-);
-
-// ── 5. Resultados ──────────────────────────────────────────────────────────
-children.push(H1("5. Resultados"));
-
-children.push(H2("5.1. Reacción fiscal lineal: DOLS y VECM"));
-children.push(
+C.push(BULLET("Identidad de acumulación de la deuda (Favero y Giavazzi, 2007):"));
+C.push(EQ(sub("d", "t"), " = ", frac(["1 + ", sub("r", "t")], ["1 + ", sub("g", "t")]),
+  " ", sub("d", "t-1"), " − ", sub("pb", "t"), " + ", sub("sft", "t")));
+C.push(
   P(
-    "En la ventana original, el contraste de Johansen indica exactamente una relación de cointegración " +
-      "entre las cuatro variables del sistema. La estimación DOLS de muestra completa no encuentra una " +
-      "reacción lineal significativa al endeudamiento: el coeficiente es ρ = −0,0071, con error estándar " +
-      "0,012 y p = 0,564; el R² del ajuste conjunto es 0,586. Un incremento de diez puntos del PIB en la " +
-      "deuda rezagada se asocia con una variación de apenas −0,07 puntos en el resultado primario: la " +
-      "falta de significatividad no enmascara un efecto cuantitativamente relevante."
+    "Frente a un Cholesky puro, la única restricción adicional es fijar el coeficiente del superávit " +
+      "sobre la brecha en 0,25 en lugar de estimarlo libremente: el sistema queda sobreidentificado en " +
+      "un grado."
   )
 );
-children.push(
+
+C.push(H2("A.2. Selección de rezagos y especificación"));
+C.push(
   P(
-    "El VECM de la ventana ampliada converge al mismo diagnóstico por una vía distinta. La velocidad de " +
-      "ajuste del resultado primario hacia el equilibrio de largo plazo no es significativa " +
-      "(α = 0,0044, p = 0,204), y tampoco lo es en cuatro de las cinco especificaciones alternativas de " +
-      "rezagos. Es la propia deuda la que carga con la velocidad de ajuste significativa del sistema " +
-      "(α = −0,111, p < 0,001): el sistema corrige desvíos, pero no a través de la política fiscal."
+    "Se estima con dos rezagos sobre 86 observaciones (2004T1–2025T2, la ventana original con dos " +
+      "trimestres consumidos por los rezagos). Los cuatro criterios de información no coinciden: AIC, " +
+      "FPE y HQIC seleccionan dos rezagos; BIC selecciona uno. Se adopta dos por mayoría. El VAR(2) " +
+      "arroja AIC = 12,66, BIC = 14,23 y HQIC = 13,29."
   )
 );
-children.push(GAP());
-children.push(
+C.push(
+  DECISION(
+    "el orden de rezagos no es unánime. La especificación de referencia es VAR(2); conviene reportar " +
+      "en un anexo la FEVD con un solo rezago para mostrar que el ordenamiento cualitativo (dominancia " +
+      "del shock primario y del ciclo) no cambia."
+  )
+);
+
+C.push(H2("A.3. Matriz de impacto contemporáneo (S)"));
+C.push(
+  P(
+    "La matriz S = A₀⁻¹B traduce un shock estructural de un desvío estándar en el efecto instantáneo " +
+      "sobre cada variable. Los coeficientes relevantes (fase19_svar_matriz_impacto_S.csv):"
+  )
+);
+C.push(GAP());
+C.push(
   academicTable(
-    ["Ecuación del sistema", "α (velocidad de ajuste)", "p", "¿Corrige?"],
+    ["Shock estructural", "→ EMBI+ (pb)", "→ Deuda/PIB (p.p.)"],
     [
-      ["Deuda / PIB", "−0,111", "< 0,001", "Sí"],
-      ["Resultado primario", "+0,0044", "0,204", "No"],
-      ["EMBI+", "+3,13", "0,306", "No"],
-      ["Tipo de cambio real", "−0,001", "0,181", "No"],
+      ["Riesgo soberano (propio)", "+473", "−0,43"],
+      ["Superávit primario (negativo, 1 d.e.)", "−222", "−3,15"],
+      ["Brecha del producto", "−179", "−2,89"],
+      ["Tipo de cambio real", "—", "+0,59"],
     ],
-    [3400, 2400, 1200, 1400],
-    ["l", "r", "r", "r"]
+    [3600, 2300, 2600],
+    ["l", "r", "r"]
   )
 );
-children.push(GAP());
-children.push(
-  NOTE(
-    "VECM de la ventana ampliada 1999–2025, rango de cointegración uno, rezago por BIC. Vector de largo " +
-      "plazo normalizado sobre la deuda: coeficientes 1,077 para el resultado primario, −0,012 para el " +
-      "EMBI+ y 17,08 para el tipo de cambio real. Fuente: resultados/tablas/fase16_vecm_final_alpha.csv " +
-      "y fase16_vecm_final_beta.csv."
+C.push(GAP());
+C.push(
+  P(
+    "Lectura: un shock estructural al riesgo soberano equivale a unos 473 puntos básicos de " +
+      "perturbación instantánea; un deterioro del superávit primario de un desvío estándar eleva el " +
+      "EMBI+ en 222 puntos dentro del mismo trimestre. Esto cuantifica el canal de credibilidad " +
+      "fiscal: el mercado castiga el desvío fiscal de inmediato."
+  )
+);
+C.push(
+  DECISION(
+    "la matriz S es el resultado más citable del canal fiscal → riesgo país. Sirve para el argumento " +
+      "de que la consolidación fiscal tiene un retorno inmediato en spread, complementario al DSA."
   )
 );
 
-children.push(H2("5.2. Inestabilidad de parámetros entre subperíodos"));
-children.push(
+C.push(H2("A.4. Descomposición de varianza del error de pronóstico (FEVD)"));
+C.push(
   P(
-    "El coeficiente nulo de muestra completa oculta heterogeneidad. Estimado por subperíodos, el " +
-      "parámetro de reacción resulta positivo y significativo en ambos: 0,037 en 2004–2014 (p = 0,002 " +
-      "por mínimos cuadrados; 0,038 por DOLS con un adelanto/rezago, p = 0,063) y 0,053 en 2015–2025 " +
-      "(p = 0,003 por mínimos cuadrados; 0,036 por DOLS, p = 0,038). El promedio de muestra completa se " +
-      "acerca a cero porque combina regímenes con niveles de superávit muy distintos, no porque no haya " +
-      "respuesta dentro de cada uno. Es el mismo fenómeno que detecta Bai-Perron."
+    "La FEVD reparte la varianza del error de pronóstico de cada variable, a cada horizonte, entre los " +
+      "cinco shocks estructurales. Es el resultado principal del SVAR (fase19_fevd.csv):"
   )
 );
-
-children.push(H2("5.3. VAR estructural restringido: qué mueve la deuda"));
-children.push(
-  P(
-    "El SVAR se estima con dos rezagos sobre 86 observaciones (2004T1–2025T2). La matriz de impacto " +
-      "contemporáneo cuantifica el canal de credibilidad fiscal: un shock estructural al riesgo soberano " +
-      "equivale a unos 473 puntos básicos de perturbación instantánea, y un shock negativo de un desvío " +
-      "estándar al resultado primario eleva el EMBI+ en 222 puntos dentro del mismo trimestre. La " +
-      "descomposición de varianza del error de pronóstico reparte la variabilidad de cada variable entre " +
-      "los cinco shocks estructurales:"
-  )
-);
-children.push(GAP());
-children.push(
+C.push(GAP());
+C.push(
   academicTable(
     ["Horizonte", "Variable", "Brecha PIB", "Superávit", "EMBI+", "TCRM", "Propia"],
     [
@@ -685,251 +381,444 @@ children.push(
     ["l", "l", "r", "r", "r", "r", "r"]
   )
 );
-children.push(GAP());
-children.push(
+C.push(GAP());
+C.push(
+  P(
+    "A mediano plazo, la varianza de la deuda está dominada por el shock al resultado primario (47,5 % " +
+      "a veinte trimestres) y por el shock a la brecha del producto (28,6 %); los shocks cambiario y de " +
+      "riesgo soberano explican en conjunto 11,5 % y la inercia propia cae de 26 % a 12 %. En la " +
+      "ecuación del EMBI+, el shock propio explica el 73 % de la varianza en el primer trimestre pero " +
+      "cede hasta el 36 % a cinco años, cuando el shock fiscal alcanza una participación equivalente: " +
+      "el mercado incorpora el historial fiscal a la prima con el tiempo."
+  )
+);
+C.push(
+  P([
+    { t: "Precisión importante: esto describe " },
+    { t: "qué perturbaciones mueven la deuda", i: true },
+    { t: " período a período (desbalances primarios y ciclo), y no debe confundirse con la existencia de una regla de reacción fiscal estabilizadora —cuya ausencia documentan DOLS y el VECM— ni con los canales por los que se resolvieron históricamente los sobreendeudamientos (depreciación real, licuación, reestructuraciones)." },
+  ])
+);
+C.push(
+  DECISION(
+    "la FEVD entra en la tesis como validación estructural del diagnóstico de DOLS/VECM, no como " +
+      "contraste de la hipótesis de reacción fiscal. El titular es: los desbalances primarios y el " +
+      "ciclo explican tres cuartas partes de la varianza de la deuda; el riesgo país y el tipo de " +
+      "cambio, un papel acotado."
+  )
+);
+
+C.push(H2("A.5. Impulso-respuesta y diagnóstico del VAR reducido"));
+C.push(
+  P(
+    "Las funciones de impulso-respuesta se calculan con bandas bootstrap al 95 % (1.000 réplicas por " +
+      "remuestreo residual). El VAR reducido, ecuación por ecuación, muestra una estructura de " +
+      "persistencia marcada y coeficientes cruzados casi todos no significativos:"
+  )
+);
+C.push(
+  BULLET(
+    "Deuda/PIB: fuertemente autorregresiva (coeficiente del primer rezago 1,06, t = 8,1); ningún " +
+      "regresor cruzado significativo."
+  )
+);
+C.push(
+  BULLET(
+    "EMBI+: persistente (primer rezago 0,76, t = 6,7); responde con dos rezagos a la deuda (43,7, " +
+      "t = 2,0) y a la brecha (19,7, t = 1,9)."
+  )
+);
+C.push(
+  BULLET(
+    "Brecha del producto: la deuda rezagada la anticipa (primer rezago −0,65, t = −3,1; segundo " +
+      "+0,65, t = 3,0), señal de causalidad de Granger deuda → actividad."
+  )
+);
+C.push(
+  BULLET(
+    "Superávit primario: solo su propio rezago es significativo (0,76, t = 5,5); no reacciona a " +
+      "rezagos de deuda, EMBI+ ni TCRM —consistente con la ausencia de regla de reacción."
+  )
+);
+C.push(
+  P(
+    "La matriz de correlación de residuos del VAR indica que las relaciones contemporáneas que " +
+      "importan son superávit–deuda (−0,47, la más fuerte) y superávit–EMBI+ (−0,21); superávit–TCRM " +
+      "es +0,17. La restricción de identificación (rigidez intra-trimestral del superávit) preserva " +
+      "estas dos: el superávit se deja reaccionar al ciclo por la vía automática y su co-movimiento con " +
+      "deuda y riesgo queda capturado por la identidad de acumulación y por la fila del EMBI+."
+  )
+);
+C.push(
+  DECISION(
+    "el diagnóstico del VAR reducido es el respaldo de que la restricción de identificación no " +
+      "descarta información sustantiva. Va en el anexo metodológico, no en el cuerpo."
+  )
+);
+
+// ═══════════════ PARTE B — EMPALME Y PROXY DE LARGO PLAZO DEL EMBI+ ═════════
+C.push(H1("B. Empalme de series: proxy de largo plazo del EMBI+"));
+
+C.push(H2("B.1. El problema"));
+C.push(
+  P(
+    "El índice EMBI no existe antes de 1993 y el EMBI+ oficial de Argentina no antes de 1998. La " +
+      "muestra central (2004–2025) cubre apenas dos décadas y coincide, en su mayor parte, con un " +
+      "régimen de riesgo soberano comprimido (2005–2019). Para responder si el umbral de fatiga fiscal " +
+      "de ~2.080 puntos básicos y el nivel de equilibrio del spread son regularidades estructurales o " +
+      "artefactos de la ventana, se reconstruye una serie trimestral homogénea de costo de " +
+      "financiamiento soberano para los 42 años de democracia (1983T4–2025T4, 169 trimestres)."
+  )
+);
+
+C.push(H2("B.2. Reconstrucción por eras financieras"));
+C.push(BULLET("Era Bonex (1983T4–1992T4): rendimiento en dólares de los Bonos Externos (Series 1982, 1984, 1987, 1989) menos la tasa del Treasury a 10 años, según Neumeyer y Perri (2005) y Kehoe y Nicolini (2021), con registros de CEMA, FIEL y BCRA."));
+C.push(BULLET("Era Brady (1993T1–1997T4): JP Morgan EMBI Argentina stripped spread sobre bonos Brady Par, Discount y FRB (Uribe y Yue, 2006)."));
+C.push(BULLET("Era EMBI+ (1998T1–2025T4): serie oficial de JP Morgan EMBI+ / EMBI Global Diversified Argentina."));
+C.push(
+  P(
+    "Para evitar saltos de nivel en los puntos de unión se aplica una corrección proporcional de sesgo " +
+      "en el solapamiento: cada tramo antiguo se reescala al nivel del tramo siguiente mediante el " +
+      "cociente de medias en el trimestre de empalme."
+  )
+);
+C.push(
+  EQ(sub("k", "1"), " = ", frac(sub("EMBI", "Brady, 1993T1"), sub("Spread", "Bonex, 1992T4")),
+    " = ", frac("850", "760"), " = 1,118", "        ",
+    sub("k", "2"), " = ", frac(sub("EMBI+", "1998T1"), sub("EMBI", "Brady, 1997T4")),
+    " = ", frac("540", "620"), " = 0,871")
+);
+C.push(
+  P(
+    "El factor compuesto Bonex → EMBI+ es 1,118 × 0,871 = 0,974. La serie resultante queda toda " +
+      "expresada en escala EMBI+ (spread_empalmado, en fase22 / spread_soberano_historico_1983_2025.csv)."
+  )
+);
+C.push(
   NOTE(
-    "Descomposición de varianza en porcentaje. Identificación de Blanchard-Perotti (semi-elasticidad " +
-      "0,25, rigidez intra-trimestral) e identidad de acumulación de Favero-Giavazzi. Fuente: " +
-      "resultados/tablas/fase19_fevd.csv."
+    "El tramo Bonex 1983–1992 es una serie reconstruida a partir de la literatura y calibrada a hitos " +
+      "trimestrales, no una serie de precios observada. Es un proxy de nivel y de régimen, no un dato " +
+      "de mercado con la misma calidad que el EMBI+ post-1998."
   )
 );
-children.push(
-  P(
-    "A horizontes de mediano plazo, la variabilidad de la deuda está dominada por los shocks al " +
-      "resultado primario —47,5 % a veinte trimestres— y por los shocks a la brecha del producto " +
-      "—28,6 %—, mientras que los shocks cambiarios y de riesgo soberano explican en conjunto apenas " +
-      "11,5 % y la inercia propia de la deuda cae de 26 % a 12 % con el horizonte. Conviene ser preciso: " +
-      "esto describe qué perturbaciones mueven la deuda período a período —desbalances primarios y " +
-      "ciclo—, y no debe confundirse con la existencia de una regla de reacción estabilizadora, cuya " +
-      "ausencia documentan DOLS y el VECM, ni con los canales por los que se resolvieron históricamente " +
-      "los episodios de sobreendeudamiento —depreciación real, licuación inflacionaria y " +
-      "reestructuraciones con quita—, que operan sobre el ajuste stock-flujo. En la ecuación del riesgo " +
-      "soberano, el shock propio explica el 73 % de la varianza en el primer trimestre pero cede terreno " +
-      "hasta el 36 % a cinco años, cuando el shock fiscal alcanza una participación equivalente: el " +
-      "mercado termina incorporando el historial fiscal a la prima de riesgo."
+C.push(
+  DECISION(
+    "la serie de 42 años sirve para robustez cualitativa —¿hay regímenes persistentes?, ¿el nivel de " +
+      "equilibrio es alto?— y no para inferencia fina. En la tesis va como “extensión de frontera”, no " +
+      "como muestra de estimación principal."
   )
 );
 
-children.push(H2("5.4. Endogeneidad del riesgo soberano (IV-2SLS)"));
-children.push(
+C.push(H2("B.3. Test 1 — Quiebres estructurales de Bai-Perron (1983–2025)"));
+C.push(
   P(
-    "Los instrumentos son relevantes: el estadístico F de primera etapa alcanza 13,00 (p = 0,002), por " +
-      "encima del umbral de 10. El test de Wu-Hausman confirma que el EMBI+ es endógeno al esfuerzo " +
-      "fiscal (7,32, p = 0,009). El test de Sargan no rechaza la validez conjunta de los instrumentos " +
-      "(0,608, p = 0,436). El coeficiente del EMBI+ instrumentado es positivo (0,0017) y marginalmente " +
-      "significativo al 10 % (p = 0,076), sobre una muestra reducida a 73 observaciones por la cobertura " +
-      "del instrumento: un incremento de 100 puntos básicos en el riesgo soberano se asociaría con una " +
-      "mejora de 0,17 puntos del PIB en el superávit primario. La evidencia es débil, pero con la serie " +
-      "real ya no permite afirmar, como ocurría con la serie de contingencia, que la ausencia de " +
-      "reacción por el canal de riesgo soberano esté firmemente establecida."
+    "Sobre los 169 trimestres se aplica el algoritmo de programación dinámica de Bai y Perron (2003) " +
+      "en la media del spread (modelo L2, tamaño mínimo de segmento 8 trimestres). Se imponen cinco " +
+      "quiebres —no se seleccionan por criterio de información como en la muestra central—, que definen " +
+      "seis regímenes de financiamiento:"
   )
 );
-
-children.push(H2("5.5. Umbrales de fatiga fiscal: Hansen y TVECM"));
-children.push(
-  P(
-    "El modelo de umbral en niveles localiza un quiebre candidato en τ* = 449 puntos básicos, con una " +
-      "reacción menor en el régimen de estrés (β₂ = 0,0126, p = 0,385) que en el régimen normal " +
-      "(β₁ = 0,0305, p = 0,171), en el orden que predice la fatiga fiscal. El contraste Sup-LM rechaza " +
-      "la linealidad solo al 10 % (p = 0,076), y la partición es muy desigual —14 trimestres normales " +
-      "frente a 74 de estrés—, la condición en que un contraste de umbral es menos confiable; ninguno de " +
-      "los dos coeficientes de régimen es individualmente significativo. Es una señal débil y frágil."
-  )
-);
-children.push(
-  P(
-    "La especificación en primeras diferencias, que satisface el supuesto de estacionariedad exigido por " +
-      "el test, ofrece evidencia más contundente: τ* = 2.083 puntos básicos, Sup-LM con p < 0,001, ambos " +
-      "coeficientes de régimen significativos y con el patrón de atenuación esperado, sobre una " +
-      "partición inversa (74 frente a 14) que no concentra el resultado en unas pocas observaciones. La " +
-      "evidencia de umbral es, entonces, sensible a la especificación, pero ya no unilateralmente débil."
-  )
-);
-children.push(
-  P(
-    "El Threshold VECM multivariado localiza un umbral casi idéntico, τ* = 2.081 puntos básicos, y una " +
-      "inversión de signo en la velocidad de ajuste fiscal: α pasa de +0,0064 en el régimen de " +
-      "normalidad (73 trimestres) a −0,0079 en el régimen de estrés (13 trimestres). El punto estimado " +
-      "es coherente con la fatiga fiscal, pero su contraste Sup-LM no alcanza significatividad (52,24, " +
-      "p = 0,625): el test multivariado pierde potencia al estimar 48 parámetros sobre 86 observaciones " +
-      "repartidas de forma muy desigual entre regímenes."
-  )
-);
-
-children.push(H2("5.6. Quiebres estructurales en la ratio de deuda"));
-children.push(
-  P(
-    "El procedimiento de Bai-Perron identifica tres quiebres endógenos en la deuda del Sector Público No " +
-      "Financiero: 2007T2, 2014T3 y 2018T1. Para la serie consolidada con los pasivos del BCRA, los " +
-      "quiebres son dos: 2007T2 y 2016T4. Las fechas coinciden con hitos verificables —el pico del " +
-      "superávit gemelo y la intervención del INDEC, el default técnico con holdouts, y la crisis " +
-      "cambiaria con el acuerdo con el FMI— y confirman que un modelo de parámetros constantes para todo " +
-      "el período está mal especificado."
-  )
-);
-
-children.push(H2("5.7. El spread soberano en 42 años de democracia (1983–2025)"));
-children.push(
-  P(
-    "No existía una serie continua y homogénea de spread soberano para todo el período democrático. Se " +
-      "construyó empalmando tres fuentes: spread implícito de los Bonex para 1983–1992, calibrado con " +
-      "Neumeyer y Perri (2005) y registros del CEMA, FIEL y BCRA; EMBI de bonos Brady para 1993–1997; y " +
-      "EMBI+ oficial de JP Morgan desde 1998. El empalme usa corrección proporcional de sesgo en los " +
-      "tramos de solapamiento. Sobre los 169 trimestres resultantes, Bai-Perron detecta cinco quiebres " +
-      "que definen seis regímenes:"
-  )
-);
-children.push(GAP());
-children.push(
+C.push(GAP());
+C.push(
   academicTable(
     ["Régimen", "Período", "Media (pb)", "Desvío (pb)", "Hito de cierre"],
     [
-      ["1", "1983T4–1988T4", "798", "359", "Agotamiento de reservas del BCRA"],
-      ["2", "1989T1–1990T4", "3.574", "1.256", "Reversión de la desconfianza hiperinflacionaria"],
-      ["3", "1991T1–2001T4", "832", "427", "Default y fin de la Convertibilidad"],
-      ["4", "2002T1–2005T2", "5.431", "638", "Canje 2005 y cancelación del FMI"],
-      ["5", "2005T3–2019T2", "684", "327", "Crisis cambiaria y acuerdo Stand-By con el FMI"],
-      ["6", "2019T3–2025T4", "1.732", "632", "Cierre de muestra"],
+      ["1", "1983T4–1988T4", "798", "359", "Colapso del Plan Austral"],
+      ["2", "1989T1–1990T4", "3.574", "1.256", "Hiperinflaciones y Plan Bonex"],
+      ["3", "1991T1–2001T4", "832", "427", "Convertibilidad y Plan Brady"],
+      ["4", "2002T1–2005T2", "5.431", "638", "Default 2001–2002 (máximo histórico)"],
+      ["5", "2005T3–2019T2", "684", "327", "Canjes 2005/2010, superávits gemelos"],
+      ["6", "2019T3–2025T4", "1.732", "632", "PASO 2019, canje 2020, estabilización"],
     ],
-    [900, 2100, 1100, 1000, 3400],
+    [850, 2050, 1050, 1000, 3550],
     ["l", "l", "r", "r", "l"]
   )
 );
-children.push(GAP());
-children.push(
-  NOTE("Fuente: resultados/tablas/fase22_bai_perron_1983_2025.csv. Test de Bai-Perron con cinco quiebres.")
-);
-
-children.push(H2("5.8. Calibración del proceso CIR"));
-children.push(
+C.push(GAP());
+C.push(
   P(
-    "Sobre la muestra homogénea 2004–2025, el proceso CIR del EMBI+ arroja una velocidad de reversión " +
-      "κ = 0,923 —vida media de 0,75 años—, un nivel de equilibrio de largo plazo θ = 1.032 puntos " +
-      "básicos y una volatilidad de difusión σ = 26,9. La condición de Feller se cumple con holgura " +
-      "(2 κ θ = 1.905 > σ² = 725; ratio 2,63), de modo que el spread simulado no puede volverse " +
-      "negativo, y el criterio AIC prefiere el CIR frente a un AR(1) (1.279 frente a 1.342). Sobre la " +
-      "serie histórica de 42 años, la reversión es más lenta (κ = 0,463, vida media de 1,5 años) y el " +
-      "nivel de equilibrio sube a 1.457 puntos básicos: la penalización de largo plazo al crédito " +
-      "argentino es una regularidad estructural, no un rasgo del período reciente."
+    "Los seis regímenes son persistentes (el más corto dura ocho trimestres) y recurrentes: Argentina " +
+      "alterna entre un nivel “normal” de 680–830 puntos básicos y episodios de crisis de 1.700 a 5.400 " +
+      "puntos. El régimen 6 (media 1.732) y el régimen 4 (media 5.431) encuadran el umbral de fatiga " +
+      "fiscal de ~2.080 puntos estimado en la muestra central: ese umbral cae dentro del rango " +
+      "histórico de tensión, no en un valor extremo."
+  )
+);
+C.push(
+  DECISION(
+    "Bai-Perron histórico responde la pregunta “¿el umbral es estructural?”: sí, en el sentido de que " +
+      "los regímenes de alto spread son un rasgo repetido de 42 años. Entra como argumento de que la " +
+      "fatiga fiscal no es un fenómeno de las últimas dos décadas."
   )
 );
 
-children.push(H2("5.9. Análisis de sostenibilidad estocástico hacia 2035"));
-children.push(
+C.push(H2("B.4. Test 2 — Calibración CIR del riesgo soberano, tres ventanas"));
+C.push(
   P(
-    "Partiendo de una ratio inicial del 74 % del PIB en 2025, la simulación de Monte Carlo proyecta la " +
-      "trayectoria de la deuda a diez años bajo tres escenarios. El resultado central es la probabilidad " +
-      "de que la ratio supere el 100 % del PIB hacia 2035:"
+    "El proceso de Cox, Ingersoll y Ross (1985) modela el spread como una difusión con reversión a la " +
+      "media y no negatividad estricta:"
   )
 );
-children.push(GAP());
-children.push(
+C.push(
+  EQ("d(", sub("risk", "t"), ") = κ ( θ − ", sub("risk", "t"), " ) dt + σ ",
+    rad([sub("risk", "t")]), " d", sub("W", "t"))
+);
+C.push(
+  P([
+    { t: "κ es la velocidad de reversión (la vida media es ln 2 ⁄ κ), θ el nivel de equilibrio de largo plazo y σ la volatilidad. La no negatividad del spread está garantizada si se cumple la condición de Feller, " },
+    { t: "2κθ > σ²", i: true },
+    { t: ". La calibración es por máxima verosimilitud exacta sobre la densidad de transición Chi-cuadrado no central. Se estima sobre las tres ventanas:" },
+  ])
+);
+C.push(GAP());
+C.push(
   academicTable(
-    ["Escenario", "Supuestos (superávit / crecimiento)", "P(deuda > 100 % PIB)", "Mediana 2035"],
+    ["Ventana", "n", "κ", "θ (pb)", "Vida media", "σ", "Feller (ratio)", "AIC: CIR vs. AR(1)"],
     [
-      ["Optimista", "2,5 % / 4,5 % anual", "3,8 %", "45,1 % PIB"],
-      ["Referencia", "1,5 % / 3,5 % anual", "31,2 %", "80,7 % PIB"],
-      ["Estrés", "0,5 % / contracción + 25 % de depreciación real", "99,9 %", "816,5 % PIB"],
+      ["2004–2025", "87", "0,923", "1.032", "0,75 años", "26,9", "cumple (2,63)", "1.279 < 1.342"],
+      ["1999–2025", "108", "0,428", "1.590", "1,62 años", "26,5", "cumple (1,94)", "1.595 < 1.673"],
+      ["1983–2025", "169", "0,463", "1.457", "1,50 años", "24,8", "cumple (2,20)", "2.467 < 2.613"],
     ],
-    [1300, 3600, 2100, 1600],
-    ["l", "l", "r", "r"]
+    [1250, 500, 700, 800, 1050, 650, 1300, 1650],
+    ["l", "r", "r", "r", "r", "r", "l", "l"]
   )
 );
-children.push(GAP());
-children.push(
+C.push(GAP());
+C.push(
   NOTE(
-    "Monte Carlo con 1.000 iteraciones y perturbaciones t de Student (ν ≈ 4,8). La cifra del 31,2 % del " +
-      "escenario de Referencia es robusta a la especificación de la dependencia entre shocks: 29,2 % con " +
-      "cópula gaussiana, 32,5 % con correlaciones dinámicas reestimadas, 33,4 % con volatilidad GARCH " +
-      "parcial y 29,8 % integrando el proceso CIR en la tasa de refinanciación. Fuente: Sección 7.3 de la tesis."
+    "Fuentes: fase20_cir_calibracion.csv (ventanas 2004–2025 y 1999–2025) y " +
+      "fase22_cir_calibracion_1983_2025.csv (42 años). En las tres ventanas el CIR domina a un AR(1) " +
+      "por AIC y se cumple la condición de Feller."
   )
 );
-children.push(
+C.push(
   P(
-    "La lectura es que la probabilidad de insolvencia depende mucho más del escenario macroeconómico de " +
-      "origen que de cualquier ajuste fiscal discrecional marginal: va de prácticamente nula en el " +
-      "escenario optimista a prácticamente segura en el de estrés. El 31,2 % del escenario de referencia " +
-      "debe entenderse como una medida de vulnerabilidad estructural pasiva frente a la volatilidad " +
-      "histórica de los fundamentos, no como una probabilidad que ya incorpore una respuesta correctiva."
+    "El parámetro que importa para la decisión es θ, el nivel de spread al que Argentina revierte en el " +
+      "largo plazo. La ventana corta 2004–2025 da 1.032 puntos básicos, un valor sesgado a la baja por " +
+      "haber transcurrido en su mayor parte dentro del régimen comprimido 2005–2019. Las ventanas que " +
+      "incorporan la crisis de 2001–2002 y/o la década de 1980 elevan θ a 1.457–1.590 puntos: un proxy " +
+      "más creíble del piso estructural del riesgo argentino. La velocidad de reversión, en cambio, es " +
+      "más estable en términos económicos: la vida media va de nueve meses a año y medio, todas dentro " +
+      "de un rango que implica reversión rápida."
+  )
+);
+C.push(
+  DECISION(
+    "para el DSA de la tesis conviene usar θ de la ventana larga (≈1.457 pb) o de la 1999–2025 " +
+      "(≈1.590 pb) como escenario base de la tasa de refinanciación, y θ de la ventana corta " +
+      "(≈1.032 pb) como escenario optimista. Reportar la sensibilidad de la probabilidad de " +
+      "insolvencia a esa elección."
   )
 );
 
-// ── 6. Lectura de conjunto ─────────────────────────────────────────────────
-children.push(H1("6. Lectura de conjunto"));
-children.push(
+C.push(H2("B.5. Test 3 — CIR de dos factores (riesgo global vs. riesgo local)"));
+C.push(
   P(
-    "Cinco estrategias de estimación, sobre dos ventanas muestrales que comparten apenas 88 de 108 " +
-      "observaciones, convergen en un diagnóstico común. La evidencia de una regla de reacción fiscal " +
-      "lineal, estable y de nivel es débil o nula: lo sostienen DOLS de muestra completa (ρ = −0,0071, " +
-      "p = 0,564), el VECM en ambas ventanas (velocidad de ajuste fiscal no significativa) y el " +
-      "ordenamiento de la descomposición de varianza del SVAR, donde los desbalances primarios y el " +
-      "ciclo —no una respuesta sistemática— son lo que mueve la deuda. La evidencia de un umbral de " +
-      "fatiga fiscal, en cambio, se fortalece bajo las especificaciones no lineales: el contraste de " +
-      "Hansen sobre la primera diferencia del resultado primario rechaza la linealidad con holgura en " +
-      "torno a 2.083 puntos básicos, y el TVECM localiza el mismo umbral con una inversión de signo en " +
-      "la velocidad de ajuste, aunque sin significar su contraste multivariado."
+    "Una calibración alternativa descompone el spread en dos componentes independientes, uno rápido " +
+      "asociado al ciclo de riesgo global y otro lento asociado al riesgo idiosincrático argentino:"
   )
 );
-children.push(
-  P(
-    "Los resultados no se contradicen entre sí. La ausencia de reacción del DOLS es coherente con que el " +
-      "VECM tampoco encuentre ajuste por la vía del resultado primario. Los quiebres de Bai-Perron " +
-      "—2007T2, 2014T3, 2018T1— coinciden con los episodios de mayor deterioro fiscal, que son también " +
-      "los que la descomposición de varianza del SVAR atribuye a shocks primarios. El umbral de Hansen " +
-      "en diferencias (2.083 puntos) y el del TVECM (2.081 puntos) coinciden entre sí, y ambos con los " +
-      "episodios históricos de ajuste más marcados. Y la probabilidad de insolvencia del 31,2 % es " +
-      "consistente con un nivel de deuda cercano al 74 % del PIB y con la dificultad, documentada en la " +
-      "serie histórica, de sostener superávits primarios elevados de forma prolongada."
+C.push(EQ(sub("risk", "t"), " = ", sub("ξ", "t"), " + ", sub("χ", "t")));
+C.push(GAP());
+C.push(
+  academicTable(
+    ["Componente", "κ", "θ (pb)", "σ", "Vida media"],
+    [
+      ["Transitorio (global)", "2,10", "361", "18,8", "0,33 años"],
+      ["Estructural (local)", "0,22", "671", "14,8", "3,15 años"],
+    ],
+    [2600, 700, 900, 900, 1400],
+    ["l", "r", "r", "r", "r"]
   )
 );
-children.push(
+C.push(GAP());
+C.push(
   P(
-    "El aporte del trabajo no es confirmar una tesis previa, sino delimitar con precisión qué permite y " +
-      "qué no permite sostener la evidencia argentina 2004–2025: no permite sostener una regla de " +
-      "reacción fiscal activa ni un canal causal fuerte entre riesgo soberano y esfuerzo primario; " +
-      "permite sostener un umbral de fatiga fiscal de manera parcial y sensible a la especificación; y " +
-      "sí permite sostener que la ratio de deuda tiene quiebres estructurales múltiples, que el " +
-      "parámetro de reacción es inestable entre subperíodos, y que la probabilidad de superar el 100 % " +
-      "del PIB hacia 2035 es un riesgo de cola no despreciable."
+    "El componente estructural revierte lentamente (vida media de más de tres años) hacia 671 puntos " +
+      "básicos: ese sería el proxy más limpio del riesgo-país argentino de largo plazo, depurado del " +
+      "ruido del apetito de riesgo global. El componente transitorio, rápido y de nivel bajo, recoge el " +
+      "contexto externo."
+  )
+);
+C.push(
+  DECISION(
+    "el CIR de dos factores es útil si la tesis quiere separar cuánto del EMBI+ es “responsabilidad de " +
+      "Argentina” y cuánto es contexto. Como es una calibración exploratoria (fase20_cir_2factores.csv, " +
+      "sin bandas), va como recuadro, no como resultado central."
+  )
+);
+
+C.push(H2("B.6. Contexto — el spread por administración presidencial"));
+C.push(GAP());
+C.push(
+  academicTable(
+    ["Administración", "Período", "Trim.", "Media (pb)", "Mínimo", "Máximo"],
+    [
+      ["Alfonsín", "1983T4–1989T2", "23", "1.036", "409", "4.676"],
+      ["Menem I", "1989T3–1995T1", "23", "1.578", "566", "5.455"],
+      ["Menem II", "1995T2–1999T3", "18", "689", "357", "1.350"],
+      ["De la Rúa", "1999T4–2001T3", "8", "811", "551", "1.469"],
+      ["Rodríguez Saá / Duhalde", "2001T4–2003T1", "6", "5.355", "2.948", "6.659"],
+      ["Néstor Kirchner", "2003T2–2007T3", "18", "2.776", "210", "5.801"],
+      ["Cristina Fernández", "2007T4–2015T3", "32", "853", "388", "1.697"],
+      ["Macri", "2015T4–2019T3", "16", "585", "360", "1.494"],
+      ["Alberto Fernández", "2019T4–2023T3", "16", "2.049", "1.392", "3.103"],
+      ["Milei", "2023T4–2025T4", "9", "1.195", "684", "2.258"],
+    ],
+    [2500, 1900, 700, 1100, 900, 900],
+    ["l", "l", "r", "r", "r", "r"]
+  )
+);
+C.push(GAP());
+C.push(NOTE("Fuente: fase22_spread_por_regimen.csv. Spread empalmado, en puntos básicos."));
+
+// ═══════════════════════ PARTE C — DECISIÓN ════════════════════════════════
+C.push(H1("C. Síntesis: qué usar en la tesis final"));
+C.push(GAP());
+C.push(
+  academicTable(
+    ["Componente", "Resultado principal", "Rol recomendado en la tesis"],
+    [
+      [
+        "SVAR — FEVD",
+        "Deuda: 47,5 % superávit, 28,6 % ciclo, 11,5 % EMBI+/TCRM (h = 20)",
+        "Cuerpo. Validación estructural del diagnóstico DOLS/VECM.",
+      ],
+      [
+        "SVAR — matriz S",
+        "Shock fiscal negativo → +222 pb de EMBI+ en el trimestre",
+        "Cuerpo. Evidencia del retorno inmediato de la consolidación en spread.",
+      ],
+      [
+        "SVAR — IRF y VAR reducido",
+        "Persistencia alta; sin reacción del superávit a rezagos de deuda/EMBI+",
+        "Anexo metodológico.",
+      ],
+      [
+        "Empalme 1983–2025",
+        "Serie homogénea de 169 trimestres, escala EMBI+",
+        "Extensión de frontera. Declarar la limitación del tramo Bonex.",
+      ],
+      [
+        "Bai-Perron histórico",
+        "6 regímenes; el umbral de ~2.080 pb cae dentro del rango de tensión histórico",
+        "Cuerpo. Argumento de que la fatiga fiscal no es un fenómeno reciente.",
+      ],
+      [
+        "CIR — tres ventanas",
+        "θ: 1.032 pb (2004–25) vs. 1.457–1.590 pb (ventanas largas)",
+        "Cuerpo. θ largo como base del DSA, θ corto como optimista.",
+      ],
+      [
+        "CIR — dos factores",
+        "Riesgo local estructural θ ≈ 671 pb, vida media 3,15 años",
+        "Recuadro exploratorio.",
+      ],
+    ],
+    [2100, 3600, 3600],
+    ["l", "l", "l"]
+  )
+);
+C.push(GAP());
+C.push(
+  P(
+    "La tensión de fondo es longitud muestral contra homogeneidad institucional. La ventana corta es " +
+      "la más limpia en datos pero la menos representativa del riesgo estructural argentino; la larga es " +
+      "la más representativa pero descansa en una reconstrucción para su primer tercio. La " +
+      "recomendación operativa es usar la ventana 1999–2025 como puente —incorpora la crisis de " +
+      "2001–2002 con datos reales de EMBI+— y la de 42 años solo para el argumento de regularidad " +
+      "estructural."
+  )
+);
+
+// ═══════════════════════ PARTE D — RESTO DEL PROTOCOLO ═════════════════════
+C.push(H1("D. Resto del protocolo (registro breve)"));
+C.push(
+  P(
+    "Para completar el cuadro, los otros contrastes de la Función de Reacción Fiscal, ya cerrados en " +
+      "la tesis:"
+  )
+);
+C.push(
+  BULLET(
+    "DOLS, muestra completa 2004–2025: coeficiente de reacción ρ = −0,0071 (error 0,012; p = 0,564). " +
+      "No hay reacción lineal significativa."
+  )
+);
+C.push(
+  BULLET(
+    "DOLS por subperíodos: ρ = 0,037 en 2004–2014 (p = 0,002) y 0,053 en 2015–2025 (p = 0,003). El " +
+      "coeficiente es positivo dentro de cada régimen; el promedio se anula por composición."
+  )
+);
+C.push(
+  BULLET(
+    "VECM, ventana ampliada 1999–2025: la velocidad de ajuste del superávit no es significativa " +
+      "(α = 0,0044; p = 0,204); la que ajusta es la deuda (α = −0,111; p < 0,001)."
+  )
+);
+C.push(
+  BULLET(
+    "IV-2SLS (instrumentos VIX y riesgo regional): F de primera etapa 13,0; Wu-Hausman p = 0,009 " +
+      "(EMBI+ endógeno); Sargan p = 0,436 (instrumentos válidos); coeficiente del EMBI+ instrumentado " +
+      "0,0017 (p = 0,076)."
+  )
+);
+C.push(
+  BULLET(
+    "Umbral de Hansen: en niveles τ* = 449 pb, Sup-LM p = 0,076 (señal débil, partición 14 vs. 74); " +
+      "en primera diferencia τ* = 2.083 pb, Sup-LM p < 0,001 (evidencia sólida de no linealidad)."
+  )
+);
+C.push(
+  BULLET(
+    "Threshold VECM (Hansen-Seo): umbral τ* = 2.081 pb; la velocidad de ajuste fiscal cambia de signo " +
+      "entre regímenes (+0,006 → −0,008), pero el contraste Sup-LM no es significativo (p = 0,625)."
+  )
+);
+C.push(
+  BULLET(
+    "Bai-Perron sobre la deuda 2004–2025: quiebres en 2007T2, 2014T3 y 2018T1 (SPNF); 2007T2 y 2016T4 " +
+      "(serie consolidada con el BCRA)."
+  )
+);
+C.push(
+  BULLET(
+    "DSA estocástico a 2035 (Monte Carlo, 1.000 iteraciones, perturbaciones t de Student ν ≈ 4,8): " +
+      "probabilidad de que la deuda supere el 100 % del PIB del 31,2 % en el escenario de referencia " +
+      "(3,8 % optimista; 99,9 % de estrés); robusta entre 29,2 % y 33,4 % según la estructura de " +
+      "dependencia, y 29,8 % integrando el proceso CIR."
   )
 );
 
 // ── Referencias ────────────────────────────────────────────────────────────
-children.push(H1("Referencias"));
+C.push(H1("Referencias"));
 [
   "Alberola, E., Kataryniuk, I., Melguizo, Á. y Orozco, R. (2016). Fiscal policy and the cycle in Latin America: the role of financing conditions and fiscal rules. BIS Working Papers 543.",
   "Bai, J. y Perron, P. (2003). Computation and analysis of multiple structural change models. Journal of Applied Econometrics, 18(1), 1–22.",
-  "Blanchard, O. (2019). Public debt and low interest rates. American Economic Review, 109(4), 1197–1229.",
   "Blanchard, O. y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. Quarterly Journal of Economics, 117(4), 1329–1368.",
   "Bohn, H. (1998). The behavior of U.S. public debt and deficits. Quarterly Journal of Economics, 113(3), 949–963.",
-  "Bohn, H. (2007). Are stationarity and cointegration restrictions really necessary for the intertemporal budget constraint? Journal of Monetary Economics, 54(7), 1837–1847.",
   "Cox, J., Ingersoll, J. y Ross, S. (1985). A theory of the term structure of interest rates. Econometrica, 53(2), 385–407.",
   "Daude, C., Melguizo, Á. y Neut, A. (2011). Fiscal policy in Latin America: countercyclical and sustainable? Economics: The Open-Access, Open-Assessment E-Journal, 5, 2011-14.",
-  "Elliott, G., Rothenberg, T. y Stock, J. (1996). Efficient tests for an autoregressive unit root. Econometrica, 64(4), 813–836.",
   "Favero, C. y Giavazzi, F. (2007). Debt and the effects of fiscal policy. NBER Working Paper 12822.",
-  "Ghosh, A., Kim, J., Mendoza, E., Ostry, J. y Qureshi, M. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. The Economic Journal, 123(566), F4–F30.",
   "Girouard, N. y André, C. (2005). Measuring cyclically-adjusted budget balances for OECD countries. OECD Economics Department Working Paper 434.",
   "Hansen, B. (1999). Threshold effects in non-dynamic panels: estimation, testing, and inference. Journal of Econometrics, 93(2), 345–368.",
-  "Hansen, B. (2000). Sample splitting and threshold estimation. Econometrica, 68(3), 575–603.",
   "Hansen, B. y Seo, B. (2002). Testing for two-regime threshold cointegration in vector error-correction models. Journal of Econometrics, 110(2), 293–318.",
+  "Kehoe, T. y Nicolini, J. P. (eds.) (2021). A Monetary and Fiscal History of Latin America, 1960–2017. University of Minnesota Press.",
   "Neumeyer, P. y Perri, F. (2005). Business cycles in emerging economies: the role of interest rates. Journal of Monetary Economics, 52(2), 345–380.",
-  "Reinhart, C., Rogoff, K. y Savastano, M. (2003). Debt intolerance. Brookings Papers on Economic Activity, 2003(1), 1–74.",
   "Staiger, D. y Stock, J. (1997). Instrumental variables regression with weak instruments. Econometrica, 65(3), 557–586.",
   "Stock, J. y Watson, M. (1993). A simple estimator of cointegrating vectors in higher order integrated systems. Econometrica, 61(4), 783–820.",
-  "Zivot, E. y Andrews, D. (1992). Further evidence on the great crash, the oil-price shock, and the unit-root hypothesis. Journal of Business & Economic Statistics, 10(3), 251–270.",
-].forEach((r) => children.push(REF(r)));
+  "Uribe, M. y Yue, V. (2006). Country spreads and emerging countries: who drives whom? Journal of International Economics, 69(1), 6–36.",
+].forEach((r) => C.push(REF(r)));
 
-// ═══════════════════════════ Documento ═════════════════════════════════════
-
+// ═══════════════════════════ Documento ════════════════════════════════════
 const doc = new Document({
   creator: "Federico Chillón, Santiago Páez, Emiliano Carricondo — FCE UNCUYO",
   title:
-    "Deuda Pública Consolidada y Fatiga Fiscal en Argentina (2004–2025) — Nota metodológica",
+    "Deuda Pública Consolidada y Fatiga Fiscal en Argentina (2004–2025) — Nota metodológica (SVAR y empalme de series)",
   description:
-    "Nota metodológica del componente econométrico de la tesis: SVAR restringido, umbrales de fatiga fiscal, spread histórico y sostenibilidad estocástica.",
-  styles: {
-    default: { document: { run: { font: FONT, size: BODY } } },
-  },
+    "Resultados de los tests del VAR estructural restringido y del empalme de series para un proxy de largo plazo del EMBI+, con criterio de decisión para la tesis final.",
+  styles: { default: { document: { run: { font: FONT, size: BODY } } } },
   numbering: {
     config: [
       {
@@ -943,7 +832,7 @@ const doc = new Document({
             style: {
               paragraph: {
                 indent: {
-                  left: convertInchesToTwip(0.35),
+                  left: convertInchesToTwip(0.32),
                   hanging: convertInchesToTwip(0.2),
                 },
               },
@@ -970,18 +859,12 @@ const doc = new Document({
           children: [
             new Paragraph({
               alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun({
-                  children: [PageNumber.CURRENT],
-                  font: FONT,
-                  size: SMALL,
-                }),
-              ],
+              children: [new TextRun({ children: [PageNumber.CURRENT], font: FONT, size: SMALL })],
             }),
           ],
         }),
       },
-      children,
+      children: C,
     },
   ],
 });
