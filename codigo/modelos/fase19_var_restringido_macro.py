@@ -14,8 +14,10 @@ Matriz Estructural Contemporánea (A0 * u_t = B * e_t):
 1. Brecha del Producto (g_gap): Reacciona contemporáneamente solo a sus propias
    innovaciones estructurales (las decisiones fiscales operan con rezago de implementación).
 2. Superávit Primario (pb_pib): Respuesta contemporánea al producto gobernada
-   exclusivamente por la elasticidad cíclica automática de la recaudación (alpha_y = 0.95),
-   con rigidez de decisión discrecional frente al riesgo y tipo de cambio dentro del trimestre.
+   por la semi-elasticidad cíclica automática de la recaudación (alpha_y = 0.25,
+   estándar OCDE/FMI para Argentina; Girouard & André, 2005; Daude et al., 2010;
+   Alberola et al., 2014), con rigidez de decisión discrecional frente al riesgo
+   y tipo de cambio dentro del trimestre.
 3. Riesgo Soberano (EMBI+): Variable financiera de ajuste inmediato ante shocks de
    actividad, fiscales y cambiarios.
 4. Tipo de Cambio Real (TCRM): Absorbe contemporáneamente shocks macroeconómicos y de balanza de pagos.
@@ -63,7 +65,7 @@ def cargar_datos():
     return data, vars_svar
 
 
-def estimar_svar_restringido(data, nlags=2, n_boot=500, horizon=20):
+def estimar_svar_restringido(data, nlags=2, n_boot=1000, horizon=20):
     n_obs, k_vars = data.shape
     
     # 1. Estimación del VAR en forma reducida
@@ -75,7 +77,7 @@ def estimar_svar_restringido(data, nlags=2, n_boot=500, horizon=20):
     # 2. Identificación Estructural Blanchard-Perotti / Favero-Giavazzi
     # A0 * u = B * e  donde B = diag(b_1, ..., b_k) y A0 tiene restricciones teóricas:
     # u_y    = e_y
-    # u_pb   = alpha_y * u_y + e_pb  (alpha_y = 0.95 elasticidad cíclica automática)
+    # u_pb   = alpha_y * u_y + e_pb  (alpha_y = 0.25, semi-elasticidad cíclica OCDE/FMI)
     # u_embi = gamma_y * u_y + gamma_pb * u_pb + e_embi
     # u_tcrm = delta_y * u_y + delta_pb * u_pb + delta_embi * u_embi + e_tcrm
     # u_d    = theta_y * u_y + theta_pb * u_pb + theta_embi * u_embi + theta_tc * u_tcrm + e_d
