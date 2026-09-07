@@ -8,9 +8,10 @@
  * estocástico. Todas las cifras provienen de resultados/tablas/ y de los
  * capítulos 4 a 8 de la tesis; no hay valores fabricados.
  *
- * Formato: una sola tipografía (Calibri), sin saltos de página, ecuaciones en
- * texto con subíndices y superíndices reales (sin editor de ecuaciones OMML,
- * que no renderiza de forma consistente entre versiones de Word).
+ * Formato: una sola tipografía (Calibri), sin saltos de página. Las ecuaciones
+ * se incrustan como imagen renderizada con Computer Modern (LaTeX) por
+ * render_eqs.py, para que se vean igual en cualquier versión de Word.
+ * Ejecutar antes: python outputs/render_eqs.py
  *
  * Autores: Federico Chillón · Santiago Páez · Emiliano Carricondo
  * Facultad de Ciencias Económicas — Universidad Nacional de Cuyo
@@ -33,10 +34,22 @@ const {
   LevelFormat,
   PageNumber,
   Footer,
+  ImageRun,
   convertInchesToTwip,
 } = require("docx");
 const fs = require("fs");
 const path = require("path");
+
+// Manifiesto de imágenes de ecuaciones (generado por render_eqs.py, tipografía
+// Computer Modern, DPI 240). Se incrustan como imagen para que rendericen con
+// calidad LaTeX de forma idéntica en cualquier versión de Word.
+const EQ_DIR = path.join(__dirname, "eq_img");
+const EQ_MANIFEST = JSON.parse(
+  fs.readFileSync(path.join(EQ_DIR, "manifest.json"), "utf-8")
+);
+const EQ_SOURCE_DPI = 240;
+const EQ_DISPLAY_DPI = 150; // efectivo: cuanto mayor, más pequeña la ecuación
+const EQ_MAX_WIDTH_PX = 600; // ancho de caja de texto de la página, a 96 DPI
 
 // ───────────────────────── Parámetros de estilo ─────────────────────────────
 
@@ -124,30 +137,29 @@ const REF = (text) =>
     children: [new TextRun({ text, font: FONT, size: SMALL })],
   });
 
-// ── Ecuación en texto: array de segmentos {t, it?, sub?, sup?, b?} ──────────
-const EQ = (segments) =>
-  new Paragraph({
+// ── Ecuación: imagen Computer Modern centrada, escalada a la página ─────────
+const EQ = (key) => {
+  const m = EQ_MANIFEST[key];
+  if (!m) throw new Error("ecuación no encontrada en el manifiesto: " + key);
+  let w = (m.w * 96) / EQ_DISPLAY_DPI;
+  let h = (m.h * 96) / EQ_DISPLAY_DPI;
+  if (w > EQ_MAX_WIDTH_PX) {
+    const f = EQ_MAX_WIDTH_PX / w;
+    w *= f;
+    h *= f;
+  }
+  return new Paragraph({
     alignment: AlignmentType.CENTER,
-    spacing: { before: 110, after: 150 },
-    children: segments.map(
-      (s) =>
-        new TextRun({
-          text: s.t,
-          italics: !!s.it,
-          bold: !!s.b,
-          font: FONT,
-          size: BODY,
-          subScript: !!s.sub,
-          superScript: !!s.sup,
-        })
-    ),
+    spacing: { before: 140, after: 170 },
+    children: [
+      new ImageRun({
+        type: "png",
+        data: fs.readFileSync(path.join(EQ_DIR, m.file)),
+        transformation: { width: Math.round(w), height: Math.round(h) },
+      }),
+    ],
   });
-
-// atajos para construir segmentos de ecuación
-const v = (t) => ({ t, it: true }); // variable en itálica
-const o = (t) => ({ t }); // operador / texto plano
-const sb = (t) => ({ t, it: true, sub: true }); // subíndice en itálica
-const sp = (t) => ({ t, it: true, sup: true }); // superíndice en itálica
+};
 
 // ───────────────────────── Tabla sobria (solo reglas horizontales) ──────────
 
@@ -394,11 +406,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    v("d"), sb("t−1"), o("  =  "),
-    o("Σ"), { t: "j = 0", sub: true }, { t: "∞", sup: true },
-    o("  "), v("sp"), sb("t+j"), o(" / (1 + "), v("r"), o(")"), sp("j+1"),
-  ])
+  EQ("igbc")
 );
 children.push(
   P(
@@ -410,12 +418,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    v("pb"), sb("t"), o("  =  α  +  ρ "), v("d"), sb("t−1"),
-    o("  +  β"), { t: "1", sub: true }, o(" "), v("ỹ"), sb("t"),
-    o("  +  β"), { t: "2", sub: true }, o(" "), v("g"), sb("t"), sp("exp"),
-    o("  +  "), v("u"), sb("t"),
-  ])
+  EQ("bohn")
 );
 children.push(
   P([
@@ -427,11 +430,7 @@ children.push(
   ])
 );
 children.push(
-  EQ([
-    o("Δ"), v("d"), sb("t"), o("  =  [ ( "), v("r"), sb("t"), o(" − "), v("g"), sb("t"),
-    o(" ) / ( 1 + "), v("g"), sb("t"), o(" ) ] "), v("d"), sb("t−1"),
-    o("  −  "), v("sp"), sb("t"),
-  ])
+  EQ("blanchard")
 );
 children.push(
   P(
@@ -474,12 +473,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    o("Δ"), v("x"), sb("t"), o("  =  α β′ "), v("x"), sb("t−1"),
-    o("  +  Σ"), { t: "i = 1", sub: true }, { t: "k−1", sup: true }, o("  "),
-    v("Γ"), sb("i"), o(" Δ"), v("x"), sb("t−i"),
-    o("  +  δ "), v("ỹ"), sb("t"), o("  +  "), v("ε"), sb("t"),
-  ])
+  EQ("vecm")
 );
 children.push(
   P([
@@ -501,12 +495,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    v("A"), sb("0"), o(" "), v("u"), sb("t"), o("  =  B "), v("e"), sb("t"),
-    o("     con     "), v("Y"), sb("t"),
-    o("  =  ( ỹ"), sb("t"), o(", pb"), sb("t"), o(", EMBI"), sb("t"),
-    o(", TCRM"), sb("t"), o(", d"), sb("t"), o(" )′"),
-  ])
+  EQ("svar")
 );
 children.push(P("Las restricciones, todas con fundamento teórico, son tres:"));
 children.push(
@@ -528,11 +517,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    v("d"), sb("t"), o("  =  [ ( 1 + "), v("r"), sb("t"), o(" ) / ( 1 + "), v("g"), sb("t"),
-    o(" ) ] "), v("d"), sb("t−1"), o("  −  "), v("pb"), sb("t"),
-    o("  +  "), v("sft"), sb("t"),
-  ])
+  EQ("favero")
 );
 children.push(
   P([
@@ -549,13 +534,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    v("pb"), sb("t"), o("  =  α  +  ρ "), v("d"), sb("t−1"),
-    o("  +  γ "), v("ỹ"), sb("t"),
-    o("  +  Σ"), { t: "j = −4", sub: true }, { t: "4", sup: true }, o("  "),
-    v("φ"), sb("j"), o(" Δ"), v("d"), sb("t−j"),
-    o("  +  "), v("ε"), sb("t"),
-  ])
+  EQ("dols")
 );
 
 children.push(H2("4.4. Corrección de la endogeneidad del riesgo soberano"));
@@ -579,12 +558,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    v("pb"), sb("t"), o("  =  α  +  β"), { t: "1", sub: true }, o(" "), v("d"), sb("t−1"),
-    o(" · 1( EMBI"), sb("t"), o(" ≤ τ )  +  β"), { t: "2", sub: true }, o(" "), v("d"), sb("t−1"),
-    o(" · 1( EMBI"), sb("t"), o(" > τ )  +  γ "), v("ỹ"), sb("t"),
-    o("  +  "), v("ε"), sb("t"),
-  ])
+  EQ("hansen")
 );
 children.push(
   P([
@@ -608,10 +582,7 @@ children.push(
   )
 );
 children.push(
-  EQ([
-    o("d( risk"), sb("t"), o(" )  =  κ ( θ − risk"), sb("t"), o(" ) d"), v("t"),
-    o("  +  σ √( risk"), sb("t"), o(" ) d"), v("W"), sb("t"),
-  ])
+  EQ("cir")
 );
 children.push(
   P([

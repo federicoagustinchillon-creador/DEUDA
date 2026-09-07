@@ -1,0 +1,52 @@
+{
+  "igbc": {
+    "file": "eq_igbc.png",
+    "w": 611,
+    "h": 191
+  },
+  "bohn": {
+    "file": "eq_bohn.png",
+    "w": 1051,
+    "h": 93
+  },
+  "blanchard": {
+    "file": "eq_blanchard.png",
+    "w": 680,
+    "h": 147
+  },
+  "vecm": {
+    "file": "eq_vecm.png",
+    "w": 1142,
+    "h": 194
+  },
+  "svar": {
+    "file": "eq_svar.png",
+    "w": 1502,
+    "h": 88
+  },
+  "favero": {
+    "file": "eq_favero.png",
+    "w": 774,
+    "h": 162
+  },
+  "dols": {
+    "file": "eq_dols.png",
+    "w": 1200,
+    "h": 200
+  },
+  "hansen": {
+    "file": "eq_hansen.png",
+    "w": 1824,
+    "h": 83
+  },
+  "cir": {
+    "file": "eq_cir.png",
+    "w": 1150,
+    "h": 103
+  },
+  "feller": {
+    "file": "eq_feller.png",
+    "w": 282,
+    "h": 90
+  }
+}
