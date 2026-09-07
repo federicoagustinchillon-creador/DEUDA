@@ -259,5 +259,5 @@ def exportar_resultados(res):
 
 if __name__ == "__main__":
     data, vars_svar = cargar_datos()
-    res = estimar_svar_restringido(data, nlags=2, n_boot=500, horizon=20)
+    res = estimar_svar_restringido(data, nlags=2, n_boot=1000, horizon=20)
     exportar_resultados(res)
