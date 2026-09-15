@@ -1,63 +1,79 @@
-# Plan de labor — Tesis oficial (director Pablo)
+# Plan de labor, tesis oficial (director Pablo)
 
-Esta es la tesis, la versión oficial que arranca ahora con Pablo como director. Es distinta del
-desarrollo cuantitativo que ya existe en `tesis/`, `codigo/` y `resultados/` (SVAR, VECM, CIR,
-TVECM, DSA sobre 2004–2025 y la extensión 1983–2025): ese trabajo es previo/paralelo y todavía no
-está decidido cómo entra en esta versión oficial — como insumo para el capítulo de resultados una
-vez que la Fase 2 defina la metodología, como apéndice técnico, o reescrito a la medida de lo que
-Pablo pida. No asumir nada al respecto sin que el usuario lo confirme. Se arregla por fases, cada
-una cerrable en una sesión.
+Este archivo es un documento de trabajo interno, para ir tachando fases entre nosotros. No es parte
+de la tesis y no se entrega ni se pega en ningún capítulo. Si la carrera exige un "Plan de Trabajo"
+formal dentro del proyecto de tesis que se presenta para aprobación, eso es un documento distinto,
+con su propio formato institucional, que se escribe aparte cuando haga falta.
 
-## Fase 0 — Hecho (2026-09-15)
-- [x] Introducción.docx y antecedentes.docx pasados a Markdown.
-- [x] Extraídos los 30+ comentarios de Pablo del PDF anotado (no estaban visibles como texto plano,
-      solo como anotaciones PDF — había que leer `/Annots` de cada página).
-- [x] Confirmado: `Introducción.docx` es idéntico a la versión que Pablo comentó. Ninguna corrección
-      aplicada todavía.
-- [x] Redactada una v2 de la Introducción que resuelve los 6 comentarios de la página 1 (ver
-      `introduccion_v2_propuesta.md`).
+Esta tesis es distinta del desarrollo cuantitativo que ya existe en `tesis/`, `codigo/` y
+`resultados/` (SVAR, VECM, CIR, TVECM, DSA sobre 2004-2025 y la extensión 1983-2025). La Fase 2
+resuelve cómo se relacionan ambos.
 
-## Fase 1 — Introducción y Antecedentes (en curso)
-1. Revisar `introduccion_v2_propuesta.md` — decidir las dos citas marcadas `[CITA: ...]`.
-2. Aplicar a Antecedentes los cambios mecánicos listados en la Fase 1 del mismo archivo (sacar
-   guiones largos, cursiva + nota al pie en términos en inglés, sacar la aclaración que pidió sacar
-   Pablo).
-3. Validar el detalle marcado como "buen detalle para tener en cuenta" — no tocar, ya está bien.
-4. **No** escribir todavía el párrafo de cierre de Antecedentes (depende de la Fase 2).
+## Fase 0, hecho (2026-09-15)
+- [x] `Introducción.docx` y `antecedentes.docx` pasados a Markdown.
+- [x] Extraídos los más de 30 comentarios de Pablo del PDF anotado (no estaban visibles como texto
+      plano, solo como anotaciones PDF; había que leer `/Annots` de cada página).
+- [x] Confirmado que `Introducción.docx` era idéntico a la versión que Pablo comentó, sin ninguna
+      corrección aplicada.
 
-## Fase 2 — Decisión metodológica de la tesis oficial
-En una entrevista previa con el grupo (Páez, Carricondo, Chillón), Pablo había pedido explícitamente
-**no profundizar a nivel de tesis de grado** — un análisis simple pero prolijo. Esa conversación fue
-antes de que esto se formalizara como la tesis oficial, así que hay que confirmar con él si ese
-límite sigue en pie ahora que el documento es la tesis en serio, o si cambia el alcance. Sin esa
-confirmación, no asumir ninguna de las dos cosas. Opciones sobre la mesa:
+## Fase 1, hecho (2026-09-15)
+- [x] Corregidos los 6 comentarios de la página 1 (sin guiones largos como inciso, sin "narrativa
+      oficial", sin el conector "Frente a este dilema", cortada la oración final que pidió sacar,
+      dos huecos de cita marcados en vez de resueltos con una cita inventada).
+- [x] Purgados los 10 pares de guion largo del resto del documento (páginas 2 y 3, sección
+      Antecedentes).
+- [x] Puestos en cursiva con nota al pie los términos en inglés (*sudden stop*, *fan charts*,
+      *push*, *early warning systems*) en su primera aparición.
+- [x] Sacada la aclaración "(2020, por ejemplo)" que pidió sacar Pablo.
+- [x] Validado sin cambios el fragmento que Pablo marcó como "buen detalle para tener en cuenta".
 
-- **Opción A**: FRF simple a la Bohn (superávit primario ~ deuda rezagada + brecha del producto), el
-  mismo tipo de ejercicio que hace Medeiros (2012) — que ya es la columna vertebral de la sección de
-  Antecedentes — más un DSA determinista/Monte Carlo sencillo. La más alineada con lo que Pablo pidió
-  en esa entrevista, si ese límite sigue vigente.
-- **Opción B**: incorporar como cuerpo de la tesis el desarrollo cuantitativo que ya existe en
-  `tesis/`, `codigo/` y `resultados/` (SVAR, VECM, CIR, TVECM, DSA), reescribiendo Introducción y
-  Antecedentes para que encajen con esa profundidad. Viable si Pablo confirma que el alcance cambió.
+Texto final: `introduccion_antecedentes_v2_corregido.md`, con una tabla de trazabilidad al final que
+mapea cada comentario de Pablo con el cambio hecho. Falta: pasarlo a `Introducción.docx` (Word,
+Calibri, sin nada que huela a IA en el formato) y decidir las dos citas marcadas `[CITA: ...]`
+antes de darlo por cerrado; no se puso ninguna cita sin verificar primero que el paper sostenga lo
+que se le está haciendo decir.
 
-Ninguna opción se elige sin que el usuario lo defina (con Pablo, si hace falta). Una vez elegida,
-redactar el párrafo de cierre de Antecedentes que pide Pablo (por qué esa metodología, por qué esas
-variables — tres razones posibles: no se probó antes / el contexto evolucionó / hay una variable
-relevante ausente en los antecedentes revisados).
+## Fase 2, alcance metodológico: RESUELTO (2026-09-15)
+Confirmado por el usuario: es una tesis de grado, no de doctorado. Nivel de grado sí, nivel de
+doctorado no.
 
-## Fase 3 — Fuente de datos para vencimientos en moneda extranjera
-Ver respuesta completa abajo. Resumen: usar el informe mensual de la Oficina de Presupuesto del
-Congreso (OPC), *Operaciones de Deuda Pública*, como fuente puntual para la cifra que se cita en la
-Introducción. No existe una fuente única y homogénea para una serie histórica larga de vencimientos
-por moneda — no vale la pena reconstruirla; si la Opción B avanza, alcanza con el stock "% deuda en
-moneda extranjera" que ya está en la matriz de datos como proxy de descalce cambiario.
+- El desarrollo cuantitativo que ya existe en `tesis/`, `codigo/` y `resultados/` (SVAR restringido,
+  VECM, TVECM de Hansen-Seo, calibración CIR por máxima verosimilitud exacta, DCC-GARCH, Bai-Perron,
+  DSA estocástico con varias especificaciones de robustez), apilado completo, es más propio de una
+  tesis de maestría o doctorado que de una de grado. No se inserta tal cual.
+- La metodología del cuerpo de esta tesis se arma alrededor de una estrategia empírica central, bien
+  ejecutada, del mismo tipo que ya usan los antecedentes centrales de la sección de Antecedentes: FRF
+  a la Bohn (superávit primario en función de la deuda rezagada y la brecha del producto, como
+  Medeiros 2012 y Everaert-Jansen 2018) estimada por DOLS o por un VECM simple de dos o tres
+  variables, más un DSA determinista y una simulación Monte Carlo simple, sin necesidad de GARCH ni
+  cópulas. Es el mismo nivel de instrumental que ya revisa la sección de Antecedentes, así que no
+  hace falta justificar un salto de complejidad frente al propio texto.
+- El SVAR, el TVECM, el CIR y el DCC-GARCH quedan disponibles como código y resultados ya corridos
+  (`resultados/tablas/`) por si hace falta un anexo de robustez puntual más adelante, pero no como
+  columna vertebral del capítulo de resultados.
 
-## Fase 4 — Resto del documento
-Pendiente de confirmar qué otras secciones existen o faltan (marco teórico, metodología, cronograma,
-y si la Opción B avanza, cómo se reordenan los capítulos ya escritos en `tesis/capitulos/`). No se
-subieron archivos de esas secciones todavía — avisar cuando estén para sumarlas al plan.
+Con esto resuelto, falta redactar el párrafo de cierre de Antecedentes que pide Pablo: por qué esta
+metodología y por qué estas variables. Con la FRF a la Bohn como eje, las tres razones que da Pablo
+como ejemplo encajan directamente: no se ha probado con la especificación de descalce cambiario que
+plantea esta tesis (razón 1), el contexto post-2024 cambió respecto de los antecedentes revisados
+(razón 2), y falta en los antecedentes una variable de riesgo soberano tratada como endógena en el
+caso argentino específicamente (razón 3, en diálogo con Levy Yeyati y Sturzenegger y con Rodríguez
+2023, ambos ya en Antecedentes).
 
-## Fase 5 — Reenvío a Pablo
-Reenviar Introducción + Antecedentes corregidos, dejando explícito en el mail/entrega qué comentario
-se resolvió con qué cambio, y qué queda abierto (el párrafo de cierre metodológico y la decisión de
-alcance, ambos condicionados a la Fase 2).
+## Fase 3, fuente de datos para vencimientos en moneda extranjera
+Usar el informe mensual de la Oficina de Presupuesto del Congreso (OPC), *Operaciones de Deuda
+Pública*, como fuente puntual para la cifra que se cita en la Introducción. No existe una fuente
+única y homogénea para una serie histórica larga de vencimientos por moneda, y no vale la pena
+reconstruirla: alcanza con el stock "% deuda en moneda extranjera", que ya está en la matriz de
+datos de la tesis individual, como proxy de descalce cambiario a través del tiempo.
+
+## Fase 4, resto del documento
+Pendiente de confirmar qué otras secciones existen o faltan: marco teórico, metodología completa
+(ya con el alcance de la Fase 2 definido), datos, cronograma formal si la carrera lo exige aparte.
+No se subieron archivos de esas secciones todavía, avisar cuando estén para sumarlas al plan.
+
+## Fase 5, reenvío a Pablo
+Reenviar Introducción y Antecedentes corregidos, dejando explícito en la entrega qué comentario se
+resolvió con qué cambio (la tabla de trazabilidad de `introduccion_antecedentes_v2_corregido.md`
+sirve para esto tal cual), y qué queda abierto: las dos citas a verificar y el párrafo de cierre
+metodológico, ya redactable con la Fase 2 resuelta.
