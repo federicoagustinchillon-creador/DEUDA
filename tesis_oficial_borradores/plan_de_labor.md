@@ -173,7 +173,15 @@ A pedido del usuario, se resolvieron seis puntos sueltos:
 - **DOLS y endogeneidad**: confirmado que el texto ya distingue correctamente los dos sentidos de
   "endogeneidad" (la de corto plazo que DOLS purga con adelantos/rezagos, vs. la simultaneidad
   resultado fiscal-riesgo país que solo corrige IV-2SLS). No se encontró ninguna oración que atribuya
-  a DOLS la corrección de la segunda. No hizo falta cambiar nada.
+  a DOLS la corrección de la segunda. **Corrección tras la reunión del usuario con Pablo (2026-09-17)**:
+  el encuadre correcto no es "se asume endógeno sin testear"; es que, en un sistema de series de
+  tiempo, todo es endógeno salvo los shocks de alta frecuencia, y por eso no corresponde presentar un
+  test como el que decide si el EMBI+ es endógeno. Reescrito en `04_metodologia.tex` (nueva Sección
+  \ref{sec:etapa4_endogeneidad}, Etapa 4): el EMBI+ es endógeno por compartir la frecuencia trimestral
+  del sistema (igual que $pb_t$, $d_t$, TCRM$_t$), y el VIX/BOVESPA\_VOL son instrumentos válidos
+  precisamente por ser series de mayor frecuencia (diaria) que el sistema no puede causar hacia atrás
+  en el tiempo. El párrafo de Wu-Hausman en `06_resultados.tex` se reescribió para no presentarlo como
+  el test que decide si instrumentar hacía falta, sino como diagnóstico secundario de eficiencia.
 - **Por qué esa matriz de SVAR y no otra, y por qué TCRM**: agregado en `04_metodologia.tex`
   (Sección \ref{sec:svar_metodologia}) con citas reales ya existentes en el repo, sin necesidad de
   buscar nada nuevo: Uribe y Yue (2006, causalidad spread-fundamentals), Neumeyer y Perri (2005,
@@ -186,18 +194,24 @@ A pedido del usuario, se resolvieron seis puntos sueltos:
   respaldo bibliográfico directo (Uribe-Yue, Neumeyer-Perri) y porque no hay serie propia de tasa de
   política monetaria ni agregados monetarios con cobertura de 30 años en la base de datos actual.
   Documentado en el mismo párrafo de `04_metodologia.tex`.
-- **Panel VAR/VECM con Chile ("siguiendo a Sturzenegger")**: buscado con un agente de investigación
-  web (no de memoria). No existe un paper de Sturzenegger que estime un VAR o VECM de panel
-  Argentina-Chile: los tres antecedentes reales más cercanos son Sturzenegger y Zettelmeyer (2006,
-  *Debt Defaults and Lessons from a Decade of Crises*, MIT Press, estudios de caso comparados sin
-  VAR), Cowan, Levy Yeyati, Panizza y Sturzenegger (2006, *Sovereign Debt in the Americas: New Data
-  and Stylized Facts*, Documento de Trabajo BCCh 371, base de datos comparada Argentina-Chile con
-  estadística descriptiva, sin VAR/VECM) y Sturzenegger-Zettelmeyer (2007/2008, *Haircuts*, JIMF).
-  Decisión del usuario: **implementarlo de verdad, pero no ahora** — queda como línea de investigación
-  futura, no como tarea de esta entrega. Agregado como primer paso concreto (antes de escalar al panel
+- **Panel VAR/VECM con Chile ("siguiendo a Sturzenegger")**: buscado primero con un agente de
+  investigación web, que no encontró un VAR/VECM de panel Argentina-Chile de Sturzenegger.
+  **Corrección**: el usuario señaló que el paper real es el de 2021, que su compañero de tesis ya usa
+  en antecedentes/introducción. Es el mismo que ya teníamos citado como `levyyeyati2021` (Levy Yeyati
+  y Sturzenegger, WP 2021 / publicado 2023): la búsqueda anterior falló por buscar literalmente "panel
+  VAR Chile" cuando el paper no es un panel conjunto, sino un VAR de 3 variables (PBI, TCR, tasa
+  internacional) aplicado país por país, que efectivamente incluye a Chile (agregando el precio del
+  cobre) además de Argentina — ya documentado en `antecedentes_notas_tecnicas.md` (línea 785 y 802),
+  no hacía falta buscar nada nuevo. Los antecedentes de 2006 (Sturzenegger-Zettelmeyer, *Debt
+  Defaults*; Cowan-Levy Yeyati-Panizza-Sturzenegger, *Sovereign Debt in the Americas*) siguen siendo
+  reales pero no son la referencia que el usuario tenía en mente. Decisión del usuario: implementar un
+  VAR/VECM de panel propio Argentina-Chile de verdad, pero no ahora, queda como línea de investigación
+  futura (no como tarea de esta entrega). Agregado como primer paso concreto (antes de escalar al panel
   de 6-8 países ya mencionado) en la Sección "Agenda de Investigación Futura" de `08_conclusiones.tex`
   (línea Quinta), citando a Cowan et al. (2006) como fuente de datos ya armonizados y dejando
-  explícito que sería una contribución metodológica genuina, no la réplica de un protocolo existente.
+  explícito que un panel conjunto Argentina-Chile sería una contribución metodológica genuina, no la
+  réplica de un protocolo existente (el propio Levy Yeyati-Sturzenegger aplica el VAR país por país,
+  no como panel conjunto).
 - **Historiografía en Introducción/Antecedentes**: la afirmación histórica general sobre crisis de
   deuda recurrentes en Argentina/Latinoamérica en `01_introduccion.tex` citaba solo papers técnicos
   de sostenibilidad fiscal (Mendoza-Oviedo, De Rasmo), no historiografía económica. Se agregaron,
