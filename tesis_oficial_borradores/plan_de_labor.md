@@ -166,3 +166,52 @@ Reenviar Introducción y Antecedentes corregidos, dejando explícito en la entre
 resolvió con qué cambio (la tabla de trazabilidad de `introduccion_antecedentes_v2_corregido.md`
 sirve para esto tal cual), y qué queda abierto: las dos citas a verificar y el párrafo de cierre
 metodológico, ya redactable con la Fase 2 resuelta.
+
+## Fase 6, justificación del SVAR, foco de shock e historiografía: HECHO (2026-09-17)
+A pedido del usuario, se resolvieron seis puntos sueltos:
+
+- **DOLS y endogeneidad**: confirmado que el texto ya distingue correctamente los dos sentidos de
+  "endogeneidad" (la de corto plazo que DOLS purga con adelantos/rezagos, vs. la simultaneidad
+  resultado fiscal-riesgo país que solo corrige IV-2SLS). No se encontró ninguna oración que atribuya
+  a DOLS la corrección de la segunda. No hizo falta cambiar nada.
+- **Por qué esa matriz de SVAR y no otra, y por qué TCRM**: agregado en `04_metodologia.tex`
+  (Sección \ref{sec:svar_metodologia}) con citas reales ya existentes en el repo, sin necesidad de
+  buscar nada nuevo: Uribe y Yue (2006, causalidad spread-fundamentals), Neumeyer y Perri (2005,
+  tasa externa contracíclica) y Eichengreen, Hausmann y Panizza (2003, *original sin*/descalce de
+  moneda) justifican por qué EMBI+ y TCRM se tratan como bloque financiero de ajuste contemporáneo, y
+  por qué TCRM no puede omitirse del sistema. Se explicitó también por qué no se usa un Cholesky
+  simple (no hay razón teórica para ordenar EMBI+ y TCRM entre sí, así que esa transmisión queda sin
+  restringir en vez de forzarse).
+- **Foco de shock elegido**: entrada/salida de capitales (no shock monetario), porque ya hay
+  respaldo bibliográfico directo (Uribe-Yue, Neumeyer-Perri) y porque no hay serie propia de tasa de
+  política monetaria ni agregados monetarios con cobertura de 30 años en la base de datos actual.
+  Documentado en el mismo párrafo de `04_metodologia.tex`.
+- **Panel VAR/VECM con Chile ("siguiendo a Sturzenegger")**: buscado con un agente de investigación
+  web (no de memoria). No existe un paper de Sturzenegger que estime un VAR o VECM de panel
+  Argentina-Chile: los tres antecedentes reales más cercanos son Sturzenegger y Zettelmeyer (2006,
+  *Debt Defaults and Lessons from a Decade of Crises*, MIT Press, estudios de caso comparados sin
+  VAR), Cowan, Levy Yeyati, Panizza y Sturzenegger (2006, *Sovereign Debt in the Americas: New Data
+  and Stylized Facts*, Documento de Trabajo BCCh 371, base de datos comparada Argentina-Chile con
+  estadística descriptiva, sin VAR/VECM) y Sturzenegger-Zettelmeyer (2007/2008, *Haircuts*, JIMF).
+  Decisión del usuario: **implementarlo de verdad, pero no ahora** — queda como línea de investigación
+  futura, no como tarea de esta entrega. Agregado como primer paso concreto (antes de escalar al panel
+  de 6-8 países ya mencionado) en la Sección "Agenda de Investigación Futura" de `08_conclusiones.tex`
+  (línea Quinta), citando a Cowan et al. (2006) como fuente de datos ya armonizados y dejando
+  explícito que sería una contribución metodológica genuina, no la réplica de un protocolo existente.
+- **Historiografía en Introducción/Antecedentes**: la afirmación histórica general sobre crisis de
+  deuda recurrentes en Argentina/Latinoamérica en `01_introduccion.tex` citaba solo papers técnicos
+  de sostenibilidad fiscal (Mendoza-Oviedo, De Rasmo), no historiografía económica. Se agregaron,
+  verificados uno por uno contra catálogos de editorial/JSTOR/Library of Congress (no de memoria):
+  Díaz Alejandro (1970), della Paolera y Taylor (2001), Rapoport (2020) para la historia argentina
+  específica, y Reinhart y Rogoff (2009) para el patrón más amplio de crisis de deuda soberana en
+  perspectiva de siglos. Las seis entradas nuevas de bibliografía (`diazalejandro1970`,
+  `dellapaolera2001`, `rapoport2020`, `reinhartrogoff2009`, `cowan2006`, `sturzenegger2006`) están en
+  `tesis/fuente/referencias.bib`.
+- **Otro paper de SVAR estructural para Argentina o países muy similares**: no se buscó específicamente
+  porque el punto 2 (justificación de la matriz) ya quedó resuelto con literatura de shocks externos
+  (Uribe-Yue, Neumeyer-Perri) en lugar de un precedente de SVAR aplicado línea por línea a Argentina;
+  pendiente si el director pide un antecedente metodológico más directo de SVAR fiscal-cambiario para
+  economías emergentes específicamente (no solo Blanchard-Perotti, que es para economías avanzadas).
+
+`Tesis.pdf` recompilado y verificado (98 páginas antes de esta fase, sin warnings de referencias
+nuevos) y commiteado.
