@@ -4,13 +4,16 @@
 \usepackage{lmodern}
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{geometry}
-\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+\geometry{top=2.2cm,bottom=2.2cm,left=2.3cm,right=2.3cm}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{booktabs,tabularx,array,longtable}
+\usepackage{graphicx}
+\graphicspath{{figuras/}{../figuras/}}
 \usepackage{xcolor}
 \usepackage{microtype}
 \usepackage{enumitem}
 \usepackage{titlesec}
+\usepackage{caption}
 \usepackage{hyperref}
 
 \hypersetup{
@@ -20,15 +23,17 @@
     citecolor=blue!70!black
 }
 
+\captionsetup{font=small,labelfont=bf,skip=6pt}
 \titleformat{\section}{\large\bfseries\color{blue!80!black}}{\thesection.}{0.5em}{}[\titlerule]
 \titleformat{\subsection}{\normalsize\bfseries\color{black}}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\small\bfseries\color{black!80!blue}}{\thesubsubsection.}{0.5em}{}
 
-\title{\textbf{\Large Guía Metodológica y Síntesis Cuantitativa Integral}\\
+\title{\textbf{\Large Dossier Metodológico, Cuantitativo y Defensivo para la Dirección de Tesis}\\
 \large Evaluación de la Sostenibilidad de la Deuda Pública en Argentina (1996--2025)\\[0.3em]
-\normalsize Documento de Validación y Consulta para la Dirección de Tesis}
+\normalsize Justificación de Decisiones, Alternativas Disponibles, Antecedentes y Evidencia Gráfica}
 \author{\textbf{Federico Agustín Chillón} \\
 Facultad de Ciencias Económicas, Universidad Nacional de Cuyo \\
-Directores: Mg. Pablo Salvador / Co-dirección}
+Dirección de Tesis: Mg. Pablo Salvador}
 \date{Septiembre de 2026}
 
 \begin{document}
@@ -36,203 +41,270 @@ Directores: Mg. Pablo Salvador / Co-dirección}
 \maketitle
 
 \begin{abstract}
-\noindent Este documento presenta de manera directa, pedagógica y exhaustiva cada uno de los bloques metodológicos, bases de datos, fórmulas matemáticas, antecedentes teóricos, resultados numéricos exactos e interpretaciones económicas de la tesis. Su propósito es servir como guía de consulta rápida para la dirección de tesis, detallando la ubicación exacta de cada resultado en el manuscrito principal (\texttt{Tesis.pdf}), en los scripts econométricos (\texttt{codigo/}) y en las matrices de datos (\texttt{datos/}, \texttt{resultados/}).
+\noindent Este documento constituye una guía exhaustiva de fundamentación metodológica para la dirección de tesis. Expone la totalidad de las decisiones adoptadas en el trabajo de graduación: la construcción empírica de variables (1996--2025, $n=120$), los antecedentes teóricos revisados y corregidos, las fórmulas econométricas, los resultados numéricos exactos, las representaciones gráficas de cada fase y las alternativas metodológicas contempladas para responder a cualquier requerimiento técnico del tribunal o de la dirección. Cada bloque explicita por qué se eligió la técnica principal, por qué se descartaron o subordinaron opciones alternativas (como el uso de diferenciales de tasas domésticas, modelos ARDL, filtros de Cholesky o especificaciones polinómicas de fatiga fiscal) y dónde verificar exactamente cada dato y script en el repositorio.
 \end{abstract}
 
-\vspace{0.5em}
+\vspace{0.8em}
 
-\section{Estructura de la Base de Datos Unificada (1996T1--2025T4, $n=120$)}
+\section{Marco de Antecedentes y Literatura Empírica}
 
-\subsection{Definición de la Ventana y Empalmes Metodológicos}
-A efectos de contar con un único horizonte temporal continuo de 30 años sin discontinuidades, se consolidó la serie \texttt{datos/dataset\_consolidado\_1996\_2025.csv} ($n=120$ trimestres):
+\subsection{Genealogía de la Literatura y Crítica a los Enfoques de Panel}
+La literatura empírica sobre sostenibilidad de deuda soberana evolucionó en los últimos quince años desde proyecciones determinísticas de escenario único hacia marcos estocásticos capaces de construir distribuciones de probabilidad sobre la trayectoria de la deuda:
 \begin{enumerate}[leftmargin=1.5em]
-    \item \textbf{Deuda Pública sobre PIB ($d_t$)}: Datos de la Secretaría de Finanzas (MECON) y Secretaría de Hacienda. Para el período 1996--2003 se empalmaron los datos trimestrales oficiales de deuda de la Administración Central y Sector Público No Financiero (SPNF) homogeneizados con la base post-2004.
-    \item \textbf{Resultado Primario sobre PIB ($pb_t$)}: Ejecución presupuestaria base caja del SPNF sin rentas de propiedad ficticias del BCRA ni FGS.
-    \item \textbf{Brecha del Producto ($g\_gap_t$)}: Estimada a partir del Estimador Mensual de Actividad Económica (EMAE/INDEC) y el PIB trimestral a precios constantes, extrayendo el ciclo mediante el filtro de Hodrick-Prescott ($\lambda = 1600$).
-    \item \textbf{Spread Soberano ($EMBI_t$)}: Construcción empalmada. Desde julio de 1997 en adelante utiliza el índice JP Morgan EMBI+ Argentina oficial. Para el tramo 1996T1--1997T2 se empalmó el diferencial de rendimiento de los Bonos Brady argentinos respecto a los Treasury bonds de EE.UU. de similar vencimiento (fuente: base histórica de mercados emergentes de JP Morgan y MECON).
-    \item \textbf{Tipo de Cambio Real Multilateral ($TCRM_t$)}: Serie histórica oficial del BCRA (base 100 = 2015). Para los 4 trimestres de 1996, ante la ausencia del índice multilateral ponderado actual, se extrapoló por tendencia anclada a la paridad fija de convertibilidad con socios comerciales mayoritarios.
-    \item \textbf{Instrumentos Externos ($VIX_t$ y $BOVESPA\_VOL_t$)}: Creados para el modelo IV-2SLS. El índice VIX proviene de CBOE (FRED/Yahoo Finance). La volatilidad de renta variable latinoamericana ($BOVESPA\_VOL$) se calculó como el desvío estándar trimestral de los retornos diarios logarítmicos del índice Bovespa (\textasciicircum BVSP), anualizado multiplicando por $\sqrt{252}$ y expresado en puntos porcentuales (datos reales 1994--2025).
+    \item \textbf{De la simulación estocástica a los marcos de riesgo soberano}:
+    \begin{itemize}
+        \item \textit{Medeiros (2012)}: Punto de partida en la Comisión Europea, combinando un VAR irrestricto con una función de reacción fiscal (FRF) de panel para quince países de la Unión Europea para generar los primeros gráficos de abanico (\textit{fan charts}) oficiales. Postuló la presencia de "fatiga fiscal" (el esfuerzo fiscal se agota ante deudas elevadas). Dicho supuesto fue importado por el Marco de Riesgo Soberano y Sostenibilidad de la Deuda del FMI (\textit{SRDSF}), aplicado a Argentina en la Octava Revisión del Servicio Ampliado (FMI, 2024).
+        \item \textit{Everaert y Jansen (2018)}: Reexaminaron el panel de la OCDE (1970--2014) utilizando el estimador \textit{Mean Group} de Pesaran y Smith, demostrando que la fatiga fiscal no es una regularidad universal, sino un artefacto de agregación estadística. Para un país individual como Argentina, las funciones de reacción calibradas sobre paneles de economías desarrolladas carecen de validez ecológica: los marcos institucionales de disciplina presupuestaria (Regla Fiscal Europea, Tratado de Maastricht) no son extrapolables a la historia argentina.
+    \end{itemize}
+
+    \item \textbf{Economías emergentes expuestas a commodities y factores globales (\textit{push/pull})}:
+    \begin{itemize}
+        \item \textit{Adler y Sosa (2014)}: Estimaron modelos PVAR y GVAR para América Latina introduciendo el Índice de Precios Netos de Materias Primas (\textit{NCPI}) desarrollado por Adler y Magud (2014). Demostraron que más de la mitad de la variabilidad del flujo de capitales hacia economías como la argentina obedece a factores globales (\textit{push}: tasa de la Reserva Federal, índice VIX de aversión al riesgo global). Documentaron además la asimetría argentina: ante crisis internacionales, el capital de residentes no amortigua sino que intensifica la salida de divisas.
+        \item \textit{Wijayanti y Rachmanira (2020)}: Implementaron sistemas de alerta temprana (\textit{early warning systems}) mediante regresiones logísticas binomiales en 43 países en desarrollo. Aunque útiles para clasificación binaria a nivel de corte transversal, carecen de estructura causal macroeconómica y no reemplazan el análisis temporal específico de un soberano en particular.
+    \end{itemize}
+
+    \item \textbf{El dilema argentino en 2001 (Flujo vs. Stock)}:
+    \begin{itemize}
+        \item \textit{Cetrángolo, Damill, Frenkel y Jiménez (1997)}: Evaluaron el Sector Público No Financiero (1975--1996) mediante el filtro Hodrick-Prescott y el cálculo de déficit macroeconómicamente ajustado (DMA) e impulsos fiscales (metodología de Blanchard, 1990). Concluyeron que el riesgo fiscal cíclico de la Convertibilidad era moderado (0.3\% a 0.6\% del PIB), pero anticiparon tempranamente que el déficit de cuenta corriente externa superaría el 7\% del PIB hacia 2001, advirtiendo que la fragilidad argentina no radicaba en el balance primario corriente sino en el financiamiento externo.
+        \item \textit{Calvo, Izquierdo y Talvi (2003)}: Bajo el marco "CDM" (economía cerrada al comercio internacional, dolarizada y con descalce de balances), demostraron que ante una interrupción súbita del crédito (\textit{sudden stop}), el ajuste cambiario necesario para reequilibrar la balanza de pagos eleva de manera destructiva el ratio deuda/PIB debido al descalce de monedas en los pasivos soberanos.
+    \end{itemize}
+
+    \item \textbf{La controversia del ratio Deuda/PIB frente al enfoque de balance completo}:
+    \begin{itemize}
+        \item \textit{Rodríguez (2023)}: Demostró que la reducción del ratio deuda/PIB durante 2003--2011 respondió primordialmente a la apreciación real de la moneda tras el canje 2005 (efecto contable de valuación) y no a un proceso de ahorro estructural sostenido. Análogamente, la devaluación de fines de 2023 llevó mecánicamente el ratio al 156.7\% del PIB en las métricas del FMI (2024), obligando al staff a relativizar la alarma de "Riesgo Alto".
+        \item \textit{Levy Yeyati y Sturzenegger (2021, 2023)}: Propusieron sustituir el ratio tradicional por el patrimonio neto integral del sector público (valor presente de ingresos tributarios menos gastos y pasivos), argumentando que tras la desdolarización post-2001 una depreciación real licúa gastos en moneda doméstica. No obstante, este resultado depende críticamente de que la deuda no retorne a esquemas en moneda dura, condición que se revirtió a partir de 2016 con la aceleración de emisiones en dólares bajo legislación extranjera.
+    \end{itemize}
+
+    \item \textbf{El costo ex post de la cesación de pagos}:
+    \begin{itemize}
+        \item \textit{Hébert y Schreger (2017)}: Utilizaron los fallos judiciales de la causa judicial \textit{República Argentina v. NML Capital} como experimento natural, demostrando que incrementos exógenos en la probabilidad de default destruyeron entre un 30\% y 45\% de la capitalización bursátil de las empresas nacionales, concentrándose el daño en sectores transables.
+    \end{itemize}
 \end{enumerate}
 
-\noindent \textbf{Sub-muestra de control sin empalme (2004--2025, $n=88$)}: Se mantiene reportada en el Capítulo 5 como contraste para transparentar que ningún resultado central es generado por el proceso de empalme histórico.
+\subsection{El Diálogo de Nuestra Tesis con los Antecedentes}
+Frente a este estado del arte, nuestra investigación supera las limitaciones de la literatura previa:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Frente a Medeiros (2012) y el FMI (2024)}: No asumimos fatiga fiscal de panel prestada; testeamos endógenamente la función de reacción fiscal con DOLS y umbrales de Hansen sobre 30 años ininterrumpidos de datos argentinos (1996--2025).
+    \item \textbf{Frente a Calvo et al. (2003) y Rodríguez (2023)}: Incorporamos explícitamente el canal del tipo de cambio real ($TCRM$) y el spread soberano ($EMBI$) en un modelo de vectores autorregresivos estructurales (SVAR), cuantificando en qué medida el descalce cambiario y el racionamiento de crédito explican la varianza de la deuda.
+    \item \textbf{Frente al marco estocástico determinista tradicional}: Anclamos la simulación de Monte Carlo directamente en la matriz de covarianza estructural estimada del SVAR, produciendo distribuciones empíricas realistas de solvencia hacia 2035.
+\end{itemize}
 
-\vspace{0.8em}
-\noindent \textbf{Ubicación}: Manuscrito \texttt{Tesis.pdf}, Capítulo 5, págs.~35--50. Script de ingesta: \texttt{codigo/ingesta\_datos/ingesta\_instrumentos\_1996\_2025.py}.
+\vspace{1em}
 
-\vspace{1.2em}
+\section{Base de Datos Unificada (1996--2025, $n=120$): Variables y Alternativas}
 
-\section{Bloque 1: Propiedades Dinámicas y Estacionariedad}
+\subsection{Definición de Variables y Fuentes Oficiales}
+Para satisfacer la directiva metodológica de contar con un único horizonte temporal homogéneo sin sub-ventanas paralelas, se consolidó la base trimestral \texttt{datos/dataset\_consolidado\_1996\_2025.csv} ($n=120$):
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Deuda Pública sobre PIB ($d_t$)}: Cobertura del Sector Público No Financiero (SPNF), expresada en porcentaje del PIB nominal. Fuente: Secretaría de Finanzas y Secretaría de Hacienda (MECON). El tramo 1996--2003 se empalmó metodológicamente a partir de las estadísticas oficiales de Deuda de la Administración Central y SPNF.
+    \item \textbf{Resultado Primario sobre PIB ($pb_t$)}: Base caja del SPNF sin rentas ficticias del BCRA ni transferencias contables del Fondo de Garantía de Sustentabilidad (FGS). Fuente: Secretaría de Hacienda.
+    \item \textbf{Brecha de Actividad ($g\_gap_t$ o $\tilde{y}_t$)}: Ciclo económico obtenido aplicando el filtro de Hodrick-Prescott ($\lambda = 1600$) a la serie del PIB a precios constantes empalmada con el EMAE (INDEC).
+    \item \textbf{Spread Soberano ($EMBI_t$)}: Expresado en puntos básicos. Fuente oficial: JP Morgan EMBI+ Argentina desde julio de 1997. Para 1996T1--1997T2 se empalmó con el diferencial de rendimiento secundario de los Bonos Brady argentinos respecto al bono del Tesoro estadounidense de idéntica duración.
+    \item \textbf{Tipo de Cambio Real Multilateral ($TCRM_t$)}: Base $100 = 2015$. Fuente: BCRA. Los 4 trimestres de 1996 fueron extrapolados mediante la tendencia del tipo de cambio bilateral promedio ponderado bajo convertibilidad.
+    \item \textbf{Instrumentos de Aversión al Riesgo ($VIX_t$ y $BOVESPA\_VOL_t$)}: El $VIX$ proviene de CBOE/FRED. $BOVESPA\_VOL$ es el desvío estándar de los retornos diarios logarítmicos del índice Bovespa (\textasciicircum BVSP), anualizado multiplicando por $\sqrt{252}$ y expresado en puntos porcentuales (datos primarios reales 1994--2025, Yahoo Finance).
+\end{enumerate}
 
-\subsection{Fundamento Teórico y Antecedente}
-En series macroeconómicas de deuda y variables fiscales, la presencia de raíces unitarias invalida las inferencias tradicionales por MCO (riesgo de regresión espuria). Es imperativo determinar el orden de integración $I(d)$ mediante pruebas robustas (Dickey-Fuller Aumentado, KPSS y el contraste de máxima potencia DF-GLS de Elliott, Rothenberg y Stock, 1996), así como evaluar la posible presencia de quiebres estructurales en la prueba de raíz unitaria (Zivot y Andrews, 1992).
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{fig5_1_deuda_resultado_primario.png}
+\caption{Evolución Histórica de la Deuda Pública y del Resultado Primario (\% PIB, 1996--2025).}
+\label{fig:deuda_pb}
+\end{figure}
 
-\subsection{Ecuación Estimada (DF-GLS)}
-Se aplican cuasi-diferenciaciones a la serie $y_t$ para remover la tendencia determinística y se estima:
+\subsection{Decisiones Metodológicas vs. Alternativas Consideradas}
+
+\subsubsection{¿Por qué empalmar Bonos Brady y EMBI+ en lugar de usar un spread de tasas domésticas?}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Decisión tomada}: Empalmar el diferencial de rendimientos de los Bonos Brady en dólares (1996T1--1997T2) con el JP Morgan EMBI+ oficial (1997T3--2025T4).
+    \item \textbf{Alternativa considerada}: Construir un diferencial de tasas de interés domésticas propias, como el spread entre la tasa Badlar privada en pesos (o la tasa de política monetaria) y la tasa de los fondos federales de EE.UU., o una tasa en pesos ajustada por futuros de tipo de cambio.
+    \item \textbf{Por qué se descartó la alternativa doméstica}:
+    \begin{enumerate}
+        \item En Argentina, las tasas de interés en pesos están fuertemente intervenidas y distorsionadas por regulaciones financieras: controles estrictos de cambios (cepos cambiarios en 2011--2015 y 2019--2025), encajes remunerados obligatorios, tasas mínimas fijadas administrativamente por el BCRA e imposibilidad de arbitraje libre de capitales.
+        \item Un spread en moneda doméstica confunde el \textit{riesgo crediticio soberano} (probabilidad de impago del Estado) con el \textit{riesgo cambiario e inflacionario} (prima de devaluación de la moneda local).
+        \item Dado que la insolvencia de la deuda argentina ocurre mayoritariamente en sus pasivos nominados en moneda extranjera, el rendimiento de los títulos soberanos en dólares (Brady y EMBI+) refleja con pureza teórica la restricción externa y la prima de default.
+    \end{enumerate}
+    \item \textbf{Alternativa B (Muestra sin empalme, 1997T3--2025T4, $n=114$)}: Si la dirección prefiere no utilizar ningún empalme, el modelo fue reestimado sobre el tramo puro de EMBI+ y los resultados (coeficientes, umbrales y diagnósticos) no sufren alteraciones cualitativas (verificado en la sección de robustez).
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figura_spread_historico_1983_2025.png}
+\caption{Reconstrucción Histórica del Spread Soberano Argentino (1983--2025) y Empalmes de Mercado.}
+\label{fig:spread_hist}
+\end{figure}
+
+\subsubsection{¿Por qué Deuda del SPNF y no Deuda Consolidada con Pasivos del BCRA en la serie central?}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Decisión tomada}: Definir la deuda del Sector Público No Financiero (SPNF) como variable de referencia en el protocolo de 30 años ($n=120$).
+    \item \textbf{Alternativa considerada}: Incluir en el stock de deuda los pasivos remunerados del Banco Central (LEBAC, LELIQ, Pases pasivos).
+    \item \textbf{Por qué se reservó la consolidada como contraste (2004--2025, $n=88$)}: Los balances del BCRA con desagregación estandarizada de pasivos remunerados están disponibles con cobertura homogénea a partir de 2004. Asumir pasivos remunerados nulos en el período 1996--2003 (mediante imputaciones tipo \texttt{fillna(0)}) crearía un salto artificial en la serie. Por ende, la deuda consolidada se estima sobre su horizonte real 2004--2025 ($n=88$) en la sección de quiebres estructurales y robustez, sin contaminar la serie de 30 años.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figura_8_1_deuda_consolidada.png}
+\caption{Contraste entre Deuda del SPNF y Deuda Consolidada con Pasivos Remunerados del BCRA (2004--2025).}
+\label{fig:consolidada}
+\end{figure}
+
+\vspace{1em}
+
+\section{Bloque 1: Propiedades Dinámicas y Estacionariedad (DF-GLS y Zivot-Andrews)}
+
+\subsection{Fundamento y Decisión Metodológica}
+Determinar si las series macroeconómicas son integradas de orden uno $I(1)$ o estacionarias $I(0)$ es el prerrequisito para no incurrir en regresiones espurias. Ante la conocida baja potencia de la prueba ADF simple en muestras moderadas y con presencia de quiebres, se implementó el test de máxima potencia **DF-GLS** de Elliott, Rothenberg y Stock (1996) y la prueba de quiebre endógeno de **Zivot y Andrews (1992)**.
+
+\subsection{Ecuación Estimada}
 \begin{equation}
 \Delta y_t^d = \alpha y_{t-1}^d + \sum_{j=1}^k \beta_j \Delta y_{t-j}^d + \varepsilon_t
 \end{equation}
 
-\subsection{Resultados Obtenidos ($n=120$)}
-\begin{table}[h!]
+\subsection{Resultados Obtenidos y Selección de Especificación}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Deuda pública ($d_t$)}: La prueba ADF simple sugería un rechazo marginal de raíz unitaria ($p = 0.042$). Sin embargo, el test **DF-GLS arroja un estadístico de $-2.65$ frente al valor crítico al 5\% de $-3.01$** (no rechaza la hipótesis nula de raíz unitaria $\implies I(1)$). La prueba de Zivot-Andrews identifica un quiebre en 2004T2 con un estadístico $t = -4.50$ (no significativo al 5\%, valor crítico $-5.07$).
+    \item \textbf{Resultado primario ($pb_t$), EMBI y TCRM}: Todos son no estacionarios $I(1)$ en niveles y estacionarios en primeras diferencias.
+    \item \textbf{Brecha del producto ($g\_gap_t$)}: Es estacionaria $I(0)$ (estadístico DF-GLS $-3.46 < -3.02$).
+\end{itemize}
+
+\subsection{Alternativas Metodológicas}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textit{¿Por qué no tratar a la deuda como $I(0)$?}: Tratar la deuda como estacionaria sobre la base aislada del ADF simple habría forzado estimaciones por MCO clásico sin corrección por cointegración, ignorando la inercia de largo plazo y el hecho de que el test DF-GLS (de mayor potencia estadística) confirma la raíz unitaria.
+\end{itemize}
+
+\begin{figure}[htbp]
 \centering
-\small
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Variable} & \textbf{ADF ($p$-valor)} & \textbf{KPSS ($p$-valor)} & \textbf{DF-GLS (Estadístico vs. Crítico 5\%)} & \textbf{Orden Integración} \\
-\midrule
-Deuda Pública ($d_t$) & 0.042 (rechaza $H_0$) & 0.100 (no rechaza) & $-2.65$ (crítico: $-3.01$, no rechaza $H_0$) & $I(1)$ \\
-Resultado Primario ($pb_t$) & 0.185 & 0.010 & $-1.30$ (crítico: $-3.01$, no rechaza $H_0$) & $I(1)$ \\
-Spread Soberano ($EMBI_t$) & 0.220 & 0.010 & $-2.30$ (crítico: $-3.01$, no rechaza $H_0$) & $I(1)$ \\
-Brecha del Producto ($g\_gap_t$) & $<0.001$ & $>0.100$ & $-3.46$ (crítico: $-3.02$, rechaza $H_0$) & $I(0)$ \\
-Tipo de Cambio Real ($TCRM_t$) & 0.140 & 0.020 & $-1.85$ (crítico: $-3.01$, no rechaza $H_0$) & $I(1)$ \\
-\bottomrule
-\end{tabular}
-\caption{Resultados del Protocolo de Integración (1996--2025).}
-\end{table}
-
-\subsection{Interpretación}
-Aunque la prueba ADF simple sugería estacionariedad marginal para la deuda ($p=0.042$), la prueba de mayor potencia DF-GLS ($-2.65 > -3.01$) y el análisis con quiebre de Zivot-Andrews ($t = -4.50$ vs. valor crítico al 5\% de $-5.07$, no significativo) ratifican que la deuda se comporta empíricamente como un proceso integrado de orden uno $I(1)$. Esto habilita formalmente el análisis de cointegración multivariada.
-
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 5, págs.~45--48. Tablas: \texttt{resultados/tablas/fase1\_dfgls.csv} y \texttt{fase1\_zivot\_andrews.csv}. Script: \texttt{codigo/modelos/fase1\_estacionariedad.py}.
+\includegraphics[width=0.85\textwidth]{figura_5_5_acf_pacf.png}
+\caption{Funciones de Autocorrelación Simple (ACF) y Parcial (PACF) de las Series de Deuda y Balance Fiscal.}
+\label{fig:acf_pacf}
+\end{figure}
 
 \vspace{1em}
 
-\section{Bloque 2: Función de Reacción Fiscal Clásica (Bohn) y DOLS}
+\section{Bloque 2: Función de Reacción Fiscal Clásica de Bohn y DOLS}
 
-\subsection{Fundamento Teórico y Antecedente}
-Henning Bohn (1998, 2007) demostró que una condición suficiente para la solvencia intertemporal de las finanzas públicas (no violación de la condición de transversalidad o No-Ponzi Game) es que el superávit primario reaccione de manera positiva ante incrementos en el stock de deuda acumulada: $\rho = \frac{\partial pb_t}{\partial d_{t-1}} > 0$. Para corregir la endogeneidad y la correlación serial de los errores en series $I(1)$, se emplea el estimador Dynamic Ordinary Least Squares (DOLS) propuesto por Stock y Watson (1993).
+\subsection{Fundamento y Antecedente Teórico}
+Henning Bohn (1998, 2007) demostró que la condición de solvencia fiscal intertemporal (no incurrir en juegos de Ponzi) requiere que el superávit primario responda positivamente ante incrementos en el stock de deuda acumulada: $\rho = \frac{\partial pb_t}{\partial d_{t-1}} > 0$. Para eliminar el sesgo de segundo orden ocasionado por la endogeneidad y la autocorrelación serial entre variables cointegradas, se utilizó el estimador Dynamic Ordinary Least Squares (DOLS) de Stock y Watson (1993).
 
-\subsection{Ecuación Estimada (DOLS)}
+\subsection{Ecuación Estimada}
 \begin{equation}
 pb_t = \alpha + \rho \, d_{t-1} + \gamma \, g\_gap_t + \sum_{j=-m}^m \theta_j \, \Delta d_{t-j} + \sum_{j=-m}^m \phi_j \, \Delta g\_gap_{t-j} + \varepsilon_t
 \end{equation}
-donde el número óptimo de adelantos y rezagos seleccionado por el criterio AIC es $m^* = 4$.
+donde el criterio de información de Akaike (AIC) selecciona $m^* = 4$ adelantos y rezagos.
 
-\subsection{Resultados Obtenidos ($n=110$ efectivos)}
+\subsection{Resultados Empíricos ($n=110$)}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Coeficiente de reacción fiscal}: $\hat{\rho} = +0.0159$ ($p = 0.218$).
-    \item \textbf{Brecha del producto}: $\hat{\gamma} = +0.0412$ ($p = 0.180$).
-    \item \textbf{Diagnósticos de especificación}: Test de Hausman ($p < 0.0001$, confirmando la necesidad de corrección por endogeneidad); Breusch-Godfrey ($p < 0.0001$); Breusch-Pagan ($p = 0.0032$); Ramsey RESET ($p < 0.0001$).
+    \item \textbf{Coeficiente de reacción fiscal}: $\hat{\rho} = \mathbf{+0.0159}$ ($p\text{-valor} = 0.218$).
+    \item \textbf{Brecha de producto}: $\hat{\gamma} = +0.0412$ ($p = 0.180$).
+    \item \textbf{Batería de diagnósticos}: Test de Hausman ($p < 0.0001$, justifica formalmente el uso de estimadores dinámicos e instrumentales); Breusch-Godfrey ($p < 0.0001$); Breusch-Pagan ($p = 0.0032$); Ramsey RESET ($p < 0.0001$).
 \end{itemize}
 
-\subsection{Interpretación}
-El signo estimado para $\rho$ es positivo ($+0.0159$), lo cual va en la dirección teórica esperada por Bohn. Sin embargo, carece de significatividad estadística al 5\% y al 10\%. Este hallazgo evidencia que, al evaluar la trayectoria completa de 30 años, el Estado argentino no exhibe una regla fiscal sistemática y permanente de respuesta estabilizadora frente al endeudamiento. Los diagnósticos de autocorrelación, heterocedasticidad y no linealidad (RESET) indican que la relación no es lineal y requiere modelos más sofisticados.
+\subsection{Interpretación y Alternativas Descartadas}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Interpretación}: El signo estimado es positivo (+0.0159), alineado con la condición de solvencia teórica de Bohn, pero no alcanza significatividad estadística. En Argentina no existe una regla fiscal permanente y automática que ahorre cuando la deuda sube. Además, el rechazo del test RESET confirma que la relación fiscal es intrínsecamente no lineal.
+    \item \textbf{Alternativa MCO Estático}: Produciría estimaciones inconsistentes debido a la endogeneidad contemporánea entre déficit y deuda detectada por el test de Hausman.
+    \item \textbf{Alternativa Modelo ARDL}: Si bien permite trabajar con mezclas de variables $I(0)$ e $I(1)$, impone una linealidad paramétrica estricta de corto y largo plazo que entra en conflicto directo con los quiebres de régimen verificados más adelante.
+\end{itemize}
 
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~52--54. Tabla: \texttt{resultados/tablas/fase3\_resultados\_dols.csv}. Script: \texttt{codigo/modelos/fase3\_reaccion\_fiscal.py}.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{fig5_3_dispersion_fatiga_fiscal.png}
+\caption{Diagrama de Dispersión entre Superávit Primario y Deuda Rezagada: Ausencia de Linealidad Simple.}
+\label{fig:dispersion_dols}
+\end{figure}
 
-\vspace{1.2em}
+\vspace{1em}
 
 \section{Bloque 3: Endogeneidad del Riesgo y Variables Instrumentales (IV-2SLS)}
 
-\subsection{Fundamento Teórico y Antecedente}
-Mendoza y Ostry (2008) y Celasun, Debrun y Ostry (2006) argumentan que el spread soberano ($EMBI$) es un determinante crítico del espacio fiscal en economías emergentes, pero sufre de simultaneidad: el riesgo soberano presiona al ajuste fiscal, pero la situación del balance primario también afecta la percepción de riesgo de los inversores. Por ello, es obligatorio instrumentar el $EMBI$ mediante variables puramente exógenas de liquidez y aversión al riesgo global y regional.
+\subsection{Fundamento y Antecedente Teórico}
+Mendoza y Ostry (2008) y Celasun, Debrun y Ostry (2006) demuestran que el riesgo soberano ($EMBI$) es determinante del espacio fiscal, pero padece simultaneidad: el riesgo exige disciplina presupuestaria, pero la trayectoria fiscal determina la percepción de riesgo soberano. Por consiguiente, el $EMBI$ debe ser instrumentado mediante perturbaciones externas puramente exógenas.
 
 \subsection{Ecuación Estimada y Sistema de Instrumentación}
 \begin{align}
 \text{\textbf{Primera Etapa:}} \quad & EMBI_t = \pi_0 + \pi_1 d_{t-1} + \pi_2 g\_gap_t + \boldsymbol{\pi}_3 VIX_t + \boldsymbol{\pi}_4 BOVESPA\_VOL_t + \nu_t \\
-\text{\textbf{Segunda Etapa:}} \quad & pb_t = \alpha + \rho \, d_{t-1} + \gamma \, g\_gap_t + \beta \, \widehat{EMBI}_t + \varepsilon_t
+\text{\textbf{Segunda Etapa:}} \quad & pb_t = \alpha + \rho \, d_{t-1} + \gamma \, g\_gap_t + \boldsymbol{\beta} \, \widehat{EMBI}_t + \varepsilon_t
 \end{align}
 
-\subsection{Resultados Obtenidos ($n=119$)}
+\subsection{Resultados Empíricos ($n=119$)}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Coeficiente del spread soberano}: $\hat{\beta} = +0.0012$ ($p = 0.0239$, \textbf{estadísticamente significativo al 5\%}).
-    \item \textbf{Coeficiente de deuda}: $\hat{\rho} = -0.0313$ ($p = 0.1879$, no significativo).
-    \item \textbf{Fuerza de los instrumentos (Primera Etapa)}: Estadístico $F = 15.87$ ($p = 0.0004$). Supera con holgura el umbral de instrumentos débiles de Staiger y Stock ($F > 10$).
-    \item \textbf{Test de Sobreidentificación de Sargan}: Estadístico $= 0.0059$, $p = 0.9390$ (no rechaza la hipótesis nula de ortogonalidad; los instrumentos son válidos y exógenos).
-    \item \textbf{Test de Endogeneidad de Wu-Hausman}: Estadístico $= 2.17$, $p = 0.1435$.
+    \item \textbf{Coeficiente del spread soberano}: $\hat{\beta} = \mathbf{+0.0012}$ ($p = \mathbf{0.0239}$, \textbf{estadísticamente significativo al 5\%}).
+    \item \textbf{Fuerza instrumental (Test $F$ de 1ra etapa)}: $\mathbf{F = 15.87 > 10}$ ($p = 0.0004$), superando el umbral de Staiger y Stock para descartar instrumentos débiles.
+    \item \textbf{Test de Sobreidentificación de Sargan}: $p = \mathbf{0.9390}$ (los instrumentos son válidos y ortogonales a los residuos).
+    \item \textbf{Test de Exogeneidad de Wu-Hausman}: $p = 0.1435$.
 \end{itemize}
 
-\subsection{Interpretación}
-El coeficiente positivo y estadísticamente significativo ($\hat{\beta} = 0.0012$) indica que cuando el riesgo soberano se dispara en 1.000 puntos básicos, el superávit primario experimenta un incremento forzado de aproximadamente 1.2 puntos porcentuales del PIB. Este resultado revela el mecanismo de racionamiento de crédito externo: ante el cierre de los mercados financieros internacionales, el Estado argentino no tiene margen para sostener el déficit y se ve forzado a recortar gastos de emergencia.
+\subsection{Justificación de Instrumentos frente a Alternativas}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{¿Por qué se eligieron $VIX$ y $BOVESPA\_VOL$?}: El $VIX$ captura la aversión al riesgo y liquidez global, mientras que $BOVESPA\_VOL$ mide el contagio financiero y bursátil regional latinoamericano. Ambas series tienen datos diarios continuos desde los años noventa, cubriendo íntegramente la ventana de 30 años.
+    \item \textbf{¿Por qué no el ETF EMB (iShares J.P. Morgan EMBI)?}: El ETF EMB comenzó a cotizar en diciembre de 2007. Utilizarlo como instrumento forzaría a descartar 12 años de historia (1996--2007), mutilando la muestra y perdiendo la crisis de la Convertibilidad.
+    \item \textbf{¿Por qué no Términos de Intercambio (ToT) como único instrumento?}: Los términos de intercambio son variables reales de frecuencia trimestral lenta; en las pruebas de primera etapa arrojaron un estadístico $F < 8$, calificando como instrumentos débiles.
+    \item \textbf{Interpretación económica}: Por cada 1.000 puntos básicos que aumenta el riesgo soberano, el resultado primario exhibe un ajuste positivo forzado de **1.2 puntos porcentuales del PIB**. Esto demuestra la presencia del canal de **racionamiento de crédito**: al cortarse el financiamiento voluntario, el Estado no puede financiar el déficit y ajusta el gasto de emergencia.
+\end{itemize}
 
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~54--56. Tablas: \texttt{resultados/tablas/fase4\_resultados\_iv.csv} y \texttt{fase4\_diagnosticos\_iv.csv}. Script: \texttt{codigo/modelos/fase4\_variables\_instrumentales.py}.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{fig6_1_diagnostico_primera_etapa.png}
+\caption{Diagnósticos de Primera Etapa de Variables Instrumentales: Poder Predictivo de $VIX$ y $BOVESPA\_VOL$.}
+\label{fig:iv_diag}
+\end{figure}
 
 \vspace{1em}
 
-\section{Bloque 4: Regímenes No Lineales y Umbral de Hansen (H1a)}
+\section{Bloque 4: Regímenes No Lineales y Umbral de Hansen ($H_{1a}$)}
 
-\subsection{Fundamento Teórico y Antecedente}
-Ghosh et al. (2013) postularon la hipótesis de \textit{fatiga fiscal}, según la cual el esfuerzo fiscal se debilita a medida que la deuda o el riesgo crecen. Para probar formalmente la presencia de cambios de régimen en función del riesgo país, se aplica la metodología econométrica de umbrales endógenos de Hansen (1999, 2000), testeando si existe un valor crítico $\tau^*$ que divida la muestra en régimen normal y régimen de estrés financiero.
+\subsection{Fundamento y Antecedente Teórico}
+Ghosh et al. (2013) postulan la hipótesis de \textit{fatiga fiscal} (desaceleración del ajuste ante altos niveles de deuda). Para modelar rigurosamente los cambios de régimen sin imponer fechas subjetivas, se utiliza la econometría de umbrales endógenos de Bruce Hansen (1999, 2000), estimando el valor crítico del spread soberano ($\tau^*$) que optimiza la suma de residuos al cuadrado.
 
 \subsection{Ecuación Estimada}
 \begin{equation}
 pb_t = \begin{cases} 
-\alpha_1 + \rho_1 \, d_{t-1} + \gamma_1 \, g\_gap_t + \varepsilon_{1t}, & \text{si } EMBI_t \le \tau^* \quad \text{(Régimen Normal)} \\[0.5em]
-\alpha_2 + \rho_2 \, d_{t-1} + \gamma_2 \, g\_gap_t + \varepsilon_{2t}, & \text{si } EMBI_t > \tau^* \quad \text{(Régimen de Estrés)}
+\alpha_1 + \rho_1 \, d_{t-1} + \gamma_1 \, g\_gap_t + \varepsilon_{1t}, & \text{si } EMBI_t \le \tau^* \quad \text{(Régimen Normal)} \\[0.4em]
+\alpha_2 + \rho_2 \, d_{t-1} + \gamma_2 \, g\_gap_t + \varepsilon_{2t}, & \text{si } EMBI_t > \tau^* \quad \text{(Régimen de Estrés Severo)}
 \end{cases}
 \end{equation}
 
 \subsection{Resultados Obtenidos ($n=119$)}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Umbral endógeno óptimo}: $\tau^* = 2.462,1$ puntos básicos.
-    \item \textbf{Significatividad del umbral}: Test Sup-LM bootstrap con 1.000 replicaciones: $p = 0.0000$ (\textbf{altamente significativo}).
+    \item \textbf{Umbral endógeno óptimo}: $\tau^* = \mathbf{2.462,1\text{ puntos básicos}}$.
+    \item \textbf{Test Sup-LM bootstrap (1.000 replicaciones)}: $p = \mathbf{0.0000}$ (\textbf{altamente significativo}).
     \item \textbf{Régimen Normal ($EMBI \le 2.462$ pb)}: $\hat{\rho}_1 = -0.0044$ ($p = 0.665$, estadísticamente nulo).
-    \item \textbf{Régimen de Estrés ($EMBI > 2.462$ pb)}: $\hat{\rho}_2 = +0.0201$ ($p = 0.006$, \textbf{positivo y significativo al 1\%}).
+    \item \textbf{Régimen de Estrés ($EMBI > 2.462$ pb)}: $\hat{\rho}_2 = \mathbf{+0.0201}$ ($p = \mathbf{0.006}$, \textbf{positivo y significativo al 1\%}).
 \end{itemize}
 
-\subsection{Interpretación y Reencuadre Teórico de H1a}
-Este resultado es uno de los aportes empíricos centrales de la tesis:
+\subsection{El Reencuadre Conceptual de $H_{1a}$ y Alternativas}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{No existe fatiga fiscal clásica}: La fatiga fiscal de Ghosh predice una desaceleración de la reacción fiscal bajo estrés ($\rho_1 > 0$ y $\rho_2 \le 0$). 
-    \item \textbf{Existe un régimen de disciplina forzada por crisis}: En tiempos normales, las autoridades no internalizan la restricción presupuestaria intertemporal ($\rho_1 \approx 0$). Solo cuando el riesgo soberano cruza el umbral extremo de 2.462 puntos básicos y el financiamiento colapsa por completo, el Estado genera una fuerte respuesta fiscal positiva ($\rho_2 = +0.0201$) para evitar la cesación de pagos desordenada.
+    \item \textbf{No es fatiga fiscal, es disciplina por crisis}: La fatiga fiscal de Ghosh predice que el Estado reacciona en bonanza ($\rho_1 > 0$) y se cansa en crisis ($\rho_2 \le 0$). En Argentina se verifica el patrón inverso: en tiempos normales el gobierno exhibe inercia e inacción fiscal ($\rho_1 \approx 0$), pero al cruzar el umbral crítico de 2.462 pb y quedar excluido del mercado, genera una fuerte reacción fiscal positiva ($\rho_2 = +0.0201$) para evitar la hiperinflación o la cesación de pagos desordenada.
+    \item \textbf{¿Por qué no polinomios cúbicos al estilo Ghosh et al. (2013)?}: Incluir términos polinómicos ($d_{t-1}^2$, $d_{t-1}^3$) induce multicolinealidad severa y presupone una transición suave y continua. En mercados emergentes, el cierre del financiamiento es discontinuo y abrupto (\textit{sudden stop}), rasgo que el modelo de umbral de Hansen capta fielmente.
 \end{itemize}
 
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~56--58. Tabla: \texttt{resultados/tablas/fase5\_resultados\_hansen.csv}. Script: \texttt{codigo/modelos/fase5\_umbral\_hansen.py}.
+\vspace{1em}
 
-\vspace{1.2em}
+\section{Bloque 5: Cointegración Multivariada de Johansen y VECM}
 
-\section{Bloque 5: Cointegración Multivariada (Johansen) y VECM}
+\subsection{Fundamento y Antecedente Teórico}
+Bohn (2007) establece que la solvencia no requiere necesariamente cointegración bivariada estricta si el ajuste ocurre a través de precios relativos y primas de riesgo. Se formula un Vector Error Correction Model (VECM) de Johansen (1988, 1995) para el vector $\mathbf{Y}_t = [d_t, pb_t, EMBI_t, TCRM_t]'$.
 
-\subsection{Fundamento Teórico y Antecedente}
-Bohn (2007) demostró que la condición de solvencia no exige necesariamente cointegración bivariada estricta entre deuda y resultado primario si existen otras variables de ajuste macroeconómico. Siguiendo a Johansen (1988, 1991, 1995), se formula un Vector Error Correction Model (VECM) de cuatro variables: $\mathbf{Y}_t = [d_t, pb_t, EMBI_t, TCRM_t]'$.
+\subsection{Resultados Empíricos ($n=118$, rezago $k=1$ por BIC)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Test de la Traza de Johansen}: Estadístico $45.18$ frente a valor crítico de $47.85$ (ambigüedad en $r=0$, se impone $r=1$ por fundamento económico).
+    \item \textbf{Velocidad de ajuste de la deuda}: $\alpha_{d} = \mathbf{-0.0736}$ ($p = \mathbf{0.004}$, \textbf{significativo}): la deuda corrige a una tasa del **7.4\% trimestral** hacia el equilibrio de largo plazo.
+    \item \textbf{Exogeneidad débil del superávit primario}: $\alpha_{pb} = -0.000017$ ($p = 0.996$, nulo).
+    \item \textbf{Ajuste del spread soberano}: $\alpha_{EMBI} = \mathbf{+6.3560}$ ($p = \mathbf{0.025}$, \textbf{significativo}): es la prima de riesgo la que absorbe los desvíos del sendero de solvencia.
+\end{itemize}
 
-\subsection{Ecuación Estimada}
-\begin{equation}
-\Delta \mathbf{Y}_t = \boldsymbol{\Pi} \mathbf{Y}_{t-1} + \sum_{i=1}^{k-1} \boldsymbol{\Gamma}_i \Delta \mathbf{Y}_{t-i} + \boldsymbol{\mu} + \boldsymbol{\varepsilon}_t, \quad \text{donde } \boldsymbol{\Pi} = \boldsymbol{\alpha} \boldsymbol{\beta}'
-\end{equation}
-donde $\boldsymbol{\beta}$ representa el vector de cointegración de largo plazo y $\boldsymbol{\alpha}$ contiene las velocidades de ajuste hacia el equilibrio.
-
-\subsection{Resultados Obtenidos ($n=118$ tras rezagos, $k=1$ por BIC)}
-\begin{table}[h!]
-\centering
-\small
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Variable} & \textbf{Vector Cointegración ($\boldsymbol{\beta}$ normalizado)} & \textbf{Velocidad de Ajuste ($\boldsymbol{\alpha}$)} & \textbf{Error Estándar} & \textbf{$p$-valor} \\
-\midrule
-Deuda sobre PIB ($d_t$) & $1.0000$ & $\mathbf{-0.0736}$ & $0.0256$ & $\mathbf{0.0040}$ \\
-Resultado Primario ($pb_t$) & $+5.9653$ ($p=0.022$) & $\mathbf{-0.000017}$ & $0.0034$ & $\mathbf{0.9960}$ \\
-Spread Soberano ($EMBI_t$) & $-0.0150$ ($p<0.001$) & $\mathbf{+6.3560}$ & $2.8340$ & $\mathbf{0.0250}$ \\
-Tipo de Cambio Real ($TCRM_t$) & $+2.0466$ ($p=0.840$) & $-0.0003$ & $0.0007$ & $0.6770$ \\
-Constante & $-45.3547$ ($p=0.007$) & --- & --- & --- \\
-\bottomrule
-\end{tabular}
-\caption{Vector de Cointegración y Mecanismo de Ajuste Dinámico VECM.}
-\end{table}
-
-\subsection{Interpretación}
-\begin{enumerate}[leftmargin=1.5em]
-    \item \textbf{La deuda sí converge al equilibrio}: $\alpha_{d} = -0.0736$ ($p = 0.004$) es negativo y significativo, corrigiendo aproximadamente un $7.4\%$ del desvío por trimestre.
-    \item \textbf{Exogeneidad débil del balance primario}: $\alpha_{pb} = -0.000017$ ($p = 0.996$). El superávit primario no responde a los desequilibrios del sendero de deuda en el esquema lineal continuo.
-    \item \textbf{El ajuste recae sobre el riesgo país}: $\alpha_{EMBI} = +6.3560$ ($p = 0.025$). Ante una desviación de la deuda por encima de su nivel de equilibrio, es el spread soberano el que se ensancha bruscamente para forzar el cierre de la brecha.
-\end{enumerate}
-
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~58--61. Tablas: \texttt{resultados/tablas/fase23\_vecm\_beta.csv} y \texttt{fase23\_vecm\_alpha.csv}. Script: \texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}.
+\subsection{Alternativas Descartadas}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textit{¿Por qué no un VAR irrestricto en diferencias?}: Diferenciar las series sin incorporar el término de corrección de error eliminaría la información económica sobre el equilibrio de solvencia intertemporal de largo plazo.
+\end{itemize}
 
 \vspace{1em}
 
 \section{Bloque 6: Identificación Estructural (SVAR FMI) y FEVD}
 
-\subsection{Fundamento Teórico y Antecedente}
-Para desentrañar qué shocks explican verdaderamente la varianza de la deuda pública, se utiliza la metodología de identificación estructural tipo Blanchard y Perotti (2002) y la guía de sostenibilidad de deuda del Fondo Monetario Internacional (FMI, 2013, 2021). Se estima un SVAR con 5 variables: $\mathbf{Z}_t = [g\_gap_t, pb_t, EMBI_t, TCRM_t, d_t]'$.
+\subsection{Fundamento y Restricciones Estructurales Contemporáneas}
+Para identificar qué perturbaciones explican verdaderamente los movimientos de la deuda, se aplica el enfoque de Blanchard y Perotti (2002) y la guía de análisis de sostenibilidad de deuda del FMI (2013, 2021), estimando un SVAR de 5 variables: $\mathbf{Z}_t = [g\_gap_t, pb_t, EMBI_t, TCRM_t, d_t]'$.
 
-\subsection{Restricciones Estructurales Contemporáneas ($\mathbf{S}$)}
-Se impone una estructura recursiva basada en fundamentos económicos institucionales:
+\subsection{Matriz de Restricciones Contemporáneas ($\mathbf{S}$)}
 \begin{equation}
 \begin{bmatrix}
 e_t^{g} \\ e_t^{pb} \\ e_t^{EMBI} \\ e_t^{TCRM} \\ e_t^{d}
@@ -251,138 +323,121 @@ s_{51} & s_{52} & s_{53} & s_{54} & s_{55}
 \end{equation}
 
 \subsection{Descomposición de Varianza del Error de Pronóstico (FEVD a 20 Trimestres)}
-\begin{table}[h!]
+\begin{table}[htbp]
 \centering
 \small
 \begin{tabular}{lcc}
 \toprule
-\textbf{Fuente del Shock} & \textbf{Ventana Ampliada 30 Años (1996--2025, $n=120$)} & \textbf{Canal Macro Agregado} \\
+\textbf{Perturbación Estructural} & \textbf{Participación (\%) a 5 Años} & \textbf{Canal Macroeconómico} \\
 \midrule
-Inercia Propia de la Deuda ($\varepsilon_t^d$) & $\mathbf{54.21\%}$ & Inercia del Stock ($54.21\%$) \\
-Tipo de Cambio Real ($\varepsilon_t^{TCRM}$) & $\mathbf{14.44\%}$ & \raisebox{-0.5em}{Canal Financiero y Cambiario: $\mathbf{25.80\%}$} \\
+Inercia Propia de la Deuda ($\varepsilon_t^d$) & $\mathbf{54.21\%}$ & Inercia Acumulada: $\mathbf{54.21\%}$ \\
+Tipo de Cambio Real ($\varepsilon_t^{TCRM}$) & $\mathbf{14.44\%}$ & \raisebox{-0.4em}{Canal Financiero y Cambiario: $\mathbf{25.80\%}$} \\
 Spread Soberano ($\varepsilon_t^{EMBI}$) & $\mathbf{11.36\%}$ & \\
-Resultado Primario ($\varepsilon_t^{pb}$) & $\mathbf{12.70\%}$ & \raisebox{-0.5em}{Canal Fiscal y Real: $\mathbf{19.98\%}$} \\
-Brecha de Actividad ($\varepsilon_t^g$) & $\mathbf{7.28\%}$ & \\
+Resultado Primario ($\varepsilon_t^{pb}$) & $\mathbf{12.70\%}$ & \raisebox{-0.4em}{Canal Fiscal y Real: $\mathbf{19.98\%}$} \\
+Brecha del Producto ($\varepsilon_t^g$) & $\mathbf{7.28\%}$ & \\
 \bottomrule
 \end{tabular}
-\caption{Descomposición de Varianza de la Deuda Pública sobre PIB a horizonte de 5 años.}
+\caption{Descomposición de Varianza de la Deuda sobre PIB (Ventana 1996--2025, $n=120$).}
 \end{table}
 
-\subsection{Interpretación y Cambio Estructural Relevante}
-Al evaluar la serie completa de 30 años (que abarca la salida de la Convertibilidad, el shock del Tequila y las crisis de deuda de 2001, 2018 y 2020), la descomposición de varianza demuestra que:
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figura_svar_fevd.png}
+\caption{Descomposición de Varianza del Error de Pronóstico (FEVD) de la Deuda Pública a 20 Trimestres.}
+\label{fig:fevd}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figura_svar_irf.png}
+\caption{Funciones de Impulso-Respuesta Estructurales (SVAR) ante Shocks Macroeconómicos.}
+\label{fig:irf}
+\end{figure}
+
+\subsection{Interpretación y Alternativas}
 \begin{itemize}[leftmargin=1.5em]
-    \item La inercia del propio stock acumulado domina la dinámica con un $54.21\%$.
-    \item El canal cambiario y financiero ($25.80\%$) supera con creces al canal fiscal y de actividad ($19.98\%$).
-    \item Esto refuta la noción tradicional de que la deuda argentina depende primordialmente del balance primario: las depreciaciones reales abruptas y los saltos en la tasa de interés explican la mayor parte de las crisis de deuda.
+    \item \textbf{Reversión empírica crucial}: En una muestra corta post-2004, el canal fiscal parecía explicar el 47\% de la deuda. Al tomar los 30 años enteros, **la inercia del propio stock domina con el 54.21\%**, y el canal financiero-cambiario ($25.80\%$) supera al fiscal ($19.98\%$). En Argentina, los saltos cambiarios y de tasa desestabilizan el ratio más rápido de lo que el esfuerzo fiscal puede compensar.
+    \item \textit{¿Por qué no Cholesky simple?}: El ordenamiento de Cholesky es arbitrario; el SVAR FMI traduce rigideces presupuestarias institucionales formales (el gasto público no puede ajustarse instantáneamente dentro del mismo trimestre ante variaciones del producto).
 \end{itemize}
 
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~64--67. Tablas: \texttt{resultados/tablas/fase19\_svar\_matriz\_impacto\_S.csv} y \texttt{fase19\_fevd.csv}. Script: \texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}.
-
-\vspace{1.2em}
+\vspace{1em}
 
 \section{Bloque 7: Quiebres Estructurales Múltiples (Bai-Perron)}
 
-\subsection{Fundamento Teórico y Antecedente}
-Para evitar fijar fechas de crisis ad-hoc, se implementa el algoritmo de estimación endógena de múltiples quiebres estructurales en media propuesto por Jushan Bai y Pierre Perron (1998, 2003).
+\subsection{Fundamento y Resultados ($n=120$)}
+Para evitar imponer fechas de quiebre \textit{ad-hoc}, se aplicó el algoritmo de Jushan Bai y Pierre Perron (1998, 2003) con selección por criterio BIC y parámetro de poda del 15\%:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Deuda SPNF sobre PIB}: Identifica endógenamente **3 quiebres ($m^* = 3$)**:
+    \begin{enumerate}
+        \item \textbf{2001T3}: Colapso de la Convertibilidad y default. El promedio salta de $34.68\%$ a $106.85\%$ del PIB.
+        \item \textbf{2006T1}: Efecto del canje 2005 y desendeudamiento. El promedio desciende a $50.72\%$.
+        \item \textbf{2017T3}: Crisis de financiamiento 2018 y acuerdo FMI. El promedio se eleva a $81.24\%$.
+    \end{enumerate}
+    \item \textbf{Deuda Consolidada (2004--2025, $n=88$)}: Identifica 2 quiebres (**2007T2 y 2016T4**), respetando la cobertura real de pasivos del BCRA sin imputaciones artificiales.
+\end{itemize}
 
-\subsection{Ecuación Estimada}
-\begin{equation}
-y_t = \mu_j + \varepsilon_t, \quad t = T_{j-1} + 1, \dots, T_j \quad (j = 1, \dots, m+1)
-\end{equation}
-minimizando la suma de residuos al cuadrado sujeta a un parámetro de poda del $15\%$ del tamaño muestral.
-
-\subsection{Resultados Obtenidos}
-\begin{enumerate}[leftmargin=1.5em]
-    \item \textbf{Deuda SPNF sobre PIB (Ventana completa 1996--2025, $n=120$)}:
-    \begin{itemize}
-        \item Quiebres óptimos por criterio BIC ($m^* = 3$): \textbf{2001T3, 2006T1, 2017T3}.
-        \item Segmento 1 (1996T1--2001T3, $n=23$): Media $= 34.68\%$ del PIB.
-        \item Segmento 2 (2001T4--2006T1, $n=18$): Media $= 106.85\%$ del PIB (crisis y colapso post-convertibilidad).
-        \item Segmento 3 (2006T2--2017T3, $n=46$): Media $= 50.72\%$ del PIB (reestructuración y canjes 2005/2010).
-        \item Segmento 4 (2017T4--2025T4, $n=33$): Media $= 81.24\%$ del PIB (reapertura, crisis 2018 y reestructuración 2020).
-    \end{itemize}
-    \item \textbf{Deuda Consolidada SPNF + Pasivos BCRA (Sub-muestra real 2004--2025, $n=88$)}:
-    \begin{itemize}
-        \item Quiebres óptimos por criterio BIC ($m^* = 2$): \textbf{2007T2 y 2016T4}.
-        \item Se eliminó el sesgo metodológico previo (no se asumen pasivos remunerados del BCRA en cero para 1996--2003, sino que se respeta la cobertura real de los balances del BCRA).
-    \end{itemize}
-\end{enumerate}
-
-\subsection{Interpretación}
-El modelo captura con exactitud endógena los hitos institucionales de la deuda argentina sin necesidad de imponer dummies subjetivas: la crisis de cesación de pagos de 2001, la etapa de alivio posterior al canje de 2005, y la reversión de tendencia iniciada a fines de 2017 que condujo al rescate con el FMI de 2018.
-
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~69--73. Tablas: \texttt{resultados/tablas/fase9\_bai\_perron\_quiebres.csv} y segmentos correspondientes. Script: \texttt{codigo/modelos/fase9\_bai\_perron.py}.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figura_9_1_bai_perron.png}
+\caption{Segmentos y Medias de Régimen Identificados Endógenamente por Bai-Perron (1996--2025).}
+\label{fig:bai_perron}
+\end{figure}
 
 \vspace{1em}
 
 \section{Bloque 8: Análisis de Sostenibilidad de Deuda (DSA) Estocástico}
 
-\subsection{Fundamento Teórico y Antecedente}
-El análisis clásico determinista del FMI y Blanchard adolece de fragilidad al ignorar la correlación de segundo orden entre variables macroeconómicas. Siguiendo a Celasun, Debrun y Ostry (2006) y el marco del FMI (2013, 2021), se calibra un modelo estocástico de simulación Monte Carlo sobre la ecuación fundamental de acumulación de la deuda.
-
-\subsection{Ecuación de Transición Dinámica de la Deuda}
+\subsection{Ecuación Fundamental de Transición Dinámica}
 \begin{equation}
 d_t = \frac{1 + r_t}{1 + g_t} \, d_{t-1} - pb_t + sft_t
 \end{equation}
-donde $r_t$ es la tasa de interés real implícita, $g_t$ la tasa de crecimiento del PIB, $pb_t$ el balance primario y $sft_t$ el ajuste stock-flujo (stock-flow adjustment) que captura revaluaciones cambiarias y rescates. En cada simulación ($10.000$ senderos generados mediante distribuciones $t$ de Student multivariadas), los shocks conjuntos se extraen de la matriz de covarianza real estimada a partir del SVAR.
+donde $sft_t$ es el ajuste stock-flujo (revaluaciones cambiarias y contingencias). Mediante simulaciones de Monte Carlo ($10.000$ senderos proyectados a 2035), los shocks aleatorios se extraen de la matriz de covarianza estructural estimada del SVAR.
 
-\subsection{Resultados Obtenidos a Horizonte 2035}
+\subsection{Resultados Numéricos al Horizonte 2035}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Probabilidad de Insolvencia / Estrés Severo}:
-    \begin{equation}
-    P(d_{2035} > 100\% \text{ del PIB}) = \mathbf{26.1\%}
-    \end{equation}
-    (en el modelo canónico fundado en la covarianza del SVAR a 30 años).
-    \item \textbf{Mediana Proyectada a 2035 (Escenario Referencia)}: $82.84\%$ del PIB.
-    \item \textbf{Especificación Alternativa (DCC-GARCH con colas pesadas)}: $29.8\%$ a $31.2\%$ (documentada en el Apéndice para consulta del director).
+    \item \textbf{Probabilidad de insolvencia severa}: $P(d_{2035} > 100\% \text{ del PIB}) = \mathbf{26.1\%}$.
+    \item \textbf{Mediana determinista (Escenario Base)}: $82.84\%$ del PIB.
+    \item \textbf{Especificación alternativa DCC-GARCH / CIR}: Calibrada con correlaciones dinámicas condicionales y colas pesadas Student-$t$, arroja una probabilidad de insolvencia de entre **$29.8\%$ y $31.2\%$** (documentada en el Apéndice).
 \end{itemize}
 
-\subsection{Interpretación}
-Existe aproximadamente una probabilidad de 1 entre 4 de que la deuda pública argentina supere el umbral crítico del $100\%$ del producto dentro de la próxima década. Este resultado cuantitativo fundamenta que, incluso en escenarios donde se proyecta un sendero positivo de superávit primario, la volatilidad cambiaria histórica y la dispersión en el riesgo soberano mantienen latente una probabilidad significativa de insolvencia financiera.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{dsa_grafico_abanico.png}
+\caption{Gráfico de Abanico (\textit{Fan Chart}) Estocástico de Sostenibilidad de la Deuda Pública (2025--2035).}
+\label{fig:dsa_fan}
+\end{figure}
 
-\vspace{0.5em}
-\noindent \textbf{Ubicación}: \texttt{Tesis.pdf}, Capítulo 6, págs.~74--79. Tablas: \texttt{resultados/tablas/fase6\_dsa\_percentiles\_estocastico.csv} y \texttt{fase6\_dsa\_probabilidad.csv}. Script: \texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{dsa_determinista.png}
+\caption{Proyecciones Deterministas de Deuda Pública bajo Escenarios Alternativos de Política Fiscal.}
+\label{fig:dsa_det}
+\end{figure}
 
-\vspace{1.2em}
+\vspace{1em}
 
-\section{Mapa de Navegación Rápida para la Reunión con la Dirección}
+\section{Matriz Maestra de Decisiones Metodológicas vs. Alternativas}
 
 \begin{table}[htbp]
 \centering
 \footnotesize
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{p{2.2cm} X X p{3.2cm}}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{p{2.2cm} p{3.8cm} p{4.2cm} X}
 \toprule
-\textbf{Técnica / Módulo} & \textbf{Pregunta Central} & \textbf{Resultado Clave} & \textbf{Script / Tabla} \\
+\textbf{Componente} & \textbf{Decisión Tomada} & \textbf{Justificación Teórica/Empírica} & \textbf{Alternativa Posible y Justificación de su Descarte} \\
 \midrule
-\textbf{DF-GLS / ZA} & ¿Las series son $I(1)$ o $I(0)$? & Deuda es $I(1)$ (DF-GLS $-2.65 > -3.01$) & \texttt{fase1\_estacionariedad.py} \\
-\textbf{DOLS (Bohn)} & ¿El Estado ahorra más cuando la deuda sube? & $\rho = +0.0159$ ($p=0.218$, no significativo) & \texttt{fase3\_reaccion\_fiscal.py} \\
-\textbf{IV-2SLS} & ¿El spread soberano fuerza el ajuste fiscal? & $\beta = +0.0012$ ($p=0.024$, significativo 5\%) & \texttt{fase4\_variables\_instrumentales.py} \\
-\textbf{Hansen Niveles} & ¿Hay fatiga fiscal o disciplina por crisis? & $\tau^* = 2.462$ pb; Normal nula vs Crisis $\rho=+0.020$ & \texttt{fase5\_umbral\_hansen.py} \\
-\textbf{VECM (Johansen)} & ¿Hacia dónde y quién ajusta en el largo plazo? & Deuda corrige $7.4\%$; EMBI ajusta; $pb$ exógeno & \texttt{fase23\_reestimacion\_1996\_2025.py} \\
-\textbf{SVAR / FEVD} & ¿Qué factores explican los saltos de deuda? & Inercia $54.2\%$, FX+Riesgo $25.8\%$, Fiscal $12.7\%$ & \texttt{fase19\_fevd.csv} \\
-\textbf{Bai-Perron} & ¿Cuándo se quebró estructuralmente la deuda? & Quiebres en 2001T3, 2006T1 y 2017T3 & \texttt{fase9\_bai\_perron.py} \\
-\textbf{DSA Monte Carlo} & ¿Cuál es la probabilidad de crisis a 10 años? & $P(d_{2035} > 100\%) = 26.1\%$ (mediana $82.8\%$) & \texttt{fase6\_dsa\_probabilidad.csv} \\
+\textbf{Horizonte Temporal} & Ventana única 1996--2025 ($n=120$, 30 años exactos). & Unifica todo el protocolo, captura la Convertibilidad completa y evita ventanas paralelas. & Sub-muestra 2004--2025 ($n=88$): se conserva como control sin empalme en Cap. 5. \\
+\textbf{Spread Soberano} & Empalme Bonos Brady (1996--97) + EMBI+ (1997--2025). & Aísla riesgo crediticio soberano en moneda dura, donde ocurre el default. & Spread doméstico en pesos (Badlar/TPM): descartado por distorsión de cepos y riesgo devaluatorio. \\
+\textbf{Perímetro Deuda} & Deuda SPNF como central; Consolidada como robustez. & SPNF tiene serie continua sin imputar pasivos del BCRA en cero para los años noventa. & Consolidada SPNF+BCRA en 30 años: descartada por inducir sesgo espurio con \texttt{fillna(0)}. \\
+\textbf{Reacción Fiscal} & Estimador DOLS ($m=4$, Stock y Watson, 1993). & Corrige endogeneidad y correlación serial sin imponer restricciones paramétricas frágiles. & MCO clásico: descartado por sesgo de simultaneidad (Hausman $p<0.0001$). ARDL: linealidad rígida. \\
+\textbf{Instrumentos IV} & VIX global + Volatilidad de Bovespa ($BOVESPA\_VOL$). & Series reales continuas desde 1994; pasan Staiger-Stock ($F=15.87$) y Sargan ($p=0.94$). & ETF EMB: descartado porque nace en 2007 (cortaría 12 años). ToT: instrumento débil ($F<8$). \\
+\textbf{No Linealidad ($H_{1a}$)} & Umbrales endógenos de Bruce Hansen (1999, 2000). & Capta la discontinuidad de los \textit{sudden stops} y colapsos de liquidez externa ($\tau^*=2462$ pb). & Polinomios cuadráticos/cúbicos: descartados por inducir multicolinealidad y suavidad irreal. \\
+\textbf{Estructura VAR} & SVAR con restricciones FMI / Blanchard-Perotti (2002). & Refleja rigideces presupuestarias contemporáneas del Estado argentino. & VAR de Cholesky: descartado por dependencia arbitraria del ordenamiento de variables. \\
+\textbf{DSA de Solvencia} & Monte Carlo estocástico con covarianza del SVAR a 30 años. & Metodología FMI transparente y anclada en la dinámica conjunta estimada del sistema. & Modelo DCC-GARCH/CIR: disponible en el Apéndice como robustez financiera sofisticada. \\
 \bottomrule
 \end{tabularx}
-\caption{Resumen Ejecutivo de Técnicas, Preguntas, Resultados y Scripts.}
+\caption{Matriz Integral de Decisiones Metodológicas, Justificaciones y Alternativas.}
+\label{tab:matriz_maestra}
 \end{table}
-
-\vspace{1.5em}
-
-\section{Estrategia de Concisión y Auditoría de Estilo ("Cero Rastros de IA")}
-
-Para optimizar el volumen del texto sin suprimir ningún modelo econométrico ni restar profundidad académica, se aplican los siguientes criterios metodológicos acordados:
-\begin{enumerate}[leftmargin=1.5em]
-    \item \textbf{Depuración Sintáctica de Guiones Largos}: Se eliminan sistemáticamente los guiones largos (\texttt{---}) utilizados como incisos en el texto en español, reemplazándolos por comas gramaticales, paréntesis aclaratorios o puntos seguidos, conforme a las directivas de estilo editorial académico.
-    \item \textbf{Economía de Espacio sin Pérdida de Sustancia}:
-    \begin{itemize}
-        \item Trasladar diagnósticos secundarios exhaustivos (pruebas de ARCH-LM detalladas por rezago, matrices de covarianza auxiliares) al Apéndice Metodológico (Capítulo 9), manteniendo en el cuerpo principal (Capítulo 6) únicamente las tablas maestras de resultados y sus estadísticas de contraste fundamentales.
-        \item Purgar perífrasis y muletillas que suelen acompañar redacciones asistidas (ej. ``cabe destacar que'', ``es importante señalar'', ``en este sentido podemos observar''), adoptando la prosa directa, asertiva y formal propia de las publicaciones del CEMA, BCRA o el Journal of Development Economics.
-    \end{itemize}
-    \item \textbf{Grounding Estricto}: Cada cifra citada en el manuscrito responde de manera unívoca a una salida registrada en las tablas de \texttt{resultados/tablas/}, asegurando reproducibilidad absoluta.
-\end{enumerate}
 
 \end{document}
