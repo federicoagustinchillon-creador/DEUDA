@@ -55,6 +55,138 @@ Como robustez complementaria al procedimiento de máxima verosimilitud de Johans
 
 El estadístico de Engle-Granger ($-2.45$) no logra rechazar la hipótesis nula de ausencia de cointegración residual entre la ratio de deuda y el resultado primario considerados de manera bivariada ($p=0.301$), incluso a un nivel de significatividad del 10\%. Este resultado es coherente con, y no contradictorio respecto de, el diagnóstico divergente ya reportado en la Sección \ref{sec:johansen_cap6}: mientras el estadístico de Traza de Johansen sugería, en su extremo, rango pleno para el sistema conjunto de cuatro variables, el Máximo Autovalor y ahora este contraste bivariado de robustez coinciden en no encontrar evidencia contundente de una relación de equilibrio de largo plazo simple entre las dos variables estructurales de la ecuación de Bohn consideradas de manera aislada. Ello refuerza la decisión metodológica, ya justificada en la Sección \ref{sec:johansen_cap6}, de no imponer una relación de cointegración bivariada no verificada y, en su lugar, recurrir a la técnica DOLS, que no exige, como paso previo, la certeza de cointegración exacta del subsistema bivariado, para estimar la Función de Reacción Fiscal.
 
+\section{Especificación Alternativa del DSA Estocástico: Calibración a Mano, CIR y DCC-GARCH}
+\label{sec:apendice_dsa_alternativo}
+
+La especificación de referencia del componente estocástico del Análisis de Sostenibilidad de la Deuda (Sección \ref{sec:dsa_resultados} del Capítulo \ref{ch:resultados}) deriva su matriz de covarianza de los residuos estimados del SVAR restringido, y arroja una probabilidad de insolvencia hacia 2035 del $26{,}1\%$. Antes de esa especificación, esta tesis desarrolló y validó una calibración a mano de la matriz de covarianzas, con dos extensiones sucesivas hacia procesos estimados (GARCH(1,1) univariado y DCC-GARCH) y un proceso de difusión continua Cox-Ingersoll-Ross (CIR) para el riesgo soberano. Ninguno de los tres resultados se descarta ni se recalcula bajo la covarianza nueva: se documentan aquí en su totalidad, con sus valores originales intactos, para que el director de tesis evalúe cuál de las dos familias de especificación, la fundada en el SVAR o esta alternativa, integrar a la versión final del documento.
+
+\subsection{Calibración a Mano y Probabilidad por Escenario}
+
+La matriz de covarianzas se calibró inicialmente a partir de órdenes de magnitud razonables de la volatilidad histórica argentina para las cinco perturbaciones del DSA (resultado primario, crecimiento, tasa doméstica, tasa externa, variación del tipo de cambio real), con una distribución $t$ de Student multivariada ($\nu\approx4.8$, calibrado por método de momentos sobre la curtosis en exceso muestral). Bajo esta calibración, la probabilidad de que la ratio Deuda/PIB supere el 100\% del producto hacia 2035 en el escenario de Referencia es del $31{,}2\%$, con una mediana de $80{,}7\%$ del PIB. La Tabla \ref{tab:probabilidad_escenarios} reporta esta probabilidad para los tres escenarios deterministas de la Tabla \ref{tab:dsa_determinista} del Capítulo \ref{ch:discusion}, centrando en cada caso las 1.000 simulaciones de Monte Carlo alrededor de los parámetros medios del escenario correspondiente.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:probabilidad_escenarios} Probabilidad de Insolvencia (Deuda/PIB $>100\%$ en 2035) por Escenario, Monte Carlo (1.000 iteraciones), Calibración a Mano.}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Escenario} & \textbf{Probabilidad de superar 100\% del PIB} & \textbf{Mediana 2035 (\% PIB)} \\
+\midrule
+Optimista & 3.8\% & 45.1\% \\
+Referencia & 31.2\% & 80.7\% \\
+Estrés & 99.9\% & 816.5\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Elaboración propia, matriz de covarianza calibrada a mano y distribución $t$ de Student ($\nu\approx4.8$), centrada alternativamente en los parámetros medios de cada escenario de la Tabla \ref{tab:dsa_determinista}.
+\end{flushleft}
+\end{table}
+
+Bajo el escenario Optimista, la probabilidad de cruzar el umbral crítico se reduce a apenas 3.8\%, con una mediana de deuda en 2035 (45.1\% del PIB) muy por debajo del nivel inicial de 2025 (74\%). En el extremo opuesto, el escenario de Estrés arroja una probabilidad de insolvencia del 99.9\%, prácticamente segura.
+
+\subsection{Robustez de la Calibración: Desvíos Estándar Estimados vía GARCH}
+
+Como chequeo de robustez sobre la calibración a mano, se reestimaron los desvíos estándar del resultado primario, del crecimiento del producto y de la variación del tipo de cambio real mediante un modelo GARCH(1,1) univariado por serie, mientras que la matriz de correlación histórica y los desvíos de las tasas de interés se mantuvieron en su valor calibrado original. La Tabla \ref{tab:garch_desvios} compara ambos conjuntos de desvíos estándar anualizados.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:garch_desvios} Comparación de Desvíos Estándar: Calibrados vs. GARCH(1,1).}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Perturbación} & \textbf{Calibrado} & \textbf{GARCH(1,1)} \\
+\midrule
+Resultado primario ($\sigma_{pb}$) & 0.0150 & 0.0114 \\
+Crecimiento del PIB ($\sigma_{g}$) & 0.0400 & 0.0640 \\
+Variación TCR ($\sigma_{\Delta e}$) & 0.1500 & 0.1300 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Los desvíos de $r_d$, $r_f$ y la matriz de correlación se mantienen calibrados en ambas columnas. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+Los tres desvíos GARCH se ubican en el mismo orden de magnitud que la calibración original: el resultado primario y el tipo de cambio real resultan algo menos volátiles bajo GARCH, mientras que el crecimiento resulta algo más volátil, un resultado plausible dado que la serie de PIB real exhibe conglomerados de volatilidad (\textit{volatility clustering}). La Tabla \ref{tab:garch_dsa_comparacion} traslada estos desvíos alternativos a la simulación estocástica completa: la probabilidad de insolvencia del escenario de Referencia se desplaza de 31.2\% a 33.4\%, una diferencia de apenas 2.2 puntos porcentuales.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:garch_dsa_comparacion} Probabilidad de Insolvencia a 2035: Calibración Histórica vs. GARCH Parcial.}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Escenario} & \textbf{Prob. calibrada} & \textbf{Prob. GARCH parcial} \\
+\midrule
+Optimista & 3.8\% & 5.8\% \\
+Referencia & 31.2\% & 33.4\% \\
+Estrés & 99.9\% & 99.9\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} 1.000 simulaciones por escenario en ambas columnas. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+\subsection{Correlación Condicional Dinámica: DCC-GARCH}
+\label{sec:dcc_garch}
+
+Como extensión adicional sobre la calibración a mano, se estimó un modelo de Correlación Condicional Dinámica (DCC-GARCH, \citealp{engle2002}) en dos etapas de Cuasi-Máxima Verosimilitud (QML) sobre los residuos estandarizados de los GARCH(1,1) univariados. La estimación por QML converge, sobre la serie real de TCRM, a un parámetro de reactividad $a\approx0$: el DCC(1,1) colapsa nuevamente a Correlación Condicional Constante (CCC, \citealp{bollerslev1990}). El aporte de esta etapa es la reestimación por QML del \textit{nivel} de correlación (resultado primario-crecimiento: 0.40 calibrada vs. 0.11 QML; resultado primario-tipo de cambio real: $-0.30$ calibrada vs. $+0.20$ QML, con la serie real el signo de esta correlación se invierte respecto de la calibración original; crecimiento-tipo de cambio real: $-0.50$ vs. $-0.17$). Sustituyendo estas correlaciones en el DSA, la probabilidad de insolvencia del escenario de Referencia hacia 2035 pasa de 31.2\% a 32.5\%, confirmando la robustez cualitativa del resultado pese al cambio de signo puntual en una de las tres correlaciones reestimadas.
+
+\subsection{Robustez a la Dependencia en Colas}
+
+La distribución $t$ multivariada de la calibración a mano introduce dependencia en colas (\textit{tail dependence}) que podría sobreestimar la frecuencia de eventos extremos simultáneos. El coeficiente de dependencia en colas es $\lambda = 2 \cdot T_{\nu+1}\!\left(-\sqrt{(\nu+1)(1-\rho)/(1+\rho)}\right)$, que para $\nu=4.8$ y la correlación QML estimada ($\rho=0.11$, resultado primario-crecimiento) resulta $\lambda \approx 0.076$ (7.6\%) \citep{demarta2005}. La Tabla \ref{tab:tail_dependence_robustez} reestima el escenario de Referencia bajo especificaciones alternativas de esta estructura.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:tail_dependence_robustez} Robustez de la Probabilidad de Insolvencia (2035, Escenario Referencia) a la Estructura de Dependencia en Colas.}
+\begin{tabular}{lr}
+\toprule
+\textbf{Especificación de las perturbaciones} & \textbf{$P(d_{2035}>100\%)$} \\
+\midrule
+(1) Cópula-$t$ ($\nu\approx4.8$) + correlación histórica & 31.2\% \\
+(2) Cópula gaussiana + correlación histórica & 29.2\% \\
+(3) Cópula gaussiana + uncorrelated (sin correlación) & 24.6\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} 1.000 simulaciones por especificación, misma semilla y mismos parámetros de escenario que la calibración a mano de referencia. Elaboración propia.
+\end{flushleft}
+\end{table}
+
+La probabilidad se desplaza de 31.2\% a 29.2\% al remover el exceso de dependencia en colas de la cópula-$t$, y a 24.6\% al remover además la correlación entre perturbaciones. En ambos casos el desplazamiento es moderado (entre 2.0 y 6.6 puntos porcentuales) y no revierte ninguna conclusión cualitativa.
+
+\subsection{Calibración del Proceso Estocástico CIR del EMBI+}
+\label{sec:cir_resultados}
+
+Como extensión distinta de las dos anteriores, se calibró el riesgo soberano (EMBI+) como un proceso de difusión continua con reversión a la media de Cox-Ingersoll-Ross (CIR 1985), en lugar de un shock discreto calibrado o estimado por GARCH. La Tabla \ref{tab:cir_calibracion} resume la calibración por Máxima Verosimilitud exacta.
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:cir_calibracion} Calibración MLE del Proceso Cox-Ingersoll-Ross (CIR) para el EMBI+.}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Parámetro Estimado} & \textbf{Muestra Homogénea (2004--2025)} & \textbf{Muestra Ampliada (1999--2025)} \\
+\midrule
+Velocidad de Reversión ($\kappa$) & 0.9229 & 0.4279 \\
+Nivel de Equilibrio ($\theta$, en pb) & 1032.25 & 1590.41 \\
+Volatilidad de Difusión ($\sigma$) & 26.9175 & 26.4954 \\
+Vida Media de Reversión ($t_{1/2} = \ln(2)/\kappa$) & 0.75 años & 1.62 años \\
+Condición de Feller ($2\kappa\theta > \sigma^2$) & $1905.30 > 724.55 \implies \mathbf{Cumple}$ & $1361.14 > 702.00 \implies \mathbf{Cumple}$ \\
+Ratio de Feller ($2\kappa\theta / \sigma^2$) & $\mathbf{2.6296 > 1.0}$ & $\mathbf{1.9389 > 1.0}$ \\
+Criterio AIC (CIR vs. AR(1)) & $\mathbf{1278.69} < 1342.34 \implies \text{Prefiere CIR}$ & $\mathbf{1594.84} < 1673.14 \implies \text{Prefiere CIR}$ \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize \textit{Nota.} Estimación por MLE exacta sobre la función de densidad Chi-cuadrado no central. Datos provenientes de \texttt{resultados/tablas/fase20\_cir\_calibracion.csv}.
+\end{flushleft}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figura_cir_simulacion.png}
+\caption{Simulación Estocástica de Monte Carlo: Proceso CIR del EMBI+ y Densidad Terminal.}
+\label{fig:cir_simulacion}
+\end{figure}
+
+Al integrar las 1.000 trayectorias continuas del proceso CIR en el módulo de proyección estocástica del DSA hacia 2035 (sustituyendo la tasa de refinanciación externa fija por $r_{f,t} = r_{US,t} + \text{CIR}_t$), la probabilidad estimada de insolvencia ($P(d_{2035} > 100\%)$) se sitúa en $\mathbf{29.8\%}$, convergiendo con gran consistencia con la cifra central de la calibración a mano que sostiene esta especificación alternativa ($31.2\%$) y sus robusteces ($30.4\%$ a $31.9\%$), y del mismo orden de magnitud que la especificación de referencia del cuerpo principal de la tesis, fundada en el SVAR ($26.1\%$, Sección \ref{sec:dsa_resultados} del Capítulo \ref{ch:resultados}).
+
 \section{Estructura de la Cadena de Procesamiento de Código (Referencia)}
 \label{sec:apendice_codigo}
 

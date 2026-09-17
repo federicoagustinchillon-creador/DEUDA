@@ -509,42 +509,7 @@ La reversión de signo entre regímenes ($\alpha_{pb}$ pasa de $+0{,}0011$ bajo 
 \section{Simulación Estocástica del DSA con Covarianza del SVAR Restringido}
 \label{sec:dsa_resultados}
 
-La especificación de referencia del Análisis de Sostenibilidad de la Deuda estocástico (Sección \ref{sec:dsa_metodologia} del Capítulo \ref{ch:metodologia}) sustituye el proceso CIR y el modelo DCC-GARCH de una especificación anterior (documentada como alternativa en la Sección \ref{sec:cir_resultados} siguiente) por una matriz de correlación derivada directamente de la covarianza de residuos estructurales del SVAR restringido de la Sección \ref{sec:svar_resultados}, estimado sobre la ventana ampliada de treinta años. Bajo esta especificación, la probabilidad de que la deuda consolidada supere el 100\% del PIB hacia 2035 es $\mathbf{26{,}1\%}$, con una mediana de $82{,}8\%$ del PIB en el escenario de Referencia determinista. Es un resultado del mismo orden de magnitud que la especificación anterior ($31{,}2\%$ con la matriz calibrada a mano, $29{,}8\%$ con CIR, $32{,}5\%$ con DCC-GARCH), pero no idéntico: la matriz de correlación fundada en el SVAR estimado, a diferencia de la calibrada a mano, incorpora directamente el hallazgo de la Sección \ref{sec:svar_resultados} de que el riesgo soberano y el tipo de cambio real están, sobre esta ventana, menos correlacionados entre sí de lo que asumía la calibración original, lo que angosta moderadamente la cola derecha de la distribución simulada.
-
-\section{Especificación Alternativa: Calibración del Proceso Estocástico CIR del EMBI+}
-\label{sec:cir_resultados}
-
-Como especificación alternativa a la de la sección anterior, documentada en su totalidad para que el director de tesis evalúe cuál integrar a la versión final del documento, la Tabla \ref{tab:cir_calibracion} resume la calibración por Máxima Verosimilitud exacta del proceso de Cox-Ingersoll-Ross (CIR 1985) para la prima de riesgo soberano.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:cir_calibracion} Calibración MLE del Proceso Cox-Ingersoll-Ross (CIR) para el EMBI+.}
-\begin{tabular}{lrr}
-\toprule
-\textbf{Parámetro Estimado} & \textbf{Muestra Homogénea (2004--2025)} & \textbf{Muestra Ampliada (1999--2025)} \\
-\midrule
-Velocidad de Reversión ($\kappa$) & 0.9229 & 0.4279 \\
-Nivel de Equilibrio ($\theta$, en pb) & 1032.25 & 1590.41 \\
-Volatilidad de Difusión ($\sigma$) & 26.9175 & 26.4954 \\
-Vida Media de Reversión ($t_{1/2} = \ln(2)/\kappa$) & 0.75 años & 1.62 años \\
-Condición de Feller ($2\kappa\theta > \sigma^2$) & $1905.30 > 724.55 \implies \mathbf{Cumple}$ & $1361.14 > 702.00 \implies \mathbf{Cumple}$ \\
-Ratio de Feller ($2\kappa\theta / \sigma^2$) & $\mathbf{2.6296 > 1.0}$ & $\mathbf{1.9389 > 1.0}$ \\
-Criterio AIC (CIR vs. AR(1)) & $\mathbf{1278.69} < 1342.34 \implies \text{Prefiere CIR}$ & $\mathbf{1594.84} < 1673.14 \implies \text{Prefiere CIR}$ \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Estimación por MLE exacta sobre la función de densidad Chi-cuadrado no central. Datos provenientes de \texttt{resultados/tablas/fase20\_cir\_calibracion.csv}.
-\end{flushleft}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{figura_cir_simulacion.png}
-\caption{Simulación Estocástica de Monte Carlo: Proceso CIR del EMBI+ y Densidad Terminal.}
-\label{fig:cir_simulacion}
-\end{figure}
-
-Al integrar las 1.000 trayectorias continuas del proceso CIR en el módulo de proyección estocástica del DSA hacia 2035 (sustituyendo la tasa de refinanciación externa fija por $r_{f,t} = r_{US,t} + \text{CIR}_t$), la probabilidad estimada de insolvencia ($P(d_{2035} > 100\%)$) se sitúa en $\mathbf{29.8\%}$, convergiendo con gran consistencia con la cifra central de la especificación calibrada a mano que sostenía esta sección ($31.2\%$) y sus robusteces ($30.4\%$ a $31.9\%$), y del mismo orden de magnitud que la especificación de referencia actual, fundada en el SVAR ($26.1\%$, Sección \ref{sec:dsa_resultados}).
+La especificación de referencia del Análisis de Sostenibilidad de la Deuda estocástico (Sección \ref{sec:dsa_metodologia} del Capítulo \ref{ch:metodologia}) sustituye el proceso CIR y el modelo DCC-GARCH de una especificación anterior por una matriz de correlación derivada directamente de la covarianza de residuos estructurales del SVAR restringido de la Sección \ref{sec:svar_resultados}, estimado sobre la ventana ampliada de treinta años. Bajo esta especificación, la probabilidad de que la deuda consolidada supere el 100\% del PIB hacia 2035 es $\mathbf{26{,}1\%}$, con una mediana de $82{,}8\%$ del PIB en el escenario de Referencia determinista. La Figura \ref{fig:fan_chart_final} (Capítulo \ref{ch:discusion}) presenta el gráfico de abanico correspondiente. Es un resultado del mismo orden de magnitud que la especificación anterior ($31{,}2\%$ con la matriz calibrada a mano, $29{,}8\%$ con CIR, $32{,}5\%$ con DCC-GARCH, documentada en su totalidad en el Apéndice \ref{sec:apendice_dsa_alternativo} para que el director de tesis evalúe cuál integrar a la versión final), pero no idéntico: la matriz de correlación fundada en el SVAR estimado, a diferencia de la calibrada a mano, incorpora directamente el hallazgo de la Sección \ref{sec:svar_resultados} de que el riesgo soberano y el tipo de cambio real están, sobre esta ventana, menos correlacionados entre sí de lo que asumía la calibración original, lo que angosta moderadamente la cola derecha de la distribución simulada.
 
 \section{Extensión de Frontera: Reconstrucción del Spread Soberano en 42 Años de Democracia (1983--2025)}
 \label{sec:spread_historico_1983_2025}
