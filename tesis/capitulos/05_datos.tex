@@ -10,25 +10,30 @@ Como paso preliminar a cualquier caracterización sustantiva de las series, corr
 
 \begin{table}[H]
 \centering
-\caption{\label{tab:descriptivos_jb} Estadísticas descriptivas de los vectores empíricos agregados (2004--2025, n=88).}
+\caption{\label{tab:descriptivos} Estadísticas descriptivas de las variables macro-fiscales (2004T1--2025T4, n=88).}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrrrr}
+\begin{tabular}{lrrrrrrrr}
 \toprule
-\textbf{Variable} & \textbf{Media} & \textbf{Mediana} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Jarque-Bera} & \textbf{$p$-valor (JB)} \\
+\textbf{Variable} & \textbf{Media} & \textbf{Mediana} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} & \textbf{Jarque-Bera} & \textbf{$p$-valor (JB)} \\
 \midrule
-$pb_t$ (Result. Primario/PIB, \%) & -0.70 & -0.80 & 1.59 & -3.80 & 1.80 & 5.87 & 0.053 \\
-$d_t$ (Deuda/PIB, \%) & 65.93 & 63.00 & 18.68 & 40.00 & 119.00 & 5.64 & 0.060 \\
-$risk_t$ (EMBI+, pb) & 1298.21 & 808.80 & 1229.50 & 210.22 & 5626.29 & 128.58 & 0.00000 \\
-$\tilde{y}_t$ (Brecha del Producto, \%) & -0.02 & -0.80 & 5.54 & -11.15 & 13.86 & 4.89 & 0.087 \\
+$pb_t$ (Result. Primario/PIB, \%) & -0.70 & -0.80 & 1.59 & -3.80 & 1.80 & -0.01 & 5.87 & 0.053 \\
+$d_t$ (Deuda/PIB, \%) & 65.93 & 63.00 & 18.68 & 40.00 & 119.00 & 0.60 & 5.64 & 0.060 \\
+$risk_t$ (EMBI+, pb) & 1298.21 & 808.80 & 1229.50 & 210.22 & 5626.29 & 2.16 & 128.58 & 0.00000 \\
+$\tilde{y}_t$ (Brecha del Producto, \%) & -0.02 & -0.80 & 5.54 & -11.15 & 13.86 & 0.59 & 4.89 & 0.087 \\
+TCRM (índice) & 1.71 & 1.63 & 0.39 & 1.14 & 2.41 & 0.48 & 7.48 & 0.024 \\
+CER (índice acumulado) & 58.01 & 4.37 & 145.79 & 1.46 & 654.29 & 3.06 & 355.63 & 0.00000 \\
+VIX (puntos) & 18.98 & 16.71 & 7.48 & 10.31 & 58.60 & 2.46 & 360.07 & 0.00000 \\
 \bottomrule
 \end{tabular}%
 }
 \begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv}. Estadístico de Jarque-Bera bajo hipótesis nula de normalidad.
+\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, MECON, INDEC, JP Morgan, datos.gob.ar). Estadístico de Jarque-Bera bajo hipótesis nula de normalidad; asimetría de Fisher-Pearson corregida por muestra.
 \end{flushleft}
 \end{table}
 
-El contraste de Jarque-Bera exige una lectura diferenciada. El EMBI+ rechaza con contundencia la hipótesis nula de normalidad ($JB=128.58$, $p<0.00001$), resultado esperable dada su naturaleza de cola derecha extrema: los episodios de pánico financiero desplazan el indicador muy por encima de su media, y con la serie real ese rechazo es aún más categórico que el que arrojaba la serie de contingencia utilizada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($JB=20.71$, $p=0.00003$). Las tres series restantes ($pb_t$, $d_t$ y $\tilde{y}_t$) exhiben $p$-valores marginales (0.05--0.09) que no permiten un rechazo al 5\% pero tampoco confirman normalidad, ubicándose en una zona de ambigüedad estadística coherente con muestras de tamaño moderado ($n=88$). Esta evidencia respalda la motivación metodológica para las técnicas robustas a la asimetría adoptadas en los capítulos subsiguientes: la regresión de umbral asimétrica de Hansen (Sección \ref{sec:hansen}) y el DSA estocástico no gaussiano (Capítulo \ref{ch:discusion}).
+El contraste de Jarque-Bera exige una lectura diferenciada en tres grupos. El EMBI+, el CER y el VIX rechazan con contundencia la hipótesis nula de normalidad ($JB>100$, $p<0.00001$ en los tres casos), resultado esperable dada su naturaleza de cola derecha extrema: los episodios de pánico financiero desplazan estos indicadores muy por encima de su media, y con la serie real de EMBI+ ese rechazo es aún más categórico que el que arrojaba la serie de contingencia utilizada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($JB=20.71$, $p=0.00003$). El TCRM también rechaza normalidad, aunque con mucha menor contundencia ($JB=7.48$, $p=0.024$). Las tres series restantes ($pb_t$, $d_t$ y $\tilde{y}_t$) exhiben $p$-valores marginales (0.05--0.09) que no permiten un rechazo al 5\% pero tampoco confirman normalidad, ubicándose en una zona de ambigüedad estadística coherente con muestras de tamaño moderado ($n=88$). Esta evidencia respalda la motivación metodológica para las técnicas robustas a la asimetría adoptadas en los capítulos subsiguientes: la regresión de umbral asimétrica de Hansen (Sección \ref{sec:hansen}) y el DSA estocástico no gaussiano (Capítulo \ref{ch:discusion}).
+
+Tres regularidades adicionales de asimetría son relevantes. Primero, el EMBI+ opera en un orden de magnitud muy superior al de economías emergentes con grado de inversión crediticia, y su asimetría positiva pronunciada (2.16) confirma la cola derecha propia de los episodios de pánico financiero, frente a fases de compresión del diferencial de riesgo comparativamente más graduales. Segundo, el Resultado Primario exhibe media negativa y asimetría prácticamente nula (-0.01), compatible con la hipótesis de reacción fiscal débil de $H_{1a}$, mientras que la Deuda/PIB muestra una asimetría moderada (0.60) que refleja la persistencia de episodios de sobreendeudamiento por encima de la media. Tercero, la asimetría extrema del CER (3.06) no expresa volatilidad financiera, sino la consecuencia mecánica de tratarse de un índice acumulativo de inflación pasada no comparable en niveles entre regímenes monetarios sucesivos, propiedad que la Sección \ref{sec:estacionariedad} somete a contraste formal de integración.
 
 \section{Fuente, Cobertura y Construcción de la Matriz de Datos}
 
@@ -89,33 +94,6 @@ Brecha del Producto & 0.001 & 0.100 & 0.000 & 0.100 & I(0) \\
 \end{table}
 
 El resultado ya no es tan ordenado como en una iteración previa de esta investigación que empleaba una ventana ampliada de 108 observaciones (1999--2025), hoy superada. El resultado primario, el EMBI+ y el TCRM se mantienen I(1) sin ambigüedad, y la brecha del producto I(0), igual que antes. La deuda/PIB, en cambio, presenta un diagnóstico que se mueve en la dirección opuesta a la que traía esa ventana anterior: allí el ADF no rechazaba la raíz unitaria ($p=0.118$) y el KPSS quedaba en el límite superior tabulado, concluyéndose I(1). En la ventana de treinta años, el ADF sí rechaza la raíz unitaria al 5\% ($p=0.042$), lo que por sí solo apuntaría a I(0); pero el KPSS en niveles tampoco rechaza estacionariedad ($p=0.100$), de modo que ambos contrastes, leídos de forma aislada, favorecerían I(0) y no I(1). Esta tesis mantiene, no obstante, el tratamiento I(1) de la deuda/PIB para la estimación VECM/SVAR de la Sección \ref{sec:etapa2_johansen} del Capítulo \ref{ch:metodologia}, por dos motivos: primero, KPSS al límite tabulado del 10\% es una no-rechazo débil, no una confirmación robusta de estacionariedad; segundo, es la lectura que preserva la comparabilidad con el resto del protocolo y con el diagnóstico obtenido sobre la sub-muestra de cobertura 100\,\% real (Sección \ref{sec:estacionariedad}), donde la deuda/PIB también se trata como I(1) pese a un diagnóstico igualmente no concluyente. El contraste DF-GLS de \textcite{elliott1996}, de mayor potencia estadística y aplicado sobre esta misma ventana única en la Sección \ref{sec:dfgls} del Capítulo \ref{ch:resultados}, refuerza esta decisión: a diferencia del ADF simple, no rechaza la raíz unitaria en niveles para la deuda/PIB ($-2.65$ frente a un crítico de $-3.01$), respaldando con más autoridad el tratamiento I(1) adoptado aquí por criterio teórico. Se deja declarado que este es un punto de tensión genuino, no resuelto por el protocolo actual, y coherente con el resto de los hallazgos de esta ventana (Secciones \ref{sec:resultados_vecm} y \ref{sec:svar_resultados} del Capítulo \ref{ch:resultados}): una deuda/PIB con un componente de reversión a la media más marcado que antes es consistente tanto con la mayor dificultad para hallar cointegración de largo plazo como con el peso creciente de la inercia propia en la descomposición de varianza del SVAR.
-
-\section{Distribución y Volatilidad de las Variables Base}
-
-La Tabla \ref{tab:descriptivos} sintetiza los estadísticos descriptivos univariados de las siete variables continuas de la matriz de datos, sobre la sub-muestra de cobertura 100\,\% real (2004T1--2025T4, $n=88$): a diferencia de las cuatro variables del sistema de cointegración, reportadas sobre la ventana única completa en la Sección \ref{sec:ventana_ampliada}, el CER carece de cobertura anterior a 2004 (Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia}) y fija, por comparabilidad dentro de una misma tabla, la ventana de las siete variables aquí reportadas.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:descriptivos} Estadísticos descriptivos de las variables macro-fiscales (2004T1--2025T4, n=88).}
-\begin{tabular}{lrrrrr}
-\toprule
-\textbf{Variable} & \textbf{Media} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} \\
-\midrule
-EMBI+ (puntos básicos) & 1298.21 & 1229.50 & 210.22 & 5626.29 & 2.16 \\
-Deuda SPNF / PIB (\%) & 65.93 & 18.68 & 40.00 & 119.00 & 0.60 \\
-Resultado Primario / PIB (\%) & -0.70 & 1.59 & -3.80 & 1.80 & -0.01 \\
-TCRM (índice) & 1.71 & 0.39 & 1.14 & 2.41 & 0.48 \\
-Brecha del Producto (\%) & -0.02 & 5.54 & -11.15 & 13.86 & 0.59 \\
-CER (índice acumulado) & 58.01 & 145.79 & 1.46 & 654.29 & 3.06 \\
-VIX (puntos) & 18.98 & 7.48 & 10.31 & 58.60 & 2.46 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, MECON, INDEC, JP Morgan, datos.gob.ar).
-\end{flushleft}
-\end{table}
-
-Tres regularidades son relevantes. Primero, el EMBI+ opera en un orden de magnitud muy superior al de economías emergentes con grado de inversión crediticia, y su asimetría positiva pronunciada (2.16) confirma la cola derecha propia de los episodios de pánico financiero, frente a fases de compresión del diferencial de riesgo comparativamente más graduales. Segundo, el Resultado Primario exhibe media negativa y asimetría prácticamente nula, compatible con la hipótesis de reacción fiscal débil de $H_{1a}$, mientras que la Deuda/PIB muestra una asimetría moderada que refleja la persistencia de episodios de sobreendeudamiento por encima de la media. Tercero, la asimetría extrema del CER (3.06) no expresa volatilidad financiera, sino la consecuencia mecánica de tratarse de un índice acumulativo de inflación pasada no comparable en niveles entre regímenes monetarios sucesivos, propiedad que la Sección \ref{sec:estacionariedad} somete a contraste formal de integración.
 
 \section{Evolución del Vector de Solvencia: Deuda y Superávit}
 
