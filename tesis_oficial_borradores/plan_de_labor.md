@@ -229,3 +229,23 @@ A pedido del usuario, se resolvieron seis puntos sueltos:
 
 `Tesis.pdf` recompilado y verificado (98 páginas antes de esta fase, sin warnings de referencias
 nuevos) y commiteado.
+
+## Fase 6b, reunión real con Pablo y primer recorte de tamaño: HECHO (2026-09-17)
+Tras una reunión efectiva del usuario con el director (no una suposición nuestra), dos correcciones:
+
+- **Endogeneidad**: Pablo no pidió una discusión de si el EMBI+ "se asume" o "se testea" endógeno.
+  Dijo, en general para series de tiempo, que todo es endógeno salvo los shocks de alta frecuencia
+  (razón por la que VIX/BOVESPA\_VOL sirven como instrumentos). El usuario fue explícito: **no
+  nombrar** esta discusión en el cuerpo de la tesis a menos que el jurado o el director lo pregunten
+  en la defensa. Se revirtió el párrafo agregado en la Fase 6 en `04_metodologia.tex` y
+  `06_resultados.tex`, quedando el texto como estaba antes de esa fase. La explicación de frecuencias
+  queda como conocimiento de respaldo para la defensa oral, no escrita.
+- **Reducción de tamaño**: confirmado el objetivo de bajar de 100 páginas. Primer recorte ejecutado:
+  el capítulo 8 (limitaciones (i)-(vi) y agenda futura) pasó de prosa corrida a listas, mismos números
+  y citas, menos palabras. En el capítulo 5 se encontró una duplicación real (dos tablas descriptivas
+  separadas para la misma submuestra 2004--2025, $n=88$) y se fusionaron en una sola tabla de 7
+  variables, calculando de datos reales (no fabricado) la mediana, asimetría y Jarque-Bera de
+  TCRM/CER/VIX que faltaban en ambas tablas originales. `Tesis.pdf`: 99 páginas (de 100). El resto del
+  capítulo 5 no se tocó porque alimenta directamente Johansen/VECM/DOLS/instrumentación del Capítulo
+  6, no es material periférico recortable sin tocar el núcleo. Pendiente si el usuario quiere seguir
+  recortando otros capítulos (antecedentes, cap. 2, fue explícitamente descartado como candidato).
