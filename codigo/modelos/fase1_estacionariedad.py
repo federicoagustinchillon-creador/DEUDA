@@ -168,15 +168,19 @@ def main():
     print(" FASE 1: TEST DE RAÍZ UNITARIA Y ESTACIONARIEDAD (DATOS REALES)")
     print("=" * 65)
     
-    file_path = "datos/dataset_consolidado_real.csv"
+    # Ventana unica de referencia (1996-2025, n=120). CER no forma parte de
+    # esta ventana: no existe como indice antes de febrero de 2002 (recien
+    # creado tras el fin de la Convertibilidad), asi que queda fuera del
+    # dataset unificado en lugar de aproximarse o rellenarse.
+    file_path = "datos/dataset_consolidado_1996_2025.csv"
     if not os.path.exists(file_path):
         print(f"[!] Archivo no encontrado: {file_path}")
         return
-        
+
     df = pd.read_csv(file_path, parse_dates=['Date'], index_col='Date')
-    
+
     # Variables clave para el análisis
-    target_vars = ['deuda_pib', 'pb_pib', 'g_gap', 'EMBI', 'TCRM', 'CER']
+    target_vars = ['deuda_pib', 'pb_pib', 'g_gap', 'EMBI', 'TCRM']
     
     # Verificar si están en el dataset
     vars_to_test = [v for v in target_vars if v in df.columns]

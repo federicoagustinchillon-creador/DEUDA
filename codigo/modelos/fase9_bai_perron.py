@@ -29,7 +29,11 @@ import matplotlib.pyplot as plt
 from bai_perron import bai_perron_breaks
 
 BASE_DIR = pathlib.Path(__file__).parent.parent.parent
-CSV_PATH = BASE_DIR / "datos" / "dataset_consolidado_real.csv"
+# Ventana unica de referencia (1996-2025, n=120). deuda_consolidada_pib
+# (SPNF + pasivos BCRA) no tiene serie de pasivos BCRA anterior a 2004 y
+# queda, en consecuencia, con menos observaciones que deuda_pib dentro de
+# esta misma ventana; no es un error, es la disponibilidad real de fuente.
+CSV_PATH = BASE_DIR / "datos" / "dataset_consolidado_1996_2025.csv"
 LATEX_DIR = BASE_DIR / "tesis" / "figuras"
 TABLES_DIR = BASE_DIR / "resultados" / "tablas"
 os.makedirs(TABLES_DIR, exist_ok=True)
@@ -64,7 +68,14 @@ def main():
             if bcra_path.exists():
                 bcra = pd.read_csv(bcra_path, parse_dates=["fecha"], index_col="fecha")
                 df["pasivos_bcra_pib"] = bcra["pasivos_bcra_pib"]
-                df["deuda_consolidada_pib"] = df["deuda_pib"] + df["pasivos_bcra_pib"].fillna(0)
+                # Sin fillna(0): la serie de pasivos remunerados del BCRA no
+                # existe antes de 2004 en esta fuente. Rellenar con 0
+                # asumiria pasivos nulos del BCRA en 1996-2003, un supuesto
+                # falso (el BCRA ya emitia instrumentos de esterilizacion en
+                # ese periodo), no una ausencia de dato inocua. Se deja NaN:
+                # deuda_consolidada_pib queda, en consecuencia, acotada a su
+                # cobertura real (2004-2025).
+                df["deuda_consolidada_pib"] = df["deuda_pib"] + df["pasivos_bcra_pib"]
 
     result_spnf = analyze_series(df, "deuda_pib", "Deuda SPNF / PIB (original)")
     result_cons = analyze_series(df, "deuda_consolidada_pib",

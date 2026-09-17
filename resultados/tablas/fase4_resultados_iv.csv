@@ -1,22 +1,22 @@
                    IV-2SLS Estimation Summary                   
-Dep. Variable:   ,pb_pib          ,  R-squared:         ,-0.3598
-Estimator:       ,IV-2SLS         ,  Adj. R-squared:    ,-0.4189
-No. Observations:,73              ,  F-statistic:       ,4.2995 
-Date:            ,Mon, Aug 10 2026,  P-value (F-stat)   ,0.2309 
-Time:            ,19:02:08        ,  Distribution:      ,chi2(3)
+Dep. Variable:   ,pb_pib          ,  R-squared:         ,0.0997 
+Estimator:       ,IV-2SLS         ,  Adj. R-squared:    ,0.0762 
+No. Observations:,119             ,  F-statistic:       ,11.202 
+Date:            ,Thu, Sep 17 2026,  P-value (F-stat)   ,0.0107 
+Time:            ,00:10:25        ,  Distribution:      ,chi2(3)
 Cov. Estimator:  ,kernel          ,                     ,       
                  ,                ,                     ,       
                     Parameter Estimates                    
      ,Parameter,Std. Err., T-stat,P-value,Lower CI,Upper CI
-const,-0.6195  ,1.1079   ,-0.5592,0.5760 ,-2.7909 ,1.5518  
-d_t_1,-0.0364  ,0.0241   ,-1.5127,0.1304 ,-0.0836 ,0.0108  
-g_gap,0.0530   ,0.0419   ,1.2649 ,0.2059 ,-0.0291 ,0.1350  
-EMBI ,0.0017   ,0.0009   ,1.7771 ,0.0756 ,-0.0002 ,0.0035  
+const,-0.0513  ,0.7130   ,-0.0719,0.9427 ,-1.4487 ,1.3462  
+d_t_1,-0.0313  ,0.0238   ,-1.3168,0.1879 ,-0.0779 ,0.0153  
+g_gap,0.0578   ,0.0339   ,1.7051 ,0.0882 ,-0.0086 ,0.1242  
+EMBI ,0.0012   ,0.0005   ,2.2593 ,0.0239 ,0.0002  ,0.0023  
 
 Endogenous: EMBI
-Instruments: VIX, EMBI_BRASIL
+Instruments: VIX, BOVESPA_VOL
 Kernel Covariance (HAC)
 Debiased: False
 Kernel: newey-west
 Automatic Bandwidth: True
-Bandwidth: 6
+Bandwidth: 4

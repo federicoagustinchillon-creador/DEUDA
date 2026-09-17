@@ -7,15 +7,23 @@ Aborda la endogeneidad del riesgo país (EMBI+) en la Función de Reacción Fisc
 Implementa:
   - 2SLS (Two-Stage Least Squares) usando `linearmodels.iv.IV2SLS` para obtener
     errores estándar consistentes (corrigiendo el HC-02 de la auditoría).
-  - VIX (Índice de volatilidad global) y un spread soberano regional
-    (EMBI_BRASIL, proxy de mercado construida en
-    `codigo/ingesta_datos/ingesta_spread_regional.py` a partir del ETF EMB -iShares
-    JPMorgan USD EM Bond, misma familia de índices que el EMBI+ argentino-)
-    como instrumentos del EMBI+, en reemplazo del TCRM rezagado (Mejora
-    Dimensión III): el TCRM impacta directamente sobre la recaudación y el
-    resultado primario argentino y por eso fue rechazado por Sargan; un
-    spread soberano regional captura el mismo riesgo sistémico de mercados
-    emergentes sin ese canal presupuestario directo.
+  - VIX (Índice de volatilidad global, ^VIX, con serie real desde 1996) y
+    BOVESPA_VOL (volatilidad realizada trimestral de los retornos diarios
+    del índice Bovespa, ^BVSP, con serie real desde 1994) como instrumentos
+    del EMBI+, en reemplazo del TCRM rezagado (Mejora Dimensión III): el
+    TCRM impacta directamente sobre la recaudación y el resultado primario
+    argentino y por eso fue rechazado por Sargan; ambos instrumentos captan
+    apetito de riesgo regional/emergente sin ese canal presupuestario
+    directo. BOVESPA_VOL reemplaza al spread regional basado en el ETF EMB
+    (iShares JPMorgan USD EM Bond) usado hasta la ventana original: el ETF
+    cotiza recién desde diciembre de 2007 y no cubre la ventana ampliada de
+    treinta años (1996-2025); no se encontró una serie de spread soberano
+    de Brasil de acceso gratuito con esa cobertura (se evaluaron IPEADATA,
+    Banco Central do Brasil y FRED sin éxito), de modo que el instrumento
+    pasa de renta fija a renta variable regional, con la misma lógica de
+    identificación (riesgo de mercado emergente, no causado por el
+    resultado fiscal argentino). Construido en
+    `codigo/ingesta_datos/ingesta_instrumentos_1996_2025.py`.
   - Diagnósticos de Primera Etapa (F-test para instrumentos débiles).
   - Test de Sobreidentificación de Sargan.
   - Test de Endogeneidad de Wu-Hausman.
@@ -52,37 +60,31 @@ def ejecutar_fase4_econometria(csv_path):
     # Lags necesarios
     df['d_t_1'] = df['deuda_pib'].shift(1)
 
-    # Verificar presencia del instrumento EMBI_BRASIL (spread regional ETF EMB)
-    if 'EMBI_BRASIL' not in df.columns or df['EMBI_BRASIL'].dropna().empty:
-        spread_path = os.path.join(os.path.dirname(os.path.abspath(csv_path)), "..", "procesados", "spread_regional_trimestral.csv")
-        if not os.path.exists(spread_path):
-            spread_path = "datos/procesados/spread_regional_trimestral.csv"
-        if not os.path.exists(spread_path):
-            try:
-                import ingesta_spread_regional as spread
-                spread.main()
-            except Exception as e:
-                print(f"[!] Aviso al generar spread regional: {e}")
-        if os.path.exists(spread_path):
-            spread_df = pd.read_csv(spread_path, index_col=0, parse_dates=True)
-            spread_df.index = pd.to_datetime(spread_df.index).to_period("Q").to_timestamp("Q")
-            df.index = pd.to_datetime(df.index).to_period("Q").to_timestamp("Q")
-            if 'EMBI_BRASIL' in df.columns:
-                df = df.drop(columns=['EMBI_BRASIL'])
-            df = df.join(spread_df[['EMBI_BRASIL']], how='left')
+    # Instrumentos VIX y BOVESPA_VOL, con serie real 1996-2025
+    # (ingesta_instrumentos_1996_2025.py), en reemplazo del spread regional
+    # basado en el ETF EMB (solo 2007-2025).
+    instr_path = os.path.join(os.path.dirname(os.path.abspath(csv_path)), "..", "procesados", "instrumentos_1996_2025.csv")
+    if not os.path.exists(instr_path):
+        instr_path = "datos/procesados/instrumentos_1996_2025.csv"
+    instr_df = pd.read_csv(instr_path, index_col=0, parse_dates=True)
+    instr_df.index = pd.to_datetime(instr_df.index).to_period("Q").to_timestamp("Q")
+    df.index = pd.to_datetime(df.index).to_period("Q").to_timestamp("Q")
+    for col in ['VIX', 'BOVESPA_VOL']:
+        if col in df.columns:
+            df = df.drop(columns=[col])
+    df = df.join(instr_df[['VIX', 'BOVESPA_VOL']], how='left')
 
-
-    subset_cols = ['pb_pib', 'd_t_1', 'g_gap', 'EMBI', 'VIX', 'EMBI_BRASIL']
+    subset_cols = ['pb_pib', 'd_t_1', 'g_gap', 'EMBI', 'VIX', 'BOVESPA_VOL']
     df = df.dropna(subset=subset_cols)
 
 
     y = df['pb_pib']
     exog = sm.add_constant(df[['d_t_1', 'g_gap']])
     endog = df[['EMBI']]
-    instr = df[['VIX', 'EMBI_BRASIL']]
+    instr = df[['VIX', 'BOVESPA_VOL']]
 
     print(f" -> Observaciones válidas: {len(df)}")
-    print(" -> Ecuación Estructural: pb_pib ~ 1 + d_t_1 + g_gap + [EMBI ~ VIX + EMBI_BRASIL]")
+    print(" -> Ecuación Estructural: pb_pib ~ 1 + d_t_1 + g_gap + [EMBI ~ VIX + BOVESPA_VOL]")
     
     print("\n[2/4] Estimando 2SLS (linearmodels.iv)...")
     # Utilizamos cov_type='robust' o 'kernel' (HAC) 
@@ -153,5 +155,6 @@ def ejecutar_fase4_econometria(csv_path):
 if __name__ == "__main__":
     import pathlib
     base_dir = pathlib.Path(__file__).parent.parent.parent
-    csv_file = base_dir / "datos" / "dataset_consolidado_real.csv"
+    # Ventana unica de referencia (1996-2025, n=120).
+    csv_file = base_dir / "datos" / "dataset_consolidado_1996_2025.csv"
     ejecutar_fase4_econometria(csv_file)

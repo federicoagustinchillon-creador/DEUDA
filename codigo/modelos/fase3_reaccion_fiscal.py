@@ -182,5 +182,7 @@ def ejecutar_fase3_econometria(csv_path):
 if __name__ == "__main__":
     import pathlib
     base_dir = pathlib.Path(__file__).parent.parent.parent
-    csv_file = base_dir / "datos" / "dataset_consolidado_real.csv"
+    # Ventana unica de referencia (1996-2025, n=120), a pedido del usuario
+    # de no sostener multiples ventanas de medicion en paralelo.
+    csv_file = base_dir / "datos" / "dataset_consolidado_1996_2025.csv"
     ejecutar_fase3_econometria(csv_file)

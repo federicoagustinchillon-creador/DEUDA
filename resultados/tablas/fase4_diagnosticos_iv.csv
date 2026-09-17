@@ -1,4 +1,4 @@
 statistic,value,pvalue
-first_stage_F_excluded_instruments,13.0044,0.001500
-wu_hausman_endogeneity,7.3172,0.008624
-sargan_overidentification,0.6075,0.435722
+first_stage_F_excluded_instruments,15.8652,0.000359
+wu_hausman_endogeneity,2.1700,0.143484
+sargan_overidentification,0.0059,0.939003

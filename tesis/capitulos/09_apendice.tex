@@ -84,7 +84,7 @@ La totalidad de los resultados cuantitativos reportados en esta tesis (estadíst
 2.1 & \url{codigo/modelos/fase1_estacionariedad.py} & Raíz unitaria (ADF, KPSS, PP, DF-GLS, Zivot-Andrews) & Tabla \ref{tab:estacionariedad}, Tabla \ref{tab:dfgls}, Sección \ref{sec:zivot_andrews} \\
 2.2 & \url{fase2_cointegracion.py} & Cointegración de Johansen & Tabla de Johansen (Sección \ref{sec:johansen_cap6}) \\
 2.3 & \url{fase3_reaccion_fiscal.py} & DOLS, diagnósticos de especificación & Tabla \ref{tab:dols} \\
-2.4 & \url{fase4_variables_instrumentales.py} & IV-2SLS (VIX + spread regional), F de primera etapa, Wu-Hausman, Sargan & Tabla \ref{tab:iv2sls} \\
+2.4 & \url{fase4_variables_instrumentales.py} & IV-2SLS (VIX + BOVESPA\_VOL, ventana única), F de primera etapa, Wu-Hausman, Sargan & Tabla \ref{tab:iv2sls} \\
 2.5 & \url{fase5_umbral_hansen.py} & Umbral de Hansen, \textit{bootstrap} Sup-LM & Tabla \ref{tab:hansen} \\
 2.6 & \url{fase6_sostenibilidad_deuda.py} & DSA determinista y Monte Carlo (t de Student) & Tabla \ref{tab:dsa_determinista}, Figura \ref{fig:fan_chart_final} \\
 2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario (calibración a mano), causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figuras \ref{fig:acf_pacf}, \ref{fig:cusum}; Tablas \ref{tab:sensibilidad_temporal}, \ref{tab:engle_granger}; probabilidades por escenario y covarianza GARCH no incorporadas a la versión final (documentadas aparte) \\
@@ -92,7 +92,7 @@ La totalidad de los resultados cuantitativos reportados en esta tesis (estadíst
 2.9 & \url{bai_perron.py} \newline \url{fase9_bai_perron.py} & Quiebres estructurales múltiples (DP + BIC), Mejora Dim. I & Figura \ref{fig:bai_perron} (Sección \ref{sec:quiebres_estructurales}) \\
 2.10 & \url{dcc_garch.py} \newline \url{fase10_dcc_garch.py} & DCC-GARCH, correlación condicional dinámica & No incorporado a la versión final del documento (documentado aparte) \\
 2.11 & \url{fase11_dols_subperiodos.py} & DOLS por subperíodo ($m=1,2$) frente a MCO estático & Tabla \ref{tab:sensibilidad_temporal} (Sección \ref{sec:sensibilidad_temporal}) \\
-2.12 & \url{fase12_diagnosticos_complementarios.py} & Selección del orden de rezagos del VAR (AIC/BIC/HQ/FPE), sensibilidad del rango de Johansen, VIF y número de condición & Tablas \ref{tab:rezagos_var} y \ref{tab:vif} \\
+2.12 & \url{fase12_diagnosticos_complementarios.py} & VIF y número de condición; selección del orden de rezagos del VAR (AIC/BIC/HQ/FPE) y sensibilidad del rango de Johansen, superadas como tablas propias por la Etapa 2.20 (ventana única) & Tabla \ref{tab:vif} \\
 2.13 & \url{fase13_robustez_hansen_dpb.py} & Robustez del umbral de Hansen con $\Delta pb_t$ (I(0)) como dependiente & Tabla \ref{tab:hansen_dpb} (Sección \ref{sec:robustez_hansen_dpb}) \\
 2.14 & \url{fase14_dsa_tail_dependence.py} & Robustez del DSA a la estructura de dependencia en colas (marginales $t$ independientes, cópula Gaussiana), sobre la calibración a mano & No incorporada a la versión final del documento (documentada aparte) \\
 2.15 & \url{fase15_sft_decomposicion_ilustrativa.py} & Descomposición ilustrativa del Ajuste Stock-Flujo ($SF_t$), episodios 2005/2018/2020 & Tabla \ref{tab:sft_ilustrativo} \\
