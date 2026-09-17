@@ -116,6 +116,45 @@ Los guiones largos como inciso siguen presentes en `03_marco_teorico.tex`, `05_d
 `06_resultados.tex` y `07_discusion.tex`: no se tocaron todavía porque el orden acordado es
 Introducción → Antecedentes → Metodología → resto, y esos capítulos no entraron en esta fase.
 
+## Fase 3b, extensión de la ventana a 30 años: HECHO (2026-09-16)
+A pedido del usuario ("me pedirán mínimo 30 años y óptimo desde la vuelta a la democracia"), se
+investigó qué tan atrás se puede llevar el sistema de 4 variables (deuda, resultado primario, EMBI+,
+TCRM). Deuda/pb/PIB ya llegaban a 1996 (empalme existente). El EMBI+ ya llegaba a 1983 (Fase 22, spread
+Bonex/Brady/EMBI+ Global, idéntico punto a punto al EMBI+ real desde 1999). El único techo real es el
+TCRM: el BCRA solo lo publica desde enero de 1997 (verificado contra el archivo crudo). Se construyó
+`datos/dataset_consolidado_1996_2025.csv` (n=120, 30 años exactos), con el TCRM de 1996 (4 de 120
+trimestres) aproximado por extrapolación de tendencia OLS sobre 1997-1999. Se reestimó todo el
+protocolo (`codigo/modelos/fase23_reestimacion_1996_2025.py`): estacionariedad, Johansen, VECM, SVAR
+restringido, TVECM. Verificado como robusto excluyendo los 4 trimestres aproximados (ventana real
+1997-2025, `fase23b_*`): mismo resultado, no es un artefacto de la aproximación.
+
+Hallazgo importante, verificado y escrito con toda la transparencia en el texto: la descomposición de
+varianza del SVAR **se invierte** respecto de lo que decía la tesis. Antes (ventana 2004-2025):
+fiscal+actividad explicaban 76% de la varianza de la deuda a 20 trimestres, cambiario+riesgo solo
+11.5%. Ahora (ventana 1996-2025): inercia propia de la deuda explica 54.2%, cambiario+riesgo (25.8%)
+supera a fiscal+actividad (20.0%). Coherente con que Johansen ya no rechaza la ausencia de
+cointegración para ningún inicio de muestra entre 1996 y 1999 (antes solo dependía de si se incluía
+1999). También apareció que deuda/PIB, con ADF y KPSS, ahora lee más cerca de I(0) que de I(1) en esta
+ventana (antes I(1) sin ambigüedad); se mantiene el tratamiento I(1) por continuidad con el resto del
+protocolo, dejando la tensión declarada en el texto en vez de ocultarla. El VECM/TVECM, en cambio, se
+CONFIRMA y se fortalece: sin reacción fiscal (antes p=0.204, ahora p=0.996), EMBI+ absorbe el ajuste
+(ahora significativo, antes no), umbral de ~2080-2104 pb replicado en tres especificaciones
+independientes (Hansen en niveles, Hansen en Δpb, TVECM).
+
+Se simplificó también la Etapa 6 (DSA estocástico): la covarianza de los shocks ahora se deriva
+directamente de la matriz de impacto estructural del SVAR (de esta misma ventana de 30 años) en vez
+de un proceso CIR + DCC-GARCH aparte. Nueva probabilidad de insolvencia a 2035: 26.1% (antes 31.2%
+con la matriz calibrada a mano, 29.8% con CIR, 32.5% con DCC-GARCH). El CIR y el DCC-GARCH NO se
+borraron: quedan documentados en `06_resultados.tex` como especificación alternativa, con sus propios
+resultados intactos, para que el director decida cuál integrar a la versión final.
+
+Todos los números reales (con las tablas completas) quedan en
+`tesis_oficial_borradores/numeros_ventana_1996_2025.md`. Actualizados con estos números:
+`00_abstract.tex`, `04_metodologia.tex`, `05_datos.tex`, `06_resultados.tex`, `07_discusion.tex`,
+`08_conclusiones.tex`, `09_apendice.tex`. `fase19_svar_matriz_impacto_S.csv` y `fase19_fevd.csv`
+(los archivos canónicos que usa el DSA) quedaron sobreescritos con los resultados de la ventana nueva;
+los de la ventana vieja (2004-2025) quedan solo en `fase23_*` como trazabilidad si hace falta comparar.
+
 ## Fase 4, resto del documento
 Marco teórico, datos y resultados ya existen en `tesis/` (no hay que escribirlos de cero), pero
 siguen con guiones largos como inciso sin purgar (ver Fase 2c) y sin revisar contra el resto de los

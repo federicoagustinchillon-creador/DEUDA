@@ -10,6 +10,7 @@ Implementa:
 """
 
 import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -51,17 +52,65 @@ SCENARIOS = {
     'Estrés':     {'pb': 0.005, 'g': -0.015, 'r_d': 0.120, 'r_f': 0.150, 'delta_e': 0.250},
 }
 
-# Matriz de covarianza empírica (simplificada para volatilidad argentina).
-# Orden: [pb, g, r_d, r_f, delta_e]. Volatilidades (std): pb=1.5%, g=4%, r_d=5%,
-# r_f=2%, delta_e=15%. Correlaciones calibradas (e.g. g cae cuando delta_e sube).
+# Volatilidades anuales (std) de cada shock del DSA, orden [pb, g, r_d, r_f,
+# delta_e]: pb=1.5%, g=4%, r_d=5%, r_f=2%, delta_e=15%. Se mantienen calibradas
+# a mano (criterio de plausibilidad para una proyeccion anual 2026-2035): ni el
+# SVAR restringido (Etapa 3, frecuencia trimestral) ni ninguna otra estimacion
+# del protocolo da directamente una volatilidad anual comparable sin un
+# supuesto adicional de agregacion temporal.
 STD_DEVS = np.array([0.015, 0.040, 0.050, 0.020, 0.150])
-CORR = np.array([
-    [ 1.0,  0.4, -0.2, -0.1, -0.3],  # pb
-    [ 0.4,  1.0, -0.4, -0.2, -0.5],  # g
-    [-0.2, -0.4,  1.0,  0.5,  0.6],  # r_d
-    [-0.1, -0.2,  0.5,  1.0,  0.4],  # r_f
-    [-0.3, -0.5,  0.6,  0.4,  1.0],  # delta_e
-])
+
+_BASE_DIR = Path(__file__).resolve().parent.parent.parent
+_SVAR_S_PATH = _BASE_DIR / "resultados" / "tablas" / "fase19_svar_matriz_impacto_S.csv"
+
+
+def _build_corr_from_svar(corr_rd_rf: float = 0.5) -> np.ndarray:
+    """
+    Matriz de correlacion del DSA, orden [pb, g, r_d, r_f, delta_e], derivada
+    de la matriz de impacto estructural S del SVAR restringido (Etapa 3,
+    Seccion sec:svar_metodologia), en lugar de correlaciones calibradas a
+    mano. S es la matriz de impacto de Y_t = (g_gap, pb_pib, EMBI, TCRM,
+    deuda_pib); Sigma_u = S @ S.T es la covarianza reducida trimestral, de la
+    que se extrae la correlacion (invariante a escala y a frecuencia, a
+    diferencia de la varianza): pb <-> g <-> EMBI (proxy de r_f) <-> TCRM
+    (proxy de delta_e).
+
+    r_d (tasa domestica) no tiene serie propia en el dataset consolidado ni
+    entra al SVAR (misma limitacion ya documentada en
+    fase7_diagnosticos_robustez.py para las volatilidades GARCH parciales):
+    sus correlaciones con pb, g y delta_e se derivan proporcionalmente a las
+    de r_f, escaladas por corr(r_d, r_f), que se mantiene en el valor
+    calibrado original (0.5) por no ser identificable a partir del sistema.
+    Es una mejora parcial y honesta de la correlacion, no una re-estimacion
+    completa: sustituye lo que el protocolo ya estimo en la Etapa 3 y deja
+    explicito lo que no.
+    """
+    S = pd.read_csv(_SVAR_S_PATH, index_col=0).values
+    sigma_u = S @ S.T
+    d = np.sqrt(np.diag(sigma_u))
+    r_svar = sigma_u / np.outer(d, d)  # orden: g_gap, pb_pib, EMBI, TCRM, deuda_pib
+
+    def r(a, b):
+        idx = {"g": 0, "pb": 1, "risk": 2, "fx": 3}
+        return r_svar[idx[a], idx[b]]
+
+    corr_pb_g = r("pb", "g")
+    corr_pb_rf = r("pb", "risk")
+    corr_pb_de = r("pb", "fx")
+    corr_g_rf = r("g", "risk")
+    corr_g_de = r("g", "fx")
+    corr_rf_de = r("risk", "fx")
+
+    return np.array([
+        [1.0, corr_pb_g, corr_rd_rf * corr_pb_rf, corr_pb_rf, corr_pb_de],
+        [corr_pb_g, 1.0, corr_rd_rf * corr_g_rf, corr_g_rf, corr_g_de],
+        [corr_rd_rf * corr_pb_rf, corr_rd_rf * corr_g_rf, 1.0, corr_rd_rf, corr_rd_rf * corr_rf_de],
+        [corr_pb_rf, corr_g_rf, corr_rd_rf, 1.0, corr_rf_de],
+        [corr_pb_de, corr_g_de, corr_rd_rf * corr_rf_de, corr_rf_de, 1.0],
+    ])
+
+
+CORR = _build_corr_from_svar()
 
 
 def build_cov_matrix():

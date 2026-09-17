@@ -1,0 +1,6 @@
+variable,adf_p,adf_estacionaria,kpss_p,kpss_estacionaria
+deuda_pib,0.042,True,0.1,True
+pb_pib,0.6046,False,0.01,False
+EMBI,0.1502,False,0.1,True
+TCRM,0.2592,False,0.1,True
+g_gap,0.0006,True,0.1,True

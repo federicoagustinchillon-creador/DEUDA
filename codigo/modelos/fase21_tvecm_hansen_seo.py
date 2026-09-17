@@ -36,7 +36,9 @@ os.makedirs(TABLAS_DIR, exist_ok=True)
 
 
 def cargar_datos():
-    ruta = DATOS_DIR / "dataset_consolidado_real.csv"
+    # Ventana ampliada de referencia (1996-2025, n=120, 30 anios). Ver
+    # fase23_reestimacion_1996_2025.py y numeros_ventana_1996_2025.md.
+    ruta = DATOS_DIR / "dataset_consolidado_1996_2025.csv"
     df = pd.read_csv(ruta)
     df["Date"] = pd.to_datetime(df["Date"])
     df.set_index("Date", inplace=True)
