@@ -4,7 +4,7 @@
 \section{Tabla Consolidada de Limitaciones Metodológicas}
 \label{sec:limitaciones_consolidadas}
 
-La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas reconocidas explícitamente en esta tesis (Sección \ref{sec:aporte_metodologico}), clasificando su tipo (estructural vs. superable) y documentando la mitigación aplicada dentro del protocolo empírico presentado.
+La Tabla \ref{tab:limitaciones} sintetiza las tres limitaciones metodológicas reconocidas explícitamente en esta tesis (Sección \ref{sec:aporte_metodologico}), clasificando su tipo (estructural vs. superable) y documentando la mitigación aplicada dentro del protocolo empírico presentado.
 
 \begin{table}[H]
 \centering
@@ -14,17 +14,11 @@ La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas r
 \toprule
 \textbf{Limitación} & \textbf{Tipo} & \textbf{Mitigación aplicada en esta tesis} \\
 \midrule
-(i) Tamaño muestral moderado (120 observaciones; 110 en DOLS, 119 en el umbral de Hansen por la construcción de rezagos) & Estructural & Tests de robustez por subperíodos sobre la muestra completa; discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
+(i) Tamaño muestral moderado (120 observaciones; 119 en el umbral de Hansen por la construcción de rezagos) & Estructural & Discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
 \midrule
-(ii) Autocorrelación residual DOLS (DW$=0.117$, frente a $0.321$ en la ventana original de 88 observaciones) & Inherente a la dinámica fiscal AR & Errores HAC Newey-West en toda la inferencia; test Breusch-Godfrey; interpretación como evidencia de inercia estructural presupuestaria \\
+(ii) Calibración (no estimación) de 2 de 5 shocks DSA ($r_d$, $r_f$) & Superable & Los otros tres shocks (resultado primario, crecimiento, tipo de cambio) usan la covarianza estimada del SVAR restringido (Sección \ref{sec:dsa_resultados} del Capítulo \ref{ch:resultados}); $r_d$ y $r_f$ siguen calibrados, al no tener serie propia en el sistema de cointegración \\
 \midrule
-(iii) Calibración (no estimación) de 2 de 5 shocks DSA ($r_d$, $r_f$) & Superable & Los otros tres shocks (resultado primario, crecimiento, tipo de cambio) usan la covarianza estimada del SVAR restringido (Sección \ref{sec:dsa_resultados} del Capítulo \ref{ch:resultados}); $r_d$ y $r_f$ siguen calibrados, al no tener serie propia en el sistema de cointegración \\
-\midrule
-(iv) Heterocedasticidad condicional ARCH-LM ($=66.29$, $p<10^{-12}$, frente a $18.74$, $p=0.0009$ en la ventana original de 88 observaciones) & Inherente a la volatilidad estructural AR & Errores HAC; interpretación como confirmación de la motivación para el DSA estocástico no gaussiano \\
-\midrule
-(v) Inestabilidad paramétrica de la Función de Reacción Fiscal por subperíodo: $\rho$ positivo y significativo en 1996--2010, nulo en 2011--2025, confirmado por el rechazo de estabilidad del CUSUM desde 2012 & Inherente a la dinámica temporal del vínculo fiscal-deuda & DOLS de muestra completa como especificación principal; MCO estático y DOLS por subperíodo, y CUSUM/CUSUMSQ, presentados como ejercicio de robustez (Sección \ref{sec:sensibilidad_temporal}) \\
-\midrule
-(vi) Ausencia de cointegración bivariada Engle-Granger ($p=0.302$, $n=120$) & Consistente con I(1) sin ancla & Johansen multivariado sobre la muestra completa como contraste principal; DOLS como estimador robusto a incertidumbre sobre el rango de cointegración; Engle-Granger como robustez (Apéndice \ref{sec:engle_granger}) \\
+(iii) Ausencia de cointegración bivariada Engle-Granger ($p=0.302$, $n=120$) & Consistente con I(1) sin ancla & Johansen multivariado sobre la muestra completa como contraste principal; Engle-Granger como robustez (Apéndice \ref{sec:engle_granger}) \\
 \bottomrule
 \end{tabular}%
 }
@@ -53,12 +47,12 @@ Como robustez complementaria al procedimiento de máxima verosimilitud de Johans
 \end{flushleft}
 \end{table}
 
-El estadístico de Engle-Granger ($-2.45$) no rechaza la hipótesis nula de ausencia de cointegración residual entre la ratio de deuda y el resultado primario considerados de manera bivariada ($p=0.302$), incluso a un nivel de significatividad del 10\%; el resultado es prácticamente idéntico al que arrojaba la ventana original de 88 observaciones ($-2.4508$, $p=0.3012$), por lo que la ampliación muestral no altera este diagnóstico. Este resultado es coherente con, y no contradictorio respecto de, el diagnóstico divergente ya reportado en la Sección \ref{sec:johansen_cap6}: mientras el estadístico de Traza de Johansen sugería, en su extremo, rango pleno para el sistema conjunto de cuatro variables, el Máximo Autovalor y ahora este contraste bivariado de robustez coinciden en no encontrar evidencia contundente de una relación de equilibrio de largo plazo simple entre las dos variables estructurales de la ecuación de Bohn consideradas de manera aislada. Ello refuerza la decisión metodológica, ya justificada en la Sección \ref{sec:johansen_cap6}, de no imponer una relación de cointegración bivariada no verificada y, en su lugar, recurrir a la técnica DOLS, que no exige, como paso previo, la certeza de cointegración exacta del subsistema bivariado, para estimar la Función de Reacción Fiscal.
+El estadístico de Engle-Granger ($-2.45$) no rechaza la hipótesis nula de ausencia de cointegración residual entre la ratio de deuda y el resultado primario considerados de manera bivariada ($p=0.302$), incluso a un nivel de significatividad del 10\%; el resultado es prácticamente idéntico al que arrojaba la ventana original de 88 observaciones ($-2.4508$, $p=0.3012$), por lo que la ampliación muestral no altera este diagnóstico. Este resultado es coherente con, y no contradictorio respecto de, el diagnóstico divergente ya reportado en la Sección \ref{sec:johansen_cap6}: mientras el estadístico de Traza de Johansen sugería, en su extremo, rango pleno para el sistema conjunto de cuatro variables, el Máximo Autovalor y ahora este contraste bivariado de robustez coinciden en no encontrar evidencia contundente de una relación de equilibrio de largo plazo simple entre las dos variables estructurales de la ecuación de Bohn consideradas de manera aislada. Ello refuerza la decisión metodológica, ya justificada en la Sección \ref{sec:johansen_cap6}, de no imponer una relación de cointegración bivariada no verificada y, en su lugar, modelar el sistema completo mediante el VECM, que no exige, como paso previo, la certeza de cointegración exacta de ningún subsistema bivariado.
 
 \section{Estructura de la Cadena de Procesamiento de Código (Referencia)}
 \label{sec:apendice_codigo}
 
-La totalidad de los resultados cuantitativos reportados en esta tesis (estadísticas descriptivas, contrastes de raíz unitaria y cointegración, estimaciones DOLS/Hansen, quiebres de Bai-Perron, DCC-GARCH, deuda consolidada, diagnósticos de robustez de este Apéndice y simulaciones DSA) se computan mediante una cadena de procesamiento de código Python real y re-ejecutable, sin datos simulados ni resultados fabricados manualmente. Por razones de extensión, este Apéndice documenta la \textbf{estructura} de esa cadena de procesamiento y remite al archivo consolidado \texttt{codigo/codigo\_completo\_deuda.py}, que reúne el código fuente íntegro de cada etapa en un único documento de lectura, en lugar de reproducir aquí sus más de 4.100 líneas.
+La totalidad de los resultados cuantitativos reportados en esta tesis (estadísticas descriptivas, contrastes de raíz unitaria y cointegración, estimaciones VECM/Hansen, quiebres de Bai-Perron, DCC-GARCH, deuda consolidada, diagnósticos de robustez de este Apéndice y simulaciones DSA) se computan mediante una cadena de procesamiento de código Python real y re-ejecutable, sin datos simulados ni resultados fabricados manualmente. Por razones de extensión, este Apéndice documenta la \textbf{estructura} de esa cadena de procesamiento y remite al archivo consolidado \texttt{codigo/codigo\_completo\_deuda.py}, que reúne el código fuente íntegro de cada etapa en un único documento de lectura, en lugar de reproducir aquí sus más de 4.100 líneas.
 
 \footnotesize
 \begin{longtable}{p{1.1cm}p{4.4cm}p{4.8cm}p{4.3cm}}
@@ -83,14 +77,14 @@ La totalidad de los resultados cuantitativos reportados en esta tesis (estadíst
 1.6 & \url{ingesta_bcra_pasivos.py} & Pasivos remunerados del BCRA (API v4.0), Mejora Dim. IV & \url{datos/procesados/bcra_pasivos_trimestral.csv} \\
 2.1 & \url{codigo/modelos/fase1_estacionariedad.py} & Raíz unitaria (ADF, KPSS, PP, DF-GLS, Zivot-Andrews) & Tabla \ref{tab:estacionariedad}, Tabla \ref{tab:dfgls}, Sección \ref{sec:zivot_andrews} \\
 2.2 & \url{fase2_cointegracion.py} & Cointegración de Johansen & Tabla de Johansen (Sección \ref{sec:johansen_cap6}) \\
-2.3 & \url{fase3_reaccion_fiscal.py} & DOLS, diagnósticos de especificación & Tabla \ref{tab:dols} \\
+2.3 & \url{fase3_reaccion_fiscal.py} & DOLS, diagnósticos de especificación & No incorporado a la versión final del documento (documentado aparte) \\
 2.5 & \url{fase5_umbral_hansen.py} & Umbral de Hansen, \textit{bootstrap} Sup-LM & Tabla \ref{tab:hansen} \\
 2.6 & \url{fase6_sostenibilidad_deuda.py} & DSA determinista y Monte Carlo (t de Student) & Tabla \ref{tab:dsa_determinista}, Figura \ref{fig:fan_chart_final} \\
-2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario (calibración a mano), causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figuras \ref{fig:acf_pacf}, \ref{fig:cusum}; Tablas \ref{tab:sensibilidad_temporal}, \ref{tab:engle_granger}; probabilidades por escenario y covarianza GARCH no incorporadas a la versión final (documentadas aparte) \\
+2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario (calibración a mano), causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figura \ref{fig:acf_pacf}, Tabla \ref{tab:engle_granger}; CUSUM/CUSUMSQ y sensibilidad temporal ligados a DOLS, probabilidades por escenario y covarianza GARCH no incorporados a la versión final (documentados aparte) \\
 2.8 & \url{fase8_deuda_consolidada.py} & Consolida deuda SPNF + pasivos BCRA, Mejora Dim. IV & Figura \ref{fig:deuda_consolidada} (Sección \ref{sec:deuda_consolidada}) \\
 2.9 & \url{bai_perron.py} \newline \url{fase9_bai_perron.py} & Quiebres estructurales múltiples (DP + BIC), Mejora Dim. I & Figura \ref{fig:bai_perron} (Sección \ref{sec:quiebres_estructurales}) \\
 2.10 & \url{dcc_garch.py} \newline \url{fase10_dcc_garch.py} & DCC-GARCH, correlación condicional dinámica & No incorporado a la versión final del documento (documentado aparte) \\
-2.11 & \url{fase11_dols_subperiodos.py} & DOLS por subperíodo ($m=1,2$) frente a MCO estático & Tabla \ref{tab:sensibilidad_temporal} (Sección \ref{sec:sensibilidad_temporal}) \\
+2.11 & \url{fase11_dols_subperiodos.py} & DOLS por subperíodo ($m=1,2$) frente a MCO estático & No incorporado a la versión final del documento (documentado aparte) \\
 2.12 & \url{fase12_diagnosticos_complementarios.py} & VIF y número de condición; selección del orden de rezagos del VAR (AIC/BIC/HQ/FPE) y sensibilidad del rango de Johansen, superadas como tablas propias por la Etapa 2.20 & Tabla \ref{tab:vif} \\
 2.13 & \url{fase13_robustez_hansen_dpb.py} & Robustez del umbral de Hansen con $\Delta pb_t$ (I(0)) como dependiente & Tabla \ref{tab:hansen_dpb} (Sección \ref{sec:robustez_hansen_dpb}) \\
 2.14 & \url{fase14_dsa_tail_dependence.py} & Robustez del DSA a la estructura de dependencia en colas (marginales $t$ independientes, cópula Gaussiana), sobre la calibración a mano & No incorporada a la versión final del documento (documentada aparte) \\
