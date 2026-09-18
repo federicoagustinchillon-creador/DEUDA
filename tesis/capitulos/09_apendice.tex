@@ -14,7 +14,7 @@ La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas r
 \toprule
 \textbf{Limitación} & \textbf{Tipo} & \textbf{Mitigación aplicada en esta tesis} \\
 \midrule
-(i) Tamaño muestral reducido (88 obs. / 73 en IV-2SLS) & Estructural & Tests de robustez por subperíodos; discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
+(i) Tamaño muestral reducido (88 obs.) & Estructural & Tests de robustez por subperíodos; discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
 \midrule
 (ii) Autocorrelación residual DOLS (DW$=0.321$) & Inherente a la dinámica fiscal AR & Errores HAC Newey-West en toda la inferencia; test Breusch-Godfrey (4 rezagos); interpretación como evidencia de inercia estructural presupuestaria \\
 \midrule
@@ -58,7 +58,7 @@ El estadístico de Engle-Granger ($-2.45$) no logra rechazar la hipótesis nula 
 \section{Estructura de la Cadena de Procesamiento de Código (Referencia)}
 \label{sec:apendice_codigo}
 
-La totalidad de los resultados cuantitativos reportados en esta tesis (estadísticas descriptivas, contrastes de raíz unitaria y cointegración, estimaciones DOLS/IV-2SLS/Hansen, quiebres de Bai-Perron, DCC-GARCH, deuda consolidada, diagnósticos de robustez de este Apéndice y simulaciones DSA) se computan mediante una cadena de procesamiento de código Python real y re-ejecutable, sin datos simulados ni resultados fabricados manualmente. Por razones de extensión, este Apéndice documenta la \textbf{estructura} de esa cadena de procesamiento y remite al archivo consolidado \texttt{codigo/codigo\_completo\_deuda.py}, que reúne el código fuente íntegro de cada etapa en un único documento de lectura, en lugar de reproducir aquí sus más de 4.100 líneas.
+La totalidad de los resultados cuantitativos reportados en esta tesis (estadísticas descriptivas, contrastes de raíz unitaria y cointegración, estimaciones DOLS/Hansen, quiebres de Bai-Perron, DCC-GARCH, deuda consolidada, diagnósticos de robustez de este Apéndice y simulaciones DSA) se computan mediante una cadena de procesamiento de código Python real y re-ejecutable, sin datos simulados ni resultados fabricados manualmente. Por razones de extensión, este Apéndice documenta la \textbf{estructura} de esa cadena de procesamiento y remite al archivo consolidado \texttt{codigo/codigo\_completo\_deuda.py}, que reúne el código fuente íntegro de cada etapa en un único documento de lectura, en lugar de reproducir aquí sus más de 4.100 líneas.
 
 \footnotesize
 \begin{longtable}{p{1.1cm}p{4.4cm}p{4.8cm}p{4.3cm}}
@@ -84,7 +84,6 @@ La totalidad de los resultados cuantitativos reportados en esta tesis (estadíst
 2.1 & \url{codigo/modelos/fase1_estacionariedad.py} & Raíz unitaria (ADF, KPSS, PP, DF-GLS, Zivot-Andrews) & Tabla \ref{tab:estacionariedad}, Tabla \ref{tab:dfgls}, Sección \ref{sec:zivot_andrews} \\
 2.2 & \url{fase2_cointegracion.py} & Cointegración de Johansen & Tabla de Johansen (Sección \ref{sec:johansen_cap6}) \\
 2.3 & \url{fase3_reaccion_fiscal.py} & DOLS, diagnósticos de especificación & Tabla \ref{tab:dols} \\
-2.4 & \url{fase4_variables_instrumentales.py} & IV-2SLS (VIX + BOVESPA\_VOL), F de primera etapa, Wu-Hausman, Sargan & Tabla \ref{tab:iv2sls} \\
 2.5 & \url{fase5_umbral_hansen.py} & Umbral de Hansen, \textit{bootstrap} Sup-LM & Tabla \ref{tab:hansen} \\
 2.6 & \url{fase6_sostenibilidad_deuda.py} & DSA determinista y Monte Carlo (t de Student) & Tabla \ref{tab:dsa_determinista}, Figura \ref{fig:fan_chart_final} \\
 2.7 & \url{fase7_diagnosticos_robustez.py} & ACF/PACF, ARCH-LM, CUSUM/CUSUMSQ, Engle-Granger, sensibilidad temporal, probabilidades por escenario (calibración a mano), causalidad de Granger, filtro de Hamilton y covarianza del DSA vía GARCH(1,1) & Figuras \ref{fig:acf_pacf}, \ref{fig:cusum}; Tablas \ref{tab:sensibilidad_temporal}, \ref{tab:engle_granger}; probabilidades por escenario y covarianza GARCH no incorporadas a la versión final (documentadas aparte) \\
