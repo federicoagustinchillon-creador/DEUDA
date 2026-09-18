@@ -43,7 +43,7 @@ Sobre esta última variable corresponde una precisión metodológica. La literat
 
 La construcción de la matriz siguió un protocolo en dos etapas, detallado en el libro de códigos: obtención de datos desde las APIs de \url{apis.datos.gob.ar}, BCRA y Yahoo Finance, recurriendo a informes alternativos (CEPAL, FMI, JP Morgan, MECON) ante discontinuidades. La deuda pública incorporada en la especificación central corresponde a la deuda bruta del SPNF neta de tenencias intra-sector público (acreencias del FGS de la ANSES), corrección que reduce el ratio bruto publicado habitualmente en prensa entre 15 y 20 puntos porcentuales del PIB según el año, y resulta metodológicamente indispensable para evitar sobreestimar la exposición neta del Tesoro frente a acreedores extra-estatales.
 
-\section{La Ventana Única: Descriptivos e Integración (1996--2025, n=120)}
+\section{Descriptivos e Integración (1996--2025, n=120)}
 \label{sec:ventana_ampliada}
 
 El procedimiento de empalme descrito en la Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia} construye las cuatro variables del sistema de cointegración (deuda/PIB, resultado primario/PIB, EMBI+ y TCRM) sobre la ventana de 120 observaciones trimestrales (1996T1--2025T4), de las cuales 32 (1996T1--2003T4) provienen del empalme y 88 (2004T1--2025T4) de fuente primaria directa, sin ningún tramo empalmado. La Tabla \ref{tab:descriptivos_ampliado} resume sus estadísticos sobre la ventana completa.
@@ -69,7 +69,7 @@ Brecha del Producto (\%) & -0.06 & 5.51 & -11.77 & 14.53 & 0.34 \\
 
 Frente a la sub-muestra de cobertura 100\,\% real (Tabla \ref{tab:descriptivos}), la incorporación del tramo empalmado 1996--2003 desplaza sensiblemente los extremos: el mínimo de la deuda/PIB baja de 40.00\% a 26.96\% (el piso de la salida de la crisis, no capturado por esa sub-muestra, que arranca ya en el proceso de descompresión posterior al canje) y su máximo sube de 119.00\% a 157.27\% (el pico de la cesación de pagos de 2002, previo a la quita de 2005). El EMBI+ se desplaza en el mismo sentido pero de forma menos mecánica: su media sube de 1298 a 1484 puntos básicos, ya que la crisis de 2001--2002 empuja el promedio hacia arriba, como es esperable, y su asimetría se acentúa levemente (2.16 a 1.93): al incorporar además 1996--1998, con niveles de riesgo soberano moderados propios de la Convertibilidad, la cola derecha vuelve a alargarse en relación con un cuerpo de distribución más bajo. Estos desplazamientos no son un artefacto del empalme: reflejan la incorporación sustantiva de quiebres estructurales extremos (crisis del Tequila y colapso de la Convertibilidad) necesarios para evaluar la sostenibilidad fiscal a lo largo de un ciclo secular completo.
 
-\subsection{Estacionariedad sobre la Ventana Única}
+\subsection{Estacionariedad sobre la Muestra Completa}
 \label{sec:estacionariedad_ampliada}
 
 La Tabla \ref{tab:estacionariedad_ampliado} repite el protocolo ADF/KPSS de la Sección \ref{sec:estacionariedad} sobre la ventana, para las cuatro variables del sistema de cointegración y la brecha del producto.
