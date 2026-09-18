@@ -249,3 +249,40 @@ Tras una reunión efectiva del usuario con el director (no una suposición nuest
   capítulo 5 no se tocó porque alimenta directamente Johansen/VECM/DOLS/instrumentación del Capítulo
   6, no es material periférico recortable sin tocar el núcleo. Pendiente si el usuario quiere seguir
   recortando otros capítulos (antecedentes, cap. 2, fue explícitamente descartado como candidato).
+
+## Fase 6c, "ventana única" purgada del texto: HECHO (2026-09-18)
+A pedido del usuario ("No nombres en ningún lado una ventana única, es implícito"), se sacaron las
+51 menciones a "ventana única"/"ventana muestral única" repartidas en 6 capítulos (04 a 09). No se
+tocó ningún número, cita o referencia cruzada, solo la auto-referencia a la propia elección
+metodológica de usar un solo período. `Tesis.pdf`: 98 páginas (de 99).
+
+## Fase 7, eliminación de H1b (endogeneidad/IV-2SLS): HECHO (2026-09-18)
+El usuario, tras otra reunión con Pablo, señaló que la premisa de H1b ("el riesgo soberano no es
+exógeno") ya no es algo que haga falta demostrar por separado: en series de tiempo todo es endógeno
+salvo los shocks de mayor frecuencia que el sistema, y el VECM/SVAR ya tratan al EMBI+ como
+conjuntamente endógeno por diseño. Pidió cortar H1b y su técnica (IV-2SLS) entera, sin dejarla
+mencionada ni siquiera de nombre, y usar el espacio ganado para reforzar la justificación de la
+matriz y los shocks del SVAR, que es "donde gira todo". No se tocó nada del SVAR ni del Monte Carlo
+sobre sus residuos, como pidió explícitamente.
+
+Cambios en los 11 archivos: 01 (dos hipótesis derivadas en vez de tres, H1c pasa a llamarse H1b,
+sale el objetivo específico de IV-2SLS, el segundo pilar de la Justificación pasa a ser la
+identificación estructural del SVAR); 02 (el área de vacancia se renombra de "Endogeneización
+Pendiente" a "Identificación Estructural Pendiente de los Canales de Transmisión", sin nombrar
+IV-2SLS ni "tratarlo de endógeno" en ningún lado, por pedido explícito del usuario en un mensaje
+posterior); 04 (Etapa 4 completa eliminada, Hansen/TVECM pasa a ser Etapa 4, DSA a Etapa 5, sale la
+fila de VIX/ETF EMB de la matriz operacional); 05 y 06 (sección/tabla IV-2SLS eliminada, ajustes de
+conteo de técnicas); 07 y 08 (párrafos y fila de tabla de H1b eliminados, renumeración H1c→H1b); 09
+(fila del apéndice de scripts eliminada); 00_abstract y 00_acronimos (IV-2SLS sacado).
+
+Dos hallazgos no buscados, corregidos al pasar por esos párrafos: en `06_resultados.tex`, el párrafo
+de magnitud económica de los coeficientes todavía tenía $\rho=-0.0071$ (valor pre-ventana única;
+el valor correcto y ya usado en el resto del capítulo es $\rho=0.0159$), corregido. Y en
+`09_apendice.tex`, la Tabla \ref{tab:limitaciones} ("Tabla Consolidada de Limitaciones
+Metodológicas") sigue con números de la ventana vieja de 88 observaciones (Durbin-Watson $=0.321$,
+ARCH-LM $p=0.0009$) que nunca se actualizaron cuando el resto de la tesis pasó a la ventana de 120
+observaciones (donde esos valores son $0.117$ y $p<10^{-12}$ respectivamente, Capítulo 8). Solo se
+corrigió la mención a IV-2SLS en esa tabla; el resto de sus números **sigue desactualizado** y queda
+pendiente de una pasada aparte si el usuario la pide.
+
+`Tesis.pdf`: 92 páginas (de 98). Recompilado y verificado sin referencias ni citas rotas.
