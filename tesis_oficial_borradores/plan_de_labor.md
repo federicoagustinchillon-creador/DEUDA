@@ -286,3 +286,47 @@ corrigió la mención a IV-2SLS en esa tabla; el resto de sus números **sigue d
 pendiente de una pasada aparte si el usuario la pide.
 
 `Tesis.pdf`: 92 páginas (de 98). Recompilado y verificado sin referencias ni citas rotas.
+
+## Fase 8, corrección "Ventana Única" en mayúscula, reestimación real y eliminación de DOLS: HECHO (2026-09-18)
+
+**8a, títulos en mayúscula sin purgar**: al mapear la estructura completa de la tesis a
+pedido del usuario, se encontraron 6 títulos de sección/captions con "Ventana Única" en
+mayúscula que la purga de la Fase 6c (case-sensitive, buscaba minúscula) no detectó
+(`05_datos.tex`, `06_resultados.tex`). Corregidos a "Muestra Completa".
+
+**8b, el bloqueo de memoria era transitorio**: el usuario insistió en que sí se podía
+reestimar CUSUM/subperíodos/Engle-Granger pese al error de OpenBLAS del día anterior. Se
+reintentó y funcionó. Reestimados de verdad con el código real del repo
+(`fase7_diagnosticos_robustez.py`, repuntado a `dataset_consolidado_1996_2025.csv`):
+CUSUM ahora **sí** rechaza estabilidad paramétrica (antes no la rechazaba, hallazgo real y
+distinto), sensibilidad por subperíodo (1996-2010 con reacción fuerte y significativa,
+2011-2025 nula) y Engle-Granger (prácticamente igual a la ventana vieja). Los tres
+convergen entre sí y con Bai-Perron. Corto período de vida: se cortaron enteros en 8c.
+
+**8c, eliminación de DOLS**: el usuario preguntó si tenía sentido sacar DOLS ("Bohn se
+aplica sobre VECM, no DOLS"), dado que VECM ya era "la técnica de referencia" y DOLS estaba
+etiquetado como "ejercicio de robustez". Confirmado que VECM solo alcanza para H1 sin dejar
+ningún hueco (no aristas faltantes). Se cortó DOLS de los 11 archivos que lo mencionaban, y
+con él todo lo que testeaba específicamente la estabilidad de SU coeficiente (no una
+robustez general de H1): el CUSUM/CUSUMSQ y la reestimación por subperíodo recién hechas en
+8b (quedan en el historial de git, no en la tesis). El VECM ya tenía su propia robustez
+aparte (sensibilidad de rezagos, interacción presidencial sobre el ECT), así que no queda
+ningún hueco tampoco ahí. La lista de limitaciones de los capítulos 8 y 9 pasó de seis a
+tres ítems (se caían las tres que eran diagnósticos de residuos de DOLS específicamente).
+En el apéndice, las filas de scripts de DOLS (fase3, fase11) quedaron marcadas "no
+incorporado a la versión final" en vez de eliminadas, siguiendo el mismo criterio ya usado
+ahí para DCC-GARCH.
+
+**8d, spread histórico 1983-2025 fuera de la tesis**: el usuario pidió sacar esta extensión
+también ("por ahora no la necesitamos, no la elimines pero sacala"). Movida a
+`tesis_oficial_borradores/extension_spread_historico_1983_2025.md`, mismo patrón que la
+especificación alternativa DSA CIR/DCC-GARCH. Se encontró una dependencia real: la
+metodología de empalme del EMBI+ para la ventana central 1996-2025 (`04_metodologia.tex`,
+`sec:empalme`) citaba esta extensión como su propia fuente ("no hace falta un empalme
+nuevo, el de esa sección ya cubre 1996-2025"). Se reescribió ese párrafo para que describa
+la corrección de empalme ($k=0.8710$) de forma autocontenida, sin depender del archivo que
+se sacó. También salió el objetivo específico correspondiente en el capítulo 1 y la fila de
+la tabla de consistencia en el capítulo 8.
+
+`Tesis.pdf`: 90 páginas (post 8a) → 85 páginas (post 8c) → **81 páginas** (post 8d).
+Recompilado y verificado en cada paso, sin referencias ni citas rotas.
