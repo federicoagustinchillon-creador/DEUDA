@@ -14,7 +14,7 @@ La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas r
 \toprule
 \textbf{Limitación} & \textbf{Tipo} & \textbf{Mitigación aplicada en esta tesis} \\
 \midrule
-(i) Tamaño muestral moderado (120 observaciones; 110 en DOLS, 119 en el umbral de Hansen por la construcción de rezagos) & Estructural & Tests de robustez por subperíodos, todavía sobre la ventana original de 88 observaciones y pendientes de reestimarse; discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
+(i) Tamaño muestral moderado (120 observaciones; 110 en DOLS, 119 en el umbral de Hansen por la construcción de rezagos) & Estructural & Tests de robustez por subperíodos sobre la muestra completa; discusión explícita de potencia estadística en \S\ref{sec:limitaciones_muestra} y \S\ref{ch:discusion}. Agenda futura: extensión a panel de emergentes latinoamericanos \\
 \midrule
 (ii) Autocorrelación residual DOLS (DW$=0.117$, frente a $0.321$ en la ventana original de 88 observaciones) & Inherente a la dinámica fiscal AR & Errores HAC Newey-West en toda la inferencia; test Breusch-Godfrey; interpretación como evidencia de inercia estructural presupuestaria \\
 \midrule
@@ -22,9 +22,9 @@ La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas r
 \midrule
 (iv) Heterocedasticidad condicional ARCH-LM ($=66.29$, $p<10^{-12}$, frente a $18.74$, $p=0.0009$ en la ventana original de 88 observaciones) & Inherente a la volatilidad estructural AR & Errores HAC; interpretación como confirmación de la motivación para el DSA estocástico no gaussiano \\
 \midrule
-(v) Inestabilidad paramétrica de la Función de Reacción Fiscal por subperíodo, todavía sobre la ventana original de 88 observaciones y pendiente de reestimarse sobre la muestra completa & Inherente a la dinámica temporal del vínculo fiscal-deuda & DOLS de muestra completa como especificación principal; MCO estático y DOLS por subperíodo presentados solo como ejercicio de robustez (Sección \ref{sec:sensibilidad_temporal}) \\
+(v) Inestabilidad paramétrica de la Función de Reacción Fiscal por subperíodo: $\rho$ positivo y significativo en 1996--2010, nulo en 2011--2025, confirmado por el rechazo de estabilidad del CUSUM desde 2012 & Inherente a la dinámica temporal del vínculo fiscal-deuda & DOLS de muestra completa como especificación principal; MCO estático y DOLS por subperíodo, y CUSUM/CUSUMSQ, presentados como ejercicio de robustez (Sección \ref{sec:sensibilidad_temporal}) \\
 \midrule
-(vi) Ausencia de cointegración bivariada Engle-Granger ($p=0.3012$, todavía sobre la ventana original de 88 observaciones) & Consistente con I(1) sin ancla & Johansen multivariado sobre la muestra completa como contraste principal; DOLS como estimador robusto a incertidumbre sobre el rango de cointegración; Engle-Granger como robustez, pendiente de reestimarse sobre la muestra completa (Apéndice \ref{sec:engle_granger}) \\
+(vi) Ausencia de cointegración bivariada Engle-Granger ($p=0.302$, $n=120$) & Consistente con I(1) sin ancla & Johansen multivariado sobre la muestra completa como contraste principal; DOLS como estimador robusto a incertidumbre sobre el rango de cointegración; Engle-Granger como robustez (Apéndice \ref{sec:engle_granger}) \\
 \bottomrule
 \end{tabular}%
 }
@@ -36,24 +36,24 @@ La Tabla \ref{tab:limitaciones} sintetiza las seis limitaciones metodológicas r
 \section[Test de Cointegración de Engle-Granger]{Test de Engle-Granger (Ecuación Única)}
 \label{sec:engle_granger}
 
-Como robustez complementaria al procedimiento de máxima verosimilitud de Johansen desarrollado en la Sección \ref{sec:johansen_cap6}, que evalúa la cointegración del sistema conjunto de cuatro variables, se reporta aquí un test de cointegración de ecuación única basado en residuos, en el mismo espíritu que el procedimiento de \textcite{phillips1990}\footnote{\texttt{statsmodels} no implementa nativamente el estadístico de Phillips-Ouliaris. Se reporta en su lugar el test de \citet{engle1987}, de la misma familia de contrastes residuales de cointegración de ecuación única, declarándolo como tal en lugar de presentarlo bajo un nombre que no le corresponde.} sobre el par bivariado núcleo de la relación de Bohn: la ratio Deuda/PIB y el Resultado Primario/PIB. Este ejercicio no se recalculó todavía sobre la muestra completa de treinta años: el resultado que sigue corresponde a la ventana original de 88 observaciones, pendiente de esa actualización.
+Como robustez complementaria al procedimiento de máxima verosimilitud de Johansen desarrollado en la Sección \ref{sec:johansen_cap6}, que evalúa la cointegración del sistema conjunto de cuatro variables, se reporta aquí un test de cointegración de ecuación única basado en residuos, en el mismo espíritu que el procedimiento de \textcite{phillips1990}\footnote{\texttt{statsmodels} no implementa nativamente el estadístico de Phillips-Ouliaris. Se reporta en su lugar el test de \citet{engle1987}, de la misma familia de contrastes residuales de cointegración de ecuación única, declarándolo como tal en lugar de presentarlo bajo un nombre que no le corresponde.} sobre el par bivariado núcleo de la relación de Bohn: la ratio Deuda/PIB y el Resultado Primario/PIB.
 
 \begin{table}[H]
 \centering
-\caption{\label{tab:engle_granger} Test de Cointegración Residual de Engle-Granger (Deuda/PIB, Result. Primario/PIB), ventana original de 88 observaciones, pendiente de reestimarse sobre la muestra completa.}
+\caption{\label{tab:engle_granger} Test de Cointegración Residual de Engle-Granger (Deuda/PIB, Result. Primario/PIB), muestra completa ($n=120$).}
 \begin{tabular}{lrrrr}
 \toprule
 \textbf{Estadístico} & \textbf{Crít. 1\%} & \textbf{Crít. 5\%} & \textbf{Crít. 10\%} & \textbf{$p$-valor} \\
 \midrule
--2.4508 & -4.0268 & -3.4073 & -3.0936 & 0.3012 \\
+-2.4490 & -3.9908 & -3.3880 & -3.0803 & 0.3020 \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia mediante \texttt{statsmodels.tsa.stattools.coint} (especificación con constante). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase7\_diagnosticos\_robustez.py}).
+\footnotesize \textit{Nota.} Elaboración propia mediante \texttt{statsmodels.tsa.stattools.coint} (especificación con constante). Elaboración propia en base a \texttt{dataset\_consolidado\_1996\_2025.csv} (\texttt{codigo/modelos/fase7\_diagnosticos\_robustez.py}).
 \end{flushleft}
 \end{table}
 
-Sobre esa ventana original, el estadístico de Engle-Granger ($-2.45$) no lograba rechazar la hipótesis nula de ausencia de cointegración residual entre la ratio de deuda y el resultado primario considerados de manera bivariada ($p=0.301$), incluso a un nivel de significatividad del 10\%. Este resultado es coherente con, y no contradictorio respecto de, el diagnóstico divergente ya reportado en la Sección \ref{sec:johansen_cap6}: mientras el estadístico de Traza de Johansen sugería, en su extremo, rango pleno para el sistema conjunto de cuatro variables, el Máximo Autovalor y ahora este contraste bivariado de robustez coinciden en no encontrar evidencia contundente de una relación de equilibrio de largo plazo simple entre las dos variables estructurales de la ecuación de Bohn consideradas de manera aislada. Ello refuerza la decisión metodológica, ya justificada en la Sección \ref{sec:johansen_cap6}, de no imponer una relación de cointegración bivariada no verificada y, en su lugar, recurrir a la técnica DOLS, que no exige, como paso previo, la certeza de cointegración exacta del subsistema bivariado, para estimar la Función de Reacción Fiscal.
+El estadístico de Engle-Granger ($-2.45$) no rechaza la hipótesis nula de ausencia de cointegración residual entre la ratio de deuda y el resultado primario considerados de manera bivariada ($p=0.302$), incluso a un nivel de significatividad del 10\%; el resultado es prácticamente idéntico al que arrojaba la ventana original de 88 observaciones ($-2.4508$, $p=0.3012$), por lo que la ampliación muestral no altera este diagnóstico. Este resultado es coherente con, y no contradictorio respecto de, el diagnóstico divergente ya reportado en la Sección \ref{sec:johansen_cap6}: mientras el estadístico de Traza de Johansen sugería, en su extremo, rango pleno para el sistema conjunto de cuatro variables, el Máximo Autovalor y ahora este contraste bivariado de robustez coinciden en no encontrar evidencia contundente de una relación de equilibrio de largo plazo simple entre las dos variables estructurales de la ecuación de Bohn consideradas de manera aislada. Ello refuerza la decisión metodológica, ya justificada en la Sección \ref{sec:johansen_cap6}, de no imponer una relación de cointegración bivariada no verificada y, en su lugar, recurrir a la técnica DOLS, que no exige, como paso previo, la certeza de cointegración exacta del subsistema bivariado, para estimar la Función de Reacción Fiscal.
 
 \section{Estructura de la Cadena de Procesamiento de Código (Referencia)}
 \label{sec:apendice_codigo}

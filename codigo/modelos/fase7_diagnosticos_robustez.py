@@ -17,8 +17,9 @@ computados sobre el proceso empírico real (no fabricados):
   6. Probabilidad de insolvencia (Monte Carlo) por escenario (Optimista,
      Referencia, Estres), no solo bajo el escenario de Referencia.
   7. Causalidad de Granger (EMBI+ <-> Delta Resultado Primario), ambas
-     direcciones, como evidencia complementaria y barata sobre la endogeneidad
-     que motiva la Seccion 6.4 (IV-2SLS).
+     direcciones, como evidencia complementaria sobre la direccion de
+     causalidad entre riesgo soberano y resultado fiscal (no incorporada
+     a la version final de la tesis).
   8. Filtro de Hamilton (2018) como robustez del filtro HP (lambda=1600)
      usado para la brecha del producto (Cap. 5), comparando ambos ciclos.
   9. Covarianza del DSA: reemplazo parcial de la calibracion a ojo por
@@ -50,7 +51,7 @@ from fase6_sostenibilidad_deuda import (
 from arch import arch_model
 
 BASE_DIR = pathlib.Path(__file__).parent.parent.parent
-CSV_PATH = BASE_DIR / "datos" / "dataset_consolidado_real.csv"
+CSV_PATH = BASE_DIR / "datos" / "dataset_consolidado_1996_2025.csv"
 LATEX_DIR = BASE_DIR / "tesis" / "figuras"
 TABLES_DIR = BASE_DIR / "resultados" / "tablas"
 os.makedirs(TABLES_DIR, exist_ok=True)
@@ -210,16 +211,16 @@ def section_4_engle_granger(df):
 
 
 def section_5_subperiod_sensitivity(df):
-    print("\n[5/9] Sensibilidad temporal: submuestras 2004-2014 vs 2015-2025...")
+    print("\n[5/9] Sensibilidad temporal: submuestras 1996-2010 vs 2011-2025...")
     df = df.copy()
     df['d_t_1'] = df['deuda_pib'].shift(1)
     df = df.dropna(subset=['pb_pib', 'd_t_1', 'g_gap'])
 
-    sub1 = df[df.index <= '2014-12-31']
-    sub2 = df[df.index >= '2015-01-01']
+    sub1 = df[df.index <= '2010-12-31']
+    sub2 = df[df.index >= '2011-01-01']
 
     results = {}
-    for label, sub in [('2004-2014', sub1), ('2015-2025', sub2)]:
+    for label, sub in [('1996-2010', sub1), ('2011-2025', sub2)]:
         y = sub['pb_pib']
         X = sm.add_constant(sub[['d_t_1', 'g_gap']])
         hac_lags = newey_west_lags(len(sub))
