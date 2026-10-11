@@ -60,7 +60,10 @@ ALPHA_Y: float = 0.25
 SEMILLA: int = 20261011
 ENDOG: list[str] = ["pb_pib", "crec", "EMBI", "TCRM"]
 SERIES_DEUDA: dict[str, tuple[str, str]] = {
-    "neta": ("deuda_consolidada_neta_1996_2025.csv", "deuda_consolidada_neta_pib"),
+    # Principal: consolidacion con el BCRA (FMI, 2021, anexo II) con las Letras
+    # Intransferibles a valor nominal, variante "piso" (informe_resultado_primario_y_valuacion.md).
+    "neta": ("deuda_consolidada_neta_nominal_1996_2025.csv", "deuda_consolidada_neta_nominal_piso_pib"),
+    "neta_libros": ("deuda_consolidada_neta_1996_2025.csv", "deuda_consolidada_neta_pib"),
     "bruta": ("deuda_consolidada_1996_2025.csv", "deuda_consolidada_pib"),
 }
 
@@ -74,9 +77,18 @@ def cargar_datos(tipo_deuda: str, rezagos_fed: int) -> tuple[pd.DataFrame, pd.Da
     fed = leer("procesados/tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"]
     vix = leer("procesados/instrumentos_1996_2025.csv")["VIX"]  # ^VIX completo desde 1996
 
+    # Resultado primario SPN base caja (MECON, datos.gob.ar dataset 379): flujo trimestral
+    # anualizado (4 x trimestre / PIB nominal de 4 trimestres). Se usa el flujo trimestral y
+    # no la suma movil de 4 trimestres porque esta induce autocorrelacion MA(3) artificial;
+    # la estacionalidad la absorben las dummies Q1-Q3.
+    pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv",
+                     index_col=0, parse_dates=True)["pb_pib_trim"]
+    # PIB real: INDEC base 1993 empalmado a base 2004 para 1996-2003; base 2004 desde 2004.
+    pib_pre = leer("procesados/pib_real_empalme_indec_1996_2003.csv")["PIB_real"]
+    pib = pd.concat([pib_pre, base["PIB_real"][base.index > pib_pre.index.max()]])
     Y = pd.DataFrame({
-        "pb_pib": base["pb_pib"],
-        "crec": 100.0 * np.log(base["PIB_real"]).diff(),
+        "pb_pib": pb,
+        "crec": 100.0 * np.log(pib).diff(),
         "EMBI": base["EMBI"],
         "TCRM": base["TCRM"],
     })
