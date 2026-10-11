@@ -30,8 +30,7 @@ SALIDA = BASE / "para_el_grupo"
 
 ARCHIVOS: dict[str, str] = {
     "plan_de_labor_grupo.md": "Plan_de_labor.docx",
-    "_capitulos_1_2_v3.md": "Introduccion_y_Antecedentes_v3.docx",
-    "especificacion_svarx_v1.md": "Especificacion_SVARX_v1.docx",
+    "_capitulos_1_2_v3.md": "Tesis_borrador_v3.docx",
 }
 
 # Documento unico para el grupo: cuerpo de la Introduccion (secciones 1.1 a 1.8, sin el
@@ -49,7 +48,8 @@ def armar_capitulos_1_2() -> Path:
     antecedentes = (BASE / "antecedentes_v3.md").read_text(encoding="utf-8")
     refs_notas = (BASE / "referencias_y_notas_cap1_2_v3.md").read_text(encoding="utf-8")
     texto = (TITULO_CAP_1_2 + "# 1. Introducción\n\n" + cuerpo_intro + "\n\n"
-             + antecedentes + "\n\n" + refs_notas)
+             + antecedentes + "\n\n"
+             + (BASE / "metodologia_v3.md").read_text(encoding="utf-8") + "\n\n" + refs_notas)
     destino = BASE / "_capitulos_1_2_v3.md"
     destino.write_text(texto, encoding="utf-8")
     return destino

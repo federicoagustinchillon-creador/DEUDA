@@ -1,0 +1,102 @@
+# 4. Metodología
+
+Este capítulo presenta la estrategia empírica: un modelo de vectores autorregresivos estructural con variables exógenas (SVARX), combinado con la identidad de acumulación de la deuda y una simulación de Monte Carlo. Cada decisión de especificación se fundamenta en el marco del FMI, en la literatura o en las propiedades de los datos.
+
+## 4.1 Arquitectura general
+
+El modelo sigue la arquitectura que el propio FMI desarrolló para economías emergentes y aplicó a
+Argentina. Celasun, Debrun y Ostry (2006) proponen tres piezas:
+
+1. Un **VAR trimestral sin restricciones** sobre los determinantes de la dinámica de la deuda:
+   crecimiento, tasas de interés y tipo de cambio. El VAR describe cómo se mueven juntos, estima
+   las varianzas y covarianzas de sus shocks y genera proyecciones consistentes entre sí.
+2. Un bloque de **comportamiento fiscal**, en su caso una función de reacción fiscal.
+3. La **identidad de acumulación de la deuda**, que separa el tramo en moneda local del tramo
+   en moneda extranjera. Por ella pasan las proyecciones del VAR, anualizadas, para calcular la
+   deuda de manera recursiva y construir los gráficos de abanico.
+
+El marco vigente del FMI (2021, párr. 52) mantiene la idea central: el gráfico de abanico se
+arma aplicando al escenario base shocks tomados de la historia de los determinantes de la deuda.
+
+El modelo de esta tesis conserva esas tres piezas. Agrega dos cosas que la vacancia justifica: los
+shocks se identifican estructuralmente y la tasa de la FED entra como un shock externo con
+nombre propio.
+
+## 4.2 Variables del sistema
+
+| Variable | Rol | Fundamento |
+|---|---|---|
+| Crecimiento real del PIB | Endógena | Determinante de la identidad de la deuda (Celasun et al., 2006; FMI, 2021). Se usa el crecimiento, no la brecha del producto, porque es lo que entra en la identidad. |
+| Resultado primario (% del PIB) | Endógena | Determinante de la identidad. Su ecuación incluye la deuda rezagada, y ese coeficiente es la reacción fiscal de Bohn (1998) que contrasta H1a. |
+| EMBI+ | Endógena | Riesgo soberano: forma parte de la tasa en dólares (tasa de Estados Unidos más spread). |
+| Tipo de cambio real multilateral | Endógena | Efecto de valuación sobre la deuda en moneda extranjera (Calvo et al., 2003). |
+| Deuda consolidada neta (% del PIB) | Entra rezagada en las ecuaciones; evoluciona por la identidad | Retroalimentación de la deuda sobre el sistema (Favero y Giavazzi, 2007). |
+| Variación de la tasa de la FED | Exógena | Shock externo de H2. |
+| VIX | Exógena | Condiciones financieras globales; es la única variable global con efectos robustos en Adler y Sosa (2013). |
+| Dummies de quiebre | Exógenas | Quiebres de Bai-Perron estimados sobre la propia serie de deuda (Bai y Perron, 2003). |
+
+**Por qué la deuda entra rezagada y se acumula con la identidad.** Favero y Giavazzi (2007)
+muestran que un VAR fiscal que omite la retroalimentación de la deuda está mal especificado:
+la restricción presupuestaria hace que el nivel de deuda condicione la política fiscal y las
+tasas. Su solución es incluir la deuda rezagada en las ecuaciones y hacerla evolucionar con la
+identidad, no con una ecuación estimada. Eso permite captar los efectos conjuntos que plantea la pregunta de
+investigación y mantiene la acumulación contablemente exacta.
+
+## 4.3 Variables exógenas
+
+Argentina es una economía pequeña y abierta: sus variables no afectan la tasa de la FED ni el
+VIX. En los VAR de economías pequeñas y abiertas, el supuesto estándar es que las variables
+externas forman un bloque exógeno (Cushman y Zha, 1997). Así se modela la transmisión de los
+shocks de Estados Unidos a América Latina (Canova, 2005) y la relación entre tasas
+internacionales y spreads en emergentes (Uribe y Yue, 2006).
+
+Una consecuencia importante es que **el efecto de la FED (H2) no depende de cómo se ordenen las
+variables argentinas entre sí**. Se calcula como un multiplicador dinámico de la variable
+exógena.
+
+La serie es la tasa de fondos federales. En los trimestres en que esa tasa estuvo en el piso de
+cero se usa la tasa sombra de Wu y Xia (2016), que mide la orientación de la política monetaria
+cuando la tasa efectiva no puede bajar más.
+
+## 4.4 Identificación de los shocks domésticos
+
+| Shock | Supuesto | Fundamento |
+|---|---|---|
+| Fiscal | El componente cíclico del resultado primario se descuenta con una elasticidad de 0,25, y el resto es el shock fiscal discrecional. | Blanchard y Perotti (2002). La política discrecional tarda más de un trimestre en reaccionar, y la elasticidad se toma de estimaciones externas (Girouard y André, 2005). |
+| Actividad | El producto puede responder al shock fiscal dentro del trimestre. | Blanchard y Perotti (2002). |
+| Riesgo soberano y tipo de cambio | Se identifican como **bloque**, sin ordenarlos entre sí. Se reporta solo su contribución conjunta. | Christiano, Eichenbaum y Evans (1999): con una identificación recursiva por bloques, lo que se identifica no depende del orden dentro de cada bloque. No hay razón teórica para ordenar el EMBI+ y el tipo de cambio, y H1a solo necesita el bloque "cambiario y de riesgo" en conjunto. |
+
+## 4.5 Niveles, rezagos e inferencia
+
+- **Variables en niveles.** El VAR se estima en niveles aunque algunas variables tengan raíz
+  unitaria. Sims, Stock y Watson (1990) muestran que las estimaciones siguen siendo consistentes
+  sin imponer relaciones de cointegración. Para 1996-2025, la prueba de Johansen no rechaza la
+  ausencia de cointegración, por lo que imponer un rango concreto sería un supuesto sin respaldo.
+- **Rezagos.** Se toma el menor número de rezagos que indican los criterios de información y con
+  el que los residuos quedan libres de autocorrelación (Lütkepohl, 2005; Ivanov y Kilian, 2005).
+- **Intervalos de confianza.** Los residuos de este tipo de modelos para Argentina rechazan la normalidad y
+  muestran volatilidad cambiante en el tiempo (heterocedasticidad condicional; ver Capítulo 6).
+  Por eso los intervalos se calculan con un *bootstrap* robusto a esa heterocedasticidad (Gonçalves y
+  Kilian, 2004), con semilla fija para que sean reproducibles.
+
+## 4.6 Simulación de Monte Carlo
+
+- **De dónde salen.** Se remuestrean los residuos estimados, que conservan las colas gordas que
+  la normal no captura. Es la versión econométrica del principio del FMI de usar shocks
+  históricos (FMI, 2021, párr. 52).
+- **Incertidumbre de parámetros.** Cada trayectoria usa parámetros de una réplica del
+  *bootstrap*. Eso da el intervalo de confianza con el que se contrasta H1b.
+- **Escenario base.** Los senderos son los del FMI (2025): crecimiento, resultado primario, tasa
+  efectiva y ajuste stock-flujo. Así la comparación con su 3% de no estabilización es directa.
+- **Tamaño del shock de la FED.** Un desvío estándar de la variación trimestral, 0,50 puntos
+  porcentuales, que es la convención para medir respuestas en estos modelos. Como escenario
+  histórico se agrega el ciclo de subas de 2022-2023, de 5,25 puntos.
+- **Tasa en dólares.** Es la tasa de la FED más el EMBI+ simulado.
+
+## 4.7 Contraste de las hipótesis
+
+| Hipótesis | Medida | Criterio |
+|---|---|---|
+| H1a | Coeficiente de la deuda rezagada en la ecuación del resultado primario, y contribución de cada bloque de shocks a la varianza de la deuda simulada | La reacción no es significativa al 5%, y el bloque cambiario y de riesgo aporta más que el fiscal. |
+| H1b | Probabilidad de que la deuda no se estabilice, con el escenario base del FMI | El límite inferior del intervalo de 90% supera el 3% del FMI (contraste unilateral al 5%). |
+| H2 | Diferencia en esa probabilidad y en la deuda esperada entre el escenario con shock de la FED y el escenario base | El intervalo de 90% de la diferencia excluye el cero. |
