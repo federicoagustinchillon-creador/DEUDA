@@ -1,48 +1,37 @@
 """
 fase24_svarx_1996_2025.py
 =========================
-SVARX trimestral 1996T1-2025T4 sobre la deuda consolidada, con la tasa de
-politica de la FED y el VIX como variables exogenas.
+SVARX trimestral 1996T1-2025T4 (Capitulo 4 de la tesis, metodologia_v3.md).
 
-Reemplaza a fase19 (SVAR restringido) y corrige dos diferencias entre aquel
-codigo y lo que dice el capitulo de Metodologia:
-  1. fase19 ordenaba EMBI+ antes que TCRM (recursivo). Aqui EMBI+ y TCRM forman
-     un bloque sin orden interno: se reporta la contribucion CONJUNTA del bloque
-     a la varianza de la deuda, que es invariante a cualquier rotacion dentro
-     del bloque (ver `contribucion_bloque`).
-  2. fase19 trataba u_pb - alpha*u_y como shock ortogonal sin estimar la
-     respuesta del producto al shock fiscal. Aqui se aplica Blanchard y Perotti
-     (2002): el shock fiscal es el residuo ciclicamente ajustado
-     e_pb = u_pb - alpha_y * u_y (alpha_y = 0,25, elasticidad citada en fase19:
-     Girouard y Andre, 2005), y el producto responde a el en el trimestre:
-     u_y = c * e_pb + e_y.
-
-Modelo en forma reducida (Y_t endogeno, X_t exogeno):
-    Y_t = nu + sum_{i=1..p} A_i Y_{t-i} + Gamma X_t + u_t,
-    Y_t = (pb_t, g_gap_t, EMBI_t, TCRM_t, d_t),
-    X_t = (dFED_t, dFED_{t-1}, ..., dFED_{t-q}, VIX_t, D^{(1)}_t, ..., D^{(m)}_t),
-donde dFED es la variacion trimestral de la tasa de politica (FEDFUNDS, con la
-tasa sombra de Wu-Xia en el piso cero) y D^{(k)} son dummies escalon en los
-quiebres de Bai-Perron estimados sobre la propia serie de deuda.
+Forma reducida (Y_t endogeno, X_t exogeno):
+    Y_t = nu + sum_{i=1..p} A_i Y_{t-i} + Gamma X_t + u_t
+    Y_t = (pb_t, crec_t, EMBI_t, TCRM_t)
+    X_t = (dFED_t, ..., dFED_{t-q}, VIX_t, Q1_t, Q2_t, Q3_t, D^(k)_t, d_{t-1})
+- crec_t = 100 * dln(PIB_real_t): crecimiento trimestral. El PIB real de la base no
+  esta desestacionalizado, por eso X incluye dummies estacionales (Lutkepohl, 2005).
+- d_{t-1}: deuda consolidada neta rezagada (% PIB). Siguiendo a Favero y Giavazzi
+  (2007), la deuda entra rezagada en todas las ecuaciones y en la simulacion evoluciona
+  por la identidad de acumulacion (fase25). El coeficiente de d_{t-1} en la ecuacion de
+  pb es la reaccion fiscal de Bohn (1998) que contrasta H1a.
+- dFED: variacion trimestral de la tasa de politica (FEDFUNDS; Wu-Xia en el piso cero).
+- D^(k): dummies escalon en los quiebres de Bai-Perron de la serie de deuda.
 
 Identificacion (u_t = S eps_t, E[eps eps'] = I):
-    eps_pb  ~ e_pb = u_pb - alpha_y u_y
-    eps_y   ~ residuo de u_y sobre e_pb
-    (eps_e, eps_t) ~ residuos de (u_EMBI, u_TCRM) sobre (e_pb, e_y),
-                     ortonormalizados por Cholesky (orden interno irrelevante
-                     para las cifras de bloque que se reportan)
-    eps_d   ~ residuo de u_d sobre todos los anteriores
-S se obtiene por MCO de u sobre eps estandarizados.
+    eps_pb  ~ e_pb = u_pb - alpha_y * u_crec      (Blanchard y Perotti, 2002; alpha_y = 0,25,
+                                                    Girouard y Andre, 2005)
+    eps_y   ~ residuo de u_crec sobre e_pb         (el producto responde al shock fiscal)
+    bloque  ~ residuos de (u_EMBI, u_TCRM) sobre (e_pb, e_y), ortonormalizados; solo se
+              reportan magnitudes de bloque, invariantes al orden interno
+              (Christiano, Eichenbaum y Evans, 1999).
 
-Efecto de la FED (H2): multiplicador dinamico de un aumento de un desvio
-estandar en dFED en t=0 (aumento permanente del nivel de la tasa), calculado
-recursivamente con los A_i y Gamma estimados. No depende de la identificacion.
-
-Intervalos: bootstrap de residuos (semilla fija). Las replicas que fallan se
-cuentan y se reportan; no se rellenan con la estimacion puntual.
+Rezagos: el menor p >= p_BIC con residuos sin autocorrelacion (Portmanteau al 5%)
+(Lutkepohl, 2005; Ivanov y Kilian, 2005).
+Inferencia: bootstrap salvaje de diseno recursivo con pesos de Rademacher, robusto a
+heterocedasticidad condicional (Goncalves y Kilian, 2004). Semilla fija. Las replicas
+fallidas se cuentan, no se rellenan.
 
 Uso:
-    python codigo/modelos/fase24_svarx_1996_2025.py --deuda neta|bruta
+    python codigo/modelos/fase24_svarx_1996_2025.py --deuda neta|bruta [--n-boot 1000]
 """
 
 from __future__ import annotations
@@ -50,6 +39,7 @@ from __future__ import annotations
 import argparse
 import pathlib
 import sys
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -59,19 +49,16 @@ from statsmodels.tsa.api import VAR
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from bai_perron import bai_perron_breaks  # noqa: E402
 
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", message=".*frequency.*")
+
 BASE = pathlib.Path(__file__).resolve().parent.parent.parent
 DATOS = BASE / "datos"
 TABLAS = BASE / "resultados" / "tablas"
 
 ALPHA_Y: float = 0.25
 SEMILLA: int = 20261011
-ENDOG: list[str] = ["pb_pib", "g_gap", "EMBI", "TCRM", "deuda"]
-BLOQUES: dict[str, list[int]] = {
-    "fiscal": [0],
-    "actividad": [1],
-    "cambiario_y_riesgo": [2, 3],
-    "deuda_propia": [4],
-}
+ENDOG: list[str] = ["pb_pib", "crec", "EMBI", "TCRM"]
 SERIES_DEUDA: dict[str, tuple[str, str]] = {
     "neta": ("deuda_consolidada_neta_1996_2025.csv", "deuda_consolidada_neta_pib"),
     "bruta": ("deuda_consolidada_1996_2025.csv", "deuda_consolidada_pib"),
@@ -79,98 +66,89 @@ SERIES_DEUDA: dict[str, tuple[str, str]] = {
 
 
 def cargar_datos(tipo_deuda: str, rezagos_fed: int) -> tuple[pd.DataFrame, pd.DataFrame, list[pd.Timestamp]]:
-    """Arma Y (endogenas) y X (exogenas) alineadas por trimestre.
+    """Arma Y y X alineadas por trimestre, sin faltantes."""
+    leer = lambda f: pd.read_csv(DATOS / f, parse_dates=["Date"], index_col="Date")
+    base = leer("dataset_consolidado_1996_2025.csv")
+    archivo, col = SERIES_DEUDA[tipo_deuda]
+    deuda = leer(f"procesados/{archivo}")[col]
+    fed = leer("procesados/tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"]
+    vix = leer("procesados/instrumentos_1996_2025.csv")["VIX"]  # ^VIX completo desde 1996
 
-    Returns:
-        (Y, X, fechas_quiebre) sin valores faltantes.
-    """
-    base = pd.read_csv(DATOS / "dataset_consolidado_1996_2025.csv", parse_dates=["Date"], index_col="Date")
-    archivo, columna = SERIES_DEUDA[tipo_deuda]
-    deuda = pd.read_csv(DATOS / "procesados" / archivo, parse_dates=["Date"], index_col="Date")[columna]
-    fed = pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv",
-                      parse_dates=["Date"], index_col="Date")["tasa_politica_fed"]
-
-    Y = base[["pb_pib", "g_gap", "EMBI", "TCRM"]].join(deuda.rename("deuda"), how="inner")
-    dfed = fed.diff().rename("dFED")
-    X = pd.concat([dfed.shift(k).rename(f"dFED_l{k}") for k in range(rezagos_fed + 1)], axis=1)
-    # VIX completo 1996-2025 (Yahoo Finance ^VIX, ingesta_instrumentos_1996_2025.py);
-    # la columna VIX de dataset_consolidado_1996_2025.csv solo cubre desde 2004.
-    vix = pd.read_csv(DATOS / "procesados" / "instrumentos_1996_2025.csv",
-                      parse_dates=["Date"], index_col="Date")["VIX"]
-    X = X.join(vix, how="inner")
-
-    quiebres = bai_perron_breaks(Y["deuda"].dropna())["fechas_quiebre"]
+    Y = pd.DataFrame({
+        "pb_pib": base["pb_pib"],
+        "crec": 100.0 * np.log(base["PIB_real"]).diff(),
+        "EMBI": base["EMBI"],
+        "TCRM": base["TCRM"],
+    })
+    X = pd.concat([fed.diff().shift(k).rename(f"dFED_l{k}") for k in range(rezagos_fed + 1)], axis=1)
+    X["VIX"] = vix
+    for q in (1, 2, 3):
+        X[f"Q{q}"] = (X.index.quarter == q).astype(float)
+    quiebres = bai_perron_breaks(deuda.dropna())["fechas_quiebre"]
     for k, fecha in enumerate(quiebres, start=1):
         X[f"D{k}_{fecha.date()}"] = (X.index > fecha).astype(float)
+    X["deuda_l1"] = deuda.shift(1)
 
     datos = Y.join(X, how="inner").dropna()
     return datos[ENDOG], datos[X.columns], list(quiebres)
 
 
 def identificar(u: np.ndarray) -> np.ndarray:
-    """Matriz de impacto S (u_t = S eps_t) con el esquema descripto en el modulo.
-
-    Args:
-        u: residuos en forma reducida, T x 5, columnas en el orden de ENDOG.
-    """
-    def resid(y: np.ndarray, X: np.ndarray) -> np.ndarray:
-        return y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
+    """Matriz S (u = S eps) segun el esquema del modulo; u es T x 4 en el orden de ENDOG."""
+    def resid(y: np.ndarray, Z: np.ndarray) -> np.ndarray:
+        return y - Z @ np.linalg.lstsq(Z, y, rcond=None)[0]
 
     e_pb = u[:, 0] - ALPHA_Y * u[:, 1]
     e_y = resid(u[:, 1], e_pb[:, None])
     v = resid(u[:, 2:4], np.column_stack([e_pb, e_y]))
     w = v @ np.linalg.inv(np.linalg.cholesky(np.cov(v, rowvar=False)).T)
-    e_d = resid(u[:, 4], np.column_stack([e_pb, e_y, w]))
-    eps = np.column_stack([e_pb, e_y, w, e_d])
+    eps = np.column_stack([e_pb, e_y, w])
     eps = (eps - eps.mean(axis=0)) / eps.std(axis=0, ddof=1)
     return np.linalg.lstsq(eps, u, rcond=None)[0].T
 
 
-def fevd_bloques(irf: np.ndarray, h: int, var: int = 4) -> dict[str, float]:
-    """Contribucion (%) de cada bloque de shocks a la varianza del error de
-    pronostico de la variable `var` a h trimestres:
-        sum_{s<h} sum_{j in bloque} theta_{var,j}(s)^2 / sum_{s<h} sum_j theta_{var,j}(s)^2.
-    La suma sobre j dentro de un bloque es invariante a rotaciones del bloque.
-    """
-    acum = (irf[:h, var, :] ** 2).sum(axis=0)
-    total = acum.sum()
-    return {b: 100.0 * acum[idx].sum() / total for b, idx in BLOQUES.items()}
+def elegir_rezagos(Y: pd.DataFrame, X: pd.DataFrame, pmax: int = 6) -> tuple[int, int, pd.DataFrame]:
+    """Menor p >= p_BIC cuyos residuos no rechazan blancura (Portmanteau 12 rezagos, 5%)."""
+    sel = VAR(Y, exog=X).select_order(maxlags=pmax, trend="c")
+    p_bic = int(max(1, sel.selected_orders["bic"]))
+    filas = []
+    elegido = None
+    for p in range(p_bic, pmax + 1):
+        pv = VAR(Y, exog=X).fit(maxlags=p, ic=None, trend="c").test_whiteness(nlags=12).pvalue
+        filas.append({"p": p, "portmanteau_p": pv})
+        if elegido is None and pv > 0.05:
+            elegido = p
+    return (elegido if elegido is not None else pmax), p_bic, pd.DataFrame(filas)
 
 
-def multiplicador_fed(coefs: np.ndarray, gamma: np.ndarray, tam: float, rezagos_fed: int,
-                      horizonte: int) -> np.ndarray:
-    """Respuesta de Y a un aumento de `tam` p.p. en dFED en t=0 (los demas
-    exogenos fijos). gamma: k x n_exog con las primeras columnas = dFED_l0..l_q.
-    """
+def respuesta_fed(coefs: np.ndarray, gamma_fed: np.ndarray, tam: float, horizonte: int) -> np.ndarray:
+    """Multiplicador dinamico de un aumento permanente de `tam` p.p. en el nivel de la tasa
+    (dFED = tam en t=0). gamma_fed: k x (q+1), columnas dFED_l0..l_q."""
     p, k, _ = coefs.shape
     resp = np.zeros((horizonte + 1, k))
     for t in range(horizonte + 1):
-        x_eff = sum(gamma[:, j] * tam for j in range(rezagos_fed + 1) if t - j == 0)
-        din = sum(coefs[i] @ resp[t - 1 - i] for i in range(p) if t - 1 - i >= 0)
-        resp[t] = (x_eff if isinstance(x_eff, np.ndarray) else np.zeros(k)) + (
-            din if isinstance(din, np.ndarray) else np.zeros(k))
+        directo = gamma_fed[:, t] * tam if t < gamma_fed.shape[1] else np.zeros(k)
+        resp[t] = directo + sum((coefs[i] @ resp[t - 1 - i] for i in range(p) if t - 1 - i >= 0), np.zeros(k))
     return resp
 
 
-def estimar(Y: pd.DataFrame, X: pd.DataFrame, p: int, rezagos_fed: int, tam_fed: float,
-            horizonte: int) -> dict:
-    """Estima el VARX, identifica y calcula FEVD por bloques y multiplicador FED."""
+def estimar(Y: pd.DataFrame, X: pd.DataFrame, p: int, tam_fed: float, horizonte: int) -> dict:
+    """VARX, identificacion, reaccion fiscal (Bohn) y respuesta a la FED."""
     res = VAR(Y, exog=X).fit(maxlags=p, ic=None, trend="c")
-    S = identificar(res.resid.values)
-    irf = np.array([res.ma_rep(maxn=horizonte)[h] @ S for h in range(horizonte + 1)])
-    gamma = res.params.loc[X.columns].values.T  # k x n_exog
+    fed_cols = [c for c in X.columns if c.startswith("dFED")]
+    gamma_fed = res.params.loc[fed_cols].values.T
     return {
-        "res": res, "S": S, "irf": irf,
-        "fevd": {h: fevd_bloques(irf, h) for h in (4, 8, 20)},
-        "fed": multiplicador_fed(res.coefs, gamma, tam_fed, rezagos_fed, horizonte),
+        "res": res,
+        "S": identificar(res.resid.values),
+        "rho": float(res.params.loc["deuda_l1", "pb_pib"]),
+        "rho_p": float(res.pvalues.loc["deuda_l1", "pb_pib"]),
+        "fed": respuesta_fed(res.coefs, gamma_fed, tam_fed, horizonte),
     }
 
 
-def bootstrap(Y: pd.DataFrame, X: pd.DataFrame, base: dict, p: int, rezagos_fed: int,
-              tam_fed: float, horizonte: int, n_boot: int) -> tuple[pd.DataFrame, int]:
-    """Bootstrap de residuos con exogenos fijos. Devuelve las replicas validas
-    (FEVD de la deuda a 20 trimestres por bloque y multiplicador FED sobre la
-    deuda a 4, 8 y 20 trimestres) y la cantidad de replicas fallidas."""
+def bootstrap(Y: pd.DataFrame, X: pd.DataFrame, base: dict, p: int, tam_fed: float, horizonte: int,
+              n_boot: int) -> tuple[pd.DataFrame, int]:
+    """Bootstrap salvaje de diseno recursivo (Goncalves y Kilian, 2004), exogenos fijos."""
     rng = np.random.default_rng(SEMILLA)
     res = base["res"]
     u = res.resid.values
@@ -179,33 +157,32 @@ def bootstrap(Y: pd.DataFrame, X: pd.DataFrame, base: dict, p: int, rezagos_fed:
     gamma = res.params.loc[X.columns].values.T
     filas, fallidas = [], 0
     for _ in range(n_boot):
-        ub = u[rng.integers(0, len(u), len(u))]
-        y = np.zeros_like(Y.values)
-        y[:p] = Y.values[:p]
+        ub = u * rng.choice([-1.0, 1.0], size=(len(u), 1))
+        y = Y.values.copy()
         for t in range(p, len(y)):
             y[t] = nu + sum(res.coefs[i] @ y[t - 1 - i] for i in range(p)) + gamma @ Xv[t - p] + ub[t - p]
         try:
-            rb = estimar(pd.DataFrame(y, index=Y.index, columns=Y.columns), X, p, rezagos_fed,
-                         tam_fed, horizonte)
+            rb = estimar(pd.DataFrame(y, index=Y.index, columns=Y.columns), X, p, tam_fed, horizonte)
         except (np.linalg.LinAlgError, ValueError):
             fallidas += 1
             continue
-        fila = {f"fevd20_{b}": v for b, v in rb["fevd"][20].items()}
-        fila.update({f"fed_deuda_h{h}": rb["fed"][h, 4] for h in (4, 8, 20)})
+        fila = {"rho_bohn": rb["rho"]}
+        for h in (0, 4, 8, 20):
+            for j, c in enumerate(ENDOG):
+                fila[f"fed_{c}_h{h}"] = rb["fed"][h, j]
         filas.append(fila)
     return pd.DataFrame(filas), fallidas
 
 
-def diagnosticos(res, p: int) -> pd.DataFrame:
-    """Autocorrelacion (Portmanteau), normalidad (Jarque-Bera multivariado),
-    estabilidad (raices) y ARCH-LM por ecuacion."""
+def diagnosticos(res) -> pd.DataFrame:
+    """Portmanteau, normalidad multivariada, estabilidad y ARCH-LM por ecuacion."""
     filas = [
-        {"prueba": "Portmanteau (12 rezagos)", "p_valor": res.test_whiteness(nlags=12).pvalue},
-        {"prueba": "Normalidad multivariada (Jarque-Bera)", "p_valor": res.test_normality().pvalue},
-        {"prueba": "Estable (todas las raices fuera del circulo unitario)", "p_valor": float(res.is_stable())},
+        {"prueba": "Portmanteau (12 rezagos)", "valor": res.test_whiteness(nlags=12).pvalue},
+        {"prueba": "Normalidad multivariada (p-valor)", "valor": res.test_normality().pvalue},
+        {"prueba": "Estable (1 = si)", "valor": float(res.is_stable())},
     ]
-    for c in res.resid.columns:
-        filas.append({"prueba": f"ARCH-LM (4) ecuacion {c}", "p_valor": het_arch(res.resid[c], nlags=4)[1]})
+    filas += [{"prueba": f"ARCH-LM(4) {c} (p-valor)", "valor": het_arch(res.resid[c], nlags=4)[1]}
+              for c in res.resid.columns]
     return pd.DataFrame(filas)
 
 
@@ -219,35 +196,33 @@ def main() -> None:
 
     Y, X, quiebres = cargar_datos(a.deuda, a.rezagos_fed)
     fed = pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"]
-    tam_fed = float(fed.diff().std(ddof=1))  # un desvio estandar de dFED (informe_tasa_fed_v1.md)
+    tam_fed = float(fed.diff().std(ddof=1))  # un desvio estandar de dFED
 
-    sel = VAR(Y, exog=X).select_order(maxlags=6, trend="c")
-    p = int(max(1, sel.selected_orders["bic"]))
-    base = estimar(Y, X, p, a.rezagos_fed, tam_fed, a.horizonte)
-    boot, fallidas = bootstrap(Y, X, base, p, a.rezagos_fed, tam_fed, a.horizonte, a.n_boot)
+    p, p_bic, tabla_p = elegir_rezagos(Y, X)
+    base = estimar(Y, X, p, tam_fed, a.horizonte)
+    boot, fallidas = bootstrap(Y, X, base, p, tam_fed, a.horizonte, a.n_boot)
+    q = boot.quantile([0.05, 0.5, 0.95]).T
+    q.columns = ["p05", "p50", "p95"]
 
     TABLAS.mkdir(parents=True, exist_ok=True)
     pre = f"fase24_{a.deuda}"
-    pd.DataFrame(sel.selected_orders, index=["rezagos"]).to_csv(TABLAS / f"{pre}_seleccion_rezagos.csv")
+    tabla_p.assign(p_bic=p_bic, p_elegido=p).to_csv(TABLAS / f"{pre}_rezagos.csv", index=False)
     pd.DataFrame(base["S"], index=ENDOG, columns=[f"shock_{c}" for c in ENDOG]).to_csv(TABLAS / f"{pre}_S.csv")
-    fevd = pd.DataFrame(base["fevd"]).T
-    fevd.index.name = "horizonte_trimestres"
-    fevd.to_csv(TABLAS / f"{pre}_fevd_deuda_bloques.csv")
     pd.DataFrame(base["fed"], columns=ENDOG).rename_axis("trimestre").to_csv(TABLAS / f"{pre}_respuesta_fed.csv")
-    q = boot.quantile([0.05, 0.5, 0.95]).T
-    q.columns = ["p05", "p50", "p95"]
     q.to_csv(TABLAS / f"{pre}_bootstrap.csv")
-    diag = diagnosticos(base["res"], p)
+    diag = diagnosticos(base["res"])
     diag.to_csv(TABLAS / f"{pre}_diagnosticos.csv", index=False)
+    with open(TABLAS / f"{pre}_resumen_var.txt", "w", encoding="utf-8") as fh:
+        fh.write(str(base["res"].summary()))
 
-    print(f"SVARX deuda={a.deuda}  n={len(Y)}  p={p} (BIC)  shock FED={tam_fed:.4f} pp")
-    print(f"Quiebres Bai-Perron: {[str(f.date()) for f in quiebres]}")
-    print(f"Bootstrap: {len(boot)} validas, {fallidas} fallidas")
-    print("FEVD deuda (%):\n", fevd.round(1))
-    print("Respuesta de la deuda al shock FED (pp PIB), h=4/8/20:",
-          [round(base['fed'][h, 4], 3) for h in (4, 8, 20)])
-    print("Bootstrap p05/p50/p95:\n", q.round(3))
-    print("Diagnosticos:\n", diag.round(4))
+    print(f"SVARX deuda={a.deuda} n={len(Y)} p={p} (BIC={p_bic}) shock FED={tam_fed:.4f} pp")
+    print(f"Quiebres: {[str(f.date()) for f in quiebres]} | bootstrap validas={len(boot)} fallidas={fallidas}")
+    print(f"Reaccion fiscal (Bohn) rho={base['rho']:.4f} p={base['rho_p']:.4f} | bootstrap 90%: "
+          f"[{q.loc['rho_bohn','p05']:.4f}, {q.loc['rho_bohn','p95']:.4f}]")
+    print("Respuesta a +1 desvio FED (h=0,4,8,20) con banda 90%:")
+    print(q.loc[[i for i in q.index if i.startswith("fed_") and not i.startswith("fed_pb")]].round(3))
+    print(q.loc[[i for i in q.index if i.startswith("fed_pb")]].round(3))
+    print("Diagnosticos:\n", diag.round(4).to_string(index=False))
 
 
 if __name__ == "__main__":
