@@ -99,7 +99,7 @@ comparar con su resultado.
 | 2 | Todo el trabajo empírico (modelo y simulación) se hace sobre la deuda consolidada SPNF y BCRA. | Es el perímetro que plantea la pregunta de investigación, y el FMI considera deuda pública a los pasivos del banco central cuando pueden financiar al Tesoro o implican riesgo fiscal (FMI, 2021, anexo II). |
 | 3 | El modelo es un SVARX: la deuda consolidada es una variable más del sistema, con la tasa de la FED y la volatilidad global como variables exógenas. | Permite efectos conjuntos: la deuda responde a los shocks y a su vez los afecta. Es lo que hace falta para medir cómo un shock de la FED vuelve sobre la deuda a través del riesgo país y del tipo de cambio. |
 | 4 | La identificación principal es el SVAR restringido por teoría que ya existe. El ordenamiento de Cholesky queda solo como prueba de robustez. | No hay razón teórica para ordenar el EMBI+ y el TCRM entre sí, y esa justificación ya fue aprobada por el director. |
-| 5 | H1b se contrasta con la probabilidad de que la deuda no se estabilice, con corte en 50%. | Es la métrica del FMI (FMI, 2021, párr. 53). El 50% equivale a afirmar que la trayectoria mediana no se estabiliza. El corte calibrado del FMI no se puede replicar con un solo país. Se reporta también la probabilidad completa, para que el resultado no dependa del corte. |
+| 5 | H1b contrasta si nuestra probabilidad de no estabilización supera la del FMI (alrededor de 3%), con el escenario base del FMI. | Es la métrica del FMI (FMI, 2021, párr. 53) y el umbral es su propio diagnóstico (FMI, 2025, anexo II). Mide si el perímetro consolidado y los shocks identificados cambian ese diagnóstico, que es la vacancia. Se contrasta con el intervalo de 90% del *bootstrap* (unilateral al 5%). |
 | 6 | El criterio "deuda mayor a 100% del PIB" sale de las hipótesis. | No tiene fuente que lo justifique. |
 | 7 | El área de vacancia se reformula. | El marco del FMI sí admite incluir los pasivos del banco central (FMI, 2021, anexo II), pero en su análisis de Argentina corre las herramientas sobre la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025, anexo II, cuadro 2). La vacancia pasa a ser la combinación de tres aspectos: identificación estructural, un shock externo identificado y la estimación sobre el perímetro consolidado. |
 | 8 | El canal cuasifiscal del shock de la FED se redacta en pasado. | Los pasivos remunerados del BCRA se redujeron a niveles mínimos desde 2024. |
@@ -152,7 +152,7 @@ Estado: **hecho**, **en curso** o **pendiente**.
 - Reescribir el capítulo con el SVARX y la identificación.
 - Definir el tamaño del shock de la FED con criterio justificado: un desvío estándar de la
   serie, un episodio histórico como el de 2022-2023, o ambos.
-- Justificar el corte de H1b, siguiendo lo ya escrito en la Introducción.
+- Escribir el criterio de H1b (contraste contra el FMI con intervalo de *bootstrap*) en el capítulo.
 - Agregar diagnósticos de residuos: autocorrelación, heterocedasticidad, normalidad y
   estabilidad.
 
@@ -189,7 +189,6 @@ Estado: **hecho**, **en curso** o **pendiente**.
 | Número de artículo de Ando et al. (2025) en el JEDC | Referencias |
 | Volumen y páginas de Mendoza y Oviedo (2007) | Referencias |
 | Número del Informe de País del FMI de 2024 | Referencias |
-| Sección exacta del clasificador de Bayes en Hastie, Tibshirani y Friedman (2009) | Justificación del corte de H1b |
 | Cuatro referencias con dos versiones distintas (Adler y Sosa, Adler y Magud, Cetrángolo et al., Wijayanti y Rachmanira) | Antecedentes |
 | Denominador de los pasivos del BCRA: 9,5% en nuestra serie frente a 18,4% del FMI en 2023 | Datos |
 
@@ -197,12 +196,7 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 1. **Tamaño del shock de la FED.** Hay dos criterios defendibles: un desvío estándar de la
    serie o un episodio histórico. Se decide cuando esté la serie.
-2. **H1b: corte del 50% o contraste contra el FMI.** El FMI estimó en 2025 una probabilidad de
-   estabilización de alrededor de 97% (FMI, 2025, anexo II). Con un corte del 50%, H1b casi
-   seguro se rechaza. La alternativa es contrastar si nuestra probabilidad de no estabilización
-   supera el 3% del FMI, lo que conecta la hipótesis con la vacancia. El detalle está en la nota 2
-   del documento de Introducción y Antecedentes.
-3. **Horizonte de las métricas.** A cinco años, como el FMI, a 2035, o ambos. La propuesta es
+2. **Horizonte de las métricas.** A cinco años, como el FMI, a 2035, o ambos. La propuesta es
    reportar los dos.
 
 ## Referencias de este documento

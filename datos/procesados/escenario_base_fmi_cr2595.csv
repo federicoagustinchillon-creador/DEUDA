@@ -1,0 +1,780 @@
+variable,anio,valor,unidad,pagina,cuadro,estado
+pib_real_crecimiento,2023,-1.6,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+pib_real_crecimiento,2024,-1.7,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+pib_real_crecimiento,2025,5.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+pib_real_crecimiento,2026,4.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+pib_real_crecimiento,2027,4.0,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+pib_real_crecimiento,2028,3.2,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+pib_real_crecimiento,2029,3.1,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+pib_real_crecimiento,2030,3.0,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+brecha_producto,2023,-0.8,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+brecha_producto,2024,-4.9,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+brecha_producto,2025,-2.7,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+brecha_producto,2026,-1.2,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+brecha_producto,2027,-0.3,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+brecha_producto,2028,-0.1,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+brecha_producto,2029,0.0,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+brecha_producto,2030,0.0,% del PIB potencial,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo,2023,211.4,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+inflacion_ipc_fin_periodo,2024,117.8,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+inflacion_ipc_fin_periodo,2027,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo,2028,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo,2029,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo,2030,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo_rango_inf,2025,18,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo_rango_inf,2026,10,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo_rango_sup,2025,23,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_fin_periodo_rango_sup,2026,15,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio,2023,133.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+inflacion_ipc_promedio,2024,219.9,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+inflacion_ipc_promedio,2027,9.4,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio,2028,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio,2029,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio,2030,7.5,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio_rango_inf,2025,33,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio_rango_inf,2026,12,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio_rango_sup,2025,38,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+inflacion_ipc_promedio_rango_sup,2026,17,% anual,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+cuenta_corriente,2023,-3.2,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+cuenta_corriente,2024,1.0,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+cuenta_corriente,2025,-0.4,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+cuenta_corriente,2026,-0.3,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+cuenta_corriente,2027,0.2,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+cuenta_corriente,2028,0.6,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+cuenta_corriente,2029,1.1,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+cuenta_corriente,2030,1.2,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_brutas,2023,10.1,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+reservas_brutas,2024,16.6,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+reservas_brutas,2025,36.3,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_brutas,2026,44.6,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_brutas,2027,54.3,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_brutas,2028,65.3,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_brutas,2029,77.0,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_brutas,2030,89.0,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_netas,2023,-8.5,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+reservas_netas,2024,-2.4,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+reservas_netas,2025,2.4,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_netas,2026,10.4,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_netas,2027,22.9,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_netas,2028,38.9,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_netas,2029,57.9,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+reservas_netas,2030,79.4,US$ miles de millones,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+deuda_externa_total,2023,121.6,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+deuda_externa_total,2024,49.2,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+deuda_externa_total,2025,45.8,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+deuda_externa_total,2026,44.3,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+deuda_externa_total,2027,44.6,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+deuda_externa_total,2028,45.2,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+deuda_externa_total,2029,43.7,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+deuda_externa_total,2030,41.8,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+bcra_costo_cuasifiscal,2023,8.4,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+bcra_costo_cuasifiscal,2024,1.6,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",observado/estimado
+bcra_costo_cuasifiscal,2025,-0.5,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+bcra_costo_cuasifiscal,2026,-0.5,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+bcra_costo_cuasifiscal,2027,-0.5,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+bcra_costo_cuasifiscal,2028,-0.5,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+bcra_costo_cuasifiscal,2029,-0.5,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+bcra_costo_cuasifiscal,2030,-0.6,% del PIB,49,"Cuadro 1 (Selected Economic and Financial Indicators, 2023-30)",proyeccion
+gob_federal_ingresos,2023,16.7,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_ingresos,2024,16.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_ingresos,2025,16.8,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_ingresos,2026,17.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_ingresos,2027,17.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_ingresos,2028,17.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_ingresos,2029,17.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_ingresos,2030,17.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_gasto_primario,2023,19.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_gasto_primario,2024,15.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_gasto_primario,2025,15.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_gasto_primario,2026,15.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_gasto_primario,2027,14.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_gasto_primario,2028,14.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_gasto_primario,2029,14.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_gasto_primario,2030,14.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario,2023,-2.8,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_resultado_primario,2024,1.8,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_resultado_primario,2025,1.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario,2026,2.2,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario,2027,2.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario,2028,2.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario,2029,2.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario,2030,2.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_intereses_caja,2023,2.2,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_intereses_caja,2024,1.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_intereses_caja,2025,1.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_intereses_caja,2026,2.2,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_intereses_caja,2027,2.0,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_intereses_caja,2028,2.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_intereses_caja,2029,2.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_intereses_caja,2030,2.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_global,2023,-5.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_resultado_global,2024,0.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_resultado_global,2025,0.0,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_global,2026,0.0,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_global,2027,0.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_global,2028,0.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_global,2029,0.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_global,2030,0.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario_estructural,2023,-3.2,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_resultado_primario_estructural,2024,2.5,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+gob_federal_resultado_primario_estructural,2025,1.9,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario_estructural,2026,2.5,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario_estructural,2027,2.6,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario_estructural,2028,2.5,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario_estructural,2029,2.5,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_resultado_primario_estructural,2030,2.5,% del PIB potencial,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_bruta,2023,155.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_bruta,2024,85.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_bruta,2025,73.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_bruta,2026,68.2,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_bruta,2027,65.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_bruta,2028,63.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_bruta,2029,59.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_bruta,2030,55.7,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_acreedores_oficiales,2023,33.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_acreedores_oficiales,2024,13.8,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_acreedores_oficiales,2025,15.2,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_acreedores_oficiales,2026,14.7,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_acreedores_oficiales,2027,14.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_acreedores_oficiales,2028,13.8,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_acreedores_oficiales,2029,12.4,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_acreedores_oficiales,2030,10.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado,2023,59.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_sector_privado,2024,37.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_sector_privado,2025,29.0,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado,2026,24.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado,2027,22.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado,2028,21.7,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado,2029,19.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado,2030,18.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado_en_me,2023,40.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_sector_privado_en_me,2024,17.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_sector_privado_en_me,2025,14.2,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado_en_me,2026,13.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado_en_me,2027,13.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado_en_me,2028,13.3,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado_en_me,2029,12.6,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_sector_privado_en_me,2030,12.1,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_entidades_publicas,2023,62.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_entidades_publicas,2024,33.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",observado/estimado
+deuda_federal_entidades_publicas,2025,28.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_entidades_publicas,2026,28.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_entidades_publicas,2027,27.9,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_entidades_publicas,2028,27.8,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_entidades_publicas,2029,27.0,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+deuda_federal_entidades_publicas,2030,26.5,% del PIB,52,"Cuadro 3b (Federal Government Operations, % PIB)",proyeccion
+gob_federal_ingresos_ars,2023,32045,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_ingresos_ars,2024,98109,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_ingresos_ars,2025,133278,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_ingresos_ars,2026,164340,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_ingresos_ars,2027,188218,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_ingresos_ars,2028,208936,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_ingresos_ars,2029,231625,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_ingresos_ars,2030,256597,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_primario_ars,2023,-5440,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_resultado_primario_ars,2024,10496,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_resultado_primario_ars,2025,10520,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_primario_ars,2026,20980,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_primario_ars,2027,26958,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_primario_ars,2028,30360,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_primario_ars,2029,33420,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_primario_ars,2030,37060,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_intereses_ars,2023,4269,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_intereses_ars,2024,8641,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_intereses_ars,2025,10183,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_intereses_ars,2026,20622,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_intereses_ars,2027,22158,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_intereses_ars,2028,25139,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_intereses_ars,2029,27774,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_intereses_ars,2030,31313,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_global_ars,2023,-9709,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_resultado_global_ars,2024,1855,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",observado/estimado
+gob_federal_resultado_global_ars,2025,337,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_global_ars,2026,358,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_global_ars,2027,4800,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_global_ars,2028,5221,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_global_ars,2029,5645,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_federal_resultado_global_ars,2030,5747,ARS miles de millones,51,"Cuadro 3a (Federal Government Operations, ARS miles de millones)",proyeccion
+gob_general_resultado_primario,2023,-2.8,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+gob_general_resultado_primario,2024,2.5,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+gob_general_resultado_primario,2025,1.8,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_primario,2026,3.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_primario,2027,3.9,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_primario,2028,3.9,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_primario,2029,3.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_primario,2030,3.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+provincias_resultado_primario,2023,0.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+provincias_resultado_primario,2024,0.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+provincias_resultado_primario,2025,0.5,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+provincias_resultado_primario,2026,1.5,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+provincias_resultado_primario,2027,1.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+provincias_resultado_primario,2028,1.3,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+provincias_resultado_primario,2029,1.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+provincias_resultado_primario,2030,1.1,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_global,2023,-5.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+gob_general_resultado_global,2024,0.9,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+gob_general_resultado_global,2025,0.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_global,2026,1.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_global,2027,1.8,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_global,2028,1.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_global,2029,1.6,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+gob_general_resultado_global,2030,1.5,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+sector_publico_consolidado_resultado,2023,-13.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+sector_publico_consolidado_resultado,2024,-0.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+sector_publico_consolidado_resultado,2025,1.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+sector_publico_consolidado_resultado,2026,1.9,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+sector_publico_consolidado_resultado,2027,2.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+sector_publico_consolidado_resultado,2028,2.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+sector_publico_consolidado_resultado,2029,2.1,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+sector_publico_consolidado_resultado,2030,2.1,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_neta_tenencias_publicas,2023,92.9,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+deuda_federal_neta_tenencias_publicas,2024,51.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+deuda_federal_neta_tenencias_publicas,2025,44.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_neta_tenencias_publicas,2026,39.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_neta_tenencias_publicas,2027,37.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_neta_tenencias_publicas,2028,35.6,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_neta_tenencias_publicas,2029,32.3,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_neta_tenencias_publicas,2030,29.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_pib_q4_anualizado,2023,105.4,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+deuda_federal_bruta_pib_q4_anualizado,2024,71.1,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+deuda_federal_bruta_pib_q4_anualizado,2025,53.9,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_pib_q4_anualizado,2026,47.8,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_pib_q4_anualizado,2027,44.6,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_pib_q4_anualizado,2028,43.1,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_pib_q4_anualizado,2029,40.6,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_pib_q4_anualizado,2030,53.1,% del PIB Q4 anualizado,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_provincial,2023,9.3,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+deuda_provincial,2024,3.1,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+deuda_provincial,2025,2.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_provincial,2026,1.3,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_provincial,2027,1.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_provincial,2028,0.8,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_provincial,2029,0.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_provincial,2030,1.1,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+bcra_titulos,2023,16.2,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+bcra_titulos,2024,1.7,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",observado/estimado
+bcra_titulos,2025,1.4,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+bcra_titulos,2026,1.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+bcra_titulos,2027,0.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+bcra_titulos,2028,0.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+bcra_titulos,2029,0.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+bcra_titulos,2030,0.0,% del PIB,53,"Cuadro 4 (General Government Operations, % PIB)",proyeccion
+deuda_federal_bruta_usd,2023,367.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_bruta_usd,2024,478.7,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_bruta_usd,2025,462.6,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_bruta_usd,2026,458.2,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_bruta_usd,2027,444.0,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_bruta_usd,2028,433.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_bruta_usd,2029,428.0,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_bruta_usd,2030,422.5,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_mas_bcra,2023,171.6,% del PIB,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_mas_bcra,2024,87.0,% del PIB,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_mas_bcra,2025,74.5,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_mas_bcra,2026,69.3,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_mas_bcra,2027,65.2,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_mas_bcra,2028,63.4,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_mas_bcra,2029,59.3,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_mas_bcra,2030,55.7,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local,2023,44.5,% del PIB,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_local,2024,39.5,% del PIB,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_local,2025,31.4,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local,2026,28.2,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local,2027,25.4,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local,2028,23.9,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local,2029,22.0,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local,2030,24.9,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera,2023,110.9,% del PIB,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_extranjera,2024,45.8,% del PIB,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_extranjera,2025,41.7,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera,2026,40.0,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera,2027,39.8,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera,2028,39.4,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera,2029,37.3,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera,2030,30.8,% del PIB,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local_usd,2023,105.4,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_local_usd,2024,221.6,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_local_usd,2025,198.7,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local_usd,2026,189.4,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local_usd,2027,172.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local_usd,2028,163.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local_usd,2029,158.7,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_local_usd,2030,188.7,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera_usd,2023,262.5,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_extranjera_usd,2024,257.1,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+deuda_federal_moneda_extranjera_usd,2025,263.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera_usd,2026,268.8,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera_usd,2027,271.1,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera_usd,2028,270.1,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera_usd,2029,269.3,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+deuda_federal_moneda_extranjera_usd,2030,233.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+pib_nominal_usd,2023,236.7,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+pib_nominal_usd,2024,561.0,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),observado/estimado
+pib_nominal_usd,2025,632.9,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+pib_nominal_usd,2026,671.5,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+pib_nominal_usd,2027,681.6,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+pib_nominal_usd,2028,685.1,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+pib_nominal_usd,2029,721.4,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+pib_nominal_usd,2030,759.0,US$ miles de millones,56,Cuadro 6 (Summary Public and External Debt),proyeccion
+a2_deuda_federal_bruta_perimetro_dsa_usd,2023,367.9,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_bruta_perimetro_dsa_usd,2024,478.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_bruta_perimetro_dsa_usd,2025,462.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_bruta_perimetro_dsa_usd,2026,458.2,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_bruta_perimetro_dsa,2023,155.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_bruta_perimetro_dsa,2024,85.3,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_bruta_perimetro_dsa,2025,73.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_bruta_perimetro_dsa,2026,68.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_usd,2023,220.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_usd,2024,288.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_usd,2025,279.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_usd,2026,264.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico,2023,92.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico,2024,51.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico,2025,44.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico,2026,39.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_me_usd,2023,173.8,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_me_usd,2024,173.4,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_me_usd,2025,186.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_me_usd,2026,190.5,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_me,2023,73.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_me,2024,30.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_me,2025,29.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_me,2026,28.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_fmi_usd,2023,40.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_fmi_usd,2024,40.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_fmi_usd,2025,55.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_fmi_usd,2026,56.1,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_fmi,2023,17.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_fmi,2024,7.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_fmi,2025,8.8,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_fmi,2026,8.3,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_oficial_usd,2023,38.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_oficial_usd,2024,37.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_oficial_usd,2025,40.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_oficial_usd,2026,42.8,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_oficial,2023,16.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_oficial,2024,6.6,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_oficial,2025,6.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_oficial,2026,6.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_privado_usd,2023,92.5,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_privado_usd,2024,91.8,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_privado_usd,2025,86.1,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_privado_usd,2026,87.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_privado,2023,39.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_privado,2024,16.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_sector_privado,2025,13.6,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_sector_privado,2026,13.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_holdouts_litigios_usd,2023,2.4,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_holdouts_litigios_usd,2024,4.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_holdouts_litigios_usd,2025,4.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_holdouts_litigios_usd,2026,4.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_holdouts_litigios,2023,1.0,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_holdouts_litigios,2024,0.7,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_me_holdouts_litigios,2025,0.6,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_me_holdouts_litigios,2026,0.6,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_ml_usd,2023,46.2,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_ml_usd,2024,115.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_ml_usd,2025,93.2,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_ml_usd,2026,73.8,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_ml,2023,19.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_ml,2024,20.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_federal_excl_intra_publico_ml,2025,14.7,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_federal_excl_intra_publico_ml,2026,11.0,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_tesoro_intra_publico_usd,2023,147.9,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_tesoro_intra_publico_usd,2024,190.1,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_tesoro_intra_publico_usd,2025,182.9,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_tesoro_intra_publico_usd,2026,193.8,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_tesoro_intra_publico,2023,62.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_tesoro_intra_publico,2024,33.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_tesoro_intra_publico,2025,28.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_tesoro_intra_publico,2026,28.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_usd,2023,43.5,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_usd,2024,12.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_usd,2025,11.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_usd,2026,9.7,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra,2023,18.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra,2024,2.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra,2025,1.8,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra,2026,1.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_me_usd,2023,5.1,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_me_usd,2024,12.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_me_usd,2025,11.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_me_usd,2026,9.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_me,2023,2.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_me,2024,2.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_me,2025,1.8,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_me,2026,1.4,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_ml_usd,2023,38.4,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_ml_usd,2024,0.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_ml_usd,2025,0.1,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_ml_usd,2026,0.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_ml,2023,16.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_ml,2024,0.0,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_pasivos_bcra_ml,2025,0.0,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_pasivos_bcra_ml,2026,0.0,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_depositos_tesoro_en_bcra_usd,2023,1.2,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_depositos_tesoro_en_bcra_usd,2024,11.9,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_depositos_tesoro_en_bcra_usd,2025,11.9,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_depositos_tesoro_en_bcra_usd,2026,11.9,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_depositos_tesoro_en_bcra,2023,0.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_depositos_tesoro_en_bcra,2024,2.1,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_depositos_tesoro_en_bcra,2025,1.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_depositos_tesoro_en_bcra,2026,1.8,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_sector_publico_usd,2023,262.2,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_sector_publico_usd,2024,289.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_sector_publico_usd,2025,279.5,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_sector_publico_usd,2026,262.1,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_sector_publico,2023,110.8,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_sector_publico,2024,51.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_sector_publico,2025,44.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_sector_publico,2026,39.0,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_ml_usd,2023,83.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_ml_usd,2024,103.6,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_ml_usd,2025,81.3,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_ml_usd,2026,62.0,US$ miles de millones,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_ml,2023,35.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_ml,2024,18.5,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",observado/estimado
+a2_deuda_neta_consolidada_ml,2025,12.9,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+a2_deuda_neta_consolidada_ml,2026,9.2,% del PIB,68,"Anexo II, Cuadro 2 (Public Sector Debt, 2023-26)",proyeccion
+sup_oficial_desembolsos,2025,6.7,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_desembolsos,2026,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_desembolsos,2027,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_desembolsos,2028,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_desembolsos,2029,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_desembolsos,2030,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_financiamiento_neto,2025,4.3,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_financiamiento_neto,2026,2.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_financiamiento_neto,2027,2.1,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_financiamiento_neto,2028,2.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_financiamiento_neto,2029,2.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_financiamiento_neto,2030,2.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_tasa_nominal,2025,3.9,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_tasa_nominal,2026,3.8,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_tasa_nominal,2027,3.8,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_tasa_nominal,2028,3.8,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_tasa_nominal,2029,3.8,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_oficial_tasa_nominal,2030,3.8,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_emision,2025,0.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_emision,2026,4.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_emision,2027,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_emision,2028,5.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_emision,2029,6.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_emision,2030,6.0,US$ miles de millones,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_spread,2025,550,puntos basicos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_spread,2026,500,puntos basicos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_spread,2027,450,puntos basicos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_spread,2028,450,puntos basicos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_spread,2029,450,puntos basicos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_spread,2030,450,puntos basicos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_plazo,2025,7,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_plazo,2026,7,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_plazo,2027,7,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_plazo,2028,7,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_plazo,2029,7,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_plazo,2030,7,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_gracia,2025,4,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_gracia,2026,4,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_gracia,2027,4,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_gracia,2028,4,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_gracia,2029,4,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_mercado_intl_gracia,2030,4,anios,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_corto_tasa_fija_share,2025,50,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_corto_tasa_fija_share,2026,50,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_corto_tasa_fija_share,2027,30,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_corto_tasa_fija_share,2028,30,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_corto_tasa_fija_share,2029,30,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_corto_tasa_fija_share,2030,30,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_cer_share,2025,50,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_cer_share,2026,40,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_cer_share,2027,40,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_cer_share,2028,20,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_cer_share,2029,20,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_cer_share,2030,20,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_largo_tasa_fija_share,2025,0,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_largo_tasa_fija_share,2026,10,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_largo_tasa_fija_share,2027,30,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_largo_tasa_fija_share,2028,50,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_largo_tasa_fija_share,2029,50,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_largo_tasa_fija_share,2030,50,% de emision en pesos,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_tasa_real,2025,4.0,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_tasa_real,2026,4.0,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_tasa_real,2027,4.7,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_tasa_real,2028,5.0,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_tasa_real,2029,5.4,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+sup_pesos_tasa_real,2030,5.6,% anual,72,"Anexo II, Recuadro 1 (Key DSA Financing Assumptions)",proyeccion
+srd_deuda_publica,2024,85.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_deuda_publica,2025,73.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2026,68.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2027,65.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2028,63.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2029,59.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2030,55.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2031,52.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2032,48.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2033,45.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2034,41.8,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deuda_publica,2035,38.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2024,-70.1,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_cambio_deuda,2025,-12.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2026,-4.9,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2027,-3.1,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2028,-1.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2029,-4.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2030,-3.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2031,-3.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2032,-3.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2033,-3.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2034,-3.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_cambio_deuda,2035,-3.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2024,-26.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_flujos_identificados,2025,-13.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2026,-7.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2027,-5.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2028,-4.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2029,-4.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2030,-4.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2031,-4.1,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2032,-4.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2033,-3.9,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2034,-3.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_flujos_identificados,2035,-3.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2024,-1.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_deficit_primario,2025,-1.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2026,-2.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2027,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2028,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2029,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2030,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2031,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2032,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2033,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2034,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_deficit_primario,2035,-2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2024,24.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_ingresos_no_intereses,2025,25.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2026,26.9,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2027,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2028,27.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2029,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2030,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2031,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2032,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2033,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2034,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_ingresos_no_intereses,2035,27.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2024,22.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_gastos_no_intereses,2025,24.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2026,24.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2027,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2028,24.6,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2029,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2030,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2031,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2032,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2033,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2034,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_gastos_no_intereses,2035,24.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2024,-24.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_dinamica_automatica,2025,-12.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2026,-5.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2027,-3.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2028,-2.1,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2029,-2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2030,-1.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2031,-1.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2032,-1.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2033,-1.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2034,-1.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_dinamica_automatica,2035,-1.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2024,-30.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_tasa_real_e_inflacion_relativa,2025,-8.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2026,-2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2027,-0.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2028,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2029,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2030,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2031,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2032,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2033,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2034,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_real_e_inflacion_relativa,2035,-0.1,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2024,-104.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_tasa_interes_real,2025,-17.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2026,-6.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2027,-3.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2028,-2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2029,-2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2030,-1.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2031,-1.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2032,-1.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2033,-1.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2034,-1.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_real,2035,-1.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2024,73.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_inflacion_relativa,2025,9.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2026,4.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2027,2.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2028,2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2029,2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2030,1.9,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2031,1.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2032,1.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2033,1.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2034,1.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_relativa,2035,1.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2024,2.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_crecimiento_real,2025,-4.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2026,-3.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2027,-2.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2028,-2.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2029,-1.9,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2030,-1.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2031,-1.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2032,-1.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2033,-1.4,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2034,-1.3,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_crecimiento_real,2035,-1.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tipo_cambio_real,2024,3.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_otros_flujos_identificados,2024,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_otros_flujos_identificados,2025,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2026,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2027,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2028,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2029,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2030,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2031,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2032,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2033,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2034,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_otros_flujos_identificados,2035,0.0,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2024,-43.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_residuo,2025,1.6,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2026,2.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2027,2.7,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2028,2.8,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2029,0.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2030,0.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2031,0.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2032,0.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2033,0.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2034,0.5,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_residuo,2035,0.2,pp del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2024,19.6,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_necesidades_financiamiento_brutas,2025,17.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2026,12.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2027,14.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2028,10.8,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2029,14.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2030,9.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2031,13.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2032,10.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2033,11.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2034,9.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_necesidades_financiamiento_brutas,2035,9.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2024,21.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_servicio_deuda,2025,18.6,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2026,14.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2027,16.8,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2028,13.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2029,16.6,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2030,12.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2031,15.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2032,13.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2033,13.8,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2034,11.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda,2035,11.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2024,16.3,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_servicio_deuda_ml,2025,14.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2026,10.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2027,12.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2028,8.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2029,9.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2030,6.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2031,7.9,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2032,5.9,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2033,7.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2034,5.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_ml,2035,1.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2024,5.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_servicio_deuda_me,2025,4.2,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2026,4.1,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2027,4.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2028,5.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2029,7.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2030,5.5,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2031,7.6,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2032,7.0,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2033,6.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2034,6.4,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_servicio_deuda_me,2035,5.7,% del PIB,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2024,-1.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_pib_real_crecimiento,2025,5.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2026,4.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2027,4.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2028,3.2,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2029,3.1,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2030,3.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2031,3.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2032,3.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2033,3.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2034,3.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_real_crecimiento,2035,3.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2024,206.3,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_inflacion_deflactor,2025,30.4,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2026,14.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2027,9.4,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2028,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2029,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2030,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2031,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2032,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2033,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2034,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_inflacion_deflactor,2035,7.5,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2024,202.6,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_pib_nominal_crecimiento,2025,37.3,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2026,19.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2027,13.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2028,10.9,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2029,10.9,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2030,10.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2031,10.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2032,10.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2033,10.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2034,10.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_pib_nominal_crecimiento,2035,10.7,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2024,3.4,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",observado/estimado
+srd_tasa_interes_efectiva,2025,2.4,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2026,4.1,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2027,3.9,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2028,4.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2029,4.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2030,4.1,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2031,4.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2032,4.0,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2033,4.1,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2034,4.2,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+srd_tasa_interes_efectiva,2035,3.9,% anual,76,"Anexo II, Cuadro 6 (Baseline Scenario, SRDSA)",proyeccion
+fan_ancho,2030,74.2,pp del PIB,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_ancho_contrib,2030,1.1,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_prob_no_estabilizacion,2030,3.0,%,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_prob_no_estabilizacion_contrib,2030,0.0,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_deuda_terminal_x_instituciones,2030,40.4,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_deuda_terminal_x_instituciones_contrib,2030,0.9,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_dfi,2030,2.0,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_promedio_base,2030,13.1,% del PIB,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_promedio_base_contrib,2030,4.5,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_bancos_tenencia_inicial,2030,30.1,% activos bancarios,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_bancos_tenencia_inicial_contrib,2030,9.8,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_bancos_cambio_estres,2030,9.1,% activos bancarios,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_bancos_cambio_estres_contrib,2030,3.1,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+gfn_gfi,2030,17.3,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_dfi_normalizado,2030,0.4,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_gfi_normalizado,2030,0.3,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_dfi_contrib,2030,0.2,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_gfi_contrib,2030,0.2,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_valor,2030,0.4,indice,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_prob_crisis_no_detectada_2025_30,2030,27.3,%,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+mti_prob_falsa_alarma_2025_30,2030,10.2,%,77,"Anexo II, Cuadro 7 (Medium-Term Risk Analysis)",proyeccion (horizonte 2025-2030)
+fan_prob_estabilizacion_texto,2030,97,"% (aprox., 'around 97 percent')",70,"Anexo II, parrafo 6",proyeccion (horizonte 2025-2030)
+fan10_prob_estabilizacion_texto,2034,97,"% (aprox., 'close to 97 percent')",70,"Anexo II, parrafo 8",proyeccion (horizonte 2025-2034)
+tipo_cambio_programa_ars_usd,2025,1053.5,ARS por US$ (31-ene-2025),99,"MTE/TMU, Cuadro 1 (Program Exchange Rates)",dato de referencia

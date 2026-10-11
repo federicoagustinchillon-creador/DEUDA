@@ -24,7 +24,6 @@
 - Fondo Monetario Internacional y Mecanismo Europeo de Estabilidad. (2023). *The stochastic debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs* [Presentación, 30 de noviembre de 2023].
 - Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, 123(566), F4-F30.
 - González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo.
-- Hastie, T., Tibshirani, R., y Friedman, J. (2009). *The elements of statistical learning* (2.ª ed.). Springer.
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, 107(10), 3119-3145.
 - Klemm, A., Meier, A., y Sosa, S. (2014). Spillovers to Latin America from the normalization of U.S. monetary policy. En D. Iakova, L. M. Cubeddu, G. Adler y S. Sosa (Eds.), *Latin America: New challenges to growth and stability*. Fondo Monetario Internacional.
 - Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84.
@@ -51,35 +50,23 @@
 
 # Notas para el grupo (no forman parte del texto de la tesis)
 
-## Nota 1. Justificación del criterio de H1b
+## Nota 1. Criterio de H1b (decidido el 10/10/2026)
 
-**La métrica.** La probabilidad de que la deuda no se estabilice: la proporción de trayectorias simuladas en las que el resultado primario al final del horizonte es menor que el necesario para estabilizar la deuda. Es la primera de las tres métricas del gráfico de abanico del FMI (FMI, 2021, párr. 53). La no estabilización de la deuda es además uno de los tres conceptos centrales que distingue el marco (FMI, 2021, recuadro 2).
+**La métrica.** La probabilidad de que la deuda no se estabilice: la proporción de trayectorias simuladas en las que el resultado primario al final del horizonte es menor que el necesario para estabilizar la deuda. Es la primera de las tres métricas del gráfico de abanico del FMI (FMI, 2021, párr. 53), y la no estabilización es uno de los tres conceptos centrales del marco (FMI, 2021, recuadro 2).
 
-**El corte del 50%.** Se justifica por tres razones:
+**El umbral: el propio resultado del FMI.** El FMI estimó para Argentina una probabilidad de estabilización de alrededor de 97% a mediano plazo y en su abanico a 2034 (FMI, 2025, anexo II, párrs. 6 y 8). La probabilidad de no estabilización es, entonces, de alrededor de 3%. H1b sostiene que nuestra estimación supera ese valor. El umbral no es una elección nuestra: es el diagnóstico oficial vigente. La hipótesis mide si las dos diferencias de esta tesis respecto del FMI (perímetro consolidado y shocks identificados con su dinámica) cambian ese diagnóstico, que es exactamente lo que plantea la vacancia.
 
-1. **Equivalencia con la mediana.** Si X es la diferencia entre el resultado primario proyectado y el que estabiliza la deuda, P(X < 0) > 0,5 si y solo si la mediana de X es negativa. Afirmar que la probabilidad supera el 50% equivale a afirmar que la trayectoria central de la simulación no estabiliza la deuda.
-2. **Regla de decisión estándar.** Con costos simétricos de error, la regla que minimiza el error esperado elige el estado más probable, lo que equivale a un corte de 0,5 (clasificador de Bayes; Hastie, Tibshirani y Friedman, 2009, sección 2.4). [VERIFICAR la sección.]
-3. **El corte calibrado del FMI no es replicable con un solo país.** Los cortes del índice compuesto del FMI (1,13 y 2,08) se calibraron sobre un panel de crisis y requieren un índice institucional que no está publicado (FMI y ESM, 2023, diapositiva 31).
+**Cómo se contrasta.** La probabilidad estimada tiene incertidumbre, que viene del muestreo de las trayectorias y de los parámetros estimados del SVARX. Se calcula su intervalo de confianza con *bootstrap* de los parámetros. H1b se considera respaldada si el límite inferior del intervalo de 90% supera el 3%, lo que equivale a un contraste unilateral al 5%, la convención estándar de significatividad.
 
-**Blindaje.** Se reporta la probabilidad completa y el ancho del abanico entre los percentiles 5 y 95, y se muestra a partir de qué corte cambiaría la conclusión.
+**Condiciones de comparabilidad.** El escenario base de la simulación reproduce los senderos del FMI: crecimiento, resultado primario y tasas, tomados de FMI (2025). Se reporta también el resultado con la deuda federal bruta, el perímetro del FMI, para separar cuánto de la diferencia viene del perímetro y cuánto de los shocks.
 
-## Nota 2. Dato nuevo del FMI que conviene discutir antes de cerrar H1b
+**Por qué no el 50%.** El corte del 50% (equivalente a que la trayectoria mediana no se estabilice) era defendible, pero con un 97% de estabilización estimado por el FMI el resultado quedaba prácticamente determinado de antemano y no informaba nada sobre la vacancia. Se lo conserva solo como dato descriptivo.
 
-El FMI estimó para Argentina, en abril de 2025, una probabilidad de estabilización de la deuda de alrededor de 97%, tanto a mediano plazo como en un abanico a 2034 (FMI, 2025, anexo II, párrs. 6 y 8). Es decir, una probabilidad de no estabilización cercana al 3%, sobre la deuda federal bruta y con shocks no identificados.
-
-Esto abre una alternativa para H1b que puede ser mejor que el corte del 50%: **contrastar contra el número del FMI.** Por ejemplo: "La probabilidad de no estabilización de la deuda consolidada, estimada con shocks estructuralmente identificados, es mayor que la que reporta el FMI para la deuda federal bruta (cerca de 3%)". Tiene tres ventajas:
-
-1. El umbral sale de una fuente oficial y no de una regla general.
-2. Conecta la hipótesis directamente con la vacancia, porque mide si el perímetro consolidado y los shocks identificados cambian el diagnóstico del FMI.
-3. Es mucho más probable que tenga un resultado informativo. Con un corte del 50%, si el FMI da 97% de estabilización, H1b casi seguro se rechaza.
-
-La desventaja es que la comparación no es exacta: el escenario base del FMI incorpora los supuestos de política del programa. Hay que usar el mismo escenario base, o explicar la diferencia. **Decidir en el grupo.**
-
-## Nota 3. Tamaño del shock de la FED (pendiente)
+## Nota 2. Tamaño del shock de la FED (pendiente)
 
 Los +100 puntos básicos de la versión anterior no estaban justificados y se sacaron. Hay dos criterios defendibles: un desvío estándar de la variación trimestral de la tasa sombra de la FED en 1996-2025, que es la convención de la literatura de VAR, o un episodio histórico como el ciclo de subas de 2022-2023. Se decide con la serie construida.
 
-## Nota 4. Cambios respecto del texto de Santiago
+## Nota 3. Cambios respecto del texto de Santiago
 
 **Introducción:**
 
@@ -105,7 +92,7 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
 - **Afirmación corregida:** se reescribió la idea de que el marco del FMI excluye al BCRA. El marco lo admite (FMI, 2021). En su análisis de Argentina, el FMI usa la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025).
 - **Párrafo cortado:** el párrafo de Santiago sobre la subordinación del BCRA, que estaba cortado, se completó y quedó marcado para verificar.
 
-## Nota 5. Pendientes de verificación
+## Nota 4. Pendientes de verificación
 
 - Si hubo emisión bajo ley de Nueva York en 2026.
 - La fuente oficial de la colocación de diciembre de 2025.

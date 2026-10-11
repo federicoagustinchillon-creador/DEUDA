@@ -43,7 +43,7 @@ Para alcanzarlo, se plantean los siguientes objetivos específicos:
 
 H1a. La dinámica de la deuda pública consolidada argentina (1996-2025) responde en mayor medida a los canales cambiario y de riesgo soberano que al resultado primario, cuya reacción ante el nivel de deuda no es estadísticamente significativa. En consecuencia, el superávit primario, por sí solo, no basta para estabilizar la deuda en 2026-2035.
 
-H1b. En el escenario base, la probabilidad de que la deuda consolidada no se estabilice hacia el final del horizonte de proyección supera el 50%. La métrica es la que el FMI utiliza en su marco de riesgo soberano (FMI, 2021), y el corte del 50% equivale a afirmar que la trayectoria mediana de la distribución simulada no se estabiliza (la justificación se desarrolla en el Capítulo 4).
+H1b. La probabilidad de que la deuda consolidada no se estabilice hacia el final del horizonte de proyección, estimada con shocks estructuralmente identificados, es mayor que la que el FMI reporta para la deuda federal bruta en su análisis de 2025, de alrededor de 3% (FMI, 2025, anexo II). Para que la comparación sea válida, el escenario base de la simulación reproduce los supuestos del escenario base del FMI.
 
 H2. Un endurecimiento de la política monetaria de la FED eleva la trayectoria esperada de la deuda consolidada y su probabilidad de no estabilizarse, a través del riesgo soberano, el tipo de cambio real y el crecimiento. [DECIDIR el tamaño del shock con criterio justificado: ver nota 2 al final del archivo.]
 
@@ -95,40 +95,9 @@ El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El Capí
 ---
 
 
-## Nota 1: justificación académica del criterio de H1b
+## Nota 1: criterio de H1b
 
-**Qué se mide.** La probabilidad de que la deuda no se estabilice: la proporción de trayectorias
-simuladas en las que el resultado primario al final del horizonte es menor que el necesario para
-estabilizar la deuda. No es un criterio propio: es la primera de las tres métricas del *fan chart*
-del FMI (FMI, 2021, párr. 53), y la no estabilización de la deuda es uno de los tres conceptos
-centrales que distingue el marco (FMI, 2021, Recuadro 2).
-
-**Por qué el corte en 50%.** Tres razones, de más fuerte a más débil:
-
-1. *Equivalencia exacta con la mediana.* Si X es la diferencia entre el resultado primario
-   proyectado y el que estabiliza la deuda, P(X < 0) > 0,5 si y solo si la mediana de X es
-   negativa. Afirmar "la probabilidad de no estabilización supera el 50%" es afirmar que la
-   trayectoria central de la distribución simulada no estabiliza la deuda. Es la versión
-   probabilística del chequeo determinista que el FMI aplica a su escenario base.
-2. *Regla de decisión estándar.* Con costos simétricos de equivocarse en un sentido o en el
-   otro, la regla que minimiza el error esperado asigna el caso al estado más probable, lo que
-   equivale a un corte de 0,5 (clasificador de Bayes; Hastie, Tibshirani y Friedman, 2009,
-   sección 2.4). [VERIFICAR la sección en el libro antes de citar.]
-3. *El corte calibrado del FMI no es replicable.* Los cortes del índice compuesto del FMI
-   (DFI menor a 1,13, riesgo bajo; mayor a 2,08, riesgo alto) se calibraron sobre un panel de
-   crisis de muchos países, para que haya 10% de crisis no anticipadas y 10% de falsas
-   alarmas (FMI y ESM, 2023, diapositiva 31). Requieren además un índice de calidad
-   institucional y una normalización que no están publicados. Con un solo país no se puede
-   calibrar un corte así.
-
-**Cómo se blinda el resultado.** Se reporta la probabilidad completa, no solo si supera el
-50%, junto con el ancho del *fan chart* (percentiles 5 a 95), que es la segunda métrica del FMI.
-También se muestra a partir de qué corte cambiaría la conclusión. Así, el lector puede aplicar
-otro criterio sin rehacer el análisis.
-
-**Qué se cae.** El criterio "deuda mayor a 100% del PIB" que usa hoy el código no tiene
-fuente. Sale de las hipótesis: o se le encuentra una justificación citada, o queda solo como
-dato descriptivo.
+Ver `referencias_y_notas_cap1_2_v3.md`, nota 1 (versión vigente del criterio).
 
 ## Nota 2: tamaño del shock de la FED (pendiente)
 
