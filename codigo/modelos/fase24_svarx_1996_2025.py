@@ -1,7 +1,7 @@
 """
 fase24_svarx_1996_2025.py
 =========================
-SVARX trimestral 1996T1-2025T4 (Capitulo 4 de la tesis, metodologia_v3.md).
+SVARX trimestral 1996T1-2025T4 (Capitulo 4 de la tesis, metodologia.md).
 
 Forma reducida (Y_t endogeno, X_t exogeno):
     Y_t = nu + sum_{i=1..p} A_i Y_{t-i} + Gamma X_t + u_t
@@ -24,8 +24,8 @@ Identificacion (u_t = S eps_t, E[eps eps'] = I):
               reportan magnitudes de bloque, invariantes al orden interno
               (Christiano, Eichenbaum y Evans, 1999).
 
-Rezagos: el menor p >= p_BIC con residuos sin autocorrelacion (Portmanteau al 5%)
-(Lutkepohl, 2005; Ivanov y Kilian, 2005).
+Rezagos: el que elige el AIC, salvo que el VAR resulte inestable; en ese caso, el mayor
+orden estable menor (ver `elegir_rezagos`; Lutkepohl, 2005).
 Inferencia: bootstrap salvaje de diseno recursivo con pesos de Rademacher, robusto a
 heterocedasticidad condicional (Goncalves y Kilian, 2004). Semilla fija. Las replicas
 fallidas se cuentan, no se rellenan.
@@ -108,17 +108,27 @@ def identificar(u: np.ndarray) -> np.ndarray:
 
 
 def elegir_rezagos(Y: pd.DataFrame, X: pd.DataFrame, pmax: int = 6) -> tuple[int, int, pd.DataFrame]:
-    """Menor p >= p_BIC cuyos residuos no rechazan blancura (Portmanteau 12 rezagos, 5%)."""
-    sel = VAR(Y, exog=X).select_order(maxlags=pmax, trend="c")
-    p_bic = int(max(1, sel.selected_orders["bic"]))
+    """Regla de seleccion del orden p (Lutkepohl, 2005, cap. 4 y prop. 2.1):
+    1. p_AIC = argmin AIC(p), p = 1..pmax.
+    2. Si el VAR(p_AIC) es estable (todas las raices del polinomio caracteristico fuera
+       del circulo unitario, i.e. modulo maximo de la matriz companera < 1), p = p_AIC.
+    3. Si no, p = mayor orden estable menor que p_AIC. La estabilidad es condicion
+       necesaria para que exista la representacion de medias moviles en la que se apoyan
+       las respuestas al impulso y la simulacion de largo plazo.
+    Devuelve (p, p_AIC, tabla de diagnosticos por orden)."""
     filas = []
-    elegido = None
-    for p in range(p_bic, pmax + 1):
-        pv = VAR(Y, exog=X).fit(maxlags=p, ic=None, trend="c").test_whiteness(nlags=12).pvalue
-        filas.append({"p": p, "portmanteau_p": pv})
-        if elegido is None and pv > 0.05:
-            elegido = p
-    return (elegido if elegido is not None else pmax), p_bic, pd.DataFrame(filas)
+    for p in range(1, pmax + 1):
+        r = VAR(Y, exog=X).fit(maxlags=p, ic=None, trend="c")
+        filas.append({"p": p, "aic": r.aic, "bic": r.bic, "hqic": r.hqic,
+                      "modulo_raiz_max": float(np.max(1.0 / np.abs(r.roots))),
+                      "estable": bool(r.is_stable()),
+                      "portmanteau_12_p": r.test_whiteness(nlags=12).pvalue})
+    tabla = pd.DataFrame(filas)
+    p_aic = int(tabla.loc[tabla["aic"].idxmin(), "p"])
+    estables = tabla[(tabla["p"] <= p_aic) & tabla["estable"]]["p"]
+    if estables.empty:
+        raise ValueError("Ningun orden p <= p_AIC produce un VAR estable.")
+    return int(estables.max()), p_aic, tabla
 
 
 def respuesta_fed(coefs: np.ndarray, gamma_fed: np.ndarray, tam: float, horizonte: int) -> np.ndarray:
@@ -206,7 +216,7 @@ def main() -> None:
 
     TABLAS.mkdir(parents=True, exist_ok=True)
     pre = f"fase24_{a.deuda}"
-    tabla_p.assign(p_bic=p_bic, p_elegido=p).to_csv(TABLAS / f"{pre}_rezagos.csv", index=False)
+    tabla_p.assign(p_aic=p_bic, p_elegido=p).to_csv(TABLAS / f"{pre}_rezagos.csv", index=False)
     pd.DataFrame(base["S"], index=ENDOG, columns=[f"shock_{c}" for c in ENDOG]).to_csv(TABLAS / f"{pre}_S.csv")
     pd.DataFrame(base["fed"], columns=ENDOG).rename_axis("trimestre").to_csv(TABLAS / f"{pre}_respuesta_fed.csv")
     q.to_csv(TABLAS / f"{pre}_bootstrap.csv")
@@ -215,7 +225,7 @@ def main() -> None:
     with open(TABLAS / f"{pre}_resumen_var.txt", "w", encoding="utf-8") as fh:
         fh.write(str(base["res"].summary()))
 
-    print(f"SVARX deuda={a.deuda} n={len(Y)} p={p} (BIC={p_bic}) shock FED={tam_fed:.4f} pp")
+    print(f"SVARX deuda={a.deuda} n={len(Y)} p={p} (AIC={p_bic}) shock FED={tam_fed:.4f} pp")
     print(f"Quiebres: {[str(f.date()) for f in quiebres]} | bootstrap validas={len(boot)} fallidas={fallidas}")
     print(f"Reaccion fiscal (Bohn) rho={base['rho']:.4f} p={base['rho_p']:.4f} | bootstrap 90%: "
           f"[{q.loc['rho_bohn','p05']:.4f}, {q.loc['rho_bohn','p95']:.4f}]")

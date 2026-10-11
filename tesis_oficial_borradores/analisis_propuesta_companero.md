@@ -75,8 +75,8 @@ escenario base con la tasa según el sendero de los *dots* de la FED, y escenari
 | Propuesta | Juicio | Qué hacer |
 |---|---|---|
 | H1a: los determinantes condicionan la sostenibilidad; el superávit primario solo no basta | Bien orientada y **ya respaldada por tus datos** (FEVD: inercia 54,2%, cambiario+riesgo 25,8%, fiscal+actividad 20,0%; VECM sin reacción fiscal). Tal como está redactada repite la pregunta. | Reescribir como contrastable: "la varianza de la deuda/PIB está dominada por los canales cambiario y de riesgo soberano antes que por el fiscal, y la reacción del resultado primario a la deuda no es significativa". Se contrasta con VECM + FEVD, que ya están. |
-| H1b: la trayectoria no ofrece margen; la probabilidad de insolvencia supera un umbral | Necesaria, pero tiene dos `[COMPLETAR]`. | **Superado (2026-10-10)**: se usa la probabilidad de no estabilización del FMI con corte en 50%, justificado en `introduccion_v3.md`, nota 1. El criterio de 100% del PIB sale de las hipótesis por falta de fuente. |
-| H2: shock de la FED aumenta deuda y probabilidad de insolvencia | Buena y contrastable. | Mantener. Agregar la magnitud del shock con criterio justificado (ver `introduccion_v3.md`, nota 2). |
+| H1b: la trayectoria no ofrece margen; la probabilidad de insolvencia supera un umbral | Necesaria, pero tiene dos `[COMPLETAR]`. | **Superado (2026-10-10)**: se usa la probabilidad de no estabilización del FMI con corte en 50%, justificado en `introduccion.md`, nota 1. El criterio de 100% del PIB sale de las hipótesis por falta de fuente. |
+| H2: shock de la FED aumenta deuda y probabilidad de insolvencia | Buena y contrastable. | Mantener. Agregar la magnitud del shock con criterio justificado (ver `introduccion.md`, nota 2). |
 
 Qué pasa con tus hipótesis actuales:
 - **H1a actual (umbral de Hansen/TVECM)**: resultado mixto (Hansen niveles significativo con

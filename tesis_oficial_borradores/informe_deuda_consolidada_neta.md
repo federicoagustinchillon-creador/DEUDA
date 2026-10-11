@@ -3,7 +3,7 @@
 Script: `codigo/ingesta_datos/construir_deuda_consolidada_neta_1996_2025.py`.
 Datos: `datos/procesados/deuda_consolidada_neta_1996_2025.csv` y `..._control_fmi.csv`.
 Figura: `resultados/figuras_borrador/deuda_consolidada_neta_1996_2025.png`.
-Reutiliza el denominador y la deuda bruta de `informe_deuda_consolidada_v1.md`.
+Reutiliza el denominador y la deuda bruta de `informe_deuda_consolidada.md`.
 
 ## 1. Definicion objetivo
 

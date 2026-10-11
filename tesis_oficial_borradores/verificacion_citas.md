@@ -42,7 +42,7 @@ El titulo del `.bib` ("Global Financial Shocks and Their Transmission to Emergin
 
 **(c) Evidencia.** PDF IMF WP/13/27 (descargado via WebFetch de https://www.imf.org/external/pubs/ft/wp/2013/wp1327.pdf), pags. PDF 1, 16-17; WP/14/60 (https://www.imf.org/external/pubs/ft/wp/2014/wp1460.pdf) resumen y pags. 8-10; IDEAS/RePEc para datos de revista; lista de capitulos en https://oeaw.ac.at/resources/Record/5001983700/TOC.
 
-**(d) Cambio necesario.** El parrafo de la linea 33 de `antecedentes_v3.md` (VAR globales y de panel con NCPI, ">50% de la variabilidad", asimetria argentina) no esta respaldado por ninguna de las obras que pude leer. Opciones: (i) reescribir con lo que si dice WP/13/27 (VAR por pais con precios de commodities, VIX y crecimiento mundial; simulaciones de sostenibilidad bajo escenarios externos adversos, con el VIX como unica variable global con resultados significativos y robustos en las regresiones de la seccion del VAR) y (ii) para residentes y flujos, citar Adler, Djigbenou y Sosa (2016), sin atribuir la cifra ">mitad" ni la "asimetria argentina" salvo que Santiago indique pagina y fuente. Pedir a Santiago la pagina exacta del capitulo del libro.
+**(d) Cambio necesario.** El parrafo de la linea 33 de `antecedentes.md` (VAR globales y de panel con NCPI, ">50% de la variabilidad", asimetria argentina) no esta respaldado por ninguna de las obras que pude leer. Opciones: (i) reescribir con lo que si dice WP/13/27 (VAR por pais con precios de commodities, VIX y crecimiento mundial; simulaciones de sostenibilidad bajo escenarios externos adversos, con el VIX como unica variable global con resultados significativos y robustos en las regresiones de la seccion del VAR) y (ii) para residentes y flujos, citar Adler, Djigbenou y Sosa (2016), sin atribuir la cifra ">mitad" ni la "asimetria argentina" salvo que Santiago indique pagina y fuente. Pedir a Santiago la pagina exacta del capitulo del libro.
 
 ---
 
@@ -111,7 +111,7 @@ El `.bib` ("An Early Warning System for Sovereign Debt Crisis in Developing Coun
 
 **(c) Evidencia.** PDF local arriba; https://www.redalyc.org/pdf/323/32312000001.pdf
 
-**(d) Cambio.** Cambiar a 2009 y revista; revisar que las citas "(Mendoza y Oviedo, 2007)" en `referencias_y_notas_cap1_2_v3.md` (linea 76) apunten a la obra correcta (la afirmacion sobre incertidumbre y limite de deuda esta en esta version; confirmar si se refiere a la de 2009 o a otra de 2007).
+**(d) Cambio.** Cambiar a 2009 y revista; revisar que las citas "(Mendoza y Oviedo, 2007)" en `referencias_y_notas.md` (linea 76) apunten a la obra correcta (la afirmacion sobre incertidumbre y limite de deuda esta en esta version; confirmar si se refiere a la de 2009 o a otra de 2007).
 
 ---
 
@@ -121,7 +121,7 @@ El `.bib` ("An Early Warning System for Sovereign Debt Crisis in Developing Coun
 - Deuda bruta del gobierno federal 2023 = 156,7% del PIB (tablas; Anexo II, tabla de deuda: pag. PDF 46 y 56). Texto: "spiking to around 157 percent of GDP at end-2023" (Anexo II, para. 4, pag. PDF 65).
 - Ancho del fanchart = 122,7 (tabla del modulo fanchart, pag. PDF 73).
 - Senal mecanica de riesgo alto en el indice de mediano plazo por el ancho del fanchart; el staff juzga que la senal no refleja el riesgo de mediano plazo (pag. PDF 65, para. 4; tabla pag. PDF 63: "mechanical signal of high risk", sobre todo y mediano plazo "Moderate" tras el juicio).
-Nota: el CR 25/95 (Solicitud de acuerdo ampliado, abril 2025; PDF local `1argea2025002-print-pdf.pdf`) reporta fanchart width 74,2 y riesgo **moderado** (pag. PDF 70 y tabla de fanchart); no contiene 156,7 ni 122,7. `antecedentes_v3.md` linea 45 cita "FMI, 2025, anexo II" para la deuda >150%: conviene verificar que ese dato salga de 25/95 y, si es el 156,7%, citar 24/167.
+Nota: el CR 25/95 (Solicitud de acuerdo ampliado, abril 2025; PDF local `1argea2025002-print-pdf.pdf`) reporta fanchart width 74,2 y riesgo **moderado** (pag. PDF 70 y tabla de fanchart); no contiene 156,7 ni 122,7. `antecedentes.md` linea 45 cita "FMI, 2025, anexo II" para la deuda >150%: conviene verificar que ese dato salga de 25/95 y, si es el 156,7%, citar 24/167.
 
 **(b) APA 7.** Fondo Monetario Internacional. (2024). *Argentina: Eighth review under the Extended Arrangement under the Extended Fund Facility, requests for modification of performance criteria, waivers of nonobservance of performance criteria, and financing assurances review* (IMF Country Report No. 24/167). https://www.imf.org/-/media/files/publications/cr/2024/english/1argea2024002.pdf
 

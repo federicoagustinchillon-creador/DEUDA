@@ -1,9 +1,8 @@
-# Especificación del modelo: SVARX con identidad de la deuda (versión 1)
+# 4. Metodología
 
-Documento para el grupo. Fundamenta, decisión por decisión, la forma del modelo empírico. Cada
-decisión se apoya en el marco del FMI, en la literatura o en nuestros propios datos.
+Este capítulo presenta la estrategia empírica: un modelo de vectores autorregresivos estructural con variables exógenas (SVARX), combinado con la identidad de acumulación de la deuda y una simulación de Monte Carlo. Cada decisión de especificación se fundamenta en el marco del FMI, en la literatura o en las propiedades de los datos.
 
-## 1. Arquitectura general: la del FMI
+## 4.1 Arquitectura general
 
 El modelo sigue la arquitectura que el propio FMI desarrolló para economías emergentes y aplicó a
 Argentina. Celasun, Debrun y Ostry (2006) proponen tres piezas:
@@ -19,16 +18,16 @@ Argentina. Celasun, Debrun y Ostry (2006) proponen tres piezas:
 El marco vigente del FMI (2021, párr. 52) mantiene la idea central: el gráfico de abanico se
 arma aplicando al escenario base shocks tomados de la historia de los determinantes de la deuda.
 
-Nuestro modelo conserva esas tres piezas. Agrega dos cosas que la vacancia justifica: los
+El modelo de esta tesis conserva esas tres piezas. Agrega dos cosas que la vacancia justifica: los
 shocks se identifican estructuralmente y la tasa de la FED entra como un shock externo con
 nombre propio.
 
-## 2. Variables del sistema
+## 4.2 Variables del sistema
 
 | Variable | Rol | Fundamento |
 |---|---|---|
-| Crecimiento real del PIB | Endógena | Determinante de la identidad de la deuda (Celasun et al., 2006; FMI, 2021). Se usa el crecimiento, no la brecha del producto, porque es lo que entra en la identidad. |
-| Resultado primario (% del PIB) | Endógena | Determinante de la identidad. Su ecuación incluye la deuda rezagada, y ese coeficiente es la reacción fiscal de Bohn (1998) que contrasta H1a. |
+| Crecimiento real del PIB | Endógena | Determinante de la identidad de la deuda (Celasun et al., 2006; FMI, 2021). Se usa el crecimiento, no la brecha del producto, porque es lo que entra en la identidad. El PIB real publicado no está desestacionalizado, por lo que el modelo incluye variables binarias estacionales (Lütkepohl, 2005). |
+| Resultado primario (% del PIB) | Endógena | Determinante de la identidad. Su ecuación incluye la deuda rezagada; ese coeficiente es la reacción fiscal de Bohn (1998), que caracteriza la respuesta del superávit al endeudamiento. |
 | EMBI+ | Endógena | Riesgo soberano: forma parte de la tasa en dólares (tasa de Estados Unidos más spread). |
 | Tipo de cambio real multilateral | Endógena | Efecto de valuación sobre la deuda en moneda extranjera (Calvo et al., 2003). |
 | Deuda consolidada neta (% del PIB) | Entra rezagada en las ecuaciones; evoluciona por la identidad | Retroalimentación de la deuda sobre el sistema (Favero y Giavazzi, 2007). |
@@ -40,11 +39,10 @@ nombre propio.
 muestran que un VAR fiscal que omite la retroalimentación de la deuda está mal especificado:
 la restricción presupuestaria hace que el nivel de deuda condicione la política fiscal y las
 tasas. Su solución es incluir la deuda rezagada en las ecuaciones y hacerla evolucionar con la
-identidad, no con una ecuación estimada. Eso da los "efectos conjuntos" que pide la pregunta de
-investigación y mantiene la acumulación contablemente exacta. Corrige además al `fase19` actual,
-donde la deuda era una regresión libre.
+identidad, no con una ecuación estimada. Eso permite captar los efectos conjuntos que plantea la pregunta de
+investigación y mantiene la acumulación contablemente exacta.
 
-## 3. Por qué la FED y el VIX entran como exógenas
+## 4.3 Variables exógenas
 
 Argentina es una economía pequeña y abierta: sus variables no afectan la tasa de la FED ni el
 VIX. En los VAR de economías pequeñas y abiertas, el supuesto estándar es que las variables
@@ -58,9 +56,23 @@ exógena.
 
 La serie es la tasa de fondos federales. En los trimestres en que esa tasa estuvo en el piso de
 cero se usa la tasa sombra de Wu y Xia (2016), que mide la orientación de la política monetaria
-cuando la tasa efectiva no puede bajar más (ver `informe_tasa_fed_v1.md`).
+cuando la tasa efectiva no puede bajar más.
 
-## 4. Identificación de los shocks argentinos
+### Canales por los que opera el shock de la FED
+
+Cada canal de transmisión que plantea la pregunta específica (Capítulo 1) está representado por una variable del sistema. Por eso el modelo puede medir cuánto pasa por cada uno.
+
+| Canal | Variable del modelo | Cómo afecta a la deuda en la identidad |
+|---|---|---|
+| Prima de riesgo soberano (Uribe y Yue, 2006) | EMBI+ | Eleva la tasa en dólares (tasa de la FED más el spread). |
+| Depreciación real y efecto de valuación (Calvo et al., 2003) | TCRM | Aumenta en pesos el valor de la deuda en moneda extranjera. |
+| Menor crecimiento y diferencial tasa-crecimiento (Neumeyer y Perri, 2005) | Crecimiento real | Achica el denominador y empeora el diferencial r - g. |
+| Respuesta fiscal | Resultado primario | Cambia el flujo que reduce o aumenta la deuda. |
+| Costo de la deuda en dólares | Tasa de la FED (exógena) | Entra directamente en la tasa en dólares. |
+
+El canal cuasifiscal, es decir, el mayor costo de los pasivos remunerados del BCRA, operó en el período de estimación a través de la deuda consolidada. No se proyecta como un canal separado porque esos pasivos son mínimos desde 2024 (FMI, 2025, anexo II).
+
+## 4.4 Identificación de los shocks domésticos
 
 | Shock | Supuesto | Fundamento |
 |---|---|---|
@@ -68,25 +80,19 @@ cuando la tasa efectiva no puede bajar más (ver `informe_tasa_fed_v1.md`).
 | Actividad | El producto puede responder al shock fiscal dentro del trimestre. | Blanchard y Perotti (2002). |
 | Riesgo soberano y tipo de cambio | Se identifican como **bloque**, sin ordenarlos entre sí. Se reporta solo su contribución conjunta. | Christiano, Eichenbaum y Evans (1999): con una identificación recursiva por bloques, lo que se identifica no depende del orden dentro de cada bloque. No hay razón teórica para ordenar el EMBI+ y el tipo de cambio, y H1a solo necesita el bloque "cambiario y de riesgo" en conjunto. |
 
-**Esto corrige al `fase19` actual.** El capítulo dice que el EMBI+ y el tipo de cambio quedan
-sin ordenar, pero el código los ordenaba. Ahora el código hace lo que dice el texto.
-
-## 5. Niveles, rezagos e inferencia
+## 4.5 Niveles, rezagos e inferencia
 
 - **Variables en niveles.** El VAR se estima en niveles aunque algunas variables tengan raíz
   unitaria. Sims, Stock y Watson (1990) muestran que las estimaciones siguen siendo consistentes
   sin imponer relaciones de cointegración. Para 1996-2025, la prueba de Johansen no rechaza la
-  ausencia de cointegración, así que imponer un rango concreto sería un supuesto sin respaldo.
-- **Rezagos.** Se toma el menor número de rezagos que indican los criterios de información y con
-  el que los residuos quedan libres de autocorrelación (Lütkepohl, 2005; Ivanov y Kilian, 2005).
-  En la prueba preliminar, el criterio BIC elegía un solo rezago y la autocorrelación quedaba,
-  así que esta regla corrige esa elección.
-- **Intervalos de confianza.** Los residuos preliminares rechazan la normalidad y muestran
-  volatilidad cambiante en el tiempo (heterocedasticidad condicional) en dos ecuaciones. Por eso
-  los intervalos se calculan con un *bootstrap* robusto a esa heterocedasticidad (Gonçalves y
+  ausencia de cointegración, por lo que imponer un rango concreto sería un supuesto sin respaldo.
+- **Rezagos.** El orden del VAR se elige con el criterio de información de Akaike (AIC), sujeto a que el modelo sea estable, es decir, a que todas las raíces de su polinomio característico queden fuera del círculo unitario. La estabilidad no es un requisito accesorio: es la condición para que el VAR tenga una representación de medias móviles, en la que se apoyan las respuestas al impulso y la simulación de largo plazo (Lütkepohl, 2005, cap. 2 y 4). Si el orden que elige el AIC produce un modelo inestable, se toma el mayor orden estable inferior. Con la deuda consolidada neta, el AIC elige cuatro rezagos, un año completo de datos trimestrales, pero ese modelo tiene una raíz de módulo 1,02, por lo que se usan tres rezagos (raíz máxima de 0,96). Con la deuda bruta, los cuatro rezagos del AIC ya son estables. La autocorrelación residual se informa como diagnóstico.
+- **Intervalos de confianza.** Los residuos de este tipo de modelos para Argentina rechazan la normalidad y
+  muestran volatilidad cambiante en el tiempo (heterocedasticidad condicional; ver Capítulo 6).
+  Por eso los intervalos se calculan con un *bootstrap* robusto a esa heterocedasticidad (Gonçalves y
   Kilian, 2004), con semilla fija para que sean reproducibles.
 
-## 6. Shocks de la simulación
+## 4.6 Simulación de Monte Carlo
 
 - **De dónde salen.** Se remuestrean los residuos estimados, que conservan las colas gordas que
   la normal no captura. Es la versión econométrica del principio del FMI de usar shocks
@@ -100,31 +106,10 @@ sin ordenar, pero el código los ordenaba. Ahora el código hace lo que dice el 
   histórico se agrega el ciclo de subas de 2022-2023, de 5,25 puntos.
 - **Tasa en dólares.** Es la tasa de la FED más el EMBI+ simulado.
 
-## 7. Qué se contrasta con qué
+## 4.7 Contraste de las hipótesis
 
 | Hipótesis | Medida | Criterio |
 |---|---|---|
-| H1a | Coeficiente de la deuda rezagada en la ecuación del resultado primario, y contribución de cada bloque de shocks a la varianza de la deuda simulada | La reacción no es significativa al 5%, y el bloque cambiario y de riesgo aporta más que el fiscal. |
+| H1a | Contribución de cada bloque de shocks (fiscal, actividad, cambiario y de riesgo) a la varianza de la deuda simulada en 2035, y reacción fiscal de Bohn como caracterización complementaria | El superávit primario "por sí solo no basta" si la contribución conjunta de los shocks no fiscales supera a la del shock fiscal, con un intervalo de 90% de la diferencia que excluye el cero. Una reacción fiscal positiva no contradice la hipótesis: indica que el superávit responde a la deuda, no que alcance para estabilizarla. |
 | H1b | Probabilidad de que la deuda no se estabilice, con el escenario base del FMI | El límite inferior del intervalo de 90% supera el 3% del FMI (contraste unilateral al 5%). |
 | H2 | Diferencia en esa probabilidad y en la deuda esperada entre el escenario con shock de la FED y el escenario base | El intervalo de 90% de la diferencia excluye el cero. |
-
-## Referencias
-
-- Bai, J., y Perron, P. (2003). Computation and analysis of multiple structural change models. *Journal of Applied Econometrics*, 18(1), 1-22.
-- Blanchard, O., y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. *Quarterly Journal of Economics*, 117(4), 1329-1368.
-- Bohn, H. (1998). The behavior of U.S. public debt and deficits. *Quarterly Journal of Economics*, 113(3), 949-963.
-- Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchange rate, and fiscal sustainability: Argentina's lessons* (NBER Working Paper No. 9828).
-- Canova, F. (2005). The transmission of US shocks to Latin America. *Journal of Applied Econometrics*, 20(2), 229-251.
-- Celasun, O., Debrun, X., y Ostry, J. D. (2006). *Primary surplus behavior and risks to fiscal sustainability in emerging market countries: A "fan-chart" approach* (IMF Working Paper WP/06/67).
-- Christiano, L. J., Eichenbaum, M., y Evans, C. L. (1999). Monetary policy shocks: What have we learned and to what end? En J. B. Taylor y M. Woodford (Eds.), *Handbook of Macroeconomics* (Vol. 1A, pp. 65-148). Elsevier.
-- Cushman, D. O., y Zha, T. (1997). Identifying monetary policy in a small open economy under flexible exchange rates. *Journal of Monetary Economics*, 39(3), 433-448.
-- Favero, C., y Giavazzi, F. (2007). *Debt and the effects of fiscal policy* (NBER Working Paper No. 12822).
-- Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper).
-- Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95).
-- Girouard, N., y André, C. (2005). *Measuring cyclically-adjusted budget balances for OECD countries* (OECD Economics Department Working Papers No. 434).
-- Gonçalves, S., y Kilian, L. (2004). Bootstrapping autoregressions with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, 123(1), 89-120.
-- Ivanov, V., y Kilian, L. (2005). A practitioner's guide to lag order selection for VAR impulse response analysis. *Studies in Nonlinear Dynamics and Econometrics*, 9(1).
-- Lütkepohl, H. (2005). *New introduction to multiple time series analysis*. Springer.
-- Sims, C. A., Stock, J. H., y Watson, M. W. (1990). Inference in linear time series models with some unit roots. *Econometrica*, 58(1), 113-144.
-- Uribe, M., y Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? *Journal of International Economics*, 69(1), 6-36.
-- Wu, J. C., y Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. *Journal of Money, Credit and Banking*, 48(2-3), 253-291.

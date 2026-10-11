@@ -34,7 +34,6 @@
 - González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo.
 - Gonçalves, S., y Kilian, L. (2004). Bootstrapping autoregressions with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, 123(1), 89-120.
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, 107(10), 3119-3145.
-- Ivanov, V., y Kilian, L. (2005). A practitioner's guide to lag order selection for VAR impulse response analysis. *Studies in Nonlinear Dynamics and Econometrics*, 9(1).
 - Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84. https://doi.org/10.1111/1475-5890.12319
 - Ley 27.541 de Solidaridad Social y Reactivación Productiva en el Marco de la Emergencia Pública (2019). Boletín Oficial de la República Argentina, 23 de diciembre de 2019.
 - Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública (2021). Boletín Oficial de la República Argentina, 3 de marzo de 2021.
@@ -91,7 +90,7 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
   - Ando et al. queda con año 2025.
   - Se sacan Garud y la tesis propia.
 - **Canal cuasifiscal del shock de la FED:** se redacta en pasado.
-- **Pregunta e hipótesis:** se acorta la pregunta, se agregan seis objetivos específicos y H1a pasa a ser contrastable.
+- **Pregunta e hipótesis:** se acorta la pregunta, se agregan seis objetivos específicos, y H1a mantiene el concepto central de Santiago con un criterio de contraste explícito (Capítulo 4).
 - **Del texto LaTeX:** se suman la Justificación (Ley 27.612) y la organización por capítulos.
 
 **Antecedentes:**

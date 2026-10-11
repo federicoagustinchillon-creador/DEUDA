@@ -5,7 +5,7 @@ Serie trimestral 1996T1-2025T4 de deuda publica consolidada de Argentina:
 
     deuda_consolidada_pib_t = deuda_spnf_pib_t + pasivos_bcra_pib_t
 
-con UN solo denominador para ambos terminos (ver informe_deuda_consolidada_v1.md):
+con UN solo denominador para ambos terminos (ver informe_deuda_consolidada.md):
 
     PIB4T_t = (1/4) * sum_{j=0..3} Y_{t-j},   Y = PIB nominal trimestral anualizado
 

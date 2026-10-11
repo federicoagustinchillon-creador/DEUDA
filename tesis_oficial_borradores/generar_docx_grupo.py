@@ -29,28 +29,31 @@ BASE = Path(__file__).resolve().parent
 SALIDA = BASE / "para_el_grupo"
 
 ARCHIVOS: dict[str, str] = {
-    "plan_de_labor_grupo.md": "Plan_de_labor.docx",
-    "_capitulos_1_2_v3.md": "Tesis_borrador_v3.docx",
+    "plan_de_labor.md": "Plan_de_labor.docx",
+    "_tesis_borrador.md": "Tesis_borrador.docx",
 }
 
-# Documento unico para el grupo: cuerpo de la Introduccion (secciones 1.1 a 1.8, sin el
-# encabezado interno ni las notas de trabajo del borrador), Antecedentes con la vacancia,
-# y al final referencias y notas para el grupo.
-TITULO_CAP_1_2 = "% Introducción y Antecedentes (versión 3, borrador para el grupo)\n\n"
+# Documento unico de la tesis: capitulos en orden (los que todavia no existen como
+# borrador se omiten), y al final referencias y notas para el grupo.
+TITULO_TESIS = "% Tesis: borrador de trabajo\n\n"
+CAPITULOS: list[str] = ["antecedentes.md", "marco_teorico.md", "metodologia.md", "datos.md"]
 
 
 def armar_capitulos_1_2() -> Path:
-    """Concatena los borradores de los capitulos 1 y 2 en un unico Markdown temporal."""
-    intro = (BASE / "introduccion_v3.md").read_text(encoding="utf-8")
+    """Concatena la Introduccion (secciones 1.1 a 1.8) y los capitulos disponibles en un
+    unico Markdown temporal."""
+    intro = (BASE / "introduccion.md").read_text(encoding="utf-8")
     inicio = intro.index("## 1.1 Contextualización")
     fin = intro.index("## Referencias\n")
     cuerpo_intro = intro[inicio:fin].rstrip().rstrip("-").rstrip()
-    antecedentes = (BASE / "antecedentes_v3.md").read_text(encoding="utf-8")
-    refs_notas = (BASE / "referencias_y_notas_cap1_2_v3.md").read_text(encoding="utf-8")
-    texto = (TITULO_CAP_1_2 + "# 1. Introducción\n\n" + cuerpo_intro + "\n\n"
-             + antecedentes + "\n\n"
-             + (BASE / "metodologia_v3.md").read_text(encoding="utf-8") + "\n\n" + refs_notas)
-    destino = BASE / "_capitulos_1_2_v3.md"
+    partes = [TITULO_TESIS + "# 1. Introducción\n\n" + cuerpo_intro]
+    for nombre in CAPITULOS:
+        ruta = BASE / nombre
+        if ruta.exists():
+            partes.append(ruta.read_text(encoding="utf-8").rstrip())
+    partes.append((BASE / "referencias_y_notas.md").read_text(encoding="utf-8"))
+    texto = "\n\n".join(partes)
+    destino = BASE / "_tesis_borrador.md"
     destino.write_text(texto, encoding="utf-8")
     return destino
 

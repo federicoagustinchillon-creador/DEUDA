@@ -1,10 +1,4 @@
-# 1. Introducción (versión 3, borrador para revisar)
-
-Base: `Introduccion_corregida.docx` de Santiago (última edición 2026-10-07). Se le suman la
-Justificación y la lista de objetivos específicos de `tesis/capitulos/01_introduccion.tex`.
-Las marcas `[VERIFICAR]` y `[DECIDIR]` son pendientes y se borran antes de pasar a Word.
-
----
+# 1. Introducción
 
 ## 1.1 Contextualización
 
@@ -41,7 +35,7 @@ Para alcanzarlo, se plantean los siguientes objetivos específicos:
 
 ## 1.5 Hipótesis
 
-H1a. La dinámica de la deuda pública consolidada argentina (1996-2025) responde en mayor medida a los canales cambiario y de riesgo soberano que al resultado primario, cuya reacción ante el nivel de deuda no es estadísticamente significativa. En consecuencia, el superávit primario, por sí solo, no basta para estabilizar la deuda en 2026-2035.
+H1a. Los determinantes macroeconómicos históricos de Argentina (1996-2025), es decir, el crecimiento, el tipo de cambio real, el riesgo país y el resultado primario, condicionan la sostenibilidad de la deuda pública consolidada (SPNF y BCRA), de modo que el superávit primario, por sí solo, no basta para estabilizarla en 2026-2035.
 
 H1b. La probabilidad de que la deuda consolidada no se estabilice hacia el final del horizonte de proyección, estimada con shocks estructuralmente identificados, es mayor que la que el FMI reporta para la deuda federal bruta en su análisis de 2025, de alrededor de 3% (FMI, 2025, anexo II). Para que la comparación sea válida, el escenario base de la simulación reproduce los supuestos del escenario base del FMI.
 
@@ -68,11 +62,11 @@ El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El Capí
 
 ## Referencias
 
-Ver `referencias_y_notas_cap1_2_v3.md` (lista única de Introducción y Antecedentes, verificada).
+Ver `referencias_y_notas.md` (lista única de Introducción y Antecedentes, verificada).
 
 ## Nota 1: criterio de H1b
 
-Ver `referencias_y_notas_cap1_2_v3.md`, nota 1 (versión vigente del criterio).
+Ver `referencias_y_notas.md`, nota 1 (versión vigente del criterio).
 
 ## Nota 2: tamaño del shock de la FED (pendiente)
 
@@ -87,7 +81,7 @@ Hay dos criterios defendibles, a elegir cuando tengamos la serie:
 
 Se puede usar el primero para las respuestas al impulso y el segundo para el Monte Carlo.
 
-## Nota 3: el área de vacancia (ver `area_vacancia_v1.md`)
+## Nota 3: el área de vacancia (ver `antecedentes.md`)
 
 Santiago escribió que el marco del FMI "excluye los pasivos remunerados del Banco Central".
 **No es correcto.** La revisión del marco (FMI, 2021, anexo II, párr. 5) establece que las
