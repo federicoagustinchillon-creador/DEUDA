@@ -72,6 +72,10 @@ API del BCRA v4.0, id 1264, "Depósitos del gobierno en el BCRA". Es coherente c
 
 Con los datos del CSV, `bruta − tenencia BCRA + pasivos BCRA − depósitos = deuda neta` se cumple al cuarto decimal en 2023 (119,03) y en 2024 (61,11 con la tenencia nominal piso; 68,31 con valor de libros). La identidad que el FMI usa en el Cuadro 2 (línea 6 = 2 + 4 − 5) también se cumple con sus cifras: 92,9 + 18,4 − 0,5 = 110,8 y 51,4 + 2,2 − 2,1 = 51,5.
 
+La Figura 5.1 muestra las tres series de deuda consolidada y los dos valores de control del FMI. Las tres se mueven juntas; la distancia entre la bruta y las netas es la deuda del Tesoro en poder del BCRA neta de sus pasivos.
+
+![Figura 5.1. Deuda pública consolidada, 1996-2025 (% del PIB de los últimos cuatro trimestres). Los puntos son la deuda consolidada neta del FMI (2025, anexo II, cuadro 2) a diciembre de 2023 y de 2024.](../tesis/figuras/fig5_1_deuda_consolidada_1996_2025.png)
+
 ## 5.4 Resultado primario
 
 - **Fuente.** MECON, Secretaría de Hacienda, Subsecretaría de Programación Macroeconómica, "Esquema Ahorro-Inversión-Financiamiento. Sector Público Nacional. Base Caja" (datos.gob.ar, dataset 379). Es una serie mensual desde 1993, en pesos corrientes, publicada en tres tramos metodológicos (1993-2006, 2007-2014 y desde 2015). Los archivos crudos están en `datos/crudos/resultado_primario/` y el script es `construir_resultado_primario_1996_2025.py`. Como hay dato mensual para todo el período, **no se desagrega con Denton ni se aplica coeficiente de enlace**: cada trimestre es la suma de sus tres meses, y se exige que estén los tres (no hay trimestres faltantes).
@@ -115,6 +119,12 @@ Con los datos del CSV, `bruta − tenencia BCRA + pasivos BCRA − depósitos = 
 ### 5.6.4 VIX
 
 Índice de volatilidad implícita del CBOE (^VIX), cierre diario de Yahoo Finance descargado con `yfinance` (`ingesta_instrumentos_1996_2025.py`), promedio trimestral. Tiene cobertura real desde 1996, sin faltantes (120 observaciones). Entra como exógena en nivel (Adler y Sosa, 2013, citados en el Capítulo 4).
+
+Las Figuras 5.2 y 5.3 muestran las cuatro variables endógenas y las dos exógenas del SVARX en la muestra completa.
+
+![Figura 5.2. Variables endógenas del SVARX, 1996-2025. El crecimiento es la variación trimestral del PIB real sin desestacionalizar; la estacionalidad la absorben las variables binarias del modelo. Las líneas punteadas marcan los quiebres de Bai y Perron.](../tesis/figuras/fig5_2_variables_endogenas.png)
+
+![Figura 5.3. Variables exógenas del SVARX. Arriba, tasa de política de la Reserva Federal: tasa de fondos federales y, en el límite cero, tasa sombra de Wu y Xia (2016). Abajo, VIX. Promedios trimestrales.](../tesis/figuras/fig5_3_fed_y_vix.png)
 
 ## 5.7 Variables que figuran en la base pero no entran en el sistema
 

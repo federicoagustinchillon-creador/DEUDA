@@ -16,11 +16,13 @@ Todos los resultados de este capítulo salen de la misma muestra efectiva, 1998T
 
 El signo coincide con el que encuentran Celasun et al. (2006) en su panel de economías emergentes. La política fiscal argentina respondió a la deuda en el período, pero con un coeficiente chico. La simulación muestra si esa respuesta alcanza para estabilizarla.
 
-**Respuesta a la tasa de la FED.** Un aumento de un desvío estándar en la tasa de política de la FED (0,50 puntos porcentuales) no produce respuestas significativas de las variables domésticas en ninguno de los horizontes considerados (0, 4, 8 y 20 trimestres). El EMBI+ sube 9 puntos básicos en el trimestre del shock, con un intervalo de 90% de [-83; 103], y 12 puntos básicos a los dos años, con un intervalo de [-14; 42]. El tipo de cambio real y el resultado primario tampoco responden de manera significativa. La única excepción es el crecimiento, que en el trimestre del shock sube medio punto con un intervalo que apenas excluye el cero, [0,00; 1,04]. Ese signo no tiene una explicación económica clara y desaparece desde el cuarto trimestre. Con 111 trimestres y un shock chico, el modelo no puede distinguir los efectos indirectos de la FED del ruido.
+**Respuesta a la tasa de la FED.** Un aumento de un desvío estándar en la tasa de política de la FED (0,50 puntos porcentuales) no produce respuestas sistemáticas de las variables domésticas (Figura 6.1). El EMBI+ sube 9 puntos básicos en el trimestre del shock, con un intervalo de 90% de [-83; 103], y 12 puntos básicos a los dos años, con un intervalo de [-14; 42]. De las 84 respuestas estimadas (cuatro variables en 21 horizontes), solo tres tienen una banda de 90% que excluye el cero: el crecimiento en el trimestre del shock (+0,5 puntos), el resultado primario un trimestre después (-0,35 puntos del PIB) y el tipo de cambio real tres trimestres después (una leve apreciación). Con bandas de 90%, el azar ya produciría unas ocho exclusiones aunque la FED no tuviera ningún efecto, y los signos del crecimiento y del tipo de cambio real son los contrarios a los que predice la teoría. Con 111 trimestres y un shock chico, el modelo no puede distinguir los efectos indirectos de la FED del ruido.
+
+![Figura 6.1. Respuestas al impulso ante una suba de la tasa de la FED. Aumento de un desvío estándar (0,50 puntos porcentuales) de la tasa de política; deuda consolidada neta, tres rezagos; bandas de 90% del bootstrap salvaje (1.000 réplicas).](../tesis/figuras/fig6_1_respuesta_fed.png)
 
 ## 6.2 El gráfico de abanico
 
-La Tabla 6.1 resume la distribución de la deuda simulada. La mediana baja de 61,0% del PIB en 2025 a 35,9% en 2030 y a 16,7% en 2035. La caída la determina el escenario base del FMI, que combina un superávit primario de alrededor de 2,5% del PIB con una tasa de interés efectiva de alrededor de 4% y un deflactor del PIB que crece cerca de 7,5% por año. Con esos supuestos, la tasa real que paga la deuda es negativa y la licua año tras año.
+La Tabla 6.1 resume la distribución de la deuda simulada. La mediana baja de 61,0% del PIB en 2025 a 35,9% en 2030 y a 16,7% en 2035. La Figura 6.2 muestra el abanico. La caída la determina el escenario base del FMI, que combina un superávit primario de alrededor de 2,5% del PIB con una tasa de interés efectiva de alrededor de 4% y un deflactor del PIB que crece cerca de 7,5% por año. Con esos supuestos, la tasa real que paga la deuda es negativa y la licua año tras año.
 
 **Tabla 6.1. Deuda consolidada neta simulada (% del PIB), percentiles**
 
@@ -32,7 +34,7 @@ La Tabla 6.1 resume la distribución de la deuda simulada. La mediana baja de 61
 | 2032 | 15,0 | 21,1 | 26,9 | 32,7 | 44,2 |
 | 2035 | 2,2 | 9,6 | 16,7 | 23,7 | 38,5 |
 
-![Figura 6.1. Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (% del PIB). Escenario base del FMI (2025) con shocks estructurales del SVARX; 300 réplicas de parámetros por 400 trayectorias.](../tesis/figuras/fig6_1_abanico_deuda_neta.png)
+![Figura 6.2. Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (% del PIB). Escenario base del FMI (2025) con shocks estructurales del SVARX; 300 réplicas de parámetros por 400 trayectorias.](../tesis/figuras/fig6_2_abanico_deuda_neta.png)
 
 El ancho del abanico entre los percentiles 5 y 95 es de 19,4 puntos en 2030, con un intervalo de 90% de [15,4; 24,3]. El del FMI para la deuda federal bruta es 74,2 (FMI, 2025, anexo II, cuadro 7). El Capítulo 7 analiza esta diferencia.
 
@@ -48,6 +50,8 @@ H1a sostiene que el superávit primario, por sí solo, no basta para estabilizar
 | No fiscal menos fiscal (diferencia) | 61,2 puntos | [17,5; 93,0] |
 
 Los shocks no fiscales explican cerca de cuatro quintos de la incertidumbre sobre la deuda en 2035, y el intervalo de la diferencia con el fiscal excluye el cero. **H1a queda respaldada.** El bloque cambiario y de riesgo es el que más pesa. El resultado es coherente con la reacción fiscal positiva de la sección 6.1: el superávit responde a la deuda, pero la variabilidad de la deuda la dominan el tipo de cambio real y el riesgo país.
+
+![Figura 6.3. Varianza de la deuda en 2035 por bloque de shocks. Participación de cada bloque de shocks estructurales en la varianza de la deuda simulada en 2035. Las barras de error son el intervalo de 90% entre réplicas de parámetros.](../tesis/figuras/fig6_3_varianza_por_bloque.png)
 
 ## 6.4 Contraste de H1b
 
@@ -92,3 +96,7 @@ Para saber por qué canal pasa el efecto, se repitió el escenario de 2022-2023 
 | FMI (2025), deuda federal bruta | 3,0% | | 74,2 |
 
 Entre corchetes, los intervalos de 90% del *bootstrap* de parámetros. Las filas a la manera del FMI no tienen intervalo porque ese procedimiento no estima parámetros.
+
+La Figura 6.4 resume la tabla: en todas las especificaciones, la barra de 2030 y su intervalo quedan por encima del 3% del FMI.
+
+![Figura 6.4. Probabilidad de no estabilización por especificación. A cinco y a diez años, con intervalos de 90% del bootstrap de parámetros, y el 3% del FMI (2025). La variante a la manera del FMI no tiene intervalo porque no estima parámetros.](../tesis/figuras/fig6_4_probabilidad_no_estabilizacion.png)

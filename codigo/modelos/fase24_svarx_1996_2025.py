@@ -202,7 +202,7 @@ def bootstrap(Y: pd.DataFrame, X: pd.DataFrame, base: dict, p: int, tam_fed: flo
             fallidas += 1
             continue
         fila = {"rho_bohn": rb["rho"]}
-        for h in (0, 4, 8, 20):
+        for h in range(horizonte + 1):
             for j, c in enumerate(ENDOG):
                 fila[f"fed_{c}_h{h}"] = rb["fed"][h, j]
         filas.append(fila)
@@ -256,8 +256,8 @@ def main() -> None:
     print(f"Reaccion fiscal (Bohn) rho={base['rho']:.4f} p={base['rho_p']:.4f} | bootstrap 90%: "
           f"[{q.loc['rho_bohn','p05']:.4f}, {q.loc['rho_bohn','p95']:.4f}]")
     print("Respuesta a +1 desvio FED (h=0,4,8,20) con banda 90%:")
-    print(q.loc[[i for i in q.index if i.startswith("fed_") and not i.startswith("fed_pb")]].round(3))
-    print(q.loc[[i for i in q.index if i.startswith("fed_pb")]].round(3))
+    sel = [i for i in q.index if i.startswith("fed_") and i.rsplit("_h", 1)[1] in ("0", "4", "8", "20")]
+    print(q.loc[sel].round(3))
     print("Diagnosticos:\n", diag.round(4).to_string(index=False))
 
 

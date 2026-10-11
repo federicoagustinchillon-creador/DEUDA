@@ -40,12 +40,14 @@ CAPITULOS: dict[str, str] = {
     "resultados.md": "06_resultados.tex",
     "discusion.md": "07_discusion.tex",
     "conclusiones.md": "08_conclusiones.tex",
+    "apendice.md": "09_apendice.tex",
 }
 
 
 def _limpiar(md: str) -> str:
     """Quita la numeracion manual de los titulos y la ruta de las figuras."""
     md = re.sub(r"^(#{1,6})\s+\d+(?:\.\d+)*\.?\s+", r"\1 ", md, flags=re.M)
+    md = re.sub(r"^(#{1,6})\s+[A-Z]\.\d+\s+", r"\1 ", md, flags=re.M)  # A.1, A.2 del apendice
     md = re.sub(r"!\[Figura \d+\.\d+\.\s*", "![", md)  # LaTeX numera la figura
     return md.replace("../tesis/figuras/", "")
 
@@ -65,12 +67,29 @@ def _cortes_texttt(tex: str) -> str:
     return re.sub(r"\\texttt\{([^{}]*)\}", cortar, tex)
 
 
+def _epigrafe_corto(tex: str) -> str:
+    """\\caption{Oracion 1. Resto} -> \\caption[Oracion 1]{Oracion 1. Resto}, para que el indice
+    de figuras muestre solo el titulo y no el epigrafe completo."""
+    salida, i = [], 0
+    while (k := tex.find("\\caption{", i)) != -1:
+        j, nivel = k + len("\\caption{"), 1
+        while nivel:
+            nivel += {"{": 1, "}": -1}.get(tex[j], 0)
+            j += 1
+        cuerpo = tex[k + len("\\caption{"): j - 1]
+        corto = re.split(r"(?<=[A-Za-záéíóú0-9)])\.\s+", cuerpo, maxsplit=1)[0].rstrip(".")
+        corto = re.sub(r"\s+", " ", corto)
+        salida.append(tex[i:k] + f"\\caption[{corto}]{{{cuerpo}}}")
+        i = j
+    return "".join(salida) + tex[i:]
+
+
 def _pandoc(md: str) -> str:
     r = subprocess.run(
         ["pandoc", "-f", "markdown-auto_identifiers", "-t", "latex", "--top-level-division=chapter"],
         input=md, capture_output=True, text=True, encoding="utf-8", check=True,
     )
-    return _cortes_texttt(r.stdout)
+    return _epigrafe_corto(_cortes_texttt(r.stdout))
 
 
 def generar() -> list[Path]:

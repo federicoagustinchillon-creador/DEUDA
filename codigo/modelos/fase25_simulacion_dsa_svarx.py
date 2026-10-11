@@ -63,6 +63,10 @@ TRIM = 4 * len(ANIOS)
 LAM = 13.0 / 64.1
 UMBRAL_FMI = 0.03  # FMI (2025), anexo II, cuadro 7: probabilidad de no estabilizacion 3,0%
 SEMILLA = 20261012
+# Identificacion: "bp" (Blanchard-Perotti + bloque sin orden, seccion 4.4) o "cholesky_fiscal_primero"
+# (robustez: Cholesky en el orden pb, crec, EMBI, TCRM, que le atribuye al shock fiscal toda la
+# covarianza contemporanea con las demas variables; es el orden mas desfavorable para H1a).
+IDENT = "bp"
 BLOQUES = {"fiscal": [0], "actividad": [1], "cambiario_y_riesgo": [2, 3]}
 
 
@@ -227,11 +231,18 @@ def simular_fmi(dr: pd.DataFrame, esc: pd.DataFrame, d0: float, alfa: float, N: 
     return {"d": d, "no_est_2030": no_est[2030], "no_est_2035": no_est[2035]}
 
 
+def impacto(u: np.ndarray) -> np.ndarray:
+    """Matriz S (u = S eps) segun la identificacion elegida en IDENT."""
+    if IDENT == "cholesky_fiscal_primero":
+        return np.linalg.cholesky(np.cov(u, rowvar=False))
+    return f24.identificar(u)
+
+
 def parametros(res, X_cols: list[str]) -> dict:
     """Extrae del VARX estimado los objetos que usa la simulacion."""
     fed_cols = [c for c in X_cols if c.startswith("dFED")]
     return {"coefs": res.coefs, "gamma_fed": res.params.loc[fed_cols].values.T,
-            "gamma_d": res.params.loc["deuda_l1"].values, "S": f24.identificar(res.resid.values)}
+            "gamma_d": res.params.loc["deuda_l1"].values, "S": impacto(res.resid.values)}
 
 
 def replicas(Y: pd.DataFrame, X: pd.DataFrame, p: int, B: int, rng) -> list[dict]:
@@ -263,6 +274,7 @@ def main() -> None:
     ap.add_argument("--N", type=int, default=400)
     ap.add_argument("--canal-domestico", action="store_true")
     ap.add_argument("--shocks", choices=["svarx", "fmi"], default="svarx")
+    ap.add_argument("--identificacion", choices=["bp", "cholesky_fiscal_primero"], default="bp")
     a = ap.parse_args()
     rng = np.random.default_rng(SEMILLA)
     TABLAS.mkdir(parents=True, exist_ok=True)
@@ -290,7 +302,9 @@ def main() -> None:
     p, _, _ = f24.elegir_rezagos(Y, X)
     Y, X = f24.recortar(Y, X, p)  # muestra efectiva comun 1998T2-2025T4
     dom = a.canal_domestico
-    suf = f"{a.deuda}_dom" if dom else a.deuda
+    global IDENT
+    IDENT = a.identificacion
+    suf = (f"{a.deuda}_dom" if dom else a.deuda) + ("_chol" if IDENT != "bp" else "")
     esc = escenario_fmi()
     d0, alfa, tcrm0 = condiciones_iniciales(a.deuda)
     sd_fed = float(pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"].diff().std(ddof=1))

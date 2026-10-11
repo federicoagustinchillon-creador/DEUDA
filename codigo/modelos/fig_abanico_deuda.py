@@ -5,7 +5,7 @@ Grafico de abanico de la deuda consolidada neta simulada (fase25, especificacion
 para el Capitulo 6. Bandas p5-p95, p10-p90 y p25-p75 y mediana, 2025-2035.
 
 Uso: python codigo/modelos/fig_abanico_deuda.py
-Salida: tesis/figuras/fig6_1_abanico_deuda_neta.png
+Salida: tesis/figuras/fig6_2_abanico_deuda_neta.png
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ import pandas as pd  # noqa: E402
 
 BASE = pathlib.Path(__file__).resolve().parent.parent.parent
 ENTRADA = BASE / "resultados" / "tablas" / "fase25_neta_fanchart.csv"
-SALIDA = BASE / "tesis" / "figuras" / "fig6_1_abanico_deuda_neta.png"
+SALIDA = BASE / "tesis" / "figuras" / "fig6_2_abanico_deuda_neta.png"
 
 
 def main() -> None:

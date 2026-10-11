@@ -12,6 +12,10 @@ El ancho del abanico de esta tesis en 2030 es de 19,4 puntos del PIB, contra 74,
 
 **El ancho depende de cómo se generan los shocks, no del perímetro.** Con el procedimiento del FMI aplicado a la deuda neta, el ancho es de 93,3 puntos, del mismo orden que el del FMI. Con el SVARX, la deuda bruta da 20,9 puntos, casi lo mismo que la neta. El perímetro mueve el ancho en uno o dos puntos y la forma de los shocks lo multiplica por cuatro.
 
+La Figura 7.1 compara los dos abanicos. Las medianas son casi iguales, porque las fija el escenario base; lo que cambia es la dispersión.
+
+![Figura 7.1. Abanicos con shocks del SVARX y con shocks a la manera del FMI. Deuda consolidada neta simulada, percentiles 5 y 95 y mediana (% del PIB). Los shocks a la manera del FMI son bloques de dos años de desvíos históricos, 1997-2025.](../tesis/figuras/fig7_1_abanico_svarx_vs_fmi.png)
+
 **Qué ensancha el abanico del procedimiento del FMI.** El ejercicio de la Tabla 7.1 repite esa variante quitando el año 2002 o fijando cada impulsor en su media histórica.
 
 **Tabla 7.1. Diagnóstico de la variante con shocks a la manera del FMI (deuda neta)**
@@ -28,6 +32,8 @@ El ancho del abanico de esta tesis en 2030 es de 19,4 puntos del PIB, contra 74,
 Fuente: `codigo/modelos/fase25b_diagnostico_abanico_fmi.py`.
 
 Un solo año, 2002, aporta un cuarto del ancho: la depreciación real de ese año (145%) aparece, con probabilidad uno en catorce, en cada bloque de dos años sorteado. La probabilidad de no estabilización, en cambio, depende sobre todo de la tasa real efectiva. Esa tasa pasó de valores positivos durante la convertibilidad (entre 6% y 9% en 1997-2001) a valores muy negativos con la inflación posterior (-56% en 2023 y -66% en 2024). El procedimiento del FMI mide los shocks como desvíos respecto de una única media para todo el período, de -17%. Así, un año como 1999 cuenta como un shock de 26 puntos de tasa real, y puede aparecer en 2030 junto con cualquier otro año de la muestra, aunque correspondan a regímenes monetarios distintos. Es una manifestación del problema que el propio FMI y el ESM (2023) señalan como desafío de su método: que la historia usada para generar el abanico sea representativa del futuro.
+
+![Figura 7.2. Impulsores anuales de la deuda que usa la variante a la manera del FMI, 1997-2025. La tasa real efectiva pasa de valores positivos en la convertibilidad a valores muy negativos con la inflación posterior.](../tesis/figuras/fig7_2_impulsores_historicos.png)
 
 **Qué hace distinto el SVARX.** El SVARX trata los cambios de régimen con las variables binarias de los quiebres estructurales (2001, 2006 y 2018) y separa lo que la dinámica del sistema permite anticipar de lo que es sorpresa. Solo remuestrea las sorpresas, que son menores que los desvíos respecto de una media de largo plazo. Además, la tasa en dólares se reprecia de a poco, a medida que vence la deuda. El resultado es un abanico más angosto, pero con una forma que importa: los shocks cambiarios y de riesgo son persistentes y están correlacionados entre sí, y por eso, cuando ocurren, empujan la deuda hacia arriba durante varios años seguidos. Con esa persistencia, una dispersión menor alcanza para que en 12% de las trayectorias el superávit del escenario base no frene la suba de la deuda en 2030.
 

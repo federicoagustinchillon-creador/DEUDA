@@ -289,6 +289,19 @@ tenencia nominal piso; 68,31 con valor de libros). La identidad que el
 FMI usa en el Cuadro 2 (línea 6 = 2 + 4 − 5) también se cumple con sus
 cifras: 92,9 + 18,4 − 0,5 = 110,8 y 51,4 + 2,2 − 2,1 = 51,5.
 
+La Figura 5.1 muestra las tres series de deuda consolidada y los dos
+valores de control del FMI. Las tres se mueven juntas; la distancia
+entre la bruta y las netas es la deuda del Tesoro en poder del BCRA neta
+de sus pasivos.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Deuda pública consolidada, 1996-2025 (\% del PIB de los últimos cuatro trimestres). Los puntos son la deuda consolidada neta del FMI (2025, anexo II, cuadro 2) a diciembre de 2023 y de 2024.}]{fig5_1_deuda_consolidada_1996_2025.png}}
+\caption[Deuda pública consolidada, 1996-2025 (\% del PIB de los últimos cuatro trimestres)]{Deuda pública consolidada, 1996-2025 (\% del PIB de los últimos
+cuatro trimestres). Los puntos son la deuda consolidada neta del FMI
+(2025, anexo II, cuadro 2) a diciembre de 2023 y de 2024.}
+\end{figure}
+
 \section{Resultado primario}
 
 \begin{itemize}
@@ -501,6 +514,26 @@ Yahoo Finance descargado con \texttt{yfinance}
 Tiene cobertura real desde 1996, sin faltantes (120 observaciones).
 Entra como exógena en nivel (Adler y Sosa, 2013, citados en el Capítulo
 4).
+
+Las Figuras 5.2 y 5.3 muestran las cuatro variables endógenas y las dos
+exógenas del SVARX en la muestra completa.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Variables endógenas del SVARX, 1996-2025. El crecimiento es la variación trimestral del PIB real sin desestacionalizar; la estacionalidad la absorben las variables binarias del modelo. Las líneas punteadas marcan los quiebres de Bai y Perron.}]{fig5_2_variables_endogenas.png}}
+\caption[Variables endógenas del SVARX, 1996-2025]{Variables endógenas del SVARX, 1996-2025. El crecimiento es la
+variación trimestral del PIB real sin desestacionalizar; la
+estacionalidad la absorben las variables binarias del modelo. Las líneas
+punteadas marcan los quiebres de Bai y Perron.}
+\end{figure}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Variables exógenas del SVARX. Arriba, tasa de política de la Reserva Federal: tasa de fondos federales y, en el límite cero, tasa sombra de Wu y Xia (2016). Abajo, VIX. Promedios trimestrales.}]{fig5_3_fed_y_vix.png}}
+\caption[Variables exógenas del SVARX]{Variables exógenas del SVARX. Arriba, tasa de política de la
+Reserva Federal: tasa de fondos federales y, en el límite cero, tasa
+sombra de Wu y Xia (2016). Abajo, VIX. Promedios trimestrales.}
+\end{figure}
 
 \section{Variables que figuran en la base pero no entran en el sistema}
 

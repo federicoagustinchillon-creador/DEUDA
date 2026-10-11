@@ -146,16 +146,34 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 - Revisión del grupo y del director, y pasaje al formato final.
 
-## 5. Datos pendientes de confirmar
+## 5. Qué falta: tareas, verificaciones y decisiones (actualizado el 11/10/2026)
 
-| Qué | Dónde se usa |
+### 5.1 Datos que hay que bajar o confirmar
+
+| Qué | Por qué importa | Cómo se resuelve | Estado |
+|---|---|---|---|
+| Títulos públicos en cartera del FGS (ANSES), 2008-2025 | La deuda neta no descuenta la deuda del Tesoro en manos del FGS. Por eso queda unos 8 a 10 puntos del PIB por encima de la consolidada del FMI (119,0 contra 110,8 en 2023; 61,1 contra 51,5 en 2024). Según una nota de prensa no verificada, la cartera de títulos del FGS rondaba los USD 44.000 millones en octubre de 2024 (cerca de 7,7% del PIB): del orden de la brecha. | ANSES bloquea la descarga automática (protección anti-bots); hay que bajar los PDF a mano desde el navegador y guardarlos en `datos/crudos/fgs/`. Archivos: Informe Estadístico Mensual de enero de 2026 (https://www.anses.gob.ar/sites/default/files/archivo/2026-03/IEM-FGS-2026-01.pdf), Anuario 2024 (https://www.anses.gob.ar/sites/default/files/inline-files/Anuario%202024.pdf), Consejo del FGS de diciembre de 2025 (https://www.anses.gob.ar/sites/default/files/archivo/2026-02/Consejo%20FGS-Diciembre-2025.pdf) y, para años anteriores, los anuarios e informes de la página del FGS (https://www.anses.gob.ar/fgs-fondo-de-garantia-de-sustentabilidad). De cada uno se toma la fila "Títulos Públicos Nacionales" al cierre de cada año o trimestre. El script `codigo/ingesta_datos/construir_tenencias_fgs.py` ya está listo para leerlos. | Pendiente: bajar a mano |
+| Deuda en manos de Agencias del Sector Público (Secretaría de Finanzas) | Sirve como dato descriptivo de la deuda intra-sector público. No se usa para restar, porque incluye otras entidades y duplicaría parte de lo que ya se consolida. | Ya está en `datos/procesados/tenencias_fgs_1996_2025.csv` (trimestral 2021-2025; anual en % del PIB 2004-2025), con los PDF de Finanzas en `datos/crudos/fgs/`. | Hecho |
+| LEFI entre julio de 2024 y julio de 2025 (11,1 billones de pesos en diciembre de 2024, según el BCRA) | La serie de pasivos del BCRA no las incluye. Si tampoco están en la deuda del Tesoro que usamos, faltan en la consolidada esos trimestres, unos 2 puntos del PIB a fines de 2024. No afectan el punto de partida de diciembre de 2025, porque para entonces estaban en cero. | Revisar en los informes trimestrales de la Secretaría de Finanzas si las LEFI se cuentan como deuda bruta de la Administración Central. Si no, sumarlas a los pasivos consolidados de esos trimestres y reestimar. | Pendiente |
+
+### 5.2 Verificaciones de citas
+
+| Qué | Estado |
 |---|---|
-| Tenencias de títulos públicos del FGS (ANSES no permite la descarga automática; hay que bajarlas a mano). Fuente: Informes Estadísticos Mensuales en anses.gob.ar; sustituto: deuda en poder de Agencias del Sector Público, informes trimestrales de la Secretaría de Finanzas | Deuda neta (Capítulo 5) |
-| Si las LEFI (julio de 2024 a julio de 2025; 11,1 billones de pesos en diciembre de 2024, según el Informe Monetario Mensual del BCRA) están en la deuda del Tesoro que usamos. La serie de pasivos del BCRA no las incluye; si tampoco están en la deuda del SPNF, faltan en la consolidada esos trimestres | Deuda consolidada (Capítulo 5) |
+| Braun y Joy (1968), restricción externa | No hay copia abierta (Oxford y JSTOR). Si alguien tiene acceso por la facultad, se verifica contra el original; si no, se cita a través de la fuente secundaria (Katz y Kosacoff, CEPAL) indicándolo. |
+| Adler, Djigbenou y Sosa (2016) | Se verificó sobre el documento de trabajo del FMI (WP/14/60), no sobre la versión de la revista. Conviene leer la versión publicada si el tribunal lo exige. |
+| Las otras siete citas del marco teórico | Verificadas contra el texto completo, con página (ver `verificacion_citas_marco.md`). |
 
-## 6. Decisiones abiertas
+### 5.3 Decisiones abiertas para el grupo
 
-- Ninguna de las que bloqueaban el trabajo. Las de tamaño del shock y horizonte quedaron resueltas (decisiones 12 y 13).
+1. **Robustez de H1a a la identificación.** Con la identificación principal (Blanchard y Perotti para el shock fiscal), los shocks no fiscales superan al fiscal en el 99% de las réplicas, con un intervalo de 90% de [17,5; 93,0]. Con una identificación de Cholesky que ordena el shock fiscal primero, se le atribuye a lo fiscal toda la covarianza contemporánea con las demás variables; es el ordenamiento más favorable a lo fiscal. Con ese ordenamiento, la participación fiscal sube a 33%, la cambiaria y de riesgo queda en 59%, y lo no fiscal supera a lo fiscal en el 78% de las réplicas. Pero el intervalo de la diferencia, [-43; 87], incluye el cero. H1b y H2 no cambian. Hay que decidir cómo se presenta: la propuesta es informarlo en la sección de robustez y en las limitaciones, y decir que H1a depende de identificar el shock fiscal con la elasticidad de Blanchard y Perotti, que es la que justifica la sección 4.4. No se escribió todavía en la tesis.
+2. **Deuda neta con o sin FGS.** Cuando esté la serie del FGS, hay que definir si la deuda neta sin el FGS pasa a ser la especificación principal, porque es la más parecida a la del FMI, o si queda como robustez. En los dos casos hay que reestimar y volver a simular.
+
+### 5.4 Otras tareas
+
+- Revisión del texto completo por el grupo y por Pablo.
+- Confirmar en el reglamento de tesis de la FCE si hace falta un resumen en inglés y una extensión máxima.
+- Hecho: se borraron de `tesis/figuras/` las figuras de los modelos viejos que ya no usaba ningún capítulo (quedan en el historial de git).
 
 ## Referencias de este documento
 

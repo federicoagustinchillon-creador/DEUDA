@@ -1,0 +1,495 @@
+Deuda de la Administración
+Central
+
+IV Trimestre 2023
+
+Secretaría de  Subsecretaría de  Oficina Nacional de
+Finanzas       Financiamiento    Crédito Público
+Índice  1 Notas Metodológicas
+        2 Evolución de la Deuda Bruta
+        3 Deuda Bruta por Acreedor y Residencia
+        4 Deuda Bruta por Moneda
+        5 Deuda Bruta por Legislación
+        6 Estructura de la Deuda Bruta
+        7 Perfiles de vencimiento
+Índice  Notas Metodológicas
+
+   1
+   A  Siguiendo las recomendaciones de los manuales estadísticos y a partir de definiciones internacionales, se utiliza el dólar como unidad de cuenta para dar
+      comparabilidad y estandarizar las estadísticas. De esta forma, todas las cifras se expresan en su equivalente en dólares aplicando el tipo de cambio del último día hábil
+3     (Com. 3500 del BCRA) del período para convertir a dicha moneda las restantes deudas emitidas y pagaderas en: pesos, derechos especiales de giro (DEG), euro, yen,
+      etc.
+
+CapítulSoe de3fine a la Deuda Bruta de la Administración Central como la Deuda Performing, Atrasos y Deuda Elegible pendiente de reestructuración. Esta última incluye
+
+      B capital, mora de intereses e intereses compensatorios estimados, devengados e impagos con posterioridad a la fecha de vencimiento de cada título. Deuda Pública
+
+(título)Performing se refiere a aquella que se encuentra en situación de pago normal.
+
+C Atrasos: Deuda en situación de pago diferido que no fuera elegible para los canjes 2005 y 2010 (Dtos. 1735/04 y 563/10).
+
+D PBI: Datos publicados por la Dirección Nacional de Cuentas Nacionales, del Instituto Nacional de Estadísticas y Censos (INDEC). Desde 2004 a 2020 los datos para el
+
+        PBI son definitivos. Para el año 2021, los datos son provisorios y para 2022 y 2023, los datos son preliminares.
+         Deuda de la Administración Central en manos de Agencias del sector Público: Incluye títulos públicos, préstamos y anticipos otorgados o en cartera de Organismos
+
+E del Sector Público Nacional.
+F CAF, OFID, BEI y Club de Paris). Deuda de la Administración Central en manos de Organismos Multilaterales o Bilaterales: Incluye préstamos otorgados por FMI, BID, BIRF, BCIE, FONPLATA, FIDA,
+3G  Deuda de la Administración Central en manos del Sector Privado: calculado como la diferencia entre la Deuda Bruta de la Administración Central y la deuda en
+    manos del Sector Público (E) y la deuda en manos de Organismos Multilaterales y Bilaterales (F).
+
+Capítulo 3
+
+               Valores negociables vinculados al PBI: informados por valor remanente total. Es la diferencia entre el máximo a pagar de 48 unidades por cada 100 de valor nocional
+
+      H y la suma de los montos pagados hasta la actualidad, de acuerdo con las condiciones establecidas en las respectivas normas de emisión.
+
+(título)
+
+       Deuda Pública Externa: se define deuda externa siguiendo el concepto de "residencia" utilizado por INDEC. No se incluye la Deuda elegible Pendiente de
+
+I Reestructuración.
+
+J Deuda en Moneda Nacional: incluye deuda a pagar en pesos, emitida en pesos, pesos ajustables por CER y dólar linked.
+2 Evolución de la Deuda
+            Bruta
+     Evolución de la Deuda Bruta de la Administración Central
+
+2
+
+ 450.000                                                                                                                                                 157,9%      170%
+                                                                                                                                             396.555                 150%
+Capítulo 2                                                                                                                                                           130%
+                                                                                                                                            363.233         370.673  110%
+ 400.000                                                                                                                                                             90%
+                                                                                                                    332.192         335.582                          70%
+(título)                                                                                                                                                             50%
+                                                                                                                             323.065
+ 350.000
+
+                                                                                                      320.935
+
+300.000  118,1%                                                                                     275.446
+250.000                                                                                    240.665
+200.000                                                                         239.326
+150.000
+                                             182.080                              223.439                                    89,8%
+                                                                         216.920
+
+         192.294 80,5%                   179.133                197.154                                             85,2%           103,8%           85,2%
+                               176.870                181.621
+
+                 154.270165.111
+
+                                                                                                             56,5%                           80,5%
+
+100.000          70,6%                       55,4%                                      52,6%  53,1%
+ 50.000                                                                         44,7%
+                               62,1%
+                                                      43,5%  40,4%       43,5%
+                                      53,8%
+
+0 38,9% 30%
+      2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023
+
+                                                             En mill. de U.$.S             En % del PBI
+     Evolución de la Deuda Bruta de la Administración Central
+
+2
+
+   450.000                                                                320.935  332.192  323.065  335.582  363.233            396.555  370.673
+                                                                                     2.805    2.435    2.500    2.439              2.388    2.346
+Capítulo 2                                                       275.446  2.877
+(t4í0t0u.00l0o)                                                   8.468            329.387  320.630  333.082  360.793            394.167  368.328
+                                               240.665
+   350.000          144.222  154.270  181.621   17.962           266.978 318.058
+   300.000          144.222   24.010   14.558
+   250.000                                     222.703
+   200.000                   130.260  167.063
+   150.000 129.750
+   100.000
+
+    50.000
+
+0                   2001     2005     2010     2015              2016     2017     2018     2019     2020     2021               2022     2023
+         2000
+
+                             Deuda Pública Performing + Atrasos                    Deuda elegible pendiente de Reestructuración
+3 Deuda Bruta por Acreedor
+            y Residencia
+3 Deuda Bruta de la Administración Central por acreedor
+
+Capítulo 3                                                                31-12-22                                           31-12-23
+(título)
+                                                            En       %       % PBI              % PBI         En       %       % PBI      % PBI Var. Absoluta Var. Relativa
+                Deuda Pública Nacional Bruta           mill de U$S  Total  -TC fin del     -TC promedio  mill de U$S  Total  -TC fin del
+                                                                           período-                                          período-     -TC promedio (b) - (a) [(b) / (a) - 1]
+                Agencias del Sector Público                 (a)                                anual-         (b)
+                Sector Privado                                                                                                            anual- en mill de U$S  (%)
+                 Deuda Elegible Pendiente de             181.945
+                 Reestructuración                                   45,9%           39,1%  28,9%         165.934      44,8%  70,7%        25,8%  (16.011)        -8,8%
+                Multilaterales y Bilaterales             134.050    33,8%           28,8%  21,3%         125.853      34,0%  53,6%        19,6%  (8.197)         -6,1%
+                Total Deuda Pública Bruta                           0,6%            0,5%   0,4%                       0,6%    1,0%        0,4%                   -1,8%
+                                                          2.388     20,3%           17,3%  12,8%          2.346       21,3%  33,6%        12,3%    (43)          -2,1%
+                Valores Negociables Vinculados al PBI               100%            85,2%  62,9%         78.887       100%   157,9%       57,7%  (1.674)         -6,5%
+                                                         80.561                                          370.673                                 (25.882)
+
+                                                         396.555
+
+                                                       12.537       100%   2,7%            2,0%          12.688       100%   5,4%         2,0%   151             1,2%
+     Evolución de la Deuda Bruta de la Administración Central por
+3 acreedor en % del PBI
+
+      160%                                                                                                                                                          157,9%
+
+Capítulo 3                                      Deuda con Agencias del Sector Público
+(tít1u40%lo)                                    Deuda con Organismos Multilaterales y Bilaterales
+                                                Deuda con Privados -Performing, Excluye Elegible Pendiente de Reestructuración-
+                118,1%                          Deuda con Privados -Elegible Pendiente de Reestructuración-
+      120%
+                                                                                                                                                                    70,7%
+                 4,0%
+                                                                                                                                               103,8%
+      100% 23,4%
+                                                                                                                                 85,2%  89,8%                 85,2%
+                           80,5%                                                                                                                                        33,6%
+       80% 5,9%                                                                                                                                41,5%   80,5%
+                                                                                                                                                              39,1%
+                           17,0%  70,6%  62,1%                                                                                   32,4%  35,9%
+       60%                        10,1%  9,1%
+                                  10,0%  8,4%   53,8%  55,4%                                     52,6%  53,1%  56,5%             14,9%                 35,0%
+                 90,6%                          18,0%  18,6%
+       40%                        39,0%  34,0%  7,3%   8,1%   43,5%         40,4%  43,5%  44,7%  30,1%  28,1%  27,4%             37,2%         23,7%
+                                                19,2%  18,8%                                                                     0,7%
+                           45,0%  11,6%  10,7%  9,3%   9,9%   18,2%  38,9%  21,4%  23,6%  25,2%  6,3%   5,4%   5,2%              2018   20,4%
+                                  2006   2007   2008   2009   6,6%                               12,2%  17,9%  23,4%
+       20%                                                    15,2%  18,7%  5,3%   5,8%   5,4%   3,9%   1,6%   0,5%                                    16,1%  17,3%
+                                                              3,5%          10,7%  10,8%  10,8%  2015   2016   2017                                                     52,6%
+                           12,5%                              2010   5,6%   3,0%   3,4%   3,3%                                          32,8% 37,7% 28,9%
+         0% 0,1%                                                     11,6%  2012   2013   2014                                                                28,3%
+                                                                     3,0%
+                 2004 2005                                           2011                                                               0,7%   0,8%    0,5%   0,5%  1,0%
+                                                                                                                                        2019   2020    2021   2022  2023
+       Deuda Bruta de la Administración Central en % del PBI
+
+160%                                                                                                                                                        157,9%
+140%
+                                              Deuda Pública con Privados -Perfoming y Elegible Pendiente de Reestructuración-
+                                              Deuda Pública Bruta
+                                              Deuda Pública Externa
+
+          118,1%
+120%
+
+                                                                                                                                      103,8%
+
+100%   90,7%                                                                                                  85,2%            89,8%                 85,2%
+ 80%
+ 60%              80,5%
+ 40%
+ 20%                     70,6%                                                                                                        80,5%
+   0%                          62,1%
+       68,5%                                                                                         56,5%
+                          50,5%                                                                53,1%
+                  57,6%                53,8%  55,4%                                     52,6%                                                               59,2%
+                                                                                                                                                              53,6%
+                                                     43,5%                43,5%  44,7%                                         43,3%  47,0%
+                                                                                                                               33,5%                        2023
+                         44,6%                              38,9%  40,4%                                      41,3%
+
+                                                                                                                                              32,0%  31,1%
+                                                                                                                                                     28,8%
+                                       28,5%                                                   19,5%23,9%                             38,5%
+                                                                                                 17,7% 22,8%
+       31,8%                                  28,7% 18,7%                               16,2%                 38,0%
+                24,1%                                       14,6%                       13,9%
+                                                                   13,7%  14,2%  14,1%                                                       29,4%
+                                                                                 12,6%
+                         21,8%         16,7%         14,6% 12,0% 11,2% 11,8%
+                                16,7%
+
+       2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018                                              2019 2020 2021 2022
+4 Deuda Bruta por Moneda
+      Deuda Bruta de la Administración Central en % del PBI
+
+160%                                                                                                                                             157,9%
+
+140% Moneda Extranjera Moneda Nacional                                                                                                           44,2%
+
+120%  118,1%            70,6%  62,1%  53,8% 55,4%                                     52,6%  53,1%  56,5%  85,2%          103,8%   80,5%  85,2%  113,7%
+100%  28,7%             28,3%  24,2%  21,0% 20,8%                                     16,1%  16,8%  17,7%  20,1%  89,8%            23,9%  28,2%
+                                                   43,5%  38,9%  40,4%  43,5%  44,7%
+ 80%             80,5%  42,3%  37,9%  32,8% 34,7%  16,3%  14,1%  15,1%  15,0%  14,6%  36,4%  36,3%  38,8%  65,1%            24,4%  56,6%  57,0%
+ 60%             33,1%                                                                                            19,9%
+ 40%  89,4%                                        27,2%  24,8%  25,3%  28,5%  30,1%
+ 20%             47,4%                                                                                                      79,3%
+                                                                                                                  69,9%
+
+0%
+        2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023
+      Composición de la Deuda Bruta de la Administración Central, en % por
+      moneda
+
+100%
+
+90% 24,3%                                                                                  23,6% 22,2% 23,5%  29,7% 33,1% 28,0%
+
+80%        41,1% 40,1%  39,0% 39,1% 37,5% 37,4% 36,3% 37,4% 34,6% 32,6% 30,7% 31,6% 31,3%
+
+70%
+
+60%
+
+50%
+
+40% 75,7%                                                                                  76,4% 77,8% 76,5%  70,3% 66,9% 72,0%
+
+30%        58,9% 59,9%  61,0% 60,9% 62,5% 62,6% 63,7% 62,6% 65,4% 67,4% 69,3% 68,4% 68,7%
+
+20%
+
+10%
+
+0%
+        2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023
+
+                        Moneda Extranjera  Moneda Nacional
+5 Deuda Bruta por
+            Legislación
+Deuda Bruta de la Administración Central por Legislación
+
+             DEUDA BRUTA                                                                                                             DEUDA BRUTA
+             U$S 370.673 M                                                                         EXCLUYENDO DEUDA ELEGIBLE PENDIENTE DE REESTRUCTURACIÓN
+
+Legislación                                                                                                                         U$S 368.328 M
+Extranjera
+                                                                                          Legislación
+  40,1%                                                                                   Extranjera
+
+                            Legislación                                                     39,7%
+                             Nacional
+                                                                                                                                                                Legislación
+                              59,9%                                                                                                                              Nacional
+
+                                                                                                                                                                   60,3%
+
+                          DEUDA BRUTA EN PODER DEL SECTOR PRIVADO                                                  DEUDA BRUTA EN PODER DEL SECTOR PÚBLICO
+              EXCLUYENDO DEUDA ELEGIBLE PENDIENTE DE REESTRUCTURACIÓN                                  EXCLUYENDO DEUDA ELEGIBLE PENDIENTE DE REESTRUCTURACIÓN
+
+                                               U$S 123.507 M                                                                           U$S 165.934 M
+
+                                                                             Legislación  Legislación  Legislación
+                                                                               Nacional   Extranjera    Nacional
+
+                                                                                47,3%        1,4%        98,6%
+
+Legislación
+Extranjera
+
+  52,7%
+6 Estructura de la Deuda
+            Bruta
+Estructura de la Deuda Bruta de la Administración Central (Excluye Deuda
+
+Elegible Pendiente de Reestructuración)
+
+DEUDA EN SITUACIÓN DE PAGO NORMAL POR PLAZO                                             DEUDA POR TIPO DE INSTRUMENTO
+                        U$S 368.225 M
+                                                                                        U$S 368.328 M                  Préstamos
+
+                                                                 2026-2030  Títulos                    Garantizados
+                                                                   23,2%    Públicos
+2024-2025                                                                    74,7%                                     0,1%
+  37,5%
+                                                                                                                       Org. Internacionales
+                                                                                                                               20,1%
+
+                                                                                                                                   Org. Oficiales
+                                                                                                                                        1,3%
+
+2041-2089                                                        2031-2040                                             Letras del  Otros
+   2,2%                                                            37,1%                                                Tesoro     2,1%
+                                                                                                                         1,7%
+
+Pesos Dólar                            DEUDA POR TIPO DE MONEDA                         DEUDA POR TIPO DE TASA
+   Linked                                       U$S 368.328 M                                  U$S 368.328 M
+   12,9%
+                                                                 Dólares                                                      Deuda con
+                                                                 58,8%                                                       Tasa Variable
+
+                                                                                                                                 38,1%
+
+     Pesos                                                                  Deuda con
+ajustables por                                                               Tasa Fija
+                                                                              45,7%
+      CER
+    12,5%
+
+Pesos                           Otros   DEG   Euros                                                                    Deuda con
+2,7%                            0,2%   11,1%  1,8%                                                                     Tasa Cero
+
+                                                                                                                         16,1%
+
+(1) A partir de Enero de 2024.
+Estructura de la Deuda Bruta de la Administración Central
+en poder del Sector Privado
+
+(Excluye Deuda Elegible Pendiente de Reestructuración)
+
+          DEUDA EN SITUACIÓN DE PAGO NORMAL POR PLAZO                                                          DEUDA POR TIPO DE INSTRUMENTO
+                                  U$S 123.465M                                                                              U$S 123.507 M
+
+                                                              2026-2030                               Títulos                                         Préstamos
+                                                                 29,9%                               Públicos                                       Garantizados
+                                                                                                      91,9%
+2024-2025                                                                                                                                                0,2%
+  30,0%                                                                                        Deuda con                                            Otros
+                                                                                               Tasa Cero                                            5,2%
+2041-2089                                                                     2031-2040                        DEUDA POR TIPO DE TASA
+   1,3%                                                                          38,8%           17,1%                U$S 123.507 M           Letras del
+                                                                                                                                               Tesoro
+    Pesos Dólar                       DEUDA POR TIPO DE MONEDA                                                                                  2,8%
+       Linked                                  U$S 123.507 M
+        11,9%                                                                                                                                    Deuda con
+                                                                                      Dólares                                                     Tasa Fija
+                                                                                       69,2%                                                        82,0%
+
+Pesos
+
+ajustables por
+
+ CER   Pesos                          Otros                                                    Deuda con Tasa
+11,6%  2,6% Euros                     0,2%                                                         Variable
+                                                                                                     0,9%
+                                4,6%
+
+(1) A partir de Enero de 2024.
+Estructura de la Deuda Bruta de la Administración Central
+en poder del Sector Público
+
+(Excluye Deuda Elegible Pendiente de Reestructuración)
+
+ DEUDA EN SITUACIÓN DE PAGO NORMAL POR PLAZO                             Títulos        DEUDA POR TIPO DE INSTRUMENTO
+                         U$S 165.873 M                                   Públicos                   U$S 165.934 M
+                                                                          97,3%
+2024-2025                                                                                                                              Préstamos
+  54,1%                                                                                                                               Garantizados
+
+                                                              2026-2030                                                                    0,1%
+                                                                 7,0%                                                                      Otros
+                                                                                                                                           0,8%
+2041-2089                                                 2031-2040                                                                  Letras del
+   1,6%                                                     37,4%                                                                     Tesoro
+                                                                                                                                        1,7%
+
+                                DEUDA POR TIPO DE MONEDA                                DEUDA POR TIPO DE TASA
+                                         U$S 165.934 M                                         U$S 165.934 M
+
+                                                          Dólares         Deuda con                                         Deuda con
+                                                          56,9%          Tasa Variable                                      Tasa Cero
+
+                                                             Pesos           40,9%                                            23,1%
+                                                              4,1%
+Pesos Dólar
+   Linked
+   19,8%
+
+                                     Pesos                                                                      Deuda con
+                                ajustables por                                                                   Tasa Fija
+                                                                                                                  36,1%
+                                      CER
+                                    19,2%
+
+(1) A partir de Enero de 2024.
+7 Perfiles de Vencimientos
+      Deuda Bruta de la Administración Central por Acreedor (1)
+
+         Capital 2024-2047
+
+     45.000
+
+     40.000
+
+     35.000
+
+     30.000
+
+     25.000
+
+     20.000
+
+     15.000
+
+     10.000
+
+      5.000
+
+            0
+                 2024 2025 2026 2027 2028 2029 2030 2031 2032 2033 2034 2035 2036 2037 2038 2039 2040 2041 2042 2043 2044 2045 2046 2047
+
+                                                      Sector Público² Sector Privado Multilaterales y Bilaterales
+
+(1) El perfil de vencimientos estático incluye las obligaciones proyectadas de acuerdo a los compromisos firmados al 31-12-2023, con los tipos de cambio, CER y tasas de interés vigentes a dicha fecha.
+(2) No incluye vencimientos de adelantos transitorios y letras del tesoro con el Sector Público Nacional.
+      Deuda Bruta de la Administración Central por Acreedor (1)
+
+         Interés 2024-2047
+
+     5.500
+     5.000
+     4.500
+     4.000
+     3.500
+     3.000
+     2.500
+     2.000
+     1.500
+     1.000
+
+        500
+           0
+                2024 2025 2026 2027 2028 2029 2030 2031 2032 2033 2034 2035 2036 2037 2038 2039 2040 2041 2042 2043 2044 2045 2046 2047
+
+                                                      Sector Público² Sector Privado Multilaterales y Bilaterales
+
+(1) El perfil de vencimientos estático incluye las obligaciones proyectadas de acuerdo a los compromisos firmados al 31-12-2023, con los tipos de cambio, CER y tasas de interés vigentes a dicha fecha.
+(2) No incluye vencimientos de adelantos transitorios y letras del tesoro con el Sector Público Nacional.
+      Deuda Bruta de la Administración Central en poder del Sector Privado
+
+       Capital 2024-2047
+
+25.000
+22.500
+20.000
+17.500
+15.000
+12.500
+10.000
+
+ 7.500
+ 5.000
+ 2.500
+
+      0
+            2024 2025 2026 2027 2028 2029 2030 2031 2032 2033 2034 2035 2036 2037 2038 2039 2040 2041 2042 2043 2044 2045 2046 2047
+                                                                                   Moneda Nacional Moneda Extranjera
+     Deuda Bruta de la Administración Central en poder del Sector Privado
+
+      Interés 2024-2047
+
+3.000
+
+2.500
+
+2.000
+
+1.500
+
+1.000
+
+  500
+
+     0
+          2024 2025 2026 2027 2028 2029 2030 2031 2032 2033 2034 2035 2036 2037 2038 2039 2040 2041 2042 2043 2044 2045 2046 2047
+                                                                                 Moneda Nacional Moneda Extranjera
+
