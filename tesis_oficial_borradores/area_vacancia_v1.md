@@ -1,4 +1,7 @@
-# Área de vacancia (versión 1, borrador para revisar)
+# Área de vacancia (versión 1, SUPERADA)
+
+> Superada por `antecedentes_v3.md`, sección 2.9, que incorpora lo verificado en FMI (2025),
+> Informe de País 25/95, anexo II. Se conserva solo como historial.
 
 Reemplaza el "Área de vacancia" de `Introduccion_corregida.docx` (Santiago) y se fusiona con la
 sección `sec:vacancia` de `tesis/capitulos/02_estado_del_arte.tex`. Las marcas `[VERIFICAR]` son

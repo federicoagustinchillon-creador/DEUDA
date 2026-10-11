@@ -30,9 +30,28 @@ SALIDA = BASE / "para_el_grupo"
 
 ARCHIVOS: dict[str, str] = {
     "plan_de_labor_grupo.md": "Plan_de_labor.docx",
-    "introduccion_v3.md": "Introduccion_v3.docx",
-    "area_vacancia_v1.md": "Area_de_vacancia_v1.docx",
+    "_capitulos_1_2_v3.md": "Introduccion_y_Antecedentes_v3.docx",
 }
+
+# Documento unico para el grupo: cuerpo de la Introduccion (secciones 1.1 a 1.8, sin el
+# encabezado interno ni las notas de trabajo del borrador), Antecedentes con la vacancia,
+# y al final referencias y notas para el grupo.
+TITULO_CAP_1_2 = "% Introducción y Antecedentes (versión 3, borrador para el grupo)\n\n"
+
+
+def armar_capitulos_1_2() -> Path:
+    """Concatena los borradores de los capitulos 1 y 2 en un unico Markdown temporal."""
+    intro = (BASE / "introduccion_v3.md").read_text(encoding="utf-8")
+    inicio = intro.index("## 1.1 Contextualización")
+    fin = intro.index("## Referencias citadas en la Introducción")
+    cuerpo_intro = intro[inicio:fin].rstrip().rstrip("-").rstrip()
+    antecedentes = (BASE / "antecedentes_v3.md").read_text(encoding="utf-8")
+    refs_notas = (BASE / "referencias_y_notas_cap1_2_v3.md").read_text(encoding="utf-8")
+    texto = (TITULO_CAP_1_2 + "# 1. Introducción\n\n" + cuerpo_intro + "\n\n"
+             + antecedentes + "\n\n" + refs_notas)
+    destino = BASE / "_capitulos_1_2_v3.md"
+    destino.write_text(texto, encoding="utf-8")
+    return destino
 
 FUENTE = "Calibri"
 
@@ -113,6 +132,7 @@ def bordes_finos(ruta: Path) -> None:
 
 def main() -> None:
     SALIDA.mkdir(exist_ok=True)
+    temporal = armar_capitulos_1_2()
     with tempfile.TemporaryDirectory() as tmp:
         referencia = Path(tmp) / "referencia.docx"
         construir_referencia(referencia)
@@ -125,6 +145,7 @@ def main() -> None:
             )
             bordes_finos(ruta_salida)
             print(f"[OK] {ruta_salida.relative_to(BASE.parent)}")
+    temporal.unlink()
 
 
 if __name__ == "__main__":

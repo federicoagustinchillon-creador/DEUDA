@@ -1,6 +1,6 @@
 # Plan de labor de la tesis
 
-Documento de trabajo del grupo. Versión del 10 de octubre de 2026.
+Documento de trabajo del grupo. Versión 2, del 10 de octubre de 2026.
 
 ## 1. Para qué sirve este documento
 
@@ -32,6 +32,65 @@ pendiente.
 - El perímetro consolidado SPNF y BCRA.
 - Notas de metodología.
 
+
+## 2b. Inventario técnico: qué tenemos y qué se hace con cada cosa
+
+Hay mucho hecho. La mayor parte se reutiliza; lo que falta son cuatro piezas.
+
+### Datos
+
+| Qué hay | Archivo | Qué se hace |
+|---|---|---|
+| Base 1996-2025 (120 trimestres): deuda/PIB del SPNF, resultado primario/PIB, PIB real, brecha del producto, TCRM, EMBI+, VIX | `datos/dataset_consolidado_1996_2025.csv` | Se reutiliza. Hay que sumarle la deuda consolidada y la tasa de la FED. |
+| Empalmes pre-2004 (deuda, resultado primario y PIB real, por el método de Denton) y TCRM de 1996 extrapolado | `codigo/ingesta_datos/empalme_*.py`, `construir_dataset_1996_2025.py` | Se reutiliza. |
+| Pasivos remunerados del BCRA, 2004-2025, de la API del BCRA (LEBAC/NOBAC, Leliq/Notaliq, pases) | `codigo/ingesta_datos/ingesta_bcra_pasivos.py`, `datos/procesados/bcra_pasivos_trimestral.csv` | Se adapta: hay que llevarla a 1996 y revisar el denominador (ver abajo). |
+| VIX y volatilidad del Bovespa, 1996-2025 | `ingesta_instrumentos_1996_2025.py` | El VIX se reutiliza como variable exógena. |
+| Spread soberano histórico 1983-2025 | `fase22_*` | Queda fuera, como ya se había decidido. |
+
+**Problema detectado con los pasivos del BCRA.** Nuestra serie da 9,5% del PIB en 2022-2023.
+El FMI da 18,4% en 2023 (16,2% solo en pesos) sobre el PIB promedio del año, y 11,0% sobre el PIB
+anualizado del cuarto trimestre (FMI, 2025, anexo II). La diferencia viene del denominador, que
+pesa mucho con inflación alta. Hay que elegir uno, justificarlo y usar el mismo para la deuda del
+SPNF y para la del BCRA.
+
+### Modelos
+
+| Qué hay | Archivo | Qué se hace |
+|---|---|---|
+| Pruebas de raíz unitaria (ADF, KPSS, DF-GLS) y de quiebre único (Zivot-Andrews) | `fase1_estacionariedad.py` | Se reutiliza y se corre sobre la deuda consolidada. |
+| Quiebres múltiples de Bai-Perron, con implementación propia | `fase9_bai_perron.py`, `bai_perron.py` | Se reutiliza. Los quiebres pasan a ser dummies del SVARX. |
+| Johansen y VECM: no encuentran reacción fiscal | `fase2`, `fase3b`, `fase16` | Se reutiliza para H1a (reacción fiscal), sobre la deuda consolidada. |
+| SVAR restringido: brecha del producto, resultado primario, EMBI+, TCRM y deuda, con elasticidad cíclica de 0,25 citada y *bootstrap* de 1.000 réplicas | `fase19_var_restringido_macro.py`, `fase23_reestimacion_1996_2025.py` | Es el núcleo. Se extiende a SVARX: el VAR de statsmodels ya admite variables exógenas, y la identificación se aplica igual sobre los residuos. |
+| Selección de rezagos, multicolinealidad y diagnósticos de residuos | `fase12`, `fase7` | Se reutiliza para validar el SVARX. |
+| Grados de libertad de la t de Student, estimados por momentos (nu = 4,8) | `fase17_calibracion_nu_dsa.py` | Se reutiliza. |
+| Umbral de Hansen y TVECM | `fase5`, `fase13`, `fase21` | Queda como resultado complementario de H1a. |
+| Simulación (DSA) | `fase6_sostenibilidad_deuda.py` | **Se rehace en buena parte** (ver abajo). Se reutilizan la identidad con separación de monedas, la t de Student y los gráficos. |
+| DOLS, variables instrumentales, CIR, DCC-GARCH, dependencia de colas, histórico 1983-2025 | `fase3`, `fase4`, `fase10`, `fase11`, `fase14`, `fase20`, `fase22` | Quedan fuera, como ya se había decidido. |
+
+**Por qué hay que rehacer la simulación.** Revisada con el criterio de que todo número tiene que
+estar justificado, tiene cuatro problemas:
+
+1. Los desvíos de los shocks (1,5%, 4%, 5%, 2% y 15%) están "calibrados a mano", según el propio
+   código.
+2. Los parámetros del escenario base (resultado primario 1,5%, crecimiento 3,5%, tasa en pesos 6%,
+   tasa en dólares 7,5%) no tienen fuente.
+3. Los shocks son independientes año a año: el SVAR solo aporta las correlaciones, no su
+   dinámica. Así no hay efectos conjuntos, que es lo que pide la pregunta.
+4. Usa el criterio de 100% del PIB, que salió de las hipótesis.
+
+La versión nueva simula directamente desde el SVARX estimado (remuestreo de residuos, con sus
+rezagos), acumula la deuda con la identidad y calcula las métricas del FMI. Para el escenario base
+hay que adoptar un sendero con fuente, por ejemplo el del propio FMI (2025), lo que además permite
+comparar con su resultado.
+
+### Las cuatro piezas que faltan
+
+1. Deuda consolidada 1996-2025 con un denominador coherente.
+2. Tasa de la FED y tasa sombra (FRED).
+3. SVARX: extender `fase19` con variables exógenas.
+4. Simulación nueva, desde el SVARX y con las métricas del FMI.
+
+
 ## 3. Decisiones tomadas
 
 | N.° | Decisión | Justificación |
@@ -42,7 +101,7 @@ pendiente.
 | 4 | La identificación principal es el SVAR restringido por teoría que ya existe. El ordenamiento de Cholesky queda solo como prueba de robustez. | No hay razón teórica para ordenar el EMBI+ y el TCRM entre sí, y esa justificación ya fue aprobada por el director. |
 | 5 | H1b se contrasta con la probabilidad de que la deuda no se estabilice, con corte en 50%. | Es la métrica del FMI (FMI, 2021, párr. 53). El 50% equivale a afirmar que la trayectoria mediana no se estabiliza. El corte calibrado del FMI no se puede replicar con un solo país. Se reporta también la probabilidad completa, para que el resultado no dependa del corte. |
 | 6 | El criterio "deuda mayor a 100% del PIB" sale de las hipótesis. | No tiene fuente que lo justifique. |
-| 7 | El área de vacancia se reformula. | La afirmación "el marco del FMI excluye al BCRA" es incorrecta (FMI, 2021, anexo II). La vacancia pasa a ser la combinación de tres aspectos que nadie cubrió juntos para Argentina: identificación estructural, un shock externo identificado y la estimación sobre el perímetro consolidado. |
+| 7 | El área de vacancia se reformula. | El marco del FMI sí admite incluir los pasivos del banco central (FMI, 2021, anexo II), pero en su análisis de Argentina corre las herramientas sobre la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025, anexo II, cuadro 2). La vacancia pasa a ser la combinación de tres aspectos: identificación estructural, un shock externo identificado y la estimación sobre el perímetro consolidado. |
 | 8 | El canal cuasifiscal del shock de la FED se redacta en pasado. | Los pasivos remunerados del BCRA se redujeron a niveles mínimos desde 2024. |
 | 9 | El módulo de balanza de pagos (exportaciones, importaciones, inversión extranjera directa, fuga de capitales, renovación de vencimientos, necesidades de financiamiento) queda fuera y pasa a investigación futura. | No está especificado, y su tamaño es el de otra tesis. |
 | 10 | Todo umbral, corte o tamaño de shock tiene que tener una justificación escrita, propia o citada. | Criterio del grupo. |
@@ -51,7 +110,7 @@ pendiente.
 
 Estado: **hecho**, **en curso** o **pendiente**.
 
-### Etapa 1. Introducción (en curso)
+### Etapa 1. Introducción (borrador listo para revisión del grupo)
 
 - Hecho: borrador corregido (`introduccion_v3`). Corrige citas mal usadas (Reinhart et al.,
   2003; Mendoza y Oviedo, 2007), actualiza la coyuntura con datos de la OPC de julio de 2026,
@@ -59,15 +118,19 @@ Estado: **hecho**, **en curso** o **pendiente**.
   27.612.
 - Pendiente: definir el tamaño del shock de la FED (ver punto 6) y verificar los datos marcados.
 
-### Etapa 2. Antecedentes y área de vacancia (en curso)
+### Etapa 2. Antecedentes y área de vacancia (borrador listo para revisión del grupo)
 
-- Hecho: borrador de la vacancia (`area_vacancia_v1`).
+- Hecho:
+  - los antecedentes de Santiago y los del texto LaTeX quedaron fusionados en ocho ejes, más la
+    vacancia (`antecedentes_v3`);
+  - se verificó en el informe del FMI de 2025 (Informe de País N.° 25/95, anexo II) el perímetro
+    que usa ese organismo;
+  - Introducción y Antecedentes quedaron en un solo Word.
 - Pendiente:
-  - bajar a mano el informe del FMI sobre Argentina de 2025 (Informe de País N.° 25/95, anexo I)
-    para confirmar si incluye la deuda del BCRA;
-  - releer Levy Yeyati y Sturzenegger (2023) y Klemm et al. (2014) para confirmar cómo se los
-    describe;
-  - fusionar los antecedentes de Santiago con los del texto LaTeX, sin duplicar autores.
+  - resolver cuatro referencias que aparecen con dos versiones distintas: Adler y Sosa, Adler y
+    Magud, Cetrángolo et al., y Wijayanti y Rachmanira;
+  - releer Levy Yeyati y Sturzenegger (2023), Klemm et al. (2014), Porto (2020) y Bouabdallah et
+    al. (2017).
 
 ### Etapa 3. Datos (pendiente; es el siguiente paso técnico)
 
@@ -127,13 +190,19 @@ Estado: **hecho**, **en curso** o **pendiente**.
 | Volumen y páginas de Mendoza y Oviedo (2007) | Referencias |
 | Número del Informe de País del FMI de 2024 | Referencias |
 | Sección exacta del clasificador de Bayes en Hastie, Tibshirani y Friedman (2009) | Justificación del corte de H1b |
-| Si el análisis del FMI de 2025 incluye la deuda del BCRA | Vacancia |
+| Cuatro referencias con dos versiones distintas (Adler y Sosa, Adler y Magud, Cetrángolo et al., Wijayanti y Rachmanira) | Antecedentes |
+| Denominador de los pasivos del BCRA: 9,5% en nuestra serie frente a 18,4% del FMI en 2023 | Datos |
 
 ## 6. Decisiones abiertas
 
 1. **Tamaño del shock de la FED.** Hay dos criterios defendibles: un desvío estándar de la
    serie o un episodio histórico. Se decide cuando esté la serie.
-2. **Horizonte de las métricas.** A cinco años, como el FMI, a 2035, o ambos. La propuesta es
+2. **H1b: corte del 50% o contraste contra el FMI.** El FMI estimó en 2025 una probabilidad de
+   estabilización de alrededor de 97% (FMI, 2025, anexo II). Con un corte del 50%, H1b casi
+   seguro se rechaza. La alternativa es contrastar si nuestra probabilidad de no estabilización
+   supera el 3% del FMI, lo que conecta la hipótesis con la vacancia. El detalle está en la nota 2
+   del documento de Introducción y Antecedentes.
+3. **Horizonte de las métricas.** A cinco años, como el FMI, a 2035, o ambos. La propuesta es
    reportar los dos.
 
 ## Referencias de este documento
@@ -143,4 +212,6 @@ Estado: **hecho**, **en curso** o **pendiente**.
 - Fondo Monetario Internacional y Mecanismo Europeo de Estabilidad. (2023). *The stochastic
   debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs*
   (presentación, 30 de noviembre de 2023).
+- Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under
+  the Extended Fund Facility* (IMF Country Report No. 25/95).
 - Oficina de Presupuesto del Congreso. (2026). *Operaciones de deuda pública, julio 2026*.
