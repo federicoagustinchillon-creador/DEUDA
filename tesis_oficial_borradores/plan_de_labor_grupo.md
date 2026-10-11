@@ -116,7 +116,7 @@ Estado: **hecho**, **en curso** o **pendiente**.
   2003; Mendoza y Oviedo, 2007), actualiza la coyuntura con datos de la OPC de julio de 2026,
   reescribe la pregunta, los objetivos y las hipótesis, y suma la Justificación con la Ley
   27.612.
-- Pendiente: definir el tamaño del shock de la FED (ver punto 6) y verificar los datos marcados.
+- Pendiente: definir el tamaño del shock de la FED (ver punto 6) y confirmar los datos de coyuntura marcados.
 
 ### Etapa 2. Antecedentes y área de vacancia (borrador listo para revisión del grupo)
 
@@ -126,12 +126,6 @@ Estado: **hecho**, **en curso** o **pendiente**.
   - se verificó en el informe del FMI de 2025 (Informe de País N.° 25/95, anexo II) el perímetro
     que usa ese organismo;
   - Introducción y Antecedentes quedaron en un solo Word.
-- Pendiente:
-  - resolver cuatro referencias que aparecen con dos versiones distintas: Adler y Sosa, Adler y
-    Magud, Cetrángolo et al., y Wijayanti y Rachmanira;
-  - releer Levy Yeyati y Sturzenegger (2023), Klemm et al. (2014), Porto (2020) y Bouabdallah et
-    al. (2017).
-
 ### Etapa 3. Datos (pendiente; es el siguiente paso técnico)
 
 1. Construir la deuda consolidada 1996-2025:
@@ -177,19 +171,15 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 ### Etapa 8. Entrega (pendiente)
 
-- Pasar todo al formato final, revisar las referencias y compilar.
+- Pasar todo al formato final y compilar.
 
-## 5. Pendientes de verificación
+## 5. Datos pendientes de confirmar
 
 | Qué | Dónde se usa |
 |---|---|
 | Si hubo emisión de deuda bajo ley de Nueva York en 2026 | Introducción, contexto |
 | Fuente oficial de la colocación de diciembre de 2025 (USD 1.000 millones al 9,26%) | Introducción, contexto |
 | Nivel de los pasivos remunerados del BCRA a fines de 2025 | Introducción y vacancia |
-| Número de artículo de Ando et al. (2025) en el JEDC | Referencias |
-| Volumen y páginas de Mendoza y Oviedo (2007) | Referencias |
-| Número del Informe de País del FMI de 2024 | Referencias |
-| Cuatro referencias con dos versiones distintas (Adler y Sosa, Adler y Magud, Cetrángolo et al., Wijayanti y Rachmanira) | Antecedentes |
 | Denominador de los pasivos del BCRA: 9,5% en nuestra serie frente a 18,4% del FMI en 2023 | Datos |
 
 ## 6. Decisiones abiertas
