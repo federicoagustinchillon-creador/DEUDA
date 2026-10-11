@@ -32,9 +32,9 @@ La identidad separa dos efectos de la depreciación real. El primero es el de va
 
 Bohn (1998) propone que la solvencia se verifica si el gobierno corrige el resultado primario cuando aumenta la deuda heredada. En su forma lineal, la regla es
 
-$$pb_t = \alpha + \rho\, d_{t-1} + \gamma\, z_t + \varepsilon_t,$$
+$$pb_t = \alpha + \rho\, d_{t-1} + \gamma\, z_t + u_t,$$
 
-con $z_t$ un conjunto de determinantes cíclicos. Si $\rho > 0$, $\varepsilon_t$ está acotado como proporción del PIB y el valor presente del PIB es finito, la política fiscal satisface la restricción presupuestaria intertemporal y la condición de transversalidad. La demostración formal figuraba en un apéndice no publicado de Bohn (1998) y se presenta en Bohn (2005), donde se la presenta como un resultado de trabajos previos del autor, entre ellos Bohn (1998). La idea de la prueba es que una respuesta positiva reduce el crecimiento de la deuda respecto de un esquema Ponzi en un factor $(1-\rho)$ por período, por lo que el valor presente de la deuda tiende a cero (Bohn, 2005).
+con $z_t$ un conjunto de determinantes cíclicos. Si $\rho > 0$, $u_t$ está acotado como proporción del PIB y el valor presente del PIB es finito, la política fiscal satisface la restricción presupuestaria intertemporal y la condición de transversalidad. La demostración formal figuraba en un apéndice no publicado de Bohn (1998) y se presenta en Bohn (2005), donde se la presenta como un resultado de trabajos previos del autor, entre ellos Bohn (1998). La idea de la prueba es que una respuesta positiva reduce el crecimiento de la deuda respecto de un esquema Ponzi en un factor $(1-\rho)$ por período, por lo que el valor presente de la deuda tiende a cero (Bohn, 2005).
 
 Bohn (2005) subraya tres puntos que importan para esta tesis. Primero, la proposición es una condición suficiente y no necesaria, porque una respuesta ausente o inestable es compatible tanto con una política insostenible como con una muestra insuficiente para identificarla. Segundo, la regla puede ser no lineal o variar en el tiempo y conservar la propiedad, siempre que la respuesta sea positiva a niveles altos de deuda. Tercero, los datos de Estados Unidos entre 1792 y 2003 arrojan una respuesta positiva y robusta del superávit primario a la deuda, y el propio autor la considera la evidencia más creíble a favor de la sostenibilidad (Bohn, 2005). Para el período 1916-1995 reporta un coeficiente de alrededor de 0,05 (Bohn, 1998, según Bohn, 2005).
 
@@ -44,7 +44,7 @@ Conviene corregir una atribución frecuente. Bohn (2007) no demuestra que $\rho 
 
 La regla de Bohn es un resultado de solvencia asintótica. No dice que la ratio se estabilice ni cuándo lo hace. Para ver la diferencia, se puede reemplazar la regla en la identidad con una tasa efectiva $r$ constante. Se obtiene
 
-$$d_t - d_{t-1} = \left(\frac{r-g}{1+g} - \rho\right) d_{t-1} - \alpha - \gamma z_t - \varepsilon_t .$$
+$$d_t - d_{t-1} = \left(\frac{r-g}{1+g} - \rho\right) d_{t-1} - \alpha - \gamma z_t - u_t .$$
 
 La ratio converge a un nivel finito solo si $\rho > (r-g)/(1+g)$. Si $0 < \rho < (r-g)/(1+g)$, la deuda crece a una tasa inferior a la de un esquema Ponzi y, por lo tanto, la condición de transversalidad se cumple, pero la ratio sigue aumentando. Dicho de otro modo, un coeficiente positivo y significativo es compatible con una trayectoria que no se estabiliza en un horizonte de decisión relevante.
 
