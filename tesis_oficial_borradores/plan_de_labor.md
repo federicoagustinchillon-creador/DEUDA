@@ -83,13 +83,12 @@ rezagos), acumula la deuda con la identidad y calcula las métricas del FMI. Par
 hay que adoptar un sendero con fuente, por ejemplo el del propio FMI (2025), lo que además permite
 comparar con su resultado.
 
-### Las cuatro piezas que faltan
+### Las cuatro piezas que faltaban (hechas)
 
-1. Deuda consolidada 1996-2025 con un denominador coherente.
-2. Tasa de la FED y tasa sombra (FRED).
-3. SVARX: extender `fase19` con variables exógenas.
-4. Simulación nueva, desde el SVARX y con las métricas del FMI.
-
+1. Deuda consolidada 1996-2025 con un denominador coherente: bruta, neta a valor libros y neta con las Letras Intransferibles a valor nominal (la principal).
+2. Tasa de la FED y tasa sombra de Wu y Xia, trimestrales.
+3. SVARX nuevo (`fase24_svarx_1996_2025.py`).
+4. Simulación desde el SVARX con la métrica del FMI (`fase25_simulacion_dsa_svarx.py`), más la variante con shocks a la manera del FMI y su diagnóstico (`fase25b_diagnostico_abanico_fmi.py`).
 
 ## 3. Decisiones tomadas
 
@@ -105,89 +104,59 @@ comparar con su resultado.
 | 8 | El canal cuasifiscal del shock de la FED se redacta en pasado. | Los pasivos remunerados del BCRA se redujeron a niveles mínimos desde 2024. |
 | 9 | El módulo de balanza de pagos (exportaciones, importaciones, inversión extranjera directa, fuga de capitales, renovación de vencimientos, necesidades de financiamiento) queda fuera y pasa a investigación futura. | No está especificado, y su tamaño es el de otra tesis. |
 | 10 | Todo umbral, corte o tamaño de shock tiene que tener una justificación escrita, propia o citada. | Criterio del grupo. |
+| 11 | Ventana única: todas las especificaciones se estiman sobre la misma muestra efectiva, 1998T2-2025T4, y los primeros trimestres de 1996-1998 se usan como condiciones iniciales de los rezagos. | Los criterios de información solo se pueden comparar entre órdenes sobre un mismo período (Lütkepohl, 2005, sec. 4.3), y así la deuda neta, la neta en libros y la bruta se estiman sobre los mismos trimestres. |
+| 12 | H1b se contrasta a cinco años (2030), el horizonte de la métrica del FMI, y a diez años (2035). | El 3% del FMI se mide a cinco años; 2035 es el final del horizonte de la tesis. |
+| 13 | El shock de la FED se mide de dos maneras: un desvío estándar (0,50 puntos) y el ciclo de 2022-2023 (5,25 puntos). | Convención de la literatura de VAR y episodio histórico reciente. |
+| 14 | La especificación principal es el SVARX; los shocks a la manera del FMI se informan como comparación. La elección se fijó antes de ver los resultados. | Solo los shocks identificados permiten contrastar H1a (bloques de shocks) y H2 (shock externo). |
+| 15 | El canal de tasas en pesos se informa como variante: el riesgo país también reprecia la deuda en pesos. | Tasa de interés del país (Neumeyer y Perri, 2005; Uribe y Yue, 2006). No hay una tasa en pesos homogénea para 1996-2025 que permita sumarla al VAR. |
 
 ## 4. Etapas
 
 Estado: **hecho**, **en curso** o **pendiente**.
 
-### Etapa 1. Introducción (borrador listo para revisión del grupo)
+### Etapa 1. Introducción (hecha; en revisión del grupo)
 
-- Hecho: borrador corregido (`introduccion`). Corrige citas mal usadas (Reinhart et al.,
-  2003; Mendoza y Oviedo, 2007), actualiza la coyuntura con datos de la OPC de julio de 2026,
-  reescribe la pregunta, los objetivos y las hipótesis, y suma la Justificación con la Ley
-  27.612.
-- Pendiente: definir el tamaño del shock de la FED (ver punto 6) y confirmar los datos de coyuntura marcados.
+- Borrador corregido, con la H1a de Santiago, H1b a cinco y diez años y el tamaño del shock de la FED definido.
 
-### Etapa 2. Antecedentes y área de vacancia (borrador listo para revisión del grupo)
+### Etapa 2. Antecedentes y área de vacancia (hecha; en revisión del grupo)
 
-- Hecho:
-  - los antecedentes de Santiago y los del texto LaTeX quedaron fusionados en ocho ejes, más la
-    vacancia (`antecedentes`);
-  - se verificó en el informe del FMI de 2025 (Informe de País N.° 25/95, anexo II) el perímetro
-    que usa ese organismo;
-  - Introducción y Antecedentes quedaron en un solo Word.
-### Etapa 3. Datos (pendiente; es el siguiente paso técnico)
+- Ocho ejes y la vacancia en tres partes, con el perímetro del FMI verificado en su informe de 2025.
 
-1. Construir la deuda consolidada 1996-2025:
-   - bajar de la API del BCRA los pases (serie 1261) y las LEBAC (serie 1258) para 1996-2003;
-     las LEBAC empiezan en 2002, así que antes de ese año valen cero;
-   - empalmar el PIB nominal base 1993 con el base 2004;
-   - verificar que la deuda del SPNF y los pasivos del BCRA estén expresados sobre el mismo PIB
-     antes de sumarlos.
-2. Recalcular la proporción de deuda en pesos para el perímetro consolidado. Hoy el código usa
-   46,3% para el SPNF solo.
-3. Bajar la tasa de la FED y la tasa sombra de Wu y Xia (que cubre los años de tasa cero) desde
-   FRED, y pasarlas a frecuencia trimestral.
-4. Validación: gráfico y valores de control de cada serie, revisados por el grupo antes de
-   seguir.
+### Etapa 3. Datos (hecha)
 
-### Etapa 4. Metodología (pendiente)
+- Series construidas desde fuentes primarias (MECON, BCRA, INDEC, FRED) y controladas contra el FMI (Capítulo 5).
 
-- Reescribir el capítulo con el SVARX y la identificación.
-- Definir el tamaño del shock de la FED con criterio justificado: un desvío estándar de la
-  serie, un episodio histórico como el de 2022-2023, o ambos.
-- Escribir el criterio de H1b (contraste contra el FMI con intervalo de *bootstrap*) en el capítulo.
-- Agregar diagnósticos de residuos: autocorrelación, heterocedasticidad, normalidad y
-  estabilidad.
+### Etapa 4. Metodología (hecha)
 
-### Etapa 5. Estimación (pendiente)
+- SVARX, identificación, ventana única, rezagos con regla AIC más estabilidad, canales de la FED, variantes y criterios de contraste (Capítulo 4).
 
-- Pruebas de raíz unitaria y de quiebres sobre la serie consolidada.
-- SVARX con dummies en los quiebres que detecte el test de Bai-Perron.
-- Respuestas al impulso ante un shock de la FED.
-- Descomposición de varianza (H1a).
+### Etapa 5. Estimación (hecha)
 
-### Etapa 6. Simulación (pendiente)
+- Reacción fiscal 0,051 [0,020; 0,082]; respuestas a la FED no significativas por separado; diagnósticos informados (Capítulo 6).
 
-- Monte Carlo en el escenario base y con el shock de la FED.
-- Métricas del FMI: probabilidad de no estabilización y ancho del abanico entre los
-  percentiles 5 y 95, medidos a cinco años y a 2035.
-- Contraste de H1b y H2.
+### Etapa 6. Simulación (hecha)
 
-### Etapa 7. Resultados, discusión y conclusiones (pendiente)
+- Escenario base y dos escenarios de la FED, robustez por perímetro, canal de tasas en pesos y shocks a la manera del FMI.
 
-- Si algún resultado contradice lo que hoy dice la tesis, se frena y se discute en el grupo
-  antes de escribirlo.
+### Etapa 7. Resultados, discusión y conclusiones (borrador listo para revisión del grupo)
+
+- H1a respaldada. H1b respaldada a cinco años (11,8% contra 3%); a diez años, 6,0% con el límite inferior en el umbral. H2 respaldada para un ciclo como el de 2022-2023, no para un shock de medio punto.
 
 ### Etapa 8. Entrega (pendiente)
 
-- Pasar todo al formato final y compilar.
+- Revisión del grupo y del director, y pasaje al formato final.
 
 ## 5. Datos pendientes de confirmar
 
 | Qué | Dónde se usa |
 |---|---|
 | Si hubo emisión de deuda bajo ley de Nueva York en 2026 | Introducción, contexto |
-| Fuente oficial de la colocación de diciembre de 2025 (USD 1.000 millones al 9,26%) | Introducción, contexto |
 | Nivel de los pasivos remunerados del BCRA a fines de 2025 | Introducción y vacancia |
-| Denominador de los pasivos del BCRA: 9,5% en nuestra serie frente a 18,4% del FMI en 2023 | Datos |
+| Tenencias de títulos públicos del FGS (ANSES no permite la descarga automática; hay que bajarlas a mano) | Deuda neta (Capítulo 5) |
 
 ## 6. Decisiones abiertas
 
-1. **Tamaño del shock de la FED.** Hay dos criterios defendibles: un desvío estándar de la
-   serie o un episodio histórico. Se decide cuando esté la serie.
-2. **Horizonte de las métricas.** A cinco años, como el FMI, a 2035, o ambos. La propuesta es
-   reportar los dos.
+- Ninguna de las que bloqueaban el trabajo. Las de tamaño del shock y horizonte quedaron resueltas (decisiones 12 y 13).
 
 ## Referencias de este documento
 

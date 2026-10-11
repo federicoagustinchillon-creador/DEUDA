@@ -26,6 +26,14 @@ Arquitectura (Celasun, Debrun y Ostry, 2006; FMI, 2021, parr. 52):
      es el factor de crecimiento de la deuda de la identidad. Se mide en T = 2030 (t+5, como el
      FMI) y T = 2035.
 
+Variantes (misma ventana de datos 1996-2025, misma identidad y misma metrica):
+  --canal-domestico: el desvio del EMBI tambien reprecia la deuda en pesos (tasa de interes
+     del pais, Neumeyer y Perri, 2005; Uribe y Yue, 2006), con la misma velocidad lam.
+  --shocks fmi: en lugar del SVARX, shocks como los del abanico del FMI (2021, anexo VI;
+     FMI y ESM, 2023): vectores anuales de desvios respecto de la media historica de la tasa
+     real efectiva r, el crecimiento g, la depreciacion real z y el resultado primario pb,
+     remuestreados en bloques de dos anios consecutivos y sumados al escenario base.
+
 Incertidumbre: B replicas de parametros (bootstrap salvaje de fase24) x N trayectorias.
 H1b: limite inferior del intervalo de 90% de P(no estabilizacion) > 3% (FMI, 2025).
 H2: intervalo de 90% de la diferencia (shock FED - base) excluye el cero.
@@ -85,7 +93,7 @@ def condiciones_iniciales(tipo: str) -> tuple[float, float, float]:
 
 
 def simular(par: dict, shocks: np.ndarray, fed_path: np.ndarray, esc: pd.DataFrame,
-            d0: float, alfa: float, tcrm0: float) -> dict[str, np.ndarray]:
+            d0: float, alfa: float, tcrm0: float, dom: bool = False) -> dict[str, np.ndarray]:
     """Simula N trayectorias.
 
     Args:
@@ -104,6 +112,7 @@ def simular(par: dict, shocks: np.ndarray, fed_path: np.ndarray, esc: pd.DataFra
     d = np.zeros((N, len(ANIOS) + 1))
     d[:, 0] = d0
     x = np.zeros(N)
+    x_pes = np.zeros(N)  # desvio de la tasa de la deuda en pesos (solo con dom=True)
     no_est = {}
     d_dev_q = np.zeros(N)
     for t in range(TRIM):
@@ -120,7 +129,9 @@ def simular(par: dict, shocks: np.ndarray, fed_path: np.ndarray, esc: pd.DataFra
             e = (yy[:, -1, 3] - tc_prev) / tcrm0
             mercado = yy[:, :, 2].mean(axis=1) / 1e4 + fed_nivel[t] / 1e2
             x = (1 - LAM) * x + LAM * mercado
-            M = (1 + fila.i / 100 + (1 - alfa) * x) * (1 + (1 - alfa) * e) / ((1 + fila.pi / 100) * (1 + g))
+            if dom:
+                x_pes = (1 - LAM) * x_pes + LAM * yy[:, :, 2].mean(axis=1) / 1e4
+            M = (1 + fila.i / 100 + (1 - alfa) * x + alfa * x_pes) * (1 + (1 - alfa) * e) / ((1 + fila.pi / 100) * (1 + g))
             d[:, a] = d[:, a - 1] * M - pb + fila.sf
             d_base = d[:, a - 1] * (1 + fila.i / 100) / ((1 + fila.pi / 100) * (1 + fila.g / 100)) - fila.pb + fila.sf
             d_dev_q = d[:, a] - d_base
@@ -133,6 +144,87 @@ def simular(par: dict, shocks: np.ndarray, fed_path: np.ndarray, esc: pd.DataFra
                 no_est[f"sim_{ANIOS[a - 1]}"] = pb < pb_estab
     return {"d": d, "no_est_2030": no_est[2030], "no_est_2035": no_est[2035],
             "no_est_sim_2030": no_est["sim_2030"], "no_est_sim_2035": no_est["sim_2035"]}
+
+
+def drivers_historicos() -> pd.DataFrame:
+    """Impulsores anuales de la deuda 1997-2025 (%), como en el abanico del FMI:
+    g: crecimiento real (PIB real anual, INDEC empalmado);
+    r: tasa real efectiva = (1 + i)/(1 + pi) - 1, con i = intereses pagados por el SPN en el
+       anio (resultado primario menos resultado financiero, MECON, dataset 379) sobre la deuda
+       bruta del SPNF a fin del anio anterior, y pi = variacion del deflactor del PIB;
+    z: depreciacion real (TCRM del cuarto trimestre contra el del anio anterior);
+    pb: resultado primario del SPN (% del PIB, suma de 4 trimestres al cuarto trimestre)."""
+    leer = lambda f: pd.read_csv(DATOS / f, parse_dates=["Date"], index_col="Date")
+    base = leer("dataset_consolidado_1996_2025.csv")
+    pib_pre = leer("procesados/pib_real_empalme_indec_1996_2003.csv")["PIB_real"]
+    pib_r = pd.concat([pib_pre, base["PIB_real"][base.index > pib_pre.index.max()]])
+    dc = leer("procesados/deuda_consolidada_1996_2025.csv")
+    real_a = pib_r.groupby(pib_r.index.year).sum()
+    nom_a = dc["pib_4t_mm"][dc.index.quarter == 4]
+    nom_a.index = nom_a.index.year
+    crudos = DATOS / "crudos" / "resultado_primario"
+    tramos = {(1996, 2006): ("379.7_SUPERAVIT_006__28_65", "379.7_RESULTADO_006__23_14"),
+              (2007, 2014): ("379.8_SUPERAVIT_014__28_7", "379.8_RESULTADO_014__23_17"),
+              (2015, 2025): ("379.9_SUPERAVIT_017__23_94", "379.9_RESULTADO_017__18_38")}
+    intereses = {}
+    for (a0, a1), (prim, fin) in tramos.items():
+        lp = pd.read_csv(crudos / f"{prim}.csv", index_col=0, parse_dates=True).iloc[:, 0]
+        lf = pd.read_csv(crudos / f"{fin}.csv", index_col=0, parse_dates=True).iloc[:, 0]
+        anual = (lp - lf).groupby(lp.index.year).agg(["sum", "count"])
+        for anio in range(a0, a1 + 1):
+            if anio in anual.index and anual.loc[anio, "count"] == 12:
+                intereses[anio] = anual.loc[anio, "sum"]
+    # 2015-2025: la serie mensual del resultado financiero (379.9) tiene meses vacios en la API;
+    # se usa la anual oficial del mismo esquema (379.3_RESULTADO_017__18_83).
+    fin_a = pd.read_csv(crudos / "379.3_RESULTADO_017__18_83.csv", index_col=0, parse_dates=True).iloc[:, 0]
+    prim_m = pd.read_csv(crudos / "379.9_SUPERAVIT_017__23_94.csv", index_col=0, parse_dates=True).iloc[:, 0]
+    prim_a = prim_m.groupby(prim_m.index.year).agg(["sum", "count"])
+    for fecha, v in fin_a.items():
+        if prim_a.loc[fecha.year, "count"] == 12:
+            intereses[fecha.year] = prim_a.loc[fecha.year, "sum"] - v
+    intereses = pd.Series(intereses)
+    deuda_ars = dc["deuda_spnf_ars_mm"][dc.index.quarter == 4]
+    deuda_ars.index = deuda_ars.index.year
+    tcrm = base["TCRM"][base.index.quarter == 4]
+    tcrm.index = tcrm.index.year
+    pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib"]
+    pb = pb[pb.index.quarter == 4]
+    pb.index = pb.index.year
+    infl = (nom_a / real_a).pct_change()
+    i_ef = intereses / deuda_ars.shift(1)
+    dr = pd.DataFrame({
+        "g": 100 * real_a.pct_change(),
+        "r": 100 * ((1 + i_ef) / (1 + infl) - 1),
+        "z": 100 * tcrm.pct_change(),
+        "pb": pb,
+    }).loc[1997:2025]
+    if dr.isna().any().any():
+        raise ValueError(f"Faltan impulsores historicos:\n{dr[dr.isna().any(axis=1)]}")
+    return dr
+
+
+def simular_fmi(dr: pd.DataFrame, esc: pd.DataFrame, d0: float, alfa: float, N: int, rng) -> dict[str, np.ndarray]:
+    """Abanico con shocks a la FMI (2021, anexo VI): desvios de la media historica, remuestreo
+    conjunto (mantiene la correlacion entre impulsores) en bloques de dos anios consecutivos
+    (mantiene parte de la autocorrelacion), sumados al escenario base. Misma identidad y misma
+    metrica de no estabilizacion que simular()."""
+    sh = (dr - dr.mean()).values  # (T, 4): g, r, z, pb
+    T = len(sh)
+    ini = rng.integers(0, T - 1, size=(N, len(ANIOS) // 2))
+    s = sh[np.stack([ini, ini + 1], axis=2).reshape(N, -1)]  # (N, 10, 4)
+    d = np.zeros((N, len(ANIOS) + 1))
+    d[:, 0] = d0
+    no_est = {}
+    for a, fila in enumerate(esc.itertuples(), start=1):
+        g = fila.g / 100 + s[:, a - 1, 0] / 100
+        i = fila.i / 100 + s[:, a - 1, 1] / 100 * (1 + fila.pi / 100)
+        e = s[:, a - 1, 2] / 100
+        pb = fila.pb + s[:, a - 1, 3]
+        M = (1 + i) * (1 + (1 - alfa) * e) / ((1 + fila.pi / 100) * (1 + g))
+        d[:, a] = d[:, a - 1] * M - pb + fila.sf
+        if ANIOS[a - 1] in (2030, 2035):
+            no_est[ANIOS[a - 1]] = fila.pb < d[:, a - 1] * (M - 1)
+    return {"d": d, "no_est_2030": no_est[2030], "no_est_2035": no_est[2035]}
 
 
 def parametros(res, X_cols: list[str]) -> dict:
@@ -169,11 +261,36 @@ def main() -> None:
     ap.add_argument("--deuda", default="neta", choices=list(f24.SERIES_DEUDA))
     ap.add_argument("--B", type=int, default=300)
     ap.add_argument("--N", type=int, default=400)
+    ap.add_argument("--canal-domestico", action="store_true")
+    ap.add_argument("--shocks", choices=["svarx", "fmi"], default="svarx")
     a = ap.parse_args()
     rng = np.random.default_rng(SEMILLA)
+    TABLAS.mkdir(parents=True, exist_ok=True)
+
+    if a.shocks == "fmi":
+        esc = escenario_fmi()
+        d0, alfa, _ = condiciones_iniciales(a.deuda)
+        dr = drivers_historicos()
+        dr.to_csv(TABLAS / "fase25_impulsores_historicos_1997_2025.csv")
+        s = simular_fmi(dr, esc, d0, alfa, 10_000, rng)
+        pct = np.percentile(s["d"], [5, 10, 25, 50, 75, 90, 95], axis=0)
+        pd.DataFrame(pct.T, index=[2025] + ANIOS, columns=["p5", "p10", "p25", "p50", "p75", "p90", "p95"]
+                     ).rename_axis("anio").to_csv(TABLAS / f"fase25_{a.deuda}_fmi_fanchart.csv")
+        out = pd.Series({"p_noest_2030": s["no_est_2030"].mean(), "p_noest_2035": s["no_est_2035"].mean(),
+                         "d2035_media": s["d"][:, -1].mean(),
+                         "ancho_p5_p95_2030": np.subtract(*np.percentile(s["d"][:, 5], [95, 5])),
+                         "ancho_p5_p95_2035": np.subtract(*np.percentile(s["d"][:, -1], [95, 5]))})
+        out.to_csv(TABLAS / f"fase25_{a.deuda}_fmi_resumen.csv", header=["valor"])
+        print(f"shocks=fmi deuda={a.deuda} d0={d0:.1f}% alfa_pesos={alfa:.3f} N=10000")
+        print(dr.describe().round(2).to_string())
+        print(out.round(4).to_string())
+        return
 
     Y, X, _ = f24.cargar_datos(a.deuda, 2)
     p, _, _ = f24.elegir_rezagos(Y, X)
+    Y, X = f24.recortar(Y, X, p)  # muestra efectiva comun 1998T2-2025T4
+    dom = a.canal_domestico
+    suf = f"{a.deuda}_dom" if dom else a.deuda
     esc = escenario_fmi()
     d0, alfa, tcrm0 = condiciones_iniciales(a.deuda)
     sd_fed = float(pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"].diff().std(ddof=1))
@@ -191,7 +308,7 @@ def main() -> None:
         shocks = eps_hist[idx]  # remuestreo conjunto de shocks estructurales historicos
         fila = {"replica": r_i}
         for nom, path in escenarios_fed.items():
-            s = simular(par, shocks, path, esc, d0, alfa, tcrm0)
+            s = simular(par, shocks, path, esc, d0, alfa, tcrm0, dom)
             fila[f"{nom}_p_noest_2030"] = s["no_est_2030"].mean()
             fila[f"{nom}_p_noest_2035"] = s["no_est_2035"].mean()
             fila[f"{nom}_p_noest_sim_2030"] = s["no_est_sim_2030"].mean()
@@ -201,12 +318,12 @@ def main() -> None:
                 if r_i == 0:
                     pct = np.percentile(s["d"], [5, 10, 25, 50, 75, 90, 95], axis=0)
                     pd.DataFrame(pct.T, index=[2025] + ANIOS, columns=["p5", "p10", "p25", "p50", "p75", "p90", "p95"]
-                                 ).rename_axis("anio").to_csv(TABLAS / f"fase25_{a.deuda}_fanchart.csv")
+                                 ).rename_axis("anio").to_csv(TABLAS / f"fase25_{suf}_fanchart.csv")
         var_bloque = {}
         for b, cols in BLOQUES.items():
             sh_b = np.zeros_like(shocks)
             sh_b[:, :, cols] = shocks[:, :, cols]
-            var_bloque[b] = simular(par, sh_b, escenarios_fed["base"], esc, d0, alfa, tcrm0)["d"][:, -1].var()
+            var_bloque[b] = simular(par, sh_b, escenarios_fed["base"], esc, d0, alfa, tcrm0, dom)["d"][:, -1].var()
         tot = sum(var_bloque.values())
         varshare.append({f"vshare_{b}": 100 * v / tot for b, v in var_bloque.items()})
         filas.append(fila)
@@ -217,11 +334,11 @@ def main() -> None:
     res["dif_fed_2022_2023_d2035"] = res["fed_2022_2023_d2035_media"] - res["base_d2035_media"]
     res["h1a_nofiscal_menos_fiscal"] = res["vshare_actividad"] + res["vshare_cambiario_y_riesgo"] - res["vshare_fiscal"]
     TABLAS.mkdir(parents=True, exist_ok=True)
-    res.to_csv(TABLAS / f"fase25_{a.deuda}_replicas.csv", index=False)
+    res.to_csv(TABLAS / f"fase25_{suf}_replicas.csv", index=False)
     resumen = res.drop(columns="replica").agg(["mean", lambda s: s.quantile(0.05), lambda s: s.quantile(0.95)]).T
     resumen.columns = ["media", "p05", "p95"]
-    resumen.to_csv(TABLAS / f"fase25_{a.deuda}_resumen.csv")
-    print(f"deuda={a.deuda} p={p} d0={d0:.1f}% alfa_pesos={alfa:.3f} replicas={len(reps)} N={a.N}")
+    resumen.to_csv(TABLAS / f"fase25_{suf}_resumen.csv")
+    print(f"deuda={a.deuda} canal_domestico={dom} p={p} d0={d0:.1f}% alfa_pesos={alfa:.3f} replicas={len(reps)} N={a.N}")
     print(resumen.round(4).to_string())
     print("H1b respaldada (p05 > 3%):", bool(resumen.loc["base_p_noest_2030", "p05"] > UMBRAL_FMI),
           "| 2035:", bool(resumen.loc["base_p_noest_2035", "p05"] > UMBRAL_FMI))

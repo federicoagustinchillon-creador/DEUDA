@@ -92,9 +92,9 @@
 
 **Por qué no el 50%.** El corte del 50% (equivalente a que la trayectoria mediana no se estabilice) era defendible, pero con un 97% de estabilización estimado por el FMI el resultado quedaba prácticamente determinado de antemano y no informaba nada sobre la vacancia. Se lo conserva solo como dato descriptivo.
 
-## Nota 2. Tamaño del shock de la FED (pendiente)
+## Nota 2. Tamaño del shock de la FED (decidido el 11/10/2026)
 
-Los +100 puntos básicos de la versión anterior no estaban justificados y se sacaron. Hay dos criterios defendibles: un desvío estándar de la variación trimestral de la tasa sombra de la FED en 1996-2025, que es la convención de la literatura de VAR, o un episodio histórico como el ciclo de subas de 2022-2023. Se decide con la serie construida.
+Los +100 puntos básicos de la versión anterior no estaban justificados y se sacaron. Se usan dos tamaños, los dos con fundamento: un desvío estándar de la variación trimestral de la tasa de política de la FED en 1996-2025 (0,50 puntos), que es la convención de la literatura de VAR, y una repetición del ciclo de subas de 2022-2023 (5,25 puntos en ocho trimestres), que es el episodio histórico más reciente. El primero no tiene un efecto distinguible y el segundo sí (Capítulo 6).
 
 ## Nota 3. Cambios respecto del texto de Santiago
 

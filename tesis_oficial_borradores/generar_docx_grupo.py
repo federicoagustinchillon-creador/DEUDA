@@ -36,7 +36,8 @@ ARCHIVOS: dict[str, str] = {
 # Documento unico de la tesis: capitulos en orden (los que todavia no existen como
 # borrador se omiten), y al final referencias y notas para el grupo.
 TITULO_TESIS = "% Tesis: borrador de trabajo\n\n"
-CAPITULOS: list[str] = ["antecedentes.md", "marco_teorico.md", "metodologia.md", "datos.md"]
+CAPITULOS: list[str] = ["antecedentes.md", "marco_teorico.md", "metodologia.md", "datos.md",
+                        "resultados.md", "discusion.md", "conclusiones.md"]
 
 
 _SUB = str.maketrans("0123456789+-t", "₀₁₂₃₄₅₆₇₈₉₊₋ₜ")

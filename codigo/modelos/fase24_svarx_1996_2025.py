@@ -58,6 +58,11 @@ TABLAS = BASE / "resultados" / "tablas"
 
 ALPHA_Y: float = 0.25
 SEMILLA: int = 20261011
+# Orden maximo considerado. Todas las especificaciones (cualquier p, cualquier serie de deuda)
+# se estiman sobre la MISMA muestra efectiva: las primeras PMAX observaciones se reservan como
+# condiciones iniciales (Lutkepohl, 2005, sec. 4.3: los criterios de informacion se comparan
+# sobre un periodo comun). Con datos desde 1996T4 la muestra efectiva es 1998T2-2025T4.
+PMAX: int = 6
 ENDOG: list[str] = ["pb_pib", "crec", "EMBI", "TCRM"]
 SERIES_DEUDA: dict[str, tuple[str, str]] = {
     # Principal: consolidacion con el BCRA (FMI, 2021, anexo II) con las Letras
@@ -119,7 +124,13 @@ def identificar(u: np.ndarray) -> np.ndarray:
     return np.linalg.lstsq(eps, u, rcond=None)[0].T
 
 
-def elegir_rezagos(Y: pd.DataFrame, X: pd.DataFrame, pmax: int = 6) -> tuple[int, int, pd.DataFrame]:
+def recortar(Y: pd.DataFrame, X: pd.DataFrame, p: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Deja PMAX - p observaciones fuera para que el VAR(p) use la muestra efectiva comun
+    (t = PMAX+1, ..., T), igual para todo p."""
+    return Y.iloc[PMAX - p:], X.iloc[PMAX - p:]
+
+
+def elegir_rezagos(Y: pd.DataFrame, X: pd.DataFrame, pmax: int = PMAX) -> tuple[int, int, pd.DataFrame]:
     """Regla de seleccion del orden p (Lutkepohl, 2005, cap. 4 y prop. 2.1):
     1. p_AIC = argmin AIC(p), p = 1..pmax.
     2. Si el VAR(p_AIC) es estable (todas las raices del polinomio caracteristico fuera
@@ -130,11 +141,13 @@ def elegir_rezagos(Y: pd.DataFrame, X: pd.DataFrame, pmax: int = 6) -> tuple[int
     Devuelve (p, p_AIC, tabla de diagnosticos por orden)."""
     filas = []
     for p in range(1, pmax + 1):
-        r = VAR(Y, exog=X).fit(maxlags=p, ic=None, trend="c")
-        filas.append({"p": p, "aic": r.aic, "bic": r.bic, "hqic": r.hqic,
+        Yp, Xp = recortar(Y, X, p)
+        r = VAR(Yp, exog=Xp).fit(maxlags=p, ic=None, trend="c")
+        filas.append({"p": p, "n_efectivo": int(r.nobs), "inicio": str(Yp.index[p].date()),
+                      **{"aic": r.aic, "bic": r.bic, "hqic": r.hqic,
                       "modulo_raiz_max": float(np.max(1.0 / np.abs(r.roots))),
                       "estable": bool(r.is_stable()),
-                      "portmanteau_12_p": r.test_whiteness(nlags=12).pvalue})
+                      "portmanteau_12_p": r.test_whiteness(nlags=12).pvalue}})
     tabla = pd.DataFrame(filas)
     p_aic = int(tabla.loc[tabla["aic"].idxmin(), "p"])
     estables = tabla[(tabla["p"] <= p_aic) & tabla["estable"]]["p"]
@@ -221,6 +234,7 @@ def main() -> None:
     tam_fed = float(fed.diff().std(ddof=1))  # un desvio estandar de dFED
 
     p, p_bic, tabla_p = elegir_rezagos(Y, X)
+    Y, X = recortar(Y, X, p)
     base = estimar(Y, X, p, tam_fed, a.horizonte)
     boot, fallidas = bootstrap(Y, X, base, p, tam_fed, a.horizonte, a.n_boot)
     q = boot.quantile([0.05, 0.5, 0.95]).T
@@ -237,7 +251,7 @@ def main() -> None:
     with open(TABLAS / f"{pre}_resumen_var.txt", "w", encoding="utf-8") as fh:
         fh.write(str(base["res"].summary()))
 
-    print(f"SVARX deuda={a.deuda} n={len(Y)} p={p} (AIC={p_bic}) shock FED={tam_fed:.4f} pp")
+    print(f"SVARX deuda={a.deuda} muestra efectiva {Y.index[p].date()}-{Y.index[-1].date()} n={len(Y) - p} p={p} (AIC={p_bic}) shock FED={tam_fed:.4f} pp")
     print(f"Quiebres: {[str(f.date()) for f in quiebres]} | bootstrap validas={len(boot)} fallidas={fallidas}")
     print(f"Reaccion fiscal (Bohn) rho={base['rho']:.4f} p={base['rho_p']:.4f} | bootstrap 90%: "
           f"[{q.loc['rho_bohn','p05']:.4f}, {q.loc['rho_bohn','p95']:.4f}]")

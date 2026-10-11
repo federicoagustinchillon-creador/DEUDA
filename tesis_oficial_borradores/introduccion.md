@@ -37,9 +37,9 @@ Para alcanzarlo, se plantean los siguientes objetivos específicos:
 
 H1a. Los determinantes macroeconómicos históricos de Argentina (1996-2025), es decir, el crecimiento, el tipo de cambio real, el riesgo país y el resultado primario, condicionan la sostenibilidad de la deuda pública consolidada (SPNF y BCRA), de modo que el superávit primario, por sí solo, no basta para estabilizarla en 2026-2035.
 
-H1b. La probabilidad de que la deuda consolidada no se estabilice hacia el final del horizonte de proyección, estimada con shocks estructuralmente identificados, es mayor que la que el FMI reporta para la deuda federal bruta en su análisis de 2025, de alrededor de 3% (FMI, 2025, anexo II). Para que la comparación sea válida, el escenario base de la simulación reproduce los supuestos del escenario base del FMI.
+H1b. La probabilidad de que la deuda consolidada no se estabilice, medida a cinco años (2030, el mismo horizonte de la métrica del FMI) y a diez años (2035, el final del horizonte de proyección) y estimada con shocks estructuralmente identificados, es mayor que la que el FMI reporta para la deuda federal bruta en su análisis de 2025, de alrededor de 3% (FMI, 2025, anexo II). Para que la comparación sea válida, el escenario base de la simulación reproduce los supuestos del escenario base del FMI.
 
-H2. Un endurecimiento de la política monetaria de la FED eleva la trayectoria esperada de la deuda consolidada y su probabilidad de no estabilizarse, a través del riesgo soberano, el tipo de cambio real y el crecimiento. [DECIDIR el tamaño del shock con criterio justificado: ver nota 2 al final del archivo.]
+H2. Un endurecimiento de la política monetaria de la FED eleva la trayectoria esperada de la deuda consolidada y su probabilidad de no estabilizarse, a través del riesgo soberano, el tipo de cambio real y el crecimiento. El shock se mide de dos maneras: un desvío estándar de la variación trimestral de la tasa (convención de la literatura de VAR) y una repetición del ciclo de subas de 2022-2023.
 
 ## 1.6 Estrategia metodológica
 
