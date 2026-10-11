@@ -238,27 +238,3 @@ Fuente: cálculo propio sobre los CSV citados en 5.1. La desviación estándar e
 5. **Swap con el PBoC** y **pases en neto** en los pasivos del BCRA.
 6. **Valuación contable** de la deuda en poder del BCRA.
 7. **Denominador** con rezago en períodos de inflación alta.
-
-## Referencias del capítulo
-
-Denton, F. T. (1971). Adjustment of monthly or quarterly series to annual totals: An approach based on quadratic minimization. *Journal of the American Statistical Association, 66*(333), 99-102.
-
-Federal Reserve Bank of Atlanta. (s. f.). *Wu-Xia shadow federal funds rate* [Conjunto de datos]. https://www.atlantafed.org/cqer/research/wu-xia-shadow-federal-funds-rate
-
-Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper). Fondo Monetario Internacional. (Archivo local: `Bibliografia/descargas_verificacion/imf2021_dsf_mac_review.pdf`; Annex II, nota 2, p. 72.)
-
-Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95). Fondo Monetario Internacional. (Archivo local: `Bibliografia/descargas_verificacion/1argea2025002-print-pdf.pdf`; Annex II, Table 2, p. 68.)
-
-Banco Central de la República Argentina. (s. f.). *Balance del Banco Central, serie histórica* [Conjunto de datos]. https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/balbcrhis.xls
-
-Banco Central de la República Argentina. (s. f.). *API de Estadísticas Monetarias v4.0* [Conjunto de datos]. https://api.bcra.gob.ar/estadisticas/v4.0/monetarias
-
-Board of Governors of the Federal Reserve System (US). (s. f.). *Federal funds effective rate* [FEDFUNDS; conjunto de datos]. Federal Reserve Bank of St. Louis, FRED. https://fred.stlouisfed.org/series/FEDFUNDS
-
-Ministerio de Economía de la Nación, Secretaría de Finanzas. (2025). *Informe de deuda pública al 31/12/2025* [Conjunto de datos]. (Archivos de los cierres 2007 a 2025 en `datos/crudos/mecon_deuda/`.)
-
-Ministerio de Economía y Producción, Secretaría de Hacienda, Oficina Nacional de Presupuesto. (2006). *Compendio fiscal 1993-2006*. https://www.economia.gob.ar/onp/documentos/ejectexto/compendio/compendio93-06.pdf
-
-Poder Ejecutivo Nacional. (2007). *Decreto 897/2007: Fondo de Garantía de Sustentabilidad del Régimen Previsional Público de Reparto* (Boletín Oficial, 13 de julio de 2007). Base normativa de la AFIP. https://biblioteca.afip.gob.ar/dcp/DEC_C_000897_2007_07_12
-
-Wu, J. C., y Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. *Journal of Money, Credit and Banking, 48*(2-3), 253-291. https://doi.org/10.1111/jmcb.12300

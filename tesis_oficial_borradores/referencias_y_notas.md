@@ -5,12 +5,17 @@
 - Ando, S., Mishra, P., Patel, N., Peralta-Alva, A., y Presbitero, A. F. (2025). Fiscal consolidation and public debt. *Journal of Economic Dynamics and Control*, 170, artículo 104998. https://doi.org/10.1016/j.jedc.2024.104998
 - Aruguete, E. (2021). Crisis de balanza de pagos y recuperación de la sostenibilidad de la deuda pública en la Argentina (2016-2020). *Revista Estado y Políticas Públicas*, (16), 101-123.
 - Bai, J., y Perron, P. (2003). Computation and analysis of multiple structural change models. *Journal of Applied Econometrics*, 18(1), 1-22.
+- Banco Central de la República Argentina. (s. f.). *Balance del Banco Central, serie histórica* [Conjunto de datos]. https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/balbcrhis.xls
 - Blanchard, O. (1990). *Suggestions for a new set of fiscal indicators* (OECD Economics Department Working Papers No. 79). OECD Publishing.
 - Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, 109(4), 1197-1229.
 - Blanchard, O., y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. *Quarterly Journal of Economics*, 117(4), 1329-1368.
+- Board of Governors of the Federal Reserve System (US). (s. f.). *Federal funds effective rate* [FEDFUNDS; conjunto de datos]. Federal Reserve Bank of St. Louis, FRED. https://fred.stlouisfed.org/series/FEDFUNDS
 - Bohn, H. (1998). The behavior of U.S. public debt and deficits. *Quarterly Journal of Economics*, 113(3), 949-963.
+- Bohn, H. (2005). *The sustainability of fiscal policy in the United States* (CESifo Working Paper No. 1446). CESifo.
+- Bohn, H. (2007). Are stationarity and cointegration restrictions really necessary for the intertemporal budget constraint? *Journal of Monetary Economics, 54*(7), 1837-1847.
 - Bohoslavsky, J. P., y Cantamutto, F. J. (2024). Deuda pública y desarrollo (no)sustentable en Argentina. Una visión crítica sobre la especialización productiva. *FACES*, 30(62), 1-18.
 - Bouabdallah, O., Checherita-Westphal, C., Warmedinger, T., de Stefani, R., Drudi, F., Setzer, R., y Westphal, A. (2017). *Debt sustainability analysis for euro area sovereigns: A methodological framework* (ECB Occasional Paper No. 185). Banco Central Europeo.
+- Braun, O., y Joy, L. (1968). A model of economic stagnation: A case study of the Argentine economy. *The Economic Journal, 78*(312), 868-887. https://doi.org/10.2307/2229183
 - Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchange rate, and fiscal sustainability: Argentina's lessons* (NBER Working Paper No. 9828).
 - Canova, F. (2005). The transmission of US shocks to Latin America. *Journal of Applied Econometrics*, 20(2), 229-251.
 - Cantamutto, F. J., Lobato, J., Rodríguez-Enríquez, C., y Féliz, M. (2024). Sustentabilidad de la deuda y derechos humanos desde la perspectiva de la sostenibilidad de la vida. En J. P. Bohoslavsky y M. L. Clérico (Eds.), *Deuda y derechos humanos: Claves desde el sistema interamericano* (pp. 170-195). EDULP.
@@ -22,9 +27,13 @@
 - Cushman, D. O., y Zha, T. (1997). Identifying monetary policy in a small open economy under flexible exchange rates. *Journal of Monetary Economics*, 39(3), 433-448.
 - Damill, M., Frenkel, R., y Rapetti, M. (2015). Macroeconomic policy in Argentina during 2002-2013. *Comparative Economic Studies*, 57(3), 369-400.
 - della Paolera, G., y Taylor, A. M. (2001). *Straining at the anchor: The Argentine currency board and the search for macroeconomic stability, 1880-1935*. University of Chicago Press.
+- Denton, F. T. (1971). Adjustment of monthly or quarterly series to annual totals: An approach based on quadratic minimization. *Journal of the American Statistical Association, 66*(333), 99-102.
+- Diamand, M. (1972). La estructura productiva desequilibrada argentina y el tipo de cambio. *Desarrollo Económico, 12*(45), 25-47.
 - Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
+- Eichengreen, B., Hausmann, R., y Panizza, U. (2003). *Currency mismatches, debt intolerance and original sin: Why they are not the same and why it matters* (NBER Working Paper No. 10036). National Bureau of Economic Research.
 - Everaert, G., y Jansen, S. (2018). On the estimation of panel fiscal reaction functions: Heterogeneity or fiscal fatigue? *Economic Modelling*, 70, 87-96.
 - Favero, C., y Giavazzi, F. (2007). *Debt and the effects of fiscal policy* (NBER Working Paper No. 12822).
+- Federal Reserve Bank of Atlanta. (s. f.). *Wu-Xia shadow federal funds rate* [Conjunto de datos]. https://www.atlantafed.org/cqer/research/wu-xia-shadow-federal-funds-rate
 - Fondo Monetario Internacional y Mecanismo Europeo de Estabilidad. (2023). *The stochastic debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs* [Presentación, 30 de noviembre de 2023].
 - Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper). Aprobado por el Directorio el 14 de enero de 2021.
 - Fondo Monetario Internacional. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 24/167).
@@ -33,27 +42,36 @@
 - Girouard, N., y André, C. (2005). *Measuring cyclically-adjusted budget balances for OECD countries* (OECD Economics Department Working Papers No. 434).
 - González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo.
 - Gonçalves, S., y Kilian, L. (2004). Bootstrapping autoregressions with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, 123(1), 89-120.
+- Hansen, B. E. (1999). Threshold effects in non-dynamic panels: Estimation, testing, and inference. *Journal of Econometrics, 93*(2), 345-368.
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, 107(10), 3119-3145.
+- Kalemli-Özcan, Ş. (2019). *U.S. monetary policy and international risk spillovers* (NBER Working Paper No. 26297). National Bureau of Economic Research. https://www.nber.org/papers/w26297
+- Leeper, E. M. (1991). Equilibria under "active" and "passive" monetary and fiscal policies. *Journal of Monetary Economics, 27*(1), 129-147. https://doi.org/10.1016/0304-3932(91)90007-B
 - Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84. https://doi.org/10.1111/1475-5890.12319
 - Ley 27.541 de Solidaridad Social y Reactivación Productiva en el Marco de la Emergencia Pública (2019). Boletín Oficial de la República Argentina, 23 de diciembre de 2019.
 - Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública (2021). Boletín Oficial de la República Argentina, 3 de marzo de 2021.
 - Lütkepohl, H. (2005). *New introduction to multiple time series analysis*. Springer.
 - Medeiros, J. (2012). *Stochastic debt simulation using VAR models and a panel fiscal reaction function: Results for a selected number of countries* (European Economy Economic Papers 459). Comisión Europea.
 - Mendoza, E. G., y Oviedo, P. M. (2009). Public debt, fiscal solvency and macroeconomic uncertainty in Latin America: The cases of Brazil, Colombia, Costa Rica and Mexico. *Economía Mexicana. Nueva Época*, 18(2), 133-177.
+- Ministerio de Economía de la Nación, Secretaría de Finanzas. (2025). *Informe de deuda pública al 31/12/2025* [Conjunto de datos]. (Archivos de los cierres 2007 a 2025 en `datos/crudos/mecon_deuda/`.)
+- Ministerio de Economía y Producción, Secretaría de Hacienda, Oficina Nacional de Presupuesto. (2006). *Compendio fiscal 1993-2006*. https://www.economia.gob.ar/onp/documentos/ejectexto/compendio/compendio93-06.pdf
 - Neumeyer, P. A., y Perri, F. (2005). Business cycles in emerging economies: The role of interest rates. *Journal of Monetary Economics*, 52(2), 345-380.
 - Oficina de Presupuesto del Congreso. (2026). *Operaciones de deuda pública, julio 2026*.
+- Poder Ejecutivo Nacional. (2007). *Decreto 897/2007: Fondo de Garantía de Sustentabilidad del Régimen Previsional Público de Reparto* (Boletín Oficial, 13 de julio de 2007). Base normativa de la AFIP. https://biblioteca.afip.gob.ar/dcp/DEC_C_000897_2007_07_12
 - Porto, A. (2020). *Evolución del sector público argentino en el largo plazo* (Documento de Trabajo N.° 36). CEFIP, Universidad Nacional de La Plata.
 - Rapoport, M. (2020). *Historia económica, política y social de la Argentina (1880-2003)*. Crítica.
 - Reinhart, C. M., Rogoff, K. S., y Savastano, M. A. (2003). Debt intolerance. *Brookings Papers on Economic Activity*, 2003(1), 1-74.
 - Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centuries of financial folly*. Princeton University Press.
 - Renzhi, N., y Beirne, J. (2024). *Global shocks and monetary policy transmission in emerging markets* (ADB Economics Working Paper No. 726). Asian Development Bank.
+- Rey, H. (2013). *Dilemma not trilemma: The global financial cycle and monetary policy independence* [Documento presentado en el Simposio de Política Económica de Jackson Hole]. Federal Reserve Bank of Kansas City.
 - Rigobon, R. (2003). Identification through heteroskedasticity. *The Review of Economics and Statistics*, 85(4), 777-792.
 - Rigobon, R., y Sack, B. (2004). The impact of monetary policy on asset prices. *Journal of Monetary Economics*, 51(8), 1553-1575.
 - Rodríguez, A. (2023). Financiamiento y sostenibilidad de la deuda pública: El caso de la economía argentina (2001-2022). *Ciencias Económicas*, 2(20).
 - Roldán, V. (2021). *La renegociación por la reestructuración de la deuda soberana argentina con los acreedores privados poseedores de instrumentos bajo jurisdicción extranjera durante 2020* [Tesina de grado]. Universidad Nacional de Rosario.
 - Sanches, P. (2019). *Análisis de la sostenibilidad de la deuda soberana argentina. 2019-2023* [Tesis de maestría]. Universidad Torcuato Di Tella.
+- Sargent, T. J., y Wallace, N. (1981). Some unpleasant monetarist arithmetic. *Federal Reserve Bank of Minneapolis Quarterly Review, 5*(3), 1-17.
 - Secretaría de Finanzas, Ministerio de Economía. (2025, 10 de diciembre). *Resultado de licitación del Bono del Tesoro Nacional en dólares estadounidenses 6,50% con vencimiento 30 de noviembre de 2029* [Comunicado]. https://www.argentina.gob.ar/noticias/resultado-de-licitacion-del-bono-del-tesoro-nacional-en-dolares-estadounidenses-650-con
 - Sims, C. A., Stock, J. H., y Watson, M. W. (1990). Inference in linear time series models with some unit roots. *Econometrica*, 58(1), 113-144.
+- Thirlwall, A. P. (1979). The balance of payments constraint as an explanation of international growth rate differences. *Banca Nazionale del Lavoro Quarterly Review, 32*(128), 45-53.
 - Uribe, M., y Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? *Journal of International Economics*, 69(1), 6-36.
 - Wijayanti, R., y Rachmanira, S. (2020). Early warning system for government debt crisis in developing countries. *Journal of Central Banking Theory and Practice*, 9(número especial), 103-124.
 - Wu, J. C., y Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. *Journal of Money, Credit and Banking*, 48(2-3), 253-291.

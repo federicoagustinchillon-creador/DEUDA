@@ -39,6 +39,38 @@ TITULO_TESIS = "% Tesis: borrador de trabajo\n\n"
 CAPITULOS: list[str] = ["antecedentes.md", "marco_teorico.md", "metodologia.md", "datos.md"]
 
 
+_SUB = str.maketrans("0123456789+-t", "₀₁₂₃₄₅₆₇₈₉₊₋ₜ")
+_SIMBOLOS = {r"\varepsilon": "ε", r"\rho": "ρ", r"\alpha": "α", r"\gamma": "γ", r"\beta": "β",
+             r"\ge": "≥", r"\geq": "≥", r"\le": "≤", r"\leq": "≤", r"\left(": "(", r"\right)": ")",
+             r"\,": "", r"\;": " ", r"\cdot": "·", r"\times": "×"}
+
+
+def _latex_a_texto(expr: str) -> str:
+    """Convierte una expresion LaTeX simple a texto plano Unicode (criterio del grupo:
+    en los Word, las ecuaciones van como texto, no como objetos de ecuacion).
+    Cubre fracciones (incluso anidadas), letras griegas, subindices t, t-1, t+k y
+    superindices L/F de la identidad de la deuda."""
+    import re
+    for k in sorted(_SIMBOLOS, key=len, reverse=True):
+        expr = expr.replace(k, _SIMBOLOS[k])
+    patron = re.compile(r"\\frac\{([^{}]*)\}\{([^{}]*)\}")
+    while patron.search(expr):
+        expr = patron.sub(lambda m: f"({m.group(1)})/({m.group(2)})", expr)
+    expr = re.sub(r"\^\{?L\}?", "ᴸ", expr)
+    expr = re.sub(r"\^\{?F\}?", "ᶠ", expr)
+    expr = re.sub(r"_\{([0-9t+\-]+)\}", lambda m: m.group(1).replace(" ", "").translate(_SUB), expr)
+    expr = re.sub(r"_([0-9t])", lambda m: m.group(1).translate(_SUB), expr)
+    expr = expr.replace("{", "").replace("}", "").replace("\\", "")
+    return re.sub(r"\s+", " ", expr).strip()
+
+
+def _matematica_a_texto(texto: str) -> str:
+    """Reemplaza $$...$$ (en parrafo propio) y $...$ (en linea) por texto plano."""
+    import re
+    texto = re.sub(r"\$\$(.+?)\$\$", lambda m: "\n\n" + _latex_a_texto(m.group(1)) + "\n\n", texto, flags=re.S)
+    return re.sub(r"\$([^$\n]+?)\$", lambda m: _latex_a_texto(m.group(1)), texto)
+
+
 def armar_capitulos_1_2() -> Path:
     """Concatena la Introduccion (secciones 1.1 a 1.8) y los capitulos disponibles en un
     unico Markdown temporal."""
@@ -52,7 +84,7 @@ def armar_capitulos_1_2() -> Path:
         if ruta.exists():
             partes.append(ruta.read_text(encoding="utf-8").rstrip())
     partes.append((BASE / "referencias_y_notas.md").read_text(encoding="utf-8"))
-    texto = "\n\n".join(partes)
+    texto = _matematica_a_texto("\n\n".join(partes))
     destino = BASE / "_tesis_borrador.md"
     destino.write_text(texto, encoding="utf-8")
     return destino
