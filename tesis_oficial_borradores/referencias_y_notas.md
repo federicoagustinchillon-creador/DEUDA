@@ -6,6 +6,8 @@
 - Aruguete, E. (2021). Crisis de balanza de pagos y recuperación de la sostenibilidad de la deuda pública en la Argentina (2016-2020). *Revista Estado y Políticas Públicas*, (16), 101-123.
 - Bai, J., y Perron, P. (2003). Computation and analysis of multiple structural change models. *Journal of Applied Econometrics*, 18(1), 1-22.
 - Banco Central de la República Argentina. (s. f.). *Balance del Banco Central, serie histórica* [Conjunto de datos]. https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/balbcrhis.xls
+- Banco Central de la República Argentina. (2025). *Informe monetario mensual, junio de 2025*. https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/informe-monetario-mensual-jun-25.pdf
+- Banco Central de la República Argentina. (2026). *Informe monetario mensual, diciembre de 2025*. https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/informe-monetario-mensual-dic-25.pdf
 - Blanchard, O. (1990). *Suggestions for a new set of fiscal indicators* (OECD Economics Department Working Papers No. 79). OECD Publishing.
 - Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, 109(4), 1197-1229.
 - Blanchard, O., y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. *Quarterly Journal of Economics*, 117(4), 1329-1368.
@@ -22,6 +24,7 @@
 - Cantamutto, F. J., y Féliz, M. (2021). Argentina entre la sostenibilidad de la deuda y la vida. *Revista Nuestramérica*, 9(17), e6167845.
 - Celasun, O., Debrun, X., y Ostry, J. D. (2006). *Primary surplus behavior and risks to fiscal sustainability in emerging market countries: A "fan-chart" approach* (IMF Working Paper WP/06/67).
 - Cetrángolo, O., Damill, M., Frenkel, R., y Jiménez, J. P. (1997). *La sostenibilidad de la política fiscal en América Latina: El caso argentino* (Documento de Trabajo R-315). Banco Interamericano de Desarrollo, Red de Centros de Investigación.
+- Chequeado. (2025, diciembre). *Luis Caputo anunció la colocación de un bono por US$ 910 millones: qué implica el regreso al mercado de deuda*. https://chequeado.com/el-explicador/luis-caputo-anuncio-un-bono-a-4-anos-que-significa-que-el-pais-vuelva-al-mercado-de-deuda/
 - Christiano, L. J., Eichenbaum, M., y Evans, C. L. (1999). Monetary policy shocks: What have we learned and to what end? En J. B. Taylor y M. Woodford (Eds.), *Handbook of Macroeconomics* (Vol. 1A, pp. 65-148). Elsevier.
 - Comín Comín, F. (2014). *Historia económica mundial: De los orígenes a la actualidad*. Alianza Editorial.
 - Cushman, D. O., y Zha, T. (1997). Identifying monetary policy in a small open economy under flexible exchange rates. *Journal of Monetary Economics*, 39(3), 433-448.
@@ -44,6 +47,7 @@
 - Gonçalves, S., y Kilian, L. (2004). Bootstrapping autoregressions with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, 123(1), 89-120.
 - Hansen, B. E. (1999). Threshold effects in non-dynamic panels: Estimation, testing, and inference. *Journal of Econometrics, 93*(2), 345-368.
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, 107(10), 3119-3145.
+- Infobae. (2026, 23 de septiembre). *El riesgo país arriba de los 550 puntos condiciona la primera emisión de deuda internacional de una provincia*. https://www.infobae.com/economia/2026/09/23/el-riesgo-pais-arriba-de-los-550-puntos-condiciona-la-primera-emision-de-deuda-internacional-de-una-provincia/
 - Kalemli-Özcan, Ş. (2019). *U.S. monetary policy and international risk spillovers* (NBER Working Paper No. 26297). National Bureau of Economic Research. https://www.nber.org/papers/w26297
 - Leeper, E. M. (1991). Equilibria under "active" and "passive" monetary and fiscal policies. *Journal of Monetary Economics, 27*(1), 129-147. https://doi.org/10.1016/0304-3932(91)90007-B
 - Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84. https://doi.org/10.1111/1475-5890.12319
@@ -62,7 +66,7 @@
 - Reinhart, C. M., Rogoff, K. S., y Savastano, M. A. (2003). Debt intolerance. *Brookings Papers on Economic Activity*, 2003(1), 1-74.
 - Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centuries of financial folly*. Princeton University Press.
 - Renzhi, N., y Beirne, J. (2024). *Global shocks and monetary policy transmission in emerging markets* (ADB Economics Working Paper No. 726). Asian Development Bank.
-- Rey, H. (2013). *Dilemma not trilemma: The global financial cycle and monetary policy independence* [Documento presentado en el Simposio de Política Económica de Jackson Hole]. Federal Reserve Bank of Kansas City.
+- Rey, H. (2013). *Dilemma not trilemma: The global financial cycle and monetary policy independence* [Documento presentado en el Simposio de Política Económica de Jackson Hole, 2013]. Federal Reserve Bank of Kansas City. Versión en NBER Working Paper No. 21162 (2015, rev. 2018).
 - Rigobon, R. (2003). Identification through heteroskedasticity. *The Review of Economics and Statistics*, 85(4), 777-792.
 - Rigobon, R., y Sack, B. (2004). The impact of monetary policy on asset prices. *Journal of Monetary Economics*, 51(8), 1553-1575.
 - Rodríguez, A. (2023). Financiamiento y sostenibilidad de la deuda pública: El caso de la economía argentina (2001-2022). *Ciencias Económicas*, 2(20).

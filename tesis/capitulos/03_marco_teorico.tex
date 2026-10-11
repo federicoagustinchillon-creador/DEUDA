@@ -1,60 +1,454 @@
-\chapter{Marco Teórico}
-\label{ch:marco_teorico}
+\chapter{Marco teórico}
 
-Este capítulo organiza el marco teórico en tres niveles, de lo general a lo específico: la restricción externa como enfoque macroeconómico, la solvencia intertemporal como teoría general, y la fatiga fiscal en economías periféricas como teoría sustantiva. Estos tres niveles definen la estructura analítica que articula las hipótesis y el diseño econométrico de los Capítulos \ref{ch:metodologia} y \ref{ch:resultados}.
+Este capítulo reúne los conceptos que sostienen el análisis empírico.
+Parte de un enfoque macroeconómico general, la restricción externa
+(sección 3.1), y de la teoría de la solvencia intertemporal y la
+identidad de acumulación de la deuda (3.2). Luego incorpora tres
+elementos que la pregunta de investigación exige: la restricción
+presupuestaria consolidada del Tesoro y el Banco Central de la República
+Argentina (BCRA) (3.3), el descalce de monedas y las interrupciones
+repentinas del financiamiento (3.4) y la transmisión de la política
+monetaria de Estados Unidos (3.5). Cierra con la noción probabilística
+de sostenibilidad que usa el Fondo Monetario Internacional (FMI) (3.6),
+la fatiga fiscal como teoría complementaria (3.7) y los alcances del
+marco (3.8). Cada sección indica qué variable o hipótesis del modelo
+sustenta.
 
-\section[Nivel I: La Restricción Externa]{Nivel I: La Restricción Externa}
+\section{El enfoque de la restricción externa}
 
-Esta tesis sigue el enfoque de la restricción externa al crecimiento de las economías periféricas \citep{damill2015}: la disponibilidad de divisas constituye el límite operativo y la restricción vinculante al proceso de acumulación en economías con pasivos en moneda extranjera. Bajo este enfoque, la deuda pública consolidada no es un fenómeno puramente fiscal, sino la contrapartida financiera de un patrón de inserción internacional asimétrico.
+La tradición estructuralista argentina sostiene que el crecimiento de
+una economía periférica queda limitado por la disponibilidad de divisas
+antes que por la disponibilidad de ahorro o de capacidad ociosa. Braun y
+Joy (1968) formalizaron un modelo de estancamiento para la economía
+argentina en el que el balance de pagos, los precios internos y el nivel
+de actividad se determinan conjuntamente. Diamand (1972) dio la
+explicación de fondo con el concepto de estructura productiva
+desequilibrada: un sector primario que opera a precios internacionales y
+un sector industrial con precios y costos superiores a los
+internacionales. Como la industria necesita divisas para crecer y no
+genera las que consume, el abastecimiento de divisas recae en el sector
+agropecuario, y la expansión interna termina en una crisis de balanza de
+pagos y una devaluación (Diamand, 1972).
 
-Las economías periféricas enfrentan el problema estructural del \textbf{pecado original} (\textit{original sin}, \citealp{eichengreen2003}): la incapacidad de emitir deuda internacional en moneda doméstica. Ello genera un insuperable \textbf{descalce de monedas} (\textit{currency mismatch}), donde los ingresos del Estado se recaudan en moneda local mientras que los servicios del pasivo soberano se encuentran denominados en divisas. Cuando la economía no genera divisas genuinas al ritmo requerido por el perfil de vencimientos, el endeudamiento externo opera como mecanismo de cierre de brecha, trasladando la escasez de divisas hacia el futuro bajo la forma de un servicio de deuda creciente y expuesto a devaluaciones.
+Thirlwall (1979) dio a la idea una forma general. Si se exige equilibrio
+de la cuenta corriente en el largo plazo, la tasa de crecimiento
+compatible con ese equilibrio se aproxima por el cociente entre el
+crecimiento de las exportaciones y la elasticidad ingreso de la demanda
+de importaciones. En ese esquema, lo que se ajusta para equilibrar el
+balance de pagos es el producto, no los precios relativos (Thirlwall,
+1979).
 
-\section{Nivel II: Teoría General de la Solvencia Intertemporal}
+Esos autores describen una restricción de flujos comerciales. Diamand
+(1972) ya advertía que el crédito externo la posterga sin resolverla,
+porque cada nuevo crédito agrega intereses y aumenta el déficit externo
+inicial, de modo que el proceso es inestable cuando se frena la entrada
+de capitales. Desde los años setenta, la acumulación de deuda pública y
+privada en moneda extranjera sumó un problema de vulnerabilidad
+financiera externa (Aruguete, 2021). Ese es el punto de contacto con
+esta tesis. La deuda en divisas convierte la restricción de divisas en
+una restricción sobre la deuda pública: los ingresos del Estado se
+obtienen en pesos y una parte del servicio se paga en dólares. El FMI
+reconoce esa limitación para el caso actual, al señalar que la base
+exportadora es pequeña y la capacidad de generar divisas es limitada, de
+modo que cumplir con las obligaciones en moneda extranjera exige
+reforzar el balance de pagos (FMI, 2025, anexo II).
 
-En el nivel de la teoría general, esta tesis adopta el marco de la Restricción Presupuestaria Intertemporal formalizado por \citet{bohn1998, bohn2007}, cuya aplicación empírica al caso estadounidense en \citet{bohn2005} constituye el antecedente directo de la especificación de la Función de Reacción Fiscal utilizada en este trabajo. Conviene precisar la distinción terminológica entre solvencia y sostenibilidad que vertebra este marco: mientras la \textbf{solvencia} es una condición contable de largo plazo (exige que el valor presente descontado de los superávits primarios esperados iguale el stock de deuda inicial), la \textbf{sostenibilidad} atañe a la viabilidad práctica y política de ejecutar dicho sendero de ajuste sin alcanzar límites de extracción ni perder el financiamiento de mercado.
+El enfoque cumple en esta tesis una función interpretativa. No se
+contrasta aquí la ley de Thirlwall, y el modelo no incluye el saldo
+comercial. Lo que el enfoque aporta es la razón para tratar al tipo de
+cambio real y al riesgo soberano como determinantes de la deuda y no
+solo como variables de control. Si la escasez de divisas es el límite
+del proceso, el superávit primario en pesos no se traduce de manera
+directa en capacidad de pago en dólares. Esa es la intuición detrás de
+la hipótesis H1a, y se formaliza con la identidad de la deuda de la
+sección siguiente.
 
-La evolución de la ratio deuda/PIB ($d_t$) en el período $t$ se rige por la ecuación fundamental de movimiento:
-\begin{equation}
-d_t - d_{t-1} = \frac{r_t - g_t}{1 + g_t} d_{t-1} - pb_t
-\end{equation}
-donde $d_{t-1}$ representa la ratio deuda/PIB del período anterior, $pb_t$ es el resultado primario como proporción del PIB, $r_t$ es la tasa de interés real ponderada de la cartera de pasivos, y $g_t$ es la tasa de variación real del producto.
+\section{Solvencia intertemporal, la regla de Bohn y la identidad de la
+deuda}
 
-La estabilización de la ratio no depende exclusivamente del esfuerzo fiscal ($pb_t$). Si la tasa de interés real supera al crecimiento económico ($r_t > g_t$), se genera una dinámica autorregresiva explosiva (efecto ``bola de nieve''). Para que la condición de solvencia intertemporal (esquema No-Ponzi) se verifique, el valor esperado del stock de deuda descontado debe anularse en el horizonte infinito, satisfaciendo la \textbf{condición de transversalidad}:
-\begin{equation}
-\lim_{e \to \infty} \mathbb{E}_t \left[ \prod_{j=1}^{e} \left( \frac{1 + g_{t+j}}{1 + r_{t+j}} \right) d_{t+e} \right] = 0
-\end{equation}
+\subsection{Sostenibilidad en la definición del FMI}
 
-Para garantizar el cumplimiento de la condición de transversalidad, \citet{bohn1998} postula la existencia de una \textbf{Función de Reacción Fiscal} lineal en la que el gobierno ajusta el resultado primario ante variaciones en el stock de deuda heredado:
-\begin{equation}
-pb_t = \alpha + \rho \, d_{t-1} + \gamma \, \tilde{y}_t + \varepsilon_t
-\end{equation}
-donde $\tilde{y}_t$ representa el ciclo económico (brecha del producto), $\varepsilon_t$ es el término de error, y el parámetro $\rho$ mide la respuesta marginal del esfuerzo fiscal frente al stock de deuda acumulado. La condición suficiente de solvencia establece que un coeficiente de reacción estrictamente positivo ($\rho > 0$) asegura la sostenibilidad intertemporal de la deuda pública. El propio \citet{bohn2007} demuestra que la verificación empírica de $\rho > 0$ es suficiente para el cumplimiento de la condición de transversalidad, sin exigir cointegración estricta en niveles.
+El marco del FMI distingue tres conceptos cercanos. La deuda es
+sostenible cuando se estabiliza con riesgos de refinanciamiento bajos
+bajo un conjunto de políticas factibles, no necesariamente las del
+escenario base. Es insostenible cuando no existe ningún conjunto de
+políticas política y económicamente factibles que la estabilice con
+riesgo de refinanciamiento aceptable. La no estabilización bajo el
+escenario base describe una situación más acotada: la ratio deuda/PIB no
+se estabiliza con las políticas que el equipo técnico considera más
+probables, lo cual puede implicar solo que se requiere un ajuste, no una
+reestructuración (FMI, 2021, párr. 9 y recuadro 2). Esta distinción
+ordena el uso de las palabras en la tesis. La métrica de H1b mide la no
+estabilización bajo un escenario base y no la insolvencia. Se la
+interpreta como un indicador de riesgo, no como un diagnóstico de
+reestructuración.
 
-\subsection[La Restricción Presupuestaria Intertemporal y el Ajuste SF]{La Restricción Presupuestaria Intertemporal y el Ajuste Stock-Flujo (SF)}
-\label{sec:restriccion_intertemporal}
+\subsection{La identidad de acumulación con composición por monedas}
 
-La ecuación de movimiento simplificada asume que la variación del stock de deuda responde únicamente al resultado primario y al diferencial $r_t - g_t$. La literatura teórica y empírica \citep{bohn1998, imf2003} reconoce un componente residual macro-determinante: el \textbf{Ajuste Stock-Flujo} (\textit{Stock-Flow Adjustment}, $SF_t$), que capta toda variación del stock no explicada por el flujo fiscal corriente:
-\begin{equation}
-d_t = \frac{1 + r_t}{1 + g_t}\, d_{t-1} - pb_t + SF_t
-\end{equation}
-donde $SF_t$ agrupa los factores de valuación cambiaria, capitalización de intereses, emisión de títulos por rescates bancarios o pasivos contingentes y variaciones de activos financieros.
+Sea \(d_t\) la deuda como proporción del PIB, con
+\(d_t = d^L_t + d^F_t\), donde \(d^L\) es la deuda en pesos y \(d^F\) la
+deuda en moneda extranjera expresada en pesos. Con \(g_t\) el
+crecimiento real del PIB, \(pb_t\) el resultado primario como proporción
+del PIB, \(r^L_t\) la tasa real sobre la deuda en pesos, \(r^F_t\) la
+tasa real en dólares y \(\varepsilon_t\) la variación del tipo de cambio
+real (positiva si hay depreciación), la identidad es, de manera
+aproximada:
 
-En economías periféricas sujetas a descalce de monedas, $SF_t$ no es un componente estocástico de segundo orden, sino un determinante central de la trayectoria de la deuda. Los saltos discretos de la ratio deuda/PIB en Argentina durante 2018--2019 y 2020 obedecen principalmente a devaluaciones nominales que revalúan en pesos el stock de deuda denominado en moneda extranjera y a la capitalización de intereses en procesos de reestructuración. La asimetría entre un flujo fiscal ($pb_t$) que se ajusta de manera gradual y un ajuste de stock ($SF_t$) que reacciona de forma discreta ante perturbaciones cambiarias constituye la razón teórica fundamental de por qué una regla lineal de Bohn ($\rho$ constante) resulta inadecuada para capturar la dinámica de solvencia en Argentina.
+\[d_t = \frac{1+r^L_t}{1+g_t}\, d^L_{t-1} + \frac{(1+r^F_t)(1+\varepsilon_t)}{1+g_t}\, d^F_{t-1} - pb_t + sf_t\]
 
-\section[Nivel III: Teoría de la Fatiga Fiscal]{Nivel III: Teoría Sustantiva de la Fatiga Fiscal en Economías Periféricas}
+El último término, \(sf_t\), es el ajuste stock-flujo. Reúne las
+variaciones del stock que no provienen del resultado primario ni de los
+intereses, como el reconocimiento de pasivos contingentes o la
+capitalización de intereses. Es la forma en que se aplica la identidad
+con separación por monedas al caso argentino (Rodríguez, 2023). El FMI
+proyecta la deuda de Argentina con senderos de crecimiento, resultado
+primario, tasa efectiva y ajuste stock-flujo (FMI, 2025). La deuda se
+acumula con esta ecuación y no con una ecuación estimada, lo que
+mantiene la acumulación contablemente exacta.
 
-En el nivel de la teoría sustantiva, esta tesis adopta el marco de la \textbf{Fatiga Fiscal} de \citet{ghosh2013}, formalizado econométricamente mediante el modelo de regresión de umbral de \citet{hansen1999}. Ghosh et al. (2013) sostienen que la reacción fiscal no es invariante respecto del nivel de endeudamiento o de tensión financiera: existe un límite práctico para la extracción de excedentes fiscales. Al superar la deuda o el riesgo soberano un umbral crítico, el esfuerzo fiscal se atenúa o colapsa, imposibilitando el cumplimiento de la condición de transversalidad sin incurrir en reestructuraciones o dominancia fiscal.
+La identidad separa dos efectos de la depreciación real. El primero es
+el de valuación: \(\varepsilon_t\, d^F_{t-1}\) eleva la ratio de manera
+inmediata aunque el gobierno no haya emitido un dólar adicional. El
+segundo es el diferencial entre tasa y crecimiento, que en la parte en
+dólares incluye el tipo de cambio. Con el saldo primario constante, la
+ratio se estabiliza si \(pb_t \ge \frac{r_t - g_t}{1+g_t}\, d_{t-1}\),
+donde \(r_t\) es la tasa efectiva ponderada por la composición de la
+cartera. Cuando la depreciación pesa sobre una cartera con alta
+proporción de moneda extranjera, \(r_t\) puede superar con holgura a
+\(g_t\) de un año a otro, sin que el resultado primario haya cambiado.
+Los datos argentinos muestran ese patrón. En 2018, el aumento de la
+ratio deuda en moneda extranjera/PIB se intensificó por una fuerte
+depreciación de la moneda y una caída de la actividad de 2,6\%
+(Rodríguez, 2023), y en la relación entre crecimiento y deuda de
+2018-2019 pesó la participación de la deuda en moneda extranjera y el
+mayor tipo de cambio (Rodríguez, 2023). El mecanismo opera en las dos
+direcciones. En 2024 la deuda federal bruta pasó de 155,4\% a 85,3\% del
+PIB, por un ajuste fiscal de más de cinco puntos y por efectos de
+valuación cambiaria (FMI, 2025). Esta simetría muestra que el tipo de
+cambio real puede mover la ratio más que el resultado primario en
+cualquiera de los dos sentidos.
 
-Formulada dentro del modelo de umbral de \citet{hansen1999}, la Función de Reacción Fiscal no lineal adopta la siguiente estructura:
-\begin{equation}
-pb_t = \alpha + \beta_1 d_{t-1} \mathbb{I}(risk_t \le \tau^*) + \beta_2 d_{t-1} \mathbb{I}(risk_t > \tau^*) + \gamma \tilde{y}_t + \varepsilon_t
-\end{equation}
-donde $\mathbb{I}(\cdot)$ representa la función indicadora de régimen, $risk_t$ es la variable de tensión financiera (aproximada por el indicador de riesgo país EMBI+), y $\tau^*$ es el parámetro de umbral crítico estimado endógenamente. El coeficiente $\beta_1$ mide la respuesta fiscal en el régimen normal ($risk_t \le \tau^*$), mientras que $\beta_2$ captura la respuesta en el régimen de estrés financiero ($risk_t > \tau^*$). La hipótesis de fatiga fiscal se verifica cuando $\beta_2 < \beta_1$, evidenciando una pérdida de efectividad o atenuación del esfuerzo fiscal al cruzar el umbral $\tau^*$.
+\subsection{La regla de reacción fiscal de Bohn como condición
+suficiente}
 
-La aplicación de la hipótesis de fatiga fiscal a economías periféricas requiere una traslación crítica. En economías centrales, la fatiga fiscal emerge como un límite de economía política interna al incremento de impuestos o recortes de gasto. En economías periféricas como la argentina, la fatiga adquiere un carácter bifronte: enfrenta el límite de economía política frente al ajuste \citep{cantamutto2024} y la barrera material de la restricción externa \citep{aruguete2021}. Debido al descalce de monedas, la generación de un superávit primario en pesos no se traduce de forma directa en capacidad de pago en divisas si la restricción externa es vinculante.
+Bohn (1998) propone que la solvencia se verifica si el gobierno corrige
+el resultado primario cuando aumenta la deuda heredada. En su forma
+lineal, la regla es
 
-Esta dualidad explica la recurrencia de episodios de fatiga fiscal en la historia reciente argentina (el colapso de 2001, la crisis cambiaria de 2018 y la reestructuración de 2020), en los cuales el sendero de superávits primarios requerido por la carga de servicios excedió los límites políticos y materiales de extracción fiscal. Estos episodios constituyen la motivación histórica que la especificación no lineal de Hansen ($\tau^*$, $\beta_1$, $\beta_2$) contrasta empíricamente en el Capítulo \ref{ch:resultados}.
+\[pb_t = \alpha + \rho\, d_{t-1} + \gamma\, z_t + u_t,\]
 
-\section{Alcances y Límites del Marco Teórico}
+con \(z_t\) un conjunto de determinantes cíclicos. Si \(\rho > 0\),
+\(u_t\) está acotado como proporción del PIB y el valor presente del PIB
+es finito, la política fiscal satisface la restricción presupuestaria
+intertemporal y la condición de transversalidad. La demostración formal
+figuraba en un apéndice no publicado de Bohn (1998) y se presenta en
+Bohn (2005), donde se la presenta como un resultado de trabajos previos
+del autor, entre ellos Bohn (1998). La idea de la prueba es que una
+respuesta positiva reduce el crecimiento de la deuda respecto de un
+esquema Ponzi en un factor \((1-\rho)\) por período, por lo que el valor
+presente de la deuda tiende a cero (Bohn, 2005).
 
-Quedan deliberadamente fuera de este estudio la teoría neoclásica del crecimiento óptimo y los modelos de ciclo real sin fricciones financieras (incompatibles con la restricción externa y el canal de riesgo soberano), así como el análisis jurídico sobre la legitimidad del endeudamiento. Los conceptos integrados en este marco teórico (restricción externa, descalce de monedas, solvencia de Bohn ($\rho$), ajuste stock-flujo ($SF_t$) y fatiga fiscal de Hansen ($\tau^*, \beta_1, \beta_2$)) se corresponden directamente con la matriz operacional del Capítulo \ref{ch:metodologia} y el desarrollo empírico del Capítulo \ref{ch:resultados}.
+Bohn (2005) subraya tres puntos que importan para esta tesis. Primero,
+la proposición es una condición suficiente y no necesaria, porque una
+respuesta ausente o inestable es compatible tanto con una política
+insostenible como con una muestra insuficiente para identificarla.
+Segundo, la regla puede ser no lineal o variar en el tiempo y conservar
+la propiedad, siempre que la respuesta sea positiva a niveles altos de
+deuda. Tercero, los datos de Estados Unidos entre 1792 y 2003 arrojan
+una respuesta positiva y robusta del superávit primario a la deuda, y el
+propio autor la considera la evidencia más creíble a favor de la
+sostenibilidad (Bohn, 2005). Para el período 1916-1995 reporta un
+coeficiente de alrededor de 0,05 (Bohn, 1998, según Bohn, 2005).
+
+Conviene corregir una atribución frecuente. Bohn (2007) no demuestra que
+\(\rho > 0\) sea suficiente sin cointegración. Lo que muestra es que las
+pruebas de estacionariedad y cointegración sobre series fiscales no
+pueden rechazar la sostenibilidad: la restricción intertemporal se
+cumple si la deuda, o los ingresos y gastos con intereses, son
+integrados de orden arbitrariamente alto, y no hace falta que ingresos y
+gastos cointegren (Bohn, 2007). La suficiencia de \(\rho > 0\) proviene
+de Bohn (1998, 2005). La lectura de Bohn (2007) tiene una consecuencia
+para el diseño econométrico: que una prueba de cointegración no rechace
+la hipótesis nula de no cointegración, como ocurre en la muestra de la
+tesis, no permite concluir que la política sea insostenible, y por eso
+el sistema se estima en niveles sin imponer relaciones de cointegración.
+
+\subsection{\texorpdfstring{Por qué \(\rho > 0\) no basta para
+estabilizar la
+deuda}{Por qué \textbackslash rho \textgreater{} 0 no basta para estabilizar la deuda}}
+
+La regla de Bohn es un resultado de solvencia asintótica. No dice que la
+ratio se estabilice ni cuándo lo hace. Para ver la diferencia, se puede
+reemplazar la regla en la identidad con una tasa efectiva \(r\)
+constante. Se obtiene
+
+\[d_t - d_{t-1} = \left(\frac{r-g}{1+g} - \rho\right) d_{t-1} - \alpha - \gamma z_t - u_t .\]
+
+La ratio converge a un nivel finito solo si \(\rho > (r-g)/(1+g)\). Si
+\(0 < \rho < (r-g)/(1+g)\), la deuda crece a una tasa inferior a la de
+un esquema Ponzi y, por lo tanto, la condición de transversalidad se
+cumple, pero la ratio sigue aumentando. Dicho de otro modo, un
+coeficiente positivo y significativo es compatible con una trayectoria
+que no se estabiliza en un horizonte de decisión relevante.
+
+Esta es la lógica de H1a. Con un coeficiente de la magnitud que Bohn
+estima para Estados Unidos, del orden de 0,05, una respuesta fiscal
+significativa pero pequeña es superada por un diferencial \(r-g\) de uno
+o dos puntos. En una economía con deuda en moneda extranjera, el término
+\(r\) incluye la depreciación real y el spread soberano, que son
+variables con shocks grandes y poco predecibles, de modo que
+\((r-g)/(1+g)\) puede exceder a \(\rho\) por márgenes amplios en años de
+estrés. El coeficiente \(\rho\) que estima esta tesis es positivo y de
+magnitud reducida (Capítulo 6). La conclusión que corresponde a H1a no
+es que el gobierno no reaccione, sino que su reacción, por sí sola, no
+basta para estabilizar la deuda cuando dominan el diferencial \(r-g\),
+los efectos de valuación y los shocks externos. Esa lectura es
+compatible con la evidencia de que las consolidaciones fiscales
+discrecionales tienen en promedio un efecto reducido sobre la ratio de
+deuda (Ando et al., 2025).
+
+\section{La restricción presupuestaria consolidada y la deuda
+cuasifiscal}
+
+Un Tesoro y un banco central con balances separados pueden mostrar una
+deuda baja y ocultar el riesgo. Sargent y Wallace (1981) escriben la
+restricción presupuestaria consolidada de las autoridades fiscal y
+monetaria: los déficits se financian con señoreaje y con venta de bonos
+al público, y la demanda de bonos pone un límite al stock real de deuda
+respecto del tamaño de la economía. Cuando la tasa de interés de los
+bonos supera a la tasa de crecimiento, un endurecimiento monetario hoy
+puede significar más inflación en el futuro, porque la deuda adicional
+debe financiarse con señoreaje (Sargent y Wallace, 1981). La implicancia
+para esta tesis es que los pasivos remunerados del banco central no son
+neutrales para la sostenibilidad. Si se emiten para absorber pesos que
+de otro modo presionarían sobre el tipo de cambio, su servicio es un
+costo cuasifiscal que alguna autoridad deberá cubrir.
+
+Leeper (1991) agrega la dimensión de la interacción entre políticas. La
+existencia y la unicidad del equilibrio dependen de si cada autoridad
+responde o no a la deuda (política pasiva o activa). El caso en que la
+política fiscal es activa, es decir, no corrige el resultado primario
+ante la deuda, y la monetaria es pasiva (región II de Leeper, 1991), se
+asemeja al régimen fiscal dominante de Sargent y Wallace (1981) y suele
+llamarse dominancia fiscal. La contrapartida empírica es la regla de
+Bohn de la sección 3.2: un \(\rho\) positivo indica una autoridad fiscal
+que responde, pero solo a la deuda que se mide dentro de su perímetro.
+
+El FMI recoge este argumento en su marco de análisis. Propone consolidar
+al banco central con el gobierno cuando el banco tiene una posición de
+capital muy negativa, o cuando participa de manera significativa en el
+financiamiento monetario directo del presupuesto o en actividades
+cuasifiscales. La consolidación implica netear los créditos del banco
+central contra el gobierno y sumar los pasivos de deuda del banco
+central, excluidos la moneda y los depósitos en poder de residentes
+(FMI, 2021, párr. 40 y anexo II, sección B). En el caso argentino, ese
+perímetro tuvo importancia cuantitativa. Los pasivos del BCRA pasaron de
+18,4\% del PIB en 2023 a 2,2\% en 2024, mientras el Tesoro asumía el
+costo de la deuda de corto plazo del banco, con una recapitalización de
+alrededor de 2,5\% del PIB (FMI, 2025, anexo II). La deuda neta
+consolidada pasó de 111\% a 52\% del PIB entre ambos años (FMI, 2025,
+anexo II). Una medida que solo tome la deuda del Tesoro no registra el
+traspaso de los pasivos del banco al Tesoro como un cambio en la
+composición de una misma deuda pública. Por eso esta tesis trabaja con
+la deuda consolidada neta.
+
+\section{Descalce de monedas, pecado original e interrupciones
+repentinas}
+
+Eichengreen, Hausmann y Panizza (2003) distinguen tres conceptos que a
+menudo se usan como sinónimos. El descalce de monedas es la diferencia
+entre las monedas en que se denominan activos y pasivos. La intolerancia
+a la deuda es la incapacidad de las economías emergentes de manejar
+niveles de deuda que resultan manejables para las avanzadas (Reinhart,
+Rogoff y Savastano, 2003). El pecado original es la dificultad de los
+emergentes para endeudarse en el exterior en su propia moneda. Los dos
+primeros tratan de explicar la volatilidad y la dificultad para pagar, y
+el tercero se ocupa de las consecuencias de esos problemas y de cómo los
+manejan las autoridades (Eichengreen et al., 2003).
+
+La distinción es relevante porque el caso argentino actual matiza la
+versión más rígida del pecado original. El Tesoro mantiene alrededor de
+20\% del PIB en deuda en pesos en manos del sector privado, y la deuda
+neta consolidada en pesos fue de alrededor de 19\% del PIB en 2024 (FMI,
+2025, anexo II). La deuda en pesos coexiste con una porción mayoritaria
+en moneda extranjera: la deuda neta consolidada total fue de 52\% del
+PIB en 2024, por lo que la parte en moneda local no llega a la mitad del
+total (FMI, 2025, anexo II, cuadro 2). El descalce sigue vigente, aunque
+de menor tamaño que en años anteriores. Por eso la identidad de la
+sección 3.2 separa los dos tramos y no supone que la deuda sea toda en
+dólares ni toda en pesos.
+
+Calvo, Izquierdo y Talvi (2003) muestran cómo opera el descalce en una
+interrupción repentina de los flujos de capital (\emph{sudden stop}).
+Esas interrupciones suelen ir acompañadas de una depreciación real
+sustancial, que daña a los países con pasivos muy dolarizados y
+convierte posiciones fiscales y corporativas que parecían sostenibles en
+insostenibles. El ajuste de precios relativos requerido es mayor cuanto
+más cerrada es la economía en la oferta de bienes transables (Calvo et
+al., 2003). Los autores usan este mecanismo para explicar la caída de la
+Convertibilidad. Es la misma lógica que mueve el término
+\(\varepsilon_t\, d^F_{t-1}\) de la identidad. Para el período
+2016-2020, Aruguete (2021) describe una crisis de balanza de pagos
+originada en un proceso de sobreendeudamiento público iniciado cuatro
+años antes.
+
+\section{Canales de transmisión de la política monetaria de Estados
+Unidos}
+
+La pregunta específica de la tesis es qué ocurre con la deuda
+consolidada ante un endurecimiento de la política de la Reserva Federal
+(FED). La literatura identifica cuatro canales por los que una suba de
+la tasa de Estados Unidos llega a las cuentas públicas de una economía
+emergente. Los tres primeros están en el modelo de la tesis, y el cuarto
+queda fuera de él.
+
+\textbf{Riesgo soberano.} Uribe y Yue (2006) estiman que los shocks de
+la tasa de Estados Unidos explican alrededor de 20\% de los movimientos
+de la actividad en economías emergentes en frecuencias de ciclo
+económico, y que afectan a las variables domésticas sobre todo a través
+del spread soberano. Kalemli-Özcan (2019) encuentra que la política
+monetaria de Estados Unidos afecta el costo del crédito interno de otros
+países a través de la percepción de riesgo de los inversores globales,
+con efectos más intensos sobre los emergentes que sobre las economías
+avanzadas, y que los flujos de capital, muy sensibles a esa percepción,
+inciden de forma directa sobre los spreads de crédito locales. Rey
+(2013) sostiene que los flujos de capital, los precios de los activos y
+el crédito se mueven con un ciclo financiero global asociado al índice
+VIX, y que la política monetaria del centro es uno de los factores de
+ese ciclo. Por eso el EMBI+ es una variable endógena del sistema, la
+tasa en dólares se construye como tasa de la FED más EMBI+ y el VIX
+entra como variable exógena que recoge las condiciones financieras
+globales (Adler y Sosa, 2013, usan el VIX entre sus variables globales).
+
+\textbf{Tipo de cambio real y valuación.} Los shocks de Estados Unidos
+influyen en las economías de América Latina por vía financiera y
+producen en dos episodios, las crisis de Argentina y de Brasil, efectos
+desestabilizadores sobre los tipos de cambio nominales (Canova, 2005).
+Una vez que el tipo de cambio real se deprecia, el efecto sobre una
+cartera con deuda en divisas es el mecanismo de valuación de la sección
+3.2 y de Calvo et al.~(2003). Por eso el tipo de cambio real es una
+variable endógena y su efecto se mide como parte del bloque cambiario y
+de riesgo.
+
+\textbf{Crecimiento y diferencial \(r-g\).} Neumeyer y Perri (2005)
+descomponen la tasa de interés real de una economía emergente en una
+tasa internacional y un componente de riesgo país. Con datos argentinos,
+eliminar el riesgo país reduce la volatilidad del producto en 27\%,
+mientras que estabilizar la tasa internacional la reduce en menos de 3\%
+(Neumeyer y Perri, 2004). El resultado sugiere que el canal relevante es
+el spread y no el nivel de la tasa de referencia, y coincide con el de
+Uribe y Yue (2006). De ahí que el crecimiento sea endógeno y que el
+diferencial \(r-g\) de la identidad se mueva a la vez por el numerador y
+el denominador.
+
+\textbf{Tasas domésticas y costo cuasifiscal.} Una suba de la tasa
+externa también presiona sobre las tasas en pesos y sobre el costo de
+los pasivos remunerados del banco central, tal como se describe en la
+sección 3.3. Este canal tiene sustento histórico en el caso argentino,
+pero el modelo no lo identifica por separado, porque no incluye una tasa
+doméstica como variable. Su efecto queda incorporado en la deuda
+consolidada y en la tasa efectiva del escenario base. Esta es una
+limitación que se declara en la sección 3.8.
+
+El tratamiento de la FED y del VIX como variables exógenas se apoya en
+que Argentina es una economía pequeña y abierta. Canova (2005)
+identifica los shocks de Estados Unidos y los trata como exógenos
+respecto de los países latinoamericanos. Adler, Djigbenou y Sosa (2016),
+con un VAR de panel sobre los flujos brutos de capital de economías
+emergentes, muestran que la respuesta ante los shocks globales difiere
+según el tipo de shock: los inversores locales cumplen un papel
+estabilizador tanto ante los shocks de incertidumbre global, donde la
+repatriación de activos compensa en buena medida la salida de no
+residentes, como ante los de la tasa larga de Estados Unidos, donde la
+compensación es mucho más limitada. Esto justifica incluir a la vez la
+tasa de la FED y el VIX, que no se confunden entre sí.
+
+\section{Sostenibilidad en sentido probabilístico}
+
+El análisis tradicional de sostenibilidad proyecta una sola trayectoria
+de la deuda. El enfoque probabilístico representa la incertidumbre
+alrededor de esa trayectoria. Celasun, Debrun y Ostry (2006) proponen un
+algoritmo de simulación de la trayectoria de la deuda con shocks
+realistas al crecimiento, a las tasas de interés y al tipo de cambio,
+junto con la respuesta endógena de la política fiscal y los shocks
+fiscales propios. Su arquitectura combina un VAR sin restricciones sobre
+la tasa de interés externa real, la tasa doméstica real, el crecimiento
+y el tipo de cambio real efectivo, con una función de reacción fiscal
+estimada en panel que incluye la deuda rezagada. Los gráficos de abanico
+resultan de combinar ese patrón de shocks con la reacción fiscal, y las
+aplicaciones incluyen a Argentina (Celasun et al., 2006). Medeiros
+(2012) simula las ratios de deuda de quince Estados miembros de la Unión
+Europea con modelos VAR y una función de reacción fiscal de panel, con
+errores normales o remuestreados, y muestra que las trayectorias
+simuladas tienen asimetría positiva. Sugiere correr los escenarios de
+sostenibilidad también con una función de reacción fiscal o con una
+hipótesis equivalente de reversión a la media (Medeiros, 2012).
+
+El FMI adoptó esa lógica. Su marco de 2021 construye el gráfico de
+abanico aplicando al escenario base shocks tomados de la historia de los
+determinantes de la deuda (FMI, 2021, párr. 52). Entre las métricas del
+abanico, la primera es la probabilidad de que la deuda no se estabilice
+en el mediano plazo, definida como la probabilidad de que el resultado
+primario proyectado del escenario base en \(t+5\) sea inferior al
+necesario para estabilizar la deuda en \(t+5\) (FMI, 2021, párr. 53).
+Para Argentina, el FMI estimó una probabilidad de estabilización cercana
+a 97\% en el escenario base, tanto en el mediano plazo como en un
+abanico que termina en 2034 (FMI, 2025, anexo II, párr. 6 y 8). Esa
+cifra es el umbral de H1b.
+
+Este enfoque tiene una ventaja sobre el análisis puntual: permite
+separar la dispersión debida a los shocks (los efectos de valuación, de
+riesgo y de crecimiento) de la trayectoria central. También tiene el
+límite que se desprende de la sección 3.2: una probabilidad de no
+estabilización es una medida de riesgo bajo un escenario base, no una
+prueba de insostenibilidad en el sentido formal del FMI (FMI, 2021,
+recuadro 2).
+
+\section{Fatiga fiscal y no linealidades como teoría complementaria}
+
+La regla lineal de Bohn supone que la respuesta del resultado primario
+es constante. Ghosh, Kim, Mendoza, Ostry y Qureshi (2013) sostienen que
+esa respuesta se debilita cuando la deuda crece, porque la capacidad de
+aumentar el resultado primario no sigue el ritmo del aumento de la
+deuda. Esa fatiga fiscal genera un límite endógeno de la deuda más allá
+del cual no puede refinanciarse (Ghosh et al., 2013). Su evidencia
+proviene de 23 economías avanzadas entre 1970 y 2007, por lo que
+trasladarla a una economía emergente con restricción externa requiere
+cautela. Las estimaciones de umbral de tipo Hansen (1999) permiten
+contrastar si la respuesta fiscal cambia por encima de un nivel de
+riesgo o de deuda.
+
+En esta tesis la fatiga fiscal no organiza el marco ni sustenta una
+hipótesis. Es un resultado complementario del Capítulo 6, que se
+interpreta como una verificación de robustez de la regla lineal, no como
+la explicación central. La razón es que el objetivo es evaluar el peso
+conjunto de los canales sobre la deuda y la probabilidad de que no se
+estabilice, y para eso la reacción fiscal es un componente más del
+sistema.
+
+\section{Alcances y límites del marco}
+
+El marco tiene cuatro límites. Primero, la restricción externa se usa
+como enfoque interpretativo y no se contrasta de manera directa, porque
+el sistema no incluye el saldo comercial ni la disponibilidad de
+reservas. Segundo, la regla de Bohn es una condición suficiente de
+solvencia asintótica, no una prueba de que la deuda se estabilice en el
+horizonte 2026-2035, y su interpretación requiere compararla con el
+diferencial \(r-g\). Tercero, el canal de las tasas domésticas y del
+costo cuasifiscal no se identifica por separado y se absorbe en la deuda
+consolidada y en la tasa efectiva del escenario base. Cuarto, la
+probabilidad de no estabilización se mide bajo el escenario base del FMI
+y no es una medida de insolvencia ni de la necesidad de una
+reestructuración.
+
+Quedan fuera del estudio la teoría del crecimiento óptimo y los modelos
+de ciclo real sin fricciones financieras, que no admiten la restricción
+externa ni el riesgo soberano, y el análisis jurídico sobre la
+legitimidad del endeudamiento. Los conceptos del capítulo se
+corresponden con la matriz operativa del Capítulo 4: el descalce y la
+identidad con las variables de deuda, tipo de cambio real y riesgo país;
+la regla de Bohn con la ecuación del resultado primario; los canales de
+la FED con las variables exógenas; y la sostenibilidad probabilística
+con la simulación de Monte Carlo.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

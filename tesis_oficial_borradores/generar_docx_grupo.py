@@ -79,7 +79,8 @@ def armar_capitulos_1_2() -> Path:
     inicio = intro.index("## 1.1 Contextualización")
     fin = intro.index("## Referencias\n")
     cuerpo_intro = intro[inicio:fin].rstrip().rstrip("-").rstrip()
-    partes = [TITULO_TESIS + "# 1. Introducción\n\n" + cuerpo_intro]
+    resumen = (BASE / "resumen.md").read_text(encoding="utf-8").rstrip()
+    partes = [TITULO_TESIS + resumen, "# 1. Introducción\n\n" + cuerpo_intro]
     for nombre in CAPITULOS:
         ruta = BASE / nombre
         if ruta.exists():
@@ -177,7 +178,7 @@ def main() -> None:
             ruta_salida = SALIDA / destino
             subprocess.run(
                 ["pandoc", str(BASE / origen), "-f", "markdown", "-t", "docx",
-                 "--reference-doc", str(referencia), "-o", str(ruta_salida)],
+                 "--reference-doc", str(referencia), "--resource-path", str(BASE), "-o", str(ruta_salida)],
                 check=True,
             )
             bordes_finos(ruta_salida)

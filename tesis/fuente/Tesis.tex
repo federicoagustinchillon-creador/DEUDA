@@ -1,11 +1,5 @@
 \documentclass[11pt,a4paper,oneside]{report}
-\usepackage[utf8]{inputenc}
-% T1 obligatorio: bajo XeLaTeX, sin esto mathptmx busca sus variantes en
-% codificacion TU (Unicode) donde no existen (p. ej. "TU/ptm/b/n undefined"),
-% y LaTeX sustituye silenciosamente la negrita por texto regular. Con T1,
-% mathptmx encuentra sus formas T1/ptm/b/n reales y \bfseries/\textbf
-% funcionan en todo el documento (titulos de capitulo, leyendas en negrita).
-\usepackage[T1]{fontenc}
+% Fuentes: ver la carga de fontspec mas abajo (se compila con XeLaTeX).
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -31,7 +25,12 @@
   \renewcommand{\listtablename}{Índice de tablas}%
 }
 \usepackage{csquotes}
-\usepackage{mathptmx} % Times New Roman
+\usepackage{mathptmx} % matematica en Times
+% Texto en Times New Roman del sistema (OpenType, Unicode completo: signo menos, letras griegas,
+% superindices) en lugar de la Times de 8 bits de mathptmx, que no tiene esos glifos.
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Consolas}[Scale=0.9]
 \usepackage[left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm,headheight=1.2cm,headsep=0.4cm]{geometry} % Margenes APA 7 (top repartido entre cabecera y margen)
 \usepackage{setspace}
 \onehalfspacing % Interlineado 1.5 (Aceptado en FCE UNCUYO)
@@ -49,10 +48,14 @@
 \usepackage{hyperref}
 \usepackage[nohyperlinks]{acronym}
 
-\usepackage[style=apa, backend=biber, natbib=true]{biblatex}
-\addbibresource{referencias.bib}
-\setlength{\bibhang}{1.27cm}
-\setlength{\bibitemsep}{0.6\baselineskip}
+% Las citas van en el texto en formato autor-anio (APA) y la lista de referencias se genera
+% desde tesis_oficial_borradores/referencias_y_notas.md (generar_latex.py), sin biber.
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{calc}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{\resizebox{\linewidth}{!}{#1}}
+\makeatletter\@ifundefined{c@none}{\newcounter{none}}{}\makeatother % pandoc: tablas sin epigrafe
 
 % Cabecera institucional (logo UNCuyo) en todas las páginas, incluidas las de inicio de capítulo
 \usepackage{fancyhdr}
@@ -81,7 +84,7 @@
     {\large \textbf{UNIVERSIDAD NACIONAL DE CUYO}}\\[0.3cm]
     {\large \textbf{FACULTAD DE CIENCIAS ECONÓMICAS}}\\[2cm]
 
-    {\LARGE \textbf{La solvencia intertemporal de la deuda consolidada argentina post-2025: proyecciones a partir de sus determinantes macroeconómicos (2004-2025)}}\\[2cm]
+    {\LARGE \textbf{La solvencia intertemporal de la deuda consolidada argentina post-2025: proyecciones a partir de sus determinantes macroeconómicos (1996-2025)}}\\[2cm]
 
     {\large Tesis Final de Grado}\\[2cm]
 
@@ -118,7 +121,7 @@
 % bloquea por seguridad la escritura fuera del árbol de la carpeta de
 % compilación. \input no genera ese archivo auxiliar y evita el problema.
 \input{../capitulos/01_introduccion}
-\input{../capitulos/02_estado_del_arte}
+\input{../capitulos/02_antecedentes}
 \input{../capitulos/03_marco_teorico}
 \input{../capitulos/04_metodologia}
 \input{../capitulos/05_datos}
@@ -126,9 +129,8 @@
 \input{../capitulos/07_discusion}
 \input{../capitulos/08_conclusiones}
 
-\appendix
-\input{../capitulos/09_apendice}
-
-\printbibliography
+\chapter*{Referencias}
+\addcontentsline{toc}{chapter}{Referencias}
+\input{../capitulos/10_referencias}
 
 \end{document}

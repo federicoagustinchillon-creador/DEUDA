@@ -1,86 +1,55 @@
-\chapter{Conclusiones Finales}
-\label{ch:conclusiones}
+\chapter{Conclusiones}
 
-El análisis sobre los determinantes de la solvencia intertemporal de la deuda consolidada del SPNF argentino, sobre la ventana muestral de treinta años que sostiene el protocolo de referencia (1996--2025, $n=120$), con el subperíodo de cobertura real 2004--2025 conservado únicamente como referencia descriptiva del Capítulo \ref{ch:descriptivo}, permite arribar a síntesis conceptuales que trascienden la exégesis econométrica y abordan la economía política del endeudamiento periférico, manteniendo el rigor estadístico para distinguir evidencia de conjeturas.
+Esta tesis se preguntó en qué medida el crecimiento, el tipo de cambio
+real, el riesgo país y el resultado primario condicionan la
+sostenibilidad de la deuda pública consolidada argentina (SPNF y BCRA)
+en 2026-2035, y cuál es la probabilidad de que no se estabilice. Para
+responderla se estimó un SVAR con variables exógenas sobre datos
+trimestrales de 1996-2025, con la deuda consolidada neta construida
+según el criterio del FMI (2021, anexo II), y se lo usó para simular la
+deuda alrededor del escenario base del FMI (2025).
 
-\section{Síntesis de Hallazgos Empíricos}
+Las respuestas son tres.
 
-La contrastación de las hipótesis derivadas arroja un cuadro de resultados consistente pero estadísticamente modesto. La Tabla \ref{tab:mapa_consistencia} resume la correspondencia entre cada hipótesis, las variables y el método empleados para contrastarla, el resultado obtenido y el veredicto que de él se sigue; los párrafos siguientes desarrollan cada caso.
+\textbf{Primera (H1a).} El superávit primario, por sí solo, no basta. La
+política fiscal respondió a la deuda en el período (una reacción de 0,05
+por punto de deuda, significativa), pero los shocks cambiarios y de
+riesgo explican cerca de 60\% de la incertidumbre sobre la deuda en
+2035, y los fiscales, menos de 20\%. El resultado se mantiene con la
+deuda bruta, con la deuda neta a valor libros y con el canal de tasas en
+pesos.
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:mapa_consistencia} Mapa de Consistencia: Hipótesis, Método, Resultado y Veredicto.}
-\footnotesize
-\begin{tabular}{p{2.6cm}p{2.9cm}p{2.7cm}p{3.3cm}p{3.5cm}}
-\toprule
-\textbf{Hipótesis} & \textbf{Variables} & \textbf{Método} & \textbf{Resultado} & \textbf{Veredicto} \\
-\midrule
-$H_{1}$: Reacción fiscal débil & $pb_t$, $d_{t-1}$, $\tilde{y}_t$, EMBI+, TCRM & VECM & $\alpha_{pb}=-0.00002$ ($p=0.996$) & \textbf{No rechazada}: sin reacción sistemática \\
-\midrule
-$H_{1a}$: Régimen de reacción fiscal extremo (umbral no lineal) & $pb_t$, $d_{t-1}$, EMBI+ como variable de umbral & Umbral de Hansen en niveles y en $\Delta pb_t$; TVECM; Sup-LM por remuestreo estocástico (1.000 rép.) & Niveles ($n=119$): $\tau^*=2462.1$ pb, normal $-0.0044$ ($p=0.665$), estrés $+0.0201$ ($p=0.006$), Sup-LM $p<0.001$. $\Delta pb_t$ (ventana original, $n=87$, pendiente de reestimar): $\tau^*=2083$ pb, ambos regímenes significativos, Sup-LM $p<0.001$. TVECM: $\alpha_{pb}$ de $+0.0011$ a $-0.0074$, Sup-LM $p=0.632$ & \textbf{Confirma un régimen crítico de riesgo soberano, no fatiga fiscal}: umbral robusto ($\approx2080$--$2462$ pb) en las tres especificaciones; forma funcional divergente (régimen extremo en niveles, atenuación clásica en $\Delta pb_t$, reversión no significativa en TVECM) \\
-\midrule
-$H_{1b}$: Quiebres estructurales & $d_t$, $d_t$ consolidada & Zivot-Andrews (quiebre único); Bai-Perron (múltiples, BIC), ventana para SPNF & Z-A no significativo ($t=-4.50$, quiebre 2004T2); Bai-Perron: 3 quiebres (SPNF, incluido 2001T3, invisible bajo la ventana original) y 2 (consolidada, cobertura real 2004--2025) & \textbf{Verificada} en su versión de quiebres múltiples \\
-\midrule
-Extensión: SVAR Restringido & $\tilde{y}_t$, $pb_t$, EMBI+, TCRM, $d_t$ & SVAR con retardos presupuestarios ($\eta_{pb}=0.25$, $a_{23}=a_{24}=0$), FEVD (ventana ampliada 1996--2025) & Deuda explicada en $54.21\%$ por su propia inercia, $19.98\%$ conjunto por $pb$ y $\tilde{y}$, $25.80\%$ conjunto por TCRM/EMBI+ & \textbf{Reversión estructural}: la inercia propia y el canal cambiario-riesgo superan ahora al fiscal-real (dominante en la ventana original 2004--2025) \\
-\midrule
-Extensión: Solvencia prospectiva & $d_t$, $pb_t$, $g_t$, $r_t$, $\Delta e_t$ & DSA Monte Carlo, $t$ de Student ($\nu\approx 4.8$, $\lambda\approx 0.076$), covarianza del SVAR restringido & $P(d_{2035}>100\%)=26.1\%$ (especificación de referencia); especificación anterior calibrada a mano: $31.2\%$ ($32.5\%$ con DCC-GARCH, $29.8\%$ con CIR) & \textbf{Riesgo de cola relevante}, no desenlace modal, en ambas especificaciones \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia. ``No rechazada'' se refiere a la hipótesis nula econométrica de ausencia de reacción, que es la hipótesis sustantiva $H_1$ de esta tesis. VECM: ventana 1996--2025 ($n=120$), rango de cointegración impuesto por motivo teórico, dado que el contraste de Johansen no rechaza $r=0$ sobre la muestra completa (Sección \ref{sec:resultados_vecm}). Las secciones de origen de cada resultado se detallan en los párrafos siguientes y en el Capítulo \ref{ch:resultados}.
-\end{flushleft}
-\end{table}
+\textbf{Segunda (H1b).} Con shocks identificados, la probabilidad de que
+la deuda consolidada no se estabilice en el horizonte de cinco años que
+usa el FMI es de 11,8\% (entre 8,0\% y 15,8\%), casi cuatro veces el 3\%
+que surge del análisis oficial. A diez años baja a 6,0\%, y su límite
+inferior coincide con el umbral. Con la deuda bruta, con la neta a valor
+libros o con el canal de tasas en pesos, el límite inferior a diez años
+también supera el 3\%. El procedimiento de shocks del FMI aplicado a los
+mismos datos da probabilidades todavía mayores. El diagnóstico de
+sostenibilidad del FMI es, por lo tanto, más optimista que el que surge
+de representar la incertidumbre con la dinámica histórica de la economía
+argentina, sobre todo en los primeros cinco años.
 
-Respecto de $H_1$ (reacción fiscal), el VECM (Sección \ref{sec:resultados_vecm} del Capítulo \ref{ch:resultados}), técnica de referencia de esta tesis, trata las cuatro variables del sistema (deuda, resultado primario, EMBI+, TCRM) como conjuntamente endógenas y no permite rechazar la hipótesis nula de ausencia de reacción sistemática del superávit primario frente al endeudamiento heredado ($\alpha_{pb}=-0.00002$, $p=0.996$): la velocidad de ajuste es esencialmente nula. La extensión de la muestra a treinta años confirma este resultado sobre un horizonte que incorpora plenamente el colapso de la convertibilidad y la crisis de 2001--2002.
+\textbf{Tercera (H2).} Un endurecimiento de la FED de la magnitud del de
+2022-2023 eleva la deuda esperada en 7 puntos del PIB hacia 2035 y la
+probabilidad de no estabilización en casi 8 puntos. Un shock de medio
+punto no tiene un efecto distinguible. La mayor parte del efecto pasa
+por el costo de refinanciar la deuda en dólares. Los canales indirectos
+(riesgo país, tipo de cambio real y crecimiento) empujan en la misma
+dirección, pero con 30 años de datos de un solo país no se los puede
+medir con precisión.
 
-Respecto de $H_{1a}$ (régimen de reacción fiscal frente a un umbral de riesgo soberano), el modelo de umbral de Hansen, en su especificación en niveles, reestimado sobre la ventana de treinta años ($n=119$), localiza un umbral candidato en $\tau^*=2462.1$ puntos básicos de EMBI+. El ordenamiento de coeficientes que arroja no es el que predeciría la hipótesis de fatiga fiscal de \citet{ghosh2013}, sino el opuesto: en el régimen ``normal'' (96 de 119 trimestres) el coeficiente es negativo y no significativo ($-0.0044$, $p=0.665$), mientras que en el régimen de ``estrés'' (23 trimestres) es positivo y significativo al 1\% ($0.0201$, $p=0.006$), un patrón de disciplina fiscal ausente en la normalidad y gatillada solo por una crisis de riesgo soberano agudo, no de reacción que se atenúa bajo presión. El contraste por remuestreo estocástico Sup-LM del propio umbral rechaza la linealidad de manera categórica ($p<0.001$), con mayor contundencia que el $p=0.076$ marginal que arrojaba la especificación equivalente sobre la ventana original de 88 observaciones, y sobre una partición muestral (96 contra 23) considerablemente menos desigual que la de aquella estimación (14 contra 74).
+\textbf{Implicancia.} El riesgo de la deuda argentina depende menos del
+esfuerzo fiscal, que el escenario base ya incorpora, que de la
+exposición al tipo de cambio real y a la prima de riesgo. Reducir la
+proporción de deuda en moneda extranjera y alargar los plazos atacan
+directamente los dos canales que dominan la varianza en esta tesis. Con
+eso no se reemplaza el superávit, pero se reduce la sensibilidad de la
+deuda a los shocks que el superávit no controla.
 
-Esta especificación en niveles, además, viola el supuesto de estacionariedad estricta que el propio test de Hansen exige de su variable dependiente, dado que $pb_t$ es I(1) (Sección \ref{sec:dfgls}). La Sección \ref{sec:robustez_hansen_dpb} reestima el contraste con $\Delta pb_t$, estacionaria y por tanto la especificación que sí satisface formalmente ese supuesto, todavía sobre la ventana original de 88 observaciones y pendiente de su reestimación sobre la muestra completa: allí, a diferencia de la especificación en niveles, el resultado es el de la fatiga fiscal clásica que predice \citet{ghosh2013}, con ambos coeficientes de régimen significativos ($0.0184$, $p=0.001$ en normalidad; $0.0077$, $p=0.030$ en estrés) y una reacción que se atenúa, sin desaparecer, bajo presión financiera.
-
-El Threshold VECM (Sección \ref{sec:tvecm_resultados}), estimado sobre la muestra completa, aporta una tercera lectura: la velocidad de ajuste fiscal revierte de signo entre regímenes ($\alpha_{pb}$ de $+0.0011$ a $-0.0074$) sin alcanzar significatividad en su propio contraste Sup-LM ($p=0.632$). Las tres especificaciones coinciden en la ubicación del umbral de riesgo soberano, entre 2080 y 2462 puntos básicos, pero no en la forma funcional de la no linealidad que describen.
-
-El veredicto de esta tesis para $H_{1a}$ es la confirmación de un \textbf{régimen crítico de reacción fiscal frente al riesgo soberano, no de fatiga fiscal en el sentido de \citet{ghosh2013}}. La especificación en niveles describe una disciplina fiscal ausente en la normalidad y gatillada solo por estrés extremo. La especificación en $\Delta pb_t$, la única que satisface formalmente el supuesto de estacionariedad del test pero todavía sobre la ventana original, describe la atenuación clásica de la fatiga fiscal. El TVECM describe una reversión de signo sin sostén estadístico formal. Esta tesis no fuerza una lectura única entre las tres: el Capítulo \ref{ch:discusion} desarrolla la tensión, y explicita que la lectura de economía política asociada es una interpretación compatible con la evidencia, no una inferencia derivada unívocamente de ella.
-
-Respecto de $H_{1b}$ (quiebres estructurales históricos), el contraste de Zivot-Andrews con quiebre endógeno, reestimado sobre la ventana de treinta años, localiza el punto de ruptura de la ratio Deuda/PIB en el segundo trimestre de 2004, coincidente con el tramo inicial de la recuperación posterior al default, pero el estadístico de prueba ($t=-4.50$) no alcanza significatividad ni siquiera al 10\% frente a los valores críticos de \textcite{zivot1992} ($-5.58$ al 1\%, $-5.07$ al 5\%, $-4.83$ al 10\%). La ratio de deuda argentina se comporta, en términos estrictamente estadísticos, como una serie genuinamente integrada de orden uno, sin una tendencia determinística estable ni siquiera reconociendo el quiebre más evidente de la ventana de treinta años. La restricción de Zivot-Andrews a un único quiebre se supera mediante el procedimiento formal de \textcite{bai2003} (programación dinámica exacta, selección del número de quiebres por BIC), corrido por primera vez sobre la ventana completa, que identifica $H_{1b}$ con mayor riqueza: tres quiebres en la deuda SPNF (2001T3, 2006T1 y 2017T3), incluido el de 2001 que una ventana muestral que arrancaba en 2004 no podía, por construcción, detectar, y dos en su versión consolidada ampliada con los pasivos remunerados del BCRA (2007T2 y 2016T4), esta última acotada a su cobertura real de datos (2004--2025), dado que la serie de pasivos del BCRA no existe con anterioridad a 2004. A diferencia del test de quiebre único, $H_{1b}$ encuentra aquí soporte estadístico afirmativo: la serie sí exhibe quiebres estructurales identificables, aunque múltiples y no reducibles a uno solo.
-
-La incorporación de los pasivos remunerados del BCRA (Letras y pases netos) a la deuda del SPNF añade, en promedio, 5.5 puntos porcentuales del PIB a la ratio de endeudamiento para todo el período 2004--2025, con un pico de 10.6\% en el primer trimestre de 2018 y una convergencia a valores prácticamente nulos desde mediados de 2024, cuando el Tesoro asumió el rol de esterilizador monetario mediante Letras Fiscales de Liquidez (LEFI). Esta capa cuasi-fiscal, ausente de la definición central de $d_t$ por decisión metodológica (Capítulo \ref{ch:metodologia}), modifica la cronología de quiebres estructurales sin alterar el diagnóstico central de $H_1$: la deuda consolidada ampliada (SPNF + BCRA) conserva el mismo orden de integración I(1) que la deuda consolidada del SPNF.
-
-Finalmente, la proyección estocástica de sostenibilidad (DSA, Monte Carlo con perturbaciones $t$ de Student, $\nu\approx 4.8$, $\lambda\approx 0.076$, 1.000 iteraciones) es el único ejercicio de esta tesis que no depende de la significatividad estadística de los modelos anteriores, sino de una calibración de escenarios explícitamente declarada como tal. Bajo la especificación de referencia, cuya matriz de covarianza se deriva de los residuos estimados del SVAR restringido sobre la ventana ampliada (Sección \ref{sec:dsa_resultados} del Capítulo \ref{ch:resultados}), la probabilidad de que la ratio Deuda/PIB supere la frontera del 100\% del producto hacia 2035 es del $26.1\%$. Una especificación preliminar, calibrada determinísticamente y documentada en los ejercicios de robustez (Apéndice Metodológico), arrojaba una probabilidad del 31.2\%, con cambios moderados (32.5\% con DCC-GARCH, 29.8\% con CIR) al sustituir esa calibración original por desvíos GARCH(1,1) y por las correlaciones reestimadas de esos dos modelos. En ambas especificaciones se trata de una probabilidad de cola relevante para el análisis macroprudencial, aunque de ningún modo un desenlace mayoritario.
-
-\section{Aporte Metodológico y Límites del Estudio}
-\label{sec:aporte_metodologico}
-
-El aporte de esta tesis reside en someter la hipótesis de un umbral crítico en la reacción fiscal frente al riesgo soberano a un protocolo econométrico secuencial completo, sobre una ventana muestral de treinta años, y en reportar el resultado que ese protocolo arroja, predominantemente negativo o mixto según el objeto exacto contrastado. La contribución no es la confirmación de una tesis previa sino la delimitación precisa de lo que la evidencia argentina 1996--2025 permite y no permite sostener: no permite sostener una regla de reacción fiscal activa ni lineal; permite sostener la existencia de un umbral crítico de riesgo soberano robusto en su ubicación pero no en la forma de la no linealidad que adopta, un régimen de reacción fiscal extremo en niveles, sin llegar a fatiga fiscal, frente a una atenuación compatible con la fatiga fiscal clásica en $\Delta pb_t$ (todavía sobre la ventana original, Sección \ref{sec:robustez_hansen_dpb}) y una reversión de signo sin sostén estadístico formal en el TVECM; y sí permite sostener que la ratio de deuda exhibe quiebres estructurales múltiples identificables, que el parámetro de reacción es inestable entre subperíodos, y que la probabilidad de superar el 100\% del PIB hacia 2035 constituye un riesgo de cola no despreciable bajo supuestos explícitos.
-
-De ello se sigue el desplazamiento del eje explicativo que articula esta tesis: si el mecanismo de ajuste no transita por la función de reacción fiscal del Tesoro (regla de Bohn, Nivel III del marco teórico), la explicación debe buscarse en el canal que el enfoque de la restricción externa identifica (Nivel I): tipo de cambio real, efecto de hoja de balance y Ajuste Stock-Flujo, tal como desarrolla el Capítulo \ref{ch:discusion}. Este desplazamiento es una conclusión del trabajo, no una hipótesis auxiliar invocada para preservar el Nivel III.
-
-Entre las limitaciones explícitamente reconocidas se cuentan:
-\begin{itemize}
-    \item[(i)] El tamaño muestral moderado de la ventana (120 observaciones, 119 en el umbral de Hansen por la construcción de rezagos) reduce el poder de las técnicas de umbral y cointegración, pese a la extensión desde los 88 trimestres originales.
-    \item[(ii)] Dos de los cinco impulsos de la matriz de covarianzas del DSA (tasas de interés doméstica e internacional, sin serie histórica propia) siguen calibrados en lugar de estimados, aunque los tres restantes ya usan la covarianza del SVAR restringido sobre la ventana ampliada (Sección \ref{sec:dsa_resultados}).
-    \item[(iii)] La ausencia de cointegración bivariada por el test residual de Engle-Granger entre deuda y resultado primario (Apéndice \ref{sec:engle_granger}, $p=0.302$, $n=120$) es coherente con el diagnóstico divergente de Johansen.
-\end{itemize}
-
-Su jerarquización orienta la agenda futura: la (i) es la más \textbf{estructural} (el límite de un único país, superable solo mediante un panel de países comparables, Sección \ref{sec:agenda_futura}). La (ii) es la más \textbf{superable} a corto plazo, con acceso a series de tasas de mayor cobertura histórica. La (iii) es en buena medida inherente a la volatilidad estructural y a la inercia fiscal de la economía argentina.
-
-\section{Agenda de Investigación Futura e Implicancias Analíticas}
-\label{sec:agenda_futura}
-
-El horizonte posterior a 2025 demanda combinar la prudencia estadística de esta tesis con el análisis riguroso de las implicancias macroeconómicas que sus hallazgos, aun modestos, permiten sostener. Las proyecciones de organismos multilaterales que asumen superávits primarios permanentes de 3\% o 4\% del PIB sin contemplar la ausencia estadísticamente verificada de una reacción fiscal sistemática de esa magnitud en el historial argentino reciente deberían, como mínimo, ponderar el escenario de Estrés y la probabilidad de cola del 26.1\% (especificación de referencia; 31.2\% bajo la calibración anterior) documentados en los Capítulos \ref{ch:resultados} y \ref{ch:discusion}.
-
-En términos analíticos, el hallazgo empírico de una correlación positiva, aunque débil, entre las variaciones del tipo de cambio real y la dinámica de la ratio de deuda ($r=0.14$ sobre la serie real de TCRM, Sección \ref{sec:hoja_balance} del Capítulo \ref{ch:descriptivo}) señala que la exposición al riesgo cambiario y la estructura de plazos de los pasivos constituyen determinantes moderados, no dominantes en la correlación bivariada simple, del Ajuste Stock-Flujo. Ello implica que la modelización econométrica de la solvencia en economías emergentes debe incorporar de forma explícita las perturbaciones del tipo de cambio real y la composición por monedas de los pasivos, en lugar de confiar exclusivamente en metas de resultado primario cuyo carácter estabilizador no encuentra sustento estadístico en la evidencia reciente.
-
-Esta tesis incorporó cinco extensiones metodológicas respecto de su formulación inicial: la estimación VECM sobre una muestra ampliada mediante empalme histórico (1996--2025, $n=120$) como técnica multivariada de referencia (Capítulos \ref{ch:metodologia}--\ref{ch:resultados}); el procedimiento formal de quiebres múltiples de \textcite{bai2003} (Capítulo \ref{ch:descriptivo}); la reestimación GARCH(1,1)/DCC-GARCH de la matriz de covarianzas del DSA como especificación alternativa de robustez; la derivación de esa misma matriz a partir de los residuos estimados del propio SVAR restringido sobre la muestra ampliada, adoptada como especificación de referencia del DSA estocástico (Sección \ref{sec:dsa_resultados} del Capítulo \ref{ch:resultados}); y la consolidación de la deuda SPNF con los pasivos remunerados del BCRA (Capítulos \ref{ch:metodologia}--\ref{ch:descriptivo}). En términos de agenda de investigación futura, esta tesis identifica cinco líneas de continuidad directa.
-
-\begin{enumerate}
-    \item \textbf{Transición suave y umbrales múltiples}, con prioridad sobre las restantes por seguirse directamente del resultado mixto y sensible a la especificación del contraste de umbral (Sección \ref{sec:robustez_hansen_dpb}): contrastar la no linealidad de la FRF mediante especificaciones STAR/LSTR y de umbrales múltiples, dado que \citet{hansen1999} supone una transición discreta que podría ocultar un ajuste gradual (Capítulo \ref{ch:discusion}). Convendría además evaluar variables de umbral alternativas al EMBI+ (deuda en moneda extranjera, cobertura de reservas sobre vencimientos).
-    \item \textbf{Intervalos de confianza de los quiebres}: implementar el contraste secuencial \textit{sup} F($l$+1$\vert$$l$) de Bai y Perron con sus tablas críticas no estándar, para acotar la ubicación de cada quiebre más allá del número óptimo que hoy informa el BIC.
-    \item \textbf{Dominancia fiscal}: retomar el análisis de \textcite{sargent1981} aprovechando la serie de pasivos remunerados del BCRA ya construida (Sección \ref{sec:deuda_consolidada}), que esta tesis empleó para consolidar el stock de deuda pero no para estimar formalmente un régimen de dominancia monetaria-fiscal.
-    \item \textbf{Panel Argentina-Chile y región}, con mayor potencial transformador: extender el análisis a un panel de economías latinoamericanas comparables (Brasil, Uruguay, Colombia, Chile, Perú; FMI y CEPAL, 1990--2025), comenzando por un VAR o VECM de panel acotado a Argentina y Chile. La base de datos de \citet{cowan2006}, que ya releva series homogéneas para ambos países, ofrece un punto de partida documentado; no se identificó, en cambio, un antecedente que estime directamente un VAR o VECM de panel Argentina-Chile, por lo que esta línea sería una contribución metodológica genuina. Un panel de 6 a 8 países con 35 años de series (700 a 1.000 observaciones) permitiría, además, distinguir si la debilidad de la reacción fiscal argentina es idiosincrática o una condición más amplia de la economía política fiscal periférica en América Latina.
-\end{enumerate}
-
-La ausencia de una regla de reacción fiscal verificable, documentada en esta tesis, es en sí misma un dato sobre la naturaleza de la solvencia soberana argentina contemporánea: una solvencia que, en el período estudiado, no se sostuvo sobre el ajuste primario sino sobre la licuación y la reestructuración de pasivos.
-
-\section{Límites Cognitivos del Estudio y Consideraciones Prospectivas}
-
-El objetivo general de esta tesis es una meta de conocimiento puro, no una propuesta de intervención de política económica. El descubrimiento de la inoperancia de la regla de Bohn y la evidencia mixta, sensible a la especificación, sobre el umbral de Hansen representan hallazgos cognitivos sobre las determinaciones materiales del vector fiscal argentino. Por ende, los hallazgos analíticos sobre la vulnerabilidad cambiaria y el perfil de vencimientos se presentan solo a título prospectivo como apertura heurística hacia futuras líneas de investigación. La transformación de un problema de conocimiento en una acción pragmática excede el alcance empírico de este trabajo.
+\textbf{Líneas de trabajo futuro.} Tres extensiones se desprenden de las
+limitaciones: incorporar los activos del FGS cuando haya una serie
+trimestral pública, modelar una tasa en pesos homogénea para todo el
+período y estimar los canales de la FED con un panel de economías
+emergentes que dé más precisión a las respuestas indirectas.

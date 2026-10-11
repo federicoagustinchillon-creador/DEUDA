@@ -1,341 +1,313 @@
-\chapter{Desarrollo Empírico y Resultados}
-\label{ch:resultados}
+\chapter{Resultados}
 
-Este capítulo contrasta empíricamente las hipótesis planteadas en el Capítulo \ref{ch:introduccion} mediante econometría de series de tiempo. El paso desde el análisis descriptivo del Capítulo \ref{ch:descriptivo} hacia la estimación econométrica evalúa los determinantes de la Función de Reacción Fiscal argentina sobre la muestra completa (1996--2025, $n=120$, treinta años exactos). DF-GLS, Johansen, VECM, Hansen, Bai-Perron, el SVAR restringido y el Threshold VECM se estiman todos sobre esta misma ventana (Secciones \ref{sec:dfgls}--\ref{sec:tvecm_resultados}); el VECM, el SVAR restringido y el Threshold VECM son las técnicas multivariadas centrales para la reacción fiscal y el análisis de no linealidad (Secciones \ref{sec:vecm} y \ref{sec:svar_metodologia} del Capítulo \ref{ch:metodologia}).
+Todos los resultados de este capítulo salen de la misma muestra
+efectiva, 1998T2-2025T4 (111 trimestres), y del mismo escenario base, el
+del FMI (2025, anexo II). La especificación principal usa la deuda
+consolidada neta con las Letras Intransferibles a valor nominal, que
+parte de 61,0\% del PIB en diciembre de 2025. Las cifras se pueden
+reproducir con \texttt{codigo/\allowbreak{}modelos/\allowbreak{}fase24\_\allowbreak{}svarx\_\allowbreak{}1996\_\allowbreak{}2025.py} y
+\texttt{codigo/\allowbreak{}modelos/\allowbreak{}fase25\_\allowbreak{}simulacion\_\allowbreak{}dsa\_\allowbreak{}svarx.py}.
 
-La evidencia recogida es mayormente débil o estadísticamente no concluyente: la regla de reacción fiscal lineal de Bohn no opera de forma estable bajo ninguna de las técnicas aplicadas. Esa inoperancia es el hallazgo central del capítulo, y se analiza en profundidad en el Capítulo \ref{ch:discusion} junto con dos resultados adicionales: el modelo de umbral de Hansen no confirma fatiga fiscal en su especificación en niveles, sino el patrón inverso (Sección \ref{sec:hansen}); y la descomposición de varianza del SVAR restringido cambia de manera sustantiva respecto de una estimación previa sobre una ventana más corta (Sección \ref{sec:svar_resultados}), reversión que se discute con el mismo criterio de transparencia que el resto del capítulo.
+\section{El SVARX estimado}
 
-\section{Contrastes Adicionales de Raíz Unitaria (DF-GLS)}
-\label{sec:dfgls}
+\textbf{Rezagos y diagnósticos.} Con la regla de la sección 4.5, el
+modelo usa tres rezagos. La raíz de mayor módulo del polinomio
+característico es 0,96, de modo que el sistema es estable y tiene
+representación de medias móviles. La prueba de Portmanteau con 12
+rezagos da un p-valor de 0,036: queda algo de autocorrelación en los
+residuos, que se informa como limitación. Los residuos no son normales
+(p \textless{} 0,001), lo que justifica remuestrear shocks históricos en
+lugar de suponer normalidad. La prueba ARCH-LM con cuatro rezagos no
+detecta heterocedasticidad condicional en ninguna ecuación (p-valores
+entre 0,87 y 0,99). El \emph{bootstrap} salvaje es válido con y sin
+heterocedasticidad, así que su uso no depende de este resultado.
 
-La Sección \ref{sec:estacionariedad} del Capítulo \ref{ch:descriptivo} ya avanzó un diagnóstico de integración basado en los contrastes complementarios de ADF y KPSS. Para robustecerlo se aplica adicionalmente el test de raíz unitaria \textit{Dickey-Fuller Generalized Least Squares} (DF-GLS) de \textcite{elliott1996}, que remueve la tendencia determinística mediante mínimos cuadrados generalizados antes de estimar la regresión aumentada, logrando una potencia estadística sustancialmente mayor que el ADF convencional en muestras acotadas como la presente ($n=120$).
+\textbf{Reacción fiscal.} El coeficiente de la deuda rezagada en la
+ecuación del resultado primario es 0,051 (p = 0,019), con un intervalo
+de 90\% del \emph{bootstrap} de {[}0,020; 0,082{]}. Diez puntos más de
+deuda en relación con el PIB se asocian, en promedio, con medio punto
+más de superávit primario. El resultado no depende del perímetro de la
+deuda:
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:dfgls} Resultados del Test de Raíz Unitaria DF-GLS (Elliott-Rothenberg-Stock, 1996), Muestra Completa (1996--2025).}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrl}
-\toprule
-\textbf{Variable} & \textbf{Estad. (nivel)} & \textbf{Crít. 5\% (nivel)} & \textbf{Estad. (1.\ dif.)} & \textbf{Crít. 5\% (1.\ dif.)} & \textbf{Conclusión} \\
-\midrule
-$pb_t$ & -1.30 & -3.01 & -5.98 & -2.12 & I(1) \\
-$d_t$ & -2.65 & -3.01 & -4.07 & -2.12 & I(1) \\
-EMBI+ ($risk_t$) & -2.30 & -3.01 & -9.16 & -2.11 & I(1) \\
-$\tilde{y}_t$ & -3.46 & -3.02 & -4.93 & -2.12 & I(0) \\
-\bottomrule
-\end{tabular}%
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Serie de deuda
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rezagos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reacción fiscal
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intervalo de 90\%
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Consolidada neta, Letras a valor nominal (principal) & 3 & 0,051 &
+{[}0,020; 0,082{]} \\
+Consolidada neta, Letras a valor libros & 3 & 0,053 & {[}0,021;
+0,085{]} \\
+Consolidada bruta & 4 & 0,054 & {[}0,027; 0,079{]} \\
+\end{longtable}
 }
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia (\texttt{codigo/modelos/fase1\_estacionariedad.py}). Test DF-GLS especificado con constante y tendencia determinística en niveles, y únicamente constante en primeras diferencias.
-\end{flushleft}
-\end{table}
 
-El DF-GLS confirma, con mayor potencia estadística que el protocolo del Capítulo \ref{ch:descriptivo}, el carácter integrado de orden uno de $pb_t$, $d_t$ y del riesgo soberano: las tres no rechazan la raíz unitaria en niveles y sí la rechazan con holgura tras la primera diferencia. Para la deuda en particular, DF-GLS es más informativo que el ADF simple de la Sección \ref{sec:estacionariedad}: mientras el ADF por sí solo dejaba una lectura ambigua entre I(0) e I(1) para $d_t$ en esta ventana (Sección \ref{sec:ventana_ampliada} del Capítulo \ref{ch:descriptivo}), el DF-GLS, de mayor potencia, no rechaza la raíz unitaria en niveles ($-2.65$ frente a un crítico de $-3.01$) y respalda con más autoridad el tratamiento I(1) que el resto del protocolo mantiene por continuidad. La brecha del producto, en cambio, rechaza la raíz unitaria tanto en niveles como en diferencias, I(0) sin ambigüedad. Esta clasificación, tres series I(1) y una I(0), es la base sobre la que la Sección \ref{sec:johansen_cap6} retoma el contraste formal de cointegración de Johansen para evaluar si el sistema conjunto admite una relación de equilibrio de largo plazo.
+El signo coincide con el que encuentran Celasun et al.~(2006) en su
+panel de economías emergentes. La política fiscal argentina respondió a
+la deuda en el período, pero con un coeficiente chico. La simulación
+muestra si esa respuesta alcanza para estabilizarla.
 
-\section{Relación de Largo Plazo: Cointegración de Johansen}
-\label{sec:johansen_cap6}
+\textbf{Respuesta a la tasa de la FED.} Un aumento de un desvío estándar
+en la tasa de política de la FED (0,50 puntos porcentuales) no produce
+respuestas significativas de las variables domésticas en ninguno de los
+horizontes considerados (0, 4, 8 y 20 trimestres). El EMBI+ sube 9
+puntos básicos en el trimestre del shock, con un intervalo de 90\% de
+{[}-83; 103{]}, y 12 puntos básicos a los dos años, con un intervalo de
+{[}-14; 42{]}. El tipo de cambio real y el resultado primario tampoco
+responden de manera significativa. La única excepción es el crecimiento,
+que en el trimestre del shock sube medio punto con un intervalo que
+apenas excluye el cero, {[}0,00; 1,04{]}. Ese signo no tiene una
+explicación económica clara y desaparece desde el cuarto trimestre. Con
+111 trimestres y un shock chico, el modelo no puede distinguir los
+efectos indirectos de la FED del ruido.
 
-Como se estableció en la Sección \ref{sec:dfgls}, el sistema conformado por la ratio Deuda/PIB, el Resultado Primario, el EMBI+ y el TCRM es I(1). Esta circunstancia obliga a verificar formalmente, mediante el procedimiento de máxima verosimilitud de Johansen, si existe al menos una combinación lineal estacionaria entre estas cuatro variables, condición necesaria para que una regresión en niveles no sea espuria.
+\section{El gráfico de abanico}
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:johansen} Test de cointegración de Johansen (Traza y Máximo Autovalor), sistema [Deuda/PIB, Result. Primario, EMBI+, TCRM], Muestra Completa (1996--2025).}
-\begin{tabular}{lrrcrrc}
-\toprule
-\multirow{2}{*}{$H_0$: rango $\le$} & \multicolumn{3}{c}{\textbf{Estadístico de Traza}} & \multicolumn{3}{c}{\textbf{Estadístico de Máx. Autovalor}} \\
- & \textbf{Valor} & \textbf{Crít. 95\%} & \textbf{Rechaza} & \textbf{Valor} & \textbf{Crít. 95\%} & \textbf{Rechaza} \\
-\midrule
-0 & 45.18 & 47.85 & No & 19.97 & 27.59 & No \\
-1 & 25.21 & 29.80 & No & 15.10 & 21.13 & No \\
-2 & 10.10 & 15.49 & No & 7.03  & 14.26 & No \\
-3 & 3.07  & 3.84  & No & 3.07  & 3.84  & No \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia (\texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}), $k\_ar\_diff=1$ (BIC). La secuencia formal de decisión se detiene en la primera hipótesis no rechazada; al no rechazarse $H_0: r=0$, la evaluación se detiene ahí y la significatividad reportada en $r\ge 1$ se muestra solo por completitud de la tabla.
-\end{flushleft}
-\end{table}
+La Tabla 6.1 resume la distribución de la deuda simulada. La mediana
+baja de 61,0\% del PIB en 2025 a 35,9\% en 2030 y a 16,7\% en 2035. La
+caída la determina el escenario base del FMI, que combina un superávit
+primario de alrededor de 2,5\% del PIB con una tasa de interés efectiva
+de alrededor de 4\% y un deflactor del PIB que crece cerca de 7,5\% por
+año. Con esos supuestos, la tasa real que paga la deuda es negativa y la
+licua año tras año.
 
-Sobre la ventana de treinta años, ambos estadísticos de Johansen coinciden en no rechazar $H_0: r=0$: la Traza ($45.18$) queda por debajo de su crítico al 95\% ($47.85$) y el Máximo Autovalor ($19.97$) también queda por debajo del suyo ($27.59$). Es un diagnóstico más contundente que el de una ventana más corta, aunque en el sentido opuesto al que ofrecía una estimación previa sobre 2004--2025: allí ambos estadísticos coincidían en rechazar $r=0$ y encontrar exactamente una relación de cointegración; aquí coinciden en no encontrar ninguna. Esta tensión, ya documentada en la Sección \ref{sec:resultados_vecm} y en la Sección \ref{sec:etapa2_johansen} del Capítulo \ref{ch:metodologia}, no se oculta: se impone igualmente un rango $r=1$ por motivo teórico, la relación de largo plazo de \citet{bohn1998}, para poder estimar el VECM y el SVAR restringido (Secciones \ref{sec:resultados_vecm} y \ref{sec:svar_resultados}), documentando explícitamente que la imposición no es una elección neutral.
+\textbf{Tabla 6.1. Deuda consolidada neta simulada (\% del PIB),
+percentiles}
 
-La adopción metodológica de un Vector de Corrección de Errores (VECM) como técnica de referencia de esta tesis (Sección \ref{sec:vecm} del Capítulo \ref{ch:metodologia}) responde a la necesidad teórica de modelar las interacciones simultáneas del sistema multivariado. La Sección \ref{sec:resultados_vecm} reporta dicha estimación, junto con la selección del orden de rezagos del VAR subyacente y la sensibilidad del rango de cointegración a esa elección.
-
-\section{Estimación de la Función de Reacción Fiscal por VECM}
-\label{sec:resultados_vecm}
-
-Sobre la muestra completa 1996T1--2025T4 ($n=120$, treinta años exactos, construida mediante el empalme de la Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia}), se estima un Modelo de Vectores con Corrección de Error (VECM) para el mismo sistema de cuatro variables [Deuda/PIB, Resultado Primario, EMBI+, TCRM], con la brecha del producto como variable exógena estacionaria. El VECM modela el sistema completo como conjuntamente endógeno: la endogeneidad queda integrada directamente en la estructura del modelo, sin necesidad de una construcción auxiliar.
-
-\subsection{Selección de Rezagos y Sensibilidad del Rango de Cointegración}
-
-La selección de rezagos del VAR en niveles sobre la ventana ampliada no arroja unanimidad entre criterios: AIC y FPE seleccionan 5 rezagos, HQIC selecciona 2, y BIC, el más parsimonioso, selecciona 1. Dado que $n=120$ es una muestra moderada para un sistema de cuatro variables (cada rezago adicional cuesta 16 parámetros), se adopta el rezago del criterio BIC ($k\_ar\_diff=1$) como especificación de referencia, reportando en la Tabla \ref{tab:vecm_sensibilidad_lags} la sensibilidad de la estimación a esta elección.
-
-Más consecuente aún es la sensibilidad del propio contraste de cointegración al punto de inicio de la muestra, reportada en la Tabla \ref{tab:vecm_sensibilidad_inicio}: con el rezago del criterio BIC, el estadístico de Traza no rechaza la ausencia de cointegración ($H_0: r=0$) para ningún inicio de muestra anterior a 2000T1, y sí la rechaza a partir de esa fecha.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:vecm_sensibilidad_inicio} Sensibilidad del Contraste de Traza de Johansen al Inicio de la Muestra (Ventana Ampliada, $k\_ar\_diff=1$).}
-\begin{tabular}{lrrrc}
-\toprule
-\textbf{Inicio de la muestra} & \textbf{$n$} & \textbf{Traza ($H_0: r=0$)} & \textbf{Crítico 95\%} & \textbf{Rango hallado} \\
-\midrule
-1996T1 (completa) & 120 & 45.18 & 47.85 & 0 \\
-1997T1 & 116 & 45.46 & 47.85 & 0 \\
-1998T1 & 112 & 46.24 & 47.85 & 0 \\
-1999T1 & 108 & 46.38 & 47.85 & 0 \\
-2000T1 & 104 & 50.95 & 47.85 & 1 \\
-2001T1 & 100 & 58.62 & 47.85 & 1 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia (\texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}). Los valores desde 1999T1 en adelante coinciden exactamente con los ya reportados para la ventana ampliada original de 108 observaciones, verificando la continuidad metodológica de la extensión.
-\end{flushleft}
-\end{table}
-
-A diferencia de la ventana ampliada de 108 observaciones, donde excluir un único año revertía el diagnóstico, en la ventana de treinta años el resultado es más contundente: ningún punto de inicio entre 1996T1 y 1999T1, cuatro alternativas distintas, rechaza la ausencia de cointegración; recién al excluir también 1998 y 1999 completos (inicio en 2000T1) el estadístico de Traza supera al crítico. Esta fragilidad es coherente con la literatura sobre la distorsión del contraste de Johansen ante quiebres estructurales severos no modelados \citep{gregory1996,johansen2000}: treinta años de muestra continua no ofrecen, por sí solos, una imagen invariante de la cointegración de largo plazo, sino una mayor sensibilidad derivada de abarcar regímenes macroeconómicos disímiles. Se impone en consecuencia un rango de cointegración $r=1$ por motivo teórico, el mismo criterio ya aplicado en la Sección \ref{sec:johansen_cap6}, documentando explícitamente que la imposición no es una elección neutral.
-
-\subsection{Estimación VECM y Sensibilidad a la Elección de Rezagos}
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:vecm_beta_alpha} Estimación VECM, Ventana Ampliada ($n=120$, $k\_ar\_diff=1$, rango de cointegración $=1$).}
-\begin{tabular}{lrrrr}
-\toprule
-\multicolumn{5}{l}{\textit{Panel A. Vector de cointegración $\boldsymbol{\beta}$ (normalizado sobre deuda\_pib)}} \\
-\midrule
-\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est.} & \textbf{$z$} & \textbf{$p$-valor} \\
-\midrule
-deuda\_pib & 1.0000 & --- & --- & --- \\
-pb\_pib & 5.9653 & 2.595 & 2.299 & 0.022 \\
-EMBI & -0.0150 & 0.003 & -4.930 & 0.000 \\
-TCRM & 2.0466 & 10.160 & 0.201 & 0.840 \\
-const & -45.3547 & 16.944 & -2.677 & 0.007 \\
-\midrule
-\multicolumn{5}{l}{\textit{Panel B. Coeficientes de ajuste $\boldsymbol{\alpha}$ (velocidad de corrección hacia el equilibrio)}} \\
-\midrule
-\textbf{Ecuación} & \textbf{Coef.} & \textbf{Error Est.} & \textbf{$z$} & \textbf{$p$-valor} \\
-\midrule
-deuda\_pib & -0.0736 & 0.026 & -2.854 & 0.004 \\
-pb\_pib & -0.0000 & 0.003 & -0.005 & 0.996 \\
-EMBI & 6.3560 & 2.837 & 2.240 & 0.025 \\
-TCRM & -0.0003 & 0.001 & -0.416 & 0.677 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia (\texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}). Deterministic="ci" (constante restringida al espacio de cointegración). $\beta$.1 (deuda\_pib) fijo en 1 por normalización, sin error estándar.
-\end{flushleft}
-\end{table}
-
-El coeficiente de ajuste de interés directo, $\alpha_{pb}$, la velocidad a la que el resultado primario corrige un desvío del período anterior respecto de la relación de largo plazo, es esencialmente nulo ($-0.00002$) y no significativo ($p=0.996$): no hay evidencia de que el resultado primario reaccione sistemáticamente para restablecer el equilibrio de largo plazo, un resultado más categórico aún que el de la ventana de 108 observaciones ($\alpha_{pb}=0.0044$, $p=0.204$). El coeficiente de ajuste de la propia deuda vuelve a ser significativo y con el signo correcto ($\alpha_{deuda}=-0.0736$, $p=0.004$): es la deuda la que corrige hacia el equilibrio de largo plazo.
-
-A diferencia de la ventana de 108 observaciones, aquí el riesgo soberano también emerge como significativo ($\alpha_{EMBI}=6.356$, $p=0.025$): ante un desvío del sistema respecto de su relación de largo plazo, es el EMBI+ el que absorbe buena parte del ajuste, no el resultado primario. Leído junto al Capítulo \ref{ch:discusion}, este resultado refuerza, con una muestra un 11\% mayor, la lectura de esta tesis: el ajuste del sistema está dominado por el canal de riesgo soberano y por revaluaciones de stock, no por el esfuerzo fiscal corriente.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:vecm_sensibilidad_lags} Sensibilidad de la Estimación VECM a la Elección de Rezagos (Ventana Ampliada, rango de cointegración $=1$).}
-\begin{tabular}{lrrrl}
-\toprule
-\textbf{$k\_ar\_diff$} & \textbf{Rezago VAR} & \textbf{$\beta_{deuda}$ (normalizado s/ $pb$)} & \textbf{$\alpha_{pb}$} & \textbf{$p$-valor ($\alpha_{pb}$)} \\
-\midrule
-1 (BIC) & 2 & 0.1677 & -0.00002 & 0.996 \\
-2 & 3 & 0.0614 & -0.0047 & 0.022$^{*}$ \\
-3 & 4 & 0.0949 & -0.0034 & 0.288 \\
-4 & 5 & 0.0870 & -0.0019 & 0.460 \\
-5 (AIC, FPE) & 6 & 0.1025 & +0.0019 & 0.558 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} $^{*}p<0.05$. Elaboración propia (\texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}).
-\end{flushleft}
-\end{table}
-
-La Tabla \ref{tab:vecm_sensibilidad_lags} muestra, en la ventana ampliada de treinta años, un patrón parcialmente distinto al de la ventana de 108 observaciones: el signo de $\beta_{deuda}$ ahora sí es estable, positivo en las cinco especificaciones, a diferencia de la inestabilidad de signo que exhibía antes. La significatividad de $\alpha_{pb}$, en cambio, sigue sin ser robusta: es significativa en una única especificación aislada ($k\_ar\_diff=2$, $p=0.022$), pero con signo negativo, lo que implicaría que el resultado primario se aleja del equilibrio en lugar de corregirlo hacia él, un signo económicamente perverso para una regla de reacción estabilizadora. Ninguna otra especificación, incluida la de referencia por BIC, acompaña ese hallazgo. Sigue siendo, como antes, el patrón típico de un hallazgo aislado por azar de especificación antes que de un efecto robusto: la lectura que se sostiene en las cinco especificaciones es la ausencia de evidencia consistente de una reacción fiscal estabilizadora vía VECM.
-
-\subsection{Robustez: Velocidad de Ajuste por Administración Presidencial}
-\label{sec:dummies_presidenciales}
-
-Como contraste complementario al umbral de riesgo soberano de Hansen (Sección \ref{sec:hansen}), se evaluó si la velocidad de ajuste $\alpha_{pb}$ del VECM difiere sistemáticamente por administración presidencial. El ejercicio inicial interactuó variables \textit{dummy} de gobierno con la deuda rezagada en niveles ($d_{t-1}$) mediante MCO; se descartó esa especificación porque $d_{t-1}$ es I(1) (Sección \ref{sec:dfgls}), y una interacción con una variable no estacionaria arriesga confundir el efecto de administración con la propia tendencia de la deuda, precisamente el problema de regresión espuria que el resto de este capítulo evita mediante VECM.
-
-En su lugar, se interactúan las \textit{dummy} de administración con el término de corrección de error del VECM de referencia, $\widehat{ect}_{t-1} = \hat{\boldsymbol{\beta}}' \mathbf{x}_{t-1}$ (Tabla \ref{tab:vecm_beta_alpha}), estacionario por construcción al ser la combinación lineal cointegrante. Se estima $\Delta pb_t = c + \alpha_{pb}\, \widehat{ect}_{t-1} + \sum_i \delta_i\, (D_i \cdot \widehat{ect}_{t-1}) + \gamma\, \tilde{y}_t + \varepsilon_t$ por MCO con errores HAC, sobre la ventana de 88 observaciones (2004--2025, series reales; pendiente de reestimarse sobre la muestra completa), con Néstor Kirchner (2004T1--2007T3) como categoría de referencia y las cinco administraciones siguientes (CFK I, CFK II, Macri, Alberto Fernández, Milei) como \textit{dummy}.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:dummies_presidenciales} Velocidad de Ajuste ($\alpha_{pb}$) Implícita por Administración Presidencial.}
-\begin{tabular}{lrr}
-\toprule
-\textbf{Administración} & \textbf{$\alpha_{pb}$ implícito} & \textbf{$p$-valor (interacción)} \\
-\midrule
-Néstor Kirchner (ref., 2004T1--2007T3) & -0.0002 & 0.867 \\
-Cristina Fernández I (2007T4--2011T3) & 0.0080 & 0.128 \\
-Cristina Fernández II (2011T4--2015T3) & 0.0044 & 0.440 \\
-Macri (2015T4--2019T3) & 0.0037 & 0.410 \\
-Alberto Fernández (2019T4--2023T3) & 0.0240 & 0.001$^{***}$ \\
-Milei (2023T4--2025T4) & 0.0174 & 0.115 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} $\alpha_{pb}$ implícito = coeficiente de $\widehat{ect}_{t-1}$ más el coeficiente de la interacción administración$\times \widehat{ect}_{t-1}$ correspondiente. El $p$-valor reportado es el de la interacción individual, no el del nivel. Test F conjunto de las cinco interacciones: $F=5.402$, $p=0.0003$. Errores HAC (Newey-West, 4 rezagos). $^{***}p<0.01$. Elaboración propia (\texttt{codigo/modelos/fase18\_dummies\_presidenciales.py}).
-\end{flushleft}
-\end{table}
-
-El test F conjunto rechaza la hipótesis de homogeneidad entre administraciones ($p=0.0003$), pero individualmente solo una es significativa: Alberto Fernández ($\alpha_{pb}=0.024$, $p=0.001$), con una velocidad de ajuste positiva y estadísticamente sólida hacia el equilibrio de largo plazo del sistema. Las cinco administraciones restantes, incluida la de referencia, no son individualmente distinguibles de cero. Este resultado no debe leerse como evidencia de una regla de reacción fiscal activa y estable durante ese gobierno en particular (el diagnóstico de fondo del capítulo, sostenido por el VECM, sigue siendo la ausencia de una reacción sistemática de muestra completa), sino como una fuente adicional, y acotada a un único período, de la inestabilidad paramétrica ya documentada por los quiebres estructurales múltiples de Bai-Perron (Sección \ref{sec:quiebres_estructurales} del Capítulo \ref{ch:descriptivo}): el rechazo del test conjunto es compatible con que la velocidad de ajuste no sea constante en el tiempo, sin que ello implique que la mayoría de los gobiernos individuales exhiban, por sí solos, una reacción fiscal estadísticamente identificable.
-
-\section{Modelo de Umbral de Hansen}
-\label{sec:hansen}
-
-El ejercicio más exigente del protocolo econométrico consistió en testear si la Función de Reacción Fiscal exhibe un quiebre de régimen endógeno condicionado por el nivel de riesgo soberano, sin presuponer si ese quiebre toma la forma de una atenuación (fatiga fiscal) o de una reacción ausente en la normalidad y gatillada solo por un nivel extremo de riesgo, siguiendo la metodología de regresión de umbral para series de tiempo de \citet{hansen1999,hansen2000}. El algoritmo realiza una búsqueda secuencial del umbral $\tau$ sobre los percentiles 15 a 85 de la distribución del EMBI+, seleccionando aquel valor que minimiza la suma de cuadrados de los residuos del modelo particionado.
-
-Sobre la ventana (1996--2025, $n=119$), la búsqueda identificó un umbral óptimo en $\tau^*=2462.1$ puntos básicos de EMBI+, del mismo orden que los $\approx2080$--$2104$ pb que arrojan la especificación con $\Delta pb_t$ (Sección \ref{sec:robustez_hansen_dpb}) y el TVECM (Sección \ref{sec:tvecm_resultados}). La Tabla \ref{tab:hansen} reporta la estimación del modelo particionado en dicho punto.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:hansen} Modelo de Umbral de Hansen, $\tau^*=2462.1$ pb de EMBI+, Muestra Completa ($n=119$, errores HAC).}
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est.} & \textbf{$z$} & \textbf{$p$-valor} \\
-\midrule
-Constante & -0.3830 & 0.570 & -0.672 & 0.502 \\
-Brecha del Producto ($\tilde{y}_t$) & 0.0375 & 0.030 & 1.237 & 0.216 \\
-$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t \le 2462.1)$ (Régimen Normal) & -0.0044 & 0.010 & -0.433 & 0.665 \\
-$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t > 2462.1)$ (Régimen de Estrés) & 0.0201 & 0.007 & 2.759 & 0.006$^{***}$ \\
-\midrule
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} $R^2=0.248$. $R^2$ ajustado$=0.228$. $F=6.287$ ($p<0.001$). Durbin-Watson$=0.364$. $^{***}p<0.01$. Elaboración propia (\texttt{codigo/modelos/fase5\_umbral\_hansen.py}).
-\end{flushleft}
-\end{table}
-
-El patrón de coeficientes de la ventana no es el de fatiga fiscal: no es una reacción que se atenúa bajo estrés, es una reacción que directamente no existe en la normalidad y aparece, fuerte y significativa, solo por encima del umbral extremo. En el régimen ``normal'' (EMBI$\le2462$ pb, que cubre 96 de 119 trimestres) el coeficiente es negativo y no significativo ($-0.0044$, $p=0.665$): no hay evidencia de que el resultado primario reaccione a la deuda heredada mientras el riesgo soberano se mantiene por debajo del umbral. En el régimen de ``estrés'' (23 trimestres), en cambio, el coeficiente es positivo y estadísticamente significativo al 1\% ($0.0201$, $p=0.006$): una vez que el riesgo soberano cruza ese nivel extremo, el resultado primario sí reacciona, y con fuerza, a la deuda heredada. Es el patrón inverso al que predice la literatura de fatiga fiscal \citep{ghosh2013}: en vez de una disciplina fiscal que se erosiona bajo presión, aparece una disciplina fiscal que no existe en la normalidad y que la crisis misma gatilla.
-
-El resultado del contraste de significatividad del propio umbral, implementado mediante \textit{bootstrap} del estadístico Sup-LM con 1.000 réplicas, es contundente: el estadístico F observado para la partición óptima es de $0.1857$, con un $p$-valor \textit{bootstrap} menor a $0.001$, que rechaza categóricamente la hipótesis nula de linealidad. A diferencia de la partición extrema que arrojaba la ventana de 88 observaciones (14 contra 74 trimestres, con el régimen minoritario aportando muy poca información), la partición de la ventana es menos desigual (96 contra 23) y ambos coeficientes de régimen se estiman con mayor precisión, lo que explica que aquí sí resulte significativo el coeficiente del régimen de estrés.
-
-En la especificación en niveles sobre la ventana, la evidencia de esta tesis no ofrece una señal de fatiga fiscal, ofrece una señal de régimen de reacción fiscal extremo: ausencia de reacción en la normalidad, reacción significativa solo bajo estrés agudo. La Sección \ref{sec:robustez_hansen_dpb} evalúa el mismo fenómeno bajo una especificación alternativa que satisface el supuesto de estacionariedad del test (ventana de 88 observaciones, ver nota de esa sección), con un patrón de atenuación más cercano a la fatiga fiscal clásica: el Capítulo \ref{ch:discusion} desarrolla las implicancias de que las dos especificaciones, sobre ventanas distintas, apunten a formas cualitativamente distintas de no linealidad pese a coincidir en la ubicación del umbral.
-
-\textit{Nota metodológica sobre el supuesto de estacionariedad del test de umbral.} El contraste Sup-LM y su \textit{bootstrap} son asintóticamente válidos bajo el supuesto de estacionariedad estricta de todos los regresores, incluida la variable dependiente \citep[Assumption~A, p.~577]{hansen2000}. Sin embargo, el diagnóstico de la Sección \ref{sec:dfgls} clasifica $pb_t$ como I(1), de modo que dicho supuesto no se cumple en sentido estricto en la especificación en niveles reportada arriba. \citet{caner2004} extienden el marco de umbral al caso de procesos cointegrados. El resultado reportado permanece como el diagnóstico central de esta sección; la Sección \ref{sec:robustez_hansen_dpb} reporta, como verificación adicional, la misma especificación con la variable dependiente en primera diferencia (I(0)).
-
-\subsection{Robustez: Umbral de Hansen con la Variable Dependiente en Primera Diferencia}
-\label{sec:robustez_hansen_dpb}
-
-La nota metodológica anterior exige reestimar el modelo de umbral bajo una especificación cuya variable dependiente satisfaga el supuesto de estacionariedad estricta de \citet{hansen2000}. Dado que $pb_t$ es I(1) mientras que su primera diferencia $\Delta pb_t$ es I(0), se reestimó exactamente el mismo procedimiento reemplazando $pb_t$ por $\Delta pb_t$ como variable dependiente. Esta especificación no se recalculó todavía sobre la ventana: los resultados que siguen corresponden a la ventana de 88 observaciones, pendientes de esa actualización.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:hansen_dpb} Modelo de Umbral de Hansen con $\Delta pb_t$ (I(0)) como Dependiente ($n=87$, errores HAC).}
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Variable} & \textbf{Coef.} & \textbf{Error Est.} & \textbf{$z$} & \textbf{$p$-valor} \\
-\midrule
-Constante & -1.0673 & 0.290 & -3.682 & 0.000 \\
-Brecha del Producto ($\tilde{y}_t$) & -0.0019 & 0.013 & -0.151 & 0.880 \\
-$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t \le 2083)$ (Régimen Normal) & 0.0184 & 0.005 & 3.412 & 0.001 \\
-$d_{t-1} \cdot \mathbb{I}(\text{EMBI}_t > 2083)$ (Régimen de Estrés) & 0.0077 & 0.004 & 2.166 & 0.030 \\
-\midrule
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Umbral óptimo $\tau^*=2083$ pb de EMBI+ (frente a 449.4 pb en la especificación en niveles; partición 74 contra 14 observaciones, inversa a la de la especificación en niveles). \textit{Bootstrap} Sup-LM (1.000 réplicas): $F=0.2326$, $p<0.001$. Elaboración propia.
-\end{flushleft}
-\end{table}
-
-El resultado se revierte de manera sustancial respecto de la especificación en niveles. El \textit{bootstrap} Sup-LM rechaza la linealidad al 1\% ($p<0.001$, frente a $p=0.076$ en niveles), y ambos coeficientes de régimen resultan individualmente significativos: $0.0184$ ($p=0.001$) en el régimen normal y $0.0077$ ($p=0.030$) en el régimen de estrés, con el patrón exacto que predeciría la fatiga fiscal (reacción atenuada, no ausente, bajo estrés financiero). A diferencia de la especificación en niveles (Sección \ref{sec:hansen}), aquí la partición no es extrema en el mismo sentido: el umbral de $2083$ pb ubica al régimen ``normal'' como el mayoritario (74 de 88 trimestres) y al de ``estrés'' como el minoritario (14), la partición inversa a la hallada en niveles, pero igualmente desigual en magnitud.
-
-Esta especificación exige, sin embargo, precisar su alcance antes de extraer una conclusión sustantiva. El objeto que estima no es idéntico al de la Tabla \ref{tab:hansen}: mientras aquella modela el \textit{nivel} del resultado primario en función del \textit{nivel} de la deuda rezagada por régimen (la forma canónica de \citet{ghosh2013}), esta especificación modela la \textit{variación} trimestral del resultado primario frente al mismo regresor, un objeto más cercano a un mecanismo de ajuste de corto plazo que a la regla de reacción de nivel de la literatura de referencia.
-
-Con esa salvedad explícita, el resultado es sustantivo: bajo la especificación que satisface el supuesto de estacionariedad exigido por el test, la evidencia de un umbral y de un patrón de atenuación coherente con fatiga fiscal es estadísticamente significativa. Las tres especificaciones de umbral de esta tesis (niveles sobre la muestra completa, $\Delta pb_t$ sobre la ventana de 88 observaciones, y el TVECM sobre la muestra completa) coinciden en rechazar la linealidad y en ubicar el umbral en un rango estrecho ($\tau^*\approx2080$--$2462$ pb), pero no en la forma que toma la no linealidad: niveles encuentra una reacción ausente en la normalidad y gatillada solo por estrés extremo, mientras que $\Delta pb_t$ encuentra una reacción presente en ambos regímenes que se atenúa, sin desaparecer, bajo estrés.
-
-Esta divergencia en la forma funcional, pese a la convergencia en la ubicación del umbral, no debe sobreinterpretarse como dos confirmaciones independientes de un mismo fenómeno: son objetos distintos (nivel de $pb_t$ frente a su variación trimestral) sobre bases muestrales distintas ($n=119$ frente a 88 observaciones, con la cautela ya señalada al inicio de esta sección). El Capítulo \ref{ch:discusion} retoma esta tensión para calificar el diagnóstico de $H_{1a}$ en el Capítulo \ref{ch:conclusiones}.
-
-\section{Resultados del VAR Estructural Restringido (SVAR)}
-\label{sec:svar_resultados}
-
-La estimación del Vector Autoregresivo Estructural Restringido (SVAR) con reglas macroeconómicas de Blanchard-Perotti ($\eta_{pb} = 0.25$, $a_{23}=a_{24}=0$) y Favero-Giavazzi sobre el vector de cinco variables $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t, d_t)'$ permite desentrañar la transmisión contemporánea y dinámica de las perturbaciones macro-fiscales. Se estima sobre la ventana ampliada de treinta años (1996--2025, $n=120$), no sobre la ventana original: es la especificación de referencia del resto del protocolo (Sección \ref{sec:vecm} del Capítulo \ref{ch:metodologia}), y su resultado cambia de manera sustantiva respecto de estimarla solo sobre 2004--2025, como se explicita más abajo. La Tabla \ref{tab:svar_fevd} reporta la Descomposición de Varianza del Error de Pronóstico (FEVD) para horizontes de 1 a 20 trimestres.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:svar_fevd} Descomposición de Varianza del Error de Pronóstico (FEVD) del SVAR Restringido, Ventana Ampliada 1996--2025 (\%).}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{llrrrrr}
-\toprule
-\textbf{Horizonte} & \textbf{Variable Explicada} & \textbf{Shock Brecha PIB} & \textbf{Shock Superávit} & \textbf{Shock EMBI+} & \textbf{Shock TCRM} & \textbf{Shock Deuda Propia} \\
-\midrule
-\multirow{2}{*}{1 Trimestre} & Deuda Pública ($d_t$) & 20.89 & 23.94 & 3.23 & 8.91 & 43.03 \\
- & Riesgo País ($\text{EMBI}_t$) & 7.81 & 11.30 & 80.89 & 0.00 & 0.00 \\
-\midrule
-\multirow{2}{*}{4 Trimestres} & Deuda Pública ($d_t$) & 12.59 & 18.97 & 10.13 & 5.39 & 52.92 \\
- & Riesgo País ($\text{EMBI}_t$) & 7.02 & 7.34 & 70.64 & 0.42 & 14.58 \\
-\midrule
-\multirow{2}{*}{8 Trimestres} & Deuda Pública ($d_t$) & 8.14 & 14.90 & 12.59 & 3.45 & 60.91 \\
- & Riesgo País ($\text{EMBI}_t$) & 8.44 & 7.81 & 53.10 & 0.72 & 29.93 \\
-\midrule
-\multirow{2}{*}{20 Trimestres} & Deuda Pública ($d_t$) & 7.28 & 12.70 & 11.36 & 14.44 & 54.21 \\
- & Riesgo País ($\text{EMBI}_t$) & 14.92 & 16.16 & 34.09 & 9.80 & 25.04 \\
-\bottomrule
-\end{tabular}%
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llllll@{}}
+\toprule\noalign{}
+Año & p5 & p25 & Mediana & p75 & p95 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2026 & 46,0 & 49,7 & 52,8 & 56,9 & 64,5 \\
+2028 & 37,7 & 41,9 & 45,6 & 50,0 & 57,9 \\
+2030 & 25,9 & 31,2 & 35,9 & 40,7 & 49,6 \\
+2032 & 15,0 & 21,1 & 26,9 & 32,7 & 44,2 \\
+2035 & 2,2 & 9,6 & 16,7 & 23,7 & 38,5 \\
+\end{longtable}
 }
-\begin{flushleft}
-\footnotesize \textit{Nota.} Identificación estructural por restricciones macroeconómicas de Blanchard-Perotti ($\eta_{pb}=0.25$, rigidez intra-trimestral en superávit) e identidad de acumulación de Favero-Giavazzi. Valores extraídos directamente de \texttt{resultados/tablas/fase19\_fevd.csv} (ventana 1996--2025; verificados sin cambio sustantivo contra la ventana real 1997--2025 sin trimestres aproximados, \texttt{fase23b\_fevd\_1997\_2025.csv}).
-\end{flushleft}
-\end{table}
 
-Extender la ventana de 26 a 30 años revierte la lectura que esta tesis sostenía sobre 2004--2025: allí, la descomposición de varianza a 20 trimestres atribuía la mayor parte de la variabilidad de la deuda a los shocks fiscal y de actividad (47{,}5\% y 28{,}6\% respectivamente, con el canal cambiario y de riesgo soberano acotado al 11{,}5\% conjunto). Sobre la muestra completa, el patrón se invierte: la inercia propia de la deuda pasa a explicar el 54{,}2\% de su propia varianza a 20 trimestres (12{,}4\% en la ventana original), el canal cambiario-riesgo soberano conjunto (25{,}8\%) supera ahora al fiscal-actividad conjunto (20{,}0\%), y ningún shock individual domina de forma aislada como lo hacía antes el superávit primario.
-
-Esta reversión no es un artefacto de la única aproximación de datos que introduce la ventana ampliada, la extrapolación del TCRM de 1996 (Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia}): reestimada sin esos cuatro trimestres (1997--2025, $n=116$), la inercia propia sigue explicando el 53{,}2\% y el canal cambiario-riesgo el 27{,}5\%, prácticamente idéntico. Es, en cambio, coherente con el resultado de la Sección \ref{sec:resultados_vecm}: la muestra completa muestra menos evidencia de una relación de cointegración estable que la original, y un sistema con menor capacidad de auto-corrección hacia un equilibrio de largo plazo es, por construcción, uno donde la inercia de cada variable explica más de su propia varianza futura. El Capítulo \ref{ch:discusion} retoma esta reversión para evaluar si treinta años de evidencia, en lugar de veintiséis, sostienen mejor o peor la lectura sustantiva de esta tesis sobre el canal dominante de ajuste de la deuda.
-
-\begin{figure}[H]
+\begin{figure}
 \centering
-\includegraphics[width=0.92\textwidth]{figura_svar_irf.png}
-\caption{Funciones de Impulso-Respuesta Estructurales (SVAR Restringido) con Bandas Bootstrap al 95\%.}
-\label{fig:svar_irf}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (\% del PIB). Escenario base del FMI (2025) con shocks estructurales del SVARX; 300 réplicas de parámetros por 400 trayectorias.}]{fig6_1_abanico_deuda_neta.png}}
+\caption{Gráfico de abanico de la deuda consolidada neta simulada,
+2025-2035 (\% del PIB). Escenario base del FMI (2025) con shocks
+estructurales del SVARX; 300 réplicas de parámetros por 400
+trayectorias.}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.88\textwidth]{figura_svar_fevd.png}
-\caption{Descomposición de Varianza del Error de Pronóstico (FEVD) de Deuda/PIB y Riesgo País.}
-\label{fig:svar_fevd}
-\end{figure}
+El ancho del abanico entre los percentiles 5 y 95 es de 19,4 puntos en
+2030, con un intervalo de 90\% de {[}15,4; 24,3{]}. El del FMI para la
+deuda federal bruta es 74,2 (FMI, 2025, anexo II, cuadro 7). El Capítulo
+7 analiza esta diferencia.
 
-\section{Estimación del Modelo Threshold VECM (TVECM)}
-\label{sec:tvecm_resultados}
+\section{Contraste de H1a}
 
-Para verificar si la velocidad de corrección fiscal conmuta entre regímenes de estrés soberano en un marco multivariado, se estimó el modelo Threshold VECM de \citet{hansen2002} sobre las cuatro variables del sistema de cointegración ($d_t, pb_t, \text{EMBI}_t, \text{TCRM}_t$), sobre la misma ventana ampliada de treinta años (1996--2025) que sostiene el VECM y el SVAR restringido.
+H1a sostiene que el superávit primario, por sí solo, no basta para
+estabilizar la deuda, porque la condicionan también el crecimiento, el
+tipo de cambio real y el riesgo país. El contraste compara la
+contribución de cada bloque de shocks a la varianza de la deuda simulada
+en 2035.
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:tvecm} Estimación del Modelo Threshold VECM (Hansen y Seo, 2002), Ventana Ampliada 1996--2025.}
-\begin{tabular}{lrr}
-\toprule
-\textbf{Parámetro / Estadístico} & \textbf{Régimen 1: Normalidad} & \textbf{Régimen 2: Fatiga / Estrés} \\
-\midrule
-Umbral Óptimo de Riesgo ($\tau^*$) & \multicolumn{2}{c}{$\mathbf{2104.22\text{ pb}}$ (Soporte empírico: 15\%--85\%)} \\
-Observaciones Efectivas por Régimen & 96 trimestres ($81.4\%$) & 22 trimestres ($18.6\%$) \\
-Velocidad de Ajuste Fiscal ($\alpha_{pb}$) & $\mathbf{+0.0011}$ & $\mathbf{-0.0074}$ \\
-Estadístico Sup-LM de Linealidad & \multicolumn{2}{c}{$\text{Sup-LM} = 59.78 \quad (p\text{-valor bootstrap} = 0.632)$} \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Vector de cointegración estimado por Johansen. Datos provenientes de \texttt{resultados/tablas/fase23\_tvecm\_resumen.csv}. El umbral estimado ($\tau^*=2104$ pb) es prácticamente idéntico al de la ventana original 2004--2025 ($\tau^*=2081$ pb) y al del umbral de Hansen sobre $\Delta pb_t$ (Sección \ref{sec:robustez_hansen_dpb}, $\tau^*=2083$ pb): las tres especificaciones, sobre ventanas y variables dependientes distintas, coinciden en un umbral de riesgo soberano de entre 2080 y 2105 puntos básicos.
-\end{flushleft}
-\end{table}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Bloque de shocks
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Participación en la varianza de la deuda en 2035
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intervalo de 90\%
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Fiscal & 19,4\% & {[}3,5; 41,2{]} \\
+Actividad & 21,6\% & {[}3,9; 49,9{]} \\
+Cambiario y de riesgo (EMBI+ y TCRM) & 59,0\% & {[}12,5; 89,5{]} \\
+No fiscal menos fiscal (diferencia) & 61,2 puntos & {[}17,5; 93,0{]} \\
+\end{longtable}
+}
 
-La reversión de signo entre regímenes ($\alpha_{pb}$ pasa de $+0{,}0011$ bajo estrés bajo a $-0{,}0074$ bajo estrés alto) se replica con la misma dirección que en la ventana original, aunque con magnitudes más pequeñas en el régimen normal; el estadístico Sup-LM sigue sin alcanzar significatividad ($p=0{,}632$, frente a $p=0{,}625$ en la ventana original), de modo que la lectura de esta sección no cambia: hay un patrón de umbral notablemente estable en su localización entre especificaciones, pero no una prueba estadística formal de que la conmutación de régimen sea significativa bajo este modelo multivariado en particular.
+Los shocks no fiscales explican cerca de cuatro quintos de la
+incertidumbre sobre la deuda en 2035, y el intervalo de la diferencia
+con el fiscal excluye el cero. \textbf{H1a queda respaldada.} El bloque
+cambiario y de riesgo es el que más pesa. El resultado es coherente con
+la reacción fiscal positiva de la sección 6.1: el superávit responde a
+la deuda, pero la variabilidad de la deuda la dominan el tipo de cambio
+real y el riesgo país.
 
-\section{Simulación Estocástica del DSA con Covarianza del SVAR Restringido}
-\label{sec:dsa_resultados}
+\section{Contraste de H1b}
 
-La especificación de referencia del Análisis de Sostenibilidad de la Deuda estocástico (Sección \ref{sec:dsa_metodologia} del Capítulo \ref{ch:metodologia}) sustituye el proceso CIR y el modelo DCC-GARCH de una especificación anterior por una matriz de correlación derivada directamente de la covarianza de residuos estructurales del SVAR restringido (Sección \ref{sec:svar_resultados}), estimado sobre la muestra completa de treinta años. Bajo esta especificación, la probabilidad de que la deuda consolidada supere el 100\% del PIB hacia 2035 es $\mathbf{26{,}1\%}$, con una mediana de $82{,}8\%$ del PIB en el escenario de Referencia determinista. La Figura \ref{fig:fan_chart_final} (Capítulo \ref{ch:discusion}) presenta el gráfico de abanico correspondiente.
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Horizonte
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Probabilidad de no estabilización
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intervalo de 90\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Criterio (límite inferior \textgreater{} 3\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2030 (cinco años, el horizonte del FMI) & 11,8\% & {[}8,0; 15,8{]} & Se
+cumple \\
+2035 (diez años) & 6,0\% & {[}3,0; 9,8{]} & Límite inferior igual al
+umbral \\
+\end{longtable}
+}
 
-Es un resultado del mismo orden de magnitud que una especificación anterior calibrada a mano ($31{,}2\%$, con $29{,}8\%$ bajo un proceso CIR del riesgo soberano y $32{,}5\%$ bajo DCC-GARCH), documentada como análisis de robustez en el Apéndice Metodológico, pero no idéntico: la matriz fundada en el SVAR, a diferencia de la calibrada a mano, incorpora el hallazgo de que el riesgo soberano y el tipo de cambio real están, sobre esta ventana, menos correlacionados entre sí de lo que asumía la calibración original, lo que angosta moderadamente la cola derecha de la distribución simulada.
+A cinco años, la probabilidad de que la deuda consolidada no se
+estabilice es de 11,8\%, casi cuatro veces el 3\% del FMI, y el
+intervalo de 90\% queda entero por encima del umbral. \textbf{H1b queda
+respaldada en el horizonte en que el FMI mide su métrica.} A diez años
+la probabilidad baja a 6,0\%, porque el escenario base sigue reduciendo
+la deuda y cada vez menos trayectorias terminan con la deuda en aumento.
+El límite inferior del intervalo coincide con el 3\%, así que a diez
+años el contraste no rechaza que la probabilidad sea igual a la del FMI.
 
-\section{Síntesis de la Evidencia Empírica}
-\label{sec:sintesis_empirica}
+\section{Contraste de H2}
 
-Cinco estrategias de estimación convergen, todas sobre la muestra completa de treinta años (1996--2025, $n=120$), en un diagnóstico predominantemente común sobre la ausencia de una reacción fiscal lineal estable, con dos divergencias sustantivas, la forma del umbral de no linealidad y el canal dominante de transmisión hacia la deuda, que exigen calificación explícita.
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Escenario
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Diferencia en la probabilidad de no estabilización en 2035
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Diferencia en la deuda media en 2035
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Suba de un desvío estándar (0,50 pp) & +0,5 pp {[}0,0; 1,5{]} & +0,7 pp
+del PIB \\
+Repetición del ciclo 2022-2023 (+5,25 pp en ocho trimestres) & +7,7 pp
+{[}2,5; 16,0{]} & +7,0 pp del PIB {[}1,4; 16,0{]} \\
+\end{longtable}
+}
 
-Sobre la reacción lineal: el contraste de Johansen no rechaza la ausencia de cointegración entre las cuatro variables del sistema (Sección \ref{sec:johansen_cap6}); el VECM no encuentra una velocidad de ajuste significativa del resultado primario ($\alpha_{pb}\approx0$, $p=0.996$) y encuentra, en cambio, un canal de ajuste vía riesgo soberano significativo ($\alpha_{EMBI}=6.356$, $p=0.025$).
+Entre corchetes, los intervalos de 90\%.
 
-Sobre la forma del umbral de no linealidad: el umbral de Hansen en niveles, la especificación en $\Delta pb_t$ (Sección \ref{sec:robustez_hansen_dpb}, ventana de 88 observaciones) y el TVECM coinciden en ubicar un umbral de riesgo soberano en un rango estrecho ($\tau^*\approx2080$--$2462$ pb), pero no coinciden en qué tipo de no linealidad describen: Hansen en niveles encuentra una reacción ausente en la normalidad y gatillada solo por estrés extremo (régimen normal $-0.0044$, no significativo; régimen de estrés $+0.0201$, $p=0.006$), un patrón de régimen extremo y no de fatiga fiscal; Hansen en $\Delta pb_t$ encuentra, en cambio, una reacción presente en ambos regímenes que se atenúa bajo estrés sin desaparecer, más cercana a la fatiga fiscal clásica; y el TVECM encuentra una reversión de signo entre regímenes ($\alpha_{pb}$ pasa de $+0.001$ a $-0.007$) sin alcanzar significatividad en su contraste Sup-LM ($p=0.632$). Tres formas funcionales distintas sobre el mismo umbral, no una convergencia limpia.
+Con un shock de un desvío estándar, el intervalo de la diferencia en la
+probabilidad toca el cero, de modo que no hay un efecto distinguible.
+Con una suba como la de 2022-2023, la probabilidad de no estabilización
+en 2035 sube 7,7 puntos y la deuda esperada, 7,0 puntos del PIB, y los
+dos intervalos excluyen el cero. \textbf{H2 queda respaldada para un
+endurecimiento de la magnitud del de 2022-2023, y no para un shock de un
+desvío estándar.}
 
-Sobre el canal dominante de transmisión: la descomposición de varianza del SVAR restringido atribuye a la inercia propia de la deuda el $54.2\%$ de su propia varianza a 20 trimestres y al canal cambiario-riesgo conjunto el $25.8\%$, superando ahora al fiscal-real conjunto ($20.0\%$); Bai-Perron, corrido por primera vez sobre la ventana completa, detecta tres quiebres estructurales en la deuda SPNF, incluido el de 2001 que una ventana más corta no podía identificar. El DSA estocástico, con una covarianza derivada de esta misma estimación del SVAR en lugar del proceso calibrado a mano de una especificación anterior (documentada aparte, fuera de este documento), sitúa la probabilidad de insolvencia a 2035 en $26.1\%$.
+Para saber por qué canal pasa el efecto, se repitió el escenario de
+2022-2023 anulando la respuesta de las variables domésticas a la FED, de
+modo que solo actúa el mayor costo de refinanciar la deuda en dólares.
+Con los parámetros estimados, ese costo directo explica 4,7 de los 7,3
+puntos de aumento de la deuda en 2035 (dos tercios). El tercio restante
+corresponde a la respuesta del riesgo país, el tipo de cambio real y el
+crecimiento, que en conjunto empujan en la misma dirección aunque, como
+se vio en la sección 6.1, ninguna de esas respuestas es significativa
+por separado.
 
-En síntesis: la evidencia de una reacción fiscal lineal, estable y de nivel sigue siendo predominantemente débil o nula, sin que el VECM encuentre una velocidad de ajuste significativa del resultado primario; la evidencia de un régimen crítico de riesgo soberano es robusta en su ubicación pero mixta en su forma, entre atenuación y reacción gatillada por crisis extrema, según la especificación; y la lectura sobre el canal dominante de transmisión hacia la deuda es, con treinta años de evidencia, la inercia propia del stock y el riesgo cambiario-soberano, no el desbalance fiscal corriente. El Capítulo \ref{ch:discusion} discute en profundidad estas tres calificaciones antes de evaluar sus implicancias teóricas sobre la solvencia intertemporal.
+\section{Robustez}
+
+\textbf{Perímetro de la deuda.} Con la deuda neta a valor libros y con
+la deuda bruta, los resultados cambian poco. La probabilidad de no
+estabilización a cinco años es de 13,0\% y 12,7\%, con límites
+inferiores de 9,0\% y 9,0\%. A diez años es de 6,8\% y 7,3\%, y en los
+dos casos el límite inferior (3,3\% y 4,0\%) queda por encima del 3\%.
+La contribución de los shocks no fiscales supera a la del fiscal en las
+dos variantes, aunque con la deuda bruta el límite inferior de la
+diferencia queda prácticamente en cero (0,1 puntos). El efecto del ciclo
+2022-2023 sobre la probabilidad a diez años es de 8,2 y 7,2 puntos, con
+intervalos que excluyen el cero.
+
+\textbf{Canal de tasas domésticas.} Si el riesgo país también encarece
+la deuda en pesos (sección 4.6), la probabilidad de no estabilización
+sube a 12,2\% a cinco años y a 7,6\% a diez años, con límites inferiores
+de 8,5\% y 3,7\%: con este canal, H1b queda respaldada en los dos
+horizontes. El bloque cambiario y de riesgo pasa a explicar 66,9\% de la
+varianza de la deuda en 2035 y el efecto del ciclo 2022-2023 sube a 9,0
+puntos de probabilidad.
+
+\textbf{Shocks como los del FMI.} Con el procedimiento del abanico del
+FMI aplicado a las mismas series (sección 4.6), la probabilidad de no
+estabilización es de 23,5\% a cinco años y de 15,1\% a diez años, y el
+ancho del abanico en 2030 es de 93,3 puntos. Con la deuda bruta, las
+cifras son 25,2\%, 17,4\% y 118,4. Las dos formas de generar los shocks
+llevan a la misma conclusión sobre H1b. La del FMI da probabilidades y
+anchos mucho mayores.
+
+\textbf{Tabla 6.2. Resumen de robustez de H1b}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Especificación
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+No estabilización 2030
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+No estabilización 2035
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ancho del abanico 2030
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+SVARX, deuda neta (principal) & 11,8\% {[}8,0; 15,8{]} & 6,0\% {[}3,0;
+9,8{]} & 19,4 \\
+SVARX, deuda neta a valor libros & 13,0\% {[}9,0; 17,8{]} & 6,8\%
+{[}3,3; 10,8{]} & 19,9 \\
+SVARX, deuda bruta & 12,7\% {[}9,0; 17,0{]} & 7,3\% {[}4,0; 11,3{]} &
+20,9 \\
+SVARX, deuda neta con canal de tasas domésticas & 12,2\% {[}8,5; 16,0{]}
+& 7,6\% {[}3,7; 12,0{]} & 21,3 \\
+Shocks a la manera del FMI, deuda neta & 23,5\% & 15,1\% & 93,3 \\
+Shocks a la manera del FMI, deuda bruta & 25,2\% & 17,4\% & 118,4 \\
+FMI (2025), deuda federal bruta & 3,0\% & & 74,2 \\
+\end{longtable}
+}
+
+Entre corchetes, los intervalos de 90\% del \emph{bootstrap} de
+parámetros. Las filas a la manera del FMI no tienen intervalo porque ese
+procedimiento no estima parámetros.

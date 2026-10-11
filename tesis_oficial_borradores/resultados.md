@@ -32,6 +32,8 @@ La Tabla 6.1 resume la distribución de la deuda simulada. La mediana baja de 61
 | 2032 | 15,0 | 21,1 | 26,9 | 32,7 | 44,2 |
 | 2035 | 2,2 | 9,6 | 16,7 | 23,7 | 38,5 |
 
+![Figura 6.1. Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (% del PIB). Escenario base del FMI (2025) con shocks estructurales del SVARX; 300 réplicas de parámetros por 400 trayectorias.](../tesis/figuras/fig6_1_abanico_deuda_neta.png)
+
 El ancho del abanico entre los percentiles 5 y 95 es de 19,4 puntos en 2030, con un intervalo de 90% de [15,4; 24,3]. El del FMI para la deuda federal bruta es 74,2 (FMI, 2025, anexo II, cuadro 7). El Capítulo 7 analiza esta diferencia.
 
 ## 6.3 Contraste de H1a

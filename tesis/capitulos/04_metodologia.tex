@@ -1,130 +1,346 @@
-\chapter{Marco Metodológico y Diseño de Investigación}
-\label{ch:metodologia}
+\chapter{Metodología}
 
-Este capítulo detalla y justifica las elecciones metodológicas, el tipo de diseño, la matriz operacional de variables y las técnicas econométricas que conforman el protocolo de esta investigación.
+Este capítulo presenta la estrategia empírica: un modelo de vectores
+autorregresivos estructural con variables exógenas (SVARX), combinado
+con la identidad de acumulación de la deuda y una simulación de Monte
+Carlo. Cada decisión de especificación se fundamenta en el marco del
+FMI, en la literatura o en las propiedades de los datos.
 
-\section{Enfoque, Tipo y Alcance de la Investigación}
-Siguiendo la clasificación estándar de los diseños de investigación en ciencias sociales \citep{marradi2007, rojas2013} y los criterios de formulación de un proyecto de tesis \citep{bassi2015}, esta investigación adopta un \textbf{enfoque cuantitativo} y un \textbf{alcance descriptivo-\allowbreak{}explicativo}, buscando establecer relaciones estadísticas e inferir umbrales críticos de reacción fiscal. El diseño temporal es \textbf{longitudinal de series de tiempo} (caso único, Argentina), lo cual permite capturar la volatilidad e inestabilidad macroeconómica local sin el sesgo de promedios multinacionales. Siguiendo una \textbf{lógica deductiva}, se derivan hipótesis contrastables ($H_{1a}$, $H_{1b}$) desde la Restricción Presupuestaria Intertemporal y se someten a contrastación empírica en el Capítulo \ref{ch:resultados}.
+\section{Arquitectura general}
 
-La investigación trabaja con datos trimestrales 1996T1--2025T4 ($n=120$, 30 años exactos), tres décadas completas de política económica argentina: la totalidad del protocolo econométrico, desde las pruebas de estacionariedad hasta el DSA estocástico, se estima sobre este período. La muestra incorpora un tramo empalmado 1996--2003 (Sección \ref{sec:empalme}), documentado en su totalidad, aun a costa de incorporar quiebres estructurales extremos (el colapso de la convertibilidad y la cesación de pagos de 2001--2002). El período 2004T1--2025T4 ($n=88$), íntegramente de fuente primaria y sin ningún tramo empalmado, se conserva únicamente como referencia descriptiva de cobertura 100\,\% real (Capítulo \ref{ch:descriptivo}).
+El modelo sigue la arquitectura que el propio FMI desarrolló para
+economías emergentes y aplicó a Argentina. Celasun, Debrun y Ostry
+(2006) proponen tres piezas:
 
-El límite efectivo de la ventana no lo fija el riesgo soberano, con serie real empalmada sin discontinuidades desde 1994 (Sección \ref{sec:empalme}), sino el Índice de Tipo de Cambio Real Multilateral (TCRM): el BCRA solo lo publica desde enero de 1997. Los cuatro trimestres de 1996 (3,3\% del panel de 120 observaciones) se aproximan por extrapolación de tendencia sobre 1997--1999 (Sección \ref{sec:empalme}), y el resultado central de la Etapa 3 se verificó como robusto a excluir esos cuatro trimestres (ventana real 1997T1--2025T4, $n=116$, sin ninguna aproximación): la descomposición de varianza y el rango de cointegración no cambian de manera sustantiva.
-
-\subsection{Unidad de Análisis}
-\label{sec:unidad_analisis}
-La Unidad de Análisis es el \textbf{trimestre macroeconómico consolidado} de Argentina, para el período 1996T1--2025T4. Esta frecuencia, frente a la agregación anual tradicional, captura la volatilidad de los flujos fiscales y las oscilaciones del riesgo país sin los suavizamientos de la baja frecuencia anual. El trimestre es también el límite superior de desagregación posible: el Resultado Primario y la Deuda Bruta del SPNF consolidado, a diferencia de los datos de Administración Nacional, no tienen publicación mensual verificable en fuente primaria para toda la ventana muestral.
-
-\subsection{Matriz Operacional de Variables}
-\label{sec:matriz_operacional}
-Siguiendo la estructura del dato científico (unidad de análisis, variable, valor e indicador) propuesta por \citet{samaja1993}, la Tabla \ref{tab:variables_operacional} formaliza la correspondencia entre cada dimensión teórica desarrollada en el Capítulo \ref{ch:marco_teorico}, su variable econométrica simbólica y su indicador operacional efectivamente medido, explicitando además su unidad de medida y su fuente de datos oficial.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:variables_operacional} Matriz de Operacionalización de Variables e Isomorfismo Lógico.}
-\resizebox{\textwidth}{!}{%
-\footnotesize
-\begin{tabular}{p{2.2cm}p{1.1cm}p{3.6cm}p{1.5cm}p{3.4cm}p{2.2cm}}
-\toprule
-\textbf{Dimensión Teórica} & \textbf{Variable} & \textbf{Indicador Operacional / de Aproximación} & \textbf{Unidad} & \textbf{Transformación Aplicada} & \textbf{Fuente} \\
-\midrule
-Esfuerzo Fiscal Primario Corriente & $pb_t$ & Resultado Primario del SPNF / PIB & \% & Nivel, sin transformar (admite negativos) & Hacienda (MECON) \\
-Stock de Deuda Heredado & $d_{t-1}$ & Stock de Deuda Bruta Consolidada SPNF$_{t-1}$ / PIB & \% & Nivel, rezagado un período & Finanzas (MECON) \\
-Ciclo Macroeconómico & $\tilde{y}_t$ & Brecha del Producto (HP s/ PIB real) & Desv. \% & Filtro HP ($\lambda=1600$), \% de desvío tendencial & INDEC \\
-Perturbaciones de Gasto Extraordinario & $g_{t}^{exp}$ & Gasto primario en crisis real & p.p. PIB & Nivel, sin transformar & MECON \\
-Restricción Financiera Internacional & $risk_t$ & Riesgo País (EMBI+) & pb & Nivel; rezagado como variable de umbral (Etapa 4) o contemporáneo dentro del sistema conjuntamente endógeno (Etapa 3) & BCRA / Bloomberg \\
-Efecto de Valoración Cambiaria & $tc_t^{val}$ & Interacción deuda en moneda extranjera $\times$ variación TCRM & Tasa var. & Tasa de variación interperiódica del TCRM & BCRA / INDEC \\
-Tensión Cambiaria (nivel) & --- & TCR \textbf{Multilateral} (TCRM, base BCRA; no bilateral USD/ARS) & Índice & Nivel; variable de control macroeconómico & BCRA / datos.gob.ar \\
-Precios Relativos & --- & Coef. de Estabilización de Referencia & Índice acum. & Nivel, sin transformar & BCRA \\
-\midrule
-Restricción Externa (enfoque marco, Nivel I) & --- & \textit{Sin variable de aproximación propia.} Enfoque (Cap. \ref{ch:marco_teorico}) operacionalizado vía $risk_t$ y $tc_t^{val}$ & N/A & N/A & --- \\
-\bottomrule
-\end{tabular}%
-}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia en base al libro de códigos de la matriz de datos consolidada del proyecto. La Deuda Pública Consolidada corresponde exclusivamente al Sector Público No Financiero (SPNF), excluyendo pasivos remunerados del BCRA (ver aclaración de perímetro institucional a continuación). Fuentes institucionales: Ministerio de Economía --- \url{https://www.economia.gob.ar} ---; INDEC --- \url{https://www.indec.gob.ar} ---; BCRA --- \url{https://www.bcra.gob.ar} ---; Portal de Datos Abiertos --- \url{https://www.datos.gob.ar} ---; Yahoo Finance --- \url{https://finance.yahoo.com} ---.
-\end{flushleft}
-\end{table}
-
-La variable Deuda Pública ($d_t$) corresponde al stock bruto consolidado del Sector Público No Financiero (SPNF), según los estándares del Manual de Estadísticas de Finanzas Públicas del FMI (2014) y el perímetro institucional que fija la Ley de Administración Financiera \citep{ley24156} para la Secretaría de Finanzas (MECON). Se excluyen de la definición central los pasivos remunerados del BCRA (LEBAC, LELIQ y pases), instrumentos de política monetaria emitidos al amparo de las facultades que le confiere su Carta Orgánica \citep{ley24144}, cuya dinámica responde a objetivos distintos de los del financiamiento fiscal directo. No obstante, como prueba de robustez (Capítulo \ref{ch:resultados}), se construye una serie consolidada alternativa que suma los pasivos del BCRA al stock del SPNF.
-
-\section{Construcción y Crítica de las Fuentes de Datos}
-El trabajo empírico en Argentina enfrenta el desafío estructural de la calidad y continuidad de las estadísticas públicas. En línea con la exigencia de respaldo empírico de toda afirmación sobre la evolución de las variables \citep{ynoub2007}, esta investigación utiliza exclusivamente \textbf{fuentes secundarias oficiales}, obtenidas mediante un protocolo de ingesta en dos etapas. En primera instancia, se intentó la descarga automatizada vía \textit{Application Programming Interface} (API): la Deuda Pública, el Resultado Primario y el Tipo de Cambio Real Multilateral desde \texttt{apis.datos.gob.ar} (MECON/BCRA/INDEC); el Coeficiente de Estabilización de Referencia desde la API pública del BCRA; y el índice de volatilidad VIX desde Yahoo Finance. En segunda instancia, ante discontinuidades o interrupciones de conectividad, se recurrió a un esquema jerárquico de fuentes de contingencia (informes del BCRA y MECON, series históricas de JP Morgan y CEPAL, y la base \textit{World Economic Outlook} del FMI), exigiendo en todos los casos el cruce contra un mínimo de dos fuentes independientes antes de su incorporación a la base consolidada, como criterio de confiabilidad instrumental de la matriz de datos \citep{cohen2019}. Para el Resultado Primario y la Deuda Pública en particular, los identificadores de serie de \texttt{apis.datos.gob.ar} vigentes al inicio del proyecto quedaron discontinuados durante su desarrollo; en la práctica, la totalidad de las 88 observaciones trimestrales de ambas variables proviene de esta segunda vía, sin un llamado API exitoso de por medio, consistente entre sí y con la base FMI WEO en los puntos de control verificados.
-
-\subsection{Empalme de la Ventana Ampliada (1996--2003)}
-\label{sec:empalme}
-Ninguna de las cuatro variables del sistema de cointegración (deuda pública, resultado primario, EMBI+, TCRM) tiene cobertura trimestral verificable en fuente primaria antes de 2004 o, en el caso del TCRM, antes de 1997. Extender la ventana muestral a 1996T1--2025T4 exigió, entonces, construir el tramo 1996--2003 mediante un procedimiento de empalme documentado en su totalidad, y no una simple extrapolación, salvo en la única excepción declarada del párrafo siguiente.
-
-Para la Deuda Pública y el Resultado Primario del SPNF, la fuente del tramo faltante es el \textit{Compendio Fiscal 1993--2006} de la Secretaría de Hacienda (MECON), de frecuencia anual. El procedimiento consta de dos pasos, aplicados por separado a cada variable. Primero, dado que las series del Compendio no miden exactamente lo mismo que las series API vigentes desde 2004 (distinto perímetro institucional y, en el caso de la deuda, distinta valuación), se calcula un \textbf{coeficiente de enlace} en el año de solapamiento más cercano al punto de empalme (2004): la razón entre el valor de la serie moderna y el valor de la serie del Compendio en ese año. Ese coeficiente, que no supone identidad entre ambas series, es el que se aplica a los valores anuales históricos antes de desagregarlos. El coeficiente resultó razonablemente estable para la deuda ($\approx 0.87$) pero inestable para el resultado primario, cuyo cociente Compendio/dataset-actual pasa de 1.12 en 2004 a 2.07 en 2006, lo cual sugiere una diferencia de perímetro más profunda que una simple diferencia de valuación; se utiliza igualmente el coeficiente del año de empalme por ser el más cercano al punto de unión, y esta limitación queda declarada como la aproximación menos confiable del procedimiento. Segundo, los valores anuales reescalados se desagregan a frecuencia trimestral mediante el método de Denton sin indicador \citep{denton1971}, que minimiza la suma de las diferencias trimestre a trimestre al cuadrado sujeto a que el promedio de los cuatro trimestres de cada año reproduzca el valor anual dado. Este es el procedimiento estándar para pasar de frecuencia anual a trimestral cuando no existe una serie de alta frecuencia relacionada que sirva de indicador. Para evitar un salto artificial en el punto de unión, la optimización incluye como puntos fijos (sin restricción de promedio anual, solo como ancla del término de suavidad) los trimestres reales 2004T1--2006T4 inmediatamente posteriores al tramo estimado.
-
-Para el PIB real, al no existir la ambigüedad de perímetro institucional del resultado fiscal, el nivel anual 1996--2003 se reconstruye encadenando hacia atrás desde el propio dato trimestral real de 2004 con las tasas de crecimiento anuales publicadas por INDEC y el Banco Mundial, sin coeficiente de enlace; la desagregación trimestral sigue el mismo procedimiento de Denton anclado contra 2004--2006.
-
-Para el EMBI+, en cambio, no se empalma con el procedimiento de Denton: se reemplaza la totalidad del panel por una serie real de fuente primaria, empalmando el \textit{stripped spread} de bonos Brady de JP Morgan (1994--1997) con el EMBI+/EMBI Global oficial (1998 en adelante, idéntico punto a punto a la serie diaria de Ámbito Financiero desde 1999T1), mediante una corrección proporcional de sesgo en el punto de unión ($k = \overline{\text{EMBI+}}_{1998\text{T1}} / \overline{\text{EMBI}}_{\text{Brady},\,1997\text{T4}} = 540.0/620.0 = 0.8710$) que evita una discontinuidad espuria en el nivel de la serie. El resultado cubre 1996--2025 sin discontinuidades.
-
-El TCRM, en cambio, sí exige una excepción declarada al criterio de no extrapolar: el BCRA publica el Índice de Tipo de Cambio Real Multilateral (rebasado a diciembre de 2001 $=1$) recién desde enero de 1997 (verificado contra el archivo fuente del BCRA), sin serie oficial anterior. Los cuatro trimestres de 1996 se aproximan por regresión OLS de $\log(\text{TCRM})$ sobre 1997T1--1999T4 (12 observaciones), proyectada hacia atrás; es la única variable del sistema para la que este procedimiento reemplaza a una fuente primaria en lugar de complementarla, y queda identificada por la columna \texttt{es\_interpolado\_tcrm}. El resultado central de la Etapa 3 (Sección \ref{sec:resultados_vecm}) se verificó como robusto a excluir esos cuatro trimestres. El CER, por su parte, no forma parte del sistema de cointegración y permanece en su cobertura real de 2004--2025 (88 observaciones): es un índice creado recién en febrero de 2002, sin existencia previa que extender, y su única función en el protocolo es de variable de control en ejercicios de robustez acotados a esa ventana.
-
-La columna \texttt{es\_interpolado} de la matriz de datos ampliada distingue explícitamente, para cada trimestre, si el dato proviene del empalme (1996T1--2003T4, deuda/resultado primario/PIB real) o de fuente primaria directa, preservando la trazabilidad exigida por el protocolo de fuentes secundarias \citep{cohen2019}.
-
-\subsection{Auditoría de Cobertura: Series de Contingencia vs. Fuente Primaria}
-\label{sec:auditoria_fallback}
-Un chequeo de trazabilidad, consistente en comparar cada columna de la matriz de datos original contra los valores de contingencia embebidos en el código de ingesta, reveló que, además de la Deuda Pública y el Resultado Primario (ya documentados como no provenientes de un llamado API exitoso), el TCRM y el EMBI+ también correspondían en su totalidad, en las 88 observaciones originales, a la fuente de contingencia y no a una consulta API exitosa. Esta auditoría motivó directamente su reemplazo por las series reales BCRA y Ámbito Financiero descritas en la Sección \ref{sec:empalme}, verificado mediante el cruce en el subperíodo de solapamiento 2004--2025 contra los valores previamente utilizados. Con la adopción de la ventana (Sección \ref{sec:unidad_analisis}), el reemplazo alcanza a la totalidad del protocolo: el umbral de Hansen, Bai-Perron, el VECM/SVAR/TVECM y el DSA estocástico se estiman todos sobre la misma matriz de datos con series reales, sin valores de contingencia remanentes en ningún ejercicio.
-
-\section{Estrategia Econométrica}
-
-La evaluación de la fatiga fiscal requiere un abordaje econométrico secuencial de seis etapas, diseñado para evitar estimadores sesgados o regresiones espurias.
-
-\subsection{Etapa 1: Estacionariedad y Quiebre Estructural Endógeno}
-Se aplican los contrastes de Dickey-Fuller Aumentado (ADF) y Kwiatkowski-Phillips-Schmidt-Shin (KPSS), de hipótesis nulas opuestas, junto con el test de \textit{Dickey-Fuller Generalized Least Squares} (DF-GLS) de \textcite{elliott1996} sobre cada serie en niveles y en primeras diferencias. Para los casos de diagnóstico ambiguo entre dichos contrastes, se implementa adicionalmente el test de quiebre estructural endógeno de \textcite{zivot1992}, que no requiere especificar \textit{a priori} la fecha de ruptura sino que la estima mediante búsqueda secuencial del punto que minimiza el estadístico $t$ del parámetro autorregresivo, permitiendo distinguir series genuinamente integradas de series estacionarias en torno a una tendencia quebrada. El protocolo se aplica sobre la ventana (1996--2025, $n=120$) para las cuatro variables del sistema de cointegración y la brecha del producto; el CER, que no forma parte del sistema, se excluye de este contraste por no tener cobertura anterior a 2004 (Sección \ref{sec:empalme}).
-
-\subsection{Etapa 2: Selección de Rezagos y Cointegración de Johansen}
-\label{sec:etapa2_johansen}
-Antes de estimar cualquier relación de largo plazo, se verifica mediante el procedimiento de máxima verosimilitud de Johansen (contraste de Traza) si el sistema conformado por la ratio de deuda ($d_t$), el resultado primario ($pb_t$), el riesgo soberano ($risk_t$) y el tipo de cambio real ($tc_t$) admite al menos una combinación lineal estacionaria, condición necesaria para descartar una regresión espuria en niveles. El orden de rezagos del VAR subyacente se selecciona por mayoría de criterios de información (AIC, BIC, FPE, HQIC); los cuatro criterios no coinciden entre sí (seleccionan 5, 1, 5 y 2 rezagos respectivamente), de modo que la especificación final no se apoya en un único criterio sino que se reporta la sensibilidad del rango de cointegración y de la estimación posterior a esta elección (Sección \ref{sec:resultados_vecm}).
-
-En la ventana de 30 años (1996--2025), el contraste de Johansen no rechaza la ausencia de cointegración ($H_0: r=0$) con el rezago seleccionado por BIC: el estadístico de Traza ($45{,}18$) queda por debajo del valor crítico al 95\% ($47{,}85$), un resultado que se mantiene prácticamente idéntico al excluir los cuatro trimestres de 1996 que se aproximan por extrapolación (ventana real 1997--2025, Traza $=45{,}46$), de modo que no es un artefacto de esa aproximación sino una propiedad genuina de extender la muestra. Esta fragilidad es coherente con la literatura sobre la distorsión del contraste de Johansen ante quiebres estructurales severos no modelados en la tendencia determinística \citep{gregory1996,johansen2000}: treinta años de muestra incorporan la salida de la hiperinflación, el Tequila de 1995, la Convertibilidad completa y su colapso, y la cesación de pagos de 2001--2002 dentro de una misma relación de largo plazo impuesta. Ante esta ambigüedad empírica, se impone un rango de cointegración $r=1$ por motivo teórico (una única relación de largo plazo, la Función de Reacción Fiscal de \citet{bohn1998}), documentando explícitamente que la imposición no es una elección neutral.
-
-\subsection{Etapa 3: Vectores con Corrección de Error (VECM) y VAR Restringido}
-\label{sec:vecm}
-Con el objetivo de superar las restricciones de los modelos de ecuación única y evaluar el ajuste simultáneo del sistema, la estimación de referencia de la Función de Reacción Fiscal de largo plazo se formula mediante un Modelo de Vectores con Corrección de Error (VECM). La diferencia no es meramente técnica: un modelo de ecuación única exige designar una variable dependiente ``principal'' (típicamente el resultado primario) y purgar la endogeneidad de corto plazo con construcciones auxiliares \textit{ad hoc}; un VECM, en cambio, modela el sistema completo, compuesto por $d_t$, $pb_t$, $risk_t$ y $tc_t$, como conjuntamente endógeno, sin necesidad de esa jerarquía: la endogeneidad queda integrada directamente en la estructura del sistema.
-
-La especificación estimada es:
-\begin{equation}
-\Delta \mathbf{x}_t = \boldsymbol{\alpha} \boldsymbol{\beta}' \mathbf{x}_{t-1} + \sum_{i=1}^{k-1} \boldsymbol{\Gamma}_i \Delta \mathbf{x}_{t-i} + \boldsymbol{\delta}\, \tilde{y}_t + \boldsymbol{\varepsilon}_t
-\end{equation}
-donde $\mathbf{x}_t = (d_t, pb_t, risk_t, tc_t)'$, $\boldsymbol{\beta}$ es el vector de cointegración (relación de largo plazo, normalizado sobre $d_t$), $\boldsymbol{\alpha}$ contiene los coeficientes de ajuste (velocidad de corrección de cada variable hacia el equilibrio de largo plazo ante un desvío del período anterior) y la brecha del producto $\tilde{y}_t$ entra como variable exógena estacionaria, fuera del vector de cointegración, por ser I(0) por construcción. El rango de cointegración se impone en $r=1$ (Sección \ref{sec:etapa2_johansen}) y el rezago en primeras diferencias $k-1$ se fija según el criterio BIC, reportando en el Capítulo \ref{ch:resultados} la sensibilidad de $\boldsymbol{\beta}$ y $\boldsymbol{\alpha}$ a esta elección.
-
-\subsubsection{Identificación Estructural y VAR Restringido con Reglas Macroeconómicas}
-\label{sec:svar_metodologia}
-Para identificar la transmisión de perturbaciones macroeconómicas y fiscales sin recurrir a un ordenamiento recursivo de Cholesky arbitrario, se formula un Vector Autoregresivo Estructural Restringido (SVAR) siguiendo el esquema de identificación contemporánea de \citet{blanchard2002} y la restricción de acumulación de deuda de \citet{favero2007,favero2012}. Para el vector de cinco variables $\mathbf{Y}_t = (\tilde{y}_t, pb_t, \text{EMBI}_t, \text{TCRM}_t, d_t)'$, el sistema estructural $A_0 \mathbf{u}_t = B \mathbf{e}_t$ impone las siguientes restricciones basadas en teoría económica:
 \begin{enumerate}
-    \item \textbf{Rigidez de Decisión Presupuestaria}: El superávit primario reacciona contemporáneamente a la brecha del producto únicamente a través de la semi-elasticidad cíclica automática de la recaudación tributaria ($\alpha_y = 0{,}25$, estándar OCDE/FMI para Argentina; \citep{girouard2005,daude2010,alberola2014}), exhibiendo rigidez institucional frente a shocks de riesgo soberano y tipo de cambio dentro del mismo trimestre ($a_{23} = a_{24} = 0$).
-    \item \textbf{Ajuste Inmediato de Precios Financieros}: El riesgo soberano ($\text{EMBI}_t$) y el tipo de cambio real ($\text{TCRM}_t$) son variables de mercado financiero que absorben contemporáneamente las perturbaciones macroeconómicas y fiscales del período. Esta restricción no es un supuesto de conveniencia: \citet{uribe2006} muestran, para un panel de economías emergentes, que el spread soberano reacciona dentro del mismo período a shocks de entrada y salida de capitales sin que exista una relación de causalidad inversa contemporánea igualmente fuerte, y \citet{neumeyer2005} documentan que la tasa de interés externa que enfrentan estas economías es en sí misma contracíclica y de ajuste inmediato, no rezagado, frente a perturbaciones reales. El tipo de cambio real se incluye, en lugar de omitirse o de tratarse como una variable de control exógena, porque \citet{eichengreen2003} muestran que el descalce de monedas (\textit{original sin}) hace que la trayectoria de la deuda de economías como la argentina responda al canal cambiario tanto o más que al fiscal; excluirlo del sistema estructural equivaldría a forzar toda la transmisión de un shock de financiamiento externo a través del EMBI+ únicamente, subestimando el canal de valuación.
-    \item \textbf{Identidad Dinámica de Acumulación}: La deuda pública evoluciona restringida por la restricción presupuestaria intertemporal:
-    \begin{equation}
-    d_t = \left( \frac{1 + r_t}{1 + g_t} \right) d_{t-1} - pb_t + sft_t
-    \end{equation}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Un \textbf{VAR trimestral sin restricciones} sobre los determinantes
+  de la dinámica de la deuda: crecimiento, tasas de interés y tipo de
+  cambio. El VAR describe cómo se mueven juntos, estima las varianzas y
+  covarianzas de sus shocks y genera proyecciones consistentes entre sí.
+\item
+  Un bloque de \textbf{comportamiento fiscal}, en su caso una función de
+  reacción fiscal.
+\item
+  La \textbf{identidad de acumulación de la deuda}, que separa el tramo
+  en moneda local del tramo en moneda extranjera. Por ella pasan las
+  proyecciones del VAR, anualizadas, para calcular la deuda de manera
+  recursiva y construir los gráficos de abanico.
 \end{enumerate}
-Frente a un ordenamiento de Cholesky simple, que impondría una jerarquía causal arbitraria entre las cinco variables sin respaldo teórico, este esquema recursivo restringe únicamente los bloques donde la teoría económica ofrece una razón explícita para hacerlo (rigidez presupuestaria intratrimestral, ajuste inmediato de precios financieros) y deja sin restringir la transmisión entre riesgo soberano y tipo de cambio real, dado que \citet{uribe2006} y \citet{eichengreen2003} no ofrecen un criterio inequívoco para ordenar esos dos precios financieros entre sí. La lectura sustantiva que esta tesis prioriza sobre la matriz de impacto estimada $\hat{S}$ es la del canal EMBI\textsuperscript{+}--TCRM en conjunto como una aproximación empírica a un shock de entrada o salida de capitales (Sección \ref{sec:eje_simulacion} del Capítulo \ref{ch:antecedentes}), antes que la de un shock monetario doméstico, para el cual esta tesis no dispone de una serie propia de tasa de interés de política ni de agregados monetarios con la misma cobertura de treinta años que el resto del sistema.
 
-A partir de la matriz de impacto estructural estimada $\hat{S} = A_0^{-1} B$, se calculan las Funciones de Impulso-Respuesta Estructurales (SVAR IRF) con bandas de confianza bootstrap al 95\% y la Descomposición de Varianza del Error de Pronóstico (FEVD).
+El marco vigente del FMI (2021, párr. 52) mantiene la idea central: el
+gráfico de abanico se arma aplicando al escenario base shocks tomados de
+la historia de los determinantes de la deuda.
 
-\subsection{Etapa 4: Modelos de Umbral (Hansen y TVECM) y Regímenes de Reacción Fiscal}
-Para evaluar si la reacción fiscal cambia de régimen de forma discontinua según el nivel de riesgo soberano, sin presuponer si ese cambio es una atenuación (fatiga fiscal) o una reacción ausente en la normalidad y gatillada solo por un nivel extremo de riesgo, se estima una regla de reacción fiscal con efectos de umbral determinados endógenamente, siguiendo la formulación de \citet{hansen1999}:
-\begin{equation}
-pb_t = \alpha + \beta_1 d_{t-1} \mathbb{I}(\text{EMBI}_t \le \tau) + \beta_2 d_{t-1} \mathbb{I}(\text{EMBI}_t > \tau) + \gamma \tilde{y}_t + \epsilon_t
-\end{equation}
-donde $\mathbb{I}(\cdot)$ es la función indicadora de régimen, $\tau^*$ denota el umbral crítico óptimo de riesgo soberano estimado mediante búsqueda de grilla sobre los percentiles 15--85 de la distribución empírica del EMBI+, y $\tilde{y}_t$ es la brecha del producto como variable de control macroeconómico. La significatividad estadística del quiebre se contrasta mediante el estadístico Sup-LM, cuya distribución bajo la hipótesis nula de linealidad se aproxima mediante re-muestreo con 1.000 réplicas \citep{hansen2000}.
+El modelo de esta tesis conserva esas tres piezas. Agrega dos cosas que
+la vacancia justifica: los shocks se identifican estructuralmente y la
+tasa de la FED entra como un shock externo con nombre propio.
 
-Adicionalmente, se extiende el análisis al marco multivariado mediante el modelo \textbf{Threshold VECM (TVECM)} de \citet{hansen2002}, permitiendo que las velocidades de ajuste del vector $\boldsymbol{\alpha}$ conmuten de régimen según el estado del mercado financiero:
-\begin{equation}
-\Delta \mathbf{x}_t = \begin{cases}
-\boldsymbol{\mu}_1 + \boldsymbol{\alpha}_1 \boldsymbol{\beta}' \mathbf{x}_{t-1} + \boldsymbol{\Gamma}_1 \Delta \mathbf{x}_{t-1} + \boldsymbol{\varepsilon}_t & \text{si } \text{EMBI}_{t-1} \le \tau^* \\
-\boldsymbol{\mu}_2 + \boldsymbol{\alpha}_2 \boldsymbol{\beta}' \mathbf{x}_{t-1} + \boldsymbol{\Gamma}_2 \Delta \mathbf{x}_{t-1} + \boldsymbol{\varepsilon}_t & \text{si } \text{EMBI}_{t-1} > \tau^*
-\end{cases}
-\end{equation}
+\section{Variables del sistema}
 
-Sobre la ratio Deuda/PIB se implementó además el procedimiento formal de \textcite{bai2003}: programación dinámica exacta sobre la suma de cuadrados residuales de la serie, con selección endógena del número de quiebres mediante el criterio BIC \citep{yao1988}.
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rol
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fundamento
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Crecimiento real del PIB & Endógena & Determinante de la identidad de la
+deuda (Celasun et al., 2006; FMI, 2021). Se usa el crecimiento, no la
+brecha del producto, porque es lo que entra en la identidad. El PIB real
+publicado no está desestacionalizado, por lo que el modelo incluye
+variables binarias estacionales (Lütkepohl, 2005). \\
+Resultado primario (\% del PIB) & Endógena & Determinante de la
+identidad. Su ecuación incluye la deuda rezagada; ese coeficiente es la
+reacción fiscal de Bohn (1998), que caracteriza la respuesta del
+superávit al endeudamiento. \\
+EMBI+ & Endógena & Riesgo soberano: forma parte de la tasa en dólares
+(tasa de Estados Unidos más spread). \\
+Tipo de cambio real multilateral & Endógena & Efecto de valuación sobre
+la deuda en moneda extranjera (Calvo et al., 2003). \\
+Deuda consolidada neta (\% del PIB) & Entra rezagada en las ecuaciones;
+evoluciona por la identidad & Retroalimentación de la deuda sobre el
+sistema (Favero y Giavazzi, 2007). \\
+Variación de la tasa de la FED & Exógena & Shock externo de H2. \\
+VIX & Exógena & Condiciones financieras globales; es la única variable
+global con efectos robustos en Adler y Sosa (2013). \\
+Dummies de quiebre & Exógenas & Quiebres de Bai-Perron estimados sobre
+la propia serie de deuda (Bai y Perron, 2003). \\
+\end{longtable}
+}
 
-\subsection{Etapa 5: Simulación Estocástica y Análisis de Sostenibilidad de la Deuda (DSA)}
-\label{sec:dsa_metodologia}
-Para trascender las proyecciones deterministas convencionales, se implementa un Análisis de Sostenibilidad de la Deuda (DSA) estocástico siguiendo el estándar de organismos multilaterales \citep{imf2003,imf2021}. Se simulan escenarios deterministas y una simulación de Monte Carlo de 1.000 iteraciones, en la cual las variables macroeconómicas fundamentales reciben perturbaciones aleatorias con una distribución $t$ de Student multivariada ($\nu \approx 4{,}8$ grados de libertad, calibrados sobre el exceso de curtosis de los shocks históricos de resultado primario y tipo de cambio real) y una matriz de correlación derivada directamente de la covarianza de residuos estructurales del SVAR restringido de la Etapa 3 (Sección \ref{sec:svar_metodologia}), en lugar de un modelo de volatilidad adicional ajustado por separado: cada trayectoria simulada hereda así la correlación efectivamente estimada entre los shocks de resultado primario, actividad, riesgo soberano y tipo de cambio, sin introducir un proceso estocástico paralelo que no esté ligado al resto del protocolo. La tasa doméstica de referencia mantiene su volatilidad calibrada por criterio de plausibilidad, al no tener serie propia en el sistema de cointegración; su correlación con el resto de los shocks se deriva proporcionalmente a la del riesgo soberano, que sí es parte del sistema. La tasa de interés de refinanciación externa ($r_{f,t} = r_{US,t} + \text{risk}_t$) se proyecta, en consecuencia, a partir de la propia trayectoria simulada del riesgo soberano dentro del sistema, integrada directamente en la ley de movimiento del ratio de deuda.
+\textbf{Por qué la deuda entra rezagada y se acumula con la identidad.}
+Favero y Giavazzi (2007) muestran que un VAR fiscal que omite la
+retroalimentación de la deuda está mal especificado: la restricción
+presupuestaria hace que el nivel de deuda condicione la política fiscal
+y las tasas. Su solución es incluir la deuda rezagada en las ecuaciones
+y hacerla evolucionar con la identidad, no con una ecuación estimada.
+Eso permite captar los efectos conjuntos que plantea la pregunta de
+investigación y mantiene la acumulación contablemente exacta.
 
-Una especificación alternativa de esta etapa modelaba el riesgo soberano como un proceso de difusión Cox-Ingersoll-Ross (CIR) calibrado por separado \citep{cox1985} y las correlaciones mediante un modelo DCC-GARCH \citep{engle2002}; ambas se conservan en el Apéndice Metodológico como análisis de robustez ante dinámicas de colas pesadas y volatilidad temporal variante.
+\section{Variables exógenas}
+
+Argentina es una economía pequeña y abierta: sus variables no afectan la
+tasa de la FED ni el VIX. En los VAR de economías pequeñas y abiertas,
+el supuesto estándar es que las variables externas forman un bloque
+exógeno (Cushman y Zha, 1997). Así se modela la transmisión de los
+shocks de Estados Unidos a América Latina (Canova, 2005) y la relación
+entre tasas internacionales y spreads en emergentes (Uribe y Yue, 2006).
+
+Una consecuencia importante es que \textbf{el efecto de la FED (H2) no
+depende de cómo se ordenen las variables argentinas entre sí}. Se
+calcula como un multiplicador dinámico de la variable exógena.
+
+La serie es la tasa de fondos federales. En los trimestres en que esa
+tasa estuvo en el piso de cero se usa la tasa sombra de Wu y Xia (2016),
+que mide la orientación de la política monetaria cuando la tasa efectiva
+no puede bajar más.
+
+\subsection{Canales por los que opera el shock de la FED}
+
+Cada canal de transmisión que plantea la pregunta específica (Capítulo
+1) está representado por una variable del sistema. Por eso el modelo
+puede medir cuánto pasa por cada uno.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Canal
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variable del modelo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cómo afecta a la deuda en la identidad
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Prima de riesgo soberano (Uribe y Yue, 2006) & EMBI+ & Eleva la tasa en
+dólares (tasa de la FED más el spread). \\
+Depreciación real y efecto de valuación (Calvo et al., 2003) & TCRM &
+Aumenta en pesos el valor de la deuda en moneda extranjera. \\
+Menor crecimiento y diferencial tasa-crecimiento (Neumeyer y Perri,
+2005) & Crecimiento real & Achica el denominador y empeora el
+diferencial r - g. \\
+Respuesta fiscal & Resultado primario & Cambia el flujo que reduce o
+aumenta la deuda. \\
+Costo de la deuda en dólares & Tasa de la FED (exógena) & Entra
+directamente en la tasa en dólares. \\
+\end{longtable}
+}
+
+El canal cuasifiscal, es decir, el mayor costo de los pasivos
+remunerados del BCRA, operó en el período de estimación a través de la
+deuda consolidada. No se proyecta como un canal separado porque esos
+pasivos son mínimos desde 2024 (FMI, 2025, anexo II).
+
+\section{Identificación de los shocks domésticos}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Shock
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Supuesto
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fundamento
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Fiscal & El componente cíclico del resultado primario se descuenta con
+una elasticidad de 0,25, y el resto es el shock fiscal discrecional. &
+Blanchard y Perotti (2002). La política discrecional tarda más de un
+trimestre en reaccionar, y la elasticidad se toma de estimaciones
+externas (Girouard y André, 2005). \\
+Actividad & El producto puede responder al shock fiscal dentro del
+trimestre. & Blanchard y Perotti (2002). \\
+Riesgo soberano y tipo de cambio & Se identifican como \textbf{bloque},
+sin ordenarlos entre sí. Se reporta solo su contribución conjunta. &
+Christiano, Eichenbaum y Evans (1999): con una identificación recursiva
+por bloques, lo que se identifica no depende del orden dentro de cada
+bloque. No hay razón teórica para ordenar el EMBI+ y el tipo de cambio,
+y H1a solo necesita el bloque ``cambiario y de riesgo'' en conjunto. \\
+\end{longtable}
+}
+
+\section{Niveles, rezagos e inferencia}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Variables en niveles.} El VAR se estima en niveles aunque
+  algunas variables tengan raíz unitaria. Sims, Stock y Watson (1990)
+  muestran que las estimaciones siguen siendo consistentes sin imponer
+  relaciones de cointegración. Para 1996-2025, la prueba de Johansen no
+  rechaza la ausencia de cointegración, por lo que imponer un rango
+  concreto sería un supuesto sin respaldo.
+\item
+  \textbf{Ventana única.} Todas las series cubren 1996-2025 y todas las
+  especificaciones se estiman sobre la misma muestra efectiva,
+  1998T2-2025T4 (111 trimestres). Los primeros trimestres no se pierden
+  por falta de datos: se usan como condiciones iniciales de los rezagos
+  (la variación de la tasa de la FED con dos rezagos y hasta seis
+  rezagos del VAR). Reservar el mismo número de observaciones para
+  cualquier orden del VAR es lo que permite comparar los criterios de
+  información entre órdenes (Lütkepohl, 2005, sec.~4.3) y hace que la
+  deuda neta, la neta en libros y la bruta se estimen sobre exactamente
+  los mismos trimestres. La simulación usa esa misma muestra para
+  remuestrear los shocks, y la variante con shocks como los del FMI usa
+  los años 1997-2025 de las mismas series.
+\item
+  \textbf{Rezagos.} El orden del VAR se elige con el criterio de
+  información de Akaike (AIC), sujeto a que el modelo sea estable, es
+  decir, a que todas las raíces de su polinomio característico queden
+  fuera del círculo unitario. La estabilidad no es un requisito
+  accesorio: es la condición para que el VAR tenga una representación de
+  medias móviles, en la que se apoyan las respuestas al impulso y la
+  simulación de largo plazo (Lütkepohl, 2005, cap. 2 y 4). Si el orden
+  que elige el AIC produce un modelo inestable, se toma el mayor orden
+  estable inferior. Con la deuda consolidada neta, el AIC alcanza su
+  mínimo en seis rezagos, el máximo considerado, pero todos los órdenes
+  desde cuatro son inestables (raíz máxima entre 1,02 y 1,03), por lo
+  que se usan tres (raíz máxima de 0,96). Los criterios de Hannan-Quinn
+  y de Schwarz eligen órdenes menores (dos y uno), de modo que tres
+  rezagos quedan dentro del rango que sugieren los tres criterios. Con
+  la deuda bruta, el mayor orden estable es cuatro (raíz máxima de
+  0,99). La prueba de Portmanteau detecta autocorrelación residual leve
+  en los modelos estables (p entre 0,02 y 0,04), que se informa como
+  limitación.
+\item
+  \textbf{Intervalos de confianza.} Los residuos de este tipo de modelos
+  para Argentina rechazan la normalidad, y la volatilidad de las
+  variables cambia entre subperíodos. Por eso los intervalos se calculan
+  con un \emph{bootstrap} salvaje de diseño recursivo, que es válido con
+  heterocedasticidad condicional de forma desconocida y también sin ella
+  (Gonçalves y Kilian, 2004), con semilla fija para que sean
+  reproducibles. Los diagnósticos del modelo estimado se presentan en el
+  Capítulo 6.
+\end{itemize}
+
+\section{Simulación de Monte Carlo}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{De dónde salen.} Se remuestrean los residuos estimados, que
+  conservan las colas gordas que la normal no captura. Es la versión
+  econométrica del principio del FMI de usar shocks históricos (FMI,
+  2021, párr. 52).
+\item
+  \textbf{Incertidumbre de parámetros.} Cada trayectoria usa parámetros
+  de una réplica del \emph{bootstrap}. Eso da el intervalo de confianza
+  con el que se contrasta H1b.
+\item
+  \textbf{Escenario base.} Los senderos son los del FMI (2025):
+  crecimiento, resultado primario, tasa efectiva y ajuste stock-flujo.
+  Así la comparación con su 3\% de no estabilización es directa.
+\item
+  \textbf{Tamaño del shock de la FED.} Un desvío estándar de la
+  variación trimestral, 0,50 puntos porcentuales, que es la convención
+  para medir respuestas en estos modelos. Como escenario histórico se
+  agrega el ciclo de subas de 2022-2023, de 5,25 puntos.
+\item
+  \textbf{Tasa en dólares.} Es la tasa de la FED más el EMBI+ simulado.
+  No se traslada de inmediato a toda la deuda: cada año se refinancia la
+  fracción λ = 13/64,1 ≈ 0,20, que es el cociente entre las necesidades
+  brutas de financiamiento y la deuda del escenario base del FMI (2025,
+  anexo II).
+\item
+  \textbf{Canal de tasas domésticas (variante).} En la especificación
+  principal, el EMBI+ encarece solo la deuda en moneda extranjera. En la
+  variante, el mismo desvío del EMBI+ también reprecia la deuda en
+  pesos, con la misma velocidad λ. El fundamento es la tasa de interés
+  del país de Neumeyer y Perri (2005) y Uribe y Yue (2006): el costo del
+  crédito para el soberano es la tasa internacional más la prima de
+  riesgo, cualquiera sea la moneda. No se agrega una tasa en pesos como
+  variable del VAR porque no hay una serie homogénea para 1996-2025: la
+  convertibilidad, el control de tasas posterior a 2002 y la indexación
+  por CER cambian el significado de cualquier tasa nominal en pesos
+  entre subperíodos.
+\item
+  \textbf{Shocks como los del FMI (variante).} Para saber cuánto del
+  resultado depende de la forma de generar los shocks, se repite la
+  simulación con el procedimiento del abanico del FMI (FMI, 2021, anexo
+  VI; FMI y ESM, 2023): se calculan los desvíos respecto de la media
+  histórica de los cuatro impulsores anuales de la deuda (tasa real
+  efectiva, crecimiento real, depreciación real y resultado primario,
+  1997-2025), se los remuestrea como vectores, para conservar la
+  correlación entre impulsores, en bloques de dos años consecutivos,
+  para conservar parte de la persistencia, y se los suma al escenario
+  base. La identidad, el punto de partida y la métrica son los mismos.
+  La tasa real efectiva es el cociente entre los intereses pagados
+  (resultado primario menos resultado financiero del Sector Público
+  Nacional, MECON) y la deuda bruta del año anterior, deflactado por el
+  deflactor del PIB.
+\item
+  \textbf{Por qué la especificación principal es el SVARX.} La elección
+  se fija antes de ver los resultados y no según cuál da una
+  probabilidad mayor. El procedimiento del FMI genera shocks en forma
+  reducida: no distingue un shock fiscal de uno cambiario ni aísla la
+  tasa de la FED. Por eso no puede contrastar H1a, que compara bloques
+  de shocks, ni H2, que requiere un shock externo identificado. El SVARX
+  sí puede, y además incorpora la respuesta de la política fiscal a la
+  deuda (Bohn, 1998). La variante del FMI se informa como comparación
+  metodológica.
+\end{itemize}
+
+\section{Contraste de las hipótesis}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Hipótesis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Medida
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Criterio
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+H1a & Contribución de cada bloque de shocks (fiscal, actividad,
+cambiario y de riesgo) a la varianza de la deuda simulada en 2035, y
+reacción fiscal de Bohn como caracterización complementaria & El
+superávit primario ``por sí solo no basta'' si la contribución conjunta
+de los shocks no fiscales supera a la del shock fiscal, con un intervalo
+de 90\% de la diferencia que excluye el cero. Una reacción fiscal
+positiva no contradice la hipótesis: indica que el superávit responde a
+la deuda, no que alcance para estabilizarla. \\
+H1b & Probabilidad de que la deuda no se estabilice, con el escenario
+base del FMI, a cinco años (2030) y a diez años (2035) & El límite
+inferior del intervalo de 90\% supera el 3\% del FMI (contraste
+unilateral al 5\%). El contraste directo es el de 2030, porque el 3\%
+del FMI se mide a cinco años; el de 2035 indica si el resultado se
+sostiene hasta el final del horizonte. \\
+H2 & Diferencia en esa probabilidad y en la deuda esperada entre el
+escenario con shock de la FED y el escenario base & El intervalo de 90\%
+de la diferencia excluye el cero. \\
+\end{longtable}
+}

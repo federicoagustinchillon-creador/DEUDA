@@ -150,9 +150,8 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 | Qué | Dónde se usa |
 |---|---|
-| Si hubo emisión de deuda bajo ley de Nueva York en 2026 | Introducción, contexto |
-| Nivel de los pasivos remunerados del BCRA a fines de 2025 | Introducción y vacancia |
-| Tenencias de títulos públicos del FGS (ANSES no permite la descarga automática; hay que bajarlas a mano) | Deuda neta (Capítulo 5) |
+| Tenencias de títulos públicos del FGS (ANSES no permite la descarga automática; hay que bajarlas a mano). Fuente: Informes Estadísticos Mensuales en anses.gob.ar; sustituto: deuda en poder de Agencias del Sector Público, informes trimestrales de la Secretaría de Finanzas | Deuda neta (Capítulo 5) |
+| Si las LEFI (julio de 2024 a julio de 2025; 11,1 billones de pesos en diciembre de 2024, según el Informe Monetario Mensual del BCRA) están en la deuda del Tesoro que usamos. La serie de pasivos del BCRA no las incluye; si tampoco están en la deuda del SPNF, faltan en la consolidada esos trimestres | Deuda consolidada (Capítulo 5) |
 
 ## 6. Decisiones abiertas
 

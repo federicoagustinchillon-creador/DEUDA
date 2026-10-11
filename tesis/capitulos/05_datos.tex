@@ -1,306 +1,979 @@
-\chapter{Análisis Estadístico Descriptivo}
-\label{ch:descriptivo}
+\chapter{Datos}
 
-Previo a la inferencia econométrica causal desarrollada en el Capítulo \ref{ch:resultados}, este capítulo describe la fuente, la construcción, el comportamiento tendencial, la dispersión y las propiedades de integración de las series de tiempo argentinas, constituyendo la base empírica sobre la cual se fundamenta la estimación paramétrica de la Función de Reacción Fiscal. Como se detalla en la Sección \ref{sec:matriz_operacional} del Capítulo \ref{ch:metodologia}, la investigación trabaja con una ventana muestral, 1996T1--2025T4 ($n=120$, treinta años exactos), construida mediante el empalme documentado en la Sección \ref{sec:empalme} de ese capítulo: sobre ella se calculan los estadísticos descriptivos, las propiedades de integración y la totalidad del protocolo de robustez de este capítulo, salvo indicación contraria. El tramo 2004T1--2025T4 ($n=88$), íntegramente de fuente primaria y sin ningún tramo empalmado, se conserva únicamente como sub-muestra de referencia de cobertura 100\,\% real (Sección \ref{sec:matriz_operacional} del Capítulo \ref{ch:metodologia}); sus propiedades de integración, junto con las de la muestra completa, se reportan en la Sección \ref{sec:estacionariedad_ampliada} de este capítulo.
+Este capítulo documenta cada serie del modelo: qué mide, de dónde sale,
+qué transformaciones se le aplicaron y por qué. La muestra es
+trimestral, 1996T1-2025T4 (120 observaciones). La muestra efectiva de
+estimación es 1996T4-2025T4 (117 observaciones), porque el crecimiento
+pierde la primera observación y los dos rezagos de la tasa de la Fed
+consumen las siguientes. Todas las cifras que aparecen aquí se
+recalcularon desde los archivos del repositorio citados en cada sección.
+Cuando una serie tiene una limitación, se declara junto con la dirección
+probable de su sesgo.
 
-\section{Propiedades Estadísticas de la Muestra y Análisis Descriptivo}
-\label{sec:propiedades_muestra}
+\section{Resumen de las series}
 
-Como paso preliminar a cualquier caracterización sustantiva de las series, corresponde examinar sus propiedades distribucionales agregadas, en particular el grado de apartamiento respecto de la normalidad, dado que dicho apartamiento condiciona la elección posterior entre técnicas de inferencia lineal convencionales y técnicas robustas a la asimetría y a la curtosis extrema (Sección \ref{sec:hansen} y Capítulo \ref{ch:discusion}). Este diagnóstico se computa sobre la sub-muestra de cobertura 100\,\% real (2004T1--2025T4, $n=88$) dentro de la ventana (Sección \ref{sec:matriz_operacional} del Capítulo \ref{ch:metodologia}), para evitar mezclar en un mismo estadístico el tramo de fuente primaria directa con el tramo empalmado 1996--2003.
-
-\begin{table}[H]
-\centering
-\caption{\label{tab:descriptivos} Estadísticas descriptivas de las variables macro-fiscales (2004T1--2025T4, n=88).}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\textbf{Variable} & \textbf{Media} & \textbf{Mediana} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} & \textbf{Jarque-Bera} & \textbf{$p$-valor (JB)} \\
-\midrule
-$pb_t$ (Result. Primario/PIB, \%) & -0.70 & -0.80 & 1.59 & -3.80 & 1.80 & -0.01 & 5.87 & 0.053 \\
-$d_t$ (Deuda/PIB, \%) & 65.93 & 63.00 & 18.68 & 40.00 & 119.00 & 0.60 & 5.64 & 0.060 \\
-$risk_t$ (EMBI+, pb) & 1298.21 & 808.80 & 1229.50 & 210.22 & 5626.29 & 2.16 & 128.58 & 0.00000 \\
-$\tilde{y}_t$ (Brecha del Producto, \%) & -0.02 & -0.80 & 5.54 & -11.15 & 13.86 & 0.59 & 4.89 & 0.087 \\
-TCRM (índice) & 1.71 & 1.63 & 0.39 & 1.14 & 2.41 & 0.48 & 7.48 & 0.024 \\
-CER (índice acumulado) & 58.01 & 4.37 & 145.79 & 1.46 & 654.29 & 3.06 & 355.63 & 0.00000 \\
-VIX (puntos) & 18.98 & 16.71 & 7.48 & 10.31 & 58.60 & 2.46 & 360.07 & 0.00000 \\
-\bottomrule
-\end{tabular}%
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable del modelo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rol (Capítulo 4)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Archivo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fuente primaria
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cobertura real
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Deuda consolidada neta, tenencia del BCRA a valor nominal, variante piso
+(\% PIB) & Rezagada en las ecuaciones &
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}nominal\_\allowbreak{}1996\_\allowbreak{}2025.csv}
+(\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}nominal\_\allowbreak{}piso\_\allowbreak{}pib}) & MECON y BCRA &
+1996T1-2025T4, sin FGS; nominal en 80 de 120 trimestres (ver 5.3.4) \\
+Deuda neta a valor de libros y deuda federal bruta (\% PIB) & Series de
+robustez y componente &
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}1996\_\allowbreak{}2025.csv},
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}deuda\_\allowbreak{}consolidada\_\allowbreak{}1996\_\allowbreak{}2025.csv} & MECON,
+Informe de Deuda 31/12/2025 & 1996T1-2025T4 (6 trimestres
+interpolados) \\
+Pasivos remunerados del BCRA & Componente &
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}1996\_\allowbreak{}2025.csv} & API BCRA v4.0 &
+1996T1-2025T4 (sin swap del PBoC) \\
+Deuda del Tesoro en poder del BCRA & Componente &
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}1996\_\allowbreak{}2025.csv} & BCRA, Balance
+histórico & 1996T1-2025T4 \\
+Depósitos del Tesoro en el BCRA & Componente &
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}1996\_\allowbreak{}2025.csv} & API BCRA v4.0, id
+1264 & 1996T1-2025T4 \\
+Resultado primario (\% PIB, flujo trimestral anualizado) & Endógena &
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}resultado\_\allowbreak{}primario\_\allowbreak{}1996\_\allowbreak{}2025.csv}
+(\texttt{pb\_\allowbreak{}pib\_\allowbreak{}trim}) & MECON, Secretaría de Hacienda, esquema
+Ahorro-Inversión-Financiamiento (datos.gob.ar, dataset 379) &
+1996T1-2025T4, mensual, sin desagregación \\
+PIB real y crecimiento & Endógena &
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}pib\_\allowbreak{}real\_\allowbreak{}empalme\_\allowbreak{}indec\_\allowbreak{}1996\_\allowbreak{}2003.csv} y
+\texttt{datos/\allowbreak{}dataset\_\allowbreak{}consolidado\_\allowbreak{}1996\_\allowbreak{}2025.csv} & INDEC, Oferta y
+Demanda Globales & 1996-2003 base 1993 empalmada a base 2004; 2004-2025
+directo \\
+EMBI+ & Endógena & \texttt{datos/\allowbreak{}dataset\_\allowbreak{}consolidado\_\allowbreak{}1996\_\allowbreak{}2025.csv} &
+JP Morgan vía Ámbito; spread Brady & 1996T1-2025T4 \\
+TCRM & Endógena & \texttt{datos/\allowbreak{}dataset\_\allowbreak{}consolidado\_\allowbreak{}1996\_\allowbreak{}2025.csv} &
+BCRA, \texttt{ITCRMSerie.xlsx} & 1997T1-2025T4; 1996 retropolado \\
+Tasa de la Fed (con tasa sombra) & Exógena &
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}tasa\_\allowbreak{}fed\_\allowbreak{}trimestral\_\allowbreak{}1996\_\allowbreak{}2025.csv} & FRED y
+Atlanta Fed & 1996T1-2025T4 \\
+VIX & Exógena & \texttt{datos/\allowbreak{}procesados/\allowbreak{}instrumentos\_\allowbreak{}1996\_\allowbreak{}2025.csv} &
+Yahoo Finance, \^{}VIX & 1996T1-2025T4 \\
+PIB nominal de cuatro trimestres & Denominador &
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}1996\_\allowbreak{}2025.csv} (\texttt{pib\_\allowbreak{}4t\_\allowbreak{}mm}) &
+INDEC & 1996T1-2025T4 (32 trimestres empalmados) \\
+\end{longtable}
 }
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, MECON, INDEC, JP Morgan, datos.gob.ar). Estadístico de Jarque-Bera bajo hipótesis nula de normalidad; asimetría de Fisher-Pearson corregida por muestra.
-\end{flushleft}
-\end{table}
 
-El contraste de Jarque-Bera exige una lectura diferenciada en tres grupos. El EMBI+, el CER y el VIX rechazan con contundencia la hipótesis nula de normalidad ($JB>100$, $p<0.00001$ en los tres casos), resultado esperable dada su naturaleza de cola derecha extrema: los episodios de pánico financiero desplazan estos indicadores muy por encima de su media, y con la serie real de EMBI+ ese rechazo es aún más categórico que el que arrojaba la serie de contingencia utilizada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($JB=20.71$, $p=0.00003$). El TCRM también rechaza normalidad, aunque con mucha menor contundencia ($JB=7.48$, $p=0.024$). Las tres series restantes ($pb_t$, $d_t$ y $\tilde{y}_t$) exhiben $p$-valores marginales (0.05--0.09) que no permiten un rechazo al 5\% pero tampoco confirman normalidad, ubicándose en una zona de ambigüedad estadística coherente con muestras de tamaño moderado ($n=88$). Esta evidencia respalda la motivación metodológica para las técnicas robustas a la asimetría adoptadas en los capítulos subsiguientes: la regresión de umbral asimétrica de Hansen (Sección \ref{sec:hansen}) y el DSA estocástico no gaussiano (Capítulo \ref{ch:discusion}).
+Un cambio metodológico respecto de versiones anteriores: ninguna serie
+fiscal ni de deuda sale ya de un diccionario escrito a mano. La deuda es
+el cociente entre stocks en pesos tomados de los informes del MECON y el
+PIB nominal. El resultado primario se lee de las planillas mensuales de
+Hacienda y el PIB real de 1996-2003 se empalma con las series publicadas
+por INDEC. Todas las construcciones son trazables a archivos y
+reproducibles con los scripts de \texttt{codigo/\allowbreak{}ingesta\_\allowbreak{}datos/\allowbreak{}}.
 
-Tres regularidades adicionales de asimetría son relevantes. Primero, el EMBI+ opera en un orden de magnitud muy superior al de economías emergentes con grado de inversión crediticia, y su asimetría positiva pronunciada (2.16) confirma la cola derecha propia de los episodios de pánico financiero, frente a fases de compresión del diferencial de riesgo comparativamente más graduales. Segundo, el Resultado Primario exhibe media negativa y asimetría prácticamente nula (-0.01), compatible con la hipótesis de reacción fiscal débil de $H_{1a}$, mientras que la Deuda/PIB muestra una asimetría moderada (0.60) que refleja la persistencia de episodios de sobreendeudamiento por encima de la media. Tercero, la asimetría extrema del CER (3.06) no expresa volatilidad financiera, sino la consecuencia mecánica de tratarse de un índice acumulativo de inflación pasada no comparable en niveles entre regímenes monetarios sucesivos, propiedad que la Sección \ref{sec:estacionariedad} somete a contraste formal de integración.
+\section{Denominador: PIB nominal de los últimos cuatro trimestres}
 
-\section{Fuente, Cobertura y Construcción de la Matriz de Datos}
+Un stock de fin de período es una variable de fin de período y el PIB es
+un flujo anual. Dividir el stock por el PIB de un solo trimestre
+anualizado mezcla estacionalidad y, con inflación alta, infla el
+denominador. El denominador elegido es la suma de los últimos cuatro
+flujos trimestrales del PIB nominal (\texttt{pib\_\allowbreak{}4t\_\allowbreak{}mm}, millones de
+pesos corrientes). En el cuarto trimestre coincide con la convención del
+FMI, que divide por el PIB del año (FMI, 2025, Annex II, Table 2, nota
+1).
 
-El panel trimestral comprende la ventana de 120 observaciones (1996T1--2025T4, Sección \ref{sec:matriz_operacional} del Capítulo \ref{ch:metodologia}), integrando ocho variables construidas a partir de fuentes secundarias oficiales: el VIX, el EMBI+ argentino\footnote{Diferencial de rendimiento, ponderado por duración, entre bonos soberanos en dólares y Treasuries de EE.UU. comparables (J.P. Morgan).}, el CER, el TCRM, el PIB real, el Resultado Primario del SPNF (\% PIB), la Deuda Pública del SPNF (\% PIB) y la brecha del producto derivada mediante filtro Hodrick-Prescott ($\lambda=1600$). De estas ocho, seis (EMBI+, TCRM, PIB real, Resultado Primario, Deuda Pública y la brecha del producto derivada de esta última) cubren la ventana completa mediante el empalme documentado en la Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia}, y el VIX se extendió con serie real completa desde 1990; el CER, en cambio, no tiene existencia previa a febrero de 2002 y permanece confinado a su cobertura real de 2004T1--2025T4 (88 observaciones).
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuente.} INDEC, PIB a precios de comprador corrientes. Para
+  2004T1-2025T4, serie 4.4\_OGP\_2004\_T\_17 de datos.gob.ar (88
+  trimestres). Para 1996T1-2003T4, serie 2.4\_OGP\_1993\_T\_17 (base
+  1993), empalmada con un coeficiente de enlace de 1,0837. Ese
+  coeficiente es la razón entre las medias de 2004 en base 2004 y en
+  base 1993 (32 trimestres, marcados \texttt{base1993\_\allowbreak{}empalmada} en
+  \texttt{pib\_\allowbreak{}origen}).
+\item
+  \textbf{Límite.} La razón entre bases no es constante a lo largo de
+  2004 (varía entre 1,07 y 1,12 por trimestre) y se aleja más en años
+  posteriores. El nivel del PIB nominal anterior a 2004 tiene, por lo
+  tanto, una incertidumbre que se traslada a todos los ratios de ese
+  tramo.
+\item
+  \textbf{Costo conocido.} Con inflación de tres dígitos (2023-2024), el
+  PIB de cuatro trimestres rezaga al PIB corriente de fin de período. El
+  ratio se sobreestima en la aceleración y se subestima en la
+  desinflación. El diagnóstico previo, con el PIB del cuarto trimestre
+  anualizado, daba 9,05 \% para los pasivos del BCRA en 2023 contra 13,3
+  \% con el denominador adoptado, y el FMI informa 18,4 \% para un
+  concepto más amplio. Se declara en la columna
+  \texttt{denominador\_\allowbreak{}tipo}.
+\end{itemize}
 
-Sobre esta última variable corresponde una precisión metodológica. La literatura reciente \citep{hamilton2018} cuestiona el filtro HP en series macroeconómicas, señalando la introducción de ciclos espurios y distorsión sistemática en los extremos de la muestra. No obstante, esta investigación adopta $\lambda=1600$ por criterio de parsimonia y comparabilidad internacional con los manuales DSA del FMI y el BID, que emplean sistemáticamente esta convención. Como chequeo de robustez, se recalculó la brecha mediante el filtro de \citet{hamilton2018} ($h=8$, $p=4$ rezagos): ambas series presentan una correlación de $r=0.72$, un grado de acuerdo sustancial que sugiere que las conclusiones de la tesis no dependen críticamente de esta elección de diseño, aunque la correlación, lejos de la unidad, confirma que ambos métodos no son intercambiables.
+\section{Deuda consolidada neta y sus componentes}
 
-La construcción de la matriz siguió un protocolo en dos etapas, detallado en el libro de códigos: obtención de datos desde las APIs de \url{apis.datos.gob.ar}, BCRA y Yahoo Finance, recurriendo a informes alternativos (CEPAL, FMI, JP Morgan, MECON) ante discontinuidades. La deuda pública incorporada en la especificación central corresponde a la deuda bruta del SPNF neta de tenencias intra-sector público (acreencias del FGS de la ANSES), corrección que reduce el ratio bruto publicado habitualmente en prensa entre 15 y 20 puntos porcentuales del PIB según el año, y resulta metodológicamente indispensable para evitar sobreestimar la exposición neta del Tesoro frente a acreedores extra-estatales.
+\subsection{Definición}
 
-\section{Descriptivos e Integración (1996--2025, n=120)}
-\label{sec:ventana_ampliada}
+Se sigue la definición de consolidación con el banco central del FMI
+(2021, Annex II, nota 2, p.~72 del archivo local; también nota 23,
+p.~28). Consolidar implica restar los créditos del banco central contra
+el gobierno y sumar los pasivos de deuda del banco central, sin moneda
+ni depósitos de residentes. En símbolos:
 
-El procedimiento de empalme descrito en la Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia} construye las cuatro variables del sistema de cointegración (deuda/PIB, resultado primario/PIB, EMBI+ y TCRM) sobre la ventana de 120 observaciones trimestrales (1996T1--2025T4), de las cuales 32 (1996T1--2003T4) provienen del empalme y 88 (2004T1--2025T4) de fuente primaria directa, sin ningún tramo empalmado. La Tabla \ref{tab:descriptivos_ampliado} resume sus estadísticos sobre la ventana completa.
+D\_neta = B − T\_BCRA − T\_FGS + L\_BCRA − DEP, todo dividido por el PIB
+de cuatro trimestres.
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:descriptivos_ampliado} Estadísticos descriptivos de las variables del sistema VECM (1996T1--2025T4, n=120).}
-\begin{tabular}{lrrrrr}
-\toprule
-\textbf{Variable} & \textbf{Media} & \textbf{Desv. Est.} & \textbf{Mín.} & \textbf{Máx.} & \textbf{Asimetría} \\
-\midrule
-Deuda SPNF / PIB (\%) & 64.46 & 27.60 & 26.96 & 157.27 & 1.12 \\
-Resultado Primario / PIB (\%) & -0.27 & 1.73 & -3.80 & 4.08 & 0.13 \\
-EMBI+ (puntos básicos) & 1483.95 & 1573.84 & 210.22 & 6658.98 & 1.93 \\
-TCRM (índice) & 1.63 & 0.45 & 0.98 & 2.76 & 0.52 \\
-Brecha del Producto (\%) & -0.06 & 5.51 & -11.77 & 14.53 & 0.34 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_1996\_2025.csv} (\texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}).
-\end{flushleft}
-\end{table}
+Aquí B es la deuda bruta federal, T\_BCRA la deuda del Tesoro en poder
+del BCRA, T\_FGS la deuda del Tesoro en poder del FGS-ANSES, L\_BCRA los
+pasivos remunerados del BCRA y DEP los depósitos del Tesoro en el BCRA.
+En la serie estimada, T\_FGS no está disponible (sección 5.9).
 
-Frente a la sub-muestra de cobertura 100\,\% real (Tabla \ref{tab:descriptivos}), la incorporación del tramo empalmado 1996--2003 desplaza sensiblemente los extremos: el mínimo de la deuda/PIB baja de 40.00\% a 26.96\% (el piso de la salida de la crisis, no capturado por esa sub-muestra, que arranca ya en el proceso de descompresión posterior al canje) y su máximo sube de 119.00\% a 157.27\% (el pico de la cesación de pagos de 2002, previo a la quita de 2005). El EMBI+ se desplaza en el mismo sentido pero de forma menos mecánica: su media sube de 1298 a 1484 puntos básicos, ya que la crisis de 2001--2002 empuja el promedio hacia arriba, como es esperable, y su asimetría se acentúa levemente (2.16 a 1.93): al incorporar además 1996--1998, con niveles de riesgo soberano moderados propios de la Convertibilidad, la cola derecha vuelve a alargarse en relación con un cuerpo de distribución más bajo. Estos desplazamientos no son un artefacto del empalme: reflejan la incorporación sustantiva de quiebres estructurales extremos (crisis del Tequila y colapso de la Convertibilidad) necesarios para evaluar la sostenibilidad fiscal a lo largo de un ciclo secular completo.
+\subsection{Deuda federal bruta (B)}
 
-\subsection{Estacionariedad sobre la Muestra Completa}
-\label{sec:estacionariedad_ampliada}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuente.} MECON, Secretaría de Finanzas, \emph{Informe de Deuda
+  Pública al 31/12/2025}, hoja A.4.5 (deuda bruta de la Administración
+  Central en miles de millones de dólares, trimestral desde 1998T1). Se
+  multiplica por el tipo de cambio de fin de trimestre de la hoja A.2.4.
+  Control del tipo de cambio: 808,45 al 31/12/2023, igual al cociente
+  USD/ARS de la hoja A.1.1 del informe de 2023. Archivos en
+  \texttt{datos/\allowbreak{}crudos/\allowbreak{}mecon\_\allowbreak{}deuda/\allowbreak{}}.
+\item
+  \textbf{Convertibilidad.} Para 1996T1-2001T4 (24 trimestres) el tipo
+  de cambio es 1, por la paridad legal de la Ley 23.928
+  (\texttt{tc\_\allowbreak{}origen\ =\ paridad\_\allowbreak{}legal\_\allowbreak{}ley\_\allowbreak{}23928}). Los otros 96
+  trimestres usan la hoja A.2.4.
+\item
+  \textbf{Interpolación.} En 1996-1997 el informe solo trae el cierre de
+  diciembre. Los seis trimestres no diciembre se interpolan linealmente
+  en dólares (\texttt{spnf\_\allowbreak{}origen\ =\ interpolado\_\allowbreak{}lineal\_\allowbreak{}usd},
+  bandera \texttt{flag\_\allowbreak{}bruta\_\allowbreak{}interpolada}). Los otros 114 son datos
+  trimestrales del informe. Se interpola porque la alternativa, eliminar
+  seis trimestres, deja agujeros en un VAR de frecuencia trimestral.
+\item
+  \textbf{Perímetro.} Es la deuda bruta de la Administración Central.
+  Excluye la deuda elegible pendiente de reestructuración e incluye
+  tenencias del BCRA, del FGS y de otros organismos públicos.
+\item
+  \textbf{Corrección de una fecha.} La hoja A.2.4 trae una fila con
+  fecha 2022-03-31 duplicada, que corresponde a 2002-03-31 (intercalada
+  con un CER de 1,0481). El script la reasigna solo si detecta la
+  duplicación.
+\end{itemize}
 
-La Tabla \ref{tab:estacionariedad_ampliado} repite el protocolo ADF/KPSS de la Sección \ref{sec:estacionariedad} sobre la ventana, para las cuatro variables del sistema de cointegración y la brecha del producto.
+\subsection{Pasivos remunerados del BCRA (L\_BCRA)}
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:estacionariedad_ampliado} Pruebas de raíz unitaria e integración, ventana (1996T1--2025T4, n=120).}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Variable} & \textbf{ADF $p$ (nivel)} & \textbf{KPSS $p$ (nivel)} & \textbf{ADF $p$ (dif.)} & \textbf{KPSS $p$ (dif.)} & \textbf{Orden} \\
-\midrule
-Deuda / PIB & 0.042 & 0.100 & 0.001 & 0.100 & I(1)$^{\dagger}$ \\
-Result. Primario / PIB & 0.605 & 0.010 & 0.000 & 0.100 & I(1) \\
-EMBI+ & 0.150 & 0.100 & 0.000 & 0.100 & I(1) \\
-TCRM & 0.259 & 0.100 & 0.000 & 0.100 & I(1) \\
-Brecha del Producto & 0.001 & 0.100 & 0.000 & 0.100 & I(0) \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia en base a \texttt{dataset\_consolidado\_1996\_2025.csv} (\texttt{codigo/modelos/fase23\_reestimacion\_1996\_2025.py}). Test ADF bajo hipótesis nula de raíz unitaria; test KPSS bajo hipótesis nula de estacionariedad. $^{\dagger}$Ver discusión: el ADF rechaza la raíz unitaria al 5\%, un diagnóstico que por sí solo sugeriría I(0), no I(1).
-\end{flushleft}
-\end{table}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Moneda local.} API del BCRA, Estadísticas Monetarias v4.0
+  (\texttt{https:/\allowbreak{}/\allowbreak{}api.bcra.gob.ar/\allowbreak{}estadisticas/\allowbreak{}v4.0/\allowbreak{}monetarias}): id
+  1258 (LEBAC y NOBAC), id 1260 (LELIQ y NOTALIQ), id 1261 (posición
+  neta de pases). La API no devuelve datos de 1258 antes de 2002-03 ni
+  de 1260 antes de 2018-01. En esos tramos el valor es cero y queda una
+  bandera (\texttt{lebac\_\allowbreak{}nobac\_\allowbreak{}sin\_\allowbreak{}serie},
+  \texttt{leliq\_\allowbreak{}notaliq\_\allowbreak{}sin\_\allowbreak{}serie}). El cero refleja que el
+  instrumento no existía en la fecha de inicio de la serie, no un dato
+  imputado.
+\item
+  \textbf{Pases en neto.} El id 1261 es pases pasivos menos pases
+  activos y puede ser negativo. Ocurre en 15 trimestres (2001T2-2004T1 y
+  2024T3-2025T1, bandera \texttt{flag\_\allowbreak{}pases\_\allowbreak{}neto\_\allowbreak{}negativo}). En esos
+  trimestres el BCRA fue acreedor neto y el total reduce la deuda. El
+  FMI informa 0,0 para 2024. Es un desvío declarado.
+\item
+  \textbf{Moneda extranjera.} Id 1259 (LEBAC, LEDIV y BOPREAL en moneda
+  extranjera, valuados en pesos). En 2023-12 y 2024-12 coincide con el
+  id 158 (USD) por el tipo de cambio. Antes de 2002-03 el instrumento no
+  existe y se imputa cero con bandera (24 trimestres,
+  \texttt{flag\_\allowbreak{}letras\_\allowbreak{}fx\_\allowbreak{}sin\_\allowbreak{}serie}).
+\item
+  \textbf{Swap con el Banco Popular de China (PBoC).} No existe una
+  serie pública en la API ni en \texttt{series.xlsm} de la que se pueda
+  leer el saldo activado. Queda omitido desde 2020 (bandera
+  \texttt{flag\_\allowbreak{}swap\_\allowbreak{}pboc\_\allowbreak{}faltante}, 24 trimestres). Su omisión
+  subestima L\_BCRA y, por lo tanto, subestima la deuda neta (sesgo en
+  dirección contraria al del FGS).
+\end{itemize}
 
-El resultado ya no es tan ordenado como en una iteración previa de esta investigación, que empleaba una ventana de 108 observaciones (1999--2025), hoy superada. El resultado primario, el EMBI+ y el TCRM se mantienen I(1) sin ambigüedad, y la brecha del producto I(0), igual que antes. La deuda/PIB, en cambio, se mueve en la dirección opuesta: allí el ADF no rechazaba la raíz unitaria ($p=0.118$) y el KPSS quedaba en el límite superior tabulado, concluyéndose I(1). En la ventana de treinta años, el ADF sí rechaza la raíz unitaria al 5\% ($p=0.042$), lo que por sí solo apuntaría a I(0); pero el KPSS en niveles tampoco rechaza estacionariedad ($p=0.100$), de modo que ambos contrastes, leídos de forma aislada, favorecerían I(0) y no I(1).
+\subsection{Deuda del Tesoro en poder del BCRA (T\_BCRA): valor contable
+y valor nominal}
 
-Esta tesis mantiene, no obstante, el tratamiento I(1) de la deuda/PIB para la estimación VECM/SVAR (Sección \ref{sec:etapa2_johansen}), por dos motivos. Primero, un KPSS en el límite tabulado del 10\% es un no-rechazo débil, no una confirmación robusta de estacionariedad. Segundo, es la lectura que preserva la comparabilidad con el resto del protocolo y con el diagnóstico de la sub-muestra de cobertura real (Sección \ref{sec:estacionariedad}), donde la deuda/PIB también se trata como I(1) pese a un diagnóstico igualmente no concluyente. El DF-GLS de \textcite{elliott1996}, de mayor potencia y aplicado sobre esta misma ventana (Sección \ref{sec:dfgls}), refuerza esta decisión: no rechaza la raíz unitaria en niveles para la deuda/PIB ($-2.65$ frente a un crítico de $-3.01$).
+\textbf{Valor contable.} Fuente: BCRA, \emph{Balance del Banco Central}
+histórico
+(\texttt{https:/\allowbreak{}/\allowbreak{}www.bcra.gob.ar/\allowbreak{}Pdfs/\allowbreak{}PublicacionesEstadisticas/\allowbreak{}balbcrhis.xls}),
+hoja B.C.R.A., columna ``Sector oficial, Total''. Incluye adelantos
+transitorios y títulos públicos en pesos, y Letras Intransferibles y
+títulos en moneda extranjera. Se toma el cierre de trimestre del dato
+mensual y se verifica que el total sea igual a la suma de sus dos
+partes. Es la valuación contable del BCRA, que se aparta del nominal
+desde diciembre de 2019 (ajuste de las Letras Intransferibles) y desde
+mayo de 2024 (costo amortizado).
 
-Este es un punto de tensión genuino, no resuelto por el protocolo actual, y coherente con el resto de los hallazgos de esta ventana (Secciones \ref{sec:resultados_vecm} y \ref{sec:svar_resultados}): una deuda/PIB con un componente de reversión a la media más marcado que antes es consistente tanto con la mayor dificultad para hallar cointegración de largo plazo como con el peso creciente de la inercia propia en la descomposición de varianza del SVAR.
+\textbf{Por qué el nominal.} La deuda bruta del MECON está a valor
+nominal. Si de ella se restan tenencias valuadas de otro modo, el neteo
+mezcla criterios y el resultado no mide ninguna deuda definida. Por eso
+la serie principal sustituye, en la tenencia del BCRA, el componente en
+moneda extranjera del balance por el stock nominal de las Letras
+Intransferibles que publica el MECON.
 
-\section{Evolución del Vector de Solvencia: Deuda y Superávit}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuente.} MECON, Secretaría de Finanzas, \emph{Estado de la
+  Deuda Pública}: hojas A.1.9, A.1.10 o A.1.11 según el año, bloque
+  ``Letras adquiridas por el BCRA'' (miles de dólares), y hoja A.12.3
+  para 2007-2010. Se suma instrumento por instrumento y el script
+  reproduce los totales del bloque (69.286 millones de dólares en 2024).
+  Se convierte con el tipo de cambio de la serie de deuda. Resumen por
+  ancla en
+  \texttt{datos/\allowbreak{}procesados/\allowbreak{}letras\_\allowbreak{}intransferibles\_\allowbreak{}bcra\_\allowbreak{}nominal\_\allowbreak{}anclas.csv}.
+\item
+  \textbf{Cobertura.} Hay planillas de cierre de año para 2007-2009 y
+  2013-2025, y de marzo de 2010. No hay planillas de 2010-12, 2011-12 ni
+  2012-12. Las Letras empiezan el 3 de enero de 2006, de modo que hasta
+  2005T4 no hay dato nominal (40 trimestres) y se conserva el valor
+  contable. Hay dato nominal en 80 de 120 trimestres: 17 con ancla
+  oficial, 32 reconstruidos con las fechas de emisión (las letras son de
+  pago único, por lo que si ningún instrumento cambia entre dos anclas
+  el stock se arma con la fecha de emisión), 7 reconstruidos hacia atrás
+  (2006T1-2007T3) y 24 interpolados linealmente entre anclas con canjes
+  o cambios de monto. Las columnas \texttt{nominal\_\allowbreak{}metodo} y
+  \texttt{flag\_\allowbreak{}nominal\_\allowbreak{}interpolado} lo registran. La interpolación es
+  una aproximación declarada, no un dato.
+\item
+  \textbf{Variante piso.} El componente en moneda extranjera del balance
+  no es igual a las Letras: contiene otros créditos en dólares (hasta
+  2017 y en 2019-2023 el valor de libros supera al nominal). La
+  sustitución estricta empeoraría 2023 (128,2 contra 119,0). Por eso la
+  serie principal es la variante piso: la tenencia nunca baja del valor
+  de libros, y solo se suma el faltante donde el nominal en pesos supera
+  al componente en moneda extranjera del balance. La variante estricta
+  (\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}nominal\_\allowbreak{}pib}) y la de libros
+  (\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}pib}) quedan como series de
+  robustez, junto con la deuda bruta.
+\end{itemize}
 
-El análisis temporal cruzado del ratio Deuda/PIB y el Resultado Primario, presentado en la Figura \ref{fig:dinamica_stocks_flujos}, permite visualizar la inoperancia práctica del teorema lineal de Bohn en la economía argentina.
+\subsection{Depósitos del Tesoro en el BCRA (DEP)}
 
-\begin{figure}[H]
-\centering
-\caption{Dinámica Macrofiscal Agregada e Hitos de Reestructuración Soberana}
-\label{fig:dinamica_stocks_flujos}
-\includegraphics[width=0.95\textwidth]{fig5_1_deuda_resultado_primario.png}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} Promedios anuales del panel trimestral, con ejes duales (deuda: eje izquierdo; resultado primario: eje derecho) y delimitación de los cuatro regímenes macrofiscales sucesivos. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/graficos/generacion\_graficos\_tesis.py}).}
-\end{figure}
+API del BCRA v4.0, id 1264, ``Depósitos del gobierno en el BCRA''. Es
+coherente con la columna ``Sector oficial, Depósitos'' del Balance
+(1.002.754 millones de pesos en 2023-12). Cobertura completa, sin
+interpolaciones. Se incluyen los depósitos en moneda extranjera a la
+valuación del BCRA.
 
-La lectura revela cuatro regímenes sucesivos. Entre 2004 y 2011, la ratio de endeudamiento colapsa desde 110\% hasta un piso de 41.50\%, impulsada por la quita del canje de 2005 y por superávits primarios sostenidos (1.10\%--1.65\% del PIB) financiados por términos de intercambio favorables. Entre 2012 y 2017, el resultado primario se deteriora de manera continua hasta un déficit de 3.00\% del PIB en 2016, mientras la ratio de deuda recupera terreno moderadamente (de 43.00\% a 64.75\%). El tercer régimen, 2018--2020, es el más abrupto: la crisis cambiaria de 2018, el acuerdo \textit{stand-by} con el FMI (cuya ejecución fue objeto de una auditoría posterior de la Auditoría General de la Nación \citep{agn2023}) y la pandemia empujan la deuda hasta 94.50\% del PIB en apenas dos años. Finalmente, entre 2021 y 2025, el resultado primario retorna a terreno superavitario (1.58\% en 2024, 0.98\% en 2025) y la ratio de deuda desciende hasta 71.50\% del PIB.
+\subsection{Identidad verificada}
 
-Ninguno de estos cuatro regímenes se explica exclusivamente por el esfuerzo fiscal corriente: la descompresión 2004--2011 combina quita nominal, crecimiento del denominador y términos de intercambio favorables con auge de materias primas; el salto 2018--2020 combina devaluación real, prima de riesgo creciente y contracción del producto. Esta observación constituye la motivación empírica directa para instrumentar el riesgo soberano en el Capítulo \ref{ch:resultados}.
+Con los datos del CSV,
+\texttt{bruta\ −\ tenencia\ BCRA\ +\ pasivos\ BCRA\ −\ depósitos\ =\ deuda\ neta}
+se cumple al cuarto decimal en 2023 (119,03) y en 2024 (61,11 con la
+tenencia nominal piso; 68,31 con valor de libros). La identidad que el
+FMI usa en el Cuadro 2 (línea 6 = 2 + 4 − 5) también se cumple con sus
+cifras: 92,9 + 18,4 − 0,5 = 110,8 y 51,4 + 2,2 − 2,1 = 51,5.
 
-\section{Efecto Hoja de Balance: Tipo de Cambio Real y Variación de Deuda}
-\label{sec:hoja_balance}
+\section{Resultado primario}
 
-Como advierte la literatura sobre economías bimonetarias \citep{sanches2019}, cuando una porción sustancial del pasivo público está denominada en moneda extranjera, una devaluación del tipo de cambio real dispara mecánicamente el numerador de la ratio Deuda/PIB, independientemente del resultado primario contemporáneo. La Figura \ref{fig:hoja_balance} contrasta el nivel anual del TCRM con la variación interanual de la ratio de deuda.
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuente.} MECON, Secretaría de Hacienda, Subsecretaría de
+  Programación Macroeconómica, ``Esquema
+  Ahorro-Inversión-Financiamiento. Sector Público Nacional. Base Caja''
+  (datos.gob.ar, dataset 379). Es una serie mensual desde 1993, en pesos
+  corrientes, publicada en tres tramos metodológicos (1993-2006,
+  2007-2014 y desde 2015). Los archivos crudos están en
+  \texttt{datos/\allowbreak{}crudos/\allowbreak{}resultado\_\allowbreak{}primario/\allowbreak{}} y el script es
+  \texttt{construir\_\allowbreak{}resultado\_\allowbreak{}primario\_\allowbreak{}1996\_\allowbreak{}2025.py}. Como hay dato
+  mensual para todo el período, \textbf{no se desagrega con Denton ni se
+  aplica coeficiente de enlace}: cada trimestre es la suma de sus tres
+  meses, y se exige que estén los tres (no hay trimestres faltantes).
+\item
+  \textbf{Rentas de la propiedad.} La serie principal incluye las rentas
+  de la propiedad, que es la definición de titular del MECON. Esas
+  rentas agregan las utilidades del BCRA, las rentas del FGS y los
+  intereses cobrados por organismos públicos, y la API no desglosa la
+  transferencia del BCRA. Se calcula además una variante sin rentas
+  (\texttt{pb\_\allowbreak{}pib\_\allowbreak{}sin\_\allowbreak{}rentas}), conservadora porque excluye más que
+  el FMI. Las rentas totales fueron de 0,3 a 0,7 puntos del PIB en
+  1996-2008, de 1,3 a 2,6 en 2009-2014 y de 0,3 a 1,3 en 2015-2025.
+\item
+  \textbf{Medida que entra al modelo.} \texttt{pb\_\allowbreak{}pib\_\allowbreak{}trim} = 100 × 4
+  × (resultado primario del trimestre) / \texttt{pib\_\allowbreak{}4t\_\allowbreak{}mm}: el flujo
+  trimestral anualizado sobre el PIB nominal de cuatro trimestres. No se
+  usa la suma móvil de cuatro trimestres (\texttt{pb\_\allowbreak{}pib}) porque, al
+  superponer ventanas, induce una autocorrelación artificial de tipo
+  MA(3): su autocorrelación de orden 1 es 0,965, contra 0,649 de
+  \texttt{pb\_\allowbreak{}pib\_\allowbreak{}trim}. La contrapartida es que el flujo trimestral
+  conserva estacionalidad (autocorrelación de orden 4 de 0,629), que el
+  sistema absorbe con tres dummies trimestrales (Q1 a Q3). La suma móvil
+  \texttt{pb\_\allowbreak{}pib} se mantiene como medida comparable en base anual, y
+  es la que se contrasta con el FMI en 5.8.
+\item
+  \textbf{Quiebres de metodología.} Los empalmes de 2006/2007 y
+  2014/2015 no tienen período de solapamiento en la API. En las filas de
+  empalme no se observa un salto anómalo (2006T4: 3,24 y 2007T1: 3,12;
+  2014T4: −0,84 y 2015T1: −1,63), pero no hay una prueba formal. El CSV
+  trae la columna \texttt{metodologia} (44, 32 y 44 trimestres por
+  tramo). Entre 1993 y 2006 las privatizaciones no figuran en el
+  primario.
+\item
+  \textbf{Perímetro.} Es el sector público nacional consolidado
+  (administración nacional, organismos descentralizados, seguridad
+  social, fondos fiduciarios y empresas), más amplio que el gobierno
+  federal del FMI. El control cruzado contra el IMIG (desde 2016) da
+  diferencia nula, pero IMIG y esquema AIF son la misma compilación, de
+  modo que no es un control independiente.
+\item
+  \textbf{Comparación con la serie anterior.} Contra la tabla escrita a
+  mano (2004-2025) y el Denton del Compendio (1996-2003), la correlación
+  es 0,89 en 2004-2025 y 0,33 en 1996-2003, con errores absolutos medios
+  de 1,29 y 1,16 puntos. La serie anterior de 1996-2003 era una
+  interpolación de datos anuales y no sirve como referencia de nivel.
+\end{itemize}
 
-\begin{figure}[H]
-\centering
-\caption{Efecto Hoja de Balance: Tipo de Cambio Real vs. Variación Anual de Deuda}
-\label{fig:hoja_balance}
-\begin{tikzpicture}
-\begin{axis} [
-    xlabel={Tipo de Cambio Real Multilateral (índice)},
-    ylabel={Variación Interanual de la Ratio Deuda/PIB (p.p.)},
-    xmin=1.10, xmax=2.45,
-    ymin=-42, ymax=17,
-    grid=both,
-    grid style={dashed, gray!30},
-    title style={font=\bfseries\small},
-    label style={font=\small},
-    tick label style={font=\scriptsize}
-]
-\addplot[only marks, mark=triangle*, color=teal, mark size=3pt] coordinates {
-    (2.33,-39.2) (2.39,-11.0) (2.32,-6.0) (2.11,-3.5) (2.08,0.5) (1.88,-4.5)
-    (1.76,-5.0) (1.51,1.5) (1.45,2.0) (1.53,3.0) (1.20,4.5) (1.36,6.5)
-    (1.27,5.8) (1.58,13.2) (1.75,7.0) (1.70,9.5) (1.64,-12.2) (1.38,-2.5)
-    (1.40,4.0) (1.37,-5.0) (1.29,-7.2)
-};
-\addplot[domain=1.15:2.4, red, thick] {-15.8*x + 24.71};
-\end{axis}
-\end{tikzpicture}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} Impacto de las variaciones del tipo de cambio real sobre el stock de pasivos. Recta de ajuste MCO simple (referencial). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (BCRA, INDEC).}
-\end{figure}
+\section{PIB real y crecimiento}
 
-El primer punto (TCRM promedio 2005 $=2.33$, $\Delta d = -39.2$ p.p.) corresponde a la quita nominal del canje de deuda de 2005, no a un valor atípico de medición: se conserva en el gráfico por ser información genuina, y explica por sí solo buena parte de la pendiente negativa del ajuste MCO de nivel anual. Este resultado no debe confundirse con el mecanismo de hoja de balance propiamente dicho, que opera sobre \textit{variaciones} del tipo de cambio, no sobre su nivel. En términos de variaciones interperiódicas trimestrales, la correlación empírica entre la primera diferencia del TCRM ($\Delta TCRM_t$) y la variación de la ratio Deuda/PIB ($\Delta d_t$) alcanza $r=0.14$, positiva pero débil: consistente en signo con el mecanismo de hoja de balance, pero muy lejos de una relación determinística. Esta correlación es sensiblemente más débil que la calculada sobre el TCRM de contingencia utilizado hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($r=0.42$); la brecha ilustra cuánto podía distorsionar una relación bivariada simple el uso de una serie de contingencia suavizada en lugar de la serie real, y refuerza que la variación del endeudamiento obedece a una combinación de factores (resultado primario, crecimiento, tipo de cambio y ajustes stock-flujo), y no a un único indicador aislado.
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuente 2004T1-2025T4.} INDEC, PIB a precios constantes de 2004
+  (serie 4.2\_OGP\_2004\_T\_17, Oferta y Demanda Globales,
+  datos.gob.ar), en la misma unidad que \texttt{PIB\_\allowbreak{}real} de la base.
+\item
+  \textbf{Fuente 1996T1-2003T4.} INDEC, base 1993 (serie
+  2.2\_OGP\_1993\_T\_17, millones de pesos de 1993), empalmada a la base
+  2004 con un coeficiente de enlace k = 1,751, la media de 2004 de la
+  razón entre ambas bases. Script
+  \texttt{construir\_\allowbreak{}pib\_\allowbreak{}real\_\allowbreak{}empalme\_\allowbreak{}indec\_\allowbreak{}1996\_\allowbreak{}2003.py}; salida
+  \texttt{datos/\allowbreak{}procesados/\allowbreak{}pib\_\allowbreak{}real\_\allowbreak{}empalme\_\allowbreak{}indec\_\allowbreak{}1996\_\allowbreak{}2003.csv}.
+  Reemplaza al empalme anterior, que encadenaba tasas anuales tipeadas y
+  las desagregaba con Denton.
+\item
+  \textbf{Límite del enlace.} La razón entre bases varía entre 1,46 y
+  1,85 en el solapamiento 2004-2013 por las distintas ponderaciones de
+  precios, de modo que el nivel anterior a 2004 depende de haber elegido
+  2004 como año de enlace. Las tasas de crecimiento anteriores a 2004,
+  que son lo que entra al modelo, no dependen de esa elección.
+\item
+  \textbf{Estacionalidad.} La serie conserva la estacionalidad de INDEC,
+  que ya no está suavizada. Por ese motivo el nivel trimestral de
+  1996-2003 difiere de la versión anterior en hasta 9,8 \% (2002T1) y
+  3,5 \% en promedio. El sistema la absorbe con las dummies
+  trimestrales, igual que en el resultado primario. Las tasas anuales de
+  la versión anterior eran correctas salvo en 2000 (−0,5 \% contra −0,79
+  \%).
+\item
+  \textbf{Transformación.} El crecimiento que entra al sistema es
+  \texttt{crec\ =\ 100\ ×\ Δln(PIB\ real)}, trimestral, que aparece en
+  la identidad de la deuda (Capítulo 4, sección 4.2). Pierde la primera
+  observación, así que tiene 119 datos. El salto entre 2003T4 y 2004T1
+  (−2,1 \%) es el efecto estacional del cambio de trimestre y no un
+  artefacto del empalme.
+\end{itemize}
 
-\section{Protocolo de Estacionariedad y Pruebas de Raíz Unitaria}
-\label{sec:estacionariedad}
+\section{Variables financieras}
 
-Para evitar el riesgo de regresiones espurias, el protocolo evalúa el orden de integración de cada serie mediante dos contrastes complementarios: el test ADF (hipótesis nula: raíz unitaria) y el test KPSS (hipótesis nula: estacionariedad). La complementariedad de ambos, que testean hipótesis nulas opuestas, permite identificar con mayor robustez los casos ambiguos, especialmente relevantes en muestras de tamaño moderado como la sub-muestra de cobertura real aquí utilizada ($n=88$), necesaria para incluir al CER dentro de un panel comparable (Sección \ref{sec:empalme} del Capítulo \ref{ch:metodologia}).
+\subsection{EMBI+ (riesgo soberano)}
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:estacionariedad} Pruebas de raíz unitaria e integración de las series (niveles y primeras diferencias).}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Variable} & \textbf{ADF $p$ (nivel)} & \textbf{KPSS $p$ (nivel)} & \textbf{ADF $p$ (dif.)} & \textbf{KPSS $p$ (dif.)} & \textbf{Orden} \\
-\midrule
-Deuda / PIB & 0.113 & 0.041 & 0.000 & 0.035 & Ambiguo / I(1) \\
-Result. Primario / PIB & 0.301 & 0.023 & 0.000 & 0.100 & I(1) \\
-Brecha del Producto & 0.001 & 0.100 & 0.001 & 0.100 & I(0) \\
-EMBI+ & 0.006 & 0.100 & 0.000 & 0.100 & I(0) \\
-TCRM & 0.511 & 0.010 & 0.000 & 0.100 & I(1) \\
-CER & 0.999 & 0.016 & 1.000 & 0.020 & Ambiguo / I(1) \\
-\bottomrule
-\end{tabular}%
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Definición.} Diferencial de rendimiento de los bonos soberanos
+  argentinos en dólares sobre los bonos del Tesoro de Estados Unidos, en
+  puntos básicos, promedio trimestral.
+\item
+  \textbf{1999T1-2025T4.} Serie diaria de riesgo país de Ámbito
+  Financiero
+  (\texttt{https:/\allowbreak{}/\allowbreak{}mercados.ambito.com/\allowbreak{}/\allowbreak{}riesgopais/\allowbreak{}historico/\allowbreak{}...}), que
+  reproduce el EMBI+ y el EMBI Global de J.P. Morgan. Archivo
+  \texttt{datos/\allowbreak{}embi\_\allowbreak{}real\_\allowbreak{}ambito\_\allowbreak{}1999\_\allowbreak{}2025.csv}. Se promedia por
+  trimestre.
+\item
+  \textbf{1996T1-1998T4.} Se empalma el \emph{stripped spread} de los
+  bonos Brady (1994-1997) con el EMBI+ oficial desde 1998. En el punto
+  de unión se aplica una corrección proporcional de sesgo, k =
+  540,0/620,0 = 0,8710 (media de 1998T1 del EMBI+ sobre media de 1997T4
+  del spread Brady), para evitar una discontinuidad espuria de nivel. Es
+  una corrección multiplicativa y preserva la estructura de varianza
+  condicional. El empalme está en
+  \texttt{fase22\_\allowbreak{}construccion\_\allowbreak{}spread\_\allowbreak{}1983\_\allowbreak{}2025.py} y la serie
+  resultante en
+  \texttt{datos/\allowbreak{}procesados/\allowbreak{}spread\_\allowbreak{}soberano\_\allowbreak{}historico\_\allowbreak{}1983\_\allowbreak{}2025.csv}
+  (columna \texttt{Spread\_\allowbreak{}Empalmado\_\allowbreak{}pb}). Desde 1999T1 es idéntica
+  punto a punto a la serie de Ámbito.
+\item
+  \textbf{Limitación.} El spread Brady no es exactamente el EMBI+
+  (distinto universo de instrumentos). El factor k ajusta el nivel pero
+  no el comportamiento de corto plazo. Son 12 de 120 trimestres.
+\end{itemize}
+
+\subsection{Tipo de cambio real multilateral (TCRM)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuente.} BCRA, Índice de Tipo de Cambio Real Multilateral
+  (\texttt{datos/\allowbreak{}crudos/\allowbreak{}ITCRMSerie.xlsx}, hoja de promedios mensuales,
+  base 17-12-2015 = 100).
+\item
+  \textbf{Transformación.} Se divide el índice mensual por su valor de
+  diciembre de 2001 (69,213) y se promedia por trimestre. La serie queda
+  con diciembre de 2001 = 1. Recalculado desde el archivo crudo, el
+  resultado coincide con \texttt{tcrm\_\allowbreak{}real\_\allowbreak{}bcra\_\allowbreak{}1997\_\allowbreak{}2025.csv} con
+  una diferencia máxima de 4,4 × 10⁻¹⁶. Esa base se elige porque deja el
+  índice en torno de 1 y no altera su dinámica.
+\item
+  \textbf{Cobertura.} El BCRA publica el índice desde enero de 1997. Los
+  cuatro trimestres de 1996 (3,3 \% de la muestra) se retropolan con una
+  regresión de ln(TCRM) sobre una tendencia lineal en 1997T1-1999T4 (12
+  observaciones), proyectada hacia atrás, y se marcan con
+  \texttt{es\_\allowbreak{}interpolado\_\allowbreak{}tcrm\ =\ 1}. Es la única variable del sistema
+  en que una proyección reemplaza a una fuente primaria. La alternativa,
+  perder un año de muestra, se considera peor que una aproximación
+  declarada. Los resultados centrales se verifican reestimando desde
+  1997 (Capítulo 6).
+\end{itemize}
+
+\subsection{Tasa de política de la Fed, con tasa sombra de Wu y Xia}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fuentes.} FEDFUNDS (tasa efectiva de fondos federales,
+  mensual), FRED (\texttt{https:/\allowbreak{}/\allowbreak{}fred.stlouisfed.org/\allowbreak{}series/\allowbreak{}FEDFUNDS}).
+  Tasa sombra de Wu y Xia (2016), mensual, Federal Reserve Bank of
+  Atlanta
+  (\texttt{https:/\allowbreak{}/\allowbreak{}www.atlantafed.org/\allowbreak{}cqer/\allowbreak{}research/\allowbreak{}wu-xia-shadow-federal-funds-rate}).
+  Copias en \texttt{datos/\allowbreak{}crudos/\allowbreak{}tasa\_\allowbreak{}fed/\allowbreak{}}; script
+  \texttt{ingesta\_\allowbreak{}tasa\_\allowbreak{}fed\_\allowbreak{}1996\_\allowbreak{}2025.py}; salida
+  \texttt{tasa\_\allowbreak{}fed\_\allowbreak{}trimestral\_\allowbreak{}1996\_\allowbreak{}2025.csv}.
+\item
+  \textbf{Construcción.} Cada serie mensual se promedia por trimestre.
+  La variable \texttt{tasa\_\allowbreak{}politica\_\allowbreak{}fed} toma la tasa sombra cuando el
+  promedio trimestral de FEDFUNDS es menor que 0,25 \% y están los tres
+  meses de la sombra. En los demás casos usa FEDFUNDS. El umbral 0,25 \%
+  es el techo del rango objetivo en el piso cero. Resultado:
+  \texttt{fedfunds} en 84 trimestres, \texttt{shadow\_\allowbreak{}wu\_\allowbreak{}xia} en 35
+  (2009T1-2015T4 y 2020T2-2021T4) y \texttt{fedfunds\_\allowbreak{}zlb\_\allowbreak{}sin\_\allowbreak{}shadow}
+  en uno.
+\item
+  \textbf{Por qué la sombra.} En el piso cero la tasa efectiva deja de
+  reflejar la orientación de la política y su variación subestima las
+  medidas no convencionales. La sombra recupera esa orientación.
+\item
+  \textbf{Empalme en 2022T1.} La hoja de Wu y Xia termina en febrero de
+  2022. 2022T1 está en el piso cero (FEDFUNDS = 0,12 \%) pero solo tiene
+  dos meses de sombra, así que se usa FEDFUNDS y se marca. El salto
+  entre 2021T4 (−1,57 \%, sombra) y 2022T1 (0,12 \%) es de unos 1,7
+  puntos y es un artefacto de la definición. Entra una vez en la primera
+  diferencia. Los trimestres 2022T2-2025T4 usan FEDFUNDS.
+\item
+  \textbf{Uso.} En el modelo entra como variación trimestral (ΔFed), con
+  una media de −0,012 pp y un desvío estándar de 0,505 pp (119
+  variaciones). Ese desvío es el tamaño del shock del Capítulo 4. El
+  ciclo 2022-2023 acumula 6,90 pp con la sombra de base y 5,25 pp medido
+  solo con FEDFUNDS.
+\end{itemize}
+
+\subsection{VIX}
+
+Índice de volatilidad implícita del CBOE (\^{}VIX), cierre diario de
+Yahoo Finance descargado con \texttt{yfinance}
+(\texttt{ingesta\_\allowbreak{}instrumentos\_\allowbreak{}1996\_\allowbreak{}2025.py}), promedio trimestral.
+Tiene cobertura real desde 1996, sin faltantes (120 observaciones).
+Entra como exógena en nivel (Adler y Sosa, 2013, citados en el Capítulo
+4).
+
+\section{Variables que figuran en la base pero no entran en el sistema}
+
+El CER (existe desde 2002), la brecha del producto (filtro
+Hodrick-Prescott, λ = 1600) y los instrumentos de las pruebas de
+variables instrumentales no forman parte del SVARX principal. Se
+documentan en \texttt{datos/\allowbreak{}codebook.md}.
+
+\section{Comparación con cifras oficiales e independientes}
+
+Esta sección calcula, desde los CSV del repositorio, cada cifra propia y
+la compara con el FMI (2025), \emph{Country Report} No.~25/95 (Annex II,
+Table 2 para la deuda; Table 3b para el resultado primario; datos en
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}escenario\_\allowbreak{}base\_\allowbreak{}fmi\_\allowbreak{}cr2595.csv}). El FMI
+publica el cuadro de deuda solo para 2023-2026.
+
+\subsection{Tabla de control, deuda (\% del PIB, cierre de diciembre)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Concepto
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2023 propio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2023 FMI
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dif.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2024 propio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2024 FMI
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dif.
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1. Deuda federal bruta & 153,5 & 155,4 & −1,9 & 82,1 & 85,3 & −3,2 \\
+3. Deuda del Tesoro en poder del sector público & 48,6 (solo BCRA,
+nominal piso) & 62,5 (BCRA y FGS) & −13,9 & 20,4 (solo BCRA, nominal
+piso) & 33,9 (BCRA y FGS) & −13,5 \\
+4. Pasivos del BCRA, total & 14,6 & 18,4 & −3,8 & 1,6 & 2,2 & −0,6 \\
+en moneda local & 13,3 & 16,2 & −2,9 & −0,06 & 0,0 & −0,1 \\
+en moneda extranjera (sin swap) & 1,3 & 2,1 & −0,8 & 1,6 & 2,1 & −0,5 \\
+5. Depósitos del Tesoro en el BCRA & 0,52 & 0,5 & 0,0 & 2,10 & 2,1 &
+0,0 \\
+6. Deuda neta consolidada (nominal piso) & \textbf{119,0} &
+\textbf{110,8} & \textbf{+8,2} & \textbf{61,1} & \textbf{51,5} &
+\textbf{+9,6} \\
+\emph{Memo: deuda neta a valor de libros} & 119,0 & 110,8 & +8,2 & 68,3
+& 51,5 & +16,8 \\
+\end{longtable}
 }
-\begin{flushleft}
-\footnotesize \textit{Nota.} Elaboración propia. Test ADF bajo hipótesis nula de raíz unitaria; test KPSS bajo hipótesis nula de estacionariedad. p-valores reportados.
-\end{flushleft}
-\end{table}
 
-Los resultados exhiben un panel de integración mixta, con implicancias metodológicas directas. La brecha del producto y el EMBI+ son estacionarias en niveles, I(0): oscilan en torno a una media constante, coherente con su naturaleza de variables cíclicas. El Resultado Primario y el TCRM son I(1): el ADF no rechaza la raíz unitaria en niveles mientras el KPSS rechaza estacionariedad; ambas se estabilizan tras la primera diferencia. Los casos de la Deuda/PIB y del CER producen un diagnóstico ambiguo, síntoma habitual de series estacionarias en torno a una tendencia con quiebre estructural (\textit{trend-stationary with a structural break}), que la Sección \ref{sec:zivot_andrews} somete a contraste formal.
+Fuentes: columnas propias en
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}nominal\_\allowbreak{}1996\_\allowbreak{}2025.csv} (diciembre de
+cada año); columnas FMI en \texttt{escenario\_\allowbreak{}base\_\allowbreak{}fmi\_\allowbreak{}cr2595.csv}
+(variables \texttt{a2\_\allowbreak{}*}). El control está además en
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}nominal\_\allowbreak{}1996\_\allowbreak{}2025\_\allowbreak{}control\_\allowbreak{}fmi.csv}.
+En dólares, el FMI publica 367,9 y 478,7 mil millones para la deuda
+bruta federal y 262,2 y 289,0 para la deuda neta consolidada (2023 y
+2024).
 
-Como evidencia visual complementaria, la Figura \ref{fig:acf_pacf} presenta los correlogramas ACF y PACF de las cuatro series núcleo. El decaimiento lento de la ACF del Resultado Primario y de la ratio Deuda/PIB, frente al corte abrupto tras el primer rezago de la Brecha del Producto y del EMBI+, ofrece una confirmación gráfica directa de la distinción entre series persistentes (I(1)) y de reversión rápida a la media (I(0)).
+\textbf{Lectura.} La deuda bruta, los depósitos y los pasivos en moneda
+local replican al FMI dentro de 3 puntos, y los depósitos coinciden. La
+diferencia en la bruta se debe a que el FMI agrega intereses
+capitalizados, \emph{holdouts} y reclamos por el cupón PIB (nota 1 del
+cuadro), que no figuran en los informes del MECON, y a la versión de PIB
+de su informe. La diferencia de los pasivos del BCRA en 2023 es
+compatible con la omisión del swap con el PBoC y de otros instrumentos,
+aunque no se pudo verificar por falta de una serie. La valuación nominal
+no cambia 2023, porque en ese año el valor de libros ya supera al
+nominal y la variante piso conserva el de libros. En 2024 reduce la
+deuda neta de 68,3 a 61,1 y la brecha con el FMI, de 16,8 a 9,6 puntos.
 
-\begin{figure}[H]
-\centering
-\caption{Funciones de Autocorrelación Simple (ACF) y Parcial (PACF) de las Series Núcleo}
-\label{fig:acf_pacf}
-\includegraphics[width=0.85\textwidth]{figura_5_5_acf_pacf.png}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} ACF (izquierda) y PACF (derecha, método Yule-Walker modificado) para 20 rezagos, con bandas de significatividad al 95\%. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase7\_diagnosticos\_robustez.py}).}
-\end{figure}
+\subsection{Descomposición de la diferencia en la deuda neta}
 
-\subsection{Contraste de Zivot-Andrews con Quiebre Estructural Endógeno}
-\label{sec:zivot_andrews}
+Como la deuda neta es B − T + L − DEP, la diferencia propio menos FMI es
+la suma de las diferencias de cada línea.
 
-A diferencia de los contrastes con quiebre exógeno (Chow, Perron), el algoritmo de Zivot-Andrews no requiere especificar \textit{a priori} la fecha de ruptura. El procedimiento itera sobre cada fecha candidata $T_B$ dentro de una ventana de recorte del 15\% en cada extremo, estimando para cada una la regresión MCO del Modelo C (quiebre simultáneo en intercepto y pendiente):
-\[
-\Delta d_t = c + \alpha\, d_{t-1} + \beta t + \theta\, DU_t(T_B) + \gamma\, DT_t(T_B) + \sum_{j=1}^{4} \phi_j \Delta d_{t-j} + \varepsilon_t
-\]
-donde $DU_t(T_B)=\mathbb{I}(t>T_B)$ y $DT_t(T_B)=(t-T_B)\cdot\mathbb{I}(t>T_B)$, y selecciona el $T_B$ que minimiza el estadístico $t$ asociado a $\alpha$. El rezago aumentado se fijó en $k=4$ trimestres.
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Componente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2023 (pp)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2024 (pp)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Deuda bruta & −1,9 & −3,2 \\
+Menos tenencias intra-públicas (diferencia de signo cambiado) & +13,9 &
++13,5 \\
+Pasivos del BCRA & −3,8 & −0,6 \\
+Menos depósitos del Tesoro & 0,0 & 0,0 \\
+\textbf{Diferencia en la deuda neta} & \textbf{+8,2} & \textbf{+9,6} \\
+\end{longtable}
+}
 
-Aplicado a la ratio Deuda/PIB sobre la ventana (1996T1--2025T4, $n=120$), el algoritmo localiza el quiebre óptimo en 2004T2. El estadístico $t$ obtenido ($-4.50$) tampoco rechaza la hipótesis nula de raíz unitaria bajo ningún umbral crítico asintótico del Modelo C ($-5.58$ al 1\%, $-5.07$ al 5\%, $-4.83$ al 10\%), aunque se acerca sensiblemente más al crítico del 10\% que el resultado obtenido en una estimación previa sobre la sub-muestra de 88 observaciones ($t=-2.83$, quiebre en 2018T2). La ratio de deuda argentina se comporta, en consecuencia, como una serie genuinamente integrada de orden uno incluso permitiendo el quiebre más favorable a la alternativa de estacionariedad dentro de los treinta años de muestra. La restricción de un único quiebre es, además, insuficiente para una serie atravesada por múltiples reestructuraciones (2005, 2010, 2020) y episodios de interrupción repentina de capitales (\textit{sudden stop}, 2018), a los que ahora se suma la propia crisis de 2001--2002 dentro de la ventana: la Sección \ref{sec:quiebres_estructurales} extiende el análisis a un marco de quiebres múltiples, y la implicancia metodológica inmediata motiva la batería de pruebas de Johansen desarrolladas en el Capítulo \ref{ch:resultados}.
+Las filas de 2024 no suman exactamente por redondeo. El exceso de
+nuestra deuda neta sobre la del FMI proviene del neteo incompleto de las
+tenencias intra-públicas, que compensa con creces la bruta menor y los
+pasivos menores.
 
-\subsection{Deuda Consolidada: Incorporación de los Pasivos Remunerados del BCRA}
-\label{sec:deuda_consolidada}
+\subsection{Resultado primario y otras comparaciones}
 
-La delimitación del Capítulo \ref{ch:metodologia} circunscribe $d_t$ al SPNF, excluyendo la absorción monetaria del BCRA: LEBAC/NOBAC (2002--2018), LELIQ/NOTALIQ (2018--2024) y la posición neta de pases. El devengamiento de intereses de estos instrumentos constituye un déficit cuasi-fiscal ausente del resultado primario del Tesoro, estimado en el orden del 9\%--10\% del PIB en su pico reciente. Como extensión de robustez, se construyó una serie de pasivos remunerados del BCRA a partir de las series oficiales v4.0 del BCRA (idVariable 1258, 1260 y 1261) y del PIB nominal trimestral de INDEC, sin neteo adicional entre ambos stocks.
+El FMI (2025, Table 3b) informa el resultado primario del gobierno
+federal sin las transferencias de utilidades del BCRA (0,9 \% del PIB en
+2023 y 0,0 \% en 2024, nota 9). La comparación usa la medida anual
+comparable \texttt{pb\_\allowbreak{}pib} (suma de cuatro trimestres sobre PIB de
+cuatro trimestres, cierre de diciembre), no la \texttt{pb\_\allowbreak{}pib\_\allowbreak{}trim}
+que entra al modelo.
 
-La brecha promedio entre ambas definiciones es de 5.5 puntos porcentuales del PIB, con un pico de 10.6\% en el primer trimestre de 2018 y una caída a valores prácticamente nulos desde mediados de 2024, cuando el Tesoro asumió el rol de esterilizador monetario mediante Letras Fiscales de Liquidez (LEFI). La Figura \ref{fig:deuda_consolidada} contrasta ambas series.
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Resultado primario (\% PIB)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2023
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2024
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Propio, con rentas (serie principal) & −2,66 & 1,78 \\
+Propio, sin rentas (cota conservadora) & −3,67 & 1,01 \\
+Propio con rentas menos transferencia BCRA del FMI & −3,56 & 1,78 \\
+Serie anterior (tabla escrita a mano) & −2,90 & 1,40 \\
+FMI (2025), gobierno federal sin transferencias del BCRA & −2,8 & 1,8 \\
+\end{longtable}
+}
 
-\begin{figure}[H]
-\centering
-\caption{Deuda Pública: SPNF vs. Consolidada con Pasivos Remunerados del BCRA}
-\label{fig:deuda_consolidada}
-\includegraphics[width=0.95\textwidth]{figura_8_1_deuda_consolidada.png}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} Elaboración propia en base a series oficiales BCRA v4.0 y PIB nominal INDEC (\texttt{codigo/ingesta\_datos/ingesta\_bcra\_pasivos.py}, \texttt{codigo/modelos/fase8\_deuda\_consolidada.py}).}
-\end{figure}
+Fuente:
+\texttt{datos/\allowbreak{}procesados/\allowbreak{}resultado\_\allowbreak{}primario\_\allowbreak{}1996\_\allowbreak{}2025\_\allowbreak{}control.csv}.
+La serie propia con rentas queda a 0,14 puntos del FMI en 2023 y a 0,02
+en 2024, y los signos coinciden. Esa cercanía debe leerse con cuidado:
+el agregado propio es el sector público nacional con todas las rentas, y
+el del FMI es el gobierno federal sin las transferencias del BCRA, de
+modo que parte de la coincidencia puede ser casual. En 2023, descontando
+la transferencia del BCRA que informa el FMI, la serie propia daría
+−3,56, a 0,76 puntos de la cifra del FMI. La serie propia ya no es una
+tabla escrita a mano, pero el control contra el FMI sigue siendo de
+orden de magnitud por el cambio de perímetro y por los quiebres de
+metodología de 2006/2007 y 2014/2015 (sección 5.4).
 
-La serie consolidada conserva el orden de integración de la serie SPNF (ADF no rechaza en niveles, $p=0.169$; rechaza en primera diferencia, $p<0.001$; KPSS rechaza estacionariedad en niveles, $p=0.038$), coherente con I(1). La Sección \ref{sec:quiebres_estructurales} evalúa si la cronología de quiebres estructurales se modifica al incorporar esta capa cuasi-fiscal.
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Concepto
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Propio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Contraste
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fuente del contraste
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Crecimiento real del PIB 2023 (media anual del índice) & −1,9 \% & −1,6
+\% & FMI (2025), Cuadro 1 \\
+Crecimiento real del PIB 2024 & −1,4 \% & −1,7 \% & FMI (2025), Cuadro
+1 \\
+Cociente USD/ARS al 31/12/2023 & 808,45 & 808,45 & MECON, hoja A.1.1
+(informe 2023) \\
+Pasivos del BCRA 2023, con PIB anualizado del cuarto trimestre & 9,05 \%
+& 13,3 \% con el denominador adoptado &
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}1996\_\allowbreak{}2025\_\allowbreak{}control\_\allowbreak{}fmi.csv} \\
+\end{longtable}
+}
 
-\subsection{Quiebres Estructurales Múltiples de Bai-Perron}
-\label{sec:quiebres_estructurales}
+Las diferencias de crecimiento (0,3 puntos) son compatibles con
+revisiones de INDEC posteriores al informe del FMI. Ambos años
+pertenecen al tramo con base 2004 directa, de modo que el empalme de
+1996-2003 no interviene.
 
-El test de Zivot-Andrews impone la restricción de un único quiebre, insuficiente para una serie atravesada por las reestructuraciones soberanas de 2005, 2010 y 2020 y los episodios de \textit{sudden stop}. \textcite{bai2003} resuelven esta limitación estimando de manera consistente el número y la ubicación de quiebres múltiples sin conocimiento \textit{a priori} de sus fechas, mediante programación dinámica sobre la suma de cuadrados residuales de las particiones factibles, con selección del número de quiebres por el criterio BIC \citep{yao1988}.
+\subsection{Control del T\_BCRA contra el stock nominal del MECON}
 
-El criterio BIC selecciona $m^*=3$ quiebres para la deuda SPNF sobre la ventana completa (1996T1--2025T4, $n=120$): 2001T3, 2006T1 y 2017T3. Las medias estimadas por segmento son 34.68\% (1996T1--2001T3, $n=23$), 106.85\% (2001T4--2006T1, $n=18$), 50.72\% (2006T2--2017T3, $n=46$) y 81.24\% (2017T4--2025T4, $n=33$) del PIB: al incorporar el tramo 1996--2003, el algoritmo detecta por primera vez el quiebre de la crisis de 2001, invisible para una ventana que arrancara en 2004. Para la deuda consolidada con pasivos del BCRA, cuya cobertura permanece acotada a la sub-muestra de fuente primaria real (2004T1--2025T4, $n=88$, Sección \ref{sec:deuda_consolidada}) por no existir una serie de pasivos remunerados del BCRA verificable antes de 2004, el criterio selecciona $m^*=2$ quiebres en 2007T2 y 2016T4, con medias de 81.8\%, 53.5\% y 86.4\%, una cronología distinta a la de la deuda SPNF sola, coherente con que el peso cuasi-fiscal del BCRA introduce su propia dinámica de régimen.
+El Informe de Deuda del MECON publica, en la hoja A.1.9, el valor
+nominal de las Letras adquiridas por el BCRA (en miles de dólares). Es
+el insumo de la serie nominal de 5.3.4.
 
-\begin{figure}[H]
-\centering
-\caption{Quiebres Estructurales Múltiples de Bai-Perron (Selección por BIC)}
-\label{fig:bai_perron}
-\includegraphics[width=0.95\textwidth]{figura_9_1_bai_perron.png}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} Deuda SPNF vs. deuda consolidada SPNF+BCRA, con quiebres óptimos de Bai-Perron ($m^*=3$ y $m^*=2$ respectivamente) y medias de segmento superpuestas. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase9\_bai\_perron.py}).}
-\end{figure}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Concepto
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+31/12/2023
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+31/12/2024
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Letras Intransferibles, nominal MECON (miles de millones de USD) & 67,2
+& 69,3 \\
+Tenencia del BCRA en moneda extranjera, valor contable (miles de
+millones de USD) & 89,2 & 28,6 \\
+Tenencia del BCRA, \% del PIB: valor de libros & 48,6 & 13,2 \\
+Tenencia del BCRA, \% del PIB: nominal piso & 48,6 & 20,4 \\
+\end{longtable}
+}
 
-Como evidencia exploratoria complementaria, se aplicó sobre el Resultado Primario un algoritmo de detección de quiebres por programación dinámica de costo $L_2$ (paquete \texttt{ruptures} \citep{truong2020}), fijando cuatro particiones para permitir una lectura comparable con los cuatro regímenes macrofiscales de la Figura \ref{fig:dinamica_stocks_flujos}.
+En 2023 la columna contable de moneda extranjera incluye otros créditos
+en dólares, por lo que supera al nominal de las Letras, y el piso
+conserva el valor de libros. Es la razón de que la variante estricta
+empeore 2023 (128,2). En 2024 el nominal de las Letras supera en 40,7
+mil millones de USD a toda la tenencia en moneda extranjera que registra
+el Balance, y la tenencia sube 7,2 puntos del PIB. Eso confirma que el
+valor contable subestima la tenencia en 2024.
 
-\begin{figure}[H]
-\centering
-\caption{Cronología de Quiebres Estructurales Múltiples en el Resultado Primario}
-\label{fig:quiebres_timeline}
-\includegraphics[width=0.95\textwidth]{figura_5_4_quiebres_timeline.png}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} Quiebres detectados mediante programación dinámica (costo $L_2$, \texttt{ruptures}), en el espíritu del enfoque de partición óptima de \textcite{bai2003} (Sección \ref{sec:zivot_andrews}). Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/graficos/generacion\_cronologia\_quiebres.py}).}
-\end{figure}
+\section{La diferencia con el FGS-ANSES y otras limitaciones de la deuda
+neta}
 
-Los cuatro quiebres detectados (2008T3, 2013T2, 2019T1 y 2024T1) se aproximan a los límites de los cuatro regímenes macrofiscales identificados en la Sección anterior, con desfases de entre uno y cuatro trimestres. Esta coincidencia aproximada confirma que los regímenes macrofiscales identificados no son arbitrarios, aunque no coinciden mecánicamente con el punto de quiebre estadísticamente óptimo de la serie de resultado primario aislada.
+\subsection{Dos conceptos distintos}
 
-\section{Matriz de Correlaciones Bivariadas y Diagnóstico de Multicolinealidad}
-\label{sec:correlaciones_vif}
+La consolidación con el banco central (FMI, 2021) y la exclusión de las
+tenencias intra-públicas son operaciones distintas.
 
-La evaluación de las correlaciones bivariadas arroja tres resultados relevantes para la especificación del Capítulo \ref{ch:resultados}. El VIX y el EMBI+ exhiben una correlación positiva pero prácticamente nula ($r=0.08$) en nivel contemporáneo: sobre la serie real de EMBI+, el canal de fuga hacia la calidad (vuelo hacia la calidad) de la literatura de finanzas internacionales no se manifiesta en la correlación simple de niveles, a diferencia de lo que sugería la serie de contingencia usada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia} ($r=0.33$); lo que no descarta el canal sino que exige una especificación menos ingenua (dinámica, no contemporánea) para detectarlo, como la que ofrece el sistema conjunto del VECM y el SVAR restringido (Capítulo \ref{ch:resultados}) en lugar de inferir la relación de una correlación de nivel. La brecha del producto y el resultado primario muestran una correlación prácticamente nula ($r=0.07$). Esto no debe leerse como evidencia de una política contracíclica ejemplar: advierte, en cambio, que la correlación contemporánea simple no captura relaciones rezagadas, no lineales, ni mediadas por terceras variables, que la estimación multivariada del Capítulo \ref{ch:resultados} sí controla. Finalmente, la correlación entre la primera diferencia del TCRM y de la ratio de deuda ($r=0.14$, Sección \ref{sec:hoja_balance}) es positiva pero débil, la más débil de las tres pese a ser, sobre la serie de contingencia previa, la que se reportaba como más robusta.
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Consolidación con el banco central.} Se netean los créditos
+  del BCRA contra el Tesoro y se suman los pasivos de deuda del BCRA.
+  Cambia el perímetro hacia el sector público ampliado con el banco
+  central. Es lo que implementa la serie de esta tesis.
+\item
+  \textbf{Exclusión de tenencias intra-públicas.} Se resta de la deuda
+  del Tesoro la parte cuyo acreedor es otra entidad pública (el
+  FGS-ANSES, organismos de la seguridad social, bancos públicos). El FMI
+  (2025, Annex II, Table 2) lo aplica en la línea 3, ``Deuda del Tesoro
+  intra-sector público (BCRA y FGS)''.
+\end{itemize}
 
-La correlación bivariada, no obstante, no permite descartar dependencias lineales entre tres o más regresores simultáneamente. Se complementa por ello con los factores de inflación de la varianza (VIF) y el número de condición de la matriz de regresores estandarizados, calculados sobre las dos especificaciones relevantes para el Capítulo \ref{ch:resultados} y reportados en la Tabla \ref{tab:vif}.
+Nuestra serie netea el BCRA, ahora a valor nominal, pero \textbf{no
+netea las tenencias del FGS-ANSES ni las de otros tenedores públicos}.
+No se trata de una omisión por criterio, sino de falta de datos.
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:vif} Diagnóstico de Multicolinealidad: Factores de Inflación de la Varianza y Número de Condición.}
-\begin{tabular}{llrr}
-\toprule
-\textbf{Especificación} & \textbf{Regresor} & \textbf{VIF} & \textbf{Núm. de condición} \\
-\midrule
-\multirow{2}{*}{Núcleo de Bohn} & $d_{t-1}$ & 1.020 & \multirow{2}{*}{1.151} \\
- & Brecha del producto ($\tilde{y}_t$) & 1.020 & \\
-\midrule
-\multirow{4}{*}{Ampliada (Bohn + EMBI+ + TCRM)} & $d_{t-1}$ & 1.869 & \multirow{4}{*}{2.381} \\
- & Brecha del producto ($\tilde{y}_t$) & 1.025 & \\
- & EMBI+ & 1.910 & \\
- & TCRM & 1.046 & \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize \textit{Nota.} $n=87$ en ambas especificaciones. Umbrales convencionales de alerta: $VIF>10$ y número de condición $>30$. El número de condición se computa sobre los regresores estandarizados, excluyendo la constante. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/modelos/fase12\_diagnosticos\_complementarios.py}).
-\end{flushleft}
-\end{table}
+\subsection{Por qué no se pudo incluir}
 
-Ninguna de las dos especificaciones exhibe multicolinealidad problemática. En el núcleo bivariado de Bohn, los dos regresores son prácticamente ortogonales ($VIF=1.02$, número de condición $=1.15$). En la especificación ampliada, con la serie real de TCRM y EMBI+, los cuatro regresores permanecen igualmente cerca de la ortogonalidad ($VIF$ entre $1.02$ y $1.91$, número de condición $=2.38$), muy por debajo tanto del umbral convencional de $10$ como del número de condición de $30$. Sobre la serie de contingencia utilizada hasta la Sección \ref{sec:auditoria_fallback} del Capítulo \ref{ch:metodologia}, el VIF de $d_{t-1}$ y de TCRM llegaba a $3.82$ y $3.69$ respectivamente (número de condición $3.84$): también por debajo de los umbrales de alerta, pero sensiblemente más alto que con la serie real, un indicio adicional de que la serie de contingencia introducía una colinealidad artificial con la trayectoria de la deuda que la serie real no reproduce. La imprecisión de los coeficientes reportada en el Capítulo \ref{ch:resultados} no es, en ningún caso, atribuible a colinealidad entre regresores.
+La serie de tenencias del FGS se publica en el Informe Estadístico
+Mensual y en los Anuarios del FGS de ANSES. El sitio de ANSES bloquea
+las descargas automatizadas con una protección anti-bot (HTTP 403). Los
+archivos guardados como
+\texttt{datos/\allowbreak{}crudos/\allowbreak{}deuda\_\allowbreak{}consolidada\_\allowbreak{}neta/\allowbreak{}fgs\_\allowbreak{}anuario2024.pdf} y
+\texttt{p.html} son páginas HTML de bloqueo de 880 bytes, no el
+documento. Ninguna cifra del FGS está en los CSV
+(\texttt{tenencia\_\allowbreak{}fgs\_\allowbreak{}tesoro\_\allowbreak{}pib} es vacía en las 120 filas,
+\texttt{flag\_\allowbreak{}fgs\_\allowbreak{}faltante\ =\ 1}). El MECON no ofrece una apertura
+trimestral por tenedor sectorial (la hoja A.4.5 clasifica por
+residencia), y el FMI da las tenencias solo para 2023-2026. Aproximar
+con una cifra no verificada violaría la regla de no fabricar datos.
 
-\section{Dispersión Empírica y la Hipótesis de Fatiga Fiscal}
+\subsection{Magnitud y dirección del sesgo}
 
-Como aproximación descriptiva preliminar a la hipótesis central de esta tesis ($H_{1a}$), la Figura \ref{fig:scatter_fatiga} cruza el nivel de deuda heredado ($d_{t-1}$) con el esfuerzo fiscal contemporáneo ($pb_t$) para el panel trimestral completo.
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Brecha 2023 y 2024.} El FMI resta 62,5 puntos del PIB en 2023
+  y 33,9 en 2024 por tenencias del BCRA y del FGS. Nosotros restamos
+  48,6 y 20,4 (solo BCRA, nominal). La diferencia es 13,9 y 13,5 puntos,
+  y se traslada a la deuda neta: nuestra serie está por encima de la del
+  FMI en 8,2 y 9,6 puntos (tabla 5.8.2), una vez compensadas las
+  diferencias menores de bruta y pasivos.
+\item
+  \textbf{Qué parte es valuación.} Con la tenencia del BCRA a valor
+  nominal, la valuación deja de ser una fuente de brecha en 2024: la
+  brecha de la neta pasa de 16,8 a 9,6 puntos. Lo que resta (13,9 puntos
+  en 2023 y 13,5 en 2024 en la línea 3) es un residuo que incluye al
+  FGS, a otros tenedores públicos y a diferencias de cobertura.
+  \textbf{No se puede asignar entre ellos con los datos disponibles.} La
+  estabilidad de ese residuo entre 2023 y 2024 (13,9 y 13,5) es
+  compatible con un componente de nivel relativamente constante, aunque
+  con dos observaciones no es una prueba.
+\item
+  \textbf{Desde cuándo.} El FGS se crea por el Decreto 897/2007, dictado
+  el 12 de julio de 2007 y publicado el 13 de julio de 2007 en el
+  Boletín Oficial (Poder Ejecutivo Nacional, 2007, según la base
+  normativa de la AFIP). Su importancia creció tras la incorporación de
+  los fondos de las AFJP en 2008 (Decreto 2103/2008). Por eso,
+  \textbf{desde 2007T3 nuestra serie neta es una cota superior de la
+  neta del FMI}. Antes de esa fecha el FGS no existe como tenedor, y los
+  46 trimestres de 1996T1 a 2007T2 tienen todos los componentes (bandera
+  \texttt{comparable\_\allowbreak{}fmi\ =\ 1}). Para ese tramo no hay cifra del FMI
+  con la que contrastar.
+\item
+  \textbf{Otras fuentes de brecha y su signo.}
+\end{itemize}
 
-\begin{figure}[H]
-\centering
-\caption{Dispersión Empírica: Esfuerzo Primario vs. Endeudamiento Heredado}
-\label{fig:scatter_fatiga}
-\includegraphics[width=0.85\textwidth]{fig5_3_dispersion_fatiga_fiscal.png}
-\par\vspace{2mm}
-{\footnotesize\textit{Nota.} Dispersión empírica trimestral completa (87 pares $(d_{t-1}, pb_t)$), con ajuste polinómico local de segundo grado e intervalo de confianza del 95\% sombreado. Elaboración propia en base a \texttt{dataset\_consolidado\_real.csv} (\texttt{codigo/graficos/generacion\_graficos\_tesis.py}).}
-\end{figure}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Fuente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Efecto sobre nuestra deuda neta
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+FGS-ANSES y otros tenedores públicos sin netear & Sobreestima \\
+Letras Intransferibles interpoladas o reconstruidas entre anclas (24 y
+32 trimestres) & Ruido sin signo definido \\
+Trimestres sin dato nominal (hasta 2005T4), con valor de libros & Sin
+efecto relevante, las Letras no existían \\
+Swap con el PBoC activado omitido (desde 2020) & Subestima \\
+Pases en neto, con trimestres negativos (2024T3-2025T1) & Subestima \\
+Bruta del MECON excluye intereses capitalizados, \emph{holdouts} y cupón
+PIB & Subestima \\
+\end{longtable}
+}
 
-La nube de puntos sugiere, a simple vista, un patrón compatible con la hipótesis de fatiga fiscal: los superávits más altos (en torno a 1.00\%--1.60\% del PIB) se concentran en la región de deuda baja o moderada (40.00\%--70.00\%), mientras que la región de deuda elevada (80.00\%--120.00\%) exhibe mayoritariamente resultados deficitarios, con dos excepciones recientes (2024--2025) que reintroducen superávits modestos bajo un nivel de deuda todavía relativamente alto (79.00\% y 73.00\%). Es necesario, no obstante, evitar inferir un umbral en esta etapa descriptiva bivariada: la dispersión no controla por la brecha del producto, el riesgo soberano contemporáneo ni la dinámica temporal de la serie, todos ellos factores que la especificación de umbral formal de \citet{hansen1999} incorpora explícitamente en el Capítulo \ref{ch:resultados}. Como se mostrará allí, cuando estos controles se introducen, la evidencia estadística del quiebre sugerido visualmente pierde buena parte de su fuerza aparente en la especificación de nivel, aunque una especificación alternativa formalmente más apropiada la recupera (Sección \ref{sec:robustez_hansen_dpb}).
+El balance de las fuentes es una sobreestimación en 2023 y 2024 y
+probablemente en todo 2007-2025, de entre 8 y 10 puntos del PIB en esos
+dos años de control.
 
-\section{Limitaciones de la Muestra y Advertencias de Inferencia}
-\label{sec:limitaciones_muestra}
+\subsection{Cómo se trata en el análisis}
 
-Los resultados presentados en este capítulo, y los que se desarrollarán en los Capítulos \ref{ch:resultados} y \ref{ch:discusion}, deben interpretarse a la luz de las limitaciones inherentes a la muestra. Las 120 observaciones trimestrales (1996T1--2025T4) constituyen la ventana muestral de esta investigación (Sección \ref{sec:matriz_operacional} del Capítulo \ref{ch:metodologia}), de las cuales 88 (2004T1--2025T4) corresponden a la sub-muestra de cobertura 100\,\% real, sin tramo empalmado. Esta longitud muestral, adecuada para series de tiempo de un único país en condiciones de estacionariedad, limita la potencia estadística de pruebas como el umbral de Hansen y la cointegración de Johansen, especialmente en presencia de quiebres estructurales frecuentes.
+La serie se presenta como \textbf{deuda neta consolidada con el BCRA, a
+valor nominal, sin neteo del FGS}, y no como ``la deuda neta del FMI''.
+En el modelo entra rezagada y cumple una función de retroalimentación,
+de modo que la corrección de nivel no cambia la dinámica si la brecha es
+aproximadamente estable. Con la valuación nominal la brecha pasa de 8,2
+a 9,6 puntos entre 2023 y 2024, una variación de 1,4 puntos, frente a
+los 8,6 puntos (de 8,2 a 16,8) que tenía con valor de libros. La
+condición de brecha estable se cumple mucho mejor que antes. El sistema
+se estima además con la deuda neta a valor de libros y con la deuda
+bruta como series de contraste
+(\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}neta\_\allowbreak{}1996\_\allowbreak{}2025.csv} y
+\texttt{deuda\_\allowbreak{}consolidada\_\allowbreak{}1996\_\allowbreak{}2025.csv}), de modo que la conclusión
+pueda evaluarse con tres medidas. El cierre de la brecha restante exige
+dos insumos: las series de tenencias del FGS en ANSES (descarga manual)
+y el saldo del swap activado (estados contables del BCRA).
 
-El contexto de alta volatilidad estructural y regímenes de política cambiante, documentado en la cronología de Bai-Perron (Sección \ref{sec:quiebres_estructurales}), agrava esta limitación: cuando la variable de umbral (EMBI+, $\sigma=1573.84$ pb sobre la ventana, Tabla \ref{tab:descriptivos_ampliado}) y la dependiente (resultado primario, $\sigma=1.73$ pp del PIB) están ambas sometidas a perturbaciones de magnitud comparable a la señal buscada, la relación señal-ruido se vuelve desfavorable para la identificación de quiebres discretos. Los tests de robustez implementados (subperíodos, especificaciones alternativas) confirman la fragilidad de inferencias fuertes sobre la significatividad estadística de los coeficientes individuales, lo que refuerza la necesidad de cautela en las proyecciones y de priorizar la consistencia del diagnóstico cualitativo sobre la precisión puntual de los estimadores.
+\section{Estadísticos descriptivos}
 
-La ventana de 120 observaciones (Sección \ref{sec:ventana_ampliada}), que sostiene la totalidad del protocolo econométrico del Capítulo \ref{ch:resultados}, no releva de esta cautela: la desplaza a un terreno más nítido y, a la vez, más preocupante. El contraste de Johansen sobre la ventana 1996--2025 no rechaza la ausencia de cointegración para $r=0$ (traza $=45.18$ frente al valor crítico al 95\% de $47.85$), y el resultado se sostiene al variar el año de inicio de la muestra: la verificación sobre 1997--2025 ($n=116$, sin el empalme aproximado del TCRM de 1996) arroja una traza de $45.46$, prácticamente idéntica y también por debajo de ese mismo crítico. A diferencia de la ventana 1999--2025, que rechazaba $r=0$ en un punto de inicio de la muestra pero no en el otro, la ventana 1996--2025 no rechaza $r=0$ en ninguno de los dos puntos de inicio probados (Capítulo \ref{ch:resultados}): la ambigüedad sobre la existencia de una relación de cointegración estable no se reduce al ampliar la muestra, sino que se vuelve más marcada. Se impone $r=1$ por el mismo criterio teórico que ya empleaba la tesis, documentando explícitamente que esa imposición queda ahora menos respaldada por la evidencia estadística que antes.
+Muestra 1996T1-2025T4 (120 trimestres). El crecimiento y la variación de
+la Fed pierden una observación por la primera diferencia; la muestra
+efectiva del sistema son 117 trimestres (1996T4-2025T4). Las variables
+del sistema de estimación son las filas 1, 6 y 8 a 12 (el resultado
+primario en su versión \texttt{pb\_\allowbreak{}pib\_\allowbreak{}trim}).
 
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Media
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Desv. est.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mínimo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Máximo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Deuda consolidada neta, nominal piso (\% PIB) & 55,97 & 26,89 & 26,13 &
+136,60 & 120 \\
+Deuda consolidada neta, valor de libros (\% PIB) & 56,55 & 27,15 & 26,13
+& 136,60 & 120 \\
+Deuda federal bruta (\% PIB) & 64,37 & 31,45 & 31,86 & 154,59 & 120 \\
+Tenencia del BCRA de deuda del Tesoro, nominal piso (\% PIB) & 12,98 &
+8,07 & 1,82 & 48,57 & 120 \\
+Pasivos remunerados del BCRA (\% PIB) & 5,22 & 3,53 & −2,29 & 14,58 &
+120 \\
+Resultado primario, flujo trimestral anualizado, \texttt{pb\_\allowbreak{}pib\_\allowbreak{}trim}
+(\% PIB) & −0,02 & 3,11 & −12,16 & 7,02 & 120 \\
+Resultado primario, suma de cuatro trimestres, \texttt{pb\_\allowbreak{}pib} (\% PIB)
+& 0,05 & 2,34 & −6,43 & 3,93 & 120 \\
+Crecimiento real del PIB (pp trimestral, 100·Δln) & 0,48 & 7,29 & −13,77
+& 18,21 & 119 \\
+EMBI+ (pb) & 1483,95 & 1573,84 & 210,22 & 6658,98 & 120 \\
+TCRM (dic. 2001 = 1) & 1,63 & 0,45 & 0,98 & 2,76 & 120 \\
+Tasa de política de la Fed (\%) & 2,08 & 2,67 & −2,92 & 6,52 & 120 \\
+Variación de la tasa de la Fed (pp) & −0,01 & 0,50 & −1,43 & 1,69 &
+119 \\
+VIX (puntos) & 20,15 & 7,11 & 10,31 & 58,60 & 120 \\
+\end{longtable}
+}
+
+Fuente: cálculo propio sobre los CSV citados en 5.1. La desviación
+estándar es muestral (ddof = 1). Los depósitos del Tesoro en el BCRA
+tienen media de 0,64 \% del PIB y desvío de 0,77, y no forman parte de
+las estadísticas del sistema. El resultado primario trimestral tiene un
+desvío mayor que el de la suma de cuatro trimestres por su
+estacionalidad (el mínimo, −12,16, ocurre en 2020T2 y el máximo, 7,02,
+en 2004T2). El crecimiento del PIB tiene un desvío alto porque la serie
+conserva la estacionalidad de INDEC y porque el tramo 1996-2003 contiene
+variaciones trimestrales de la crisis de 2001-2002 (mínimo en 2002T1,
+máximo en 2010T2). El máximo de la deuda neta ocurre en 2002T3 y el
+mínimo en 2013T3. El máximo del EMBI+ ocurre en 2002T3 y el mínimo en
+2007T1.
+
+\section{Resumen de limitaciones de datos}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Deuda neta sin FGS.} Cota superior de la neta del FMI desde
+  2007T3, con una brecha de 8,2 puntos en 2023 y 9,6 en 2024 (secciones
+  5.8 y 5.9).
+\item
+  \textbf{Resultado primario.} Incluye todas las rentas de la propiedad,
+  entre ellas las utilidades del BCRA que la API no permite separar.
+  Perímetro del sector público nacional, no del gobierno federal del
+  FMI, y quiebres de metodología en 2006/2007 y 2014/2015 sin período de
+  solapamiento.
+\item
+  \textbf{Valuación nominal de la tenencia del BCRA.} Hay dato nominal
+  en 80 de 120 trimestres; 24 están interpolados y 39 reconstruidos con
+  fechas de emisión o hacia atrás. Los 40 trimestres anteriores a 2006
+  conservan el valor de libros porque las Letras no existían.
+\item
+  \textbf{Empalme 1996-2003} del PIB real (base 1993 a base 2004,
+  coeficiente k = 1,751) y del PIB nominal (coeficiente 1,0837).
+  Incertidumbre de nivel por el coeficiente de enlace, sin efecto sobre
+  las tasas de crecimiento del PIB real.
+\item
+  \textbf{Seis trimestres de deuda bruta interpolados} (1996-1997) y
+  \textbf{cuatro de TCRM retropolados} (1996).
+\item
+  \textbf{Swap con el PBoC} y \textbf{pases en neto} en los pasivos del
+  BCRA.
+\item
+  \textbf{Denominador} con rezago en períodos de inflación alta.
+\end{enumerate}

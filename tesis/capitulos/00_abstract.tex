@@ -1,8 +1,36 @@
-\textbf{Introducción:} La deuda pública de Argentina exhibe episodios recurrentes de reestructuración e inestabilidad macroeconómica. Este trabajo evalúa la solvencia intertemporal de dicha deuda en el período 1996--2025 (30 años exactos) y simula escenarios estocásticos proyectados hasta 2035.
+\textbf{Objetivo.} La tesis evalúa la sostenibilidad de la deuda pública
+consolidada argentina, que suma la del Sector Público No Financiero y la
+del Banco Central, en el horizonte 2026-2035, a partir de sus
+determinantes macroeconómicos históricos (1996-2025): el crecimiento, el
+tipo de cambio real, el riesgo país y el resultado primario.
 
-\textbf{Metodología:} Se aplica un protocolo econométrico secuencial sobre una ventana unificada de 120 observaciones trimestrales (1996T1--2025T4) construida mediante empalme histórico homogéneo, conservando el tramo 2004--2025 ($n=88$) como control de cobertura directa. Se estiman contrastes de raíz unitaria (ADF, KPSS, DF-GLS), quiebres estructurales endógenos (Zivot-Andrews, Bai-Perron) y cointegración de Johansen. La Función de Reacción Fiscal se modela mediante regresiones de umbral endógeno \citep{hansen1999,hansen2000} y un Modelo de Vectores con Corrección de Error (VECM). Como extensión, se formula un SVAR restringido (Blanchard-Perotti/FMI) y un Análisis de Sostenibilidad de la Deuda (DSA) estocástico de Monte Carlo anclado en la matriz de covarianza del SVAR.
+\textbf{Metodología.} Se estima un modelo de vectores autorregresivos
+estructural con variables exógenas (SVARX) sobre datos trimestrales, con
+la tasa de política de la Reserva Federal y la volatilidad financiera
+global como variables externas. Los shocks fiscales se identifican con
+el método de Blanchard y Perotti (2002), y la deuda consolidada neta se
+construye según el criterio del FMI (2021). Con el modelo se simulan
+120.000 trayectorias de la deuda alrededor del escenario base del FMI
+(2025) y se mide la probabilidad de que la deuda no se estabilice, la
+métrica central del marco de sostenibilidad del FMI.
 
-\textbf{Resultados:} La evidencia constata la ausencia de una regla fiscal lineal permanente: el VECM confirma la ausencia de una velocidad de ajuste significativa del superávit primario hacia el equilibrio de largo plazo ($\alpha_{pb}=-0.00002$, $p=0.996$). En contraste, el modelo de umbral de Hansen en niveles identifica un régimen crítico en $\tau^*=2462.1$ puntos básicos ($p<0.001$), donde la reacción fiscal pasa de ser estadísticamente nula en normalidad ($\rho_1=-0.0044$, $p=0.665$) a fuertemente positiva bajo estrés financiero severo ($\rho_2=+0.0201$, $p=0.006$), revelando un patrón de disciplina fiscal gatillada por asfixia externa de crédito en lugar de fatiga fiscal. La descomposición de varianza (FEVD) del SVAR demuestra que a 20 trimestres la inercia propia del stock acumulado explica el $54.21\%$ de la deuda, y el canal financiero-cambiario ($25.80\%$) supera al canal fiscal-real ($19.98\%$). La simulación estocástica DSA proyecta una probabilidad del $26.1\%$ de que la deuda supere el $100\%$ del PIB hacia 2035 (mediana de $82.8\%$).
+\textbf{Resultados.} La política fiscal respondió a la deuda en el
+período (reacción de 0,05 por punto de deuda), pero los shocks
+cambiarios y de riesgo explican cerca de 60\% de la incertidumbre sobre
+la deuda en 2035, y los fiscales, menos de 20\%. La probabilidad de que
+la deuda no se estabilice a cinco años es de 11,8\%, con un intervalo de
+90\% de 8,0\% a 15,8\%, frente a alrededor de 3\% en el análisis del
+FMI. A diez años baja a 6,0\%. Un endurecimiento de la Reserva Federal
+como el de 2022-2023 eleva la deuda esperada en 7 puntos del PIB hacia
+2035, sobre todo por el mayor costo de refinanciar la deuda en dólares.
 
-\textbf{Discusión:} La solvencia de la deuda argentina no descansa en un compromiso continuo de ahorro presupuestario, sino en correcciones forzadas durante crisis de financiamiento y en canales de ajuste exógenos a la discreción fiscal (depreciación real, licuación inflacionaria y reestructuraciones soberanas), en consonancia con el enfoque de restricción externa. Las proyecciones DSA confirman que la trayectoria de mediano plazo está gobernada predominantemente por la volatilidad cambiaria y el costo de financiamiento externo antes que por el esfuerzo fiscal discrecional.
+\textbf{Conclusión.} El superávit primario es necesario pero no alcanza
+para estabilizar la deuda. Con el mismo escenario base, representar la
+incertidumbre con la dinámica histórica de la economía argentina da un
+diagnóstico de sostenibilidad más exigente que el del FMI en los
+primeros cinco años.
 
+\textbf{Palabras clave:} deuda pública, sostenibilidad fiscal, SVAR,
+gráfico de abanico, Argentina.
+
+\textbf{Clasificación JEL:} E62, F34, H63.

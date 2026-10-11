@@ -1,40 +1,201 @@
 \chapter{Introducción}
-\label{ch:introduccion}
 
-\section{Contextualización de la Problemática}
+\section{Contextualización}
 
-La República Argentina representa un caso paradigmático, dentro de un patrón más amplio de crisis de deuda soberana documentado para las economías periféricas a lo largo de casi dos siglos \citep{reinhartrogoff2009}, de inestabilidad macroeconómica crónica: episodios recurrentes de cesación de pagos y reestructuraciones de deuda, ya relevados por la historiografía económica argentina \citep{diazalejandro1970, dellapaolera2001, rapoport2020}, conviven con una exposición estructural a la restricción de divisas señalada por la literatura de sostenibilidad fiscal para economías emergentes \citep{mendoza2007, derasmo2016}. Tras la crisis de 2001 y la reestructuración de 2005, que implicó una quita sustancial de valor presente neto sobre los títulos en default, la ratio Deuda/PIB cayó de 110\% a un piso de 41,5\% hacia 2011, impulsada por el recorte nominal de capital y un ciclo de materias primas favorable. A partir de 2012 el deterioro fiscal fue continuo: el déficit primario alcanzó 3\% del PIB hacia 2016, el Estado retornó a los mercados internacionales de crédito y, tras el cierre abrupto de esos mercados en 2018 y el acuerdo con el FMI, la ratio de deuda consolidada saltó hasta 94,5\% del PIB.
+La historia macroeconómica de América Latina, y de la República
+Argentina en particular, está atravesada por un patrón recurrente de
+dependencia del crédito externo, vulnerabilidad ante la interrupción
+repentina de los flujos de capital (\emph{sudden stops})\footnote{Interrupción
+  repentina de los flujos de capital.} y crisis de impago soberano
+(Comín Comín, 2014, p.~699; Reinhart y Rogoff, 2009). En el caso
+argentino, ese patrón fue relevado por la historiografía económica desde
+mediados del siglo XX (Díaz Alejandro, 1970; della Paolera y Taylor,
+2001; Rapoport, 2020) y volvió a manifestarse en el default de 2001 y en
+la reestructuración de 2020. Ambos episodios dejaron en evidencia la
+vulnerabilidad de una economía condicionada por la restricción externa
+de divisas.
 
-La percepción de riesgo soberano, medida por el \textit{Emerging Markets Bond Index} (EMBI+), promedió 1.298 puntos básicos durante el período 2004--2025, con una desviación estándar de 1.230 puntos, lo que refleja la incompatibilidad estructural entre las condiciones de financiamiento externo y una trayectoria de deuda estable. Recién en el bienio 2024--2025 un ajuste fiscal pronunciado, que restituye el superávit primario por primera vez desde 2011, coincidió con una compresión del EMBI+ hacia 561--1.100 puntos básicos. Esta trayectoria no puede explicarse exclusivamente por decisiones de política fiscal discrecional: la hoja de balance del Banco Central de la República Argentina (BCRA), la evolución del tipo de cambio real y la restricción de divisas operaron como determinantes simultáneos, a menudo dominantes, de la ratio Deuda/PIB, y la literatura sobre \textit{fatiga fiscal} advierte que existe un límite económico e institucional para los superávits primarios que una sociedad puede sostener de manera prolongada \citep{ghosh2013}.
+La administración que asumió en diciembre de 2023 recibió un elevado
+stock de pasivos y un acceso muy limitado al crédito voluntario. El
+regreso a los mercados fue gradual: la primera colocación en dólares se
+realizó en diciembre de 2025, con un bono a 2029 bajo legislación local
+por USD 1.000 millones de valor nominal y un rendimiento de 9,26\% anual
+(Secretaría de Finanzas, 2025). El precio de colocación fue de 91 por
+cada 100 nominales, de modo que el Tesoro recaudó unos USD 910 millones
+(Chequeado, 2025). En 2026 el Tesoro siguió financiándose con bonos en
+dólares bajo ley local y no emitió bajo legislación de Nueva York: en
+septiembre, el ministro de Economía afirmó que el Gobierno no tenía
+planes de emitir deuda internacional (Infobae, 2026). A fines de julio
+de 2026, la deuda en moneda extranjera de la Administración Central
+sumaba USD 248.458 millones, y los vencimientos en divisas previstos
+para el resto del año alcanzaban USD 5.080 millones, de los cuales el
+53,5\% correspondía a pagos al Fondo Monetario Internacional (FMI)
+(Oficina de Presupuesto del Congreso {[}OPC{]}, 2026).
 
-\section{Delimitación Científica del Objeto}
+\section{Planteamiento del problema}
 
-En consonancia con la ruptura epistemológica que exige toda construcción de objeto científico \citep{bachelard1938}, esta delimitación se aparta de las prenociones dicotómicas sobre la deuda pública (``buena''/``mala'', ``legítima''/``odiosa''), no operacionalizables en una matriz de datos cuantitativa. Esta tesis define la deuda pública consolidada como una restricción presupuestaria intertemporal, cuya sostenibilidad queda parametrizada por una Función de Reacción Fiscal estimable y por dinámicas estocásticas latentes en los fundamentos macroeconómicos. El riesgo soberano se modela como variable endógena que interactúa con una reacción fiscal potencialmente no lineal por regímenes, y no como un factor exógeno aislado ni como resultado de la mera voluntad política del gobierno de turno.
+Frente a esta coyuntura, surge la necesidad de evaluar si la consecución
+de un superávit fiscal primario y la voluntad política de pago bastan
+para asegurar la sostenibilidad de la deuda en el mediano plazo. La
+alternativa es que los determinantes estructurales de la economía
+argentina condicionen el resultado fiscal e incrementen la probabilidad
+de un nuevo default o reestructuración soberana.
 
-\section{Planteamiento del Problema}
+La evidencia internacional matiza la premisa de que la consolidación
+presupuestaria alcanza para disipar el riesgo de impago: en promedio,
+los ajustes fiscales discrecionales tienen un efecto reducido sobre la
+ratio de deuda, y solo se asocian con reducciones duraderas cuando se
+aplican en fases de expansión económica (Ando et al., 2025). La
+sostenibilidad depende además de otros factores. Uno es la capacidad de
+la economía de generar las divisas que exige el servicio de una deuda
+dolarizada (Calvo et al., 2003). Otro es el efecto de valuación del tipo
+de cambio real sobre los pasivos en moneda extranjera (Levy Yeyati y
+Sturzenegger, 2023). Se suman la exposición de la deuda a las
+condiciones financieras externas (Adler y Sosa, 2013) y la menor
+tolerancia a la deuda de las economías con historia de default (Reinhart
+et al., 2003). Por último, la incertidumbre macroeconómica reduce el
+nivel de deuda que un gobierno puede sostener (Mendoza y Oviedo, 2009),
+y existe un límite político e institucional a los superávits que una
+sociedad acepta de manera prolongada, conocido como fatiga fiscal (Ghosh
+et al., 2013).
 
-La evaluación estándar de la sostenibilidad de la deuda pública, basada en la restricción presupuestaria intertemporal de \citet{bohn1998}, sostiene que una política fiscal es sostenible si el Estado incrementa sistemáticamente su superávit primario ante el crecimiento de la ratio Deuda/PIB. Este enfoque asume que el espacio fiscal, formalizado por \citet{ostry2010} como la distancia entre el nivel de deuda vigente y el límite que la capacidad de ajuste permite sostener, es ilimitado. Dicha presunción colisiona con la realidad de las economías emergentes: modelizaciones empíricas \citep{mendoza2004, mendoza2009, ghosh2013} sugieren que la Función de Reacción Fiscal (FRF) puede exhibir no linealidades, con una reacción atenuada o inexistente bajo niveles elevados de deuda o riesgo soberano. La literatura aplicada a Argentina ha tendido además a excluir el riesgo soberano endógeno de la modelación de la reacción fiscal y a omitir el componente estocástico de las variables macroeconómicas, vacíos que esta tesis aborda directamente.
+\section{Preguntas de investigación}
 
-\section{Objetivo General e Hipótesis}
+La pregunta principal es: ¿en qué medida el crecimiento, el tipo de
+cambio real, el riesgo país y el resultado primario de Argentina
+(1996-2025) condicionan la sostenibilidad de su deuda pública
+consolidada, que suma la del Sector Público No Financiero (SPNF) y la
+del Banco Central de la República Argentina (BCRA), en el horizonte
+2026-2035, y cuál es la probabilidad de que esa trayectoria resulte
+insostenible?
 
-A partir de este planteo, la pregunta que organiza la investigación es en qué medida las trayectorias de los determinantes macroeconómicos, crecimiento del producto, tipo de cambio real, tasa de interés y resultado fiscal primario, condicionaron la solvencia intertemporal de la deuda pública consolidada argentina durante el período bajo estudio, y qué horizontes de probabilidad emergen, a partir de dicha evidencia, para el subperíodo prospectivo 2026--2035. El objetivo general de la tesis es, en consecuencia, determinar en qué medida esos determinantes macroeconómicos condicionaron la solvencia intertemporal de la deuda pública consolidada argentina, mediante la estimación de una Función de Reacción Fiscal, y proyectar su sostenibilidad hacia 2026--2035 mediante un Análisis de Sostenibilidad de la Deuda (DSA) estocástico.
+Como pregunta específica, se plantea: ¿cómo y en qué magnitud impactaría
+un endurecimiento de la política monetaria de la Reserva Federal de los
+Estados Unidos (FED) sobre la dinámica de la deuda pública consolidada
+argentina y sobre su probabilidad de no estabilizarse durante 2026-2035?
 
-La hipótesis general que vertebra la investigación sostiene que esa solvencia intertemporal estuvo condicionada por una función de reacción fiscal estructuralmente débil frente al endeudamiento, en un régimen macroeconómico caracterizado por un canal de transmisión del riesgo país (EMBI+) hacia el esfuerzo fiscal efectivo, ambos fenómenos enmarcados por la restricción externa periférica que desarrolla el Capítulo \ref{ch:marco_teorico}: no un tercer contraste independiente, sino el supuesto de fondo que encuadra la interpretación de los dos primeros.
+La elección de esta perturbación se fundamenta en que opera
+simultáneamente sobre varios canales. Encarece el financiamiento externo
+y eleva el riesgo soberano (Uribe y Yue, 2006). Desencadena una
+depreciación del tipo de cambio real, con efectos de valuación sobre los
+pasivos dolarizados (Calvo et al., 2003). Deprime el crecimiento y, con
+ello, deteriora el diferencial entre la tasa de interés y el crecimiento
+(Blanchard, 2019; Neumeyer y Perri, 2005; Uribe y Yue, 2006). Por
+último, condiciona la transmisión de la política monetaria doméstica en
+las economías emergentes (Renzhi y Beirne, 2024). En Argentina, ese
+último canal operó durante buena parte del período histórico a través
+del costo de los pasivos remunerados del BCRA, cuyo stock llegó a 18,4\%
+del PIB en 2023 y cayó a 2,2\% en 2024, cuando la esterilización
+monetaria pasó al Tesoro (FMI, 2025, anexo II, cuadro 2).
 
-Esa hipótesis general se desagrega en dos hipótesis derivadas, cada una vinculada a una técnica econométrica específica del protocolo del Capítulo \ref{ch:metodologia}. La primera, $H_{1a}$, sostiene que la Función de Reacción Fiscal argentina exhibe un umbral crítico de riesgo soberano por encima del cual el coeficiente de reacción del superávit primario cambia de régimen de forma discontinua, sin presuponer la dirección de ese cambio: la literatura de fatiga fiscal \citep{ghosh2013} predice una reacción que se atenúa o desaparece bajo estrés, pero la evidencia también admite el patrón inverso, una reacción ausente en la normalidad y gatillada recién por un nivel extremo de riesgo; se contrasta mediante el modelo de umbral de \citet{hansen1999,hansen2000} (Sección \ref{sec:hansen}) en dos especificaciones y mediante su extensión multivariada (Sección \ref{sec:tvecm_resultados}). La segunda, $H_{1b}$, sostiene que la serie de la ratio Deuda/PIB exhibe al menos un quiebre estructural estadísticamente identificable en el período bajo estudio, asociado a episodios de crisis de financiamiento externo; se contrasta mediante el test de quiebre endógeno de Zivot-Andrews y el procedimiento de quiebres múltiples de Bai-Perron. Como se desarrolla en el Capítulo \ref{ch:resultados}, la evidencia recogida para estas dos hipótesis es de magnitud e intensidad estadística heterogénea, y en ningún caso alcanza, con la muestra disponible, una confirmación categórica e inequívoca.
+\section{Objetivos}
 
-\section{Objetivos Específicos}
+El objetivo general es evaluar la dinámica de la deuda pública
+consolidada argentina (SPNF y BCRA) a partir de sus determinantes
+macroeconómicos históricos (1996-2025), para proyectar su sostenibilidad
+en el horizonte 2026-2035 y estimar la probabilidad de que no se
+estabilice.
 
-Para alcanzar el objetivo general, se plantea el siguiente protocolo analítico-econométrico:
+Para alcanzarlo, se plantean los siguientes objetivos específicos:
 
 \begin{enumerate}
-    \item Analizar las propiedades estocásticas de las series de tiempo macro-fiscales mediante pruebas de raíz unitaria (ADF, KPSS) y de quiebre estructural endógeno (Zivot-Andrews).
-    \item Verificar la existencia de relaciones de equilibrio de largo plazo entre la ratio de endeudamiento, el esfuerzo primario, el riesgo soberano y el tipo de cambio real, mediante el contraste de Traza y Máximo Autovalor de Johansen.
-    \item Estimar la Función de Reacción Fiscal histórica mediante un Modelo de Vectores con Corrección de Error (VECM) y un Vector Autorregresivo Estructural restringido (SVAR).
-    \item Evaluar la existencia de no linealidades y de un régimen crítico de riesgo soberano en la reacción fiscal, sin presuponer su dirección, mediante un modelo de umbral univariado y su extensión multivariada, el Threshold VECM de \citet{hansen2002}.
-    \item Proyectar las trayectorias de la deuda consolidada para el período 2026--2035 bajo escenarios macroeconómicos deterministas, y simular las bandas de probabilidad de un Análisis de Sostenibilidad de la Deuda estocástico mediante el método de Monte Carlo.
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Construir una serie trimestral de deuda pública consolidada (SPNF y
+  pasivos remunerados del BCRA) para 1996-2025.
+\item
+  Analizar las propiedades estocásticas de las series (raíz unitaria y
+  quiebres estructurales).
+\item
+  Estimar un modelo de vectores autorregresivos estructural con
+  variables exógenas (SVARX), en el que la deuda consolidada interactúa
+  con el crecimiento, el tipo de cambio real, el riesgo país y el
+  resultado primario, y en el que la tasa de la FED y la volatilidad
+  financiera global entran como variables exógenas.
+\item
+  Medir la contribución de cada canal a la variabilidad de la deuda y la
+  reacción del resultado primario ante el nivel de endeudamiento.
+\item
+  Simular, mediante el método de Monte Carlo, la distribución de
+  trayectorias de la deuda consolidada en 2026-2035 bajo un escenario
+  base.
+\item
+  Estimar el impacto de un endurecimiento de la política monetaria de la
+  FED sobre esa distribución.
 \end{enumerate}
 
-\section{Justificación de la Investigación}
+\section{Hipótesis}
 
-La justificación de esta tesis reside en el vacío de conocimiento que persiste en la literatura sobre sostenibilidad fiscal para el caso argentino, un vacío con correlato institucional directo: la Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública \citep{ley27612} exige, desde 2021, que todo nuevo endeudamiento del Estado nacional se someta a un análisis de sostenibilidad de la deuda, sin que la literatura académica local disponga aún de un protocolo econométrico propio, replicable y estadísticamente contrastado que dé contenido empírico a esa exigencia legal. El precedente metodológico directo de ese protocolo es \citet{medeiros2012}, quien combinó por primera vez un VAR irrestricto con una Función de Reacción Fiscal de panel para simular estocásticamente la trayectoria de deuda de un conjunto de países y construir distribuciones de probabilidad en lugar de escenarios únicos, esquema luego adoptado como marco institucional por el FMI en su Marco de Riesgo Soberano y Sostenibilidad de la Deuda (SRDSF), aplicado a Argentina en 2024 (Capítulo \ref{ch:antecedentes}). Esta tesis retoma esa arquitectura general, VAR estructural más simulación estocástica, pero la especifica para el caso argentino: en la dimensión metodológica, avanza sobre las limitaciones de la ecuación de acumulación clásica en dos direcciones no exploradas conjuntamente para este período, la identificación estructural explícita de los canales de transmisión entre el resultado fiscal, el riesgo soberano, el tipo de cambio real y la actividad mediante un SVAR restringido por teoría económica en lugar de un ordenamiento de Cholesky arbitrario, y el sometimiento de la hipótesis de fatiga fiscal a un contraste de significatividad estadística formal, en lugar de asumirla por analogía con la literatura internacional. En la dimensión empírica, la consolidación de los pasivos remunerados del BCRA con la deuda del SPNF constituye una extensión que la literatura aplicada al período no ha desarrollado de manera integrada.
+H1a. Los determinantes macroeconómicos históricos de Argentina
+(1996-2025), es decir, el crecimiento, el tipo de cambio real, el riesgo
+país y el resultado primario, condicionan la sostenibilidad de la deuda
+pública consolidada (SPNF y BCRA), de modo que el superávit primario,
+por sí solo, no basta para estabilizarla en 2026-2035.
+
+H1b. La probabilidad de que la deuda consolidada no se estabilice,
+medida a cinco años (2030, el mismo horizonte de la métrica del FMI) y a
+diez años (2035, el final del horizonte de proyección) y estimada con
+shocks estructuralmente identificados, es mayor que la que el FMI
+reporta para la deuda federal bruta en su análisis de 2025, de alrededor
+de 3\% (FMI, 2025, anexo II). Para que la comparación sea válida, el
+escenario base de la simulación reproduce los supuestos del escenario
+base del FMI.
+
+H2. Un endurecimiento de la política monetaria de la FED eleva la
+trayectoria esperada de la deuda consolidada y su probabilidad de no
+estabilizarse, a través del riesgo soberano, el tipo de cambio real y el
+crecimiento. El shock se mide de dos maneras: un desvío estándar de la
+variación trimestral de la tasa (convención de la literatura de VAR) y
+una repetición del ciclo de subas de 2022-2023.
+
+\section{Estrategia metodológica}
+
+Para contrastar estas hipótesis se estima un SVARX con datos
+trimestrales de Argentina (1996-2025). La deuda consolidada entra como
+variable del sistema, de modo que los shocks se transmiten entre las
+variables en ambos sentidos: la deuda responde al riesgo país, al tipo
+de cambio y al resultado fiscal, y a la vez los afecta en los trimestres
+siguientes. La evolución de la deuda respeta la identidad contable de
+acumulación, que distingue el tramo en moneda local del tramo en moneda
+extranjera. Los resultados del modelo alimentan simulaciones de Monte
+Carlo que generan distribuciones de probabilidad sobre la trayectoria de
+la deuda en 2026-2035, cuyos resultados se resumen en gráficos de
+abanico (\emph{fan charts})\footnote{Gráficos que muestran la
+  distribución de trayectorias posibles de una variable mediante bandas
+  de percentiles.} y en las métricas que utiliza el FMI para evaluar el
+riesgo soberano.
+
+\section{Justificación}
+
+La Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda
+Pública exige, desde 2021, que todo nuevo endeudamiento del Estado
+nacional se someta a un análisis de sostenibilidad. La literatura
+académica local, sin embargo, no dispone de un protocolo econométrico
+propio, replicable y contrastado que dé contenido empírico a esa
+exigencia.
+
+El precedente metodológico directo es Medeiros (2012), quien combinó un
+modelo VAR con una función de reacción fiscal para simular la
+trayectoria de la deuda y construir distribuciones de probabilidad en
+lugar de escenarios únicos. El FMI adoptó luego esa lógica en su Marco
+de Riesgo Soberano y Sostenibilidad de la Deuda (SRDSF), aplicado a
+Argentina en sus revisiones del programa (FMI, 2024, 2025). Esta tesis
+retoma esa arquitectura y la especifica para el caso argentino en dos
+direcciones. La primera es metodológica: identifica de manera explícita
+los canales de transmisión entre el resultado fiscal, el riesgo
+soberano, el tipo de cambio real y la actividad, e incorpora un shock
+externo de origen identificable, la política monetaria de la FED. La
+segunda es de cobertura: estima la dinámica histórica de la deuda
+incluyendo los pasivos remunerados del BCRA, que el propio FMI considera
+parte de la deuda pública cuando pueden financiar al Tesoro o
+representan un riesgo fiscal material (FMI, 2021).
+
+\section{Organización del trabajo}
+
+El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El
+Capítulo 3 presenta el marco teórico. El Capítulo 4 describe la
+estrategia metodológica y el Capítulo 5, los datos. El Capítulo 6 expone
+los resultados, incluido el escenario de shock de la FED. El Capítulo 7
+los discute y el Capítulo 8 presenta las conclusiones y las
+limitaciones. {[}AJUSTAR cuando se cierre el índice.{]}
