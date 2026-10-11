@@ -31,6 +31,7 @@ SALIDA = BASE / "para_el_grupo"
 ARCHIVOS: dict[str, str] = {
     "plan_de_labor.md": "Plan_de_labor.docx",
     "_tesis_borrador.md": "Tesis_borrador.docx",
+    "guia_de_defensa.md": "Guia_de_defensa.docx",
 }
 
 # Documento unico de la tesis: capitulos en orden (los que todavia no existen como

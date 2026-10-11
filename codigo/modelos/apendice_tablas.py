@@ -96,7 +96,7 @@ def seccion_fiscal() -> str:
 
 
 def seccion_robustez() -> str:
-    specs = {"neta": "Neta (principal)", "neta_libros": "Neta en libros", "bruta": "Bruta", "neta_dom": "Neta con tasas en pesos"}
+    specs = {"neta": "Neta (principal)", "neta_libros": "Neta en libros", "bruta": "Bruta", "neta_dom": "Neta con tasas en pesos", "neta_sin_retro": "Neta sin retroalimentación"}
     ind = {"base_p_noest_2030": ("No estabilización 2030 (%)", 100), "base_p_noest_2035": ("No estabilización 2035 (%)", 100),
            "base_d2035_media": ("Deuda media 2035 (% PIB)", 1), "base_ancho_p5_p95_2030": ("Ancho p5-p95 2030", 1),
            "vshare_fiscal": ("Varianza 2035: fiscal (%)", 1), "vshare_actividad": ("Varianza 2035: actividad (%)", 1),

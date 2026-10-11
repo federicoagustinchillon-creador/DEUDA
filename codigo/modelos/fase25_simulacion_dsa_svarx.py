@@ -67,6 +67,9 @@ SEMILLA = 20261012
 # (robustez: Cholesky en el orden pb, crec, EMBI, TCRM, que le atribuye al shock fiscal toda la
 # covarianza contemporanea con las demas variables; es el orden mas desfavorable para H1a).
 IDENT = "bp"
+# Arquitectura A (Paez, 2026): sin retroalimentacion de la deuda sobre el VARX (gamma_d = 0);
+# la diferencia con la especificacion principal (arquitectura B) mide cuanto pesa esa retroalimentacion.
+SIN_RETRO = False
 BLOQUES = {"fiscal": [0], "actividad": [1], "cambiario_y_riesgo": [2, 3]}
 
 
@@ -235,6 +238,15 @@ def impacto(u: np.ndarray) -> np.ndarray:
     """Matriz S (u = S eps) segun la identificacion elegida en IDENT."""
     if IDENT == "cholesky_fiscal_primero":
         return np.linalg.cholesky(np.cov(u, rowvar=False))
+    if IDENT == "cholesky_santiago":
+        # Orden propuesto en la metodologia de Paez (2026): crecimiento, TCRM, EMBI, resultado
+        # primario. Se calcula Cholesky en ese orden y se devuelven filas (variables) y columnas
+        # (shocks) al orden de ENDOG (pb, crec, EMBI, TCRM), para que BLOQUES siga valiendo.
+        orden = [1, 3, 2, 0]
+        L = np.linalg.cholesky(np.cov(u[:, orden], rowvar=False))
+        S = np.zeros_like(L)
+        S[np.ix_(orden, orden)] = L
+        return S
     return f24.identificar(u)
 
 
@@ -242,7 +254,7 @@ def parametros(res, X_cols: list[str]) -> dict:
     """Extrae del VARX estimado los objetos que usa la simulacion."""
     fed_cols = [c for c in X_cols if c.startswith("dFED")]
     return {"coefs": res.coefs, "gamma_fed": res.params.loc[fed_cols].values.T,
-            "gamma_d": res.params.loc["deuda_l1"].values, "S": impacto(res.resid.values)}
+            "gamma_d": 0.0 * res.params.loc["deuda_l1"].values if SIN_RETRO else res.params.loc["deuda_l1"].values, "S": impacto(res.resid.values)}
 
 
 def replicas(Y: pd.DataFrame, X: pd.DataFrame, p: int, B: int, rng) -> list[dict]:
@@ -274,7 +286,8 @@ def main() -> None:
     ap.add_argument("--N", type=int, default=400)
     ap.add_argument("--canal-domestico", action="store_true")
     ap.add_argument("--shocks", choices=["svarx", "fmi"], default="svarx")
-    ap.add_argument("--identificacion", choices=["bp", "cholesky_fiscal_primero"], default="bp")
+    ap.add_argument("--sin-retroalimentacion", action="store_true")
+    ap.add_argument("--identificacion", choices=["bp", "cholesky_fiscal_primero", "cholesky_santiago"], default="bp")
     a = ap.parse_args()
     rng = np.random.default_rng(SEMILLA)
     TABLAS.mkdir(parents=True, exist_ok=True)
@@ -302,9 +315,10 @@ def main() -> None:
     p, _, _ = f24.elegir_rezagos(Y, X)
     Y, X = f24.recortar(Y, X, p)  # muestra efectiva comun 1998T2-2025T4
     dom = a.canal_domestico
-    global IDENT
+    global IDENT, SIN_RETRO
     IDENT = a.identificacion
-    suf = (f"{a.deuda}_dom" if dom else a.deuda) + ("_chol" if IDENT != "bp" else "")
+    SIN_RETRO = a.sin_retroalimentacion
+    suf = (f"{a.deuda}_dom" if dom else a.deuda) + {"bp": "", "cholesky_fiscal_primero": "_chol", "cholesky_santiago": "_chol_santiago"}[IDENT] + ("_sin_retro" if SIN_RETRO else "")
     esc = escenario_fmi()
     d0, alfa, tcrm0 = condiciones_iniciales(a.deuda)
     sd_fed = float(pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"].diff().std(ddof=1))

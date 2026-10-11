@@ -12,4 +12,9 @@ Las respuestas son tres.
 
 **Implicancia.** El riesgo de la deuda argentina depende menos del esfuerzo fiscal, que el escenario base ya incorpora, que de la exposición al tipo de cambio real y a la prima de riesgo. Reducir la proporción de deuda en moneda extranjera y alargar los plazos atacan directamente los dos canales que dominan la varianza en esta tesis. Con eso no se reemplaza el superávit, pero se reduce la sensibilidad de la deuda a los shocks que el superávit no controla.
 
-**Líneas de trabajo futuro.** Tres extensiones se desprenden de las limitaciones: incorporar los activos del FGS cuando haya una serie trimestral pública, modelar una tasa en pesos homogénea para todo el período y estimar los canales de la FED con un panel de economías emergentes que dé más precisión a las respuestas indirectas.
+**Líneas de trabajo futuro.**
+
+- Estimar el sistema como un panel conjunto de Argentina y Chile. Levy Yeyati y Sturzenegger (2023) aplican su VAR país por país; un panel conjunto daría más precisión a las respuestas a la FED, que con una sola serie no son significativas.
+- Reemplazar la variación de la tasa de la FED por shocks monetarios identificados con datos de alta frecuencia, que aíslan la parte no anticipada de la política de Estados Unidos.
+- Incorporar los términos de intercambio como variable exógena, por su peso en la generación de divisas.
+- Restar los títulos públicos en cartera del FGS cuando haya una serie pública completa, y modelar una tasa en pesos homogénea para todo el período.

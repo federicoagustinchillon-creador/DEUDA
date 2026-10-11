@@ -201,7 +201,7 @@ def bootstrap(Y: pd.DataFrame, X: pd.DataFrame, base: dict, p: int, tam_fed: flo
         except (np.linalg.LinAlgError, ValueError):
             fallidas += 1
             continue
-        fila = {"rho_bohn": rb["rho"]}
+        fila = {"rho_bohn": rb["rho"], **{f"deuda_a_{c}": rb["res"].params.loc["deuda_l1", c] for c in ENDOG}}
         for h in range(horizonte + 1):
             for j, c in enumerate(ENDOG):
                 fila[f"fed_{c}_h{h}"] = rb["fed"][h, j]

@@ -62,6 +62,18 @@ panel de economías emergentes. La política fiscal argentina respondió a
 la deuda en el período, pero con un coeficiente chico. La simulación
 muestra si esa respuesta alcanza para estabilizarla.
 
+\textbf{Retroalimentación de la deuda.} La deuda rezagada entra en las
+cuatro ecuaciones del sistema, de modo que la deuda responde a los
+shocks y a su vez los afecta (Favero y Giavazzi, 2007). El efecto más
+claro es sobre el riesgo país: un punto más de deuda en relación con el
+PIB eleva el EMBI+ del trimestre siguiente en 22 puntos básicos, con un
+intervalo de 90\% del bootstrap de {[}11; 41{]}. El crecimiento también
+responde con signo positivo, {[}0,02; 0,12{]}, y el tipo de cambio real
+no responde, {[}-0,002; 0,003{]}. Junto con la reacción fiscal, el
+sistema tiene así dos mecanismos que actúan en sentidos opuestos cuando
+la deuda sube: el riesgo país la encarece y el superávit primario la
+reduce.
+
 \textbf{Respuesta a la tasa de la FED.} Un aumento de un desvío estándar
 en la tasa de política de la FED (0,50 puntos porcentuales) no produce
 respuestas sistemáticas de las variables domésticas (Figura 6.1). El
@@ -284,6 +296,17 @@ horizontes. El bloque cambiario y de riesgo pasa a explicar 66,9\% de la
 varianza de la deuda en 2035 y el efecto del ciclo 2022-2023 sube a 9,0
 puntos de probabilidad.
 
+\textbf{Sin retroalimentación de la deuda.} Si se anula el efecto de la
+deuda rezagada sobre las cuatro variables, la deuda se acumula por la
+identidad pero ya no realimenta al sistema. En ese caso, la probabilidad
+de no estabilización es de 11,6\% a cinco años y de 5,7\% a diez, el
+abanico se ensancha de 19,4 a 20,9 puntos y la contribución de los
+shocks no fiscales casi no cambia (61,4 puntos de diferencia con el
+fiscal). Los dos mecanismos de la sección 6.1 se compensan: el aumento
+del riesgo país que provoca una deuda mayor queda contrarrestado por la
+respuesta del superávit. La retroalimentación importa para la forma de
+la dinámica, pero no cambia las conclusiones sobre las hipótesis.
+
 \textbf{Shocks como los del FMI.} Con el procedimiento del abanico del
 FMI aplicado a las mismas series (sección 4.6), la probabilidad de no
 estabilización es de 23,5\% a cinco años y de 15,1\% a diez años, y el
@@ -322,6 +345,8 @@ SVARX, deuda bruta & 12,7\% {[}9,0; 17,0{]} & 7,3\% {[}4,0; 11,3{]} &
 20,9 \\
 SVARX, deuda neta con canal de tasas domésticas & 12,2\% {[}8,5; 16,0{]}
 & 7,6\% {[}3,7; 12,0{]} & 21,3 \\
+SVARX, deuda neta sin retroalimentación de la deuda & 11,6\% {[}7,8;
+15,5{]} & 5,7\% {[}2,8; 9,3{]} & 20,9 \\
 Shocks a la manera del FMI, deuda neta & 23,5\% & 15,1\% & 93,3 \\
 Shocks a la manera del FMI, deuda bruta & 25,2\% & 17,4\% & 118,4 \\
 FMI (2025), deuda federal bruta & 3,0\% & & 74,2 \\

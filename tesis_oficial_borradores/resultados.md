@@ -16,6 +16,8 @@ Todos los resultados de este capítulo salen de la misma muestra efectiva, 1998T
 
 El signo coincide con el que encuentran Celasun et al. (2006) en su panel de economías emergentes. La política fiscal argentina respondió a la deuda en el período, pero con un coeficiente chico. La simulación muestra si esa respuesta alcanza para estabilizarla.
 
+**Retroalimentación de la deuda.** La deuda rezagada entra en las cuatro ecuaciones del sistema, de modo que la deuda responde a los shocks y a su vez los afecta (Favero y Giavazzi, 2007). El efecto más claro es sobre el riesgo país: un punto más de deuda en relación con el PIB eleva el EMBI+ del trimestre siguiente en 22 puntos básicos, con un intervalo de 90% del bootstrap de [11; 41]. El crecimiento también responde con signo positivo, [0,02; 0,12], y el tipo de cambio real no responde, [-0,002; 0,003]. Junto con la reacción fiscal, el sistema tiene así dos mecanismos que actúan en sentidos opuestos cuando la deuda sube: el riesgo país la encarece y el superávit primario la reduce.
+
 **Respuesta a la tasa de la FED.** Un aumento de un desvío estándar en la tasa de política de la FED (0,50 puntos porcentuales) no produce respuestas sistemáticas de las variables domésticas (Figura 6.1). El EMBI+ sube 9 puntos básicos en el trimestre del shock, con un intervalo de 90% de [-83; 103], y 12 puntos básicos a los dos años, con un intervalo de [-14; 42]. De las 84 respuestas estimadas (cuatro variables en 21 horizontes), solo tres tienen una banda de 90% que excluye el cero: el crecimiento en el trimestre del shock (+0,5 puntos), el resultado primario un trimestre después (-0,35 puntos del PIB) y el tipo de cambio real tres trimestres después (una leve apreciación). Con bandas de 90%, el azar ya produciría unas ocho exclusiones aunque la FED no tuviera ningún efecto, y los signos del crecimiento y del tipo de cambio real son los contrarios a los que predice la teoría. Con 111 trimestres y un shock chico, el modelo no puede distinguir los efectos indirectos de la FED del ruido.
 
 ![Figura 6.1. Respuestas al impulso ante una suba de la tasa de la FED. Aumento de un desvío estándar (0,50 puntos porcentuales) de la tasa de política; deuda consolidada neta, tres rezagos; bandas de 90% del bootstrap salvaje (1.000 réplicas).](../tesis/figuras/fig6_1_respuesta_fed.png)
@@ -81,6 +83,8 @@ Para saber por qué canal pasa el efecto, se repitió el escenario de 2022-2023 
 
 **Canal de tasas domésticas.** Si el riesgo país también encarece la deuda en pesos (sección 4.6), la probabilidad de no estabilización sube a 12,2% a cinco años y a 7,6% a diez años, con límites inferiores de 8,5% y 3,7%: con este canal, H1b queda respaldada en los dos horizontes. El bloque cambiario y de riesgo pasa a explicar 66,9% de la varianza de la deuda en 2035 y el efecto del ciclo 2022-2023 sube a 9,0 puntos de probabilidad.
 
+**Sin retroalimentación de la deuda.** Si se anula el efecto de la deuda rezagada sobre las cuatro variables, la deuda se acumula por la identidad pero ya no realimenta al sistema. En ese caso, la probabilidad de no estabilización es de 11,6% a cinco años y de 5,7% a diez, el abanico se ensancha de 19,4 a 20,9 puntos y la contribución de los shocks no fiscales casi no cambia (61,4 puntos de diferencia con el fiscal). Los dos mecanismos de la sección 6.1 se compensan: el aumento del riesgo país que provoca una deuda mayor queda contrarrestado por la respuesta del superávit. La retroalimentación importa para la forma de la dinámica, pero no cambia las conclusiones sobre las hipótesis.
+
 **Shocks como los del FMI.** Con el procedimiento del abanico del FMI aplicado a las mismas series (sección 4.6), la probabilidad de no estabilización es de 23,5% a cinco años y de 15,1% a diez años, y el ancho del abanico en 2030 es de 93,3 puntos. Con la deuda bruta, las cifras son 25,2%, 17,4% y 118,4. Las dos formas de generar los shocks llevan a la misma conclusión sobre H1b. La del FMI da probabilidades y anchos mucho mayores.
 
 **Tabla 6.2. Resumen de robustez de H1b**
@@ -91,6 +95,7 @@ Para saber por qué canal pasa el efecto, se repitió el escenario de 2022-2023 
 | SVARX, deuda neta a valor libros | 13,0% [9,0; 17,8] | 6,8% [3,3; 10,8] | 19,9 |
 | SVARX, deuda bruta | 12,7% [9,0; 17,0] | 7,3% [4,0; 11,3] | 20,9 |
 | SVARX, deuda neta con canal de tasas domésticas | 12,2% [8,5; 16,0] | 7,6% [3,7; 12,0] | 21,3 |
+| SVARX, deuda neta sin retroalimentación de la deuda | 11,6% [7,8; 15,5] | 5,7% [2,8; 9,3] | 20,9 |
 | Shocks a la manera del FMI, deuda neta | 23,5% | 15,1% | 93,3 |
 | Shocks a la manera del FMI, deuda bruta | 25,2% | 17,4% | 118,4 |
 | FMI (2025), deuda federal bruta | 3,0% | | 74,2 |

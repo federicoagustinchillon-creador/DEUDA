@@ -104,7 +104,7 @@ comparar con su resultado.
 | 8 | El canal cuasifiscal del shock de la FED se redacta en pasado. | Los pasivos remunerados del BCRA se redujeron a niveles mínimos desde 2024. |
 | 9 | El módulo de balanza de pagos (exportaciones, importaciones, inversión extranjera directa, fuga de capitales, renovación de vencimientos, necesidades de financiamiento) queda fuera y pasa a investigación futura. | No está especificado, y su tamaño es el de otra tesis. |
 | 10 | Todo umbral, corte o tamaño de shock tiene que tener una justificación escrita, propia o citada. | Criterio del grupo. |
-| 11 | Ventana única: todas las especificaciones se estiman sobre la misma muestra efectiva, 1998T2-2025T4, y los primeros trimestres de 1996-1998 se usan como condiciones iniciales de los rezagos. | Los criterios de información solo se pueden comparar entre órdenes sobre un mismo período (Lütkepohl, 2005, sec. 4.3), y así la deuda neta, la neta en libros y la bruta se estiman sobre los mismos trimestres. |
+| 11 | Una sola muestra de estimación: todas las especificaciones se estiman sobre la misma muestra efectiva, 1998T2-2025T4, y los primeros trimestres de 1996-1998 se usan como condiciones iniciales de los rezagos. | Los criterios de información solo se pueden comparar entre órdenes sobre un mismo período (Lütkepohl, 2005, sec. 4.3), y así la deuda neta, la neta en libros y la bruta se estiman sobre los mismos trimestres. |
 | 12 | H1b se contrasta a cinco años (2030), el horizonte de la métrica del FMI, y a diez años (2035). | El 3% del FMI se mide a cinco años; 2035 es el final del horizonte de la tesis. |
 | 13 | El shock de la FED se mide de dos maneras: un desvío estándar (0,50 puntos) y el ciclo de 2022-2023 (5,25 puntos). | Convención de la literatura de VAR y episodio histórico reciente. |
 | 14 | La especificación principal es el SVARX; los shocks a la manera del FMI se informan como comparación. La elección se fijó antes de ver los resultados. | Solo los shocks identificados permiten contrastar H1a (bloques de shocks) y H2 (shock externo). |
@@ -128,7 +128,7 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 ### Etapa 4. Metodología (hecha)
 
-- SVARX, identificación, ventana única, rezagos con regla AIC más estabilidad, canales de la FED, variantes y criterios de contraste (Capítulo 4).
+- SVARX, identificación, muestra de estimación común, rezagos con regla AIC más estabilidad, canales de la FED, variantes y criterios de contraste (Capítulo 4).
 
 ### Etapa 5. Estimación (hecha)
 
@@ -166,13 +166,15 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 ### 5.3 Decisiones abiertas para el grupo
 
-1. **Robustez de H1a a la identificación.** Con la identificación principal (Blanchard y Perotti para el shock fiscal), los shocks no fiscales superan al fiscal en el 99% de las réplicas, con un intervalo de 90% de [17,5; 93,0]. Con una identificación de Cholesky que ordena el shock fiscal primero, se le atribuye a lo fiscal toda la covarianza contemporánea con las demás variables; es el ordenamiento más favorable a lo fiscal. Con ese ordenamiento, la participación fiscal sube a 33%, la cambiaria y de riesgo queda en 59%, y lo no fiscal supera a lo fiscal en el 78% de las réplicas. Pero el intervalo de la diferencia, [-43; 87], incluye el cero. H1b y H2 no cambian. Hay que decidir cómo se presenta: la propuesta es informarlo en la sección de robustez y en las limitaciones, y decir que H1a depende de identificar el shock fiscal con la elasticidad de Blanchard y Perotti, que es la que justifica la sección 4.4. No se escribió todavía en la tesis.
+1. **Robustez de H1a a la identificación.** Con la identificación principal (Blanchard y Perotti para el shock fiscal), los shocks no fiscales superan al fiscal en el 99% de las réplicas, con un intervalo de 90% de [17,5; 93,0]. Con una identificación de Cholesky que ordena el shock fiscal primero, se le atribuye a lo fiscal toda la covarianza contemporánea con las demás variables; es el ordenamiento más favorable a lo fiscal. Con ese ordenamiento, la participación fiscal sube a 33%, la cambiaria y de riesgo queda en 59%, y lo no fiscal supera a lo fiscal en el 78% de las réplicas. Pero el intervalo de la diferencia, [-43; 87], incluye el cero. H1b y H2 no cambian. Con el orden de Cholesky que propuso Santiago en su metodología (crecimiento, TCRM, EMBI+, resultado primario), H1a queda más respaldada: 79 puntos de diferencia, con un intervalo de [38; 96]. Hay que decidir cómo se presenta: la propuesta es informarlo en la sección de robustez y en las limitaciones, y decir que H1a depende de identificar el shock fiscal con la elasticidad de Blanchard y Perotti, que es la que justifica la sección 4.4. No se escribió todavía en la tesis.
 2. **Deuda neta con o sin FGS.** Cuando esté la serie del FGS, hay que definir si la deuda neta sin el FGS pasa a ser la especificación principal, porque es la más parecida a la del FMI, o si queda como robustez. En los dos casos hay que reestimar y volver a simular.
+
+3. **Propuestas del grupo ya incorporadas el 11/10.** Por un lado, la retroalimentación entre la deuda y las variables (arquitectura B de Santiago): un punto más de deuda sube el EMBI+ 22 puntos básicos [11; 41], y está en la sección 6.1. Por otro, el contraste sin retroalimentación (arquitectura A), en la sección 6.6. Se repuso además en las líneas futuras el panel Argentina-Chile (decisión del 17/9), y se sumaron los shocks de la FED de alta frecuencia y los términos de intercambio que proponía Santiago.
 
 ### 5.4 Otras tareas
 
 - Revisión del texto completo por el grupo y por Pablo.
-- Confirmar en el reglamento de tesis de la FCE si hace falta un resumen en inglés y una extensión máxima.
+- Confirmado: no se pide resumen en inglés y la extensión tiene que ser corta. Candidato a recortar: el capítulo de Datos, llevando el detalle de construcción al apéndice.
 - Hecho: se borraron de `tesis/figuras/` las figuras de los modelos viejos que ya no usaba ningún capítulo (quedan en el historial de git).
 
 ## Referencias de este documento
