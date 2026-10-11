@@ -10,13 +10,13 @@ Las marcas `[VERIFICAR]` y `[DECIDIR]` son pendientes y se borran antes de pasar
 
 La historia macroeconómica de América Latina, y de la República Argentina en particular, está atravesada por un patrón recurrente de dependencia del crédito externo, vulnerabilidad ante la interrupción repentina de los flujos de capital (*sudden stops*)[^1] y crisis de impago soberano (Comín Comín, 2014, p. 699; Reinhart y Rogoff, 2009). En el caso argentino, ese patrón fue relevado por la historiografía económica desde mediados del siglo XX (Díaz Alejandro, 1970; della Paolera y Taylor, 2001; Rapoport, 2020) y volvió a manifestarse en el default de 2001 y en la reestructuración de 2020. Ambos episodios dejaron en evidencia la vulnerabilidad de una economía condicionada por la restricción externa de divisas.
 
-La administración que asumió en diciembre de 2023 recibió un elevado stock de pasivos y un acceso muy limitado al crédito voluntario. El regreso a los mercados fue gradual: la primera colocación en dólares se realizó en diciembre de 2025, por USD 1.000 millones a una tasa de 9,26% anual y bajo legislación local. [VERIFICAR antes de entregar: si hubo emisión bajo ley de Nueva York en 2026.] A fines de julio de 2026, la deuda en moneda extranjera de la Administración Central sumaba USD 248.458 millones, y los vencimientos en divisas previstos para el resto del año alcanzaban USD 5.080 millones, de los cuales el 53,5% correspondía a pagos al Fondo Monetario Internacional (FMI) (Oficina de Presupuesto del Congreso [OPC], 2026).
+La administración que asumió en diciembre de 2023 recibió un elevado stock de pasivos y un acceso muy limitado al crédito voluntario. El regreso a los mercados fue gradual: la primera colocación en dólares se realizó en diciembre de 2025, con un bono a 2029 bajo legislación local por USD 1.000 millones de valor nominal y un rendimiento de 9,26% anual (Secretaría de Finanzas, 2025). A fines de julio de 2026, la deuda en moneda extranjera de la Administración Central sumaba USD 248.458 millones, y los vencimientos en divisas previstos para el resto del año alcanzaban USD 5.080 millones, de los cuales el 53,5% correspondía a pagos al Fondo Monetario Internacional (FMI) (Oficina de Presupuesto del Congreso [OPC], 2026).
 
 ## 1.2 Planteamiento del problema
 
 Frente a esta coyuntura, surge la necesidad de evaluar si la consecución de un superávit fiscal primario y la voluntad política de pago bastan para asegurar la sostenibilidad de la deuda en el mediano plazo. La alternativa es que los determinantes estructurales de la economía argentina condicionen el resultado fiscal e incrementen la probabilidad de un nuevo default o reestructuración soberana.
 
-La evidencia internacional matiza la premisa de que la consolidación presupuestaria alcanza para disipar el riesgo de impago: en promedio, los ajustes fiscales discrecionales tienen un efecto reducido sobre la ratio de deuda, y solo se asocian con reducciones duraderas cuando se aplican en fases de expansión económica (Ando et al., 2025). La sostenibilidad depende además de otros factores. Uno es la capacidad de la economía de generar las divisas que exige el servicio de una deuda dolarizada (Calvo et al., 2003). Otro es el efecto de valuación del tipo de cambio real sobre los pasivos en moneda extranjera (Levy Yeyati y Sturzenegger, 2023). Se suman la volatilidad de los spreads de riesgo país ante shocks financieros externos (Adler y Sosa, 2014) y la menor tolerancia a la deuda de las economías con historia de default (Reinhart et al., 2003). Por último, la incertidumbre macroeconómica reduce el nivel de deuda que un gobierno puede sostener (Mendoza y Oviedo, 2007), y existe un límite político e institucional a los superávits que una sociedad acepta de manera prolongada, conocido como fatiga fiscal (Ghosh et al., 2013).
+La evidencia internacional matiza la premisa de que la consolidación presupuestaria alcanza para disipar el riesgo de impago: en promedio, los ajustes fiscales discrecionales tienen un efecto reducido sobre la ratio de deuda, y solo se asocian con reducciones duraderas cuando se aplican en fases de expansión económica (Ando et al., 2025). La sostenibilidad depende además de otros factores. Uno es la capacidad de la economía de generar las divisas que exige el servicio de una deuda dolarizada (Calvo et al., 2003). Otro es el efecto de valuación del tipo de cambio real sobre los pasivos en moneda extranjera (Levy Yeyati y Sturzenegger, 2023). Se suman la exposición de la deuda a las condiciones financieras externas (Adler y Sosa, 2013) y la menor tolerancia a la deuda de las economías con historia de default (Reinhart et al., 2003). Por último, la incertidumbre macroeconómica reduce el nivel de deuda que un gobierno puede sostener (Mendoza y Oviedo, 2009), y existe un límite político e institucional a los superávits que una sociedad acepta de manera prolongada, conocido como fatiga fiscal (Ghosh et al., 2013).
 
 ## 1.3 Preguntas de investigación
 
@@ -24,7 +24,7 @@ La pregunta principal es: ¿en qué medida el crecimiento, el tipo de cambio rea
 
 Como pregunta específica, se plantea: ¿cómo y en qué magnitud impactaría un endurecimiento de la política monetaria de la Reserva Federal de los Estados Unidos (FED) sobre la dinámica de la deuda pública consolidada argentina y sobre su probabilidad de no estabilizarse durante 2026-2035?
 
-La elección de esta perturbación se fundamenta en que opera simultáneamente sobre varios canales. Encarece el financiamiento externo y eleva el riesgo soberano (Klemm et al., 2014). Desencadena una depreciación del tipo de cambio real, con efectos de valuación sobre los pasivos dolarizados (Adler y Sosa, 2014; Calvo et al., 2003). Deprime el crecimiento y, con ello, deteriora el diferencial entre la tasa de interés y el crecimiento (Blanchard, 2019; Neumeyer y Perri, 2005; Uribe y Yue, 2006). Por último, condiciona la transmisión de la política monetaria doméstica en las economías emergentes (Renzhi y Beirne, 2024). En Argentina, ese último canal operó durante buena parte del período histórico a través del costo de los pasivos remunerados del BCRA, cuyo stock llegó a 18,4% del PIB en 2023 y cayó a 2,2% en 2024, cuando la esterilización monetaria pasó al Tesoro (FMI, 2025, anexo II, cuadro 2).
+La elección de esta perturbación se fundamenta en que opera simultáneamente sobre varios canales. Encarece el financiamiento externo y eleva el riesgo soberano (Uribe y Yue, 2006). Desencadena una depreciación del tipo de cambio real, con efectos de valuación sobre los pasivos dolarizados (Calvo et al., 2003). Deprime el crecimiento y, con ello, deteriora el diferencial entre la tasa de interés y el crecimiento (Blanchard, 2019; Neumeyer y Perri, 2005; Uribe y Yue, 2006). Por último, condiciona la transmisión de la política monetaria doméstica en las economías emergentes (Renzhi y Beirne, 2024). En Argentina, ese último canal operó durante buena parte del período histórico a través del costo de los pasivos remunerados del BCRA, cuyo stock llegó a 18,4% del PIB en 2023 y cayó a 2,2% en 2024, cuando la esterilización monetaria pasó al Tesoro (FMI, 2025, anexo II, cuadro 2).
 
 ## 1.4 Objetivos
 
@@ -66,34 +66,9 @@ El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El Capí
 
 ---
 
-## Referencias citadas en la Introducción
+## Referencias
 
-- Adler, G., y Sosa, S. (2014). External conditions and debt sustainability in Latin America. En D. Iakova, L. M. Cubeddu, G. Adler y S. Sosa (Eds.), *Latin America: New challenges to growth and stability*. Fondo Monetario Internacional.
-- Ando, S., Mishra, P., Patel, N., Peralta-Alva, A., y Presbitero, A. F. (2025). Fiscal consolidation and public debt. *Journal of Economic Dynamics and Control*, 170. [VERIFICAR número de artículo. Versión previa: CEPR DP 18548, 2023.]
-- Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, 109(4), 1197-1229.
-- Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchange rate, and fiscal sustainability: Argentina's lessons* (NBER Working Paper No. 9828).
-- Comín Comín, F. (2014). *Historia económica mundial: De los orígenes a la actualidad*. Alianza Editorial.
-- della Paolera, G., y Taylor, A. M. (2001). *Straining at the anchor: The Argentine currency board and the search for macroeconomic stability, 1880-1935*. University of Chicago Press.
-- Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
-- Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper, aprobado por el Directorio el 14 de enero de 2021).
-- Fondo Monetario Internacional. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 24/167). [VERIFICAR número: en `referencias.bib` figura como "Eighth and Ninth Reviews".]
-- Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, 123(566), F4-F30.
-- Klemm, A., Meier, A., y Sosa, S. (2014). Spillovers to Latin America from the normalization of U.S. monetary policy. En Iakova et al. (Eds.), *op. cit.*
-- Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84.
-- Medeiros, J. (2012). *Stochastic debt simulation using VAR models and a panel fiscal reaction function* (European Economy Economic Papers 459). Comisión Europea.
-- Mendoza, E. G., y Oviedo, P. M. (2007). Public debt, fiscal solvency and macroeconomic uncertainty in Latin America. *Economía*. [COMPLETAR volumen y páginas.]
-- Neumeyer, P. A., y Perri, F. (2005). Business cycles in emerging economies: The role of interest rates. *Journal of Monetary Economics*, 52(2), 345-380.
-- Oficina de Presupuesto del Congreso. (2026). *Operaciones de deuda pública, julio 2026*. https://opc.gob.ar/operaciones-de-deuda-publica/operaciones-de-deuda-publica-julio-2026/
-- Rapoport, M. (2020). *Historia económica, política y social de la Argentina (1880-2003)*. Crítica.
-- Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centuries of financial folly*. Princeton University Press.
-- Reinhart, C. M., Rogoff, K. S., y Savastano, M. A. (2003). Debt intolerance. *Brookings Papers on Economic Activity*, 2003(1), 1-74.
-- Renzhi, N., y Beirne, J. (2024). *Global shocks and monetary policy transmission in emerging markets* (ADB Economics Working Paper No. 726). Asian Development Bank.
-- Uribe, M., y Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? *Journal of International Economics*, 69(1), 6-36.
-- Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública (2021). Boletín Oficial de la República Argentina, 3 de marzo de 2021.
-- Fuente del dato de la colocación de diciembre de 2025: [VERIFICAR y citar fuente oficial, Secretaría de Finanzas o BCRA, no la nota periodística.]
-
----
-
+Ver `referencias_y_notas_cap1_2_v3.md` (lista única de Introducción y Antecedentes, verificada).
 
 ## Nota 1: criterio de H1b
 

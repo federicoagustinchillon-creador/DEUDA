@@ -43,7 +43,7 @@ def armar_capitulos_1_2() -> Path:
     """Concatena los borradores de los capitulos 1 y 2 en un unico Markdown temporal."""
     intro = (BASE / "introduccion_v3.md").read_text(encoding="utf-8")
     inicio = intro.index("## 1.1 Contextualización")
-    fin = intro.index("## Referencias citadas en la Introducción")
+    fin = intro.index("## Referencias\n")
     cuerpo_intro = intro[inicio:fin].rstrip().rstrip("-").rstrip()
     antecedentes = (BASE / "antecedentes_v3.md").read_text(encoding="utf-8")
     refs_notas = (BASE / "referencias_y_notas_cap1_2_v3.md").read_text(encoding="utf-8")

@@ -1,36 +1,35 @@
 # Referencias
 
-- Adler, G., y Magud, N. E. (2014). [VERIFICAR: en `referencias.bib` figura *Four decades of terms-of-trade booms: A metric of income windfall* (IMF Working Paper WP/14/103), y Santiago cita *Terms-of-trade booms: Saving-investment patterns and a new metric of income windfall* (capítulo del libro del FMI editado por Iakova et al.). Son dos versiones distintas: elegir la que respalda lo que se afirma.]
-- Adler, G., y Sosa, S. (2014). [VERIFICAR: en `referencias.bib` figura *Global financial shocks and their transmission to emerging markets* (IMF Working Paper WP/14/72), y Santiago cita *External conditions and debt sustainability in Latin America* (capítulo del mismo libro del FMI). Son trabajos distintos. Hay que confirmar en cuál están el resultado de "más de la mitad de la variabilidad de las entradas de capital" y la asimetría argentina.]
-- Ando, S., Mishra, P., Patel, N., Peralta-Alva, A., y Presbitero, A. F. (2025). Fiscal consolidation and public debt. *Journal of Economic Dynamics and Control*, 170. [VERIFICAR número de artículo.]
+- Adler, G., Djigbenou, M.-L., y Sosa, S. (2016). Global financial shocks and foreign asset repatriation: Do local investors play a stabilizing role? *Journal of International Money and Finance*, 60, 8-28.
+- Adler, G., y Sosa, S. (2013). *External conditions and debt sustainability in Latin America* (IMF Working Paper No. 13/27). Fondo Monetario Internacional.
+- Ando, S., Mishra, P., Patel, N., Peralta-Alva, A., y Presbitero, A. F. (2025). Fiscal consolidation and public debt. *Journal of Economic Dynamics and Control*, 170, artículo 104998. https://doi.org/10.1016/j.jedc.2024.104998
 - Aruguete, E. (2021). Crisis de balanza de pagos y recuperación de la sostenibilidad de la deuda pública en la Argentina (2016-2020). *Revista Estado y Políticas Públicas*, (16), 101-123.
 - Blanchard, O. (1990). *Suggestions for a new set of fiscal indicators* (OECD Economics Department Working Papers No. 79). OECD Publishing.
 - Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, 109(4), 1197-1229.
 - Bohoslavsky, J. P., y Cantamutto, F. J. (2024). Deuda pública y desarrollo (no)sustentable en Argentina. Una visión crítica sobre la especialización productiva. *FACES*, 30(62), 1-18.
-- Bouabdallah, O., Checherita-Westphal, C., Warmedinger, T., de Stefani, R., Drudi, F., Setzer, R., y Westphal, A. (2017). *Debt sustainability analysis for euro area sovereigns: A methodological framework* (ECB Occasional Paper No. 185). Banco Central Europeo. [VERIFICAR autores y que sostenga la absorción de la fatiga fiscal en los marcos europeos.]
+- Bouabdallah, O., Checherita-Westphal, C., Warmedinger, T., de Stefani, R., Drudi, F., Setzer, R., y Westphal, A. (2017). *Debt sustainability analysis for euro area sovereigns: A methodological framework* (ECB Occasional Paper No. 185). Banco Central Europeo.
 - Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchange rate, and fiscal sustainability: Argentina's lessons* (NBER Working Paper No. 9828).
 - Cantamutto, F. J., y Féliz, M. (2021). Argentina entre la sostenibilidad de la deuda y la vida. *Revista Nuestramérica*, 9(17), e6167845.
 - Cantamutto, F. J., Lobato, J., Rodríguez-Enríquez, C., y Féliz, M. (2024). Sustentabilidad de la deuda y derechos humanos desde la perspectiva de la sostenibilidad de la vida. En J. P. Bohoslavsky y M. L. Clérico (Eds.), *Deuda y derechos humanos: Claves desde el sistema interamericano* (pp. 170-195). EDULP.
 - Celasun, O., Debrun, X., y Ostry, J. D. (2006). *Primary surplus behavior and risks to fiscal sustainability in emerging market countries: A "fan-chart" approach* (IMF Working Paper WP/06/67).
-- Cetrángolo, O., Damill, M., Frenkel, R., y Jiménez, J. P. (1997). [VERIFICAR: en `referencias.bib` figura *Sector público argentino: Ahorro, inversión y financiamiento (1975-1996)* (CEPAL, Oficina en Buenos Aires), y Santiago cita *La sostenibilidad de la política fiscal en América Latina: El caso argentino* (CEDES). Confirmar cuál es el documento descripto.]
+- Cetrángolo, O., Damill, M., Frenkel, R., y Jiménez, J. P. (1997). *La sostenibilidad de la política fiscal en América Latina: El caso argentino* (Documento de Trabajo R-315). Banco Interamericano de Desarrollo, Red de Centros de Investigación.
 - Comín Comín, F. (2014). *Historia económica mundial: De los orígenes a la actualidad*. Alianza Editorial.
 - Damill, M., Frenkel, R., y Rapetti, M. (2015). Macroeconomic policy in Argentina during 2002-2013. *Comparative Economic Studies*, 57(3), 369-400.
 - della Paolera, G., y Taylor, A. M. (2001). *Straining at the anchor: The Argentine currency board and the search for macroeconomic stability, 1880-1935*. University of Chicago Press.
 - Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
 - Everaert, G., y Jansen, S. (2018). On the estimation of panel fiscal reaction functions: Heterogeneity or fiscal fatigue? *Economic Modelling*, 70, 87-96.
 - Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper). Aprobado por el Directorio el 14 de enero de 2021.
-- Fondo Monetario Internacional. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility* (IMF Country Report). [VERIFICAR número: Santiago cita 24/167; `referencias.bib` dice "Eighth and Ninth Reviews".]
+- Fondo Monetario Internacional. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 24/167).
 - Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95). Anexo II: Application of the Sovereign Risk and Debt Sustainability Framework.
 - Fondo Monetario Internacional y Mecanismo Europeo de Estabilidad. (2023). *The stochastic debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs* [Presentación, 30 de noviembre de 2023].
 - Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, 123(566), F4-F30.
 - González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo.
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, 107(10), 3119-3145.
-- Klemm, A., Meier, A., y Sosa, S. (2014). Spillovers to Latin America from the normalization of U.S. monetary policy. En D. Iakova, L. M. Cubeddu, G. Adler y S. Sosa (Eds.), *Latin America: New challenges to growth and stability*. Fondo Monetario Internacional.
-- Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84.
+- Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84. https://doi.org/10.1111/1475-5890.12319
 - Ley 27.541 de Solidaridad Social y Reactivación Productiva en el Marco de la Emergencia Pública (2019). Boletín Oficial de la República Argentina, 23 de diciembre de 2019.
 - Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública (2021). Boletín Oficial de la República Argentina, 3 de marzo de 2021.
 - Medeiros, J. (2012). *Stochastic debt simulation using VAR models and a panel fiscal reaction function: Results for a selected number of countries* (European Economy Economic Papers 459). Comisión Europea.
-- Mendoza, E. G., y Oviedo, P. M. (2007). Public debt, fiscal solvency and macroeconomic uncertainty in Latin America. *Economía*. [COMPLETAR volumen y páginas.]
+- Mendoza, E. G., y Oviedo, P. M. (2009). Public debt, fiscal solvency and macroeconomic uncertainty in Latin America: The cases of Brazil, Colombia, Costa Rica and Mexico. *Economía Mexicana. Nueva Época*, 18(2), 133-177.
 - Neumeyer, P. A., y Perri, F. (2005). Business cycles in emerging economies: The role of interest rates. *Journal of Monetary Economics*, 52(2), 345-380.
 - Oficina de Presupuesto del Congreso. (2026). *Operaciones de deuda pública, julio 2026*.
 - Porto, A. (2020). *Evolución del sector público argentino en el largo plazo* (Documento de Trabajo N.° 36). CEFIP, Universidad Nacional de La Plata.
@@ -38,13 +37,14 @@
 - Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centuries of financial folly*. Princeton University Press.
 - Reinhart, C. M., Rogoff, K. S., y Savastano, M. A. (2003). Debt intolerance. *Brookings Papers on Economic Activity*, 2003(1), 1-74.
 - Renzhi, N., y Beirne, J. (2024). *Global shocks and monetary policy transmission in emerging markets* (ADB Economics Working Paper No. 726). Asian Development Bank.
+- Secretaría de Finanzas, Ministerio de Economía. (2025, 10 de diciembre). *Resultado de licitación del Bono del Tesoro Nacional en dólares estadounidenses 6,50% con vencimiento 30 de noviembre de 2029* [Comunicado]. https://www.argentina.gob.ar/noticias/resultado-de-licitacion-del-bono-del-tesoro-nacional-en-dolares-estadounidenses-650-con
 - Rigobon, R. (2003). Identification through heteroskedasticity. *The Review of Economics and Statistics*, 85(4), 777-792.
 - Rigobon, R., y Sack, B. (2004). The impact of monetary policy on asset prices. *Journal of Monetary Economics*, 51(8), 1553-1575.
 - Rodríguez, A. (2023). Financiamiento y sostenibilidad de la deuda pública: El caso de la economía argentina (2001-2022). *Ciencias Económicas*, 2(20).
 - Roldán, V. (2021). *La renegociación por la reestructuración de la deuda soberana argentina con los acreedores privados poseedores de instrumentos bajo jurisdicción extranjera durante 2020* [Tesina de grado]. Universidad Nacional de Rosario.
 - Sanches, P. (2019). *Análisis de la sostenibilidad de la deuda soberana argentina. 2019-2023* [Tesis de maestría]. Universidad Torcuato Di Tella.
 - Uribe, M., y Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? *Journal of International Economics*, 69(1), 6-36.
-- Wijayanti, R., y Rachmanira, S. (2020). [VERIFICAR: en `referencias.bib` figura como ponencia (*An early warning system for sovereign debt crisis in developing countries: A signal approach*, International Conference on Business, Economics, Social Sciences, and Humanities), y Santiago la cita como artículo en *Journal of Central Banking Theory and Practice*, 9 (número especial), 103-124. Confirmar cuál es.]
+- Wijayanti, R., y Rachmanira, S. (2020). Early warning system for government debt crisis in developing countries. *Journal of Central Banking Theory and Practice*, 9(número especial), 103-124.
 
 ---
 
@@ -92,14 +92,7 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
 - **Afirmación corregida:** se reescribió la idea de que el marco del FMI excluye al BCRA. El marco lo admite (FMI, 2021). En su análisis de Argentina, el FMI usa la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025).
 - **Párrafo cortado:** el párrafo de Santiago sobre la subordinación del BCRA, que estaba cortado, se completó y quedó marcado para verificar.
 
-## Nota 4. Pendientes de verificación
+## Nota 4. Pendientes
 
-- Si hubo emisión bajo ley de Nueva York en 2026.
-- La fuente oficial de la colocación de diciembre de 2025.
-- El nivel de los pasivos del BCRA a fines de 2025 en nuestra serie.
-- Las cuatro referencias con dos versiones distintas: Adler y Sosa, Adler y Magud, Cetrángolo et al., y Wijayanti y Rachmanira.
-- Bouabdallah et al. (2017).
-- Las cifras de FMI (2024).
-- Porto (2020) y Damill et al. (2015) para el párrafo del BCRA.
-- Klemm et al. (2014).
-- Levy Yeyati y Sturzenegger: confirmar que su VAR no incluye riesgo soberano.
+- Adler y Sosa: la versión de Santiago les atribuía un VAR global con un índice de precios netos de materias primas, que "más de la mitad" de la variabilidad de los flujos de capital responde a condiciones internacionales y una asimetría argentina. Nada de eso aparece en los trabajos de esos autores que se pudieron leer. El párrafo se reescribió con lo verificado. Si Santiago tiene la página de donde salió, se puede recuperar.
+- Klemm et al. (2014) y Adler y Magud (2014) salieron del texto: no se pudo leer el capítulo de Klemm et al., y en Adler y Magud no está definido el índice que se les atribuía.
