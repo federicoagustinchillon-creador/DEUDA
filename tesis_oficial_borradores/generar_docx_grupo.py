@@ -31,6 +31,7 @@ SALIDA = BASE / "para_el_grupo"
 ARCHIVOS: dict[str, str] = {
     "plan_de_labor_grupo.md": "Plan_de_labor.docx",
     "_capitulos_1_2_v3.md": "Introduccion_y_Antecedentes_v3.docx",
+    "especificacion_svarx_v1.md": "Especificacion_SVARX_v1.docx",
 }
 
 # Documento unico para el grupo: cuerpo de la Introduccion (secciones 1.1 a 1.8, sin el
