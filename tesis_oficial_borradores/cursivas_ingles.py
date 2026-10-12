@@ -27,8 +27,19 @@ DEFINICIONES = {
     "bootstrap": "Método de remuestreo que aproxima la distribución de un estimador repitiendo la estimación sobre muestras generadas a partir de los propios datos.",
     "stock": "Saldo de una variable en un momento dado, por oposición a un flujo.",
     "swap": "Acuerdo de intercambio de monedas entre bancos centrales.",
+    "stripped spread": "Diferencial de rendimiento de un bono Brady calculado sobre la parte no garantizada de sus flujos, una vez descontado el valor de las garantías en bonos del Tesoro de Estados Unidos.",
+    "brady": "Bonos emitidos por países en desarrollo en la década de 1990 para canjear préstamos bancarios en cesación de pagos, según el plan que lleva el nombre del secretario del Tesoro de Estados Unidos Nicholas Brady.",
 }
-PATRON = re.compile(r"(?<![\w*\-/])(shocks?|spreads?|default|bootstrap|stocks?|swaps?)(?![\w*\-/])", re.IGNORECASE)
+# Términos que van en cursiva. "stripped spreads?" va antes que "spreads?" para que la
+# alternancia tome la expresión completa. "holdouts" y "Ponzi" van en cursiva pero no reciben
+# nota automática ("holdouts" ya tiene su nota en antecedentes.md).
+TERMINOS = r"stripped spreads?|spreads?|shocks?|default|bootstrap|stocks?|swaps?|holdouts?|Brady|Ponzi"
+PATRON = re.compile(rf"(?<![\w*\-/])({TERMINOS})(?![\w*\-/])", re.IGNORECASE)
+
+
+def _slug(raiz: str) -> str:
+    """Identificador de nota al pie válido para pandoc (sin espacios)."""
+    return raiz.replace(" ", "-")
 
 
 def cursivas(md: str) -> str:
@@ -43,13 +54,17 @@ def cursivas(md: str) -> str:
 
 
 def _raiz(termino: str) -> str:
-    t = termino.lower()
+    t = re.sub(r"\s+", " ", termino.lower())
     return t[:-1] if t.endswith("s") and t[:-1] in DEFINICIONES else t
 
 
 def notas_primera_aparicion() -> None:
     pendientes = set(DEFINICIONES)
-    patron = re.compile(r"(?<![\w\-/])\*?(shocks?|spreads?|default|bootstrap|stocks?|swaps?)\*?(?![\w\-/])", re.IGNORECASE)
+    # Un término que ya tiene su nota en cualquier capítulo no vuelve a recibirla.
+    for nombre in ORDEN:
+        existente = (BASE / nombre).read_text(encoding="utf-8")
+        pendientes -= {r for r in DEFINICIONES if f"[^en-{_slug(r)}]:" in existente}
+    patron = re.compile(rf"(?<![\w\-/])\*?({TERMINOS})\*?(?![\w\-/])", re.IGNORECASE)
     for nombre in ORDEN:
         if not pendientes:
             break
@@ -64,9 +79,9 @@ def notas_primera_aparicion() -> None:
                 continue
             for m in list(patron.finditer(linea)):
                 raiz = _raiz(m.group(1))
-                if raiz in pendientes and f"[^en-{raiz}]" not in texto:
-                    linea = linea[:m.end()] + f"[^en-{raiz}]" + linea[m.end():]
-                    notas.append(f"[^en-{raiz}]: *{raiz.capitalize()}*: {DEFINICIONES[raiz][0].lower() + DEFINICIONES[raiz][1:]}")
+                if raiz in pendientes and f"[^en-{_slug(raiz)}]" not in texto:
+                    linea = linea[:m.end()] + f"[^en-{_slug(raiz)}]" + linea[m.end():]
+                    notas.append(f"[^en-{_slug(raiz)}]: *{raiz.capitalize()}*: {DEFINICIONES[raiz][0].lower() + DEFINICIONES[raiz][1:]}")
                     pendientes.discard(raiz)
                     break
             lineas[k] = linea

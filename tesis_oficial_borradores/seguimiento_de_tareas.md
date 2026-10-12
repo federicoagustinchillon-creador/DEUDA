@@ -25,7 +25,7 @@ pendiente.
 - Una tesis en LaTeX de 81 páginas, que hay que reorganizar según las decisiones de este
   documento.
 
-**Lo que aportó Santiago (archivos del 26 de septiembre y del 7 de octubre de 2026):**
+**Aportes del equipo (archivos del 26 de septiembre y del 7 de octubre de 2026):**
 
 - Una Introducción con pregunta, objetivos e hipótesis nuevos.
 - El shock de la tasa de la FED como pregunta específica.
@@ -94,7 +94,7 @@ comparar con su resultado.
 
 | N.° | Decisión | Justificación |
 |---|---|---|
-| 1 | La Introducción de Santiago del 7/10 es la base, completada con la Justificación y los objetivos específicos del texto LaTeX. | Es la versión más reciente y ya fue revisada. |
+| 1 | La Introducción del 7/10 es la base, completada con la Justificación y los objetivos específicos del texto LaTeX. | Es la versión más reciente y ya fue revisada. |
 | 2 | Todo el trabajo empírico (modelo y simulación) se hace sobre la deuda consolidada SPNF y BCRA. | Es el perímetro que plantea la pregunta de investigación, y el FMI considera deuda pública a los pasivos del banco central cuando pueden financiar al Tesoro o implican riesgo fiscal (FMI, 2021, anexo II). |
 | 3 | El modelo es un SVARX: la deuda consolidada es una variable más del sistema, con la tasa de la FED y la volatilidad global como variables exógenas. | Permite efectos conjuntos: la deuda responde a los shocks y a su vez los afecta. Es lo que hace falta para medir cómo un shock de la FED vuelve sobre la deuda a través del riesgo país y del tipo de cambio. |
 | 4 | La identificación principal es el SVAR restringido por teoría que ya existe. El ordenamiento de Cholesky queda solo como prueba de robustez. | No hay razón teórica para ordenar el EMBI+ y el TCRM entre sí, y esa justificación ya fue aprobada por el director. |
@@ -116,7 +116,7 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 ### Etapa 1. Introducción (hecha; en revisión del grupo)
 
-- Borrador corregido, con la H1a de Santiago, H1b a cinco y diez años y el tamaño del shock de la FED definido.
+- Borrador corregido, con la H1a original, H1b a cinco y diez años y el tamaño del shock de la FED definido.
 
 ### Etapa 2. Antecedentes y área de vacancia (hecha; en revisión del grupo)
 
@@ -166,10 +166,10 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 ### 5.3 Decisiones abiertas para el grupo
 
-1. **Criterio de H1a (decidido el 11/10, para revisar con el grupo).** La descomposición de la varianza no mide si el superávit alcanza, y con las correcciones no es significativa ni robusta. El criterio principal pasa a ser el contraste de suficiencia: el superávit que haría falta para llevar la probabilidad de no estabilización al 1% del FMI, comparado con el máximo histórico del Sector Público Nacional. La varianza se sigue informando. Conviene que Santiago y Pablo lo validen, porque es un cambio de criterio.
+1. **Criterio de H1a (decidido el 11/10, para revisar con el grupo).** La descomposición de la varianza no mide si el superávit alcanza, y con las correcciones no es significativa ni robusta. El criterio principal pasa a ser el contraste de suficiencia: el superávit que haría falta para llevar la probabilidad de no estabilización al 1% del FMI, comparado con el máximo histórico del Sector Público Nacional. La varianza se sigue informando. Conviene que Pablo y el equipo lo validen, porque es un cambio de criterio.
 2. **Deuda neta con o sin FGS.** Cuando esté la serie del FGS, hay que definir si la deuda neta sin el FGS pasa a ser la especificación principal, porque es la más parecida a la del FMI, o si queda como robustez. En los dos casos hay que reestimar y volver a simular.
 
-3. **Propuestas del grupo ya incorporadas el 11/10.** Por un lado, la retroalimentación entre la deuda y las variables (arquitectura B de Santiago): un punto más de deuda sube el EMBI+ 22 puntos básicos [11; 41], y está en la sección 6.1. Por otro, el contraste sin retroalimentación (arquitectura A), en la sección 6.6. Se repuso además en las líneas futuras el panel Argentina-Chile (decisión del 17/9), y se sumaron los shocks de la FED de alta frecuencia y los términos de intercambio que proponía Santiago.
+3. **Propuestas del grupo ya incorporadas el 11/10.** Por un lado, la retroalimentación entre la deuda y las variables (arquitectura B de la propuesta metodológica): un punto más de deuda sube el EMBI+ 22 puntos básicos, con un intervalo de 90% que incluye el cero ([-0,1; 48,6]); está en la sección 6.1. Por otro, el contraste sin retroalimentación (arquitectura A), en la sección 6.6. Se repuso además en las líneas futuras el panel Argentina-Chile (decisión del 17/9), y se sumaron los shocks de la FED de alta frecuencia y los términos de intercambio que planteaba la propuesta metodológica.
 
 4. **Escenario base del FMI actualizado (11/10/2026).** El FMI publicó dos análisis de sostenibilidad posteriores al de abril de 2025: la primera revisión (Informe 25/219, agosto de 2025) y el Artículo IV con la segunda revisión (Informe 26/105, mayo de 2026). Se pasó al de mayo de 2026, extraído del PDF con `codigo/ingesta_datos/extraer_escenario_base_fmi_cr26105.py`. La tesis, los gráficos y la guía de defensa ya usan esas cifras.
 

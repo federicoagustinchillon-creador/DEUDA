@@ -33,7 +33,8 @@ ARCHIVOS: dict[str, str] = {
     "seguimiento_de_tareas.md": "Seguimiento_de_tareas.docx",
     "_tesis_borrador.md": "Tesis_borrador.docx",
     "guia_de_defensa.md": "Guia_de_defensa.docx",
-    "propuestas_de_santiago.md": "Propuestas_de_Santiago.docx",
+    "propuesta_metodologica.md": "Propuesta_metodologica.docx",
+    "revision_critica.md": "Revision_critica.docx",
 }
 
 # Documento unico de la tesis: capitulos en orden (los que todavia no existen como

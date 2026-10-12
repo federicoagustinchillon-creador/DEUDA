@@ -105,7 +105,7 @@ Efecto en el mismo trimestre de un shock estructural de un desvío estándar (es
 
 ## A.6 Ecuación del resultado primario
 
-Ecuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*.
+Ecuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*. El coeficiente de la deuda rezagada es un efecto de impacto sobre el resultado primario trimestral. Con los rezagos propios del resultado primario (suma 0,729), el multiplicador de largo plazo de la estimación por MCO es 0,051/(1 − 0,729) ≈ 0,19; no se calculó su intervalo.
 
 | Regresor | Coeficiente | Error estándar | p-valor |
 |---|---|---|---|
@@ -113,7 +113,7 @@ Ecuación del resultado primario del VARX en forma reducida, especificación pri
 | Variación de la tasa de la FED, rezago 1 | -0,7911 | 0,5670 | 0,163 |
 | Variación de la tasa de la FED, rezago 2 | 0,0030 | 0,5160 | 0,995 |
 | VIX | -0,0253 | 0,0319 | 0,427 |
-| Deuda consolidada neta, rezago 1 (reacción de Bohn) | 0,0505 | 0,0215 | 0,019 |
+| Deuda consolidada neta, rezago 1 (reacción fiscal de impacto) | 0,0505 | 0,0215 | 0,019 |
 | Resultado primario, rezago 1 | 0,3404 | 0,1116 | 0,002 |
 | Crecimiento, rezago 1 | 0,0901 | 0,0647 | 0,164 |
 | EMBI+, rezago 1 | -0,0005 | 0,0004 | 0,189 |
@@ -129,7 +129,7 @@ Ecuación del resultado primario del VARX en forma reducida, especificación pri
 
 ## A.7 Resultados completos de la especificación principal
 
-Estimación central con parámetros corregidos por sesgo (Kilian, 1998) y 20.000 trayectorias; intervalos de 200 réplicas con 1.000 trayectorias cada una. Autovalor máximo del VAR: 0,964 estimado y 0,9998 corregido.
+Estimación central con parámetros corregidos por sesgo (Kilian, 1998) y 20.000 trayectorias; intervalos de 200 réplicas con 1.000 trayectorias cada una. Autovalor máximo del VAR: 0,964 estimado y 0,9998 corregido. Las réplicas usan una corrección del sesgo más reducida que la estimación central, de modo que los intervalos percentiles no quedan centrados en ella y la estimación central se ubica cerca de su límite superior (sección 4.5).
 
 | Medida | Estimación central | Intervalo de 90% |
 |---|---|---|
@@ -146,8 +146,8 @@ Estimación central con parámetros corregidos por sesgo (Kilian, 1998) y 20.000
 | No fiscal menos fiscal (puntos) | 35,9 | [-4,8; 91,2] |
 | Cambiario y de riesgo menos fiscal (puntos) | 26,6 | [-31,2; 80,3] |
 | Promedio por shock cambiario y de riesgo menos fiscal (puntos) | -2,5 | [-40,7; 38,1] |
-| FED, un desvío: diferencia en la probabilidad 2035 (pp) | 1,5 | [0,1; 3,1] |
-| FED, un desvío: diferencia en la deuda 2035 (pp del PIB) | 1,0 | [-0,1; 2,4] |
+| FED, nivel 0,50 pp más alto: diferencia en la probabilidad 2035 (pp) | 1,5 | [0,1; 3,1] |
+| FED, nivel 0,50 pp más alto: diferencia en la deuda 2035 (pp del PIB) | 1,0 | [-0,1; 2,4] |
 | FED, senda 2022-2025: diferencia en la probabilidad 2031 (pp) | 2,4 | [-4,5; 11,4] |
 | FED, senda 2022-2025: diferencia en la probabilidad 2035 (pp) | 13,0 | [1,0; 24,8] |
 | FED, senda 2022-2025: diferencia en la deuda 2035 (pp del PIB) | 7,8 | [-1,4; 20,4] |

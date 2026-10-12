@@ -149,10 +149,10 @@ directamente en la tasa en dólares. \\
 
 Fuente: elaboración propia.
 
-El canal cuasifiscal, es decir, el mayor costo de los pasivos
-remunerados del BCRA, operó en el período de estimación a través de la
-deuda consolidada. No se proyecta como un canal separado porque esos
-pasivos son mínimos desde 2024 (FMI, 2025, anexo II).
+El canal cuasifiscal, que es el mayor costo de los pasivos remunerados
+del BCRA, operó en el período de estimación a través de la deuda
+consolidada. No se proyecta como un canal separado porque esos pasivos
+son mínimos desde 2024 (FMI, 2025, anexo II).
 
 \section{\texorpdfstring{Identificación de los \emph{shocks}
 domésticos}{Identificación de los shocks domésticos}}
@@ -183,7 +183,7 @@ restricciones en el trimestre del impacto (Tabla 4.3):
   política fiscal, y el de rigidez del producto en el trimestre que usan
   los VAR monetarios (Christiano et al., 1999). Dentro del bloque no se
   impone ningún orden con interpretación económica: se usa una
-  ortonormalización cualquiera y solo se informa la contribución
+  ortonormalización arbitraria y solo se informa la contribución
   conjunta, que no depende de ella (Christiano et al., 1999).
 \end{itemize}
 
@@ -218,14 +218,13 @@ TCRM & libre & libre & libre \\
 
 Fuente: elaboración propia sobre la base de Blanchard y Perotti (2002).
 
-Dos supuestos merecen discusión. El primero es la elasticidad de 0,25,
-que proviene de estimaciones para países de la OCDE (Girouard y André,
-2005); para acotar su efecto, la simulación se repite con elasticidades
-de 0 y 0,5. El segundo es que el resultado primario no responda en el
-trimestre al tipo de cambio, cuando en Argentina los derechos de
-exportación dependen de él. Para evaluarlo se usan dos ordenamientos de
-Cholesky como robustez: uno que pone primero al resultado primario y
-otro que lo pone último.
+La elasticidad de 0,25 proviene de estimaciones para países de la OCDE
+(Girouard y André, 2005); para acotar su efecto, la simulación se repite
+con elasticidades de 0 y 0,5. La identificación también supone que el
+resultado primario no responda en el trimestre al tipo de cambio, cuando
+en Argentina los derechos de exportación dependen de él. Para evaluarlo
+se usan dos ordenamientos de Cholesky como robustez: uno que pone
+primero al resultado primario y otro que lo pone último.
 
 \section{Niveles, rezagos e inferencia}
 
@@ -281,11 +280,23 @@ otro que lo pone último.
   regenera también la deuda, con un VAR auxiliar que la incluye como
   quinta variable, de modo que la retroalimentación entre la deuda y el
   sistema esté presente en los datos simulados. Los coeficientes de
-  rezago se corrigen por el sesgo de muestra chica con el procedimiento
-  de Kilian (1998): una primera etapa de 100 réplicas mide el sesgo, y
-  la estimación y cada réplica de la segunda etapa se corrigen por él,
-  con una corrección reducida cuando la completa volvería inestable al
-  VAR. La semilla es fija para que los resultados se puedan reproducir.
+  rezago se corrigen por el sesgo de muestra pequeña con el
+  procedimiento de Kilian (1998): una primera etapa de 100 réplicas mide
+  el sesgo, y la estimación y cada réplica de la segunda etapa se
+  corrigen por él, con una corrección reducida cuando la completa
+  volvería inestable al VAR. La semilla es fija para que los resultados
+  se puedan reproducir.
+\item
+  \textbf{Persistencia de la estimación central.} El autovalor de mayor
+  módulo del VAR estimado por mínimos cuadrados es 0,964. La estimación
+  central usa los coeficientes corregidos por sesgo, con la corrección
+  multiplicada por un factor δ = 0,9 para mantener la estabilidad, y su
+  autovalor máximo es 0,9998, prácticamente una raíz unitaria. Con esa
+  dinámica los \emph{shocks} son muy persistentes, lo que eleva las
+  probabilidades de no estabilización. Las réplicas del \emph{bootstrap}
+  generan los datos con un proceso cuyo factor δ es menor, de modo que
+  los intervalos percentiles no quedan centrados en la estimación
+  central, que se ubica cerca de su límite superior.
 \end{itemize}
 
 \section{Simulación de Monte Carlo}
@@ -313,7 +324,7 @@ donde a = 0,42 es la proporción de la deuda en pesos (diciembre de
 x\_t es el desvío de la tasa en dólares (EMBI+ y FED). La inflación
 relativa del FMI se escala por el cociente entre la deuda simulada y la
 del FMI, porque es proporcional al \emph{stock} en moneda extranjera. La
-tasa en dólares se reprecia de a poco: cada año se refinancia la
+tasa en dólares se reprecia gradualmente: cada año se refinancia la
 fracción λ = 18,0/63,6 ≈ 0,28, cociente entre las necesidades brutas de
 financiamiento promedio y la deuda promedio de los seis primeros años
 del escenario del FMI. Como esa fracción incluye la refinanciación de
@@ -360,12 +371,18 @@ parámetros corregidos por sesgo y 20.000 trayectorias; se informa su
 error de Monte Carlo. Los intervalos de 90\% salen de 200 réplicas de
 parámetros con 1.000 trayectorias cada una.
 
-\textbf{Tamaño del \emph{shock} de la FED.} Se usan dos escenarios. El
-primero es una suba de un desvío estándar de la variación trimestral de
-la tasa (0,50 puntos), la convención para medir respuestas en estos
-modelos. El segundo repite la senda trimestral efectiva de la tasa de
-fondos federales de 2022 a 2025: sube de 0,08\% a 5,33\% hasta fines de
-2023 y baja a 3,90\% en 2025.
+\textbf{Tamaño del \emph{shock} de la FED.} La tasa de la FED entra al
+modelo como variación trimestral, de modo que el desvío del nivel de la
+tasa respecto del escenario base es la suma acumulada de esas
+variaciones y persiste mientras no se revierta. Se usan dos escenarios.
+El primero es una suba de un desvío estándar de la variación trimestral
+de la tasa (0,50 puntos), la convención para medir respuestas en estos
+modelos: el nivel de la tasa queda 0,50 puntos por encima del base de
+2026 a 2035. El segundo repite las variaciones trimestrales efectivas de
+la tasa de fondos federales de 2022 a 2025 (de 0,08\% a 5,33\% hasta
+fines de 2023 y a 3,90\% en 2025): en 2026-2029 el nivel sube 5,25
+puntos y luego baja 1,43, y desde entonces queda 3,82 puntos por encima
+del base hasta 2035.
 
 \textbf{Variantes.}
 
@@ -400,14 +417,15 @@ fondos federales de 2022 a 2025: sube de 0,08\% a 5,33\% hasta fines de
   FGS.
 \end{itemize}
 
-\textbf{Por qué la especificación principal es el SVARX.} La elección se
-fijó antes de ver los resultados. El procedimiento del FMI genera
-\emph{shocks} en forma reducida: no distingue un \emph{shock} fiscal de
-uno cambiario ni aísla la tasa de la FED, de modo que no permite
-descomponer la incertidumbre por origen ni contrastar H2. La
-identificación, en cambio, no influye en la probabilidad de no
-estabilización: los \emph{shocks} estructurales reconstruyen los mismos
-residuos históricos, cualquiera sea la matriz S.
+\textbf{Por qué la especificación principal es el SVARX.} El
+procedimiento del FMI genera \emph{shocks} en forma reducida: no
+distingue un \emph{shock} fiscal de uno cambiario ni aísla la tasa de la
+FED, de modo que no permite descomponer la incertidumbre por origen ni
+contrastar H2. La identificación sirve para separar la varianza de la
+deuda por bloque de \emph{shocks} y para definir el \emph{shock} fiscal.
+La probabilidad de no estabilización no depende de ella: los
+\emph{shocks} estructurales reconstruyen los mismos residuos históricos,
+cualquiera sea la matriz S.
 
 \section{Contraste de las hipótesis}
 
@@ -431,12 +449,16 @@ Criterio
 \bottomrule\noalign{}
 \endlastfoot
 H1a & (i) Resultado primario necesario en 2031 para que la probabilidad
-de no estabilización baje al nivel del FMI (1\%), y (ii) contribución de
+de no estabilización en 2031 baje a la estimación puntual del FMI para
+Argentina (1\%), desplazando en la misma magnitud el resultado primario
+de todos los años 2026-2035 del escenario base, y (ii) contribución de
 cada bloque de \emph{shocks} a la varianza de la deuda simulada en 2035
 & El superávit primario ``por sí solo no basta'' si el necesario supera
-el máximo del Sector Público Nacional en 1996-2025 (3,6\% del PIB en
-2004). La descomposición de la varianza muestra de dónde viene el riesgo
-que el superávit no cubre. \\
+el máximo del Sector Público Nacional en 1996-2025: 3,6\% del PIB en la
+suma de los cuatro trimestres a diciembre de 2004, con rentas de la
+propiedad (el máximo de la suma móvil de cuatro trimestres es 3,93\%, en
+2004T3, y sin rentas de la propiedad es 3,29\%). La descomposición de la
+varianza se informa como complemento. \\
 H1b & Probabilidad de que la deuda no se estabilice, con el escenario
 base del FMI, en 2031 y en 2035 & El límite inferior del intervalo de
 90\% supera la probabilidad del FMI para el mismo horizonte (contraste
@@ -452,8 +474,20 @@ Fuente: elaboración propia.
 
 El criterio (i) de H1a mide directamente lo que afirma la hipótesis: si
 con un superávit de la magnitud que la Argentina alcanzó en su mejor año
-la deuda sigue teniendo una probabilidad de no estabilizarse mayor que
-la que el FMI considera baja, el superávit, por sí solo, no basta. Como
-H1b se contrasta en dos horizontes y H2 en dos escenarios, se informa
-además si las conclusiones se sostienen con la corrección de Bonferroni,
-es decir, con los límites de 2,5\%.
+la probabilidad de no estabilización sigue por encima de la que el FMI
+estima para el país, el superávit, por sí solo, no basta. El 1\% es la
+estimación puntual del FMI para Argentina (FMI, 2026), no un umbral de
+riesgo bajo definido por el FMI. Como H1b se contrasta en dos horizontes
+y H2 en dos escenarios, se informa también si las conclusiones se
+sostienen con la corrección de Bonferroni, que usa los límites de 2,5\%.
+
+\textbf{Revisión de los criterios.} Los criterios de la Tabla 4.4 se
+revisaron después de la primera estimación, en octubre de 2026. El
+criterio original de H1a era la descomposición de la varianza: la
+hipótesis se consideraba respaldada si el intervalo de 90\% de la
+diferencia entre la contribución de los \emph{shocks} no fiscales y la
+del fiscal excluía el cero. Ese intervalo, {[}-4,8; 91,2{]}, no cumple
+el criterio. Se adoptó el criterio de suficiencia porque mide
+directamente lo que afirma la hipótesis, y el Capítulo 6 informa los
+dos. Los tamaños de los \emph{shocks} de la FED también se definieron en
+octubre de 2026.

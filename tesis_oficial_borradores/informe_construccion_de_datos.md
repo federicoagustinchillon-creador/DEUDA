@@ -3,11 +3,11 @@
 Documento interno del grupo, no forma parte de la tesis. Es la versión completa del Capítulo 5, con archivos, columnas, banderas y controles de cada serie. El Capítulo 5 de la tesis es un resumen de este informe.
 
 
-Este capítulo documenta cada serie del modelo: qué mide, de dónde sale, qué transformaciones se le aplicaron y por qué. La muestra es trimestral, 1996T1-2025T4 (120 observaciones). La muestra efectiva de estimación es 1996T4-2025T4 (117 observaciones), porque el crecimiento pierde la primera observación y los dos rezagos de la tasa de la Fed consumen las siguientes. Todas las cifras que aparecen aquí se recalcularon desde los archivos del repositorio citados en cada sección. Cuando una serie tiene una limitación, se declara junto con la dirección probable de su sesgo.
+Este capítulo documenta cada serie del modelo: qué mide, de dónde sale, qué transformaciones se le aplicaron y por qué. Los datos son trimestrales y cubren 1996T1-2025T4 (120 observaciones). La muestra efectiva de estimación de la tesis es 1998T2-2025T4 (111 observaciones); los trimestres anteriores se usan como rezagos iniciales (Capítulo 4). Todas las cifras que aparecen aquí se recalcularon desde los archivos del repositorio citados en cada sección. Cuando una serie tiene una limitación, se declara junto con la dirección probable de su sesgo.
 
 ## 5.1 Resumen de las series
 
-| Variable del modelo | Rol (Capítulo 4) | Archivo | Fuente primaria | Cobertura real |
+| Variable del modelo | Rol (Capítulo 4) | Archivo | Fuente | Cobertura real |
 |---|---|---|---|---|
 | Deuda consolidada neta, tenencia del BCRA a valor nominal, variante piso (% PIB) | Rezagada en las ecuaciones | `datos/procesados/deuda_consolidada_neta_nominal_1996_2025.csv` (`deuda_consolidada_neta_nominal_piso_pib`) | MECON y BCRA | 1996T1-2025T4, sin FGS; nominal en 80 de 120 trimestres (ver 5.3.4) |
 | Deuda neta a valor de libros y deuda federal bruta (% PIB) | Series de robustez y componente | `datos/procesados/deuda_consolidada_neta_1996_2025.csv`, `datos/procesados/deuda_consolidada_1996_2025.csv` | MECON, Informe de Deuda 31/12/2025 | 1996T1-2025T4 (6 trimestres interpolados) |
@@ -16,17 +16,17 @@ Este capítulo documenta cada serie del modelo: qué mide, de dónde sale, qué 
 | Depósitos del Tesoro en el BCRA | Componente | `deuda_consolidada_neta_1996_2025.csv` | API BCRA v4.0, id 1264 | 1996T1-2025T4 |
 | Resultado primario (% PIB, flujo trimestral anualizado) | Endógena | `datos/procesados/resultado_primario_1996_2025.csv` (`pb_pib_trim`) | MECON, Secretaría de Hacienda, esquema Ahorro-Inversión-Financiamiento (datos.gob.ar, dataset 379) | 1996T1-2025T4, mensual, sin desagregación |
 | PIB real y crecimiento | Endógena | `datos/procesados/pib_real_empalme_indec_1996_2003.csv` y `datos/dataset_consolidado_1996_2025.csv` | INDEC, Oferta y Demanda Globales | 1996-2003 base 1993 empalmada a base 2004; 2004-2025 directo |
-| EMBI+ | Endógena | `datos/dataset_consolidado_1996_2025.csv` | JP Morgan vía Ámbito; spread Brady | 1996T1-2025T4 |
+| EMBI+ | Endógena | `datos/dataset_consolidado_1996_2025.csv` | J.P. Morgan: EMBI+ desde 1998 (vía Ámbito desde 1998T4; 1998T1-1998T3 transcriptos en el código); *stripped spread* Brady 1996-1997, transcripto | 1996T1-2025T4 |
 | TCRM | Endógena | `datos/dataset_consolidado_1996_2025.csv` | BCRA, `ITCRMSerie.xlsx` | 1997T1-2025T4; 1996 retropolado |
 | Tasa de la Fed (con tasa sombra) | Exógena | `datos/procesados/tasa_fed_trimestral_1996_2025.csv` | FRED y Atlanta Fed | 1996T1-2025T4 |
 | VIX | Exógena | `datos/procesados/instrumentos_1996_2025.csv` | Yahoo Finance, ^VIX | 1996T1-2025T4 |
 | PIB nominal de cuatro trimestres | Denominador | `deuda_consolidada_1996_2025.csv` (`pib_4t_mm`) | INDEC | 1996T1-2025T4 (32 trimestres empalmados) |
 
-Un cambio metodológico respecto de versiones anteriores: ninguna serie fiscal ni de deuda sale ya de un diccionario escrito a mano. La deuda es el cociente entre stocks en pesos tomados de los informes del MECON y el PIB nominal. El resultado primario se lee de las planillas mensuales de Hacienda y el PIB real de 1996-2003 se empalma con las series publicadas por INDEC. Todas las construcciones son trazables a archivos y reproducibles con los scripts de `codigo/ingesta_datos/`.
+Un cambio metodológico respecto de versiones anteriores: ninguna serie fiscal ni de deuda sale ya de un diccionario escrito a mano. La deuda es el cociente entre stocks en pesos tomados de los informes del MECON y el PIB nominal. El resultado primario se lee de las planillas mensuales de Hacienda y el PIB real de 1996-2003 se empalma con las series publicadas por INDEC. Todas las construcciones son trazables a archivos y reproducibles con los scripts de `codigo/ingesta_datos/`, con una excepción: los valores del riesgo país de 1996T1-1998T3 están transcriptos en `fase22_construccion_spread_1983_2025.py` (sección 5.6.1).
 
 ## 5.2 Denominador: PIB nominal de los últimos cuatro trimestres
 
-Un stock de fin de período es una variable de fin de período y el PIB es un flujo anual. Dividir el stock por el PIB de un solo trimestre anualizado mezcla estacionalidad y, con inflación alta, infla el denominador. El denominador elegido es la suma de los últimos cuatro flujos trimestrales del PIB nominal (`pib_4t_mm`, millones de pesos corrientes). En el cuarto trimestre coincide con la convención del FMI, que divide por el PIB del año (FMI, 2025, Annex II, Table 2, nota 1).
+Un stock de fin de período es una variable de fin de período y el PIB es un flujo anual. Dividir el stock por el PIB de un solo trimestre anualizado mezcla estacionalidad y, con inflación alta, infla el denominador. El denominador elegido es el promedio móvil de cuatro trimestres del PIB nominal trimestral anualizado (`pib_4t_mm`, millones de pesos corrientes), equivalente a la suma de los últimos cuatro flujos trimestrales. En el cuarto trimestre coincide con la convención del FMI, que divide por el PIB del año (FMI, 2025, Annex II, Table 2, nota 1).
 
 - **Fuente.** INDEC, PIB a precios de comprador corrientes. Para 2004T1-2025T4, serie 4.4_OGP_2004_T_17 de datos.gob.ar (88 trimestres). Para 1996T1-2003T4, serie 2.4_OGP_1993_T_17 (base 1993), empalmada con un coeficiente de enlace de 1,0837. Ese coeficiente es la razón entre las medias de 2004 en base 2004 y en base 1993 (32 trimestres, marcados `base1993_empalmada` en `pib_origen`).
 - **Límite.** La razón entre bases no es constante a lo largo de 2004 (varía entre 1,07 y 1,12 por trimestre) y se aleja más en años posteriores. El nivel del PIB nominal anterior a 2004 tiene, por lo tanto, una incertidumbre que se traslada a todos los ratios de ese tramo.
@@ -40,7 +40,7 @@ Se sigue la definición de consolidación con el banco central del FMI (2021, An
 
 D_neta = B − T_BCRA − T_FGS + L_BCRA − DEP, todo dividido por el PIB de cuatro trimestres.
 
-Aquí B es la deuda bruta federal, T_BCRA la deuda del Tesoro en poder del BCRA, T_FGS la deuda del Tesoro en poder del FGS-ANSES, L_BCRA los pasivos remunerados del BCRA y DEP los depósitos del Tesoro en el BCRA. En la serie estimada, T_FGS no está disponible (sección 5.9).
+Aquí B es la deuda bruta federal, T_BCRA la deuda del Tesoro en poder del BCRA, T_FGS la deuda del Tesoro en poder del FGS-ANSES, L_BCRA los pasivos remunerados del BCRA y DEP los depósitos del Tesoro en el BCRA. En la serie estimada, T_FGS no se descuenta (sección 5.9).
 
 ### 5.3.2 Deuda federal bruta (B)
 
@@ -101,9 +101,10 @@ La Figura 5.1 muestra las tres series de deuda consolidada y los dos valores de 
 ### 5.6.1 EMBI+ (riesgo soberano)
 
 - **Definición.** Diferencial de rendimiento de los bonos soberanos argentinos en dólares sobre los bonos del Tesoro de Estados Unidos, en puntos básicos, promedio trimestral.
-- **1999T1-2025T4.** Serie diaria de riesgo país de Ámbito Financiero (`https://mercados.ambito.com//riesgopais/historico/...`), que reproduce el EMBI+ y el EMBI Global de J.P. Morgan. Archivo `datos/embi_real_ambito_1999_2025.csv`. Se promedia por trimestre.
-- **1996T1-1998T4.** Se empalma el *stripped spread* de los bonos Brady (1994-1997) con el EMBI+ oficial desde 1998. En el punto de unión se aplica una corrección proporcional de sesgo, k = 540,0/620,0 = 0,8710 (media de 1998T1 del EMBI+ sobre media de 1997T4 del spread Brady), para evitar una discontinuidad espuria de nivel. Es una corrección multiplicativa y preserva la estructura de varianza condicional. El empalme está en `fase22_construccion_spread_1983_2025.py` y la serie resultante en `datos/procesados/spread_soberano_historico_1983_2025.csv` (columna `Spread_Empalmado_pb`). Desde 1999T1 es idéntica punto a punto a la serie de Ámbito.
-- **Limitación.** El spread Brady no es exactamente el EMBI+ (distinto universo de instrumentos). El factor k ajusta el nivel pero no el comportamiento de corto plazo. Son 12 de 120 trimestres.
+- **1998T4-2025T4.** Serie diaria de riesgo país de Ámbito Financiero (`https://mercados.ambito.com//riesgopais/historico/...`), que reproduce el EMBI+ y el EMBI Global de J.P. Morgan. Archivos `datos/crudos/no_referenciados/embi_real_ambito_1998_2026.csv` (desde 1998T4, el que lee el script) y `datos/embi_real_ambito_1999_2025.csv`. Se promedia por trimestre.
+- **1998T1-1998T3.** Tres valores trimestrales del EMBI+ (540, 560 y 980 puntos básicos) transcriptos a mano en `fase22_construccion_spread_1983_2025.py`, sin archivo de respaldo. La fuente exacta no está documentada.
+- **1996T1-1997T4.** Se empalma el *stripped spread* de los bonos Brady (1993-1997) con el EMBI+ desde 1998. Los valores del *stripped spread* están transcriptos en `fase22_construccion_spread_1983_2025.py`, cuya documentación los atribuye al EMBI de J.P. Morgan y cita a Uribe y Yue (2006) y Neumeyer y Perri (2005), sin indicar cuadro ni página. En el punto de unión se aplica una corrección proporcional de sesgo, k = 540,0/620,0 = 0,8710 (media de 1998T1 del EMBI+ sobre media de 1997T4 del spread Brady), para evitar una discontinuidad espuria de nivel. Es una corrección multiplicativa y preserva la estructura de varianza condicional. El empalme está en `fase22_construccion_spread_1983_2025.py` y la serie resultante en `datos/procesados/spread_soberano_historico_1983_2025.csv` (columna `Spread_Empalmado_pb`). Desde 1998T4 es idéntica punto a punto a la serie de Ámbito.
+- **Limitación.** El spread Brady no es exactamente el EMBI+ (distinto universo de instrumentos). El factor k ajusta el nivel pero no el comportamiento de corto plazo. Son 8 de 120 trimestres, fuera de la muestra de estimación. Los tres valores transcriptos de 1998T1-1998T3 no tienen el factor k; 1998T2 y 1998T3 están dentro de la muestra de estimación.
 
 ### 5.6.2 Tipo de cambio real multilateral (TCRM)
 
@@ -213,11 +214,13 @@ La consolidación con el banco central (FMI, 2021) y la exclusión de las tenenc
 - **Consolidación con el banco central.** Se netean los créditos del BCRA contra el Tesoro y se suman los pasivos de deuda del BCRA. Cambia el perímetro hacia el sector público ampliado con el banco central. Es lo que implementa la serie de esta tesis.
 - **Exclusión de tenencias intra-públicas.** Se resta de la deuda del Tesoro la parte cuyo acreedor es otra entidad pública (el FGS-ANSES, organismos de la seguridad social, bancos públicos). El FMI (2025, Annex II, Table 2) lo aplica en la línea 3, "Deuda del Tesoro intra-sector público (BCRA y FGS)".
 
-Nuestra serie netea el BCRA, ahora a valor nominal, pero **no netea las tenencias del FGS-ANSES ni las de otros tenedores públicos**. No se trata de una omisión por criterio, sino de falta de datos.
+Nuestra serie netea el BCRA, ahora a valor nominal, pero **no netea las tenencias del FGS-ANSES ni las de otros tenedores públicos**. Hay datos de las tenencias de agencias del sector público, en forma agregada (sección 5.9.2); la variante que las descuente todavía no se construyó.
 
-### 5.9.2 Por qué no se pudo incluir
+### 5.9.2 Datos disponibles y qué falta
 
-La serie de tenencias del FGS se publica en el Informe Estadístico Mensual y en los Anuarios del FGS de ANSES. El sitio de ANSES bloquea las descargas automatizadas con una protección anti-bot (HTTP 403). Los archivos guardados como `datos/crudos/deuda_consolidada_neta/fgs_anuario2024.pdf` y `p.html` son páginas HTML de bloqueo de 880 bytes, no el documento. Ninguna cifra del FGS está en los CSV (`tenencia_fgs_tesoro_pib` es vacía en las 120 filas, `flag_fgs_faltante = 1`). El MECON no ofrece una apertura trimestral por tenedor sectorial (la hoja A.4.5 clasifica por residencia), y el FMI da las tenencias solo para 2023-2026. Aproximar con una cifra no verificada violaría la regla de no fabricar datos.
+La cartera del FGS por tipo de activo se publica en el Informe Estadístico Mensual y en los Anuarios del FGS de ANSES. El sitio de ANSES bloquea las descargas automatizadas con una protección anti-bot (HTTP 403). Los archivos guardados como `datos/crudos/deuda_consolidada_neta/fgs_anuario2024.pdf` y `p.html` son páginas HTML de bloqueo de 880 bytes, no el documento, y las columnas propias del FGS siguen vacías (`tenencia_fgs_tesoro_pib` en las 120 filas, `flag_fgs_faltante = 1`; `fgs_titulos_ars_mm` en `tenencias_fgs_1996_2025.csv`).
+
+Sí hay datos de las tenencias de agencias del sector público en conjunto. La Secretaría de Finanzas publica, en la presentación gráfica trimestral de la deuda, el cuadro "Deuda bruta de la Administración Central por acreedor" con la fila "Agencias del Sector Público". `codigo/ingesta_datos/construir_tenencias_fgs.py` lo lee de los PDF de `datos/crudos/fgs/finanzas_pres/` y escribe `datos/procesados/tenencias_fgs_1996_2025.csv` (columna `agencias_sp_pib`): anual (diciembre) de 2004 a 2020 y trimestral desde 2021T4, 34 observaciones. La serie principal no descuenta esas tenencias. Antes de construir la variante que las descuente hay que verificar si la categoría incluye al BCRA, que la serie ya netea, para no restarlo dos veces. El FMI da las tenencias solo para 2023-2026.
 
 ### 5.9.3 Magnitud y dirección del sesgo
 
@@ -229,7 +232,7 @@ La serie de tenencias del FGS se publica en el Informe Estadístico Mensual y en
 | Fuente | Efecto sobre nuestra deuda neta |
 |---|---|
 | FGS-ANSES y otros tenedores públicos sin netear | Sobreestima |
-| Letras Intransferibles interpoladas o reconstruidas entre anclas (24 y 32 trimestres) | Ruido sin signo definido |
+| Letras Intransferibles interpoladas (24 trimestres) o reconstruidas con fechas de emisión (39 trimestres) | Ruido sin signo definido |
 | Trimestres sin dato nominal (hasta 2005T4), con valor de libros | Sin efecto relevante, las Letras no existían |
 | Swap con el PBoC activado omitido (desde 2020) | Subestima |
 | Pases en neto, con trimestres negativos (2024T3-2025T1) | Subestima |
@@ -239,11 +242,11 @@ El balance de las fuentes es una sobreestimación en 2023 y 2024 y probablemente
 
 ### 5.9.4 Cómo se trata en el análisis
 
-La serie se presenta como **deuda neta consolidada con el BCRA, a valor nominal, sin neteo del FGS**, y no como "la deuda neta del FMI". En el modelo entra rezagada y cumple una función de retroalimentación, de modo que la corrección de nivel no cambia la dinámica si la brecha es aproximadamente estable. Con la valuación nominal la brecha pasa de 8,2 a 9,6 puntos entre 2023 y 2024, una variación de 1,4 puntos, frente a los 8,6 puntos (de 8,2 a 16,8) que tenía con valor de libros. La condición de brecha estable se cumple mucho mejor que antes. El sistema se estima además con la deuda neta a valor de libros y con la deuda bruta como series de contraste (`deuda_consolidada_neta_1996_2025.csv` y `deuda_consolidada_1996_2025.csv`), de modo que la conclusión pueda evaluarse con tres medidas. El cierre de la brecha restante exige dos insumos: las series de tenencias del FGS en ANSES (descarga manual) y el saldo del swap activado (estados contables del BCRA).
+La serie se presenta como **deuda neta consolidada con el BCRA, a valor nominal, sin neteo del FGS**, y no como "la deuda neta del FMI". En el modelo entra rezagada y cumple una función de retroalimentación, de modo que la corrección de nivel no cambia la dinámica si la brecha es aproximadamente estable. Con la valuación nominal la brecha pasa de 8,2 a 9,6 puntos entre 2023 y 2024, una variación de 1,4 puntos, frente a los 8,6 puntos (de 8,2 a 16,8) que tenía con valor de libros. La condición de brecha estable se cumple mucho mejor que antes. El sistema se estima además con la deuda neta a valor de libros y con la deuda bruta como series de contraste (`deuda_consolidada_neta_1996_2025.csv` y `deuda_consolidada_1996_2025.csv`), de modo que la conclusión pueda evaluarse con tres medidas. El cierre de la brecha restante exige dos insumos: una variante que descuente las tenencias de agencias del sector público (sección 5.9.2), o la cartera del FGS de ANSES (descarga manual), y el saldo del swap activado (estados contables del BCRA).
 
 ## 5.10 Estadísticos descriptivos
 
-Muestra 1996T1-2025T4 (120 trimestres). El crecimiento y la variación de la Fed pierden una observación por la primera diferencia; la muestra efectiva del sistema son 117 trimestres (1996T4-2025T4). Las variables del sistema de estimación son las filas 1, 6 y 8 a 12 (el resultado primario en su versión `pb_pib_trim`).
+Datos 1996T1-2025T4 (120 trimestres). El crecimiento y la variación de la Fed pierden una observación por la primera diferencia. Los estadísticos de esta sección cubren todos los datos; la muestra de estimación de la tesis es 1998T2-2025T4 (111 trimestres). Las variables del sistema de estimación son las filas 1, 6 y 8 a 12 (el resultado primario en su versión `pb_pib_trim`).
 
 | Variable | Media | Desv. est. | Mínimo | Máximo | n |
 |---|---|---|---|---|---|

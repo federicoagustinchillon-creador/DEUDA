@@ -13,16 +13,18 @@ robusteces del Capítulo 6 descartan algunas: no la explican el perímetro
 (con la deuda del Tesoro sola la probabilidad es casi igual), ni el
 punto de partida (partiendo de la deuda consolidada neta del FMI baja a
 22,8\%), ni la identificación de los \emph{shocks}, que no altera la
-probabilidad. Con el procedimiento de \emph{shocks} del propio FMI
-aplicado a los mismos datos, la probabilidad es de 23,7\%, del mismo
-orden que la del SVARX. La diferencia con el 1\% del FMI, entonces, no
-depende del método de esta tesis. Proviene de los datos históricos con
-los que se generan los \emph{shocks}, que el FMI no publica para
-Argentina, y de cómo esa historia se proyecta sobre el escenario base.
-Lo que la tesis puede afirmar es que, con las series argentinas de
-1996-2025 y con cualquiera de los dos procedimientos, la probabilidad de
+probabilidad. Con un procedimiento de \emph{shocks} a la manera del FMI
+aplicado a los datos de esta tesis, la probabilidad es de 23,7\%, del
+mismo orden que la del SVARX, y el ancho del abanico es de 114 puntos,
+contra 71,5 del FMI. Ese procedimiento no reproduce la cifra del FMI, de
+modo que la tesis no puede atribuir la diferencia ni al método ni a los
+datos: el FMI no publica la historia con la que genera sus \emph{shocks}
+para Argentina, y los perímetros también difieren (deuda consolidada
+neta que parte de 61,0\% del PIB, contra deuda federal bruta que parte
+de 80,3\%). Lo que la tesis puede afirmar es que, con esta
+implementación y las series argentinas de 1996-2025, la probabilidad de
 no estabilización es un orden de magnitud mayor que la que informa el
-FMI.
+FMI con los dos procedimientos usados.
 
 A diez años, la probabilidad es algo menor (22,3\%) pero sigue muy por
 encima del umbral. La métrica del FMI pregunta si el ajuste del
@@ -118,36 +120,40 @@ la convertibilidad a valores muy negativos con la inflación posterior.}
 régimen con las variables binarias de los quiebres estructurales (2001,
 2006 y 2018) y separa lo que la dinámica del sistema permite anticipar
 de lo que es sorpresa: solo remuestrea las sorpresas, que son menores
-que los desvíos respecto de una media de largo plazo. Además, la tasa en
-dólares se reprecia de a poco, a medida que vence la deuda. Por eso el
-abanico es más angosto. Que la probabilidad de no estabilización sea aun
-así alta indica que la métrica no depende tanto de la dispersión total
-como de la frecuencia de años en los que una depreciación real o una
-suba del riesgo país elevan el resultado primario necesario por encima
-del previsto. Esta tesis no aísla qué parte de ese resultado se debe a
-la persistencia de los \emph{shocks}; queda como hipótesis para trabajo
-futuro.
+que los desvíos respecto de una media de largo plazo. La tasa en
+dólares, por su parte, se reprecia gradualmente, a medida que vence la
+deuda. Por eso el abanico es más angosto. Que la probabilidad de no
+estabilización sea aun así alta indica que la métrica no depende tanto
+de la dispersión total como de la frecuencia de años en los que una
+depreciación real o una suba del riesgo país elevan el resultado
+primario necesario por encima del previsto. Esta tesis no aísla qué
+parte de ese resultado se debe a la persistencia de los \emph{shocks};
+queda como hipótesis para trabajo futuro.
 
 \section{El papel del superávit primario}
 
 La reacción fiscal estimada es positiva (0,051, con un intervalo de
 0,010 a 0,103): en 1998-2025, el resultado primario respondió a la
-deuda, en línea con la condición de Bohn (1998). Una reacción de esa
-magnitud estabiliza la deuda mientras el diferencial entre tasa y
-crecimiento, ajustado por el crecimiento, se mantenga por debajo de unos
-cinco puntos. Argentina lo superó con frecuencia en los años de
-depreciación real y suba del riesgo país.
+deuda, en línea con la condición de Bohn (1998). Ese coeficiente es el
+efecto de impacto sobre el resultado primario trimestral; teniendo en
+cuenta los rezagos del propio resultado primario, el multiplicador de
+largo plazo de la estimación por mínimos cuadrados es de alrededor de
+0,19, una estimación puntual sin intervalo. La tesis no traduce esa
+reacción en un diferencial entre tasa y crecimiento que la deuda pueda
+tolerar.
 
-El contraste de suficiencia de la sección 6.3 da la medida de esa
-insuficiencia. Para que la probabilidad de no estabilización baje al
-nivel que el FMI considera bajo, el superávit tendría que ser de 7,0\%
-del PIB, el doble del máximo de las últimas tres décadas. El superávit
-es necesario, y el escenario base del FMI se apoya en él, pero no
-alcanza para controlar la trayectoria: una parte del riesgo viene de
-variables que el superávit no controla. El resultado coincide con el
-diagnóstico de la restricción externa del Capítulo 3: con 58\% de la
-deuda en moneda extranjera, una depreciación real cambia el cociente de
-deuda aunque las cuentas fiscales estén en orden (Calvo et al., 2003).
+El contraste de suficiencia de la sección 6.3 mide si el superávit
+alcanza. Para que la probabilidad de no estabilización en 2031 baje al
+1\% que estima el FMI para Argentina, el resultado primario de todos los
+años tendría que subir unos 4,75 puntos, hasta 7,05\% del PIB en 2031,
+casi el doble del máximo de las últimas tres décadas (3,6\% en 2004). El
+superávit es necesario, y el escenario base del FMI se apoya en él, pero
+en el rango observado no alcanza para llevar la probabilidad a la cifra
+del FMI. Con 58\% de la deuda en moneda extranjera, la identidad hace
+que una depreciación real cambie el cociente de deuda aunque las cuentas
+fiscales estén en orden (Calvo et al., 2003); cuánto del riesgo simulado
+viene de esa fuente depende de la descomposición de la varianza, que no
+es robusta.
 
 La descomposición de la varianza apunta en la misma dirección, con el
 bloque cambiario y de riesgo como el mayor componente en la estimación
@@ -159,19 +165,20 @@ observado, no basta.
 
 \section{\texorpdfstring{El \emph{shock} de la FED}{El shock de la FED}}
 
-La suba de la tasa de la FED eleva la probabilidad de no estabilización,
-pero el efecto está estimado con poca precisión. Una repetición de la
-senda de 2022-2025 suma 13 puntos de probabilidad en 2035, con un
-intervalo de 1 a 25 puntos, y no se sostiene con la corrección por
-contrastes múltiples. Tres quintos del efecto sobre la deuda vienen del
-canal más directo, el mayor costo de refinanciar la deuda en dólares; el
-resto, de la respuesta del riesgo país, el tipo de cambio real y el
-crecimiento, que no son significativas por separado. Esto no quiere
-decir que los canales indirectos no existan: Uribe y Yue (2006) y Canova
-(2005) los documentan con paneles y muestras más largas. Quiere decir
-que una sola serie argentina de 111 trimestres no alcanza para medirlos.
-La conclusión sobre H2 descansa, por lo tanto, sobre todo en el canal de
-costo.
+H2 queda respaldada solo en parte. Repetir las variaciones de la tasa de
+la FED de 2022-2025, que dejan su nivel 3,82 puntos por encima del base
+desde 2029, suma 13 puntos de probabilidad de no estabilización en 2035,
+con un intervalo de 1 a 25 puntos. El efecto sobre la probabilidad
+cumple el criterio al 90\%, pero el efecto sobre la deuda esperada no lo
+cumple, ninguno resiste la corrección por contrastes múltiples, y en las
+respuestas al impulso los canales que nombra la hipótesis (riesgo, tipo
+de cambio real, crecimiento) no se distinguen del azar. Tres quintos del
+efecto sobre la deuda vienen del mayor costo de refinanciar la deuda en
+dólares, que el modelo incorpora por construcción a través de la
+identidad. Esto no quiere decir que los canales indirectos no existan:
+Uribe y Yue (2006) y Canova (2005) los documentan con paneles y muestras
+más largas. Quiere decir que una sola serie argentina de 111 trimestres
+no alcanza para medirlos.
 
 \section{Diálogo con la literatura}
 
@@ -182,12 +189,14 @@ costo.
   encuentran que una devaluación real de 20\% casi no modifica el
   patrimonio neto del sector público argentino, porque el mayor costo de
   la deuda en dólares se compensa con más recaudación de bienes
-  transables. Esta tesis mide otro objeto, el cociente de deuda, y
-  encuentra que la valuación por el tipo de cambio es una de sus
-  principales fuentes de riesgo. Las dos conclusiones son compatibles:
-  el cociente de deuda puede no estabilizarse aunque el patrimonio neto
-  se mantenga, y por eso Rodríguez (2023) advierte que el cociente es
-  una medida engañosa después de un salto cambiario.
+  transables. Esta tesis mide otro objeto, el cociente de deuda. En la
+  estimación central, el bloque cambiario y de riesgo es el mayor
+  componente de la varianza de ese cociente, aunque la descomposición no
+  es robusta y no permite afirmar que domine al fiscal. Si ese peso se
+  confirmara, las dos conclusiones serían compatibles: el cociente de
+  deuda puede no estabilizarse aunque el patrimonio neto se mantenga, y
+  por eso Rodríguez (2023) advierte que el cociente es una medida
+  engañosa después de un salto cambiario.
 \item
   \textbf{Tasa y crecimiento.} Blanchard (2019) muestra que, cuando la
   tasa de interés es menor que el crecimiento, la deuda se licua sin
@@ -219,10 +228,23 @@ costo.
   Con el ajuste stock-flujo en cero, la probabilidad baja (22,0\% en
   2031) pero las conclusiones no cambian.
 \item
-  \textbf{FGS.} La deuda neta no descuenta los títulos en poder del FGS,
-  porque no hay una serie histórica pública de su cartera (Capítulo 5).
-  Partir de la deuda del FMI, que sí lo descuenta, no cambia las
-  conclusiones.
+  \textbf{FGS.} La deuda neta no descuenta los títulos en poder del FGS
+  ni de otros organismos públicos. La ANSES no publica una serie
+  histórica de la cartera del FGS por tipo de activo (Capítulo 5); hay
+  datos anuales de la deuda en manos de organismos del sector público
+  desde 2004, que no se usaron para descontar porque no cubren todo el
+  período de estimación ni separan al FGS. Partir de la deuda del FMI,
+  que sí descuenta el FGS, no cambia las conclusiones.
+\item
+  \textbf{Persistencia.} La estimación central usa coeficientes
+  corregidos por sesgo con un autovalor máximo de 0,9998, casi una raíz
+  unitaria. Esa persistencia eleva las probabilidades de no
+  estabilización, y los intervalos percentiles no quedan centrados en la
+  estimación central, que se ubica cerca de su límite superior.
+\item
+  \textbf{Resultado primario.} Incluye las rentas de la propiedad, entre
+  ellas las utilidades del BCRA. Sin ellas, la probabilidad de no
+  estabilización es de 23,4\% en 2031 y 19,6\% en 2035.
 \item
   \textbf{Autocorrelación residual y remuestreo.} La prueba de
   Portmanteau rechaza la ausencia de autocorrelación (p = 0,036), y los

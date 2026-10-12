@@ -42,7 +42,7 @@ El titulo del `.bib` ("Global Financial Shocks and Their Transmission to Emergin
 
 **(c) Evidencia.** PDF IMF WP/13/27 (descargado via WebFetch de https://www.imf.org/external/pubs/ft/wp/2013/wp1327.pdf), pags. PDF 1, 16-17; WP/14/60 (https://www.imf.org/external/pubs/ft/wp/2014/wp1460.pdf) resumen y pags. 8-10; IDEAS/RePEc para datos de revista; lista de capitulos en https://oeaw.ac.at/resources/Record/5001983700/TOC.
 
-**(d) Cambio necesario.** El parrafo de la linea 33 de `antecedentes.md` (VAR globales y de panel con NCPI, ">50% de la variabilidad", asimetria argentina) no esta respaldado por ninguna de las obras que pude leer. Opciones: (i) reescribir con lo que si dice WP/13/27 (VAR por pais con precios de commodities, VIX y crecimiento mundial; simulaciones de sostenibilidad bajo escenarios externos adversos, con el VIX como unica variable global con resultados significativos y robustos en las regresiones de la seccion del VAR) y (ii) para residentes y flujos, citar Adler, Djigbenou y Sosa (2016), sin atribuir la cifra ">mitad" ni la "asimetria argentina" salvo que Santiago indique pagina y fuente. Pedir a Santiago la pagina exacta del capitulo del libro.
+**(d) Cambio necesario.** El parrafo de la linea 33 de `antecedentes.md` (VAR globales y de panel con NCPI, ">50% de la variabilidad", asimetria argentina) no esta respaldado por ninguna de las obras que pude leer. Opciones: (i) reescribir con lo que si dice WP/13/27 (VAR por pais con precios de commodities, VIX y crecimiento mundial; simulaciones de sostenibilidad bajo escenarios externos adversos, con el VIX como unica variable global con resultados significativos y robustos en las regresiones de la seccion del VAR) y (ii) para residentes y flujos, citar Adler, Djigbenou y Sosa (2016), sin atribuir la cifra ">mitad" ni la "asimetria argentina" salvo que el equipo indique pagina y fuente. Pedir al equipo la pagina exacta del capitulo del libro.
 
 ---
 
@@ -54,7 +54,7 @@ El titulo del `.bib` ("Global Financial Shocks and Their Transmission to Emergin
 
 **(c) Evidencia.** https://www.imf.org/external/pubs/ft/wp/2013/wp13103.pdf (pag. PDF 1-2, resumen); pagina IMF del WP, DOI.
 
-**(d) Cambio.** Corregir ano/numero/titulo. Si la tesis dice que el NCPI es de Adler y Magud, **no esta respaldado**; quitar la atribucion o pedir a Santiago la fuente exacta del indice.
+**(d) Cambio.** Corregir ano/numero/titulo. Si la tesis dice que el NCPI es de Adler y Magud, **no esta respaldado**; quitar la atribucion o pedir al equipo la fuente exacta del indice.
 
 ---
 
@@ -74,7 +74,7 @@ El titulo del `.bib`, "Sector publico argentino: ahorro, inversion y financiamie
 
 **(c) Evidencia.** https://repositorio.cedes.org/handle/123456789/3626 (PDF); https://ideas.repec.org/p/idb/brikps/6103.html (resumen).
 
-**(d) Cambio.** Reemplazar la entrada CEPAL del `.bib` por la del BID/CEDES. Si Santiago insiste en el titulo CEPAL, pedir ficha completa.
+**(d) Cambio.** Reemplazar la entrada CEPAL del `.bib` por la del BID/CEDES. Si el equipo prefiere en el titulo CEPAL, pedir ficha completa.
 
 ---
 

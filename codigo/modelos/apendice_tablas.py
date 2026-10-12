@@ -130,10 +130,17 @@ def seccion_fiscal() -> str:
         elif k.startswith("dFED_l"):
             nom = f"Variación de la tasa de la FED, rezago {k[-1]}"
         else:
-            nom = {"deuda_l1": "Deuda consolidada neta, rezago 1 (reacción de Bohn)", "VIX": "VIX"}[k]
+            nom = {"deuda_l1": "Deuda consolidada neta, rezago 1 (reacción fiscal de impacto)", "VIX": "VIX"}[k]
         filas.append([nom, num(par[k], 4), num(se[k], 4), num(pv[k], 3)])
     d = pd.DataFrame(filas, columns=["Regresor", "Coeficiente", "Error estándar", "p-valor"])
-    return ("## A.6 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*.\n\n"
+    # Multiplicador de largo plazo de la deuda sobre el resultado primario: b_deuda / (1 - sum_j a_j),
+    # con a_j los coeficientes de los rezagos propios del resultado primario (MCO; no se calcula intervalo).
+    propios = float(sum(par[k] for k in par.index if re.fullmatch(r"L\d+\.pb_pib", k)))
+    largo_plazo = float(par["deuda_l1"]) / (1.0 - propios)
+    nota_lp = (" El coeficiente de la deuda rezagada es un efecto de impacto sobre el resultado primario trimestral. "
+               f"Con los rezagos propios del resultado primario (suma {num(propios, 3)}), el multiplicador de largo plazo de la "
+               f"estimación por MCO es {num(par['deuda_l1'], 3)}/(1 − {num(propios, 3)}) ≈ {num(largo_plazo, 2)}; no se calculó su intervalo.")
+    return ("## A.6 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*." + nota_lp + "\n\n"
             + tabla(d) + "\n")
 
 
@@ -150,8 +157,8 @@ def seccion_robustez() -> str:
            "h1a_nofiscal_menos_fiscal": ("No fiscal menos fiscal (puntos)", 1),
            "h1a_cambiario_menos_fiscal": ("Cambiario y de riesgo menos fiscal (puntos)", 1),
            "h1a_por_shock_cambiario_menos_fiscal": ("Promedio por shock cambiario y de riesgo menos fiscal (puntos)", 1),
-           "dif_fed_1de_p_noest_2035": ("FED, un desvío: diferencia en la probabilidad 2035 (pp)", 100),
-           "dif_fed_1de_d2035": ("FED, un desvío: diferencia en la deuda 2035 (pp del PIB)", 1),
+           "dif_fed_1de_p_noest_2035": ("FED, nivel 0,50 pp más alto: diferencia en la probabilidad 2035 (pp)", 100),
+           "dif_fed_1de_d2035": ("FED, nivel 0,50 pp más alto: diferencia en la deuda 2035 (pp del PIB)", 1),
            "dif_fed_2022_2025_p_noest_2031": ("FED, senda 2022-2025: diferencia en la probabilidad 2031 (pp)", 100),
            "dif_fed_2022_2025_p_noest_2035": ("FED, senda 2022-2025: diferencia en la probabilidad 2035 (pp)", 100),
            "dif_fed_2022_2025_d2035": ("FED, senda 2022-2025: diferencia en la deuda 2035 (pp del PIB)", 1)}
@@ -162,7 +169,9 @@ def seccion_robustez() -> str:
     miles = lambda v: f"{v:,}".replace(",", ".")
     nota = (f"Estimación central con parámetros corregidos por sesgo (Kilian, 1998) y {miles(meta['N_central'])} trayectorias; "
             f"intervalos de {meta['B']} réplicas con {miles(meta['N'])} trayectorias cada una. Autovalor máximo del VAR: "
-            f"{num(meta['raiz_max_estimada'], 3)} estimado y {num(meta['raiz_max_corregida'], 4)} corregido.")
+            f"{num(meta['raiz_max_estimada'], 3)} estimado y {num(meta['raiz_max_corregida'], 4)} corregido. "
+            "Las réplicas usan una corrección del sesgo más reducida que la estimación central, de modo que los intervalos "
+            "percentiles no quedan centrados en ella y la estimación central se ubica cerca de su límite superior (sección 4.5).")
     return "## A.7 Resultados completos de la especificación principal\n\n" + nota + "\n\n" + tabla(d) + "\n"
 
 
