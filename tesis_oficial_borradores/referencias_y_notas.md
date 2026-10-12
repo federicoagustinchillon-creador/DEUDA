@@ -160,7 +160,7 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
 | No discutir en el texto si el riesgo país es endógeno (17/9) | No aparece; queda como respuesta oral en la guía de defensa |
 | Justificar la matriz del SVAR, "donde gira todo" | Secciones 4.4 (identificación) y 4.3 (canales de la FED) |
 | Panel Argentina-Chile como línea futura | Capítulo 8 |
-| Bajar la extensión | 60 páginas |
+| Bajar la extensión | 69 páginas; falta acordar en el grupo qué se recorta para llegar a unas 60 |
 
 **Propuestas de la metodología de Santiago**
 
