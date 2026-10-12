@@ -36,6 +36,23 @@ def tabla(df: pd.DataFrame) -> str:
     return cab + "".join("| " + " | ".join(str(v) for v in fila) + " |\n" for fila in df.values)
 
 
+def seccion_descriptivos() -> str:
+    """Estadisticos descriptivos de la muestra efectiva de estimacion (1998T2-2025T4)."""
+    Y, X, _ = f24.cargar_datos("neta", 2)
+    p, _, _ = f24.elegir_rezagos(Y, X)
+    Y, X = f24.recortar(Y, X, p)
+    muestra = pd.concat([Y.iloc[p:], X.iloc[p:][["deuda_l1", "dFED_l0", "VIX"]]], axis=1)
+    nombres = {"pb_pib": "Resultado primario (% del PIB, trimestral anualizado)", "crec": "Crecimiento real trimestral (%)",
+               "EMBI": "EMBI+ (puntos básicos)", "TCRM": "TCRM (diciembre de 2001 = 1)",
+               "deuda_l1": "Deuda consolidada neta, rezagada (% del PIB)",
+               "dFED_l0": "Variación de la tasa de la FED (puntos)", "VIX": "VIX"}
+    filas = [[nombres[c], num(muestra[c].mean(), 2), num(muestra[c].std(ddof=1), 2), num(muestra[c].min(), 2),
+              num(muestra[c].max(), 2)] for c in nombres]
+    d = pd.DataFrame(filas, columns=["Variable", "Media", "Desvío estándar", "Mínimo", "Máximo"])
+    return (f"## A.0 Estadísticos descriptivos\n\nMuestra efectiva de estimación, {muestra.index[0].year}T{muestra.index[0].quarter}-"
+            f"{muestra.index[-1].year}T{muestra.index[-1].quarter} ({len(muestra)} trimestres).\n\n" + tabla(d) + "\n")
+
+
 def seccion_rezagos() -> str:
     out = "## A.1 Selección del orden del VAR\n\nMuestra efectiva común 1998T2-2025T4 (111 trimestres) para todos los órdenes (sección 4.5). El orden elegido es el mayor orden estable que no supera al que minimiza el AIC.\n\n"
     for s, nombre in SERIES.items():
@@ -118,7 +135,7 @@ def seccion_robustez() -> str:
 
 def main() -> None:
     texto = "# Apéndice estadístico\n\nTablas generadas con `codigo/modelos/apendice_tablas.py` a partir de los resultados de `fase24_svarx_1996_2025.py` y `fase25_simulacion_dsa_svarx.py`.\n\n"
-    texto += seccion_rezagos() + seccion_diagnosticos() + seccion_impacto() + seccion_fiscal() + seccion_robustez()
+    texto += seccion_descriptivos() + seccion_rezagos() + seccion_diagnosticos() + seccion_impacto() + seccion_fiscal() + seccion_robustez()
     SALIDA.write_text(texto, encoding="utf-8")
     print(f"[OK] {SALIDA.relative_to(BASE)}")
 

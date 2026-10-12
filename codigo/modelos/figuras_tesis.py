@@ -159,7 +159,8 @@ def fig6_4() -> None:
         hi.append(0)
         ax.bar(x + dx, med, width=0.34, color=color, yerr=[lo, hi], capsize=3, error_kw={"lw": 0.8},
                label=f"{anio} ({'cinco' if anio == 2030 else 'diez'} años)")
-    ax.axhline(3, color=ROJO, lw=1.2, ls="--", label="FMI (2025): 3%")
+    ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026), mediano plazo: 1%")
+    ax.axhline(3, color=ROJO, lw=1.0, ls=":", label="FMI (2026), diez años: menos de 3%")
     ax.set_xticks(x, list(specs.values()) + ["Shocks a la\nmanera del FMI"], fontsize=7.5)
     ax.set_ylabel("Probabilidad de no estabilización (%)")
     ax.grid(axis="x", visible=False)

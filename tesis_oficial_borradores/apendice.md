@@ -2,6 +2,20 @@
 
 Tablas generadas con `codigo/modelos/apendice_tablas.py` a partir de los resultados de `fase24_svarx_1996_2025.py` y `fase25_simulacion_dsa_svarx.py`.
 
+## A.0 Estadísticos descriptivos
+
+Muestra efectiva de estimación, 1998T2-2025T4 (111 trimestres).
+
+| Variable | Media | Desvío estándar | Mínimo | Máximo |
+|---|---|---|---|---|
+| Resultado primario (% del PIB, trimestral anualizado) | -0,04 | 3,23 | -12,16 | 7,02 |
+| Crecimiento real trimestral (%) | 0,39 | 7,41 | -13,77 | 18,21 |
+| EMBI+ (puntos básicos) | 1.561,19 | 1.611,94 | 210,22 | 6.658,98 |
+| TCRM (diciembre de 2001 = 1) | 1,66 | 0,45 | 0,98 | 2,76 |
+| Deuda consolidada neta, rezagada (% del PIB) | 57,74 | 27,07 | 26,13 | 136,60 |
+| Variación de la tasa de la FED (puntos) | -0,01 | 0,52 | -1,43 | 1,69 |
+| VIX | 20,20 | 7,33 | 10,31 | 58,60 |
+
 ## A.1 Selección del orden del VAR
 
 Muestra efectiva común 1998T2-2025T4 (111 trimestres) para todos los órdenes (sección 4.5). El orden elegido es el mayor orden estable que no supera al que minimiza el AIC.
@@ -94,15 +108,15 @@ Media entre réplicas de parámetros y, entre corchetes, percentiles 5 y 95 (300
 
 | Indicador | Neta (principal) | Neta en libros | Bruta | Neta con tasas en pesos | Neta sin retroalimentación |
 |---|---|---|---|---|---|
-| No estabilización 2030 (%) | 11,8 [8,0; 15,8] | 13,0 [9,0; 17,8] | 12,7 [9,0; 17,0] | 12,2 [8,5; 16,0] | 11,6 [7,8; 15,5] |
-| No estabilización 2035 (%) | 6,0 [3,0; 9,8] | 6,8 [3,2; 10,8] | 7,3 [4,0; 11,2] | 7,6 [3,7; 12,0] | 5,6 [2,8; 9,2] |
-| Deuda media 2035 (% PIB) | 18,0 [17,2; 19,2] | 19,7 [18,8; 21,0] | 25,8 [24,9; 26,9] | 18,6 [17,4; 20,3] | 18,0 [17,1; 19,1] |
-| Ancho p5-p95 2030 | 19,4 [15,4; 24,3] | 19,9 [15,8; 24,6] | 20,9 [16,9; 26,0] | 21,3 [16,5; 27,2] | 20,9 [16,4; 26,0] |
-| Varianza 2035: fiscal (%) | 19,4 [3,5; 41,2] | 18,7 [3,6; 38,9] | 21,4 [2,3; 50,0] | 16,8 [2,7; 38,8] | 19,3 [3,7; 41,5] |
-| Varianza 2035: actividad (%) | 21,6 [3,9; 49,9] | 22,8 [4,0; 54,2] | 27,4 [6,6; 58,4] | 16,3 [3,0; 40,3] | 20,6 [5,0; 49,9] |
-| Varianza 2035: cambiario y de riesgo (%) | 59,0 [12,5; 89,5] | 58,4 [15,1; 88,8] | 51,2 [6,8; 86,5] | 66,9 [25,1; 92,3] | 60,1 [12,0; 88,4] |
-| H1a: no fiscal menos fiscal | 61,2 [17,5; 93,0] | 62,5 [22,3; 92,7] | 57,1 [0,1; 95,4] | 66,4 [22,4; 94,7] | 61,4 [16,9; 92,7] |
-| H2: FED 1 desvío, Δ probabilidad 2035 (pp) | 0,5 [0,0; 1,5] | 0,6 [0,0; 1,8] | 0,6 [0,0; 1,5] | 0,7 [0,0; 1,8] | 0,5 [0,0; 1,2] |
-| H2: FED 2022-2023, Δ probabilidad 2035 (pp) | 7,7 [2,5; 16,0] | 8,2 [3,0; 17,3] | 7,2 [2,0; 13,2] | 9,0 [2,2; 20,5] | 6,7 [2,7; 13,5] |
-| H2: FED 2022-2023, Δ deuda 2035 (pp PIB) | 7,0 [1,4; 16,0] | 7,5 [1,4; 17,1] | 6,8 [0,1; 15,0] | 7,6 [0,4; 19,5] | 7,0 [1,7; 15,1] |
+| No estabilización 2030 (%) | 11,5 [7,7; 15,2] | 12,7 [8,8; 17,0] | 12,3 [8,5; 16,3] | 12,2 [8,5; 16,2] | 11,5 [7,8; 15,8] |
+| No estabilización 2035 (%) | 6,6 [3,2; 10,5] | 7,4 [3,8; 11,8] | 7,8 [4,5; 11,8] | 8,8 [4,2; 14,5] | 6,1 [3,2; 10,0] |
+| Deuda media 2035 (% PIB) | 16,4 [15,4; 17,6] | 17,7 [16,8; 19,1] | 22,8 [21,9; 24,0] | 17,1 [15,7; 19,1] | 16,3 [15,3; 17,4] |
+| Ancho p5-p95 2030 | 18,6 [14,4; 23,3] | 19,0 [14,5; 23,9] | 19,3 [15,8; 24,3] | 21,0 [15,7; 27,2] | 19,9 [15,6; 24,9] |
+| Varianza 2035: fiscal (%) | 21,2 [4,0; 43,3] | 20,8 [4,6; 41,7] | 23,7 [3,1; 53,7] | 17,9 [2,8; 41,3] | 21,0 [4,1; 44,0] |
+| Varianza 2035: actividad (%) | 19,0 [3,4; 45,2] | 20,2 [3,2; 52,1] | 24,9 [5,4; 55,4] | 14,0 [2,4; 37,1] | 18,4 [4,2; 44,8] |
+| Varianza 2035: cambiario y de riesgo (%) | 59,8 [12,6; 90,0] | 59,1 [14,5; 88,8] | 51,5 [5,7; 86,7] | 68,1 [27,5; 92,7] | 60,5 [12,3; 88,7] |
+| H1a: no fiscal menos fiscal | 57,7 [13,4; 92,0] | 58,5 [16,6; 90,8] | 52,6 [-7,5; 93,7] | 64,2 [17,4; 94,5] | 57,9 [11,9; 91,8] |
+| H2: FED 1 desvío, Δ probabilidad 2035 (pp) | 0,7 [0,0; 1,7] | 0,8 [0,0; 1,8] | 0,7 [0,0; 1,5] | 0,8 [0,0; 2,0] | 0,6 [0,0; 1,5] |
+| H2: FED 2022-2023, Δ probabilidad 2035 (pp) | 9,5 [3,7; 19,0] | 10,1 [3,8; 20,3] | 8,7 [2,8; 15,8] | 11,0 [3,0; 25,0] | 8,2 [3,8; 15,8] |
+| H2: FED 2022-2023, Δ deuda 2035 (pp PIB) | 7,8 [1,9; 17,5] | 8,4 [2,1; 18,8] | 7,5 [0,6; 15,9] | 8,8 [1,1; 21,7] | 7,6 [2,2; 16,0] |
 

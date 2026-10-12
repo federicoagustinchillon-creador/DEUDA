@@ -60,8 +60,20 @@ TABLAS = BASE / "resultados" / "tablas"
 
 ANIOS = list(range(2026, 2036))
 TRIM = 4 * len(ANIOS)
+# Escenarios base del FMI disponibles. Principal: el mas reciente, Informe de Pais 26/105 (Articulo
+# IV 2026 y segunda revision del EFF, mayo de 2026), Table 6 y Table 7: probabilidad de no
+# estabilizacion 1,0%. Robustez: Informe de Pais 25/95 (abril de 2025), cuadro 7: 3,0%.
+# (archivo, umbral del FMI, primer anio de proyeccion del informe)
+ESCENARIOS = {
+    "cr26105": ("escenario_base_fmi_cr26105.csv", 0.010, 2026),
+    "cr2595": ("escenario_base_fmi_cr2595.csv", 0.030, 2025),
+}
+ESC = "cr26105"
+UMBRAL_FMI = ESCENARIOS[ESC][1]
+# Velocidad de refinanciacion: necesidades brutas de financiamiento promedio sobre deuda promedio de
+# los seis primeros anios de proyeccion del informe (el promedio de mediano plazo del FMI). Se fija
+# en main() segun el escenario: 18,0/63,6 = 0,28 con CR 26/105; 13/64,1 = 0,20 con CR 25/95.
 LAM = 13.0 / 64.1
-UMBRAL_FMI = 0.03  # FMI (2025), anexo II, cuadro 7: probabilidad de no estabilizacion 3,0%
 SEMILLA = 20261012
 # Identificacion: "bp" (Blanchard-Perotti + bloque sin orden, seccion 4.4) o "cholesky_fiscal_primero"
 # (robustez: Cholesky en el orden pb, crec, EMBI, TCRM, que le atribuye al shock fiscal toda la
@@ -73,9 +85,20 @@ SIN_RETRO = False
 BLOQUES = {"fiscal": [0], "actividad": [1], "cambiario_y_riesgo": [2, 3]}
 
 
+def velocidad_refinanciacion(esc_id: str) -> float:
+    """lam = GFN promedio / deuda promedio en los seis primeros anios de proyeccion del informe."""
+    archivo, _, inicio = ESCENARIOS[esc_id]
+    d = pd.read_csv(DATOS / "procesados" / archivo)
+    anios = list(range(inicio, inicio + 6))
+    def media(v: str) -> float:
+        s = d[d.variable == v].drop_duplicates("anio").set_index("anio")["valor"]
+        return float(s.loc[anios].mean())
+    return media("srd_necesidades_financiamiento_brutas") / media("srd_deuda_publica")
+
+
 def escenario_fmi() -> pd.DataFrame:
-    """Senderos anuales del escenario base del FMI (CR 25/95, anexo II, cuadro 6), en %."""
-    d = pd.read_csv(DATOS / "procesados" / "escenario_base_fmi_cr2595.csv")
+    """Senderos anuales del escenario base del FMI (anexo de sostenibilidad, Table 6), en %."""
+    d = pd.read_csv(DATOS / "procesados" / ESCENARIOS[ESC][0])
     def serie(v: str) -> pd.Series:
         return d[d.variable == v].drop_duplicates("anio").set_index("anio")["valor"]
     esc = pd.DataFrame({
@@ -288,8 +311,14 @@ def main() -> None:
     ap.add_argument("--shocks", choices=["svarx", "fmi"], default="svarx")
     ap.add_argument("--sin-retroalimentacion", action="store_true")
     ap.add_argument("--identificacion", choices=["bp", "cholesky_fiscal_primero", "cholesky_santiago"], default="bp")
+    ap.add_argument("--escenario", choices=list(ESCENARIOS), default="cr26105")
     a = ap.parse_args()
     rng = np.random.default_rng(SEMILLA)
+    global ESC, UMBRAL_FMI, LAM
+    ESC = a.escenario
+    UMBRAL_FMI = ESCENARIOS[ESC][1]
+    LAM = velocidad_refinanciacion(ESC)
+    sufijo_esc = "" if ESC == "cr26105" else f"_{ESC}"
     TABLAS.mkdir(parents=True, exist_ok=True)
 
     if a.shocks == "fmi":
@@ -300,12 +329,12 @@ def main() -> None:
         s = simular_fmi(dr, esc, d0, alfa, 10_000, rng)
         pct = np.percentile(s["d"], [5, 10, 25, 50, 75, 90, 95], axis=0)
         pd.DataFrame(pct.T, index=[2025] + ANIOS, columns=["p5", "p10", "p25", "p50", "p75", "p90", "p95"]
-                     ).rename_axis("anio").to_csv(TABLAS / f"fase25_{a.deuda}_fmi_fanchart.csv")
+                     ).rename_axis("anio").to_csv(TABLAS / f"fase25_{a.deuda}_fmi{sufijo_esc}_fanchart.csv")
         out = pd.Series({"p_noest_2030": s["no_est_2030"].mean(), "p_noest_2035": s["no_est_2035"].mean(),
                          "d2035_media": s["d"][:, -1].mean(),
                          "ancho_p5_p95_2030": np.subtract(*np.percentile(s["d"][:, 5], [95, 5])),
                          "ancho_p5_p95_2035": np.subtract(*np.percentile(s["d"][:, -1], [95, 5]))})
-        out.to_csv(TABLAS / f"fase25_{a.deuda}_fmi_resumen.csv", header=["valor"])
+        out.to_csv(TABLAS / f"fase25_{a.deuda}_fmi{sufijo_esc}_resumen.csv", header=["valor"])
         print(f"shocks=fmi deuda={a.deuda} d0={d0:.1f}% alfa_pesos={alfa:.3f} N=10000")
         print(dr.describe().round(2).to_string())
         print(out.round(4).to_string())
@@ -315,10 +344,10 @@ def main() -> None:
     p, _, _ = f24.elegir_rezagos(Y, X)
     Y, X = f24.recortar(Y, X, p)  # muestra efectiva comun 1998T2-2025T4
     dom = a.canal_domestico
-    global IDENT, SIN_RETRO
+    global IDENT, SIN_RETRO  # noqa: PLW0603
     IDENT = a.identificacion
     SIN_RETRO = a.sin_retroalimentacion
-    suf = (f"{a.deuda}_dom" if dom else a.deuda) + {"bp": "", "cholesky_fiscal_primero": "_chol", "cholesky_santiago": "_chol_santiago"}[IDENT] + ("_sin_retro" if SIN_RETRO else "")
+    suf = (f"{a.deuda}_dom" if dom else a.deuda) + {"bp": "", "cholesky_fiscal_primero": "_chol", "cholesky_santiago": "_chol_santiago"}[IDENT] + ("_sin_retro" if SIN_RETRO else "") + sufijo_esc
     esc = escenario_fmi()
     d0, alfa, tcrm0 = condiciones_iniciales(a.deuda)
     sd_fed = float(pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"].diff().std(ddof=1))
@@ -366,9 +395,9 @@ def main() -> None:
     resumen = res.drop(columns="replica").agg(["mean", lambda s: s.quantile(0.05), lambda s: s.quantile(0.95)]).T
     resumen.columns = ["media", "p05", "p95"]
     resumen.to_csv(TABLAS / f"fase25_{suf}_resumen.csv")
-    print(f"deuda={a.deuda} canal_domestico={dom} p={p} d0={d0:.1f}% alfa_pesos={alfa:.3f} replicas={len(reps)} N={a.N}")
+    print(f"escenario={ESC} umbral={UMBRAL_FMI:.3f} lam={LAM:.3f} deuda={a.deuda} canal_domestico={dom} p={p} d0={d0:.1f}% alfa_pesos={alfa:.3f} replicas={len(reps)} N={a.N}")
     print(resumen.round(4).to_string())
-    print("H1b respaldada (p05 > 3%):", bool(resumen.loc["base_p_noest_2030", "p05"] > UMBRAL_FMI),
+    print(f"H1b respaldada (p05 > {UMBRAL_FMI:.0%}):", bool(resumen.loc["base_p_noest_2030", "p05"] > UMBRAL_FMI),
           "| 2035:", bool(resumen.loc["base_p_noest_2035", "p05"] > UMBRAL_FMI))
 
 

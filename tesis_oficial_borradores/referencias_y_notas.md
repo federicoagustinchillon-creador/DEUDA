@@ -41,6 +41,7 @@
 - Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper). Aprobado por el Directorio el 14 de enero de 2021.
 - Fondo Monetario Internacional. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 24/167).
 - Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95). Anexo II: Application of the Sovereign Risk and Debt Sustainability Framework.
+- Fondo Monetario Internacional. (2026). *Argentina: 2026 Article IV consultation, second review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 26/105). Anexo: Sovereign Risk and Debt Sustainability Assessment.
 - Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, 123(566), F4-F30.
 - Girouard, N., y André, C. (2005). *Measuring cyclically-adjusted budget balances for OECD countries* (OECD Economics Department Working Papers No. 434).
 - González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo.

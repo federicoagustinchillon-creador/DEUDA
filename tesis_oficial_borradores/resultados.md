@@ -1,6 +1,6 @@
 # 6. Resultados
 
-Todos los resultados de este capítulo salen de la misma muestra efectiva, 1998T2-2025T4 (111 trimestres), y del mismo escenario base, el del FMI (2025, anexo II). La especificación principal usa la deuda consolidada neta con las Letras Intransferibles a valor nominal, que parte de 61,0% del PIB en diciembre de 2025. Las cifras se pueden reproducir con `codigo/modelos/fase24_svarx_1996_2025.py` y `codigo/modelos/fase25_simulacion_dsa_svarx.py`.
+Todos los resultados de este capítulo salen de la misma muestra efectiva, 1998T2-2025T4 (111 trimestres), y del mismo escenario base, el del análisis de sostenibilidad más reciente del FMI (2026), publicado con la consulta del Artículo IV y la segunda revisión del programa en mayo de 2026. La especificación principal usa la deuda consolidada neta con las Letras Intransferibles a valor nominal, que parte de 61,0% del PIB en diciembre de 2025. Las cifras se pueden reproducir con `codigo/modelos/fase24_svarx_1996_2025.py` y `codigo/modelos/fase25_simulacion_dsa_svarx.py`.
 
 ## 6.1 El SVARX estimado
 
@@ -24,21 +24,21 @@ El signo coincide con el que encuentran Celasun et al. (2006) en su panel de eco
 
 ## 6.2 El gráfico de abanico
 
-La Tabla 6.1 resume la distribución de la deuda simulada. La mediana baja de 61,0% del PIB en 2025 a 35,9% en 2030 y a 16,7% en 2035. La Figura 6.2 muestra el abanico. La caída la determina el escenario base del FMI, que combina un superávit primario de alrededor de 2,5% del PIB con una tasa de interés efectiva de alrededor de 4% y un deflactor del PIB que crece cerca de 7,5% por año. Con esos supuestos, la tasa real que paga la deuda es negativa y la licua año tras año.
+La Tabla 6.1 resume la distribución de la deuda simulada. La mediana baja de 61,0% del PIB en 2025 a 29,9% en 2030 y a 14,9% en 2035 (Figura 6.2). La caída la determina el escenario base del FMI (2026, cuadro 6). Ese escenario combina un superávit primario que sube de 1,4% del PIB en 2026 a 2,3% desde 2029 con una tasa de interés efectiva de entre 2,6% y 5,1%, mientras el deflactor del PIB pasa de 30,2% en 2026 a 7,5% desde 2029. Con esos supuestos, la tasa real que paga la deuda es muy negativa en los primeros años y la licua.
 
 **Tabla 6.1. Deuda consolidada neta simulada (% del PIB), percentiles**
 
 | Año | p5 | p25 | Mediana | p75 | p95 |
 |---|---|---|---|---|---|
-| 2026 | 46,0 | 49,7 | 52,8 | 56,9 | 64,5 |
-| 2028 | 37,7 | 41,9 | 45,6 | 50,0 | 57,9 |
-| 2030 | 25,9 | 31,2 | 35,9 | 40,7 | 49,6 |
-| 2032 | 15,0 | 21,1 | 26,9 | 32,7 | 44,2 |
-| 2035 | 2,2 | 9,6 | 16,7 | 23,7 | 38,5 |
+| 2026 | 42,7 | 46,0 | 48,8 | 52,4 | 59,5 |
+| 2028 | 31,6 | 35,7 | 39,1 | 42,8 | 50,4 |
+| 2030 | 20,0 | 25,2 | 29,9 | 34,6 | 42,9 |
+| 2032 | 10,7 | 17,0 | 22,4 | 28,9 | 39,1 |
+| 2035 | 0,3 | 7,6 | 14,9 | 22,5 | 37,1 |
 
-![Figura 6.2. Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (% del PIB). Escenario base del FMI (2025) con shocks estructurales del SVARX; 300 réplicas de parámetros por 400 trayectorias.](../tesis/figuras/fig6_2_abanico_deuda_neta.png)
+![Figura 6.2. Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (% del PIB). Escenario base del FMI (2026) con shocks estructurales del SVARX; 300 réplicas de parámetros por 400 trayectorias.](../tesis/figuras/fig6_2_abanico_deuda_neta.png)
 
-El ancho del abanico entre los percentiles 5 y 95 es de 19,4 puntos en 2030, con un intervalo de 90% de [15,4; 24,3]. El del FMI para la deuda federal bruta es 74,2 (FMI, 2025, anexo II, cuadro 7). El Capítulo 7 analiza esta diferencia.
+El ancho del abanico entre los percentiles 5 y 95 es de 18,6 puntos en 2030, con un intervalo de 90% de [14,4; 23,3]. El del FMI para la deuda federal bruta es 71,5 (FMI, 2026, cuadro 7). El Capítulo 7 analiza esta diferencia.
 
 ## 6.3 Contraste de H1a
 
@@ -46,62 +46,67 @@ H1a sostiene que el superávit primario, por sí solo, no basta para estabilizar
 
 | Bloque de shocks | Participación en la varianza de la deuda en 2035 | Intervalo de 90% |
 |---|---|---|
-| Fiscal | 19,4% | [3,5; 41,2] |
-| Actividad | 21,6% | [3,9; 49,9] |
-| Cambiario y de riesgo (EMBI+ y TCRM) | 59,0% | [12,5; 89,5] |
-| No fiscal menos fiscal (diferencia) | 61,2 puntos | [17,5; 93,0] |
+| Fiscal | 21,2% | [4,0; 43,3] |
+| Actividad | 19,0% | [3,4; 45,2] |
+| Cambiario y de riesgo (EMBI+ y TCRM) | 59,8% | [12,6; 90,0] |
+| No fiscal menos fiscal (diferencia) | 57,7 puntos | [13,4; 92,0] |
 
-Los shocks no fiscales explican cerca de cuatro quintos de la incertidumbre sobre la deuda en 2035, y el intervalo de la diferencia con el fiscal excluye el cero. **H1a queda respaldada.** El bloque cambiario y de riesgo es el que más pesa. El resultado es coherente con la reacción fiscal positiva de la sección 6.1: el superávit responde a la deuda, pero la variabilidad de la deuda la dominan el tipo de cambio real y el riesgo país.
+Los shocks no fiscales explican cerca de cuatro quintos de la incertidumbre sobre la deuda en 2035, y el intervalo de la diferencia con el fiscal excluye el cero. **H1a queda respaldada en la especificación principal.** El bloque cambiario y de riesgo es el que más pesa. El resultado es coherente con la reacción fiscal positiva de la sección 6.1: el superávit responde a la deuda, pero la variabilidad de la deuda la dominan el tipo de cambio real y el riesgo país. La sección 6.6 muestra en qué especificaciones el resultado se mantiene y en cuáles no.
 
 ![Figura 6.3. Varianza de la deuda en 2035 por bloque de shocks. Participación de cada bloque de shocks estructurales en la varianza de la deuda simulada en 2035. Las barras de error son el intervalo de 90% entre réplicas de parámetros.](../tesis/figuras/fig6_3_varianza_por_bloque.png)
 
 ## 6.4 Contraste de H1b
 
-| Horizonte | Probabilidad de no estabilización | Intervalo de 90% | Criterio (límite inferior > 3%) |
-|---|---|---|---|
-| 2030 (cinco años, el horizonte del FMI) | 11,8% | [8,0; 15,8] | Se cumple |
-| 2035 (diez años) | 6,0% | [3,0; 9,8] | Límite inferior igual al umbral |
+El FMI (2026) estima una probabilidad de estabilización de alrededor de 99% en su abanico de mediano plazo (no estabilización de 1,0%, cuadro 7) y superior a 97% en su abanico de diez años, que termina en 2035. Cada horizonte se contrasta contra la cifra del FMI correspondiente.
 
-A cinco años, la probabilidad de que la deuda consolidada no se estabilice es de 11,8%, casi cuatro veces el 3% del FMI, y el intervalo de 90% queda entero por encima del umbral. **H1b queda respaldada en el horizonte en que el FMI mide su métrica.** A diez años la probabilidad baja a 6,0%, porque el escenario base sigue reduciendo la deuda y cada vez menos trayectorias terminan con la deuda en aumento. El límite inferior del intervalo coincide con el 3%, así que a diez años el contraste no rechaza que la probabilidad sea igual a la del FMI.
+| Horizonte | Probabilidad de no estabilización | Intervalo de 90% | Umbral del FMI | Criterio (límite inferior mayor que el umbral) |
+|---|---|---|---|---|
+| 2030 (cinco años) | 11,5% | [7,7; 15,2] | 1,0% | Se cumple |
+| 2035 (diez años) | 6,6% | [3,3; 10,5] | menos de 3% | Se cumple |
+
+A cinco años, la probabilidad de que la deuda consolidada no se estabilice es de 11,5%, más de diez veces el 1,0% del FMI, y el intervalo de 90% queda entero por encima de ese valor. A diez años baja a 6,6%, porque el escenario base sigue reduciendo la deuda y cada vez menos trayectorias terminan con la deuda en aumento. Aun así, el límite inferior (3,3%) supera el 3%, que es la cota que da el FMI para ese horizonte. **H1b queda respaldada en los dos horizontes.**
 
 ## 6.5 Contraste de H2
 
 | Escenario | Diferencia en la probabilidad de no estabilización en 2035 | Diferencia en la deuda media en 2035 |
 |---|---|---|
-| Suba de un desvío estándar (0,50 pp) | +0,5 pp [0,0; 1,5] | +0,7 pp del PIB |
-| Repetición del ciclo 2022-2023 (+5,25 pp en ocho trimestres) | +7,7 pp [2,5; 16,0] | +7,0 pp del PIB [1,4; 16,0] |
+| Suba de un desvío estándar (0,50 pp) | +0,7 pp [0,0; 1,8] | +0,7 pp del PIB |
+| Repetición del ciclo 2022-2023 (+5,25 pp en ocho trimestres) | +9,5 pp [3,7; 19,0] | +7,8 pp del PIB [1,9; 17,5] |
 
 Entre corchetes, los intervalos de 90%.
 
-Con un shock de un desvío estándar, el intervalo de la diferencia en la probabilidad toca el cero, de modo que no hay un efecto distinguible. Con una suba como la de 2022-2023, la probabilidad de no estabilización en 2035 sube 7,7 puntos y la deuda esperada, 7,0 puntos del PIB, y los dos intervalos excluyen el cero. **H2 queda respaldada para un endurecimiento de la magnitud del de 2022-2023, y no para un shock de un desvío estándar.**
+Con un shock de un desvío estándar, el intervalo de la diferencia en la probabilidad toca el cero, de modo que no hay un efecto distinguible. Con una suba como la de 2022-2023, la probabilidad de no estabilización en 2035 sube 9,5 puntos y la deuda esperada, 7,8 puntos del PIB, y los dos intervalos excluyen el cero. **H2 queda respaldada para un endurecimiento de la magnitud del de 2022-2023, y no para un shock de un desvío estándar.**
 
-Para saber por qué canal pasa el efecto, se repitió el escenario de 2022-2023 anulando la respuesta de las variables domésticas a la FED, de modo que solo actúa el mayor costo de refinanciar la deuda en dólares. Con los parámetros estimados, ese costo directo explica 4,7 de los 7,3 puntos de aumento de la deuda en 2035 (dos tercios). El tercio restante corresponde a la respuesta del riesgo país, el tipo de cambio real y el crecimiento, que en conjunto empujan en la misma dirección aunque, como se vio en la sección 6.1, ninguna de esas respuestas es significativa por separado.
+Para saber por qué canal pasa el efecto, se repitió el escenario de 2022-2023 anulando la respuesta de las variables domésticas a la FED, de modo que solo actúa el mayor costo de refinanciar la deuda en dólares. Con los parámetros estimados, ese costo directo explica 5,1 de los 8,3 puntos de aumento de la deuda en 2035 (61%). El resto corresponde a la respuesta del riesgo país, el tipo de cambio real y el crecimiento, que en conjunto empujan en la misma dirección aunque, como se vio en la sección 6.1, ninguna de esas respuestas es significativa por separado.
 
 ## 6.6 Robustez
 
-**Perímetro de la deuda.** Con la deuda neta a valor libros y con la deuda bruta, los resultados cambian poco. La probabilidad de no estabilización a cinco años es de 13,0% y 12,7%, con límites inferiores de 9,0% y 9,0%. A diez años es de 6,8% y 7,3%, y en los dos casos el límite inferior (3,3% y 4,0%) queda por encima del 3%. La contribución de los shocks no fiscales supera a la del fiscal en las dos variantes, aunque con la deuda bruta el límite inferior de la diferencia queda prácticamente en cero (0,1 puntos). El efecto del ciclo 2022-2023 sobre la probabilidad a diez años es de 8,2 y 7,2 puntos, con intervalos que excluyen el cero.
+**Escenario base anterior del FMI.** Con el escenario de abril de 2025 (FMI, 2025, anexo II), que era el vigente cuando se planteó la investigación, la probabilidad de no estabilización es de 11,8% [8,0; 15,8] a cinco años y de 6,0% [3,0; 9,8] a diez, frente a 3,0% del FMI en ese informe. Las conclusiones no dependen de cuál de los dos escenarios del FMI se use.
 
-**Canal de tasas domésticas.** Si el riesgo país también encarece la deuda en pesos (sección 4.6), la probabilidad de no estabilización sube a 12,2% a cinco años y a 7,6% a diez años, con límites inferiores de 8,5% y 3,7%: con este canal, H1b queda respaldada en los dos horizontes. El bloque cambiario y de riesgo pasa a explicar 66,9% de la varianza de la deuda en 2035 y el efecto del ciclo 2022-2023 sube a 9,0 puntos de probabilidad.
+**Perímetro de la deuda.** Con la deuda neta a valor libros y con la deuda bruta, la probabilidad de no estabilización a cinco años es de 12,7% y 12,3%, y a diez años, de 7,4% y 7,8%. En todos los casos los límites inferiores superan los umbrales del FMI. El efecto del ciclo 2022-2023 sobre la probabilidad a diez años es de 10,1 y 8,7 puntos, con intervalos que excluyen el cero. Para H1a la conclusión depende del perímetro. Con la deuda neta a valor libros se mantiene: los shocks no fiscales superan al fiscal por 58,5 puntos [16,6; 90,8]. Con la deuda bruta, en cambio, la diferencia es de 52,6 puntos, pero su intervalo, [-7,5; 93,7], incluye el cero.
 
-**Sin retroalimentación de la deuda.** Si se anula el efecto de la deuda rezagada sobre las cuatro variables, la deuda se acumula por la identidad pero ya no realimenta al sistema. En ese caso, la probabilidad de no estabilización es de 11,6% a cinco años y de 5,7% a diez, el abanico se ensancha de 19,4 a 20,9 puntos y la contribución de los shocks no fiscales casi no cambia (61,4 puntos de diferencia con el fiscal). Los dos mecanismos de la sección 6.1 se compensan: el aumento del riesgo país que provoca una deuda mayor queda contrarrestado por la respuesta del superávit. La retroalimentación importa para la forma de la dinámica, pero no cambia las conclusiones sobre las hipótesis.
+**Canal de tasas domésticas.** Si el riesgo país también encarece la deuda en pesos (sección 4.6), la probabilidad de no estabilización sube a 12,2% a cinco años y a 8,8% a diez. El bloque cambiario y de riesgo pasa a explicar 68,1% de la varianza de la deuda en 2035, y el efecto del ciclo 2022-2023 sube a 11,0 puntos de probabilidad.
 
-**Shocks como los del FMI.** Con el procedimiento del abanico del FMI aplicado a las mismas series (sección 4.6), la probabilidad de no estabilización es de 23,5% a cinco años y de 15,1% a diez años, y el ancho del abanico en 2030 es de 93,3 puntos. Con la deuda bruta, las cifras son 25,2%, 17,4% y 118,4. Las dos formas de generar los shocks llevan a la misma conclusión sobre H1b. La del FMI da probabilidades y anchos mucho mayores.
+**Sin retroalimentación de la deuda.** Si se anula el efecto de la deuda rezagada sobre las cuatro variables, la deuda se acumula por la identidad pero ya no realimenta al sistema. En ese caso, la probabilidad de no estabilización es de 11,5% a cinco años y de 6,1% a diez, el abanico se ensancha de 18,6 a 19,9 puntos y la diferencia entre los shocks no fiscales y el fiscal casi no cambia (57,9 puntos). Los dos mecanismos de la sección 6.1 se compensan: el aumento del riesgo país que provoca una deuda mayor queda contrarrestado por la respuesta del superávit. La retroalimentación importa para la forma de la dinámica, pero no cambia las conclusiones sobre las hipótesis.
+
+**Shocks como los del FMI.** Con el procedimiento del abanico del FMI aplicado a las mismas series (sección 4.6), la probabilidad de no estabilización es de 23,0% a cinco años y de 15,2% a diez años, y el ancho del abanico en 2030 es de 82,8 puntos. Con la deuda bruta, las cifras son 24,6%, 17,3% y 104,1. Las dos formas de generar los shocks llevan a la misma conclusión sobre H1b. La del FMI da probabilidades y anchos mucho mayores.
 
 **Tabla 6.2. Resumen de robustez de H1b**
 
 | Especificación | No estabilización 2030 | No estabilización 2035 | Ancho del abanico 2030 |
 |---|---|---|---|
-| SVARX, deuda neta (principal) | 11,8% [8,0; 15,8] | 6,0% [3,0; 9,8] | 19,4 |
-| SVARX, deuda neta a valor libros | 13,0% [9,0; 17,8] | 6,8% [3,3; 10,8] | 19,9 |
-| SVARX, deuda bruta | 12,7% [9,0; 17,0] | 7,3% [4,0; 11,3] | 20,9 |
-| SVARX, deuda neta con canal de tasas domésticas | 12,2% [8,5; 16,0] | 7,6% [3,7; 12,0] | 21,3 |
-| SVARX, deuda neta sin retroalimentación de la deuda | 11,6% [7,8; 15,5] | 5,7% [2,8; 9,3] | 20,9 |
-| Shocks a la manera del FMI, deuda neta | 23,5% | 15,1% | 93,3 |
-| Shocks a la manera del FMI, deuda bruta | 25,2% | 17,4% | 118,4 |
-| FMI (2025), deuda federal bruta | 3,0% | | 74,2 |
+| SVARX, deuda neta (principal) | 11,5% [7,7; 15,2] | 6,6% [3,3; 10,5] | 18,6 |
+| SVARX, deuda neta a valor libros | 12,7% [8,8; 17,0] | 7,4% [3,8; 11,8] | 19,0 |
+| SVARX, deuda bruta | 12,3% [8,5; 16,3] | 7,8% [4,5; 11,8] | 19,3 |
+| SVARX, deuda neta con canal de tasas domésticas | 12,2% [8,5; 16,3] | 8,8% [4,3; 14,5] | 21,0 |
+| SVARX, deuda neta sin retroalimentación de la deuda | 11,5% [7,8; 15,8] | 6,1% [3,3; 10,0] | 19,9 |
+| SVARX, deuda neta, escenario del FMI de 2025 | 11,8% [8,0; 15,8] | 6,0% [3,0; 9,8] | 19,5 |
+| Shocks a la manera del FMI, deuda neta | 23,0% | 15,2% | 82,8 |
+| Shocks a la manera del FMI, deuda bruta | 24,6% | 17,3% | 104,1 |
+| FMI (2026), deuda federal bruta | 1,0% | menos de 3% | 71,5 |
 
 Entre corchetes, los intervalos de 90% del *bootstrap* de parámetros. Las filas a la manera del FMI no tienen intervalo porque ese procedimiento no estima parámetros.
 
-La Figura 6.4 resume la tabla: en todas las especificaciones, la barra de 2030 y su intervalo quedan por encima del 3% del FMI.
+La Figura 6.4 resume la tabla: en todas las especificaciones, la barra de 2030 y su intervalo quedan por encima del 1% del FMI, y la de 2035, por encima del 3%.
 
-![Figura 6.4. Probabilidad de no estabilización por especificación. A cinco y a diez años, con intervalos de 90% del bootstrap de parámetros, y el 3% del FMI (2025). La variante a la manera del FMI no tiene intervalo porque no estima parámetros.](../tesis/figuras/fig6_4_probabilidad_no_estabilizacion.png)
+![Figura 6.4. Probabilidad de no estabilización por especificación. A cinco y a diez años, con intervalos de 90% del bootstrap de parámetros, y los umbrales del FMI (2026): 1% a mediano plazo y 3% a diez años. La variante a la manera del FMI no tiene intervalo porque no estima parámetros.](../tesis/figuras/fig6_4_probabilidad_no_estabilizacion.png)
