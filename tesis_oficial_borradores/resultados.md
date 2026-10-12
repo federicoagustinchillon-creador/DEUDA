@@ -132,7 +132,7 @@ La Tabla 6.6 resume las 18 especificaciones alternativas.
 | Shocks a la manera del FMI, deuda bruta | 24,6% | 21,3% | 143,2 | no aplica |
 | FMI (2026), deuda federal bruta | 1,0% | menos de 3% | 71,5 | no aplica |
 
-Fuente: elaboración propia. Entre corchetes, intervalos de 90%. Las filas a la manera del FMI no tienen intervalo porque ese procedimiento no estima parámetros.
+Fuente: elaboración propia. Entre corchetes, intervalos de 90%. Las filas a la manera del FMI no tienen intervalo porque ese procedimiento no estima parámetros. Con la muestra desde 2004 (82 trimestres), la estimación de 2035 queda por encima del intervalo: en 48 de las 200 réplicas la corrección del sesgo tuvo que reducirse para mantener la estabilidad, esas réplicas generan menos persistencia que la estimación central y el intervalo percentil se corre hacia abajo. El sesgo juega en contra de H1b, de modo que su límite inferior es conservador.
 
 **H1b es robusta.** En todas las especificaciones, la probabilidad de no estabilización supera con holgura los umbrales del FMI en los dos horizontes. El valor más bajo, con el ajuste stock-flujo en cero, tiene un límite inferior de 9,4% en 2035. Partir de la deuda consolidada neta del FMI (52,1% del PIB), que descuenta las tenencias del FGS, apenas reduce la probabilidad (22,8% en 2031). Tampoco cambia el resultado restar del remuestreo los *shocks* del período de cesación de pagos y canje, usar el escenario del FMI de 2025 o medir solo la deuda del Tesoro.
 

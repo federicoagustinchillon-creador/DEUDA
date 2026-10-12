@@ -53,7 +53,7 @@ El precedente metodológico es la arquitectura de Celasun et al. (2006), desarro
 
 ## 1.8 Organización del trabajo
 
-El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El Capítulo 3 presenta el marco teórico. El Capítulo 4 describe la estrategia metodológica y el Capítulo 5, los datos. El Capítulo 6 expone los resultados, incluido el escenario de shock de la FED. El Capítulo 7 los discute y presenta, en la sección 7.5, las limitaciones. El Capítulo 8 reúne las conclusiones. El Apéndice estadístico completa las pruebas y estimaciones.
+El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El Capítulo 3 presenta el marco teórico. El Capítulo 4 describe la estrategia metodológica y el Capítulo 5, los datos. El Capítulo 6 expone los resultados, incluido el escenario de shock de la FED. El Capítulo 7 los discute y presenta, en la sección 7.6, las limitaciones. El Capítulo 8 reúne las conclusiones. El Apéndice estadístico completa las pruebas y estimaciones.
 
 [^1]: Interrupción abrupta de la entrada neta de capitales, que obliga a un ajuste rápido de la cuenta corriente (Calvo et al., 2003).
 [^2]: Gráficos que muestran la distribución de trayectorias posibles de una variable mediante bandas de percentiles.

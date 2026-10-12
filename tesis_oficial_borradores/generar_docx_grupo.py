@@ -30,6 +30,7 @@ SALIDA = BASE / "para_el_grupo"
 
 ARCHIVOS: dict[str, str] = {
     "plan_de_labor.md": "Plan_de_labor.docx",
+    "seguimiento_de_tareas.md": "Seguimiento_de_tareas.docx",
     "_tesis_borrador.md": "Tesis_borrador.docx",
     "guia_de_defensa.md": "Guia_de_defensa.docx",
     "propuestas_de_santiago.md": "Propuestas_de_Santiago.docx",
@@ -172,6 +173,53 @@ def bordes_finos(ruta: Path) -> None:
     doc.save(str(ruta))
 
 
+def formato_catedra(ruta: Path) -> None:
+    """Formato que pide la cátedra de Metodología de la Investigación para el proyecto:
+    márgenes de 3 cm (izquierdo y superior) y 2 cm (derecho e inferior), interlineado 1,5,
+    sangría de 1,25 cm al comienzo de cada párrafo y cuerpo justificado."""
+    from docx.shared import Cm
+    doc = Document(str(ruta))
+    for seccion in doc.sections:
+        seccion.left_margin, seccion.top_margin = Cm(3), Cm(3)
+        seccion.right_margin, seccion.bottom_margin = Cm(2), Cm(2)
+    for nombre in ("Body Text", "First Paragraph"):
+        formato = doc.styles[nombre].paragraph_format
+        formato.line_spacing = 1.5
+        formato.first_line_indent = Cm(1.25)
+        formato.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    ancho_util = 16.0  # 21 cm de la hoja A4 menos 3 + 2 cm de márgenes
+    for tabla in doc.tables:
+        columnas = len(tabla.columns)
+        # El cronograma (actividad + 12 meses) lleva la primera columna ancha; el resto, parejas.
+        primera = 6.4 if columnas == 13 else ancho_util / columnas
+        resto = (ancho_util - primera) / max(columnas - 1, 1)
+        tabla.autofit = False
+        disposicion = OxmlElement("w:tblLayout")
+        disposicion.set(qn("w:type"), "fixed")
+        tabla._tbl.tblPr.append(disposicion)
+        for j, columna in enumerate(tabla.columns):
+            columna.width = Cm(primera if j == 0 else resto)
+        for fila in tabla.rows:
+            for j, celda in enumerate(fila.cells):
+                celda.width = Cm(primera if j == 0 else resto)
+                for parrafo in celda.paragraphs:
+                    parrafo.paragraph_format.first_line_indent = Cm(0)
+                    parrafo.paragraph_format.line_spacing = 1.0
+                    if j > 0 and columnas == 13:
+                        parrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    # Referencias en APA: sangría francesa de 1,27 cm en lugar de sangría de primera línea.
+    en_referencias = False
+    for parrafo in doc.paragraphs:
+        if parrafo.style.name.startswith("Heading"):
+            en_referencias = "Referencias" in parrafo.text
+            continue
+        if en_referencias and parrafo.text.strip():
+            parrafo.paragraph_format.left_indent = Cm(1.27)
+            parrafo.paragraph_format.first_line_indent = Cm(-1.27)
+            parrafo.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    doc.save(str(ruta))
+
+
 def main() -> None:
     SALIDA.mkdir(exist_ok=True)
     temporal = armar_capitulos_1_2()
@@ -186,6 +234,8 @@ def main() -> None:
                 check=True,
             )
             bordes_finos(ruta_salida)
+            if origen == "plan_de_labor.md":
+                formato_catedra(ruta_salida)
             print(f"[OK] {ruta_salida.relative_to(BASE.parent)}")
     temporal.unlink()
 

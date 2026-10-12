@@ -1,191 +1,221 @@
-# Plan de labor de la tesis
+---
+title: "Plan de labor"
+subtitle: "Tesis final de grado. Facultad de Ciencias Económicas, Universidad Nacional de Cuyo"
+---
 
-Documento de trabajo del grupo. Última actualización: 11 de octubre de 2026.
+Páez, Santiago. Legajo 34110
 
-## 1. Para qué sirve este documento
+Chillón, Federico. Legajo 34394
 
-Ordena qué está hecho, qué se decidió y qué falta, paso a paso, para que todos trabajemos sobre
-la misma base. Cada decisión tiene su justificación. Cada número viene de un archivo del
-repositorio o de una fuente citada. Lo que todavía no está verificado aparece marcado como
-pendiente.
+Carricondo, Emiliano. Legajo 33396
 
-## 2. De dónde partimos
+Octubre de 2026
 
-**Lo que ya existe en el repositorio:**
+# 1. Identificación del proyecto
 
-- Una base trimestral 1996-2025 (120 trimestres) con deuda/PIB, resultado primario/PIB, PIB
-  real, tipo de cambio real multilateral (TCRM), EMBI+ y VIX.
-- Un modelo SVAR restringido estimado sobre esa base. Su descomposición de varianza a 20
-  trimestres atribuye la variabilidad de la deuda/PIB así: 54,2% a la inercia propia de la
-  deuda, 25,8% a los canales cambiario y de riesgo soberano y 20,0% a los canales fiscal y de
-  actividad.
-- Un VECM que no encuentra reacción del resultado primario ante la deuda (p = 0,996).
-- Una simulación de Monte Carlo de 1.000 trayectorias para 2026-2035, que ya separa la deuda en
-  pesos de la deuda en dólares.
-- Una tesis en LaTeX de 81 páginas, que hay que reorganizar según las decisiones de este
-  documento.
+**1.1. Director:** Pablo Mahnic.
 
-**Lo que aportó Santiago (archivos del 26 de septiembre y del 7 de octubre de 2026):**
+**1.2. Codirector:** no tiene.
 
-- Una Introducción con pregunta, objetivos e hipótesis nuevos.
-- El shock de la tasa de la FED como pregunta específica.
-- El perímetro consolidado SPNF y BCRA.
-- Notas de metodología.
+**1.3. Ubicación académica:** Facultad de Ciencias Económicas, Universidad Nacional de Cuyo.
 
+**1.4. Denominación del proyecto:** La solvencia intertemporal de la deuda consolidada argentina post-2025: proyecciones a partir de sus determinantes macroeconómicos (1996-2025).
 
-## 2b. Inventario técnico: qué tenemos y qué se hace con cada cosa
+**1.5. Palabras clave:** deuda pública consolidada; sostenibilidad de la deuda; vectores autorregresivos estructurales; simulación de Monte Carlo; política monetaria de Estados Unidos.
 
-Hay mucho hecho. La mayor parte se reutiliza; lo que falta son cuatro piezas.
+**1.6. Resumen técnico.** Argentina registró un superávit primario en 2024 y 2025 y volvió a colocar deuda en dólares en diciembre de 2025, después de dos décadas marcadas por el *default*[^en-default] de 2001 y la reestructuración de 2020. Este proyecto se pregunta si ese superávit alcanza para que la deuda pública se estabilice o si el crecimiento, el tipo de cambio real y el riesgo país la condicionan más que el esfuerzo fiscal. La deuda se mide en forma consolidada: la del Tesoro nacional más los pasivos remunerados del Banco Central de la República Argentina (BCRA). Se estimará un modelo de vectores autorregresivos estructural con variables exógenas (SVARX) con datos trimestrales de 1996 a 2025. Sus variables serán el crecimiento, el resultado primario, el riesgo país y el tipo de cambio real; la tasa de la Reserva Federal de los Estados Unidos (FED) y la volatilidad financiera global entrarán como exógenas. Los *shocks*[^en-shock] identificados del modelo alimentarán una simulación de Monte Carlo de la deuda entre 2026 y 2035 sobre el escenario base del Fondo Monetario Internacional (FMI). El resultado será la probabilidad de que la deuda no se estabilice, medida con el mismo criterio que usa el FMI, y el cambio de esa probabilidad ante un endurecimiento de la política monetaria de la FED. El estudio es cuantitativo, explicativo y longitudinal, y trabaja solo con datos secundarios de fuentes oficiales. Se espera aportar una medida del riesgo de la deuda que identifique de dónde viene la incertidumbre y que pueda compararse directamente con la del FMI.
 
-### Datos
+# 2. Descripción del proyecto
 
-| Qué hay | Archivo | Qué se hace |
-|---|---|---|
-| Base 1996-2025 (120 trimestres): deuda/PIB del SPNF, resultado primario/PIB, PIB real, brecha del producto, TCRM, EMBI+, VIX | `datos/dataset_consolidado_1996_2025.csv` | Se reutiliza. Hay que sumarle la deuda consolidada y la tasa de la FED. |
-| Empalmes pre-2004 (deuda, resultado primario y PIB real, por el método de Denton) y TCRM de 1996 extrapolado | `codigo/ingesta_datos/empalme_*.py`, `construir_dataset_1996_2025.py` | Se reutiliza. |
-| Pasivos remunerados del BCRA, 2004-2025, de la API del BCRA (LEBAC/NOBAC, Leliq/Notaliq, pases) | `codigo/ingesta_datos/ingesta_bcra_pasivos.py`, `datos/procesados/bcra_pasivos_trimestral.csv` | Se adapta: hay que llevarla a 1996 y revisar el denominador (ver abajo). |
-| VIX y volatilidad del Bovespa, 1996-2025 | `ingesta_instrumentos_1996_2025.py` | El VIX se reutiliza como variable exógena. |
-| Spread soberano histórico 1983-2025 | `fase22_*` | Queda fuera, como ya se había decidido. |
+## 2.1. Tema
 
-**Problema detectado con los pasivos del BCRA.** Nuestra serie da 9,5% del PIB en 2022-2023.
-El FMI da 18,4% en 2023 (16,2% solo en pesos) sobre el PIB promedio del año, y 11,0% sobre el PIB
-anualizado del cuarto trimestre (FMI, 2025, anexo II). La diferencia viene del denominador, que
-pesa mucho con inflación alta. Hay que elegir uno, justificarlo y usar el mismo para la deuda del
-SPNF y para la del BCRA.
+La sostenibilidad de la deuda pública consolidada argentina (Tesoro nacional y BCRA) y sus determinantes macroeconómicos, 1996-2035.
 
-### Modelos
+## 2.2. Estado actual del conocimiento
 
-| Qué hay | Archivo | Qué se hace |
-|---|---|---|
-| Pruebas de raíz unitaria (ADF, KPSS, DF-GLS) y de quiebre único (Zivot-Andrews) | `fase1_estacionariedad.py` | Se reutiliza y se corre sobre la deuda consolidada. |
-| Quiebres múltiples de Bai-Perron, con implementación propia | `fase9_bai_perron.py`, `bai_perron.py` | Se reutiliza. Los quiebres pasan a ser dummies del SVARX. |
-| Johansen y VECM (versión anterior) | `fase2`, `fase3b`, `fase16` | Reemplazados por la ecuación fiscal del SVARX (`fase24`), estimada sobre la deuda consolidada con datos reales. Su reacción fiscal da 0,019 (p = 0,005), significativa, a diferencia del VECM anterior. |
-| SVAR restringido: brecha del producto, resultado primario, EMBI+, TCRM y deuda, con elasticidad cíclica de 0,25 citada y *bootstrap* de 1.000 réplicas | `fase19_var_restringido_macro.py`, `fase23_reestimacion_1996_2025.py` | Es el núcleo. Se extiende a SVARX: el VAR de statsmodels ya admite variables exógenas, y la identificación se aplica igual sobre los residuos. |
-| Selección de rezagos, multicolinealidad y diagnósticos de residuos | `fase12`, `fase7` | Se reutiliza para validar el SVARX. |
-| Grados de libertad de la t de Student, estimados por momentos (nu = 4,8) | `fase17_calibracion_nu_dsa.py` | Se reutiliza. |
-| Umbral de Hansen y TVECM | `fase5`, `fase13`, `fase21` | Queda como resultado complementario de H1a. |
-| Simulación (DSA) | `fase6_sostenibilidad_deuda.py` | **Se rehace en buena parte** (ver abajo). Se reutilizan la identidad con separación de monedas, la t de Student y los gráficos. |
-| DOLS, variables instrumentales, CIR, DCC-GARCH, dependencia de colas, histórico 1983-2025 | `fase3`, `fase4`, `fase10`, `fase11`, `fase14`, `fase20`, `fase22` | Quedan fuera, como ya se había decidido. |
+La literatura sobre la deuda argentina puede ordenarse en ocho ejes, que el capítulo de Antecedentes de la tesis desarrolla. Los que delimitan el problema son cuatro.
 
-**Por qué hay que rehacer la simulación.** Revisada con el criterio de que todo número tiene que
-estar justificado, tiene cuatro problemas:
+El primero discute las limitaciones de los enfoques contables. Rodríguez (2023) muestra que la ratio deuda/PIB no alcanza para evaluar la solvencia si no se consideran las tasas de interés y el ciclo económico. Sanches (2019) descompone la dinámica de la ratio en sus componentes. Ninguno de estos trabajos estima cómo se transmiten los *shocks* entre el resultado fiscal, el riesgo país, el tipo de cambio y la actividad.
 
-1. Los desvíos de los shocks (1,5%, 4%, 5%, 2% y 15%) están "calibrados a mano", según el propio
-   código.
-2. Los parámetros del escenario base (resultado primario 1,5%, crecimiento 3,5%, tasa en pesos 6%,
-   tasa en dólares 7,5%) no tienen fuente.
-3. Los shocks son independientes año a año: el SVAR solo aporta las correlaciones, no su
-   dinámica. Así no hay efectos conjuntos, que es lo que pide la pregunta.
-4. Usa el criterio de 100% del PIB, que salió de las hipótesis.
+El segundo eje estudia los límites del ajuste. Ghosh et al. (2013) encuentran que el superávit primario responde cada vez menos a la deuda cuando esta es alta, lo que llaman fatiga fiscal. Ando et al. (2025) muestran que los ajustes fiscales discrecionales reducen poco la ratio de deuda y solo lo hacen de forma duradera en fases de expansión.
 
-La versión nueva simula directamente desde el SVARX estimado (remuestreo de residuos, con sus
-rezagos), acumula la deuda con la identidad y calcula las métricas del FMI. Para el escenario base
-hay que adoptar un sendero con fuente, por ejemplo el del propio FMI (2025), lo que además permite
-comparar con su resultado.
+El tercer eje es la simulación estocástica de la deuda. Celasun et al. (2006) proponen en el FMI combinar un VAR sobre los determinantes de la deuda con una función de reacción fiscal y la identidad de acumulación, para obtener distribuciones de trayectorias en lugar de un único escenario. Medeiros (2012) aplica la misma arquitectura en la Comisión Europea, y el FMI la incorporó a su Marco de Riesgo Soberano y Sostenibilidad de la Deuda (FMI, 2021), con el que evalúa a la Argentina en las revisiones del programa (FMI, 2025, 2026). Ese marco genera los *shocks* a partir de la historia de los determinantes, sin identificar su origen.
 
-### Las cuatro piezas que faltaban (hechas)
+El cuarto eje trata la exposición externa. Calvo et al. (2003) explican cómo una interrupción repentina de capitales encarece la deuda en dólares a través de la depreciación real. Uribe y Yue (2006) estiman que las tasas internacionales elevan las primas de riesgo de los países emergentes, y Levy Yeyati y Sturzenegger (2023) estudian el efecto de valuación del tipo de cambio sobre el patrimonio neto del sector público argentino.
 
-1. Deuda consolidada 1996-2025 con un denominador coherente: bruta, neta a valor libros y neta con las Letras Intransferibles a valor nominal (la principal).
-2. Tasa de la FED y tasa sombra de Wu y Xia, trimestrales.
-3. SVARX nuevo (`fase24_svarx_1996_2025.py`).
-4. Simulación desde el SVARX con la métrica del FMI (`fase25_simulacion_dsa_svarx.py`), más la variante con shocks a la manera del FMI y su diagnóstico (`fase25b_diagnostico_abanico_fmi.py`).
+**Área de vacancia.** La revisión deja tres aspectos sin cubrir de manera conjunta para el caso argentino. No hay una estimación con *shocks* identificados: los trabajos que los identifican lo hacen sobre paneles de países, y los que estudian la deuda argentina no los identifican. El efecto de la política monetaria de Estados Unidos no se tradujo en un cambio en la probabilidad de que la deuda argentina no se estabilice. Y aunque el FMI (2021) admite incluir los pasivos del banco central en la deuda pública, en su análisis de la Argentina usa la deuda bruta del gobierno federal; la deuda consolidada con el BCRA aparece solo como un cuadro de stocks[^en-stock] (FMI, 2025, anexo II). Ningún trabajo estima cómo evolucionó esa deuda consolidada junto con sus determinantes.
 
-## 3. Decisiones tomadas
+## 2.3. Planteamiento del problema
 
-| N.° | Decisión | Justificación |
-|---|---|---|
-| 1 | La Introducción de Santiago del 7/10 es la base, completada con la Justificación y los objetivos específicos del texto LaTeX. | Es la versión más reciente y ya fue revisada. |
-| 2 | Todo el trabajo empírico (modelo y simulación) se hace sobre la deuda consolidada SPNF y BCRA. | Es el perímetro que plantea la pregunta de investigación, y el FMI considera deuda pública a los pasivos del banco central cuando pueden financiar al Tesoro o implican riesgo fiscal (FMI, 2021, anexo II). |
-| 3 | El modelo es un SVARX: la deuda consolidada es una variable más del sistema, con la tasa de la FED y la volatilidad global como variables exógenas. | Permite efectos conjuntos: la deuda responde a los shocks y a su vez los afecta. Es lo que hace falta para medir cómo un shock de la FED vuelve sobre la deuda a través del riesgo país y del tipo de cambio. |
-| 4 | La identificación principal es el SVAR restringido por teoría que ya existe. El ordenamiento de Cholesky queda solo como prueba de robustez. | No hay razón teórica para ordenar el EMBI+ y el TCRM entre sí, y esa justificación ya fue aprobada por el director. |
-| 5 | H1b contrasta si nuestra probabilidad de no estabilización supera la del FMI, con el escenario base del FMI. Desde el 11/10/2026 se usa el análisis más reciente (FMI, 2026: 1,0% a mediano plazo y menos de 3% a diez años); el de abril de 2025 (3%) queda como robustez. | Es la métrica del FMI (FMI, 2021, párr. 53) y el umbral es su propio diagnóstico. El escenario y el umbral se toman siempre del mismo informe. Se contrasta con el intervalo de 90% del *bootstrap* (unilateral al 5%). |
-| 6 | El criterio "deuda mayor a 100% del PIB" sale de las hipótesis. | No tiene fuente que lo justifique. |
-| 7 | El área de vacancia se reformula. | El marco del FMI sí admite incluir los pasivos del banco central (FMI, 2021, anexo II), pero en su análisis de Argentina corre las herramientas sobre la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025, anexo II, cuadro 2). La vacancia pasa a ser la combinación de tres aspectos: identificación estructural, un shock externo identificado y la estimación sobre el perímetro consolidado. |
-| 8 | El canal cuasifiscal del shock de la FED se redacta en pasado. | Los pasivos remunerados del BCRA se redujeron a niveles mínimos desde 2024. |
-| 9 | El módulo de balanza de pagos (exportaciones, importaciones, inversión extranjera directa, fuga de capitales, renovación de vencimientos, necesidades de financiamiento) queda fuera y pasa a investigación futura. | No está especificado, y su tamaño es el de otra tesis. |
-| 10 | Todo umbral, corte o tamaño de shock tiene que tener una justificación escrita, propia o citada. | Criterio del grupo. |
-| 11 | Una sola muestra de estimación: todas las especificaciones se estiman sobre la misma muestra efectiva, 1998T2-2025T4, y los primeros trimestres de 1996-1998 se usan como condiciones iniciales de los rezagos. | Los criterios de información solo se pueden comparar entre órdenes sobre un mismo período (Lütkepohl, 2005, sec. 4.3), y así la deuda neta, la neta en libros y la bruta se estiman sobre los mismos trimestres. |
-| 12 | H1b se contrasta a cinco años (2030) y a diez años (2035). | Son los dos horizontes del FMI (2026): el abanico de mediano plazo y el de diez años, que termina en 2035. |
-| 13 | El shock de la FED se mide de dos maneras: un desvío estándar (0,50 puntos) y el ciclo de 2022-2023 (5,25 puntos). | Convención de la literatura de VAR y episodio histórico reciente. |
-| 14 | La especificación principal es el SVARX; los shocks a la manera del FMI se informan como comparación. La elección se fijó antes de ver los resultados. | Solo los shocks identificados permiten contrastar H1a (bloques de shocks) y H2 (shock externo). |
-| 15 | El canal de tasas en pesos se informa como variante: el riesgo país también reprecia la deuda en pesos. | Tasa de interés del país (Neumeyer y Perri, 2005; Uribe y Yue, 2006). No hay una tasa en pesos homogénea para 1996-2025 que permita sumarla al VAR. |
+**Contextualización.** La historia argentina muestra un ciclo repetido de endeudamiento externo, interrupción de los flujos de capital y cesación de pagos (Reinhart y Rogoff, 2009; Rapoport, 2020). La administración que asumió en diciembre de 2023 recibió un stock elevado de pasivos y un acceso muy limitado al crédito voluntario. El Tesoro volvió a colocar un bono en dólares en diciembre de 2025, bajo ley local y a una tasa de 9,26% anual (Secretaría de Finanzas, 2025). A fines de julio de 2026, la deuda en moneda extranjera de la Administración Central sumaba USD 248.458 millones (Oficina de Presupuesto del Congreso [OPC], 2026). Entre 2002 y 2024, además, el BCRA absorbió liquidez con pasivos remunerados que llegaron a 18,4% del PIB en 2023 (FMI, 2025, anexo II), de modo que una parte del endeudamiento público no aparece en la deuda del Tesoro.
 
-## 4. Etapas
+**Problema.** Resta determinar si el superávit primario alcanza para estabilizar la deuda en el mediano plazo o si los determinantes estructurales de la economía argentina la condicionan más que el resultado fiscal.
 
-Estado: **hecho**, **en curso** o **pendiente**.
+**Preguntas de investigación.**
 
-### Etapa 1. Introducción (hecha; en revisión del grupo)
+- Pregunta general: ¿en qué medida el crecimiento, el tipo de cambio real, el riesgo país y el resultado primario de Argentina (1996-2025) condicionan la sostenibilidad de la deuda consolidada en 2026-2035, y cuál es la probabilidad de que la deuda no se estabilice bajo el escenario base?
+- Pregunta específica: ¿cómo y en qué magnitud impactaría un endurecimiento de la política monetaria de la FED sobre la dinámica de la deuda consolidada y sobre su probabilidad de no estabilizarse en 2026-2035?
 
-- Borrador corregido, con la H1a de Santiago, H1b a cinco y diez años y el tamaño del shock de la FED definido.
+**Objetivo general.** Evaluar la dinámica de la deuda pública consolidada argentina a partir de sus determinantes macroeconómicos históricos (1996-2025), para proyectar su sostenibilidad en 2026-2035 y estimar la probabilidad de que no se estabilice.
 
-### Etapa 2. Antecedentes y área de vacancia (hecha; en revisión del grupo)
+**Objetivos específicos.**
 
-- Ocho ejes y la vacancia en tres partes, con el perímetro del FMI verificado en su informe de 2025.
+1. Construir una serie trimestral de deuda pública consolidada (Tesoro nacional y pasivos remunerados del BCRA) para 1996-2025.
+2. Analizar las propiedades estadísticas de las series: raíz unitaria, quiebres estructurales y cointegración.
+3. Estimar un SVARX en el que el crecimiento, el resultado primario, el riesgo país y el tipo de cambio real interactúan con la deuda rezagada, con la tasa de la FED y la volatilidad global como variables exógenas.
+4. Medir la reacción del resultado primario ante el nivel de deuda y la contribución de los *shocks* fiscal, de actividad y cambiario y de riesgo a la variabilidad de la deuda.
+5. Simular la distribución de trayectorias de la deuda en 2026-2035 bajo el escenario base del FMI y calcular la probabilidad de que no se estabilice.
+6. Estimar el efecto de un endurecimiento de la política monetaria de la FED sobre esa distribución.
 
-### Etapa 3. Datos (hecha)
+**Justificación.** La Ley 27.612 (2021) exige una ley especial para emitir deuda en moneda extranjera bajo legislación extranjera por encima del máximo del presupuesto y una ley que apruebe cada programa con el FMI. Esas decisiones requieren evaluaciones de sostenibilidad, y la evaluación probabilística de referencia es la del FMI. El proyecto aporta una segunda medida, comparable con la del FMI porque usa su escenario y su métrica, pero con *shocks* identificados y sobre el perímetro consolidado. En lo metodológico, deja un procedimiento replicable que puede actualizarse con cada nuevo informe del FMI.
 
-- Series construidas desde fuentes primarias (MECON, BCRA, INDEC, FRED) y controladas contra el FMI (Capítulo 5).
+**Viabilidad.** El proyecto no requiere trabajo de campo ni financiamiento. Todos los datos son públicos y gratuitos: Ministerio de Economía (MECON), BCRA, Instituto Nacional de Estadística y Censos (INDEC), FMI, Reserva Federal y la Bolsa de Opciones de Chicago (CBOE). La estimación y la simulación se programan en Python con bibliotecas de uso libre. El único dato de acceso incierto son las tenencias de títulos públicos del Fondo de Garantía de Sustentabilidad (FGS) de la ANSES; si no se consiguen completas, se informa una variante que parte de la deuda consolidada neta del FMI, que ya las descuenta.
 
-### Etapa 4. Metodología (hecha)
+## 2.4. Marco teórico
 
-- SVARX, identificación, muestra de estimación común, rezagos con regla AIC más estabilidad, canales de la FED, variantes y criterios de contraste (Capítulo 4).
+El marco va de la teoría general a la teoría sustantiva en cuatro niveles.
 
-### Etapa 5. Estimación (hecha)
+**Restricción externa.** El punto de partida es el enfoque de la restricción externa: en una economía que necesita divisas para crecer y para pagar su deuda, el endeudamiento en moneda extranjera la expone a la disponibilidad de dólares (Díaz Alejandro, 1970; Calvo et al., 2003). Ese enfoque explica por qué en Argentina el tipo de cambio real y el riesgo país pesan sobre la deuda tanto como el resultado fiscal.
 
-- Reacción fiscal 0,051 [0,020; 0,082]; respuestas a la FED no significativas por separado; diagnósticos informados (Capítulo 6).
+**Solvencia y sostenibilidad.** El gobierno es solvente si el valor presente de sus superávits primarios futuros cubre la deuda actual. Bohn (1998) muestra que una condición suficiente es que el superávit primario responda positivamente al nivel de deuda. Esa respuesta, sin embargo, no garantiza que la deuda se estabilice en un nivel determinado: si la diferencia entre la tasa de interés y el crecimiento es alta, el superávit necesario puede superar lo que la economía genera. El FMI (2021) define la deuda como sostenible cuando el gobierno puede cumplir sus obligaciones sin un ajuste poco realista, y evalúa la estabilización con la identidad de acumulación de la deuda.
 
-### Etapa 6. Simulación (hecha)
+**Identidad de la deuda con composición por monedas.** La ratio deuda/PIB cambia por el diferencial entre la tasa de interés y el crecimiento, por el resultado primario y, cuando parte de la deuda está en moneda extranjera, por la depreciación real. Esta identidad conecta las variables del modelo con la deuda y separa el efecto del esfuerzo fiscal del efecto de valuación.
 
-- Escenario base y dos escenarios de la FED, robustez por perímetro, canal de tasas en pesos y shocks a la manera del FMI.
+**Deuda consolidada.** Cuando el banco central financia al Tesoro o absorbe la liquidez con pasivos remunerados, la restricción presupuestaria relevante es la del sector público consolidado. El FMI (2021) incluye esos pasivos en la deuda pública cuando pueden financiar al gobierno o representan un riesgo fiscal material.
 
-### Etapa 7. Resultados, discusión y conclusiones (borrador listo para revisión del grupo)
+**Transmisión de la política monetaria de Estados Unidos.** Una suba de la tasa de la FED eleva la prima de riesgo de los emergentes (Uribe y Yue, 2006), deprecia su tipo de cambio real y reduce su crecimiento (Neumeyer y Perri, 2005). Cada canal entra en la identidad de la deuda por un término distinto.
 
-- Resultados corregidos tras la revisión adversarial del 11/10 (inflación relativa del FMI en la identidad, retroalimentación sobre el desvío acumulado, corrección de sesgo de Kilian, deuda regenerada en el bootstrap, horizonte 2031, senda real de la FED 2022-2025). H1b respaldada y robusta: 25,2% en 2031 [19,0; 27,7] contra 1%, y 22,3% en 2035 contra menos de 3%, en las 18 especificaciones. H1a respaldada por suficiencia: hace falta un superávit de 7,0% del PIB, el doble del máximo histórico (3,6%); la descomposición de la varianza no es robusta. H2 respaldada de manera débil: +13 puntos de probabilidad en 2035 [1; 25], que no se sostienen con Bonferroni.
+**Sostenibilidad en sentido probabilístico.** Como los determinantes son inciertos, la sostenibilidad se expresa como la probabilidad de que la deuda no se estabilice, construida con simulaciones (Celasun et al., 2006; FMI, 2021). La fatiga fiscal (Ghosh et al., 2013) completa el marco: fija un límite a cuánto superávit puede exigirse de manera realista.
 
-### Etapa 8. Entrega (pendiente)
+## 2.5. Hipótesis
 
-- Revisión del grupo y del director, y pasaje al formato final.
+**H1a.** El crecimiento, el tipo de cambio real, el riesgo país y el resultado primario condicionan la sostenibilidad de la deuda consolidada, de modo que el superávit primario, por sí solo, no basta para estabilizarla en 2026-2035. Unidad: la economía argentina. Variables: superávit primario necesario y probabilidad de no estabilización. Relación: el superávit que reduciría esa probabilidad al nivel del FMI supera el máximo alcanzado en 1996-2025.
 
-## 5. Qué falta: tareas, verificaciones y decisiones (actualizado el 11/10/2026)
+**H1b.** La probabilidad de que la deuda consolidada no se estabilice es mayor que la que informa el FMI para la deuda federal bruta: alrededor de 1% a mediano plazo (2031) y menos de 3% a diez años (2035) (FMI, 2026).
 
-### 5.1 Datos que hay que bajar o confirmar
+**H2.** Un endurecimiento de la política monetaria de la FED eleva la trayectoria esperada de la deuda consolidada y su probabilidad de no estabilizarse, a través del riesgo país, el tipo de cambio real y el crecimiento.
 
-| Qué | Por qué importa | Cómo se resuelve | Estado |
-|---|---|---|---|
-| Títulos públicos en cartera del FGS (ANSES), 2008-2025 | La deuda neta no descuenta la deuda del Tesoro en manos del FGS. Por eso queda unos 8 a 10 puntos del PIB por encima de la consolidada del FMI (119,0 contra 110,8 en 2023; 61,1 contra 51,5 en 2024). Según una nota de prensa no verificada, la cartera de títulos del FGS rondaba los USD 44.000 millones en octubre de 2024 (cerca de 7,7% del PIB): del orden de la brecha. | ANSES bloquea la descarga automática (protección anti-bots); hay que bajar los PDF a mano desde el navegador y guardarlos en `datos/crudos/fgs/`. Archivos: Informe Estadístico Mensual de enero de 2026 (https://www.anses.gob.ar/sites/default/files/archivo/2026-03/IEM-FGS-2026-01.pdf), Anuario 2024 (https://www.anses.gob.ar/sites/default/files/inline-files/Anuario%202024.pdf), Consejo del FGS de diciembre de 2025 (https://www.anses.gob.ar/sites/default/files/archivo/2026-02/Consejo%20FGS-Diciembre-2025.pdf) y, para años anteriores, los anuarios e informes de la página del FGS (https://www.anses.gob.ar/fgs-fondo-de-garantia-de-sustentabilidad). De cada uno se toma la fila "Títulos Públicos Nacionales" al cierre de cada año o trimestre. El script `codigo/ingesta_datos/construir_tenencias_fgs.py` ya está listo para leerlos. | Pendiente: bajar a mano |
-| Deuda en manos de Agencias del Sector Público (Secretaría de Finanzas) | Sirve como dato descriptivo de la deuda intra-sector público. No se usa para restar, porque incluye otras entidades y duplicaría parte de lo que ya se consolida. | Ya está en `datos/procesados/tenencias_fgs_1996_2025.csv` (trimestral 2021-2025; anual en % del PIB 2004-2025), con los PDF de Finanzas en `datos/crudos/fgs/`. | Hecho |
-| LEFI entre julio de 2024 y julio de 2025 | Si no estaban en la deuda del Tesoro, faltaban en la consolidada. | Verificado en el Informe de Deuda del MECON al 31/12/2024 (hoja A.1.7): la LeFi/$/TNAPM/17-07-2025 figura en el stock de títulos y letras del Tesoro en moneda nacional, por 23,0 billones de pesos. Está en la deuda bruta, y la parte en poder del BCRA se resta como tenencia del BCRA. No falta nada. | Resuelto |
+## 2.6. Estrategia metodológica
 
-### 5.2 Verificaciones de citas
+**Tipo de estudio.** Cuantitativo, explicativo y longitudinal. Es explicativo porque busca medir cómo los determinantes macroeconómicos afectan la deuda. Es retrospectivo en la estimación (1996-2025) y prospectivo en la simulación (2026-2035).
 
-| Qué | Estado |
-|---|---|
-| Braun y Joy (1968), restricción externa | No hay copia abierta (Oxford y JSTOR). Si alguien tiene acceso por la facultad, se verifica contra el original; si no, se cita a través de la fuente secundaria (Katz y Kosacoff, CEPAL) indicándolo. |
-| Adler, Djigbenou y Sosa (2016) | Se verificó sobre el documento de trabajo del FMI (WP/14/60), no sobre la versión de la revista. Conviene leer la versión publicada si el tribunal lo exige. |
-| Las otras siete citas del marco teórico | Verificadas contra el texto completo, con página (ver `verificacion_citas_marco.md`). |
+**Unidad de análisis, población y muestra.** La unidad de análisis es el trimestre de la economía argentina. La población son todos los trimestres con datos de deuda pública. La muestra es no probabilística e intencional: 1996-2025, porque desde 1996 existen series trimestrales homogéneas de todas las variables y porque el período incluye regímenes cambiarios y fiscales distintos (convertibilidad, *default*, desendeudamiento, reendeudamiento y programa con el FMI). La muestra efectiva de estimación es 1998T2-2025T4 (111 trimestres), porque los primeros trimestres se reservan para los rezagos.
 
-### 5.3 Decisiones abiertas para el grupo
+**Técnicas de obtención y evaluación de datos secundarios.** Todos los datos son secundarios. La evaluación de cada serie revisará cuatro aspectos: la institución que la produce, la definición y cobertura, los cambios metodológicos (por ejemplo, el cambio de base del PIB en 2004) y la coherencia con otra fuente. La serie de deuda consolidada se construirá sumando la deuda bruta de la Administración Central y los pasivos remunerados del BCRA, y restando la deuda del Tesoro en poder del BCRA y los depósitos del Tesoro en el banco central. Se contrastará con el cuadro de deuda consolidada del FMI (2025, anexo II) en los años en que ambos se superponen.
 
-1. **Criterio de H1a (decidido el 11/10, para revisar con el grupo).** La descomposición de la varianza no mide si el superávit alcanza, y con las correcciones no es significativa ni robusta. El criterio principal pasa a ser el contraste de suficiencia: el superávit que haría falta para llevar la probabilidad de no estabilización al 1% del FMI, comparado con el máximo histórico del Sector Público Nacional. La varianza se sigue informando. Conviene que Santiago y Pablo lo validen, porque es un cambio de criterio.
-2. **Deuda neta con o sin FGS.** Cuando esté la serie del FGS, hay que definir si la deuda neta sin el FGS pasa a ser la especificación principal, porque es la más parecida a la del FMI, o si queda como robustez. En los dos casos hay que reestimar y volver a simular.
+**Variables, dimensiones e indicadores.**
 
-3. **Propuestas del grupo ya incorporadas el 11/10.** Por un lado, la retroalimentación entre la deuda y las variables (arquitectura B de Santiago): un punto más de deuda sube el EMBI+ 22 puntos básicos [11; 41], y está en la sección 6.1. Por otro, el contraste sin retroalimentación (arquitectura A), en la sección 6.6. Se repuso además en las líneas futuras el panel Argentina-Chile (decisión del 17/9), y se sumaron los shocks de la FED de alta frecuencia y los términos de intercambio que proponía Santiago.
+**Tabla 1. Variables, indicadores y fuentes**
 
-4. **Escenario base del FMI actualizado (11/10/2026).** El FMI publicó dos análisis de sostenibilidad posteriores al de abril de 2025: la primera revisión (Informe 25/219, agosto de 2025) y el Artículo IV con la segunda revisión (Informe 26/105, mayo de 2026). Se pasó al de mayo de 2026, extraído del PDF con `codigo/ingesta_datos/extraer_escenario_base_fmi_cr26105.py`. La tesis, los gráficos y la guía de defensa ya usan esas cifras.
+| Variable | Dimensión | Indicador | Fuente | Rol |
+|---|---|---|---|---|
+| Sostenibilidad de la deuda | Estabilización | Probabilidad de que la deuda no se estabilice en 2031 y 2035 | Elaboración propia con el criterio del FMI (2021) | Dependiente |
+| Deuda pública consolidada | Solvencia | Deuda del Tesoro y del BCRA neta de tenencias cruzadas, % del PIB | MECON y BCRA | Entra rezagada y se acumula con la identidad |
+| Política fiscal | Esfuerzo fiscal | Resultado primario del Sector Público Nacional, % del PIB | MECON | Endógena |
+| Actividad | Crecimiento | Variación trimestral del PIB real | INDEC | Endógena |
+| Riesgo soberano | Costo del financiamiento | EMBI+ Argentina (puntos básicos) | J.P. Morgan | Endógena |
+| Precios relativos | Efecto de valuación | Tipo de cambio real multilateral | BCRA | Endógena |
+| Política monetaria de Estados Unidos | *Shock* externo | Tasa de fondos federales; tasa sombra en el límite cero (Wu y Xia, 2016) | Reserva Federal | Exógena |
+| Condiciones financieras globales | Aversión al riesgo | VIX | CBOE | Exógena |
+| Escenario base | Proyección oficial | Crecimiento, deflactor, tasa efectiva, resultado primario y ajuste stock-flujo, 2026-2035 | FMI (2026), cuadro 6 | Supuesto de la simulación |
 
-### 5.4 Otras tareas
+Fuente: elaboración propia.
 
-- Revisión del texto completo por el grupo y por Pablo.
-- Confirmado: no se pide resumen en inglés y la extensión tiene que ser corta. Candidato a recortar: el capítulo de Datos, llevando el detalle de construcción al apéndice.
-- Hecho: se borraron de `tesis/figuras/` las figuras de los modelos viejos que ya no usaba ningún capítulo (quedan en el historial de git).
+**Procedimiento y pruebas.** El trabajo empírico seguirá seis pasos.
 
-## Referencias de este documento
+1. *Propiedades de las series.* Pruebas de raíz unitaria de Dickey y Fuller aumentada (ADF) y de Kwiatkowski, Phillips, Schmidt y Shin (KPSS); prueba de Zivot y Andrews, que admite un quiebre; quiebres múltiples de Bai y Perron (2003) sobre la serie de deuda, que entrarán como variables binarias; prueba de cointegración de Johansen.
+2. *Especificación.* Selección de rezagos con los criterios de Akaike, Hannan-Quinn y Schwarz, sujeta a que el modelo sea estable (todos los autovalores de la matriz compañera con módulo menor que uno). Diagnóstico de residuos: autocorrelación (Portmanteau), normalidad (Jarque-Bera) y heterocedasticidad.
+3. *Identificación.* Restricciones de impacto según Blanchard y Perotti (2002): el resultado primario no responde dentro del trimestre a los *shocks* cambiarios y de riesgo, y su respuesta automática al ciclo se fija con una elasticidad de 0,25. Como robustez, dos ordenamientos de Cholesky.
+4. *Inferencia.* Intervalos de confianza por *bootstrap*[^en-bootstrap] salvaje (Gonçalves y Kilian, 2004), válidos con heterocedasticidad, y corrección del sesgo de muestra chica de Kilian (1998).
+5. *Simulación.* Monte Carlo de 2026 a 2035 sobre el escenario base del FMI (2026), con los *shocks* estructurales remuestreados de la historia. Antes de simular se verificará que la identidad reproduzca la senda de deuda del FMI.
+6. *Contraste de hipótesis y robustez.* H1a: superávit primario necesario para que la probabilidad baje al 1% del FMI, comparado con el máximo histórico; como complemento, la descomposición de la varianza de la deuda por bloque de *shocks*. H1b: el límite inferior del intervalo de 90% debe superar la probabilidad del FMI. H2: el intervalo de 90% de la diferencia entre el escenario de la FED y el base debe excluir el cero. Robustez: otras series de deuda, otra identificación, otros rezagos, otra muestra y el procedimiento de *shocks* del propio FMI.
 
-- Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for
-  market access countries* (IMF Policy Paper).
-- Fondo Monetario Internacional y Mecanismo Europeo de Estabilidad. (2023). *The stochastic
-  debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs*
-  (presentación, 30 de noviembre de 2023).
-- Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under
-  the Extended Fund Facility* (IMF Country Report No. 25/95).
-- Oficina de Presupuesto del Congreso. (2026). *Operaciones de deuda pública, julio 2026*.
+# 3. Transferencia y beneficiarios
+
+**Organismos públicos.** El Congreso de la Nación, que por la Ley 27.612 aprueba el endeudamiento en moneda extranjera bajo ley extranjera y los programas con el FMI, y su Oficina de Presupuesto, que analiza la deuda pública. El Ministerio de Economía y el BCRA, como usuarios de una evaluación de la deuda consolidada distinta de la del FMI.
+
+**Ámbito académico.** Estudiantes y cátedras de Macroeconomía, Finanzas Públicas y Econometría de la FCE, que dispondrán de una aplicación completa de un SVARX a la deuda argentina, con datos y código reproducibles.
+
+**Analistas y sociedad.** Analistas de riesgo soberano y periodistas económicos, que podrán contrastar la probabilidad de no estabilización con la del FMI y saber qué *shocks* la explican.
+
+El conocimiento se transferirá mediante la tesis, su defensa pública y un repositorio con los datos y el código.
+
+# 4. Cronograma de actividades
+
+El mes 1 corresponde a marzo de 2026, cuando el grupo comenzó a trabajar con el director.
+
+**Tabla 2. Cronograma de actividades por mes**
+
+| Actividad | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Revisión bibliográfica y antecedentes | X | X | X | | | | | | | | | |
+| Problema, preguntas, objetivos e hipótesis | X | X | | | | | | | | | | |
+| Marco teórico | | X | X | X | | | | | | | | |
+| Recolección de datos secundarios | | X | X | X | | | | | | | | |
+| Construcción de la deuda consolidada y evaluación de las fuentes | | | X | X | X | | | | | | | |
+| Pruebas de raíz unitaria, quiebres y cointegración | | | | | X | | | | | | | |
+| Especificación, identificación y estimación del SVARX | | | | | X | X | | | | | | |
+| Escenario base del FMI y simulación de Monte Carlo | | | | | | X | X | | | | | |
+| Contraste de hipótesis y pruebas de robustez | | | | | | | X | X | | | | |
+| Redacción de resultados, discusión y conclusiones | | | | | | | | X | X | | | |
+| Revisión del director y correcciones | | | | | | | | | X | X | X | |
+| Entrega y preparación de la defensa | | | | | | | | | | | X | X |
+
+Fuente: elaboración propia.
+
+# 5. Referencias bibliográficas
+
+Ando, S., Mishra, P., Patel, N., Peralta-Alva, A., y Presbitero, A. F. (2025). Fiscal consolidation and public debt. *Journal of Economic Dynamics and Control*, *170*, artículo 104998. https://doi.org/10.1016/j.jedc.2024.104998
+
+Bai, J., y Perron, P. (2003). Computation and analysis of multiple structural change models. *Journal of Applied Econometrics*, *18*(1), 1-22. https://doi.org/10.1002/jae.659
+
+Blanchard, O., y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. *Quarterly Journal of Economics*, *117*(4), 1329-1368. https://doi.org/10.1162/003355302320935043
+
+Bohn, H. (1998). The behavior of U.S. public debt and deficits. *Quarterly Journal of Economics*, *113*(3), 949-963. https://doi.org/10.1162/003355398555793
+
+Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchange rate, and fiscal sustainability: Argentina's lessons* (NBER Working Paper No. 9828). National Bureau of Economic Research. https://doi.org/10.3386/w9828
+
+Celasun, O., Debrun, X., y Ostry, J. D. (2006). *Primary surplus behavior and risks to fiscal sustainability in emerging market countries: A "fan-chart" approach* (IMF Working Paper No. 06/67). Fondo Monetario Internacional. https://doi.org/10.5089/9781451863277.001
+
+Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
+
+Fondo Monetario Internacional. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper). Aprobado por el Directorio el 14 de enero de 2021.
+
+Fondo Monetario Internacional. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95). Anexo II: Application of the Sovereign Risk and Debt Sustainability Framework.
+
+Fondo Monetario Internacional. (2026). *Argentina: 2026 Article IV consultation, second review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 26/105). Anexo: Sovereign Risk and Debt Sustainability Assessment.
+
+Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, *123*(566), F4-F30. https://doi.org/10.1111/ecoj.12010
+
+Gonçalves, S., y Kilian, L. (2004). Bootstrapping autoregressions with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, *123*(1), 89-120. https://doi.org/10.1016/j.jeconom.2003.10.030
+
+Kilian, L. (1998). Small-sample confidence intervals for impulse response functions. *Review of Economics and Statistics*, *80*(2), 218-230. https://doi.org/10.1162/003465398557465
+
+Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, *44*(1), 61-84. https://doi.org/10.1111/1475-5890.12319
+
+Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública. (2021, 3 de marzo). Boletín Oficial de la República Argentina. https://www.argentina.gob.ar/normativa/nacional/norma-347532/texto
+
+Medeiros, J. (2012). *Stochastic debt simulation using VAR models and a panel fiscal reaction function: Results for a selected number of countries* (European Economy Economic Papers No. 459). Comisión Europea.
+
+Neumeyer, P. A., y Perri, F. (2005). Business cycles in emerging economies: The role of interest rates. *Journal of Monetary Economics*, *52*(2), 345-380. https://doi.org/10.1016/j.jmoneco.2004.04.011
+
+Oficina de Presupuesto del Congreso. (2026). *Operaciones de deuda pública, julio 2026*.
+
+Rapoport, M. (2020). *Historia económica, política y social de la Argentina (1880-2003)*. Crítica.
+
+Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centuries of financial folly*. Princeton University Press.
+
+Rodríguez, A. (2023). Financiamiento y sostenibilidad de la deuda pública: El caso de la economía argentina (2001-2022). *Ciencias Económicas*, *2*(20), e0032. https://doi.org/10.14409/rce.2023.20.e0032
+
+Sanches, P. (2019). *Análisis de la sostenibilidad de la deuda soberana argentina. 2019-2023* [Tesis de maestría]. Universidad Torcuato Di Tella.
+
+Secretaría de Finanzas, Ministerio de Economía. (2025, 10 de diciembre). *Resultado de licitación del Bono del Tesoro Nacional en dólares estadounidenses 6,50% con vencimiento 30 de noviembre de 2029* [Comunicado]. https://www.argentina.gob.ar/noticias/resultado-de-licitacion-del-bono-del-tesoro-nacional-en-dolares-estadounidenses-650-con
+
+Uribe, M., y Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? *Journal of International Economics*, *69*(1), 6-36. https://doi.org/10.1016/j.jinteco.2005.04.003
+
+Wu, J. C., y Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. *Journal of Money, Credit and Banking*, *48*(2-3), 253-291. https://doi.org/10.1111/jmcb.12300
+
+[^en-default]: *Default*: cesación de pagos de la deuda.
+[^en-shock]: *Shock*: perturbación inesperada que afecta a una variable y se transmite a las demás.
+[^en-stock]: *Stock*: saldo de una variable en un momento dado, por oposición a un flujo.
+[^en-bootstrap]: *Bootstrap*: método de remuestreo que aproxima la distribución de un estimador repitiendo la estimación sobre muestras generadas a partir de los propios datos.
