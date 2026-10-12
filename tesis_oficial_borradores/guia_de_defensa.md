@@ -101,7 +101,7 @@ Ordenado de más a menos peligroso.
 **1. "H1a depende de cómo identificaron el shock fiscal."**
 - **Es cierto en parte.** Con Cholesky ordenando el fiscal primero, que es el orden más favorable a lo fiscal, el intervalo de la diferencia incluye el cero. La mayoría de las réplicas (77%) igual da lo no fiscal por encima. Con la deuda bruta pasa algo parecido: 92% de las réplicas da lo no fiscal por encima, pero el intervalo también incluye el cero.
 - **Respuesta:** la identificación principal se basa en una elasticidad estimada, no en un orden arbitrario. Con el orden propuesto por Santiago el resultado es todavía más fuerte, y el bloque cambiario y de riesgo explica cerca de 60% en todas las identificaciones. Lo que cambia es cuánto se lleva el fiscal frente a la actividad.
-- **Mejora:** decidir con el grupo cómo presentarlo. La propuesta es mostrarlo en Robustez y Limitaciones. Todavía no está escrito en la tesis.
+- **Cómo quedó:** está en Robustez (6.6) y en Limitaciones (7.5): H1a depende de identificar el shock fiscal por su respuesta al ciclo.
 
 **2. "¿Por qué ese escenario del FMI y no otro?"**
 - **Respuesta:** es el análisis de sostenibilidad más reciente del FMI (mayo de 2026). Hasta octubre de 2026 se usaba el de abril de 2025, y con ese escenario los resultados son casi los mismos (11,8% a cinco años), así que la conclusión no depende de cuál se use.
@@ -180,7 +180,7 @@ Ordenado de más a menos peligroso.
 
 ## Parte 3. Qué mejorar, por prioridad
 
-1. **Decidir cómo se presenta la robustez de H1a** a la identificación y al perímetro (crítica 1). Lo de la deuda bruta ya está escrito en Resultados; lo de Cholesky con el fiscal primero, todavía no.
+1. **Hecho:** la robustez de H1a a la identificación y al perímetro está escrita en Robustez y en Limitaciones (crítica 1).
 2. **Restar el FGS** (crítica 10) y verificar las LEFI (crítica 11). Puede cambiar el punto de partida y conviene que esté antes de la entrega.
 3. **Hecho:** el escenario base pasó al análisis del FMI de mayo de 2026, y el de abril de 2025 quedó como robustez.
 4. **Robusteces baratas:** estimar desde 2004, ajuste stock-flujo en cero y velocidad de refinanciación de 10% y 30% (críticas 4, 5 y 16).

@@ -33,6 +33,7 @@
 - Denton, F. T. (1971). Adjustment of monthly or quarterly series to annual totals: An approach based on quadratic minimization. *Journal of the American Statistical Association, 66*(333), 99-102.
 - Diamand, M. (1972). La estructura productiva desequilibrada argentina y el tipo de cambio. *Desarrollo Económico, 12*(45), 25-47.
 - Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
+- Dickey, D. A., y Fuller, W. A. (1979). Distribution of the estimators for autoregressive time series with a unit root. *Journal of the American Statistical Association*, 74(366), 427-431.
 - Eichengreen, B., Hausmann, R., y Panizza, U. (2003). *Currency mismatches, debt intolerance and original sin: Why they are not the same and why it matters* (NBER Working Paper No. 10036). National Bureau of Economic Research.
 - Everaert, G., y Jansen, S. (2018). On the estimation of panel fiscal reaction functions: Heterogeneity or fiscal fatigue? *Economic Modelling*, 70, 87-96.
 - Favero, C., y Giavazzi, F. (2007). *Debt and the effects of fiscal policy* (NBER Working Paper No. 12822).
@@ -49,7 +50,9 @@
 - Hansen, B. E. (1999). Threshold effects in non-dynamic panels: Estimation, testing, and inference. *Journal of Econometrics, 93*(2), 345-368.
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, 107(10), 3119-3145.
 - Infobae. (2026, 23 de septiembre). *El riesgo país arriba de los 550 puntos condiciona la primera emisión de deuda internacional de una provincia*. https://www.infobae.com/economia/2026/09/23/el-riesgo-pais-arriba-de-los-550-puntos-condiciona-la-primera-emision-de-deuda-internacional-de-una-provincia/
+- Johansen, S. (1991). Estimation and hypothesis testing of cointegration vectors in Gaussian vector autoregressive models. *Econometrica*, 59(6), 1551-1580.
 - Kalemli-Özcan, Ş. (2019). *U.S. monetary policy and international risk spillovers* (NBER Working Paper No. 26297). National Bureau of Economic Research. https://www.nber.org/papers/w26297
+- Kwiatkowski, D., Phillips, P. C. B., Schmidt, P., y Shin, Y. (1992). Testing the null hypothesis of stationarity against the alternative of a unit root. *Journal of Econometrics*, 54(1-3), 159-178.
 - Leeper, E. M. (1991). Equilibria under "active" and "passive" monetary and fiscal policies. *Journal of Monetary Economics, 27*(1), 129-147. https://doi.org/10.1016/0304-3932(91)90007-B
 - Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, 44(1), 61-84. https://doi.org/10.1111/1475-5890.12319
 - Ley 27.541 de Solidaridad Social y Reactivación Productiva en el Marco de la Emergencia Pública (2019). Boletín Oficial de la República Argentina, 23 de diciembre de 2019.
@@ -80,6 +83,7 @@
 - Uribe, M., y Yue, V. Z. (2006). Country spreads and emerging countries: Who drives whom? *Journal of International Economics*, 69(1), 6-36.
 - Wijayanti, R., y Rachmanira, S. (2020). Early warning system for government debt crisis in developing countries. *Journal of Central Banking Theory and Practice*, 9(número especial), 103-124.
 - Wu, J. C., y Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. *Journal of Money, Credit and Banking*, 48(2-3), 253-291.
+- Zivot, E., y Andrews, D. W. K. (1992). Further evidence on the great crash, the oil-price shock, and the unit-root hypothesis. *Journal of Business and Economic Statistics*, 10(3), 251-270.
 
 ---
 
@@ -126,6 +130,50 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
 
 - **Afirmación corregida:** se reescribió la idea de que el marco del FMI excluye al BCRA. El marco lo admite (FMI, 2021). En su análisis de Argentina, el FMI usa la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025).
 - **Párrafo cortado:** el párrafo de Santiago sobre la subordinación del BCRA, que estaba cortado, se completó y quedó marcado para verificar.
+
+## Nota 3b. Qué se hizo con cada comentario de Pablo y cada propuesta de Santiago
+
+**Comentarios de Pablo sobre Introducción y Antecedentes (PDF anotado del 15/9/2026)**
+
+| Comentario | Qué se hizo | Dónde |
+|---|---|---|
+| Dar citas para el patrón histórico de crisis de deuda | Comín Comín (2014), Reinhart y Rogoff (2009), Díaz Alejandro (1970), della Paolera y Taylor (2001), Rapoport (2020) | 1.1 |
+| La frase sobre que la solvencia no depende solo del saldo fiscal necesita cita | Ando et al. (2025), Calvo et al. (2003), Levy Yeyati y Sturzenegger (2023) | 1.1 |
+| El texto tiene que ser científico; sacar frases como "reabre un interrogante decisivo" y conectores como "Frente a este dilema" | Reescrito | 1.1 |
+| Sacar la parte de "margen de solvencia para honrar los compromisos" del objetivo | Sacada; el objetivo quedó en evaluar la dinámica y estimar la probabilidad de no estabilización | 1.4 |
+| No escribir entre rayas (delata la IA) | No queda ninguna raya en la tesis | Todo el texto |
+| *Fan charts* y *early warning systems* en cursiva y con nota al pie | Hecho | Introducción y 2.5 |
+| Sacar el inciso entre rayas que seguía a "de 36,5% a 50,8%" | Sacado | 2.7 |
+| Cerrar Antecedentes con por qué esta metodología y estas variables (no se probó, cambió el contexto, hay una variable nueva) | Párrafo con esas tres razones | 2.9 |
+
+**Decisiones de reuniones con Pablo**
+
+| Decisión | Cómo quedó |
+|---|---|
+| No nombrar la "ventana única" (18/9) | No aparece; se habla de "muestra de estimación" |
+| No discutir en el texto si el riesgo país es endógeno (17/9) | No aparece; queda como respuesta oral en la guía de defensa |
+| Justificar la matriz del SVAR, "donde gira todo" | Secciones 4.4 (identificación) y 4.3 (canales de la FED) |
+| Panel Argentina-Chile como línea futura | Capítulo 8 |
+| Bajar la extensión | 60 páginas |
+
+**Propuestas de la metodología de Santiago**
+
+| Propuesta | Qué se hizo | Dónde |
+|---|---|---|
+| ADF y KPSS para raíz unitaria, Zivot-Andrews y Bai-Perron para quiebres | Hecho; los quiebres de Bai-Perron entran como variables binarias | 6.1 y A.1 |
+| Selección de rezagos por AIC y BIC con residuos sin autocorrelación | AIC sujeto a estabilidad; BIC y HQ informados; autocorrelación declarada | 4.5 y A.2 |
+| Variables binarias por quiebres | Hecho | 4.3 |
+| Deuda consolidada como variable del sistema, la "esponja contable" (retroalimentación) | La deuda rezagada entra en las cuatro ecuaciones y se acumula con la identidad: un punto más de deuda sube el EMBI+ 22 puntos básicos | 6.1 |
+| Contraste con y sin retroalimentación | Hecho; casi no cambia porque el riesgo país y el superávit se compensan | 6.6 |
+| Cholesky con orden crecimiento, TCRM, EMBI+, resultado primario | Como robustez; la identificación principal es Blanchard y Perotti, la que aprobó Pablo | 6.6 |
+| Opción B: tasa en dólares desde el EMBI+ y tasa en pesos aparte | Es la especificación principal; la variante con el riesgo país en la tasa en pesos se informa como robustez | 4.6 y 6.6 |
+| Shock de la FED con la tasa sombra | Hecho (Wu y Xia, 2016) | 5.4 |
+| Shocks de la FED identificados por la literatura (alta frecuencia) | Línea futura | 8 |
+| Términos de intercambio (Lanteri, 2019) | Línea futura | 8 |
+| Probabilidad de que la deuda supere 100% del PIB | Reemplazada por la métrica del FMI, porque el 100% no tiene fuente | 4.7 |
+| Módulo de balanza de pagos | Fuera del alcance (es otra tesis); línea futura | 8 |
+| Restricciones de signo y Blanchard-Quah | No se usan: la neutralidad de largo plazo del TCRM es difícil de sostener para Argentina | Guía de defensa |
+| X-13 para desestacionalizar | Se usan variables binarias estacionales | 4.2 |
 
 ## Nota 4. Pendientes
 

@@ -12,6 +12,18 @@ PIB en diciembre de 2025. Las cifras se pueden reproducir con
 
 \section{El SVARX estimado}
 
+\textbf{Propiedades de las series.} Las pruebas de raíz unitaria no
+clasifican con claridad la mayoría de las series: el resultado primario
+se comporta como una serie con raíz unitaria, el VIX como estacionaria,
+y en el resto ADF y KPSS no coinciden (Apéndice, sección A.1). Es lo
+esperable en series cortas con cambios de régimen, que es la razón por
+la que se estima el VAR en niveles. La prueba de Zivot y Andrews (1992)
+ubica el quiebre del tipo de cambio real en 2001T4, el mismo que
+encuentra el procedimiento de Bai y Perron (2003) para la deuda, que
+identifica tres quiebres (2001T4, 2006T2 y 2018T1). La prueba de
+Johansen no rechaza la ausencia de cointegración entre las variables en
+niveles.
+
 \textbf{Rezagos y diagnósticos.} Con la regla de la sección 4.5, el
 modelo usa tres rezagos. La raíz de mayor módulo del polinomio
 característico es 0,96, de modo que el sistema es estable y tiene
@@ -303,6 +315,29 @@ perímetro. Con la deuda neta a valor libros se mantiene: los shocks no
 fiscales superan al fiscal por 58,5 puntos {[}16,6; 90,8{]}. Con la
 deuda bruta, en cambio, la diferencia es de 52,6 puntos, pero su
 intervalo, {[}-7,5; 93,7{]}, incluye el cero.
+
+\textbf{Identificación de los shocks.} La identificación principal
+descuenta del resultado primario su respuesta automática al ciclo
+(sección 4.4). Se la contrasta con dos ordenamientos de Cholesky, que
+imponen un orden de reacción contemporánea entre las variables: - El
+primero (crecimiento, tipo de cambio real, EMBI+ y resultado primario)
+deja al shock fiscal en el último lugar: el resultado primario se ajusta
+en el mismo trimestre al ciclo y al riesgo, y no al revés. Con ese
+orden, la diferencia entre los shocks no fiscales y el fiscal es mayor
+que en la especificación principal: 78,5 puntos, con un intervalo de
+{[}34,7; 96,2{]}. - El orden inverso (resultado primario primero) le
+atribuye al shock fiscal toda la covarianza contemporánea con las demás
+variables. Es el ordenamiento más favorable a lo fiscal. Con él, la
+participación fiscal sube a 33,7\% y la cambiaria y de riesgo queda en
+59,9\%. La diferencia sigue siendo positiva (32,6 puntos) y lo es en
+77\% de las réplicas, pero su intervalo, {[}-47,5; 87,4{]}, incluye el
+cero.
+
+La identificación no cambia la varianza total de la deuda simulada, de
+modo que H1b y H2 dan lo mismo con cualquiera de los tres esquemas. H1a,
+en cambio, depende de cómo se separa el shock fiscal: se sostiene con la
+identificación principal y con el orden que deja al shock fiscal último,
+y no con el que lo pone primero.
 
 \textbf{Canal de tasas domésticas.} Si el riesgo país también encarece
 la deuda en pesos (sección 4.6), la probabilidad de no estabilización
