@@ -3,7 +3,7 @@ fase25b_diagnostico_abanico_fmi.py
 ==================================
 Diagnostico de la variante con shocks a la manera del FMI (fase25 --shocks fmi): que impulsor
 historico explica el ancho del abanico y la probabilidad de no estabilizacion. Se repite la
-simulacion (deuda neta, 10.000 trayectorias, misma semilla) quitando el anio 2002 o fijando un
+simulacion (deuda neta, 20.000 trayectorias, misma semilla) quitando el anio 2002 o fijando un
 impulsor en su media historica. Se usa en el Capitulo 7 (Discusion).
 
 Uso: python codigo/modelos/fase25b_diagnostico_abanico_fmi.py
@@ -36,10 +36,10 @@ def main() -> None:
     }
     filas = []
     for nombre, sub in variantes.items():
-        s = f25.simular_fmi(sub, esc, d0, alfa, 10_000, np.random.default_rng(f25.SEMILLA))
-        filas.append({"variante": nombre, "p_noest_2030": s["no_est_2030"].mean(),
+        s = f25.simular_fmi(sub, esc, d0, alfa, 20_000, np.random.default_rng(f25.SEMILLA))
+        filas.append({"variante": nombre, "p_noest_2031": s["no_est_2031"].mean(),
                       "p_noest_2035": s["no_est_2035"].mean(),
-                      "ancho_p5_p95_2030": np.subtract(*np.percentile(s["d"][:, 5], [95, 5]))})
+                      "ancho_p5_p95_2031": np.subtract(*np.percentile(s["d"][:, 6], [95, 5]))})
     out = pd.DataFrame(filas)
     out.to_csv(f25.TABLAS / "fase25b_diagnostico_abanico_fmi.csv", index=False)
     print(out.round(3).to_string(index=False))

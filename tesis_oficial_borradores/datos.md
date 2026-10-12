@@ -1,6 +1,6 @@
 # 5. Datos
 
-Las series son trimestrales y cubren 1996T1-2025T4. Todas se construyeron desde fuentes primarias con procedimientos reproducibles, sin cifras cargadas a mano. Este capítulo resume qué mide cada serie, de dónde sale y por qué se la construyó así, y la contrasta con las cifras del FMI. Los estadísticos descriptivos de la muestra de estimación están en el Apéndice.
+Las series son trimestrales y cubren 1996T1-2025T4. Todas se construyeron desde fuentes primarias con procedimientos reproducibles, sin intervención manual sobre los datos. Este capítulo resume qué mide cada serie, de dónde sale y por qué se la construyó así, y la contrasta con las cifras del FMI. Los estadísticos descriptivos de la muestra de estimación están en el Apéndice.
 
 ## 5.1 Series y fuentes
 
@@ -9,22 +9,22 @@ Las series son trimestrales y cubren 1996T1-2025T4. Todas se construyeron desde 
 | Deuda consolidada neta (% del PIB) | Rezagada en las ecuaciones y acumulada en la simulación | MECON (deuda de la Administración Central) y BCRA (balance y estadísticas monetarias) | Sección 5.2 |
 | Resultado primario (% del PIB) | Endógena | MECON, esquema ahorro-inversión-financiamiento del Sector Público Nacional, base caja | Suma mensual por trimestre, anualizada sobre el PIB de cuatro trimestres |
 | Crecimiento real | Endógena | INDEC, PIB a precios constantes | Variación logarítmica trimestral; 1996-2003 en base 1993 empalmada a base 2004 |
-| EMBI+ (puntos básicos) | Endógena | J.P. Morgan; antes de 1998, *stripped spread* de los bonos Brady | Promedio trimestral, con empalme en 1998 |
+| EMBI+ (puntos básicos) | Endógena | J.P. Morgan desde 1999; 1996-1998, *stripped spread* de los bonos Brady | Promedio trimestral, con empalme en 1999 |
 | Tipo de cambio real multilateral | Endógena | BCRA | Promedio trimestral del índice |
-| Tasa de política de la FED | Exógena | Reserva Federal (FRED) y tasa sombra de Wu y Xia (2016) | Promedio trimestral; tasa sombra en el límite cero |
-| VIX | Exógena | CBOE | Promedio trimestral |
+| Tasa de política de la FED | Exógena | Tasa de fondos federales de la Junta de Gobernadores de la Reserva Federal, obtenida de FRED, la base de datos del Banco de la Reserva Federal de St. Louis (Board of Governors of the Federal Reserve System, s. f.); tasa sombra de Wu y Xia (2016), publicada por el Banco de la Reserva Federal de Atlanta (Federal Reserve Bank of Atlanta, s. f.) | Promedio trimestral; tasa sombra en el límite cero |
+| VIX | Exógena | *Chicago Board Options Exchange* (CBOE) | Promedio trimestral |
 
-**Denominador.** Todos los cocientes usan el PIB nominal de los últimos cuatro trimestres. Dividir un stock por el PIB de un solo trimestre anualizado mezcla estacionalidad y, con inflación alta, distorsiona el cociente. En el cuarto trimestre, el denominador coincide con el PIB del año, que es la convención del FMI. Con inflación de tres dígitos (2023-2024), este denominador rezaga al PIB de fin de período y sobreestima el cociente en la aceleración.
+**Denominador.** Todos los cocientes usan el PIB nominal de los últimos cuatro trimestres. Dividir un stock por el PIB de un solo trimestre anualizado mezcla estacionalidad y, con inflación alta, distorsiona el cociente. En el cuarto trimestre, el denominador coincide con el PIB del año, de modo que los cocientes de diciembre son comparables con las cifras anuales del FMI. Con inflación de tres dígitos (2023-2024), este denominador rezaga al PIB de fin de período y sobreestima el cociente en la aceleración.
 
 ## 5.2 Deuda consolidada neta
 
-Se sigue la consolidación con el banco central del FMI (2021, anexo II): se restan los créditos del banco central contra el gobierno y se suman los pasivos de deuda del banco central.
+La deuda bruta es la de la Administración Central (Tesoro nacional). El resultado primario, en cambio, es el del Sector Público Nacional (SPN), un perímetro más amplio (sección 5.3). Se sigue la consolidación con el banco central del FMI (2021, anexo II): se restan los créditos del banco central contra el gobierno y se suman los pasivos de deuda del banco central.
 
 D = B − T + L − DEP
 
-- **B, deuda bruta de la Administración Central.** Informe de Deuda Pública del MECON, convertida a pesos con el tipo de cambio de fin de trimestre. En 1996-2001 el tipo de cambio es 1, por la convertibilidad. Los seis trimestres de 1996-1997 que no son cierre de año se interpolan en dólares.
-- **T, deuda del Tesoro en poder del BCRA.** Adelantos transitorios, títulos en pesos y Letras Intransferibles. Las Letras se valúan a su valor nominal, que publica el MECON, y no al valor contable del balance del BCRA. La razón es que la deuda bruta del MECON está a valor nominal, y restarle tenencias valuadas con otro criterio mezcla dos medidas. Cuando el valor contable supera al nominal, porque incluye otros créditos en dólares, se conserva el contable (variante "piso").
-- **L, pasivos remunerados del BCRA.** LEBAC y NOBAC, LELIQ y NOTALIQ, posición neta de pases y letras en moneda extranjera (BCRA, estadísticas monetarias). El swap con el Banco Popular de China no tiene serie pública y queda afuera.
+- **B, deuda bruta de la Administración Central.** Informe de Deuda Pública del MECON (Ministerio de Economía de la Nación, 2025), convertida a pesos con el tipo de cambio de fin de trimestre. En 1996-2001 el tipo de cambio es 1, por la convertibilidad. Los seis trimestres de 1996-1997 que no son cierre de año se interpolan en dólares.
+- **T, deuda del Tesoro en poder del BCRA.** Adelantos transitorios, títulos en pesos y Letras Intransferibles. Las Letras se valúan a su valor nominal, que publica el MECON, y no al valor contable del balance del BCRA (Banco Central de la República Argentina, s. f.). La razón es que la deuda bruta del MECON está a valor nominal, y restarle tenencias valuadas con otro criterio mezcla dos medidas. Cuando el valor contable supera al nominal, porque incluye otros créditos en dólares, se conserva el contable (variante "piso"). Se la llama así porque el valor contable funciona como cota inferior: en cada trimestre se resta el mayor de los dos valores.
+- **L, pasivos remunerados del BCRA.** LEBAC y NOBAC, LELIQ y NOTALIQ, posición neta de pases y letras en moneda extranjera (BCRA, estadísticas monetarias). El swap[^en-swap] con el Banco Popular de China no tiene serie pública y queda excluido.
 - **DEP, depósitos del Tesoro en el BCRA.**
 
 La Figura 5.1 muestra la serie principal, la variante con las Letras a valor contable y la deuda consolidada bruta (B + L).
@@ -35,7 +35,7 @@ La Figura 5.1 muestra la serie principal, la variante con las Letras a valor con
 
 **Resultado primario.** La serie del MECON es mensual desde 1993 y se publica en tres tramos metodológicos (1993-2006, 2007-2014 y desde 2015). Cada trimestre es la suma de sus tres meses, sin interpolar. La medida que entra al modelo es el flujo trimestral anualizado, no la suma móvil de cuatro trimestres: la suma móvil superpone trimestres y crea una autocorrelación artificial (0,97 de orden 1, contra 0,65 del flujo trimestral). La estacionalidad que conserva el flujo trimestral la absorben las variables binarias del modelo. La serie incluye las rentas de la propiedad, entre ellas las utilidades del BCRA, porque la fuente no permite separarlas.
 
-**Crecimiento.** El PIB real de 2004-2025 es la serie del INDEC en base 2004. El de 1996-2003 es la serie en base 1993, empalmada con un coeficiente de enlace de 1,751 (la razón media entre las dos bases en 2004). El coeficiente afecta el nivel anterior a 2004, pero no las tasas de crecimiento, que es lo que entra al modelo. La serie no está desestacionalizada, por la misma razón que el resultado primario.
+**Crecimiento.** El PIB real de 2004-2025 es la serie del INDEC en base 2004. El de 1996-2003 es la serie en base 1993, empalmada con un coeficiente de enlace de 1,751 (la razón media entre las dos bases en 2004). El coeficiente afecta el nivel anterior a 2004, pero no las tasas de crecimiento, que es lo que entra al modelo. Se usa la serie original y no la desestacionalizada del INDEC, porque esta empieza en 2004; la estacionalidad la absorben las variables binarias trimestrales.
 
 ## 5.4 Variables financieras y externas
 
@@ -64,18 +64,20 @@ El FMI (2025, anexo II, cuadro 2) publica la deuda consolidada para 2023 y 2024.
 | Depósitos del Tesoro en el BCRA | 0,5 | 0,5 | 2,1 | 2,1 |
 | **Deuda consolidada neta** | **119,0** | **110,8** | **61,1** | **51,5** |
 
-La deuda bruta y los depósitos coinciden con el FMI dentro de 3 puntos. La deuda bruta del FMI es algo mayor porque suma intereses capitalizados, deuda con acreedores que no entraron a los canjes (*holdouts*) y reclamos por el cupón PIB, que no figuran en el informe del MECON. Los pasivos del BCRA son algo menores porque falta el swap con China. La diferencia principal está en la segunda línea: el FMI resta también la deuda del Tesoro en poder del Fondo de Garantía de Sustentabilidad (FGS) de la ANSES, que esta tesis no puede restar porque no hay una serie pública completa que se pueda obtener (la ANSES publica la cartera solo en informes que no permiten la descarga automática). Por eso, la deuda neta de esta tesis queda entre 8 y 10 puntos por encima de la del FMI desde 2007, cuando se creó el FGS, y antes de esa fecha no hay diferencia de perímetro.
+La deuda bruta y los depósitos coinciden con el FMI dentro de 3,2 puntos. La deuda bruta del FMI es algo mayor porque suma intereses capitalizados, deuda con acreedores que no entraron a los canjes (*holdouts*) y reclamos por el cupón PIB, que no figuran en el informe del MECON. Los pasivos del BCRA son algo menores porque falta el swap con China. La diferencia principal está en la segunda línea: el FMI resta también la deuda del Tesoro en poder del Fondo de Garantía de Sustentabilidad (FGS) de la ANSES, que esta tesis no resta. La Administración Nacional de la Seguridad Social (ANSES) no publica una serie histórica de la cartera del FGS por tipo de activo; los datos están dispersos en informes en PDF que no cubren todo el período. Por eso, la deuda neta de esta tesis queda 8,2 puntos por encima de la del FMI en 2023 y 9,6 puntos en 2024. Es esperable que la brecha aparezca desde 2007, cuando se creó el FGS (Poder Ejecutivo Nacional, 2007), aunque la tesis solo puede medirla en los años que publica el FMI.
 
-El informe más reciente del FMI (2026, cuadro 2) actualiza esas cifras y agrega 2025: 111,1% en 2023, 53,6% en 2024 y 52,1% en 2025, frente a 119,0%, 61,1% y 61,0% de esta tesis. La diferencia, de 8 a 9 puntos, se mantiene estable, como corresponde a una brecha que viene sobre todo del FGS.
+El informe más reciente del FMI (2026, cuadro 2) actualiza esas cifras y agrega 2025: 111,1% en 2023, 53,6% en 2024 y 52,1% en 2025, frente a 119,0%, 61,1% y 61,0% de esta tesis. La diferencia, de 7,5 a 8,9 puntos, se mantiene estable, lo que es compatible con una brecha que viene sobre todo del FGS.
 
-El resultado primario de esta tesis da −2,7% del PIB en 2023 y 1,8% en 2024, frente a −2,8% y 1,8% del FMI (2025, cuadro 3b). El crecimiento real da −1,9% y −1,4%, frente a −1,6% y −1,7% del FMI, diferencias compatibles con las revisiones posteriores del INDEC.
+El resultado primario de esta tesis da −2,7% del PIB en 2023 y 1,8% en 2024, frente a −2,8% y 1,8% del FMI (2025, cuadro 3b). El crecimiento real da −1,9% y −1,4%, frente a −1,6% y −1,7% del FMI.
 
 ## 5.6 Limitaciones de los datos
 
-1. **FGS.** La deuda neta no descuenta la deuda del Tesoro en poder del FGS. La sobreestima entre 8 y 10 puntos del PIB desde 2007. Como en el modelo la deuda entra rezagada y la diferencia es estable (8,2 puntos en 2023 y 9,6 en 2024), su efecto sobre la dinámica estimada es acotado. Para acotarlo, el modelo se estima también con la deuda bruta.
+1. **FGS.** La deuda neta no descuenta la deuda del Tesoro en poder del FGS, y por eso queda por encima de la del FMI (8,2 puntos del PIB en 2023 y 9,6 en 2024). La ANSES no publica una serie histórica de la cartera del FGS por tipo de activo; los datos están dispersos en informes en PDF que no cubren todo el período. Como en el modelo la deuda entra rezagada y la diferencia es estable, su efecto sobre la dinámica estimada debería ser acotado. El modelo se estima también con la deuda bruta. Para acotar el efecto sobre la proyección, la simulación se repite partiendo de la deuda consolidada neta del FMI (52,1% del PIB en 2025), que sí descuenta el FGS (Capítulo 6).
 2. **Valuación de las Letras Intransferibles.** El valor nominal está disponible en 80 de los 120 trimestres. En el resto se interpola entre fechas con dato o, antes de 2006, cuando las Letras no existían, se usa el valor contable. La serie con valor contable se usa como robustez.
-3. **Empalmes.** El PIB de 1996-2003 (cambio de base) y el EMBI+ de 1996-1998 (spread Brady) tienen incertidumbre de nivel, pero no afectan las variaciones que entran al modelo.
+3. **Empalmes.** El PIB de 1996-2003 (cambio de base) tiene incertidumbre de nivel, pero el empalme no afecta las tasas de crecimiento que entran al modelo. El EMBI+, en cambio, entra en niveles, y el empalme afecta el nivel de 12 trimestres (1996-1998). De ellos, solo 1998T2-1998T4 caen dentro de la muestra efectiva de estimación (1998T2-2025T4); los anteriores entran únicamente como rezagos iniciales.
 4. **Resultado primario.** Incluye las utilidades del BCRA, cubre el Sector Público Nacional, que es un perímetro más amplio que el del gobierno federal del FMI, y tiene dos cambios de metodología (2007 y 2015) sin período de superposición.
 5. **Pasivos del BCRA.** Falta el swap con China, y la posición de pases es neta, de modo que en algunos trimestres resta.
 
 El detalle de cada construcción, con sus controles, está en el informe de datos del repositorio de la tesis.
+
+[^en-swap]: *Swap*: acuerdo de intercambio de monedas entre bancos centrales.

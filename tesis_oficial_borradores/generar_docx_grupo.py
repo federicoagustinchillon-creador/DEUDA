@@ -87,6 +87,8 @@ def armar_capitulos_1_2() -> Path:
         if ruta.exists():
             partes.append(ruta.read_text(encoding="utf-8").rstrip())
     partes.append((BASE / "referencias_y_notas.md").read_text(encoding="utf-8"))
+    from cursivas_ingles import cursivas  # términos en inglés en cursiva (no en las referencias)
+    partes = [cursivas(t) for t in partes[:-1]] + partes[-1:]
     texto = _matematica_a_texto("\n\n".join(partes))
     destino = BASE / "_tesis_borrador.md"
     destino.write_text(texto, encoding="utf-8")

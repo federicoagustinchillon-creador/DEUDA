@@ -54,10 +54,12 @@
 \usepackage{array}
 \usepackage{calc}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\providecommand{\pandocbounded}[1]{\resizebox{\linewidth}{!}{#1}}
+% Figuras: ancho de la caja de texto como máximo y alto de 42% de la página, sin deformar.
+\setkeys{Gin}{width=\linewidth,height=0.42\textheight,keepaspectratio}
+\providecommand{\pandocbounded}[1]{#1}
 \makeatletter\@ifundefined{c@none}{\newcounter{none}}{}\makeatother % pandoc: tablas sin epigrafe
 % Figuras cerca del texto que las cita (h), sin paginas con una figura sola centrada.
-\makeatletter\def\fps@figure{htbp}\makeatother
+\makeatletter\def\fps@figure{tbp}\makeatother
 \renewcommand{\floatpagefraction}{0.75}
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\textfraction}{0.1}
@@ -96,9 +98,9 @@
     \begin{flushleft}
         \large
         \textbf{Autores:}\\
-        Páez, Santiago -- Legajo: 34110\\
-        Chillón, Federico -- Legajo: 34394\\
-        Carricondo, Emiliano -- Legajo: 33396\\
+        Páez, Santiago. Legajo 34110\\
+        Chillón, Federico. Legajo 34394\\
+        Carricondo, Emiliano. Legajo 33396\\
 
     \end{flushleft}
 

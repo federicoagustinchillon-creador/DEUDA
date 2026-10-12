@@ -12,7 +12,8 @@ con su fuente). El abanico (figura 6.2) lo genera fig_abanico_deuda.py.
   fig6_1  Respuestas al impulso a +1 desvio de la tasa de la FED, con bandas de 90%.
   fig6_2  Grafico de abanico (fig_abanico_deuda.py).
   fig6_3  Participacion de cada bloque de shocks en la varianza de la deuda en 2035.
-  fig6_4  Probabilidad de no estabilizacion por especificacion, 2030 y 2035, contra el 3% del FMI.
+  fig6_4  Probabilidad de no estabilizacion por especificacion, 2031 y 2035, contra los umbrales del FMI.
+  fig6_5  Contraste de suficiencia del superavit (H1a).
   fig7_1  Abanicos con shocks del SVARX y con shocks a la manera del FMI.
   fig7_2  Impulsores historicos anuales de la deuda (1997-2025).
 
@@ -124,48 +125,66 @@ def fig6_1() -> None:
     guardar(fig, "fig6_1_respuesta_fed.png")
 
 
+def _intervalo(t: pd.DataFrame, fila: str, escala: float = 1.0) -> tuple[float, float, float]:
+    """Estimacion central y longitudes de error (no negativas) hasta los percentiles 5 y 95."""
+    c, lo, hi = (escala * t.loc[fila, k] for k in ("estimacion", "p05", "p95"))
+    return c, max(c - lo, 0.0), max(hi - c, 0.0)
+
+
 def fig6_3() -> None:
-    r = pd.read_csv(TABLAS / "fase25_neta_replicas.csv")
+    t = pd.read_csv(TABLAS / "fase25_neta_resumen.csv", index_col=0)
     bloques = {"vshare_fiscal": "Fiscal", "vshare_actividad": "Actividad", "vshare_cambiario_y_riesgo": "Cambiario y de riesgo"}
-    med = [r[c].mean() for c in bloques]
-    lo = [r[c].mean() - r[c].quantile(0.05) for c in bloques]
-    hi = [r[c].quantile(0.95) - r[c].mean() for c in bloques]
+    vals = [_intervalo(t, c) for c in bloques]
     fig, ax = plt.subplots(figsize=(6, 3))
-    ax.bar(list(bloques.values()), med, color=[GRIS, GRIS, AZUL], yerr=[lo, hi], capsize=4,
-           error_kw={"lw": 0.8})
-    for i, m in enumerate(med):
-        ax.text(i, 2, f"{m:.1f}%".replace(".", ","), ha="center", color="white", fontsize=9, fontweight="bold")
+    ax.bar(list(bloques.values()), [v[0] for v in vals], color=[GRIS, GRIS, AZUL],
+           yerr=[[v[1] for v in vals], [v[2] for v in vals]], capsize=4, error_kw={"lw": 0.8})
+    for k, v in enumerate(vals):
+        ax.text(k, 2, f"{v[0]:.1f}%".replace(".", ","), ha="center", color="white", fontsize=9, fontweight="bold")
     ax.set_ylabel("% de la varianza de la deuda en 2035")
     ax.grid(axis="x", visible=False)
     guardar(fig, "fig6_3_varianza_por_bloque.png")
 
 
+ESPECIFICACIONES = {
+    "neta": "Principal", "neta_libros": "Neta en\nlibros", "bruta": "Bruta", "tesoro": "Solo\nTesoro",
+    "neta_dom": "Tasas\nen pesos", "neta_sin_retro": "Sin retro-\nalimentación", "neta_sin_default": "Sin shocks\ndel default",
+    "neta_cr2595": "Escenario\nFMI 2025",
+}
+
+
 def fig6_4() -> None:
-    specs = {"neta": "SVARX, neta\n(principal)", "neta_libros": "SVARX, neta\nen libros", "bruta": "SVARX,\nbruta",
-             "neta_dom": "SVARX, neta con\ntasas en pesos"}
-    fig, ax = plt.subplots(figsize=(7, 3.4))
+    fig, ax = plt.subplots(figsize=(7.2, 3.6))
+    specs = [s for s in ESPECIFICACIONES if (TABLAS / f"fase25_{s}_resumen.csv").exists()]
     x = np.arange(len(specs) + 1)
-    for k, (anio, color, dx) in enumerate(((2030, AZUL, -0.17), (2035, GRIS, 0.17))):
-        med, lo, hi = [], [], []
-        for s in specs:
-            t = pd.read_csv(TABLAS / f"fase25_{s}_resumen.csv", index_col=0)
-            fila = t.loc[f"base_p_noest_{anio}"]
-            med.append(100 * fila["media"])
-            lo.append(100 * (fila["media"] - fila["p05"]))
-            hi.append(100 * (fila["p95"] - fila["media"]))
+    for anio, color, dx in ((2031, AZUL, -0.17), (2035, GRIS, 0.17)):
+        vals = [_intervalo(pd.read_csv(TABLAS / f"fase25_{s}_resumen.csv", index_col=0), f"base_p_noest_{anio}", 100) for s in specs]
         fmi = pd.read_csv(TABLAS / "fase25_neta_fmi_resumen.csv", index_col=0)["valor"]
-        med.append(100 * fmi[f"p_noest_{anio}"])
-        lo.append(0)
-        hi.append(0)
-        ax.bar(x + dx, med, width=0.34, color=color, yerr=[lo, hi], capsize=3, error_kw={"lw": 0.8},
-               label=f"{anio} ({'cinco' if anio == 2030 else 'diez'} años)")
+        vals.append((100 * fmi[f"p_noest_{anio}"], 0.0, 0.0))
+        ax.bar(x + dx, [v[0] for v in vals], width=0.34, color=color, capsize=3, error_kw={"lw": 0.8},
+               yerr=[[v[1] for v in vals], [v[2] for v in vals]],
+               label=f"{anio} ({'mediano plazo' if anio == 2031 else 'diez años'})")
     ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026), mediano plazo: 1%")
     ax.axhline(3, color=ROJO, lw=1.0, ls=":", label="FMI (2026), diez años: menos de 3%")
-    ax.set_xticks(x, list(specs.values()) + ["Shocks a la\nmanera del FMI"], fontsize=7.5)
+    ax.set_xticks(x, [ESPECIFICACIONES[s] for s in specs] + ["Shocks a la\nmanera del FMI"], fontsize=7)
     ax.set_ylabel("Probabilidad de no estabilización (%)")
     ax.grid(axis="x", visible=False)
-    ax.legend(fontsize=7.5)
+    ax.legend(fontsize=7, loc="upper left")
     guardar(fig, "fig6_4_probabilidad_no_estabilizacion.png")
+
+
+def fig6_5() -> None:
+    t = pd.read_csv(TABLAS / "fase25_neta_suficiencia.csv")
+    pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib"]
+    maximo = float(pb.max())
+    fig, ax = plt.subplots(figsize=(6.5, 3.4))
+    ax.plot(t["pb_2031"], 100 * t["p_noest_2031"], color=AZUL, lw=1.8, marker="o", ms=3, label="Probabilidad de no estabilización en 2031")
+    ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026): 1%")
+    ax.axvline(maximo, color=GRIS, lw=1.0, ls=":", label=f"Máximo histórico 1996-2025: {maximo:.1f}%".replace(".", ","))
+    ax.axvline(float(t["pb_2031"].iloc[0]), color=AZUL, lw=0.8, ls=":", label="Escenario base del FMI")
+    ax.set_xlabel("Resultado primario en 2031 (% del PIB)")
+    ax.set_ylabel("%")
+    ax.legend(fontsize=7)
+    guardar(fig, "fig6_5_suficiencia_superavit.png")
 
 
 def fig7_1() -> None:
@@ -198,7 +217,7 @@ def fig7_2() -> None:
 
 def main() -> None:
     FIG.mkdir(parents=True, exist_ok=True)
-    for f in (fig5_1, fig5_2, fig5_3, fig6_1, fig6_3, fig6_4, fig7_1, fig7_2):
+    for f in (fig5_1, fig5_2, fig5_3, fig6_1, fig6_3, fig6_4, fig6_5, fig7_1, fig7_2):
         f()
     fig_abanico_deuda.main()
 

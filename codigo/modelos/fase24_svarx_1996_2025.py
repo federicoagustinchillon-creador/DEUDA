@@ -70,7 +70,17 @@ SERIES_DEUDA: dict[str, tuple[str, str]] = {
     "neta": ("deuda_consolidada_neta_nominal_1996_2025.csv", "deuda_consolidada_neta_nominal_piso_pib"),
     "neta_libros": ("deuda_consolidada_neta_1996_2025.csv", "deuda_consolidada_neta_pib"),
     "bruta": ("deuda_consolidada_1996_2025.csv", "deuda_consolidada_pib"),
+    # Solo la deuda bruta del Tesoro (Administracion Central), sin el BCRA: contrasta el argumento
+    # de la vacancia (seccion 2.9) de que omitir al BCRA cambia la sensibilidad de la deuda.
+    "tesoro": ("deuda_consolidada_neta_nominal_1996_2025.csv", "bruta_federal_pib"),
 }
+# Opciones de robustez de la estimacion (se fijan desde fase25 antes de cargar los datos):
+#   PB_COLUMNA: "pb_pib_trim" (principal) o "pb_pib_trim_sin_rentas" (sin rentas de la propiedad,
+#               que incluyen las utilidades del BCRA, internas al perimetro consolidado).
+#   DESDE: primer trimestre de la muestra (None = 1996); "2004-01-01" deja afuera la
+#          convertibilidad y el default.
+PB_COLUMNA: str = "pb_pib_trim"
+DESDE: str | None = None
 
 
 def cargar_datos(tipo_deuda: str, rezagos_fed: int) -> tuple[pd.DataFrame, pd.DataFrame, list[pd.Timestamp]]:
@@ -87,7 +97,7 @@ def cargar_datos(tipo_deuda: str, rezagos_fed: int) -> tuple[pd.DataFrame, pd.Da
     # no la suma movil de 4 trimestres porque esta induce autocorrelacion MA(3) artificial;
     # la estacionalidad la absorben las dummies Q1-Q3.
     pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv",
-                     index_col=0, parse_dates=True)["pb_pib_trim"]
+                     index_col=0, parse_dates=True)[PB_COLUMNA]
     # PIB real: INDEC base 1993 empalmado a base 2004 para 1996-2003; base 2004 desde 2004.
     pib_pre = leer("procesados/pib_real_empalme_indec_1996_2003.csv")["PIB_real"]
     pib = pd.concat([pib_pre, base["PIB_real"][base.index > pib_pre.index.max()]])
@@ -107,6 +117,13 @@ def cargar_datos(tipo_deuda: str, rezagos_fed: int) -> tuple[pd.DataFrame, pd.Da
     X["deuda_l1"] = deuda.shift(1)
 
     datos = Y.join(X, how="inner").dropna()
+    if DESDE is not None:
+        datos = datos[datos.index >= pd.Timestamp(DESDE)]
+        constantes = [c for c in X.columns if c.startswith("D") and datos[c].nunique() < 2]
+        datos = datos.drop(columns=constantes)
+        quiebres = [q for q in quiebres if q >= pd.Timestamp(DESDE)]
+        cols_x = [c for c in X.columns if c not in constantes]
+        return datos[ENDOG], datos[cols_x], list(quiebres)
     return datos[ENDOG], datos[X.columns], list(quiebres)
 
 
@@ -182,31 +199,45 @@ def estimar(Y: pd.DataFrame, X: pd.DataFrame, p: int, tam_fed: float, horizonte:
 
 
 def bootstrap(Y: pd.DataFrame, X: pd.DataFrame, base: dict, p: int, tam_fed: float, horizonte: int,
-              n_boot: int) -> tuple[pd.DataFrame, int]:
-    """Bootstrap salvaje de diseno recursivo (Goncalves y Kilian, 2004), exogenos fijos."""
+              n_boot: int, deuda: pd.Series, n_sesgo: int = 200) -> tuple[pd.DataFrame, int, np.ndarray]:
+    """Bootstrap salvaje de diseno recursivo (Goncalves y Kilian, 2004) en el que la deuda tambien
+    se regenera (VAR auxiliar con la deuda como quinta variable), con la correccion de sesgo de
+    Kilian (1998) en los coeficientes de rezago. Usa el mismo generador que la simulacion (fase25).
+    Devuelve las replicas, las fallidas y la respuesta a la FED con los coeficientes corregidos."""
+    import fase25_simulacion_dsa_svarx as f25  # import diferido: fase25 importa este modulo
+
     rng = np.random.default_rng(SEMILLA)
     res = base["res"]
-    u = res.resid.values
-    Xv = X.values[p:]
-    nu = res.params.loc["const"].values
-    gamma = res.params.loc[X.columns].values.T
-    filas, fallidas = [], 0
-    for _ in range(n_boot):
-        ub = u * rng.choice([-1.0, 1.0], size=(len(u), 1))
-        y = Y.values.copy()
-        for t in range(p, len(y)):
-            y[t] = nu + sum(res.coefs[i] @ y[t - 1 - i] for i in range(p)) + gamma @ Xv[t - p] + ub[t - p]
+    aux, Xa, muestra = f25.generador(Y, X, deuda, p)
+    est_m, est_a = [], []
+    while len(est_m) < n_sesgo:
+        Yb, Xb, Zb = muestra(rng, aux.coefs)
         try:
-            rb = estimar(pd.DataFrame(y, index=Y.index, columns=Y.columns), X, p, tam_fed, horizonte)
+            est_m.append(VAR(Yb, exog=Xb).fit(maxlags=p, ic=None, trend="c").coefs)
+            est_a.append(VAR(Zb, exog=Xa).fit(maxlags=p, ic=None, trend="c").coefs)
+        except (np.linalg.LinAlgError, ValueError):
+            continue
+    sesgo = np.mean(est_m, axis=0) - res.coefs
+    aux_c, _ = f25.corregir_sesgo(aux.coefs, np.mean(est_a, axis=0) - aux.coefs)
+    coefs_c, _ = f25.corregir_sesgo(res.coefs, sesgo)
+    fed_cols = [c for c in X.columns if c.startswith("dFED")]
+    resp_c = respuesta_fed(coefs_c, res.params.loc[fed_cols].values.T, tam_fed, horizonte)
+    filas, fallidas = [], 0
+    while len(filas) < n_boot:
+        Yb, Xb, _ = muestra(rng, aux_c)
+        try:
+            rb = estimar(Yb, Xb, p, tam_fed, horizonte)
         except (np.linalg.LinAlgError, ValueError):
             fallidas += 1
             continue
-        fila = {"rho_bohn": rb["rho"], **{f"deuda_a_{c}": rb["res"].params.loc["deuda_l1", c] for c in ENDOG}}
+        c, _ = f25.corregir_sesgo(rb["res"].coefs, sesgo)
+        resp = respuesta_fed(c, rb["res"].params.loc[fed_cols].values.T, tam_fed, horizonte)
+        fila = {"rho_bohn": rb["rho"], **{f"deuda_a_{v}": rb["res"].params.loc["deuda_l1", v] for v in ENDOG}}
         for h in range(horizonte + 1):
-            for j, c in enumerate(ENDOG):
-                fila[f"fed_{c}_h{h}"] = rb["fed"][h, j]
+            for jj, v in enumerate(ENDOG):
+                fila[f"fed_{v}_h{h}"] = resp[h, jj]
         filas.append(fila)
-    return pd.DataFrame(filas), fallidas
+    return pd.DataFrame(filas), fallidas, resp_c
 
 
 def diagnosticos(res) -> pd.DataFrame:
@@ -233,16 +264,19 @@ def main() -> None:
     fed = pd.read_csv(DATOS / "procesados" / "tasa_fed_trimestral_1996_2025.csv")["tasa_politica_fed"]
     tam_fed = float(fed.diff().std(ddof=1))  # un desvio estandar de dFED
 
-    p, p_bic, tabla_p = elegir_rezagos(Y, X)
+    p, p_aic, tabla_p = elegir_rezagos(Y, X)
     Y, X = recortar(Y, X, p)
     base = estimar(Y, X, p, tam_fed, a.horizonte)
-    boot, fallidas = bootstrap(Y, X, base, p, tam_fed, a.horizonte, a.n_boot)
+    archivo, col = SERIES_DEUDA[a.deuda]
+    deuda = pd.read_csv(DATOS / "procesados" / archivo, parse_dates=["Date"], index_col="Date")[col]
+    boot, fallidas, resp_c = bootstrap(Y, X, base, p, tam_fed, a.horizonte, a.n_boot, deuda)
+    base["fed"] = resp_c  # respuesta con coeficientes corregidos por sesgo (Kilian, 1998)
     q = boot.quantile([0.05, 0.5, 0.95]).T
     q.columns = ["p05", "p50", "p95"]
 
     TABLAS.mkdir(parents=True, exist_ok=True)
     pre = f"fase24_{a.deuda}"
-    tabla_p.assign(p_aic=p_bic, p_elegido=p).to_csv(TABLAS / f"{pre}_rezagos.csv", index=False)
+    tabla_p.assign(p_aic=p_aic, p_elegido=p).to_csv(TABLAS / f"{pre}_rezagos.csv", index=False)
     pd.DataFrame(base["S"], index=ENDOG, columns=[f"shock_{c}" for c in ENDOG]).to_csv(TABLAS / f"{pre}_S.csv")
     pd.DataFrame(base["fed"], columns=ENDOG).rename_axis("trimestre").to_csv(TABLAS / f"{pre}_respuesta_fed.csv")
     q.to_csv(TABLAS / f"{pre}_bootstrap.csv")
@@ -251,7 +285,7 @@ def main() -> None:
     with open(TABLAS / f"{pre}_resumen_var.txt", "w", encoding="utf-8") as fh:
         fh.write(str(base["res"].summary()))
 
-    print(f"SVARX deuda={a.deuda} muestra efectiva {Y.index[p].date()}-{Y.index[-1].date()} n={len(Y) - p} p={p} (AIC={p_bic}) shock FED={tam_fed:.4f} pp")
+    print(f"SVARX deuda={a.deuda} muestra efectiva {Y.index[p].date()}-{Y.index[-1].date()} n={len(Y) - p} p={p} (AIC={p_aic}) shock FED={tam_fed:.4f} pp")
     print(f"Quiebres: {[str(f.date()) for f in quiebres]} | bootstrap validas={len(boot)} fallidas={fallidas}")
     print(f"Reaccion fiscal (Bohn) rho={base['rho']:.4f} p={base['rho_p']:.4f} | bootstrap 90%: "
           f"[{q.loc['rho_bohn','p05']:.4f}, {q.loc['rho_bohn','p95']:.4f}]")

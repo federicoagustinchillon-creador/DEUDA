@@ -32,6 +32,7 @@ FILAS = {
     "Noninterest revenues": "srd_ingresos_no_intereses",
     "Noninterest expenditures": "srd_gastos_no_intereses",
     "Contribution of residual": "srd_residuo",
+    "Relative inflation": "srd_inflacion_relativa",
     "Gross financing needs": "srd_necesidades_financiamiento_brutas",
     "Real GDP growth (percent)": "srd_pib_real_crecimiento",
     "Inflation (GDP deflator; percent)": "srd_inflacion_deflactor",

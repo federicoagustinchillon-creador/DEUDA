@@ -84,7 +84,11 @@ def _epigrafe_corto(tex: str) -> str:
     return "".join(salida) + tex[i:]
 
 
-def _pandoc(md: str) -> str:
+def _pandoc(md: str, cursiva: bool = True) -> str:
+    """Convierte a LaTeX; con cursiva=True pone en cursiva los términos en inglés (no en las referencias)."""
+    if cursiva:
+        from cursivas_ingles import cursivas
+        md = cursivas(md)
     r = subprocess.run(
         ["pandoc", "-f", "markdown-auto_identifiers", "-t", "latex", "--top-level-division=chapter"],
         input=md, capture_output=True, text=True, encoding="utf-8", check=True,
@@ -109,7 +113,7 @@ def generar() -> list[Path]:
     refs = (BASE / "referencias_y_notas.md").read_text(encoding="utf-8")
     refs = refs[: refs.index("# Notas para el grupo")]
     refs = re.sub(r"^# Referencias\s*\n", "", refs)
-    tex = _pandoc(refs).replace("\\begin{itemize}", "\\begin{itemize}[label={},leftmargin=1.27cm,itemindent=-1.27cm,itemsep=0.6\\baselineskip]")
+    tex = _pandoc(refs, cursiva=False).replace("\\begin{itemize}", "\\begin{itemize}[label={},leftmargin=1.27cm,itemindent=-1.27cm,itemsep=0.6\\baselineskip]")
     (CAPS / "10_referencias.tex").write_text(tex, encoding="utf-8")
     escritos.append(CAPS / "10_referencias.tex")
     return escritos
