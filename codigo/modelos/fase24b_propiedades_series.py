@@ -9,11 +9,11 @@ propuesto en la metodologia de Paez, 2026):
      rechaza; en los demas casos el resultado es ambiguo.
   2. Zivot y Andrews (1992): raiz unitaria con un quiebre endogeno en el intercepto, para los casos
      en que un quiebre puede hacer que ADF no rechace por error (Perron, 1989).
-  3. Bai y Perron (2003): quiebres multiples en la media de la deuda consolidada neta, con el numero
+  3. Bai y Perron (2003): quiebres multiples en la media de la deuda federal bruta, con el numero
      de quiebres elegido por BIC. Son los que entran como variables binarias en el SVARX.
   4. Johansen: prueba de la traza sobre las variables en niveles de la muestra de estimacion.
 
-Las series son las de la muestra 1996-2025 tal como entran al modelo (fase24.cargar_datos).
+Las series son las de la muestra tal como entran al modelo (fase24.cargar_datos).
 
 Uso: python codigo/modelos/fase24b_propiedades_series.py
 Salida: resultados/tablas/fase24b_raiz_unitaria.csv, fase24b_bai_perron.csv, fase24b_johansen.csv
@@ -46,13 +46,15 @@ def clasificar(p_adf: float, p_kpss: float) -> str:
 
 
 def main() -> None:
-    Y, X, quiebres = f24.cargar_datos("neta", 2)
+    Y, X, quiebres = f24.cargar_datos("federal", 2)
+    _, Xc, _ = f24.cargar_datos("consolidada", 2)
     series = {
         "Resultado primario": Y["pb_pib"],
         "Crecimiento real": Y["crec"],
         "EMBI+": Y["EMBI"],
         "TCRM": Y["TCRM"],
-        "Deuda consolidada neta": X["deuda_l1"].shift(-1).dropna(),
+        "Deuda federal bruta": X["deuda_l1"].shift(-1).dropna(),
+        "Deuda consolidada con el BCRA": Xc["deuda_l1"].shift(-1).dropna(),
         "Tasa de la FED (nivel)": X["dFED_l0"].cumsum(),
         "VIX": X["VIX"],
     }
@@ -74,7 +76,9 @@ def main() -> None:
     raiz = pd.DataFrame(filas)
     raiz.to_csv(TABLAS / "fase24b_raiz_unitaria.csv", index=False)
 
-    deuda = series["Deuda consolidada neta"]
+    # Misma serie y mismo periodo (1996-2025) que usa fase24.cargar_datos para fechar los quiebres.
+    archivo, col = f24.SERIES_DEUDA["federal"]
+    deuda = pd.read_csv(f24.DATOS / "procesados" / archivo, parse_dates=["Date"], index_col="Date")[col].dropna()
     bp = bai_perron_breaks(deuda)
     bp["bic_por_m"].assign(m_optimo=bp["m_optimo"]).to_csv(TABLAS / "fase24b_bai_perron.csv", index=False)
 

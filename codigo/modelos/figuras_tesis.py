@@ -5,8 +5,8 @@ Figuras de los Capitulos 5, 6 y 7 de la tesis, todas generadas desde archivos de
 resultados del repositorio (ningun valor tipeado a mano, salvo los dos puntos de control del FMI
 con su fuente). El abanico (figura 6.2) lo genera fig_abanico_deuda.py.
 
-  fig5_1  Deuda consolidada 1996-2025: bruta, neta a valor libros y neta nominal (principal),
-          con los valores del FMI (2025, anexo II, cuadro 2) como control.
+  fig5_1  Deuda federal bruta (principal) y consolidada con el BCRA 1996-2025, con los valores
+          del FMI (2026, anexo II, cuadro 2) como control.
   fig5_2  Variables endogenas del SVARX con los quiebres de Bai-Perron.
   fig5_3  Tasa de politica de la FED (con la tasa sombra de Wu y Xia) y VIX.
   fig6_1  Respuestas al impulso a +1 desvio de la tasa de la FED, con bandas de 90%.
@@ -15,7 +15,7 @@ con su fuente). El abanico (figura 6.2) lo genera fig_abanico_deuda.py.
   fig6_4  Probabilidad de no estabilizacion por especificacion, 2031 y 2035, contra los umbrales del FMI.
   fig6_5  Contraste de suficiencia del superavit (H1a).
   fig7_1  Abanicos con shocks del SVARX y con shocks a la manera del FMI.
-  fig7_2  Impulsores historicos anuales de la deuda (1997-2025).
+  fig7_2  Impulsores historicos anuales de la deuda (2000-2025).
 
 Uso: python codigo/modelos/figuras_tesis.py
 Salida: tesis/figuras/*.png
@@ -47,8 +47,10 @@ plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.righ
                      "axes.grid": True, "grid.color": "#dddddd", "grid.linewidth": 0.5,
                      "legend.frameon": False, "figure.dpi": 200})
 
-# FMI (2025), CR 25/95, anexo II, cuadro 2: deuda consolidada neta del sector publico (% PIB).
-CONTROL_FMI = {2023: 110.8, 2024: 51.5}
+# FMI (2026), CR 26/105, anexo II, cuadro 2 (% PIB): linea 1, deuda federal bruta, y linea 5,
+# deuda del sector publico consolidado con el BCRA (neta de tenencias intra sector publico).
+CONTROL_FEDERAL = {2023: 154.6, 2024: 84.7, 2025: 80.3}
+CONTROL_CONSOLIDADA = {2023: 111.1, 2024: 53.6, 2025: 52.1}
 
 
 def leer(rel: str) -> pd.DataFrame:
@@ -63,21 +65,20 @@ def guardar(fig, nombre: str) -> None:
 
 
 def fig5_1() -> None:
-    b = leer("procesados/deuda_consolidada_1996_2025.csv")
     n = leer("procesados/deuda_consolidada_neta_nominal_1996_2025.csv")
     fig, ax = plt.subplots(figsize=(7, 3.6))
-    ax.plot(b.index, b["deuda_consolidada_pib"], color=GRIS, lw=1.2, label="Consolidada bruta (SPNF + pasivos del BCRA)")
-    ax.plot(n.index, n["deuda_consolidada_neta_libros_pib"], color=AZUL, lw=1.0, ls="--", label="Consolidada neta, Letras a valor libros")
-    ax.plot(n.index, n["deuda_consolidada_neta_nominal_piso_pib"], color=AZUL, lw=1.8, label="Consolidada neta, Letras a valor nominal (principal)")
-    ax.scatter([pd.Timestamp(f"{a}-12-31") for a in CONTROL_FMI], list(CONTROL_FMI.values()), color=ROJO,
-               zorder=5, s=22, label="FMI (2025), consolidada neta")
+    ax.plot(n.index, n["bruta_federal_pib"], color=AZUL, lw=1.8, label="Federal bruta (perímetro del FMI, principal)")
+    ax.plot(n.index, n["deuda_consolidada_neta_nominal_pib"], color=GRIS, lw=1.3, label="Consolidada con el BCRA (extensión)")
+    for ctrl, color, etiqueta in ((CONTROL_FEDERAL, ROJO, "FMI (2026), federal bruta"),
+                                  (CONTROL_CONSOLIDADA, VERDE, "FMI (2026), consolidada")):
+        ax.scatter([pd.Timestamp(f"{a}-12-31") for a in ctrl], list(ctrl.values()), color=color, zorder=5, s=20, label=etiqueta)
     ax.set_ylabel("% del PIB")
     ax.legend(fontsize=7.5, loc="upper left")
-    guardar(fig, "fig5_1_deuda_consolidada_1996_2025.png")
+    guardar(fig, "fig5_1_deuda_1996_2025.png")
 
 
 def fig5_2() -> None:
-    Y, _, quiebres = f24.cargar_datos("neta", 2)
+    Y, _, quiebres = f24.cargar_datos("federal", 2)
     titulos = {"pb_pib": "Resultado primario (% del PIB, trimestral anualizado)",
                "crec": "Crecimiento real trimestral (%)", "EMBI": "EMBI+ Argentina (puntos básicos)",
                "TCRM": "Tipo de cambio real multilateral (índice)"}
@@ -87,8 +88,8 @@ def fig5_2() -> None:
         for q in quiebres:
             ax.axvline(q, color=ROJO, lw=0.7, ls=":")
         ax.set_title(titulos[c], fontsize=8)
-    fig.text(0.5, 0.005, "Líneas punteadas: quiebres estructurales de Bai y Perron (2001T4, 2006T2, 2018T1)",
-             ha="center", fontsize=7)
+    fechas = ", ".join(f"{q.year}T{q.quarter}" for q in quiebres)
+    fig.text(0.5, 0.005, f"Líneas punteadas: quiebres estructurales de Bai y Perron ({fechas})", ha="center", fontsize=7)
     guardar(fig, "fig5_2_variables_endogenas.png")
 
 
@@ -107,15 +108,15 @@ def fig5_3() -> None:
 
 
 def fig6_1() -> None:
-    q = pd.read_csv(TABLAS / "fase24_neta_bootstrap.csv", index_col=0)
-    punto = pd.read_csv(TABLAS / "fase24_neta_respuesta_fed.csv", index_col=0)
+    q = pd.read_csv(TABLAS / "fase24_federal_bootstrap.csv", index_col=0)
+    punto = pd.read_csv(TABLAS / "fase24_federal_respuesta_fed.csv", index_col=0)
     titulos = {"pb_pib": "Resultado primario (pp del PIB)", "crec": "Crecimiento real (pp)",
                "EMBI": "EMBI+ (puntos básicos)", "TCRM": "TCRM (índice)"}
     fig, axs = plt.subplots(2, 2, figsize=(7, 4.6), sharex=True)
     for ax, c in zip(axs.flat, f24.ENDOG):
         filas = [f"fed_{c}_h{h}" for h in punto.index]
         ax.fill_between(punto.index, q.loc[filas, "p05"], q.loc[filas, "p95"], color=AZUL, alpha=0.2, lw=0,
-                        label="Banda de 90% (bootstrap)")
+                        label="Intervalo de 90% (Hall)")
         ax.plot(punto.index, punto[c], color=AZUL, lw=1.5, label="Estimación puntual")
         ax.axhline(0, color="black", lw=0.6)
         ax.set_title(titulos[c], fontsize=8)
@@ -132,11 +133,12 @@ def _intervalo(t: pd.DataFrame, fila: str, escala: float = 1.0) -> tuple[float, 
 
 
 def fig6_3() -> None:
-    t = pd.read_csv(TABLAS / "fase25_neta_resumen.csv", index_col=0)
-    bloques = {"vshare_fiscal": "Fiscal", "vshare_actividad": "Actividad", "vshare_cambiario_y_riesgo": "Cambiario y de riesgo"}
+    t = pd.read_csv(TABLAS / "fase25_federal_resumen.csv", index_col=0)
+    bloques = {"vshare_fiscal": "Fiscal", "vshare_actividad": "Actividad", "vshare_cambiario_y_riesgo": "Cambiario y\nde riesgo",
+               "vshare_externo": "Externo\n(FED y VIX)"}
     vals = [_intervalo(t, c) for c in bloques]
     fig, ax = plt.subplots(figsize=(6, 3))
-    ax.bar(list(bloques.values()), [v[0] for v in vals], color=[GRIS, GRIS, AZUL],
+    ax.bar(list(bloques.values()), [v[0] for v in vals], color=[ROJO, GRIS, AZUL, AZUL],
            yerr=[[v[1] for v in vals], [v[2] for v in vals]], capsize=4, error_kw={"lw": 0.8})
     for k, v in enumerate(vals):
         ax.text(k, 2, f"{v[0]:.1f}%".replace(".", ","), ha="center", color="white", fontsize=9, fontweight="bold")
@@ -146,9 +148,9 @@ def fig6_3() -> None:
 
 
 ESPECIFICACIONES = {
-    "neta": "Principal", "neta_libros": "Neta en\nlibros", "bruta": "Bruta", "tesoro": "Solo\nTesoro",
-    "neta_dom": "Tasas\nen pesos", "neta_sin_retro": "Sin retro-\nalimentación", "neta_sin_default": "Sin shocks\ndel default",
-    "neta_cr2595": "Escenario\nFMI 2025",
+    "federal": "Principal", "consolidada": "Consolidada\ncon el BCRA", "federal_dom": "Tasas\nen pesos",
+    "federal_sin_retro": "Sin retro-\nalimentación", "federal_p3": "Tres\nrezagos", "federal_sin_default": "Sin shocks\ndel default",
+    "federal_desde2004": "Datos\ndesde 2004", "federal_cr2595": "Escenario\nFMI 2025", "federal_kilian": "Corrección\nde Kilian",
 }
 
 
@@ -158,7 +160,7 @@ def fig6_4() -> None:
     x = np.arange(len(specs) + 1)
     for anio, color, dx in ((2031, AZUL, -0.17), (2035, GRIS, 0.17)):
         vals = [_intervalo(pd.read_csv(TABLAS / f"fase25_{s}_resumen.csv", index_col=0), f"base_p_noest_{anio}", 100) for s in specs]
-        fmi = pd.read_csv(TABLAS / "fase25_neta_fmi_resumen.csv", index_col=0)["valor"]
+        fmi = pd.read_csv(TABLAS / "fase25_federal_fmi_resumen.csv", index_col=0)["valor"]
         vals.append((100 * fmi[f"p_noest_{anio}"], 0.0, 0.0))
         ax.bar(x + dx, [v[0] for v in vals], width=0.34, color=color, capsize=3, error_kw={"lw": 0.8},
                yerr=[[v[1] for v in vals], [v[2] for v in vals]],
@@ -173,13 +175,13 @@ def fig6_4() -> None:
 
 
 def fig6_5() -> None:
-    t = pd.read_csv(TABLAS / "fase25_neta_suficiencia.csv")
+    t = pd.read_csv(TABLAS / "fase25_federal_suficiencia.csv")
     pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib"]
-    maximo = float(pb.max())
+    maximo = float(pb[pb.index.quarter == 4].loc["1999":].max())  # anio calendario, definicion del FMI
     fig, ax = plt.subplots(figsize=(6.5, 3.4))
     ax.plot(t["pb_2031"], 100 * t["p_noest_2031"], color=AZUL, lw=1.8, marker="o", ms=3, label="Probabilidad de no estabilización en 2031")
     ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026): 1%")
-    ax.axvline(maximo, color=GRIS, lw=1.0, ls=":", label=f"Máximo histórico 1996-2025: {maximo:.1f}%".replace(".", ","))
+    ax.axvline(maximo, color=GRIS, lw=1.0, ls=":", label=f"Máximo anual 1999-2025: {maximo:.1f}%".replace(".", ","))
     ax.axvline(float(t["pb_2031"].iloc[0]), color=AZUL, lw=0.8, ls=":", label="Escenario base del FMI")
     ax.set_xlabel("Resultado primario en 2031 (% del PIB)")
     ax.set_ylabel("%")
@@ -188,8 +190,8 @@ def fig6_5() -> None:
 
 
 def fig7_1() -> None:
-    a = pd.read_csv(TABLAS / "fase25_neta_fanchart.csv", index_col="anio")
-    b = pd.read_csv(TABLAS / "fase25_neta_fmi_fanchart.csv", index_col="anio")
+    a = pd.read_csv(TABLAS / "fase25_federal_fanchart.csv", index_col="anio")
+    b = pd.read_csv(TABLAS / "fase25_federal_fmi_fanchart.csv", index_col="anio")
     fig, ax = plt.subplots(figsize=(7, 3.8))
     ax.fill_between(b.index, b["p5"], b["p95"], color=GRIS, alpha=0.25, lw=0, label="Shocks a la manera del FMI, p5-p95")
     ax.plot(b.index, b["p50"], color=GRIS, lw=1.4, ls="--", label="Shocks a la manera del FMI, mediana")
@@ -202,7 +204,7 @@ def fig7_1() -> None:
 
 
 def fig7_2() -> None:
-    d = pd.read_csv(TABLAS / "fase25_impulsores_historicos_1997_2025.csv", index_col=0)
+    d = pd.read_csv(TABLAS / "fase25_federal_impulsores_historicos.csv", index_col=0)
     titulos = {"g": "Crecimiento real (%)", "r": "Tasa real efectiva (%)", "z": "Depreciación real (%)",
                "pb": "Resultado primario (% del PIB)"}
     fig, axs = plt.subplots(2, 2, figsize=(7, 4.6), sharex=True)
@@ -211,7 +213,7 @@ def fig7_2() -> None:
         ax.axhline(d[c].mean(), color="black", lw=0.8, ls="--")
         ax.set_title(titulos[c], fontsize=8)
         ax.grid(axis="x", visible=False)
-    fig.text(0.5, 0.005, "Línea punteada: media 1997-2025. En rojo, 2002.", ha="center", fontsize=7)
+    fig.text(0.5, 0.005, f"Línea punteada: media {d.index.min()}-{d.index.max()}. En rojo, 2002.", ha="center", fontsize=7)
     guardar(fig, "fig7_2_impulsores_historicos.png")
 
 

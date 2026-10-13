@@ -1,0 +1,8 @@
+prueba,valor
+Portmanteau (12 rezagos),0.29586031847156613
+Normalidad multivariada (p-valor),0.0
+Estable (1 = si),1.0
+ARCH-LM(4) pb_pib (p-valor),0.9876683533649953
+ARCH-LM(4) crec (p-valor),0.8680630598652475
+ARCH-LM(4) EMBI (p-valor),0.9980501707104167
+ARCH-LM(4) TCRM (p-valor),0.11417223852543941

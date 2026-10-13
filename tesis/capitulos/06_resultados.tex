@@ -1,71 +1,56 @@
 \chapter{Resultados}
 
 Todos los resultados de este capítulo provienen de la misma muestra
-efectiva, 1998T2-2025T4 (111 trimestres), y del escenario base del
+efectiva, 2000T3-2025T4 (102 trimestres), y del escenario base del
 análisis de sostenibilidad más reciente del FMI (2026). La
-especificación principal usa la deuda consolidada neta con las Letras
-Intransferibles a valor nominal, que parte de 61,0\% del PIB en
-diciembre de 2025. Los intervalos son de 90\% y salen del
-\emph{bootstrap} descripto en la sección 4.5.
+especificación principal mide la deuda bruta del gobierno federal, que
+parte de 80,3\% del PIB a fines de 2025, como en el FMI. Los intervalos
+son de 90\% y salen del \emph{bootstrap} descripto en la sección 4.5.
 
 \section{El SVARX estimado}
 
-\textbf{Propiedades de las series.} Las pruebas de raíz unitaria no
-clasifican con claridad la mayoría de las series: el resultado primario
-se comporta como una serie con raíz unitaria, el VIX como estacionaria,
-y en el resto ADF y KPSS no coinciden (Apéndice, sección A.2). Es lo
-esperable en series cortas con cambios de régimen (Perron, 1989), y es
-la razón por la que el VAR se estima en niveles. La prueba de Zivot y
-Andrews (1992) rechaza la raíz unitaria del TCRM cuando admite un
-quiebre, que ubica en 2001T4, el mismo trimestre que el primero de los
-tres quiebres que el procedimiento de Bai y Perron (2003) encuentra en
-la deuda (2001T4, 2006T2 y 2018T1). Para la propia deuda, en cambio,
-Zivot y Andrews ubican el quiebre en 2005T1 sin rechazar la raíz
-unitaria. La prueba de Johansen no rechaza la ausencia de cointegración
-entre las variables en niveles.
+\textbf{Propiedades de las series.} El resultado primario se comporta
+como una serie con raíz unitaria, el crecimiento y el VIX como
+estacionarias, y en el resto ADF y KPSS no coinciden (Apéndice, sección
+A.2), lo esperable en series cortas con cambios de régimen (Perron,
+1989). El procedimiento de Bai y Perron (2003) encuentra quiebres en la
+deuda federal en 2001T4, 2006T2 y 2018T1; Zivot y Andrews (1992) ubican
+uno en 2005T1, sin rechazar la raíz unitaria.
 
-\textbf{Rezagos y diagnósticos.} El modelo usa tres rezagos (sección
-4.5); el autovalor de mayor módulo de la matriz compañera es 0,96, de
-modo que el sistema es estable. La estimación central de la simulación
-usa los coeficientes corregidos por sesgo (sección 4.5), cuyo autovalor
-máximo es 0,9998, prácticamente una raíz unitaria. Con esa dinámica los
-\emph{shocks} son muy persistentes, lo que eleva las probabilidades de
-no estabilización. Como las réplicas del \emph{bootstrap} usan una
-corrección menor, los intervalos percentiles no quedan centrados en la
-estimación central, que se ubica cerca de su límite superior. La prueba
-de Portmanteau con 12 rezagos rechaza la ausencia de autocorrelación al
-5\% (p = 0,036). Los residuos no son normales (p \textless{} 0,001), lo
-que justifica remuestrear \emph{shocks} históricos en lugar de suponer
-normalidad. La prueba ARCH-LM (Engle, 1982) con cuatro rezagos no
-detecta heterocedasticidad condicional en ninguna ecuación (p entre 0,87
-y 0,99).
+\textbf{Rezagos y diagnósticos.} Con dos rezagos (sección 4.5), el
+sistema es estable: el autovalor máximo es 0,849, y su mediana entre las
+réplicas del \emph{bootstrap}, 0,818. Los residuos no muestran
+autocorrelación ni heterocedasticidad condicional al 5\% (ARCH-LM;
+Engle, 1982), pero rechazan la normalidad multivariada (Jarque y Bera,
+1987; p = 0,000), lo que justifica remuestrear \emph{shocks} históricos
+(Apéndice, sección A.4).
 
 \textbf{Reacción fiscal.} El coeficiente de la deuda rezagada en la
-ecuación del resultado primario es 0,051, con un intervalo de {[}0,010;
-0,103{]}. Es el efecto de impacto de la deuda del trimestre anterior
-sobre el resultado primario trimestral, en un VAR con tres rezagos. Como
-el resultado primario depende también de sus propios rezagos
-(coeficientes de 0,340, 0,374 y 0,015 en la estimación por mínimos
-cuadrados), el multiplicador de largo plazo es 0,051/(1 − 0,340 − 0,374
-− 0,015) ≈ 0,19. Es una estimación puntual: no se calculó su intervalo
-(Apéndice, sección A.6). El coeficiente de impacto casi no cambia con el
-perímetro de la deuda (Tabla 6.1).
+ecuación del resultado primario es el efecto de impacto de la deuda del
+trimestre anterior sobre el resultado primario trimestral. Como el
+resultado primario depende también de sus propios rezagos, el
+multiplicador de largo plazo es mayor (Tabla 6.1; Apéndice, sección
+A.6). Los dos son positivos, con intervalos que excluyen el cero, en los
+dos perímetros.
 
-\textbf{Tabla 6.1. Reacción fiscal según la serie de deuda}
+\textbf{Tabla 6.1. Reacción fiscal según el perímetro de la deuda}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Serie de deuda
+Perímetro
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Rezagos
+Impacto
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Reacción fiscal
+Intervalo de 90\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Largo plazo
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Intervalo de 90\%
 \end{minipage} \\
@@ -73,12 +58,10 @@ Intervalo de 90\%
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Consolidada neta, Letras a valor nominal (principal) & 3 & 0,051 &
-{[}0,010; 0,103{]} \\
-Consolidada neta, Letras a valor libros & 3 & 0,053 & {[}0,012;
-0,105{]} \\
-Consolidada bruta (Tesoro y BCRA) & 4 & 0,054 & {[}0,023; 0,099{]} \\
-Bruta del Tesoro, sin el BCRA & 4 & 0,057 & {[}0,024; 0,098{]} \\
+Deuda federal bruta (principal) & 0,0495 & {[}0,0099; 0,0799{]} & 0,167
+& {[}0,057; 0,296{]} \\
+Deuda consolidada con el BCRA (extensión) & 0,0620 & {[}0,0128;
+0,0889{]} & 0,249 & {[}0,059; 0,420{]} \\
 \end{longtable}
 }
 
@@ -88,56 +71,49 @@ El signo coincide con el que encuentran Celasun et al.~(2006) en su
 panel de economías emergentes. Una reacción positiva es condición
 suficiente para la solvencia en el sentido de Bohn (1998, 2005), pero no
 dice si alcanza para estabilizar la deuda frente a los \emph{shocks} que
-enfrenta; eso es lo que contrasta H1a.
+enfrenta.
 
 \textbf{Retroalimentación de la deuda.} La deuda rezagada entra en las
-cuatro ecuaciones del sistema (Favero y Giavazzi, 2007). Además del
-superávit primario, la deuda se asocia con el crecimiento del trimestre
-siguiente, con un intervalo de {[}0,010; 0,141{]}. Con el riesgo país,
-la estimación puntual es de 22 puntos básicos por punto de deuda, pero
-el intervalo, {[}-0,1; 48,6{]}, incluye el cero: con 111 trimestres no
-se puede afirmar que una deuda mayor eleve el EMBI+. Con el tipo de
-cambio real no hay relación.
+cuatro ecuaciones del sistema (Favero y Giavazzi, 2007). Fuera de la
+ecuación fiscal, ningún efecto se distingue del cero. Con el riesgo
+país, la estimación puntual es de 15,5 puntos básicos por punto de
+deuda, con un intervalo de {[}-4,2; 29,7{]}: con 102 trimestres no se
+puede afirmar que una deuda mayor eleve el EMBI+. El intervalo del
+crecimiento, {[}-0,0177; 0,0907{]}, también incluye el cero, y con el
+tipo de cambio real no hay relación.
 
 \textbf{Respuesta a la tasa de la FED.} Un aumento de un desvío estándar
-en la tasa de política de la FED (0,50 puntos) no produce respuestas
-sistemáticas de las variables domésticas (Figura 6.1). El EMBI+ sube 6
-puntos básicos en el trimestre del \emph{shock}, con un intervalo de
-{[}-110; 98{]}, y 28 puntos básicos a los dos años, con un intervalo de
-{[}-32; 55{]}. De las 84 respuestas estimadas (cuatro variables en 21
-horizontes), cinco tienen una banda que excluye el cero: el crecimiento
-en el trimestre del \emph{shock}, el resultado primario un trimestre
-después y el tipo de cambio real entre uno y tres trimestres después,
-que se aprecia levemente. Con bandas de 90\%, el azar ya produciría unas
-ocho exclusiones aunque la FED no tuviera ningún efecto, y los signos
-del crecimiento y del tipo de cambio real son los contrarios a los que
-predice la teoría. Con 111 trimestres y un \emph{shock} de magnitud
-acotada, el modelo no distingue los efectos indirectos de la FED del
-ruido.
+en la variación de la tasa de la FED (0,504 puntos) no produce
+respuestas sistemáticas de las variables domésticas (Figura 6.1). De las
+84 respuestas estimadas (cuatro variables en 21 horizontes), tres tienen
+un intervalo que excluye el cero, todas del TCRM, entre dos y cuatro
+trimestres después del \emph{shock}, y con signo de apreciación real.
+Con intervalos de 90\%, el azar produciría más exclusiones aunque la FED
+no tuviera efecto, y el signo contradice la teoría. El modelo no
+distingue los efectos indirectos de la FED del ruido.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Respuestas al impulso ante una suba de la tasa de la FED. Aumento de un desvío estándar (0,50 puntos porcentuales) de la tasa de política; deuda consolidada neta, tres rezagos; coeficientes corregidos por sesgo; bandas de 90\% del bootstrap (1.000 réplicas).}]{fig6_1_respuesta_fed.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Respuestas al impulso ante una suba de la tasa de la FED. Aumento de un desvío estándar (0,504 puntos porcentuales) en la variación trimestral de la tasa; deuda federal bruta, dos rezagos, parámetros de mínimos cuadrados e intervalos de 90\% del bootstrap. Fuente: elaboración propia.}]{fig6_1_respuesta_fed.png}}
 \caption[Respuestas al impulso ante una suba de la tasa de la FED]{Respuestas al impulso ante una suba de la tasa de la FED.
-Aumento de un desvío estándar (0,50 puntos porcentuales) de la tasa de
-política; deuda consolidada neta, tres rezagos; coeficientes corregidos
-por sesgo; bandas de 90\% del \emph{bootstrap} (1.000 réplicas).}
+Aumento de un desvío estándar (0,504 puntos porcentuales) en la
+variación trimestral de la tasa; deuda federal bruta, dos rezagos,
+parámetros de mínimos cuadrados e intervalos de 90\% del
+\emph{bootstrap}. Fuente: elaboración propia.}
 \end{figure}
 
 \section{El gráfico de abanico}
 
-La Tabla 6.2 resume la distribución de la deuda simulada (Figura 6.2).
-La mediana baja de 61,0\% del PIB en 2025 a 39,5\% en 2031 y a 29,9\% en
-2035, prácticamente la senda determinista del escenario base aplicada al
-punto de partida de esta tesis (40,2\% y 30,3\%). La caída la determina
-el escenario del FMI (2026, cuadro 6): un superávit primario que sube de
-1,4\% del PIB en 2026 a 2,3\% desde 2029 y una tasa de interés efectiva
-de entre 2,6\% y 5,1\%, mientras el deflactor del PIB pasa de 30,2\% en
-2026 a 7,5\% desde 2029. La inflación relativa, que es la valuación de
-la deuda en moneda extranjera por la depreciación nominal del escenario,
-suma en sentido contrario, sobre todo en 2026 y 2027.
+La Tabla 6.2 y la Figura 6.2 muestran la distribución de la deuda
+simulada. La mediana baja de 80,3\% del PIB en 2025 a 52,6\% en 2031 y a
+41,1\% en 2035, cerca de la senda determinista del escenario base
+(53,9\% y 42,7\%). La caída la determina el escenario del FMI (2026,
+cuadro 6), con superávit primario sostenido y una tasa de interés
+efectiva menor que la inflación. La distribución es asimétrica hacia
+arriba: en 2035 la deuda media es 44,6\%, por encima de la mediana, y el
+percentil 95 supera el punto de partida.
 
-\textbf{Tabla 6.2. Deuda consolidada neta simulada (\% del PIB),
+\textbf{Tabla 6.2. Deuda federal bruta simulada (\% del PIB),
 percentiles}
 
 {\def\LTcaptype{none} % do not increment counter
@@ -148,11 +124,11 @@ Año & p5 & p25 & Mediana & p75 & p95 \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-2026 & 49,7 & 53,3 & 55,9 & 59,0 & 65,2 \\
-2028 & 39,6 & 45,4 & 49,7 & 54,7 & 63,3 \\
-2031 & 23,4 & 32,7 & 39,5 & 46,8 & 58,7 \\
-2033 & 15,0 & 26,2 & 34,7 & 43,9 & 58,5 \\
-2035 & 6,2 & 19,5 & 29,9 & 41,5 & 61,4 \\
+2026 & 65,0 & 68,8 & 72,3 & 76,7 & 90,6 \\
+2028 & 50,6 & 59,3 & 64,7 & 71,1 & 85,0 \\
+2031 & 31,8 & 43,6 & 52,6 & 62,7 & 80,1 \\
+2033 & 22,5 & 35,8 & 46,8 & 59,5 & 82,6 \\
+2035 & 13,7 & 28,1 & 41,1 & 57,1 & 87,4 \\
 \end{longtable}
 }
 
@@ -160,67 +136,30 @@ Fuente: elaboración propia. Estimación central, 20.000 trayectorias.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (\% del PIB). Escenario base del FMI (2026) con shocks estructurales del SVARX; estimación central con parámetros corregidos por sesgo y 20.000 trayectorias.}]{fig6_2_abanico_deuda_neta.png}}
-\caption[Gráfico de abanico de la deuda consolidada neta simulada, 2025-2035 (\% del PIB)]{Gráfico de abanico de la deuda consolidada neta simulada,
+\pandocbounded{\includegraphics[keepaspectratio,alt={Gráfico de abanico de la deuda federal bruta simulada, 2025-2035 (\% del PIB). Escenario base del FMI (2026) con shocks estructurales del SVARX y variables externas simuladas; estimación central con parámetros de mínimos cuadrados y 20.000 trayectorias. La línea discontinua es la senda base del FMI. Fuente: elaboración propia.}]{fig6_2_abanico_deuda.png}}
+\caption[Gráfico de abanico de la deuda federal bruta simulada, 2025-2035 (\% del PIB)]{Gráfico de abanico de la deuda federal bruta simulada,
 2025-2035 (\% del PIB). Escenario base del FMI (2026) con \emph{shocks}
-estructurales del SVARX; estimación central con parámetros corregidos
-por sesgo y 20.000 trayectorias.}
+estructurales del SVARX y variables externas simuladas; estimación
+central con parámetros de mínimos cuadrados y 20.000 trayectorias. La
+línea discontinua es la senda base del FMI. Fuente: elaboración propia.}
 \end{figure}
 
-El ancho del abanico entre los percentiles 5 y 95 es de 35,3 puntos en
-2031, con un intervalo de {[}19,1; 37,6{]}. El del FMI para la deuda
-federal bruta es 71,5 (FMI, 2026, cuadro 7). El Capítulo 7 analiza esta
-diferencia.
+El ancho del abanico entre los percentiles 5 y 95 es de 48,3 puntos en
+2031, con un intervalo de {[}39,9; 63,1{]}. El del FMI para la misma
+deuda es 71,5 (FMI, 2026, cuadro 7). El Capítulo 7 analiza por qué un
+abanico más angosto convive con una probabilidad de no estabilización
+mayor.
 
 \section{Contraste de H1a}
 
 H1a sostiene que el superávit primario, por sí solo, no basta para
 estabilizar la deuda, porque la condicionan también el crecimiento, el
-tipo de cambio real y el riesgo país.
-
-\textbf{Suficiencia del superávit.} Con el superávit del escenario base
-(1,4\% del PIB en 2026 y 2,3\% desde 2029), la probabilidad de que la
-deuda no se estabilice en 2031 es de 25,2\%. El contraste desplaza en la
-misma magnitud el resultado primario de todos los años de 2026 a 2035, y
-la Figura 6.3 muestra cómo baja la probabilidad de 2031 a medida que
-crece ese desplazamiento. Para llevarla al 1\%, que es la estimación
-puntual del FMI para Argentina (FMI, 2026), el desplazamiento tiene que
-ser de alrededor de 4,75 puntos: un superávit primario de 6,15\% del PIB
-en 2026 que sube a 7,05\% en 2031. El máximo del Sector Público Nacional
-en 1996-2025 es 3,6\% del PIB, la suma de los cuatro trimestres a
-diciembre de 2004, que incluye las rentas de la propiedad; el máximo de
-la suma móvil de cuatro trimestres es 3,93\% (2004T3), y sin rentas de
-la propiedad es 3,29\%. Con un superávit de 3,6\% en 2031, la
-probabilidad de no estabilización sería de alrededor de 15\%. Con este
-criterio, H1a queda respaldada: ningún superávit dentro del rango
-observado en tres décadas lleva la probabilidad a la estimación del FMI.
-
-En 2035 la probabilidad no baja de manera monótona: cae hasta 1,15\% con
-un desplazamiento de 4,5 puntos y vuelve a subir, hasta 1,93\% con 6,0
-puntos. Con superávits tan altos la deuda queda cerca de cero, y la
-métrica, que se evalúa año por año, se activa con \emph{shocks}
-pequeños.
-
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Contraste de suficiencia del superávit. Probabilidad de no estabilización en 2031 según el resultado primario de 2031, con el resultado primario de todos los años del escenario base del FMI (2026) desplazado en la misma magnitud. Estimación central, 10.000 trayectorias.}]{fig6_5_suficiencia_superavit.png}}
-\caption[Contraste de suficiencia del superávit]{Contraste de suficiencia del superávit. Probabilidad de no
-estabilización en 2031 según el resultado primario de 2031, con el
-resultado primario de todos los años del escenario base del FMI (2026)
-desplazado en la misma magnitud. Estimación central, 10.000
-trayectorias.}
-\end{figure}
-
-\textbf{De dónde viene el riesgo.} La Tabla 6.3 descompone la varianza
-de la deuda simulada en 2035 según el bloque de \emph{shocks} (Figura
-6.4). En la estimación central, el bloque cambiario y de riesgo explica
-58,7\%, el fiscal 32,1\% y el de actividad 9,3\%. Los intervalos son
-amplios y se superponen: la diferencia entre los \emph{shocks} no
-fiscales y el fiscal es de 35,9 puntos, pero su intervalo, {[}-4,8;
-91,2{]}, incluye el cero. La descomposición indica que el riesgo
-cambiario y de riesgo país es el componente más grande en la estimación
-central, pero no permite afirmar con el nivel de confianza fijado que
-domine al fiscal.
+tipo de cambio real y el riesgo país. La Tabla 6.3 descompone la
+varianza de la deuda simulada en 2035 según el bloque de \emph{shocks}.
+El bloque externo explica 46,6\% y el cambiario y de riesgo 32,3\%; el
+de actividad, 12,4\%, y el fiscal, 8,7\%. La diferencia entre los
+\emph{shocks} no fiscales y el fiscal es de 82,6 puntos, con un
+intervalo de {[}65,8; 92,4{]} que excluye el cero. H1a queda respaldada.
 
 \textbf{Tabla 6.3. Participación de cada bloque de \emph{shocks} en la
 varianza de la deuda en 2035}
@@ -233,31 +172,69 @@ Bloque de \emph{shocks} & Participación & Intervalo de 90\% \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Fiscal & 32,1\% & {[}4,4; 52,4{]} \\
-Actividad & 9,3\% & {[}3,8; 43,1{]} \\
-Cambiario y de riesgo (EMBI+ y TCRM) & 58,7\% & {[}17,2; 86,0{]} \\
-No fiscal menos fiscal (diferencia) & 35,9 puntos & {[}-4,8; 91,2{]} \\
+Fiscal & 8,7\% & {[}3,8; 17,1{]} \\
+Actividad & 12,4\% & {[}3,6; 21,8{]} \\
+Cambiario y de riesgo (EMBI+ y TCRM) & 32,3\% & {[}20,0; 48,0{]} \\
+Externo (FED y VIX) & 46,6\% & {[}18,3; 58,6{]} \\
+No fiscal menos fiscal (diferencia) & 82,6 puntos & {[}65,8; 92,4{]} \\
 \end{longtable}
 }
 
 Fuente: elaboración propia.
 
+El resultado se sostiene en las 19 especificaciones (sección 6.6). El
+menor límite inferior, 31,4 puntos, aparece cuando el \emph{shock}
+fiscal absorbe toda la covarianza entre el resultado primario y el
+crecimiento: con el ordenamiento de Cholesky que pone primero al
+resultado primario o, de manera equivalente, con una elasticidad cíclica
+de cero.
+
+\textbf{Suficiencia del superávit.} El análisis complementario,
+descriptivo, desplaza en la misma magnitud el resultado primario de
+todos los años del escenario base (Figura 6.3). El máximo anual de
+1999-2025, con la definición del FMI, es 3,58\% del PIB, en 2004. Con el
+resultado primario en ese nivel todos los años, la probabilidad de no
+estabilización en 2031 es 25,5\%. Para llevarla al 1\% que estima el FMI
+para Argentina hay que sumar 7,75 puntos al resultado primario del
+escenario en todos los años: un superávit de 9,2\% del PIB en 2026 y de
+10,0\% en 2031, casi el triple del máximo observado.
+
+En 2035 la relación no es monótona. La probabilidad baja hasta 1,35\%
+con un desplazamiento de 6,25 puntos y vuelve a subir, a 2,05\% con 8,00
+puntos. Con superávits tan altos la deuda queda cerca de cero, y la
+métrica, que compara el resultado primario necesario con el previsto año
+por año, se activa con \emph{shocks} pequeños.
+
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Varianza de la deuda en 2035 por bloque de shocks. Participación de cada bloque de shocks estructurales en la varianza de la deuda simulada en 2035; estimación central y barras de error hasta los percentiles 5 y 95 entre réplicas.}]{fig6_3_varianza_por_bloque.png}}
-\caption[Varianza de la deuda en 2035 por bloque de \emph{shocks}. Participación de cada bloque de \emph{shocks} estructurales en la varianza de la deuda simulada en 2035; estimación central y barras de error hasta los percentiles 5 y 95 entre réplicas]{Varianza de la deuda en 2035 por bloque de \emph{shocks}.
-Participación de cada bloque de \emph{shocks} estructurales en la
-varianza de la deuda simulada en 2035; estimación central y barras de
-error hasta los percentiles 5 y 95 entre réplicas.}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Suficiencia del superávit primario. Probabilidad de no estabilización en 2031 según el resultado primario de 2031, con el resultado primario de todos los años del escenario base del FMI (2026) desplazado en la misma magnitud; la línea vertical marca el máximo anual de 1999-2025. Estimación central. Fuente: elaboración propia.}]{fig6_5_suficiencia_superavit.png}}
+\caption[Suficiencia del superávit primario]{Suficiencia del superávit primario. Probabilidad de no
+estabilización en 2031 según el resultado primario de 2031, con el
+resultado primario de todos los años del escenario base del FMI (2026)
+desplazado en la misma magnitud; la línea vertical marca el máximo anual
+de 1999-2025. Estimación central. Fuente: elaboración propia.}
+\end{figure}
+
+En la descomposición (Figura 6.4), los intervalos de los bloques externo
+y cambiario y de riesgo se superponen y no permiten ordenarlos entre sí.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Varianza de la deuda en 2035 por bloque de shocks. Participación de los bloques fiscal, de actividad, cambiario y de riesgo, y externo en la varianza de la deuda federal bruta simulada en 2035; estimación central e intervalos de 90\%. Fuente: elaboración propia.}]{fig6_3_varianza_por_bloque.png}}
+\caption[Varianza de la deuda en 2035 por bloque de \emph{shocks}. Participación de los bloques fiscal, de actividad, cambiario y de riesgo, y externo en la varianza de la deuda federal bruta simulada en 2035; estimación central e intervalos de 90\%. Fuente: elaboración propia]{Varianza de la deuda en 2035 por bloque de \emph{shocks}.
+Participación de los bloques fiscal, de actividad, cambiario y de
+riesgo, y externo en la varianza de la deuda federal bruta simulada en
+2035; estimación central e intervalos de 90\%. Fuente: elaboración
+propia.}
 \end{figure}
 
 \section{Contraste de H1b}
 
-El FMI (2026) estima una probabilidad de estabilización de alrededor de
-99\% en su abanico de mediano plazo (no estabilización de 1,0\%, cuadro
-7) y superior a 97\% en su abanico de diez años, que termina en 2035.
-Cada horizonte se contrasta contra la cifra del FMI correspondiente
-(Tabla 6.4).
+El FMI (2026) estima una probabilidad de no estabilización de 1\% en su
+abanico de mediano plazo (cuadro 7) y menor que 3\% en su abanico de
+diez años, que termina en 2035. Con la deuda federal bruta, el mismo
+punto de partida, el mismo escenario y la misma métrica, cada horizonte
+se contrasta contra la cifra del FMI correspondiente (Tabla 6.4).
 
 \textbf{Tabla 6.4. Contraste de H1b}
 
@@ -284,105 +261,99 @@ Criterio
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-2031 (mediano plazo) & 25,2\% & {[}19,0; 27,7{]} & 1,0\% & Se cumple \\
-2035 (diez años) & 22,3\% & {[}15,6; 24,9{]} & menos de 3\% & Se
+2031 (mediano plazo) & 32,8\% & {[}26,8; 37,9{]} & 1\% & Se cumple \\
+2035 (diez años) & 31,3\% & {[}27,0; 35,3{]} & menos de 3\% & Se
 cumple \\
 \end{longtable}
 }
 
 Fuente: elaboración propia. Error de Monte Carlo de la estimación
-central: 0,3 puntos en los dos horizontes.
+central: 0,33 puntos.
 
-En los dos horizontes, el intervalo queda entero muy por encima de la
+En los dos horizontes el intervalo queda entero muy por encima de la
 cifra del FMI, y la conclusión se mantiene con la corrección de
-Bonferroni (límites inferiores de 2,5\%: 18,0\% y 14,6\%). Con dos
-medidas alternativas el resultado es el mismo: si se usa el resultado
-primario simulado en lugar del previsto, la probabilidad en 2031 es de
-29,2\%, y la probabilidad de que la deuda de 2031 supere a la de 2029 es
-de 22,0\%. H1b queda respaldada en los dos horizontes.
-
-La comparación con el FMI tiene un límite. Las cifras del FMI
-corresponden a la deuda federal bruta, que parte de 80,3\% del PIB, y
-esta tesis mide la deuda consolidada neta, que parte de 61,0\%. Con un
-procedimiento de \emph{shocks} a la manera del FMI aplicado a los datos
-de esta tesis, la probabilidad en 2031 es de 23,7\% y el ancho del
-abanico de 114 puntos, frente a 1\% y 71,5 del FMI (sección 6.6). La
-tesis no reproduce la cifra del FMI ni siquiera con ese procedimiento,
-de modo que no puede identificar de dónde viene la diferencia.
+Bonferroni (límites inferiores de 26,3\% y 26,4\%). Las medidas
+alternativas llevan a lo mismo: con el resultado primario simulado en
+lugar del previsto, la probabilidad en 2031 es 35,4\% {[}30,3; 40,8{]},
+y la probabilidad de que la deuda de 2031 supere a la de 2029 es 27,5\%
+{[}23,9; 33,1{]}. En las 19 especificaciones el límite inferior supera
+las cifras del FMI; el menor, 20,3\%, corresponde a la deuda
+consolidada. H1b queda respaldada en los dos horizontes.
 
 \section{Contraste de H2}
 
-\textbf{Tabla 6.5. Efecto de la FED sobre la deuda en 2035}
+\textbf{Tabla 6.5. Efecto de la FED sobre la deuda federal bruta}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Escenario
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Diferencia en la probabilidad de no estabilización
+Probabilidad 2031 (pp)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Diferencia en la deuda media
+Probabilidad 2035 (pp)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Deuda media 2035 (pp del PIB)
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Nivel 0,50 pp más alto en 2026-2035 (un desvío estándar) & +1,5 pp
-{[}0,1; 3,1{]} & +1,0 pp del PIB {[}-0,1; 2,4{]} \\
-Variaciones de 2022-2025 (nivel 3,82 pp más alto desde 2029) & +13,0 pp
-{[}1,0; 24,8{]} & +7,8 pp del PIB {[}-1,4; 20,4{]} \\
+Nivel 0,504 pp más alto desde 2026T1 & +0,9 {[}0,0; 1,5{]} & +1,5
+{[}0,5; 2,6{]} & +1,5 {[}0,1; 2,5{]} \\
+Senda de 2022-2025 repetida en 2026-2029 & +5,1 {[}-0,2; 9,1{]} & +11,3
+{[}4,4; 17,9{]} & +12,6 {[}1,2; 21,8{]} \\
 \end{longtable}
 }
 
-Fuente: elaboración propia.
+Fuente: elaboración propia. Diferencias respecto del escenario base;
+entre corchetes, intervalos de 90\%.
 
-Los dos escenarios dejan el nivel de la tasa de la FED por encima del
-base hasta 2035: 0,50 puntos en el primero; en el segundo, el nivel sube
-5,25 puntos y baja 1,43 en 2026-2029, y queda 3,82 puntos por encima del
-base hasta 2035 (sección 4.6). En los dos, la suba eleva la probabilidad
-de no estabilización en 2035 con un intervalo de 90\% que excluye el
-cero, con límites inferiores de 0,1 y 1,0 puntos. El efecto sobre la
-deuda esperada tiene el signo previsto, pero sus intervalos incluyen el
-cero, de modo que no cumple el criterio de la Tabla 4.4. Con la
-corrección de Bonferroni, ninguno de los efectos sobre la probabilidad
-se sostiene (límites inferiores de 2,5\% de -0,1 y -0,2 puntos). En las
-respuestas al impulso, 5 de las 84 bandas excluyen el cero, menos que
-las ocho que produciría el azar (sección 6.1).
+Los dos escenarios elevan la probabilidad de no estabilización y la
+deuda media en 2035 con intervalos que excluyen el cero, de modo que la
+especificación principal cumple el criterio de la Tabla 4.4. En 2031 el
+efecto es menor y sus intervalos tocan o cruzan el cero, como
+corresponde a un efecto que se acumula.
 
-Para saber por qué canal pasa el efecto, se repitió el escenario de
-2022-2025 anulando la respuesta de las variables domésticas a la FED, de
-modo que solo actúa el mayor costo de refinanciar la deuda en dólares.
-Ese costo directo explica 4,7 de los 7,8 puntos de aumento de la deuda
-en 2035 (60\%). El resto corresponde a la respuesta del riesgo país, el
-tipo de cambio real y el crecimiento, ninguna de ellas significativa por
-separado (sección 6.1).
+La evidencia es más firme para la probabilidad que para la deuda
+esperada. Con la corrección de Bonferroni, los efectos sobre la
+probabilidad en 2035 siguen excluyendo el cero (límites inferiores de
+0,2 y 1,4 puntos) y los efectos sobre la deuda no (-0,0 y -0,5). Entre
+las especificaciones de robustez, el efecto de la senda de 2022-2025
+sobre la probabilidad excluye el cero en 18 de 19, y el efecto sobre la
+deuda, en 12 de 19.
 
-H2 queda respaldada solo en parte: el efecto sobre la probabilidad
-cumple el criterio al 90\%, pero no el efecto sobre la deuda esperada,
-no resiste la corrección por contrastes múltiples y los canales que
-nombra la hipótesis (riesgo, tipo de cambio real, crecimiento) no se
-distinguen del azar; la mayor parte del efecto es el costo directo de la
-deuda en dólares, que el modelo incorpora por construcción.
+Para saber por qué canal pasa el efecto, el escenario de 2022-2025 se
+repitió anulando la respuesta de las variables domésticas a la FED, de
+modo que solo actúa el mayor costo de la deuda en dólares. Ese costo
+directo, que la identidad incorpora, explica 9,4 de los 12,6 puntos de
+aumento de la deuda en 2035 (75\%). El resto corresponde a la respuesta
+del riesgo país, el tipo de cambio real y el crecimiento, que no se
+distinguen del azar (sección 6.1). H2 queda respaldada en su efecto
+sobre la probabilidad de no estabilización; el mecanismo que propone, la
+transmisión por los canales domésticos, no se verifica.
 
 \section{Robustez}
 
-La Tabla 6.6 resume las 17 especificaciones alternativas a la principal,
-dos variantes con \emph{shocks} a la manera del FMI y la cifra de
-referencia del FMI.
+La Tabla 6.6 resume las especificaciones alternativas más relevantes. La
+tabla completa, con las 19 especificaciones del SVARX, está en el
+Apéndice, sección A.8.
 
-\textbf{Tabla 6.6. Robustez}
+\textbf{Tabla 6.6. Robustez (selección)}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Especificación
@@ -391,114 +362,77 @@ No estabilización 2031
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 No estabilización 2035
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Ancho del abanico 2031
+Ancho 2031
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-No fiscal menos fiscal (varianza)
+No fiscal menos fiscal
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Senda de la FED: probabilidad 2035
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Principal & 25,2\% {[}19,0; 27,7{]} & 22,3\% {[}15,6; 24,9{]} & 35,3 &
-35,9 {[}-4,8; 91,2{]} \\
-Deuda neta a valor libros & 26,5\% {[}20,7; 28,8{]} & 23,9\% {[}16,7;
-25,6{]} & 37,5 & 23,0 {[}-11,5; 92,6{]} \\
-Deuda bruta (Tesoro y BCRA) & 27,6\% {[}22,0; 29,7{]} & 22,9\% {[}16,7;
-28,0{]} & 34,4 & 36,0 {[}-16,4; 89,3{]} \\
-Deuda bruta del Tesoro, sin el BCRA & 27,3\% {[}22,7; 30,1{]} & 23,5\%
-{[}17,9; 27,6{]} & 33,5 & 31,5 {[}-17,1; 90,8{]} \\
-Canal de tasas en pesos & 26,9\% {[}20,1; 28,4{]} & 30,8\% {[}17,2;
-31,9{]} & 43,2 & 45,5 {[}-4,6; 93,5{]} \\
-Sin retroalimentación de la deuda & 25,6\% {[}19,1; 27,3{]} & 22,9\%
-{[}14,1; 23,9{]} & 46,7 & 41,4 {[}-13,3; 90,7{]} \\
-Dos rezagos & 27,4\% {[}22,6; 31,1{]} & 27,9\% {[}17,6; 31,2{]} & 45,5 &
-49,6 {[}10,4; 89,9{]} \\
-Cholesky, resultado primario primero (equivale a elasticidad cíclica 0)
-& 25,7\% {[}19,2; 27,6{]} & 23,1\% {[}15,0; 24,0{]} & 35,5 & 23,0
-{[}-41,8; 82,3{]} \\
-Cholesky, resultado primario último & 25,7\% {[}19,1; 27,6{]} & 23,1\%
-{[}14,8; 23,9{]} & 35,5 & 77,9 {[}20,6; 96,0{]} \\
-Elasticidad cíclica 0,5 & 25,7\% {[}19,4; 27,5{]} & 23,1\% {[}15,4;
-23,9{]} & 35,5 & 61,8 {[}38,2; 97,2{]} \\
-Sin los \emph{shocks} de 2001T4-2005T3 & 23,7\% {[}16,8; 26,6{]} &
-19,2\% {[}12,8; 22,7{]} & 32,5 & 20,1 {[}-16,2; 87,5{]} \\
-Muestra desde 2004 & 24,8\% {[}14,4; 25,8{]} & 27,5\% {[}10,4; 26,8{]} &
-35,8 & -18,9 {[}-43,1; 91,9{]} \\
-Resultado primario sin rentas de la propiedad & 23,4\% {[}18,9; 27,8{]}
-& 19,6\% {[}13,4; 22,2{]} & 22,9 & -12,2 {[}-50,7; 57,3{]} \\
-Ajuste stock-flujo en cero & 22,0\% {[}15,9; 24,1{]} & 18,9\% {[}9,4;
-20,6{]} & 33,4 & 27,8 {[}-15,0; 88,1{]} \\
-λ = 0,15 & 25,6\% {[}19,0; 27,5{]} & 20,7\% {[}14,5; 23,4{]} & 32,4 &
-31,6 {[}-6,9; 89,2{]} \\
-λ = 0,40 & 25,8\% {[}19,3; 27,5{]} & 24,9\% {[}15,6; 25,6{]} & 37,8 &
-38,0 {[}-3,4; 92,3{]} \\
-Punto de partida 52,1\% (deuda del FMI) & 22,8\% {[}16,9; 24,7{]} &
-20,9\% {[}12,0; 21,9{]} & 34,0 & 30,2 {[}-12,1; 88,9{]} \\
-Escenario del FMI de 2025 & 23,4\% {[}17,1; 25,5{]} & 20,4\% {[}13,1;
-22,0{]} & 34,1 & 34,8 {[}-5,1; 89,9{]} \\
-\emph{Shocks} a la manera del FMI, deuda neta & 23,7\% & 19,7\% & 114,0
+Principal (deuda federal bruta) & 32,8\% {[}26,8; 37,9{]} & 31,3\%
+{[}27,0; 35,3{]} & 48,3 & 82,6 {[}65,8; 92,4{]} & 11,3 {[}4,4;
+17,9{]} \\
+Deuda consolidada con el BCRA & 26,8\% {[}20,3; 31,0{]} & 24,1\%
+{[}20,4; 29,6{]} & 38,0 & 67,1 {[}36,8; 86,1{]} & 10,1 {[}2,5;
+16,7{]} \\
+Resultado primario sin rentas de la propiedad & 32,4\% {[}26,6; 37,0{]}
+& 31,2\% {[}26,4; 35,6{]} & 47,6 & 75,5 {[}51,7; 86,3{]} & 9,6 {[}2,5;
+15,7{]} \\
+Sin retroalimentación de la deuda & 31,4\% {[}26,0; 36,3{]} & 29,5\%
+{[}24,3; 34,8{]} & 55,5 & 81,5 {[}63,6; 91,4{]} & 8,1 {[}5,6; 10,6{]} \\
+Tres rezagos & 30,3\% {[}23,0; 35,1{]} & 29,6\% {[}24,2; 35,5{]} & 40,8
+& 72,3 {[}46,2; 88,9{]} & 10,3 {[}4,1; 17,1{]} \\
+Datos desde 2004 & 31,9\% {[}27,9; 40,5{]} & 32,5\% {[}24,0; 41,7{]} &
+35,8 & 86,7 {[}73,5; 97,4{]} & 11,0 {[}-4,8; 17,2{]} \\
+Parámetros corregidos por sesgo (Kilian, 1998) & 31,3\% {[}24,2; 36,0{]}
+& 31,1\% {[}27,2; 35,7{]} & 52,1 & 61,3 {[}32,7; 100,0{]} & 12,8 {[}1,6;
+20,8{]} \\
+\emph{Shocks} a la manera del FMI, deuda federal bruta & 16,6\% & 15,1\%
+& 151,1 & no aplica & no aplica \\
+FMI (2026), deuda federal bruta & 1\% & menos de 3\% & 71,5 & no aplica
 & no aplica \\
-\emph{Shocks} a la manera del FMI, deuda bruta & 24,6\% & 21,3\% & 143,2
-& no aplica \\
-FMI (2026), deuda federal bruta & 1,0\% & menos de 3\% & 71,5 & no
-aplica \\
 \end{longtable}
 }
 
-Fuente: elaboración propia. Entre corchetes, intervalos de 90\%. Las
-filas a la manera del FMI no tienen intervalo porque ese procedimiento
-no estima parámetros. Con la muestra desde 2004 (82 trimestres), la
-estimación de 2035 queda por encima del intervalo: en 48 de las 200
-réplicas la corrección del sesgo tuvo que reducirse para mantener la
-estabilidad, esas réplicas generan menos persistencia que la estimación
-central y el intervalo percentil se corre hacia abajo. El sesgo juega en
-contra de H1b, de modo que su límite inferior es conservador. Las filas
-de Cholesky y de elasticidad cíclica difieren de la principal en 0,5 a
-0,8 puntos de probabilidad por las extracciones de Monte Carlo, no por
-la identificación, que no altera la probabilidad de no estabilización
-(sección 4.6).
+Fuente: elaboración propia y FMI (2026, anexo II). Entre corchetes,
+intervalos de 90\%. La fila a la manera del FMI no tiene intervalo
+porque ese procedimiento no estima parámetros.
 
-\textbf{H1b.} En todas las especificaciones, la probabilidad de no
-estabilización supera con holgura las cifras del FMI en los dos
-horizontes. El valor más bajo, con el ajuste stock-flujo en cero, tiene
-un límite inferior de 9,4\% en 2035. Partir de la deuda consolidada neta
-del FMI (52,1\% del PIB), que descuenta las tenencias del FGS, apenas
-reduce la probabilidad (22,8\% en 2031). Tampoco cambia el resultado
-restar del remuestreo los \emph{shocks} del período de cesación de pagos
-y canje, usar el escenario del FMI de 2025 o medir solo la deuda del
-Tesoro.
+\textbf{Hipótesis.} H1b se cumple en todas las especificaciones. H1a
+también: la diferencia entre los \emph{shocks} no fiscales y el fiscal
+excluye el cero en las 19. El efecto de la senda de la FED sobre la
+probabilidad solo incluye el cero con los datos desde 2004, la
+especificación con menos observaciones. Cambiar la identificación
+(ordenamientos de Cholesky y elasticidades cíclicas de 0 y 0,5) no
+modifica la probabilidad, porque todas las especificaciones comparten el
+sorteo y los \emph{shocks} estructurales reconstruyen los mismos
+residuos (sección 4.6); solo cambia el reparto de la varianza entre
+bloques.
 
-\textbf{Perímetro.} Con la deuda bruta del Tesoro, sin el BCRA, las
-probabilidades (27,3\% y 23,5\%) son casi iguales a las de la deuda
-consolidada. El argumento de la sección 2.9, según el cual omitir al
-BCRA podía subestimar la sensibilidad de la deuda, no encuentra respaldo
-en la simulación: el aporte de la consolidación es de medición del
-nivel, no de la dinámica.
+\textbf{Extensión consolidada.} Con la deuda del sector público
+consolidado con el BCRA, que parte de 52,1\% del PIB, la senda base
+llega a 31,9\% en 2031 y a 21,8\% en 2035, y el abanico es más angosto
+que el federal. Las tres hipótesis llevan a las mismas conclusiones que
+en la especificación principal: la probabilidad de no estabilización
+supera con holgura las cifras del FMI, la diferencia entre los
+\emph{shocks} no fiscales y el fiscal excluye el cero y la senda de la
+FED eleva la probabilidad. Su efecto sobre la deuda esperada, 6,7 puntos
+{[}-0,3; 12,4{]}, no excluye el cero.
 
-\textbf{Descomposición de la varianza.} La diferencia entre los
-\emph{shocks} no fiscales y el fiscal es positiva en la mayoría de las
-especificaciones, pero no es robusta: su intervalo solo excluye el cero
-con dos rezagos, con una elasticidad cíclica de 0,5 y con el
-ordenamiento de Cholesky que pone último al resultado primario. Se
-vuelve negativa con la muestra desde 2004 y con el resultado primario
-sin rentas de la propiedad. La identificación del \emph{shock} fiscal
-determina cuánto de la varianza se le atribuye. Por eso el contraste de
-H1a descansa en la suficiencia del superávit (sección 6.3), que no
-depende de la identificación, y no en la descomposición.
-
-\textbf{H2.} El efecto de la senda de 2022-2025 sobre la probabilidad en
-2035 excluye el cero en la mayoría de las especificaciones, pero no con
-el canal de tasas en pesos ni con el resultado primario sin rentas. El
-efecto sobre la deuda esperada no excluye el cero en ninguna.
-
-La Figura 6.5 resume la tabla para H1b.
+\textbf{Procedimiento del FMI.} Con \emph{shocks} generados a la manera
+del FMI sobre la historia argentina de 2000-2025, la probabilidad en
+2031 es la mitad que con el SVARX y muy superior a la del FMI, con un
+abanico dos veces más ancho que el del organismo (Capítulo 7).
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Probabilidad de no estabilización por especificación. Estimaciones centrales en 2031 y 2035, con intervalos de 90\%, y las cifras del FMI (2026): 1\% a mediano plazo y menos de 3\% a diez años. La variante a la manera del FMI no tiene intervalo porque no estima parámetros.}]{fig6_4_probabilidad_no_estabilizacion.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Probabilidad de no estabilización por especificación. Estimaciones centrales en 2031 y 2035 con intervalos de 90\%, y cifras del FMI (2026): 1\% a mediano plazo y menos de 3\% a diez años. La variante a la manera del FMI no tiene intervalo porque no estima parámetros. Fuente: elaboración propia.}]{fig6_4_probabilidad_no_estabilizacion.png}}
 \caption[Probabilidad de no estabilización por especificación]{Probabilidad de no estabilización por especificación.
-Estimaciones centrales en 2031 y 2035, con intervalos de 90\%, y las
-cifras del FMI (2026): 1\% a mediano plazo y menos de 3\% a diez años.
-La variante a la manera del FMI no tiene intervalo porque no estima
-parámetros.}
+Estimaciones centrales en 2031 y 2035 con intervalos de 90\%, y cifras
+del FMI (2026): 1\% a mediano plazo y menos de 3\% a diez años. La
+variante a la manera del FMI no tiene intervalo porque no estima
+parámetros. Fuente: elaboración propia.}
 \end{figure}

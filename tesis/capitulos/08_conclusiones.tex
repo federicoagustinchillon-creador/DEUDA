@@ -2,69 +2,82 @@
 
 Esta tesis se preguntó en qué medida el crecimiento, el tipo de cambio
 real, el riesgo país y el resultado primario condicionan la
-sostenibilidad de la deuda pública consolidada argentina (Tesoro
-nacional y BCRA) en 2026-2035, y cuál es la probabilidad de que no se
-estabilice bajo el escenario base. Para responderla se estimó un SVARX
-sobre datos trimestrales de 1996-2025, con la deuda consolidada neta
-construida según el criterio del FMI (2021, anexo II), salvo las
-tenencias del FGS y otros organismos públicos, que no se descuentan, y
-se lo usó para simular la deuda alrededor del escenario base del
-análisis de sostenibilidad más reciente del FMI (2026).
+sostenibilidad de la deuda pública argentina en 2026-2035, y cuál es la
+probabilidad de que no se estabilice bajo el escenario base. Para
+responderla se estimó un SVARX con datos trimestrales desde 1999
+(muestra de estimación 2000-2025) sobre la deuda federal bruta, que es
+el perímetro del análisis de sostenibilidad del FMI, y se lo usó para
+simular la deuda alrededor del escenario base más reciente del FMI
+(2026), desde su mismo punto de partida y con su misma métrica. Como
+extensión, el ejercicio se repitió con la deuda consolidada con el BCRA.
 
-\textbf{H1a.} El superávit primario, por sí solo, no basta para
-estabilizar la deuda. La política fiscal respondió a la deuda en el
-período (un coeficiente de impacto de 0,051 sobre el resultado primario
-trimestral), pero para que la probabilidad de no estabilización en 2031
-baje al 1\% que estima el FMI para Argentina, el resultado primario de
-todos los años tendría que subir unos 4,75 puntos, hasta 7,05\% del PIB
-en 2031, casi el doble del máximo que alcanzó el Sector Público Nacional
-en tres décadas (3,6\% en 2004). La descomposición de la varianza ubica
-al bloque cambiario y de riesgo como la mayor fuente de incertidumbre en
-la estimación central (59\%), pero ese resultado depende de cómo se
-identifica el \emph{shock} fiscal y no permite afirmar con el nivel de
-confianza fijado que domine al fiscal. Ese era el criterio original de
-H1a, que no se cumple; el de suficiencia se adoptó después de la primera
-estimación (sección 4.7).
+\textbf{H1a.} Los \emph{shocks} no fiscales explican la mayor parte de
+la incertidumbre sobre la deuda de 2035: su contribución a la varianza
+supera a la del \emph{shock} fiscal en 82,6 puntos, con un intervalo de
+90\% de 65,8 a 92,4. El bloque externo (FED y VIX) aporta 46,6\% de la
+varianza y el cambiario y de riesgo, 32,3\%, frente a 8,7\% del fiscal.
+El criterio fijado para H1a se cumple en las 19 especificaciones; el
+menor límite inferior, 31,4 puntos, corresponde a la identificación de
+Cholesky con el resultado primario primero. La política fiscal respondió
+a la deuda en el período (un coeficiente de impacto de 0,0495 de la
+deuda rezagada sobre el resultado primario trimestral, con un intervalo
+de 0,0099 a 0,0799). Como complemento descriptivo, sin criterio de
+contraste: con el resultado primario en su máximo anual de 1999-2025
+(3,58\% del PIB) en todos los años, la probabilidad de no estabilización
+en 2031 sería de 25,5\%, y llevarla al 1\% que informa el FMI requeriría
+sumar 7,75 puntos al resultado primario del escenario en todos los años.
 
-\textbf{H1b.} La probabilidad de que la deuda consolidada no se
-estabilice es de 25,2\% en 2031 (entre 19,0\% y 27,7\%) y de 22,3\% en
-2035, frente a 1\% y menos de 3\% en el análisis del FMI. El resultado
-se mantiene en las 17 especificaciones alternativas, con un
-procedimiento de \emph{shocks} a la manera del FMI y partiendo de la
-deuda consolidada que informa el FMI. No lo explican el perímetro de la
-deuda simulada, el punto de partida ni la identificación. Con esta
-implementación y estos datos, la probabilidad es mayor que la del FMI;
-la diferencia no se pudo atribuir a una causa porque el procedimiento
-del FMI no se reproduce con los datos disponibles (a su manera, da
-23,7\% en 2031). Las cifras tampoco miden el mismo perímetro: la deuda
-consolidada neta parte de 61,0\% del PIB y la federal bruta del FMI, de
-80,3\%.
+\textbf{H1b.} La probabilidad de que la deuda federal bruta no se
+estabilice es de 32,8\% en 2031 (intervalo de 90\%: 26,8\% a 37,9\%) y
+de 31,3\% en 2035 (27,0\% a 35,3\%), frente a alrededor de 1\% y menos
+de 3\% en el análisis del FMI, con el mismo perímetro, punto de partida,
+escenario y métrica. Los límites inferiores superan las cifras del FMI
+con la corrección de Bonferroni (26,3\% y 26,4\%) y en las 19
+especificaciones; el menor, 20,3\%, corresponde a la deuda consolidada.
+Con el procedimiento de \emph{shocks} del FMI aplicado a la historia
+argentina de 2000-2025, la probabilidad de 2031 es de 16,6\%, de modo
+que tampoco así se reproduce el 1\%. La diferencia con el FMI proviene
+de la distribución de \emph{shocks} que el organismo usa y no publica, y
+la tesis no la atribuye a una causa que no puede verificar.
 
-\textbf{H2.} H2 queda respaldada solo en parte. Repetir las variaciones
-de la tasa de la FED de 2022-2025, que dejan su nivel 3,82 puntos por
-encima del base desde 2029, aumenta la probabilidad de no estabilización
-en 13 puntos en 2035, con un intervalo de 1 a 25 puntos. El efecto sobre
-la probabilidad cumple el criterio al 90\%, pero no el efecto sobre la
-deuda esperada, no resiste la corrección por contrastes múltiples y los
-canales que nombra la hipótesis (riesgo, tipo de cambio real,
-crecimiento) no se distinguen del azar; la mayor parte del efecto es el
-costo directo de la deuda en dólares, que el modelo incorpora por
-construcción.
+\textbf{H2.} Repetir en 2026-2029 la senda de la tasa de la FED de
+2022-2025, que deja su nivel 3,82 puntos por encima del escenario base
+desde 2030, eleva la probabilidad de no estabilización de 2035 en 11,3
+puntos (4,4 a 17,9) y la deuda esperada de 2035 en 12,6 puntos del PIB
+(1,2 a 21,8). Un nivel de la tasa 0,504 puntos más alto en forma
+permanente las eleva en 1,5 puntos (0,5 a 2,6) y 1,5 puntos del PIB (0,1
+a 2,5). H2 queda respaldada en su efecto sobre la probabilidad, que
+resiste la corrección de Bonferroni y, con la senda de 2022-2025,
+excluye el cero en 18 de las 19 especificaciones. El efecto sobre la
+deuda esperada no resiste esa corrección y excluye el cero en 12 de 19.
+Los canales que nombra la hipótesis no se distinguen: 3 de 84 intervalos
+de respuesta excluyen el cero, todos del tipo de cambio real y con signo
+de apreciación. El 75\% del efecto sobre la deuda de 2035 (9,4 de 12,6
+puntos) es el costo directo de la deuda en dólares, que la identidad
+incorpora. H2 se sostiene en el efecto y no en el mecanismo que propone.
 
-\textbf{Implicancia.} Con la dinámica histórica estimada, ni siquiera un
-superávit en el máximo de tres décadas lleva la probabilidad de no
-estabilización a la cifra del FMI. La tesis no permite atribuir el
-riesgo restante a una fuente en particular, porque la descomposición de
-la varianza no es robusta. Tampoco simula cambios en la composición por
-moneda ni en los plazos de la deuda; evaluar si reducir la proporción en
-moneda extranjera (58\%) o alargar los vencimientos baja la probabilidad
-de no estabilización es una extensión directa del modelo.
+\textbf{Extensión con la deuda consolidada.} Con la deuda consolidada
+con el BCRA, que parte de 52,1\% del PIB, la probabilidad de no
+estabilización es de 26,8\% en 2031 (20,3\% a 31,0\%) y de 24,1\% en
+2035 (20,4\% a 29,6\%). La contribución no fiscal a la varianza supera a
+la fiscal en 67,1 puntos (36,8 a 86,1). La senda de la FED eleva la
+probabilidad de 2035 en 10,1 puntos (2,5 a 16,7) y la deuda de 2035 en
+6,7 puntos del PIB, con un intervalo (−0,3 a 12,4) que incluye el cero.
+Las conclusiones sobre H1a y H1b no dependen del perímetro.
+
+\textbf{Implicancia.} Con la dinámica histórica estimada, el riesgo de
+que la deuda federal no se estabilice es mucho mayor que el que informa
+el FMI, y la mayor parte de la incertidumbre proviene de \emph{shocks}
+externos, cambiarios y de riesgo, que la política fiscal no controla. Un
+superávit en el máximo de 1999-2025 sostenido en todos los años reduce
+la probabilidad, pero la deja lejos de la cifra del FMI. La tesis no
+simula cambios en la composición por moneda ni en los plazos de la
+deuda, de modo que no permite evaluar esas alternativas.
 
 \textbf{Alcance.} Los resultados están condicionados al escenario base
-del FMI, que fue construido para la deuda federal bruta, y a que la
-dinámica de 1998-2025 siga vigente. La estimación central es muy
-persistente (autovalor máximo de 0,9998), lo que eleva las
-probabilidades. Las limitaciones se detallan en la sección 7.6.
+del FMI y a que la dinámica de 2000-2025 siga vigente. La proporción de
+la deuda en pesos queda fija en el escenario, el mismo supuesto que hace
+el FMI. Las limitaciones se detallan en la sección 7.6.
 
 \textbf{Líneas de trabajo futuro.}
 
@@ -75,19 +88,17 @@ probabilidades. Las limitaciones se detallan en la sección 7.6.
   economía con exposición similar a los precios de materias primas y al
   financiamiento externo. Levy Yeyati y Sturzenegger (2023) aplican su
   VAR país por país; un panel conjunto daría más precisión a las
-  respuestas a la FED, que con una sola serie no son significativas.
+  respuestas a la FED, que con una sola serie casi nunca son
+  significativas.
 \item
   Reemplazar la variación de la tasa de la FED por \emph{shocks}
   monetarios identificados con datos de alta frecuencia, que aíslan la
   parte no anticipada de la política de Estados Unidos.
 \item
   Incorporar los términos de intercambio como variable exógena, por su
-  peso en la generación de divisas, y un módulo de balanza de pagos.
+  peso en la generación de divisas.
 \item
-  Simular cambios en la composición por moneda y en los plazos de la
-  deuda.
-\item
-  Restar los títulos públicos en cartera del FGS cuando haya una serie
-  pública completa, y modelar una tasa en pesos homogénea para todo el
-  período.
+  Agregar un módulo de balanza de pagos, que permita contrastar el
+  enfoque de la restricción externa que en esta tesis cumple un papel de
+  contexto.
 \end{itemize}

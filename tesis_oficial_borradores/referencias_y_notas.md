@@ -18,6 +18,7 @@
 - Bohoslavsky, J. P., y Cantamutto, F. J. (2024). Deuda pública y desarrollo (no)sustentable en Argentina. Una visión crítica sobre la especialización productiva. *FACES*, *30*(62), 1-18. https://nulan.mdp.edu.ar/id/eprint/4109/1/FACES-30-62-bohoslavsky-cantamutto.pdf
 - Bouabdallah, O., Checherita-Westphal, C., Warmedinger, T., de Stefani, R., Drudi, F., Setzer, R., y Westphal, A. (2017). *Debt sustainability analysis for euro area sovereigns: A methodological framework* (ECB Occasional Paper No. 185). Banco Central Europeo. https://ecb.europa.eu/pub/pdf/scpops/ecbop185.bg.pdf
 - Braun, O., y Joy, L. (1968). A model of economic stagnation: A case study of the Argentine economy. *The Economic Journal*, *78*(312), 868-887. https://doi.org/10.2307/2229183
+- Brüggemann, R., Jentsch, C., y Trenkler, C. (2016). Inference in VARs with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, *191*(1), 69-85. https://doi.org/10.1016/j.jeconom.2015.10.004
 - Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchange rate, and fiscal sustainability: Argentina's lessons* (NBER Working Paper No. 9828). National Bureau of Economic Research. https://doi.org/10.3386/w9828
 - Canova, F. (2005). The transmission of US shocks to Latin America. *Journal of Applied Econometrics*, *20*(2), 229-251. https://doi.org/10.1002/jae.837
 - Cantamutto, F. J., y Féliz, M. (2021). Argentina entre la sostenibilidad de la deuda y la vida. *Revista Nuestramérica*, *9*(17), e6167845.
@@ -44,9 +45,9 @@
 - Fondo Monetario Internacional [FMI] y Mecanismo Europeo de Estabilidad [ESM]. (2023). *The stochastic debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs* [Presentación, 30 de noviembre de 2023].
 - Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, *123*(566), F4-F30. https://doi.org/10.1111/ecoj.12010
 - Girouard, N., y André, C. (2005). *Measuring cyclically-adjusted budget balances for OECD countries* (OECD Economics Department Working Papers No. 434). OECD Publishing.
-- Gonçalves, S., y Kilian, L. (2004). Bootstrapping autoregressions with conditional heteroskedasticity of unknown form. *Journal of Econometrics*, *123*(1), 89-120. https://doi.org/10.1016/j.jeconom.2003.10.030
 - González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo. https://doi.org/10.18235/0004701
 - Hakkio, C. S., y Rush, M. (1991). Is the budget deficit "too large?" *Economic Inquiry*, *29*(3), 429-445. https://doi.org/10.1111/j.1465-7295.1991.tb00837.x
+- Hall, P. (1992). *The bootstrap and Edgeworth expansion*. Springer. https://doi.org/10.1007/978-1-4612-4384-7
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, *107*(10), 3119-3145. https://doi.org/10.1257/aer.20151667
 - Hodrick, R. J., y Prescott, E. C. (1997). Postwar U.S. business cycles: An empirical investigation. *Journal of Money, Credit and Banking*, *29*(1), 1-16. https://doi.org/10.2307/2953682
 - Hosking, J. R. M. (1980). The multivariate portmanteau statistic. *Journal of the American Statistical Association*, *75*(371), 602-608. https://doi.org/10.1080/01621459.1980.10477520
@@ -61,7 +62,6 @@
 - Kwiatkowski, D., Phillips, P. C. B., Schmidt, P., y Shin, Y. (1992). Testing the null hypothesis of stationarity against the alternative of a unit root. *Journal of Econometrics*, *54*(1-3), 159-178. https://doi.org/10.1016/0304-4076(92)90104-Y
 - Leeper, E. M. (1991). Equilibria under "active" and "passive" monetary and fiscal policies. *Journal of Monetary Economics*, *27*(1), 129-147. https://doi.org/10.1016/0304-3932(91)90007-B
 - Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, *44*(1), 61-84. https://doi.org/10.1111/1475-5890.12319
-- Ley 27.541 de Solidaridad Social y Reactivación Productiva en el Marco de la Emergencia Pública. (2019, 23 de diciembre). Boletín Oficial de la República Argentina.
 - Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública. (2021, 3 de marzo). Boletín Oficial de la República Argentina. https://www.argentina.gob.ar/normativa/nacional/norma-347532/texto
 - Lütkepohl, H. (2005). *New introduction to multiple time series analysis*. Springer.
 - Medeiros, J. (2012). *Stochastic debt simulation using VAR models and a panel fiscal reaction function: Results for a selected number of countries* (European Economy Economic Papers No. 459). Comisión Europea. https://doi.org/10.2765/26084
@@ -71,7 +71,6 @@
 - Oficina de Presupuesto del Congreso [OPC]. (2026). *Operaciones de deuda pública, julio 2026*.
 - Perron, P. (1989). The great crash, the oil price shock, and the unit root hypothesis. *Econometrica*, *57*(6), 1361-1401. https://doi.org/10.2307/1913712
 - Pesaran, M. H., y Smith, R. (1995). Estimating long-run relationships from dynamic heterogeneous panels. *Journal of Econometrics*, *68*(1), 79-113. https://doi.org/10.1016/0304-4076(94)01644-F
-- Poder Ejecutivo Nacional. (2007). *Decreto 897/2007: Fondo de Garantía de Sustentabilidad del Régimen Previsional Público de Reparto* (Boletín Oficial, 13 de julio de 2007). Base normativa de la AFIP. https://biblioteca.afip.gob.ar/dcp/DEC_C_000897_2007_07_12
 - Porto, A. (2020). *Evolución del sector público argentino en el largo plazo* (Documento de Trabajo N.° 36). CEFIP, Universidad Nacional de La Plata. https://www.mfp.econo.unlp.edu.ar/wp-content/uploads/2020/06/DocTrab36.pdf
 - Rapoport, M. (2020). *Historia económica, política y social de la Argentina (1880-2003)*. Crítica.
 - Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centuries of financial folly*. Princeton University Press.
@@ -97,19 +96,19 @@
 
 # Notas para el grupo (no forman parte del texto de la tesis)
 
-## Nota 1. Criterio de H1b (actualizado el 11/10/2026)
+## Nota 1. Criterio de H1b (actualizado el 12/10/2026)
 
-**La métrica.** La probabilidad de que la deuda no se estabilice: la proporción de trayectorias simuladas en las que el resultado primario del escenario base es menor que el necesario para estabilizar la deuda (FMI, 2021, párr. 53 y anexo VI, nota 9).
+**La métrica.** La probabilidad de que la deuda no se estabilice: la proporción de trayectorias simuladas en las que el resultado primario del escenario base es menor que el necesario para estabilizar la deuda (FMI, 2021, párr. 53 y anexo VI, nota 9). El resultado primario necesario incluye el ajuste stock-flujo, como la identidad: pb* = d_{T-1}(M_T − 1) + sf_T + ri_T.
 
-**El umbral: el propio resultado del FMI.** Se usa el análisis de sostenibilidad más reciente, el del Artículo IV y la segunda revisión del programa (FMI, 2026): probabilidad de estabilización de alrededor de 99% a mediano plazo (no estabilización de 1,0%, cuadro 7) y superior a 97% en el abanico de diez años que termina en 2035. Por eso se contrasta en 2031, el último año del abanico de mediano plazo, contra 1%, y en 2035 contra 3%. El análisis de abril de 2025 (3% a mediano plazo) queda como robustez.
+**El umbral: el propio resultado del FMI.** Se usa el análisis de sostenibilidad más reciente, el del Artículo IV y la segunda revisión del programa (FMI, 2026): probabilidad de estabilización de alrededor de 99% a mediano plazo (no estabilización de 1,0%, cuadro 7) y superior a 97% en el abanico de diez años que termina en 2035. Por eso se contrasta en 2031, el último año del abanico de mediano plazo, contra 1%, y en 2035 contra 3%. El análisis de abril de 2025 queda como robustez del escenario.
 
-**Cómo se contrasta.** H1b se considera respaldada si el límite inferior del intervalo de 90% del *bootstrap* supera el umbral (contraste unilateral al 5%); se informa además el límite de 2,5% (corrección de Bonferroni por los dos horizontes).
+**Cómo se contrasta.** H1b se considera respaldada si el límite inferior del intervalo de 90% supera el umbral (contraste unilateral al 5%); se informa además el intervalo de 95% (corrección de Bonferroni por los dos horizontes).
 
-**Condiciones de comparabilidad.** El escenario base reproduce los senderos del FMI, incluida la inflación relativa (la valuación de la deuda en moneda extranjera por la depreciación del escenario); la identidad reproduce la senda de deuda del FMI con un desvío máximo de 0,1 puntos. Se informan también la deuda bruta, la deuda solo del Tesoro y un punto de partida igual a la deuda del FMI.
+**Condiciones de comparabilidad.** La comparación usa el perímetro del FMI (deuda federal bruta), su punto de partida (80,3% del PIB a fines de 2025), su escenario base y su métrica. La identidad reproduce la senda de deuda del FMI con un desvío máximo de 0,12 puntos. La deuda consolidada con el BCRA es una extensión, con el punto de partida del FMI para ese perímetro (52,1%).
 
 ## Nota 2. Tamaño del shock de la FED (decidido el 11/10/2026)
 
-Los +100 puntos básicos de la versión anterior no estaban justificados y se sacaron. Se usan dos tamaños, los dos con fundamento: un desvío estándar de la variación trimestral de la tasa de política de la FED en 1996-2025 (0,50 puntos), que es la convención de la literatura de VAR, y una repetición del ciclo de subas de 2022-2023 (5,25 puntos en ocho trimestres), que es el episodio histórico más reciente. El primero no tiene un efecto distinguible y el segundo sí (Capítulo 6).
+Los +100 puntos básicos de una versión anterior no estaban justificados y se sacaron. Se usan dos escenarios, los dos con fundamento: un nivel de la tasa 0,504 puntos más alto en forma permanente desde 2026T1, que es un desvío estándar de la variación trimestral de la tasa en la muestra (convención de la literatura de VAR), y la repetición en 2026-2029 de la senda trimestral de 2022-2025 (sube 5,25 puntos y baja 1,43, y desde 2030 queda 3,82 puntos por encima del escenario base). Los dos elevan la probabilidad de no estabilización de 2035 con intervalos que excluyen el cero (Capítulo 6).
 
 ## Nota 3. Cambios respecto de la versión anterior del texto
 
@@ -124,6 +123,7 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
   - Se sacan Garud y la tesis propia.
 - **Canal cuasifiscal del shock de la FED:** se redacta en pasado.
 - **Pregunta e hipótesis:** se acorta la pregunta, se agregan seis objetivos específicos, y H1a mantiene su concepto central con un criterio de contraste explícito (Capítulo 4).
+- **Perímetro y muestra (octubre de 2026):** las preguntas, los objetivos y las hipótesis se refieren a la deuda pública, federal bruta en la especificación principal y consolidada con el BCRA como extensión; los datos empiezan en 1999.
 - **Del texto LaTeX:** se suman la Justificación (Ley 27.612) y la organización por capítulos.
 
 **Antecedentes:**
@@ -134,7 +134,7 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
 
 **Vacancia:**
 
-- **Afirmación corregida:** se reescribió la idea de que el marco del FMI excluye al BCRA. El marco lo admite (FMI, 2021). En su análisis de Argentina, el FMI usa la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2025).
+- **Afirmación corregida:** se reescribió la idea de que el marco del FMI excluye al BCRA. El marco lo admite (FMI, 2021). En su análisis de Argentina, el FMI usa la deuda federal bruta y muestra la consolidada solo como cuadro (FMI, 2026). La vacancia se redefinió en octubre de 2026: una estimación de caso único con *shocks* identificados cuyo resultado es la métrica del FMI sobre su propio perímetro y escenario, con el perímetro consolidado como extensión.
 - **Párrafo cortado:** el párrafo sobre la subordinación del BCRA, que estaba cortado, se completó y quedó marcado para verificar.
 
 ## Nota 3b. Qué se hizo con cada comentario de Pablo y cada punto de la propuesta metodológica
@@ -160,26 +160,40 @@ Los +100 puntos básicos de la versión anterior no estaban justificados y se sa
 | No discutir en el texto si el riesgo país es endógeno (17/9) | No aparece; queda como respuesta oral en la guía de defensa |
 | Justificar la matriz del SVAR, "donde gira todo" | Secciones 4.4 (identificación) y 4.3 (canales de la FED) |
 | Panel Argentina-Chile como línea futura | Capítulo 8 |
-| Bajar la extensión | 69 páginas; falta acordar en el grupo qué se recorta para llegar a unas 60 |
+| Bajar la extensión | La tabla completa de robustez pasó al Apéndice (A.8) y los ejes 2, 3 y 8 de Antecedentes se redujeron a lo esencial |
 
 **Propuesta metodológica**
 
 | Propuesta | Qué se hizo | Dónde |
 |---|---|---|
 | ADF y KPSS para raíz unitaria, Zivot-Andrews y Bai-Perron para quiebres | Hecho; los quiebres de Bai-Perron entran como variables binarias | 4.2, 6.1 y A.1 |
-| Selección de rezagos por AIC y BIC con residuos sin autocorrelación | AIC sujeto a estabilidad; BIC y HQ informados. No se lograron residuos sin autocorrelación: la autocorrelación remanente se informa como limitación | 4.5, A.2 y 7.5 |
+| Selección de rezagos por AIC y BIC con residuos sin autocorrelación | Criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005); si sus residuos están autocorrelacionados, el menor orden mayor que no lo está. Schwarz elige 1, con residuos autocorrelacionados (p = 0,000); se usan 2 rezagos (Portmanteau p = 0,296), el mismo orden que elige Hannan-Quinn | 4.5 y A.3 |
 | Variables binarias por quiebres | Hecho | 4.2 |
-| Deuda consolidada como variable del sistema, la "esponja contable" (retroalimentación) | La deuda rezagada entra en las cuatro ecuaciones y se acumula con la identidad: un punto más de deuda sube el EMBI+ 22 puntos básicos | 6.1 |
-| Contraste con y sin retroalimentación | Hecho; casi no cambia porque el riesgo país y el superávit se compensan | 6.6 |
-| Cholesky con orden crecimiento, TCRM, EMBI+, resultado primario | Como robustez; la identificación principal es Blanchard y Perotti, la que aprobó Pablo | 6.6 |
+| Deuda como variable del sistema, la "esponja contable" (retroalimentación) | La deuda rezagada (federal bruta en la especificación principal, consolidada con el BCRA en la extensión) entra en las cuatro ecuaciones y se acumula con la identidad. Un punto más de deuda federal sube el EMBI+ 15,5 puntos básicos, con un intervalo de 90% que incluye el cero (−4,2 a 29,7) | 6.1 |
+| Contraste con y sin retroalimentación | Hecho: sin retroalimentación, la probabilidad de no estabilización de 2031 es 31,4%, frente a 32,8% con ella | 6.6 y A.8 |
+| Cholesky con orden crecimiento, TCRM, EMBI+, resultado primario | Como robustez; la identificación principal es Blanchard y Perotti, la que validaron Pablo y el equipo | 6.6 |
 | Opción B: tasa en dólares desde el EMBI+ y tasa en pesos aparte | Es la especificación principal; la variante con el riesgo país en la tasa en pesos se informa como robustez | 4.6 y 6.6 |
-| Shock de la FED con la tasa sombra | Hecho (Wu y Xia, 2016) | 5.4 |
+| Shock de la FED con la tasa sombra | Hecho (Wu y Xia, 2016), con el empalme de 2022T1 calculado con la tasa efectiva en ambos trimestres | 5.4 |
 | Shocks de la FED identificados por la literatura (alta frecuencia) | Línea futura | 8 |
 | Términos de intercambio (Lanteri, 2019) | Línea futura | 8 |
 | Probabilidad de que la deuda supere 100% del PIB | Reemplazada por la métrica del FMI, porque el 100% no tiene fuente | 4.7 |
 | Módulo de balanza de pagos | Fuera del alcance (es otra tesis); línea futura | 8 |
 | Restricciones de signo y Blanchard-Quah | No se usan: la neutralidad de largo plazo del TCRM es difícil de sostener para Argentina | Guía de defensa |
 | X-13 para desestacionalizar | Se usan variables binarias estacionales | 4.2 |
+
+## Nota 3c. Decisiones de la revisión de octubre de 2026 (detalle en `_decisiones_finales.md`)
+
+| Decisión | Cómo quedó |
+|---|---|
+| Perímetro principal (D1) | Deuda federal bruta, el perímetro del FMI; punto de partida 80,3% del PIB (FMI, 2026). La deuda consolidada con el BCRA es una extensión, desde 52,1% |
+| Muestra (D2) | Datos desde 1999T1, todos con fuente publicada; muestra efectiva 2000T3-2025T4 (102 trimestres) |
+| Rezagos (D3) | 2, por la regla de Schwarz con residuos sin autocorrelación |
+| Resultado primario (D4) | Con rentas de la propiedad para la deuda federal (definición del FMI); sin rentas para la consolidada |
+| Inferencia (D7 y D8) | Remuestreo de *shocks* en bloques de ocho trimestres; intervalos por *bootstrap* de bloques móviles (Brüggemann et al., 2016) con percentiles de Hall (1992); se abandona el *bootstrap* salvaje |
+| H1a (D10) | Vuelve el criterio original (descomposición de la varianza); se cumple en las 19 especificaciones. El cálculo de suficiencia del superávit queda como complemento descriptivo, sin criterio de contraste |
+| H1b (D11) | Mismo perímetro, punto de partida, escenario y métrica que el FMI; se cumple en las 19 especificaciones |
+| H2 (D12) | Criterio sin cambios; respaldada en el efecto sobre la probabilidad, no en el mecanismo |
+| Título (D13) | "Probabilidad de no estabilización de la deuda pública argentina, 2026-2035: un modelo SVARX con determinantes macroeconómicos y política monetaria de Estados Unidos" |
 
 ## Nota 4. Pendientes
 

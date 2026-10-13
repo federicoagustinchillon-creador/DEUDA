@@ -1,11 +1,11 @@
 """
 fig_abanico_deuda.py
 ====================
-Grafico de abanico de la deuda consolidada neta simulada (fase25, especificacion principal)
-para el Capitulo 6. Bandas p5-p95, p10-p90 y p25-p75 y mediana, 2025-2035.
+Grafico de abanico de la deuda federal bruta simulada (fase25, especificacion principal) para
+el Capitulo 6. Bandas p5-p95, p10-p90 y p25-p75, mediana y senda base del FMI, 2025-2035.
 
 Uso: python codigo/modelos/fig_abanico_deuda.py
-Salida: tesis/figuras/fig6_2_abanico_deuda_neta.png
+Salida: tesis/figuras/fig6_2_abanico_deuda.png
 """
 
 from __future__ import annotations
@@ -19,8 +19,9 @@ import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 
 BASE = pathlib.Path(__file__).resolve().parent.parent.parent
-ENTRADA = BASE / "resultados" / "tablas" / "fase25_neta_fanchart.csv"
-SALIDA = BASE / "tesis" / "figuras" / "fig6_2_abanico_deuda_neta.png"
+ENTRADA = BASE / "resultados" / "tablas" / "fase25_federal_fanchart.csv"
+ESCENARIO = BASE / "datos" / "procesados" / "escenario_base_fmi_cr26105.csv"
+SALIDA = BASE / "tesis" / "figuras" / "fig6_2_abanico_deuda.png"
 
 
 def main() -> None:
@@ -30,6 +31,9 @@ def main() -> None:
         ax.fill_between(f.index, f[lo], f[hi], color="#1f4e79", alpha=alpha, linewidth=0,
                         label=f"Percentiles {lo[1:]}-{hi[1:]}")
     ax.plot(f.index, f["p50"], color="#1f4e79", linewidth=1.8, label="Mediana")
+    e = pd.read_csv(ESCENARIO)
+    fmi = e[e.variable == "srd_deuda_publica"].drop_duplicates("anio").set_index("anio")["valor"].reindex(f.index)
+    ax.plot(fmi.index, fmi.values, color="#a23b2a", linewidth=1.4, linestyle="--", label="Escenario base del FMI (2026)")
     ax.set_xlabel("Año")
     ax.set_ylabel("% del PIB")
     ax.set_xticks(f.index)

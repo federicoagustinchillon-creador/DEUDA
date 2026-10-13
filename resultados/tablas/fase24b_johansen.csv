@@ -1,10 +1,10 @@
 variables,rango_nulo,traza,critico_95,rechaza_95
-niveles (sin crecimiento),r <= 0,43.655641018011174,47.8545,False
-niveles (sin crecimiento),r <= 1,19.9859490747347,29.7961,False
-niveles (sin crecimiento),r <= 2,10.830219690979776,15.4943,False
-niveles (sin crecimiento),r <= 3,3.3179444654714163,3.8415,False
-las cinco variables,r <= 0,184.98287054208018,69.8189,True
-las cinco variables,r <= 1,43.14161249444154,47.8545,False
-las cinco variables,r <= 2,18.92942295511629,29.7961,False
-las cinco variables,r <= 3,9.950616111838523,15.4943,False
-las cinco variables,r <= 4,3.0970655168125156,3.8415,False
+niveles (sin crecimiento),r <= 0,44.96588999725631,47.8545,False
+niveles (sin crecimiento),r <= 1,23.963106511142893,29.7961,False
+niveles (sin crecimiento),r <= 2,9.629228902020806,15.4943,False
+niveles (sin crecimiento),r <= 3,2.875815786357549,3.8415,False
+las cinco variables,r <= 0,158.69027894901558,69.8189,True
+las cinco variables,r <= 1,44.98490004548577,47.8545,False
+las cinco variables,r <= 2,24.20871663146341,29.7961,False
+las cinco variables,r <= 3,9.962104281297115,15.4943,False
+las cinco variables,r <= 4,3.0222500110501853,3.8415,False
