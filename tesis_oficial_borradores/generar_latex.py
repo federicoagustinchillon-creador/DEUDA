@@ -84,6 +84,21 @@ def _epigrafe_corto(tex: str) -> str:
     return "".join(salida) + tex[i:]
 
 
+def _indice_tablas(tex: str) -> str:
+    """Las tablas del texto llevan un titulo en negrita ('Tabla 4.1. ...') y no un \\caption: antes de cada
+    titulo se agrega la entrada correspondiente al indice de tablas (\\listoftables)."""
+    salida, i, clave = [], 0, "\\textbf{Tabla "
+    while (k := tex.find(clave, i)) != -1:
+        j, nivel = k + len("\\textbf{"), 1
+        while nivel:
+            nivel += {"{": 1, "}": -1}.get(tex[j], 0)
+            j += 1
+        titulo = re.sub(r"\s+", " ", tex[k + len("\\textbf{"): j - 1]).strip()
+        salida.append(tex[i:k] + f"\\addcontentsline{{lot}}{{table}}{{{titulo}}}" + tex[k:j])
+        i = j
+    return "".join(salida) + tex[i:]
+
+
 def _pandoc(md: str, cursiva: bool = True) -> str:
     """Convierte a LaTeX; con cursiva=True pone en cursiva los términos en inglés (no en las referencias)."""
     if cursiva:
@@ -93,7 +108,7 @@ def _pandoc(md: str, cursiva: bool = True) -> str:
         ["pandoc", "-f", "markdown-auto_identifiers", "-t", "latex", "--top-level-division=chapter"],
         input=md, capture_output=True, text=True, encoding="utf-8", check=True,
     )
-    return _epigrafe_corto(_cortes_texttt(r.stdout))
+    return _indice_tablas(_epigrafe_corto(_cortes_texttt(r.stdout)))
 
 
 def generar() -> list[Path]:

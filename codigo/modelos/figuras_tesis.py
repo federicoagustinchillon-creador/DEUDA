@@ -72,8 +72,12 @@ def fig5_1() -> None:
     for ctrl, color, etiqueta in ((CONTROL_FEDERAL, ROJO, "FMI (2026), federal bruta"),
                                   (CONTROL_CONSOLIDADA, VERDE, "FMI (2026), consolidada")):
         ax.scatter([pd.Timestamp(f"{a}-12-31") for a in ctrl], list(ctrl.values()), color=color, zorder=5, s=20, label=etiqueta)
+    inicio = pd.Timestamp(f24.INICIO_CONSOLIDADA)
+    ax.axvspan(n.index.min(), inicio, color="#eeeeee", zorder=0)
+    ax.axvline(inicio, color=GRIS, lw=0.8, ls="--")
+    ax.text(n.index.min() + pd.Timedelta(days=120), 152, "Antes de 2002\nla consolidada\nno se estima", fontsize=7, color=GRIS, va="top", ha="left")
     ax.set_ylabel("% del PIB")
-    ax.legend(fontsize=7.5, loc="upper left")
+    ax.legend(fontsize=7.5, loc="upper center", bbox_to_anchor=(0.55, 1.0))
     guardar(fig, "fig5_1_deuda_1996_2025.png")
 
 
@@ -82,14 +86,36 @@ def fig5_2() -> None:
     titulos = {"pb_pib": "Resultado primario (% del PIB, trimestral anualizado)",
                "crec": "Crecimiento real trimestral (%)", "EMBI": "EMBI Argentina (puntos básicos)",
                "TCRM": "Tipo de cambio real multilateral (índice)"}
-    fig, axs = plt.subplots(2, 2, figsize=(7, 4.8), sharex=True)
-    for ax, c in zip(axs.flat, f24.ENDOG):
+    fig = plt.figure(figsize=(7, 5.4))
+    gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 0.22], hspace=0.45)
+    axs = [fig.add_subplot(gs[i, j]) for i in range(2) for j in range(2)]
+    for ax, c in zip(axs, f24.ENDOG):
         ax.plot(Y.index, Y[c], color=AZUL, lw=0.9)
         for q in quiebres:
             ax.axvline(q, color=ROJO, lw=0.7, ls=":")
         ax.set_title(titulos[c], fontsize=8)
+        ax.set_xlim(Y.index.min(), Y.index.max())
+    # Franja de gobiernos (Menem es la categoria de referencia de las binarias presidenciales).
+    fin_ventana = Y.index.max() + pd.offsets.QuarterEnd(0)
+    inicios = {"Menem": Y.index.min() - pd.offsets.QuarterEnd(1)}
+    mandatos = {"Menem": (inicios["Menem"], pd.Timestamp(list(f24.MANDATOS.values())[0][0]) - pd.offsets.QuarterEnd(1))}
+    etiquetas = {"Menem": "Menem", "De_la_Rua": "De la Rúa", "Duhalde": "Duh.", "N_Kirchner": "N. Kirchner",
+                 "CF_Kirchner": "C. Fernández de Kirchner", "Macri": "Macri", "A_Fernandez": "A. Fernández", "Milei": "Milei"}
+    for nombre, (ini, fin) in f24.MANDATOS.items():
+        mandatos[nombre] = (pd.Timestamp(ini) - pd.offsets.QuarterEnd(1), pd.Timestamp(fin))
+    axg = fig.add_subplot(gs[2, :])
+    for k, (nombre, (ini, fin)) in enumerate(mandatos.items()):
+        axg.axvspan(ini, fin, color=(AZUL if k % 2 == 0 else GRIS), alpha=0.28, lw=0)
+        axg.text(ini + (fin - ini) / 2, 0.5, etiquetas[nombre], ha="center", va="center", fontsize=5.6 if nombre in ("Duhalde", "De_la_Rua") else 6.2)
+    axg.set_xlim(Y.index.min(), Y.index.max())
+    axg.set_yticks([])
+    axg.grid(False)
+    for lado in ("left", "bottom"):
+        axg.spines[lado].set_visible(False)
+    axg.tick_params(axis="x", length=0, labelbottom=False)
     fechas = ", ".join(f"{q.year}T{q.quarter}" for q in quiebres)
-    fig.text(0.5, 0.005, f"Líneas punteadas: quiebres estructurales de Bai y Perron ({fechas})", ha="center", fontsize=7)
+    fig.text(0.5, 0.005, f"Líneas punteadas: quiebres de Bai y Perron conservados ({fechas}). Franja inferior: gobiernos; Menem es la referencia de las binarias presidenciales.",
+             ha="center", fontsize=6.3)
     guardar(fig, "fig5_2_variables_endogenas.png")
 
 
@@ -136,21 +162,32 @@ def fig6_3() -> None:
     t = pd.read_csv(TABLAS / "fase25_federal_resumen.csv", index_col=0)
     bloques = {"vshare_fiscal": "Fiscal", "vshare_actividad": "Actividad", "vshare_cambiario_y_riesgo": "Cambiario y\nde riesgo",
                "vshare_externo": "Externo\n(FED y VIX)"}
+    ext = {"vshare_externo_vix": "VIX\nsolo", "vshare_externo_fed": "FED\nsola", "vshare_externo_fed_directo": "FED, solo\nefecto directo"}
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(8.4, 3.2), gridspec_kw={"width_ratios": [4, 3]})
     vals = [_intervalo(t, c) for c in bloques]
-    fig, ax = plt.subplots(figsize=(6, 3))
     ax.bar(list(bloques.values()), [v[0] for v in vals], color=[ROJO, GRIS, AZUL, AZUL],
            yerr=[[v[1] for v in vals], [v[2] for v in vals]], capsize=4, error_kw={"lw": 0.8})
     for k, v in enumerate(vals):
         ax.text(k, 2, f"{v[0]:.1f}%".replace(".", ","), ha="center", color="white", fontsize=9, fontweight="bold")
     ax.set_ylabel("% de la varianza de la deuda en 2035")
+    ax.set_title("Participación de cada bloque", fontsize=8.5)
     ax.grid(axis="x", visible=False)
+    v2 = [_intervalo(t, c) for c in ext]
+    bx.bar(list(ext.values()), [v[0] for v in v2], color=[AZUL, VERDE, VERDE],
+           yerr=[[v[1] for v in v2], [v[2] for v in v2]], capsize=4, error_kw={"lw": 0.8})
+    for k, v in enumerate(v2):
+        bx.text(k, max(v[0] * 0.5, 2), f"{v[0]:.1f}%".replace(".", ","), ha="center", color="white", fontsize=8.5, fontweight="bold")
+    bx.axhline(t.loc["vshare_externo", "estimacion"], color=GRIS, lw=0.9, ls="--")
+    bx.text(2.45, t.loc["vshare_externo", "estimacion"], "bloque externo\ncompleto", fontsize=6.5, color=GRIS, ha="right", va="bottom")
+    bx.set_title("Apertura del bloque externo (no aditiva)", fontsize=8.5)
+    bx.grid(axis="x", visible=False)
     guardar(fig, "fig6_3_varianza_por_bloque.png")
 
 
 ESPECIFICACIONES = {
     "federal": "Principal", "consolidada": "Consolidada\ncon el BCRA", "federal_dom": "Tasas\nen pesos",
     "federal_sin_retro": "Sin retro-\nalimentación", "federal_p3": "Tres\nrezagos", "federal_sin_default": "Sin shocks\ndel default",
-    "federal_desde2004": "Datos\ndesde 2004", "federal_cr2595": "Escenario\nFMI 2025", "federal_kilian": "Corrección\nde Kilian",
+    "federal_desde2004": "Datos\ndesde 2004", "federal_sin_presidenciales": "Sin binarias\npresidenciales", "federal_cr2595": "Escenario\nFMI 2025", "federal_kilian": "Corrección\nde Kilian",
 }
 
 

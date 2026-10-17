@@ -1,3 +1,5 @@
+> **Para replicar las cifras de la tesis vigente, véase [`GUIA_DE_EJECUCION.md`](GUIA_DE_EJECUCION.md).** Lo que sigue describe la estructura histórica de la carpeta.
+
 # Código — Orientación
 
 Tres subcarpetas, en el orden en que se ejecutan:

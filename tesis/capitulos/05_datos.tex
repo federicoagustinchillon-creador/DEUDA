@@ -15,14 +15,13 @@ tienen dato publicado en toda la ventana, el EMBI antes de diciembre de
 
 \section{Series y fuentes}
 
-\textbf{Tabla 5.1. Series del modelo: rol, fuente y construcción}
+\addcontentsline{lot}{table}{Tabla 5.1. Series del modelo: rol, fuente y construcción}\textbf{Tabla 5.1. Series del modelo: rol, fuente y construcción}
 
-{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Variable
@@ -39,9 +38,10 @@ Construcción
 \endlastfoot
 Deuda federal bruta (\% del PIB) & Especificación principal & MECON,
 Informe de Deuda Pública (Administración Central) & Sección 5.2 \\
-Deuda consolidada con el BCRA (\% del PIB) & Extensión & MECON (deuda de
-la Administración Central) y BCRA (balance y estadísticas monetarias) &
-Sección 5.2 \\
+Deuda consolidada con el BCRA (\% del PIB) & Extensión, estimada desde
+2002 & MECON (deuda de la Administración Central) y BCRA (balance y
+estadísticas monetarias) & Sección 5.2; no descuenta las tenencias del
+FGS (sección 5.6) \\
 Resultado primario (\% del PIB) & Endógena & MECON, esquema
 ahorro-inversión-financiamiento del Sector Público Nacional, base caja &
 Suma mensual por trimestre, anualizada; sin rentas de la propiedad
@@ -62,11 +62,11 @@ Tasa de política monetaria de la Reserva Federal (FED) & Exógena & Tasa
 de fondos federales, obtenida de FRED (Board of Governors of the Federal
 Reserve System, s. f.); tasa sombra de Wu y Xia (2016) (Federal Reserve
 Bank of Atlanta, s. f.) & Promedio trimestral; tasa sombra en el límite
-cero; cambio de serie en el trimestre 2022T1 (sección 5.4) \\
+cero; cambios de serie en 2009T1, 2016T1, 2020T2 y 2022T1 (sección
+5.4) \\
 VIX & Exógena & Índice VIX de la \emph{Chicago Board Options Exchange}
 (CBOE), descargado de Yahoo Finance & Promedio trimestral \\
 \end{longtable}
-}
 
 Fuente: elaboración propia.
 
@@ -93,7 +93,17 @@ diferencia no entra en la proyección. La Figura 5.1 muestra las dos
 series de deuda.
 
 La deuda consolidada con el BCRA, de la extensión, sigue la
-consolidación del FMI (2021, anexo II):
+consolidación del FMI (2021, anexo II). Se construye para 1996-2025,
+pero la extensión se estima desde 2002: hasta 2001 el BCRA operó con la
+autonomía formal de la Carta Orgánica de 1992 y bajo la Convertibilidad,
+sin financiar al Tesoro, y el criterio del FMI para consolidar al banco
+central con el gobierno es precisamente que lo financie o realice
+actividades cuasifiscales (sección 2.9). Antes de 2002 la consolidación
+no tiene fundamento en ese criterio. Por eso la extensión usa una
+muestra más corta que la especificación principal (sección 7.6). Aunque
+la serie se llama deuda consolidada con el BCRA, solo consolida al
+Tesoro con el BCRA y no descuenta la deuda del Tesoro en poder del FGS,
+de modo que no equivale a la deuda consolidada del FMI (sección 5.6):
 
 D = B − T + L − DEP
 
@@ -109,7 +119,7 @@ rige el valor contable.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Deuda federal bruta y deuda consolidada con el BCRA en 1996-2025 (\% del PIB de los últimos cuatro trimestres). Los puntos son las cifras del FMI a diciembre de 2023, 2024 y 2025 (Tabla 5.2). Fuente: elaboración propia con datos del MECON, el BCRA y el INDEC; FMI (2026, anexo II, cuadro 2).}]{fig5_1_deuda_1996_2025.png}}
+\includegraphics{fig5_1_deuda_1996_2025.png}
 \caption[Deuda federal bruta y deuda consolidada con el BCRA en 1996-2025 (\% del PIB de los últimos cuatro trimestres)]{Deuda federal bruta y deuda consolidada con el BCRA en
 1996-2025 (\% del PIB de los últimos cuatro trimestres). Los puntos son
 las cifras del FMI a diciembre de 2023, 2024 y 2025 (Tabla 5.2). Fuente:
@@ -180,24 +190,28 @@ iniciales.
 
 \textbf{Los resultados no dependen de los empalmes.} Con datos desde
 1999, que solo usan el EMBI observado, la probabilidad de no
-estabilización de la deuda federal bruta en 2031 es de 32,4\% {[}26,6;
-37,0{]}, contra 31,8\% {[}25,2; 36,4{]} con la ventana completa, y las
-conclusiones sobre H1a y H2 no cambian (Apéndice, sección A.9).
+estabilización de la deuda federal bruta en 2031 es de 29,5\% {[}22,5;
+36,7{]}, contra 27,7\% {[}20,6; 34,7{]} con la ventana completa, y las
+conclusiones sobre H1a y sobre el efecto de la FED en la probabilidad no
+cambian (Apéndice, sección A.9).
 
 La tasa de la FED es la de fondos federales, salvo en los trimestres en
 el límite cero (2009-2015 y 2020-2021), donde la tasa efectiva deja de
 reflejar la orientación de la política y se usa la tasa sombra de Wu y
-Xia (2016). En el modelo entra su variación trimestral. En el trimestre
-2022T1, cuando la serie pasa de la tasa sombra a la efectiva, la
-variación se calcula con la tasa efectiva en ambos trimestres, para no
-confundir el cambio de serie con un cambio de política. Su desvío
+Xia (2016). En el modelo entra su variación trimestral. La serie cambia
+de tramo cuatro veces: entra al límite cero en 2009T1 y 2020T2 y sale de
+él en 2016T1 y 2022T1. En cada una de esas transiciones la variación se
+calcula con la tasa efectiva en ambos trimestres, para no confundir el
+cambio de serie con un cambio de política; sin esa corrección, la
+variación de 2009T1 saldría de la diferencia entre una tasa sombra y una
+efectiva. Dentro de cada tramo se usa la propia serie. Su desvío
 estándar en la muestra, 0,494 puntos, es el tamaño del primer escenario
 de la FED (sección 4.6). Las Figuras 5.2 y 5.3 muestran las variables
 endógenas y las exógenas.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Variables endógenas del SVARX en 1996-2025. El crecimiento es la variación trimestral del PIB real sin desestacionalizar. El EMBI de 1996T1-1998T3 y el TCRM de 1996 provienen de los empalmes de la sección 5.4. Las líneas punteadas marcan los quiebres de Bai y Perron. Fuente: elaboración propia con datos del INDEC, el MECON, el BCRA y J.P. Morgan (sección 5.4).}]{fig5_2_variables_endogenas.png}}
+\includegraphics{fig5_2_variables_endogenas.png}
 \caption[Variables endógenas del SVARX en 1996-2025]{Variables endógenas del SVARX en 1996-2025. El crecimiento es
 la variación trimestral del PIB real sin desestacionalizar. El EMBI de
 1996T1-1998T3 y el TCRM de 1996 provienen de los empalmes de la sección
@@ -208,7 +222,7 @@ elaboración propia con datos del INDEC, el MECON, el BCRA y J.P. Morgan
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Variables exógenas del SVARX. Arriba, tasa de política de la Reserva Federal: tasa de fondos federales y, en el límite cero, tasa sombra de Wu y Xia (2016). Abajo, VIX. Promedios trimestrales. Fuente: elaboración propia con datos de Board of Governors of the Federal Reserve System (s. f.), Federal Reserve Bank of Atlanta (s. f.) y CBOE, descargados de Yahoo Finance.}]{fig5_3_fed_y_vix.png}}
+\includegraphics{fig5_3_fed_y_vix.png}
 \caption[Variables exógenas del SVARX]{Variables exógenas del SVARX. Arriba, tasa de política de la
 Reserva Federal: tasa de fondos federales y, en el límite cero, tasa
 sombra de Wu y Xia (2016). Abajo, VIX. Promedios trimestrales. Fuente:
@@ -219,18 +233,17 @@ descargados de Yahoo Finance.}
 
 \section{Contraste con el FMI}
 
-\textbf{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB,
+\addcontentsline{lot}{table}{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB, diciembre)}\textbf{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB,
 diciembre)}
 
-{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Concepto
@@ -261,7 +274,6 @@ restan & 0,8 & no se restan \\
 Deuda consolidada con el BCRA & 128,2 & 111,1 & 61,1 & 53,6 & 61,0 &
 52,1 \\
 \end{longtable}
-}
 
 Fuente: elaboración propia con datos del MECON, el BCRA y el INDEC; FMI
 (2026, anexo II, cuadro 2, líneas 1, 3, 4 y 5). En el cuadro del FMI, la

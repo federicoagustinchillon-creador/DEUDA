@@ -318,7 +318,8 @@ def drivers_historicos() -> pd.DataFrame:
     pb.index = pb.index.year
     infl = (nom_a / real_a).pct_change()
     i_ef = intereses / deuda_ars.shift(1)
-    inicio = pd.Timestamp(f24.DESDE).year + 1 if f24.DESDE else 1997
+    desde = f24.desde_efectivo(DEUDA)
+    inicio = pd.Timestamp(desde).year + 1 if desde else 1997
     dr = pd.DataFrame({"g": 100 * real_a.pct_change(), "r": 100 * ((1 + i_ef) / (1 + infl) - 1),
                        "z": 100 * tcrm.pct_change(), "pb": pb}).loc[inicio:2025]
     if dr.isna().any().any():
@@ -508,6 +509,19 @@ def medidas(par: dict, shocks: np.ndarray, ext: np.ndarray, fed: dict[str, np.nd
     tot = sum(var.values())
     for nombre, v in var.items():
         f[f"vshare_{nombre}"] = 100 * v / tot
+    # Apertura del bloque externo (mismo denominador): VIX y tasa de la FED por separado, y la tasa de
+    # la FED solo con su efecto directo en la identidad (costo de la deuda en dolares), sin la
+    # respuesta de las variables del sistema (gamma_fed = 0). La diferencia con la tasa de la FED
+    # completa es el efecto indirecto. Las participaciones no son aditivas (la simulacion es no lineal).
+    solo_vix, solo_fed = cero_ex.copy(), cero_ex.copy()
+    solo_vix[:, :, 0], solo_fed[:, :, 1] = ext[:, :, 0], ext[:, :, 1]
+    par_directo = {**par, "gamma_fed": 0.0 * par["gamma_fed"]}
+    v_vix = float(sim(cero_sh, solo_vix, fed["base"])["d"][:, -1].var())
+    v_fed = float(sim(cero_sh, solo_fed, fed["base"])["d"][:, -1].var())
+    v_dir = float(simular(par_directo, cero_sh, solo_fed, fed["base"], esc, d0, alfa, a_fmi, tcrm0, dom,
+                          sf_cero=sf_cero)["d"][:, -1].var())
+    f["vshare_externo_vix"], f["vshare_externo_fed"] = 100 * v_vix / tot, 100 * v_fed / tot
+    f["vshare_externo_fed_directo"] = 100 * v_dir / tot
     f["var_total_2035"] = float(b["d"][:, -1].var())
     f["var_suma_bloques_2035"] = tot
     f["h1a_nofiscal_menos_fiscal"] = 100 - 2 * f["vshare_fiscal"]
@@ -527,7 +541,10 @@ def acotar(h: pd.DataFrame, cols: tuple[str, str] = ("inf", "sup")) -> pd.DataFr
     cols = list(cols)
     es_p = h.index.str.contains("_p_noest_|_p_sube2_") & ~h.index.str.startswith("dif_")
     h.loc[es_p, cols] = h.loc[es_p, cols].clip(0, 1)
-    es_v = h.index.str.startswith("vshare_")
+    # Las aperturas del bloque externo (VIX, FED) no son aditivas y pueden pasar de 100: solo se acota abajo.
+    es_v = h.index.str.startswith("vshare_") & ~h.index.str.startswith("vshare_externo_")
+    es_ve = h.index.str.startswith("vshare_externo_")
+    h.loc[es_ve, cols] = h.loc[es_ve, cols].clip(lower=0)
     h.loc[es_v, cols] = h.loc[es_v, cols].clip(0, 100)
     es_d = h.index.str.startswith("h1a_")
     h.loc[es_d, cols] = h.loc[es_d, cols].clip(-100, 100)
@@ -540,7 +557,7 @@ DEUDA = "federal"
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--deuda", default="federal", choices=list(f24.SERIES_DEUDA))
-    ap.add_argument("--B", type=int, default=200)
+    ap.add_argument("--B", type=int, default=1000, help="replicas de parametros (1.000: colas del 95% con Bonferroni)")
     ap.add_argument("--B1", type=int, default=100, help="replicas para medir el sesgo (--kilian)")
     ap.add_argument("--N", type=int, default=1000)
     ap.add_argument("--N-central", type=int, default=20000)
@@ -554,6 +571,7 @@ def main() -> None:
     ap.add_argument("--sf-cero", action="store_true", help="ajuste stock-flujo del FMI en cero")
     ap.add_argument("--pb-alternativa", action="store_true", help="la otra definicion del resultado primario")
     ap.add_argument("--sin-quiebres", action="store_true")
+    ap.add_argument("--sin-presidenciales", action="store_true", help="sin binarias por mandato (robustez)")
     ap.add_argument("--desde", default=None, help="primer trimestre de los datos (robustez)")
     ap.add_argument("--lam", type=float, default=None)
     ap.add_argument("--alpha-y", type=float, default=None)
@@ -571,6 +589,7 @@ def main() -> None:
     if a.desde:
         f24.DESDE = a.desde
     f24.SIN_QUIEBRES = a.sin_quiebres
+    f24.SIN_PRESIDENCIALES = a.sin_presidenciales
     _, p_mp, p_lp, _ = ESCENARIOS[ESC]
     rng_est = np.random.default_rng(SEMILLA)      # bootstrap de parametros
     rng_c = np.random.default_rng(SEMILLA + 1)    # trayectorias de la estimacion central
@@ -585,7 +604,8 @@ def main() -> None:
                  "cholesky_fiscal_ultimo": "chol_ultimo"}[IDENT], "sin_retro" if SIN_RETRO else "",
                  "" if ESC == "cr26105" else ESC, "sin_default" if a.sin_default else "", "sf0" if a.sf_cero else "",
                  "pb_alt" if a.pb_alternativa else "", f"desde{a.desde[:4]}" if a.desde else "",
-                 "sin_quiebres" if a.sin_quiebres else "", "kilian" if KILIAN else "",
+                 "sin_quiebres" if a.sin_quiebres else "", "sin_presidenciales" if a.sin_presidenciales else "",
+                 "kilian" if KILIAN else "",
                  f"lam{a.lam:g}" if a.lam is not None else "", f"alfa{a.alpha_y:g}" if a.alpha_y is not None else "",
                  f"d0_{a.d0:g}" if a.d0 is not None else "", f"p{a.p}" if a.p is not None else ""]
     suf = "_".join(e for e in etiquetas if e)
@@ -673,7 +693,7 @@ def main() -> None:
     resumen.to_csv(TABLAS / f"fase25_{suf}_resumen.csv")
     meta.update({"escenario": ESC, "deuda": a.deuda, "lam": LAM, "alpha_y": f24.ALPHA_Y, "d0": d0,
                  "alfa_pesos": alfa, "alfa_pesos_fmi": a_fmi, "p": p, "pb": f24.columna_pb(a.deuda),
-                 "desde": f24.DESDE, "sin_quiebres": f24.SIN_QUIEBRES, "B": a.B, "N": a.N,
+                 "desde": f24.desde_efectivo(a.deuda), "sin_quiebres": f24.SIN_QUIEBRES, "sin_presidenciales": f24.SIN_PRESIDENCIALES, "B": a.B, "N": a.N,
                  "N_central": a.N_central, "bloque_sim": BLOQUE_SIM, "bloque_inf": BLOQUE_INF,
                  "phi_vix": phi["vix"], "phi_fed": phi["fed"], "sd_dfed": sd_fed,
                  "desvio_max_senda_fmi": desvio_fmi, "prob_fmi_mediano_plazo": p_mp, "prob_fmi_2035": p_lp,

@@ -17,6 +17,7 @@ correr() {  # nombre, comando...
 correr empalmes python codigo/ingesta_datos/empalme_embi_tcrm_1996_1998.py
 correr f24_federal python $M/fase24_svarx_1996_2025.py --deuda federal
 correr f24_consolidada python $M/fase24_svarx_1996_2025.py --deuda consolidada
+correr f24_sin_presidenciales python $M/fase24_svarx_1996_2025.py --deuda federal --sin-presidenciales
 correr f24b_propiedades python $M/fase24b_propiedades_series.py
 
 S="python $M/fase25_simulacion_dsa_svarx.py"
@@ -35,6 +36,7 @@ correr f25_sin_default $S --sin-default
 correr f25_desde1999 $S --desde 1999-01-01
 correr f25_desde2004 $S --desde 2004-01-01
 correr f25_sin_quiebres $S --sin-quiebres
+correr f25_sin_presidenciales $S --sin-presidenciales
 correr f25_sf0 $S --sf-cero
 correr f25_lam015 $S --lam 0.15
 correr f25_lam040 $S --lam 0.40

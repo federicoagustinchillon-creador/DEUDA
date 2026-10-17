@@ -87,6 +87,10 @@ def main() -> None:
     ex = f[(f.p05 > 0) | (f.p95 < 0)]
     L.append(f"- Respuestas a la FED: {len(ex)} de {len(f)} intervalos excluyen el cero: " + ", ".join(f"{i} {n(row.p50, 3)} [{n(row.p05, 3)}; {n(row.p95, 3)}]" for i, row in ex.iterrows()))
 
+    # Redondeos usados en el texto del capitulo 6 (1 y 2 decimales) y referencia de Bohn.
+    _bf = pd.read_csv(T / "fase24_federal_bootstrap.csv", index_col=0)
+    _bc = pd.read_csv(T / "fase24_consolidada_bootstrap.csv", index_col=0)
+    L.append("- Redondeos para el texto: deuda → EMBI federal " + ", ".join(n(_bf.loc["deuda_a_EMBI", k], 1) for k in ("p50", "p05", "p95")) + "; consolidada " + ", ".join(n(_bc.loc["deuda_a_EMBI", k], 1) for k in ("p50", "p05", "p95")) + "; deuda → crec federal " + ", ".join(n(_bf.loc["deuda_a_crec", k], 2) for k in ("p50", "p05", "p95")) + "; coeficiente de Bohn de referencia 0,05; respuestas del resultado primario a la FED entre -0,05 y -0,11; parte indirecta del efecto de la FED en la deuda 2035: " + n(19.3 - 14.8) + " pp (diferencia entre el total y el costo directo).")
     L.append("\n## Simulación principal (deuda federal bruta, intervalos de Hall al 90%)")
     fc = pd.read_csv(T / "fase25_federal_fanchart.csv", index_col="anio")
     L.append("- Percentiles de la deuda (p5, p25, mediana, p75, p95): " + "; ".join(
@@ -131,7 +135,7 @@ def main() -> None:
     L.append(f"- P(2035) mínima {n(100 * su.p_noest_2035[imin], 2)}% con +{n(su.dpb[imin], 2)} pp; después sube a {n(100 * su.p_noest_2035.iloc[-1], 2)}% con +{n(su.dpb.iloc[-1], 2)} (no monótona).")
 
     L.append("\n## Extensión consolidada")
-    L.append(f"- No estabilización 2031 {iv(rc, 'base_p_noest_2031')}; 2035 {iv(rc, 'base_p_noest_2035')}; ancho {n(rc.loc['base_ancho_p5_p95_2031', 'estimacion'])}; no fiscal menos fiscal {iv(rc, 'h1a_nofiscal_menos_fiscal', 1)}; senda FED prob 2035 {iv(rc, 'dif_fed_2022_2025_p_noest_2035')}; deuda {iv(rc, 'dif_fed_2022_2025_d2035', 1)}; senda base 2031 {n(rc.loc['senda_base_d2031', 'estimacion'])}, 2035 {n(rc.loc['senda_base_d2035', 'estimacion'])}.")
+    L.append(f"- No estabilización 2031 {iv(rc, 'base_p_noest_2031')}; 2035 {iv(rc, 'base_p_noest_2035')}; ancho {n(rc.loc['base_ancho_p5_p95_2031', 'estimacion'])}; no fiscal menos fiscal {iv(rc, 'h1a_nofiscal_menos_fiscal', 1)}; senda FED prob 2035 {iv(rc, 'dif_fed_2022_2025_p_noest_2035')}; réplicas con media de la deuda 2035 explosiva (|d|>1000): {int((pd.read_csv(T / 'fase25_consolidada_replicas.csv')['base_d2035_media'].abs() > 1000).sum())} de 1000 (no se informa la media de la deuda consolidada); senda base 2031 {n(rc.loc['senda_base_d2031', 'estimacion'])}, 2035 {n(rc.loc['senda_base_d2035', 'estimacion'])}.")
 
     L.append("\n## Shocks a la manera del FMI")
     for s in ("federal_fmi", "consolidada_fmi"):
