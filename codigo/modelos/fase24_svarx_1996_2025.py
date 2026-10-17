@@ -1,9 +1,10 @@
 """
 fase24_svarx_1996_2025.py
 =========================
-SVARX trimestral (Capitulo 4 de la tesis, metodologia.md). Datos desde 1999T1 (todas las series
-de fuentes publicadas; el EMBI+ anterior a 1999 se reconstruia con valores transcriptos y se deja
-afuera); muestra efectiva comun 2000T3-2025T4.
+SVARX trimestral, ventana 1996-2025 (Capitulo 4 de la tesis, metodologia.md). Los trimestres de
+1996-1998 del EMBI y de 1996 del TCRM, sin dato directo publicado, salen de los empalmes
+documentados y validados en codigo/ingesta_datos/empalme_embi_tcrm_1996_1998.py. Los primeros
+trimestres se usan como condiciones iniciales: muestra efectiva comun 1998T2-2025T4.
 
 Forma reducida (Y_t endogeno, X_t exogeno):
     Y_t = nu + sum_{i=1..p} A_i Y_{t-i} + Gamma X_t + u_t
@@ -68,7 +69,7 @@ SEMILLA: int = 20261011
 # Orden maximo considerado. Todas las especificaciones (cualquier p, cualquier serie de deuda)
 # se estiman sobre la MISMA muestra efectiva: las primeras PMAX observaciones se reservan como
 # condiciones iniciales (Lutkepohl, 2005, sec. 4.3: los criterios de informacion se comparan
-# sobre un periodo comun). Con datos desde 1999T1 la muestra efectiva es 2000T3-2025T4.
+# sobre un periodo comun). Con datos desde 1996 la muestra efectiva es 1998T2-2025T4.
 PMAX: int = 6
 ENDOG: list[str] = ["pb_pib", "crec", "EMBI", "TCRM"]
 SERIES_DEUDA: dict[str, tuple[str, str]] = {
@@ -87,17 +88,16 @@ SERIES_DEUDA: dict[str, tuple[str, str]] = {
     "tesoro": ("deuda_consolidada_neta_nominal_1996_2025.csv", "bruta_federal_pib"),
 }
 # Opciones de robustez de la estimacion (se fijan desde fase25 antes de cargar los datos):
-#   PB_COLUMNA: None elige la definicion coherente con el perimetro de la deuda:
-#               - federal: "pb_pib_trim" (con rentas de la propiedad). Es la definicion del FMI
-#                 para el gobierno federal (2025: 1,4% en el FMI y 1,38% en esta serie): las
-#                 utilidades que el BCRA transfiere al Tesoro son ingreso del Tesoro.
-#               - consolidada y demas: "pb_pib_trim_sin_rentas", porque en el perimetro
-#                 consolidado las utilidades del BCRA son un flujo interno.
-#               Un valor explicito fuerza la otra definicion (robustez).
-#   DESDE: primer trimestre de los datos; "1999-01-01" (principal) o "2004-01-01" (robustez).
+#   PB_COLUMNA: None usa el resultado primario sin rentas de la propiedad en todos los
+#               perimetros. El FMI excluye de su resultado primario las transferencias de
+#               utilidades del BCRA (FMI, 2026, cuadro 1, nota 4), y la fuente publica no las
+#               separa del resto de las rentas de la propiedad: la serie sin rentas es la que las
+#               excluye. "pb_pib_trim" (con rentas) es la robustez.
+#   DESDE: primer trimestre de los datos; None = 1996 (principal); "1999-01-01" (solo EMBI
+#          observado, robustez del empalme) o "2004-01-01" (robustez).
 #   SIN_QUIEBRES: True quita las variables binarias de quiebre (robustez).
 PB_COLUMNA: str | None = None
-DESDE: str | None = "1999-01-01"
+DESDE: str | None = None
 SIN_QUIEBRES: bool = False
 
 
@@ -112,9 +112,7 @@ def dfed_empalmado(fed: pd.DataFrame) -> pd.Series:
 
 def columna_pb(tipo_deuda: str) -> str:
     """Definicion del resultado primario coherente con el perimetro (ver PB_COLUMNA)."""
-    if PB_COLUMNA is not None:
-        return PB_COLUMNA
-    return "pb_pib_trim" if tipo_deuda == "federal" else "pb_pib_trim_sin_rentas"
+    return PB_COLUMNA if PB_COLUMNA is not None else "pb_pib_trim_sin_rentas"
 
 
 def cargar_datos(tipo_deuda: str, rezagos_fed: int) -> tuple[pd.DataFrame, pd.DataFrame, list[pd.Timestamp]]:
@@ -306,7 +304,7 @@ def main() -> None:
     if a.desde:
         DESDE = a.desde
     if a.pb_alternativa:
-        PB_COLUMNA = "pb_pib_trim_sin_rentas" if a.deuda == "federal" else "pb_pib_trim"
+        PB_COLUMNA = "pb_pib_trim"
     SIN_QUIEBRES = a.sin_quiebres
 
     Y, X, quiebres = cargar_datos(a.deuda, a.rezagos_fed)

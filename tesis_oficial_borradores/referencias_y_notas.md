@@ -8,6 +8,7 @@
 - Banco Central de la República Argentina [BCRA]. (s. f.). *Balance del Banco Central, serie histórica* [Conjunto de datos]. https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/balbcrhis.xls
 - Banco Central de la República Argentina [BCRA]. (2025). *Informe monetario mensual, junio de 2025*. https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/informe-monetario-mensual-jun-25.pdf
 - Banco Central de la República Argentina [BCRA]. (2026). *Informe monetario mensual, diciembre de 2025*. https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/informe-monetario-mensual-dic-25.pdf
+- Bank for International Settlements [BIS]. (s. f.). *Effective exchange rate indices: Broad real effective exchange rate, Argentina* [M.R.B.AR; conjunto de datos]. https://data.bis.org/topics/EER
 - Blanchard, O. (1990). *Suggestions for a new set of fiscal indicators* (OECD Economics Department Working Papers No. 79). OECD Publishing.
 - Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, *109*(4), 1197-1229. https://doi.org/10.1257/aer.109.4.1197
 - Blanchard, O., y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. *Quarterly Journal of Economics*, *117*(4), 1329-1368. https://doi.org/10.1162/003355302320935043
@@ -108,7 +109,7 @@
 
 ## Nota 2. Tamaño del shock de la FED (decidido el 11/10/2026)
 
-Los +100 puntos básicos de una versión anterior no estaban justificados y se sacaron. Se usan dos escenarios, los dos con fundamento: un nivel de la tasa 0,504 puntos más alto en forma permanente desde 2026T1, que es un desvío estándar de la variación trimestral de la tasa en la muestra (convención de la literatura de VAR), y la repetición en 2026-2029 de la senda trimestral de 2022-2025 (sube 5,25 puntos y baja 1,43, y desde 2030 queda 3,82 puntos por encima del escenario base). Los dos elevan la probabilidad de no estabilización de 2035 con intervalos que excluyen el cero (Capítulo 6).
+Los +100 puntos básicos de una versión anterior no estaban justificados y se sacaron. Se usan dos escenarios, los dos con fundamento: un nivel de la tasa 0,494 puntos más alto en forma permanente desde 2026T1, que es un desvío estándar de la variación trimestral de la tasa en la muestra (convención de la literatura de VAR), y la repetición en 2026-2029 de la senda trimestral de 2022-2025 (sube 5,25 puntos y baja 1,43, y desde 2030 queda 3,82 puntos por encima del escenario base). Los dos elevan la probabilidad de no estabilización de 2035 con intervalos de 90% que excluyen el cero; con la corrección de Bonferroni solo lo sigue haciendo la senda de 2022-2025 (Capítulo 6).
 
 ## Nota 3. Cambios respecto de la versión anterior del texto
 
@@ -123,7 +124,7 @@ Los +100 puntos básicos de una versión anterior no estaban justificados y se s
   - Se sacan Garud y la tesis propia.
 - **Canal cuasifiscal del shock de la FED:** se redacta en pasado.
 - **Pregunta e hipótesis:** se acorta la pregunta, se agregan seis objetivos específicos, y H1a mantiene su concepto central con un criterio de contraste explícito (Capítulo 4).
-- **Perímetro y muestra (octubre de 2026):** las preguntas, los objetivos y las hipótesis se refieren a la deuda pública, federal bruta en la especificación principal y consolidada con el BCRA como extensión; los datos empiezan en 1999.
+- **Perímetro y muestra (octubre de 2026):** las preguntas, los objetivos y las hipótesis se refieren a la deuda pública, federal bruta en la especificación principal y consolidada con el BCRA como extensión; el período de estudio es 1996-2025 en todo el texto y la proyección, 2026-2035.
 - **Del texto LaTeX:** se suman la Justificación (Ley 27.612) y la organización por capítulos.
 
 **Antecedentes:**
@@ -156,23 +157,23 @@ Los +100 puntos básicos de una versión anterior no estaban justificados y se s
 
 | Decisión | Cómo quedó |
 |---|---|
-| No nombrar la "ventana única" (18/9) | No aparece; se habla de "muestra de estimación" |
+| No nombrar la "ventana única" (18/9) | La expresión no aparece; el texto dice siempre 1996-2025 para el estudio y 2026-2035 para la proyección |
 | No discutir en el texto si el riesgo país es endógeno (17/9) | No aparece; queda como respuesta oral en la guía de defensa |
 | Justificar la matriz del SVAR, "donde gira todo" | Secciones 4.4 (identificación) y 4.3 (canales de la FED) |
 | Panel Argentina-Chile como línea futura | Capítulo 8 |
-| Bajar la extensión | La tabla completa de robustez pasó al Apéndice (A.8) y los ejes 2, 3 y 8 de Antecedentes se redujeron a lo esencial |
+| Bajar la extensión | La tabla completa de robustez pasó al Apéndice (A.9) y los ejes 2, 3 y 8 de Antecedentes se redujeron a lo esencial |
 
 **Propuesta metodológica**
 
 | Propuesta | Qué se hizo | Dónde |
 |---|---|---|
-| ADF y KPSS para raíz unitaria, Zivot-Andrews y Bai-Perron para quiebres | Hecho; los quiebres de Bai-Perron entran como variables binarias | 4.2, 6.1 y A.1 |
-| Selección de rezagos por AIC y BIC con residuos sin autocorrelación | Criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005); si sus residuos están autocorrelacionados, el menor orden mayor que no lo está. Schwarz elige 1, con residuos autocorrelacionados (p = 0,000); se usan 2 rezagos (Portmanteau p = 0,296), el mismo orden que elige Hannan-Quinn | 4.5 y A.3 |
+| ADF y KPSS para raíz unitaria, Zivot-Andrews y Bai-Perron para quiebres | Hecho; los quiebres de Bai-Perron entran como variables binarias | 4.2, 6.1 y A.3 |
+| Selección de rezagos por AIC y BIC con residuos sin autocorrelación | Criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005); si sus residuos están autocorrelacionados, el menor orden mayor que no lo está. Schwarz elige 1, con residuos autocorrelacionados (p = 0,000); se usan 2 rezagos (Portmanteau p = 0,056), el mismo orden que elige Hannan-Quinn | 4.5 y A.4 |
 | Variables binarias por quiebres | Hecho | 4.2 |
-| Deuda como variable del sistema, la "esponja contable" (retroalimentación) | La deuda rezagada (federal bruta en la especificación principal, consolidada con el BCRA en la extensión) entra en las cuatro ecuaciones y se acumula con la identidad. Un punto más de deuda federal sube el EMBI+ 15,5 puntos básicos, con un intervalo de 90% que incluye el cero (−4,2 a 29,7) | 6.1 |
-| Contraste con y sin retroalimentación | Hecho: sin retroalimentación, la probabilidad de no estabilización de 2031 es 31,4%, frente a 32,8% con ella | 6.6 y A.8 |
-| Cholesky con orden crecimiento, TCRM, EMBI+, resultado primario | Como robustez; la identificación principal es Blanchard y Perotti, la que validaron Pablo y el equipo | 6.6 |
-| Opción B: tasa en dólares desde el EMBI+ y tasa en pesos aparte | Es la especificación principal; la variante con el riesgo país en la tasa en pesos se informa como robustez | 4.6 y 6.6 |
+| Deuda como variable del sistema, la "esponja contable" (retroalimentación) | La deuda rezagada (federal bruta en la especificación principal, consolidada con el BCRA en la extensión) entra en las cuatro ecuaciones y se acumula con la identidad. Un punto más de deuda federal bruta sube el EMBI 15,3 puntos básicos, con un intervalo de 90% que incluye el cero (-5,3 a 30,5) | 6.1 |
+| Contraste con y sin retroalimentación | Hecho: sin retroalimentación, la probabilidad de no estabilización de 2031 es 30,4%, frente a 31,8% con ella | 6.6 y A.9 |
+| Cholesky con orden crecimiento, TCRM, EMBI, resultado primario | Como robustez, con dos ordenamientos de Cholesky (resultado primario primero y resultado primario último). La identificación principal son restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con un bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto, la que validaron Pablo y el equipo | 6.6 |
+| Opción B: tasa en dólares desde el EMBI y tasa en pesos aparte | Es la especificación principal; la variante con el riesgo país en la tasa en pesos se informa como robustez | 4.6 y 6.6 |
 | Shock de la FED con la tasa sombra | Hecho (Wu y Xia, 2016), con el empalme de 2022T1 calculado con la tasa efectiva en ambos trimestres | 5.4 |
 | Shocks de la FED identificados por la literatura (alta frecuencia) | Línea futura | 8 |
 | Términos de intercambio (Lanteri, 2019) | Línea futura | 8 |
@@ -186,13 +187,13 @@ Los +100 puntos básicos de una versión anterior no estaban justificados y se s
 | Decisión | Cómo quedó |
 |---|---|
 | Perímetro principal (D1) | Deuda federal bruta, el perímetro del FMI; punto de partida 80,3% del PIB (FMI, 2026). La deuda consolidada con el BCRA es una extensión, desde 52,1% |
-| Muestra (D2) | Datos desde 1999T1, todos con fuente publicada; muestra efectiva 2000T3-2025T4 (102 trimestres) |
+| Ventana (D2) | 1996-2025 para todo el estudio y 2026-2035 para la proyección. El EMBI de 1996T1-1998T3 se empalma con la tasa de préstamos interfinancieros en dólares del BCRA menos la tasa de fondos federales, y el TCRM de 1996 con el tipo de cambio real efectivo amplio del BIS (validación en el Apéndice, A.2). Las ecuaciones se estiman con 1998T2-2025T4 (111 trimestres). Con datos desde 1999, sin empalme, la probabilidad de 2031 es 32,4%, contra 31,8% |
 | Rezagos (D3) | 2, por la regla de Schwarz con residuos sin autocorrelación |
-| Resultado primario (D4) | Con rentas de la propiedad para la deuda federal (definición del FMI); sin rentas para la consolidada |
+| Resultado primario (D4) | Una sola definición: resultado primario del Sector Público Nacional sin rentas de la propiedad, porque el FMI excluye las transferencias de utilidades del BCRA (FMI, 2026, cuadro 1, nota 4) y el MECON no las separa del resto de las rentas. La serie con rentas es robustez. Máximo 1996-2025: 3,29% del PIB en 2004 (3,58% con rentas). Se corrigió la versión anterior, que presentaba la serie con rentas como la definición del FMI |
 | Inferencia (D7 y D8) | Remuestreo de *shocks* en bloques de ocho trimestres; intervalos por *bootstrap* de bloques móviles (Brüggemann et al., 2016) con percentiles de Hall (1992); se abandona el *bootstrap* salvaje |
-| H1a (D10) | Vuelve el criterio original (descomposición de la varianza); se cumple en las 19 especificaciones. El cálculo de suficiencia del superávit queda como complemento descriptivo, sin criterio de contraste |
-| H1b (D11) | Mismo perímetro, punto de partida, escenario y métrica que el FMI; se cumple en las 19 especificaciones |
-| H2 (D12) | Criterio sin cambios; respaldada en el efecto sobre la probabilidad, no en el mecanismo |
+| H1a (D10) | Vuelve el criterio original (descomposición de la varianza): 78,3 puntos [57,3; 87,9]; se cumple en las 20 especificaciones. El cálculo de suficiencia del superávit queda como complemento descriptivo, sin criterio de contraste |
+| H1b (D11) | Mismo perímetro, punto de partida, escenario y métrica que el FMI: 31,8% [25,2; 36,4] en 2031 y 31,0% [26,8; 35,6] en 2035; se cumple en las 20 especificaciones |
+| H2 (D12) | Criterio sin cambios; respaldada en el efecto de la senda de 2022-2025 sobre la probabilidad (+9,7 puntos en 2035, robusto a Bonferroni y en 18 de 20 especificaciones). El efecto sobre la deuda esperada (+9,0) y el del desvío estándar no son robustos, y el 96% del efecto sobre la deuda es el costo directo de la deuda en dólares |
 | Título (D13) | "Probabilidad de no estabilización de la deuda pública argentina, 2026-2035: un modelo SVARX con determinantes macroeconómicos y política monetaria de Estados Unidos" |
 
 ## Nota 4. Pendientes

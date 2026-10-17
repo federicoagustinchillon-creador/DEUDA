@@ -54,7 +54,7 @@ def main() -> None:
     Y, X, quiebres = f24.cargar_datos("federal", 2)
 
     L.append("## Muestra y especificación")
-    L.append(f"- Datos desde 1999T1; muestra efectiva {meta['muestra'][0]} a {meta['muestra'][1]}, {meta['trimestres_historicos']} trimestres.")
+    L.append(f"- Datos desde {f24.DESDE or '1996-01-01'}; muestra efectiva {meta['muestra'][0]} a {meta['muestra'][1]}, {meta['trimestres_historicos']} trimestres.")
     L.append(f"- Rezagos: Schwarz elige {int(rz['p_sic'].iloc[0])}; Portmanteau de ese orden p = {n(rz.loc[rz.p == rz['p_sic'].iloc[0], 'portmanteau_12_p'].iloc[0], 3)}; orden elegido {meta['p']} (Portmanteau p = {n(dg['Portmanteau (12 rezagos)'], 3)}). AIC sin restricción: {int(rz['p_aic'].iloc[0])}; HQ: {int(rz.loc[rz.hqic.idxmin(), 'p'])}.")
     L.append(f"- Raíces máximas por orden: " + ", ".join(f"p={int(a)}: {n(c, 3)}{'' if e else ' (inestable)'}" for a, c, e in zip(rz.p, rz.modulo_raiz_max, rz.estable)))
     L.append(f"- Autovalor máximo del VAR principal: {n(meta['raiz_max_estimada'], 3)}; mediana de las réplicas {n(meta['raiz_max_mediana_replicas'], 3)}.")
@@ -69,6 +69,15 @@ def main() -> None:
     jn = jo[jo.variables == "niveles (sin crecimiento)"]
     L.append("- Johansen (niveles, traza vs crítico 5%): " + "; ".join(f"{a}: {n(t)} vs {n(c)}" for a, t, c in zip(jn.rango_nulo, jn.traza, jn.critico_95)))
 
+    ev = pd.read_csv(T / "empalmes_validacion.csv").set_index("empalme")
+    e = ev.loc["EMBI"]
+    L.append(f"- Empalme EMBI 1996T1-1998T3 con la tasa interbancaria en dólares del BCRA menos la tasa de fondos federales: superposición {e['superposicion']}, n = {int(e['n'])}, EMBI = {n(e['a'])} + {n(e['b'], 3)} × diferencial, R2 = {n(e['r2'], 2)}, correlación {n(e['correlacion'], 3)}, RMSE dejando uno afuera {n(e['rmse_dejando_uno_afuera'], 0)} pb (desvío del EMBI {n(e['desvio_embi_superposicion'], 0)} pb); fuera de muestra 2001T1-T3: real {e['fuera_de_muestra_2001_real']}, pronóstico {e['fuera_de_muestra_2001_pronostico']}.")
+    tc = ev.loc["TCRM"]
+    L.append(f"- Empalme TCRM 1996 con el tipo de cambio real efectivo amplio del BIS (inversa): correlación de variaciones trimestrales {n(tc['correlacion'], 2)} (n = {int(tc['n'])}) y {n(tc['correlacion_1997_2001'], 2)} en 1997-2001 (n = {int(tc['n_1997_2001'])}).")
+    emp = pd.read_csv(BASE / "datos" / "procesados" / "empalmes_1996_1998.csv", index_col=0)
+    L.append("- Valores empalmados EMBI: " + ", ".join(f"{i[:7]} {n(v, 0)}" for i, v in emp["EMBI"].dropna().items()) + "; TCRM 1996: " + ", ".join(f"{i[:7]} {n(v, 3)}" for i, v in emp["TCRM"].dropna().items()))
+    r99 = pd.read_csv(T / "fase25_federal_desde1999_resumen.csv", index_col=0)
+    L.append(f"- Sin empalme (datos desde 1999): no estabilización 2031 {iv(r99, 'base_p_noest_2031')}, 2035 {iv(r99, 'base_p_noest_2035')}; no fiscal menos fiscal {iv(r99, 'h1a_nofiscal_menos_fiscal', 1)}; senda FED prob 2035 {iv(r99, 'dif_fed_2022_2025_p_noest_2035')}.")
     L.append("\n## Estimación (fase24, intervalos de Hall al 90%)")
     for nom, bb in (("federal", b), ("consolidada", bc)):
         L.append(f"- {nom}: reacción fiscal de impacto {n(bb.loc['rho_bohn', 'p50'], 4)} [{n(bb.loc['rho_bohn', 'p05'], 4)}; {n(bb.loc['rho_bohn', 'p95'], 4)}]; largo plazo {n(bb.loc['rho_largo_plazo', 'p50'], 3)} [{n(bb.loc['rho_largo_plazo', 'p05'], 3)}; {n(bb.loc['rho_largo_plazo', 'p95'], 3)}]")
@@ -108,12 +117,14 @@ def main() -> None:
 
     su = pd.read_csv(T / "fase25_federal_suficiencia.csv")
     pbh = pd.read_csv(BASE / "datos" / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)
-    anual = pbh.loc[pbh.index.quarter == 4, ["pb_pib", "pb_pib_sin_rentas"]].loc["1999":]
-    mx = anual["pb_pib"].max()
+    anual = pbh.loc[pbh.index.quarter == 4, ["pb_pib", "pb_pib_sin_rentas"]].loc["1996":]
+    mx = anual["pb_pib_sin_rentas"].max()
+    mx_con = anual["pb_pib"].max()
     L.append(f"\n## Suficiencia del superávit (H1a, complemento)")
-    L.append(f"- Máximo anual del resultado primario 1999-2025 (definición del FMI, con rentas): {n(mx, 2)} en {anual['pb_pib'].idxmax().year}; sin rentas: {n(anual['pb_pib_sin_rentas'].max(), 2)}.")
+    L.append(f"- Máximo anual del resultado primario 1996-2025 sin rentas de la propiedad (definición principal): {n(mx, 2)} en {anual['pb_pib_sin_rentas'].idxmax().year}; con rentas: {n(mx_con, 2)} en {anual['pb_pib'].idxmax().year}.")
     p_mx = np.interp(mx, su.pb_2031, su.p_noest_2031)
-    L.append(f"- Con el resultado primario en el máximo histórico en todos los años (pb 2031 = {n(mx, 2)}): P(2031) = {n(100 * p_mx)}%.")
+    p_mx_con = np.interp(mx_con, su.pb_2031, su.p_noest_2031)
+    L.append(f"- Con el resultado primario en el máximo histórico en todos los años: P(2031) = {n(100 * p_mx)}% con {n(mx, 2)} (sin rentas) y {n(100 * p_mx_con)}% con {n(mx_con, 2)} (con rentas).")
     cruce = su[su.p_noest_2031 <= 0.01].iloc[0]
     L.append(f"- Primer desplazamiento con P(2031) ≤ 1%: +{n(cruce.dpb, 2)} pp, pb 2026 = {n(cruce.pb_2026)}% y pb 2031 = {n(cruce.pb_2031)}%.")
     imin = su.p_noest_2035.idxmin()
@@ -134,7 +145,7 @@ def main() -> None:
     L.append(f"- Impulsores {imp.index.min()}-{imp.index.max()}: depreciación real media {n(imp.z.mean())}% (sin 2002: {n(sin02.z.mean())}%); "
              f"años con depreciación sobre la media {n(100 * ((imp.z - imp.z.mean()) > 0).mean(), 0)}% (sin 2002: {n(100 * ((sin02.z - sin02.z.mean()) > 0).mean(), 0)}%); "
              f"correlación crecimiento-depreciación {n(imp.corr().loc['g', 'z'], 2)}, crecimiento-resultado primario {n(imp.corr().loc['g', 'pb'], 2)}.")
-    L.append("\n## Robustez: rango entre especificaciones del SVARX (ver Apéndice A.8)")
+    L.append("\n## Robustez: rango entre especificaciones del SVARX (ver Apéndice A.9)")
     vals = {}
     for f_ in T.glob("fase25_*_resumen.csv"):
         s = f_.stem[7:-8]
@@ -152,6 +163,22 @@ def main() -> None:
     for k in ("dif_fed_2022_2025_p_noest_2035", "dif_fed_2022_2025_d2035", "dif_fed_1de_p_noest_2035", "dif_fed_1de_d2035"):
         no = sorted(s for s, v in vals.items() if v.loc[k, "p05"] <= 0 <= v.loc[k, "p95"])
         L.append(f"- {k}: incluyen el cero en {len(no)} de {len(vals)}: {', '.join(no) if no else 'ninguna'}.")
+    L.append("\n## Tabla 5.2: deuda de esta tesis y del FMI (diciembre, % del PIB)")
+    dn = pd.read_csv(BASE / "datos" / "procesados" / "deuda_consolidada_neta_nominal_1996_2025.csv", parse_dates=["Date"], index_col="Date")
+    cols = {"bruta_federal_pib": "Deuda federal bruta", "tenencia_bcra_tesoro_nominal_pib": "Deuda del Tesoro en poder del BCRA",
+            "pasivos_bcra_pib": "Pasivos del BCRA", "dep_tesoro_bcra_pib": "Depósitos del Tesoro en el BCRA",
+            "deuda_consolidada_neta_nominal_pib": "Deuda consolidada con el BCRA"}
+    for c, nom in cols.items():
+        L.append(f"- Propia, {nom}: " + ", ".join(f"{a}: {n(dn.loc[f'{a}-12-31', c])}" for a in (2023, 2024, 2025)))
+    # FMI (2026), anexo II, cuadro 2 (PDF p. 72): lineas 1, 3, 4, 5, swap con el PBoC y proporcion en moneda extranjera.
+    fmi = {"Línea 1, deuda federal bruta": (154.6, 84.7, 80.3), "Línea 3, deuda del Tesoro en poder del sector público": (62.1, 33.7, 31.4),
+           "Línea 4, pasivos del BCRA": (19.2, 2.6, 3.3), "Línea 5, deuda consolidada": (111.1, 53.6, 52.1),
+           "Swap con el PBoC": (2.1, 0.9, 0.9), "Deuda en moneda extranjera / deuda total (%)": (69.3, 61.9, 68.5)}
+    for nom, v in fmi.items():
+        L.append(f"- FMI, {nom}: 2023: {n(v[0])}, 2024: {n(v[1])}, 2025: {n(v[2])}")
+    brecha = [dn.loc[f"{a}-12-31", "deuda_consolidada_neta_nominal_pib"] - fmi["Línea 5, deuda consolidada"][i] for i, a in enumerate((2023, 2024, 2025))]
+    bf = [fmi["Línea 1, deuda federal bruta"][i] - dn.loc[f"{a}-12-31", "bruta_federal_pib"] for i, a in enumerate((2023, 2024, 2025))]
+    L.append("- Brecha consolidada propia menos FMI: " + ", ".join(n(x) for x in brecha) + "; federal FMI menos propia: " + ", ".join(n(x) for x in bf))
     SALIDA.write_text("\n".join(L) + "\n", encoding="utf-8")
     print(f"[OK] {SALIDA.relative_to(BASE)}")
 

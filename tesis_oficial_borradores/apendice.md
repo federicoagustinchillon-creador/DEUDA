@@ -4,156 +4,196 @@ Fuente de todas las tablas, salvo indicación: elaboración propia.
 
 ## A.1 Estadísticos descriptivos
 
-Muestra efectiva de estimación, 2000T3-2025T4 (102 trimestres).
+Muestra efectiva de estimación, 1998T2-2025T4 (111 trimestres).
 
 | Variable | Media | Desvío estándar | Mínimo | Máximo |
 |---|---|---|---|---|
-| Resultado primario (% del PIB, trimestral anualizado) | -0,14 | 3,33 | -12,16 | 7,02 |
-| Crecimiento real trimestral (%) | 0,38 | 7,50 | -13,77 | 18,21 |
-| EMBI+ (puntos básicos) | 1.636,94 | 1.660,42 | 210,22 | 6.658,98 |
-| TCRM (diciembre de 2001 = 1) | 1,71 | 0,44 | 0,98 | 2,76 |
-| Deuda federal bruta, rezagada (% del PIB) | 69,26 | 31,40 | 34,52 | 154,59 |
-| Variación de la tasa de la FED (puntos) | -0,04 | 0,50 | -1,43 | 1,46 |
-| VIX | 19,76 | 7,44 | 10,31 | 58,60 |
+| Resultado primario (% del PIB, trimestral anualizado) | -0,95 | 3,41 | -12,53 | 6,92 |
+| Crecimiento real trimestral (%) | 0,39 | 7,41 | -13,77 | 18,21 |
+| EMBI (puntos básicos) | 1.559,25 | 1.612,73 | 210,22 | 6.658,98 |
+| TCRM (diciembre de 2001 = 1) | 1,66 | 0,45 | 0,98 | 2,76 |
+| Deuda federal bruta, rezagada (% del PIB) | 66,56 | 31,45 | 32,18 | 154,59 |
+| Variación de la tasa de la FED (puntos) | -0,03 | 0,49 | -1,43 | 1,46 |
+| VIX | 20,20 | 7,33 | 10,31 | 58,60 |
 
-## A.2 Propiedades de las series
+## A.2 Empalmes de 1996-1998
 
-**Raíz unitaria.** ADF (Dickey y Fuller, 1979; hipótesis nula: raíz unitaria) y KPSS (Kwiatkowski et al., 1992; hipótesis nula: estacionariedad), con constante. Una serie se clasifica como estacionaria solo si ADF rechaza y KPSS no rechaza al 5%, y con raíz unitaria en el caso inverso. Zivot y Andrews (1992) permiten un quiebre endógeno en el nivel. Datos desde 1999T1.
+La serie diaria pública del EMBI para Argentina comienza el 11 de diciembre de 1998 y el índice de tipo de cambio real multilateral del BCRA, en enero de 1997. Para completar la ventana 1996-2025, el EMBI de 1996T1-1998T3 se reconstruye con la relación EMBI = 550,3 + 1,171 × diferencial, estimada en la superposición, donde el diferencial es la tasa de préstamos interfinancieros en dólares del BCRA menos la tasa de fondos federales. La superposición termina en 2001T3 porque el corralito de diciembre de 2001 interrumpe el mercado interbancario en dólares. El TCRM de 1996 se encadena hacia atrás con las variaciones del tipo de cambio real efectivo del BIS. La Figura A.1 compara las series observadas con las reconstruidas.
+
+| Serie | Variable puente | Superposición | n | Correlación | R² | Validación |
+|---|---|---|---|---|---|---|
+| EMBI | Tasa de préstamos interfinancieros en dólares (BCRA) menos tasa de fondos federales | 1998T4-2001T3 | 12 | 0,944 | 0,89 | Error típico dejando un trimestre afuera: 102 pb (desvío del EMBI: 240 pb) |
+| TCRM | Tipo de cambio real efectivo amplio del BIS (invertido) | 1997T2-2025T4 | 115 | 0,923 | 0,85 | Correlación de las variaciones en 1997-2001: 0,977 |
+
+Fuente: elaboración propia con datos del BCRA, J.P. Morgan (serie diaria publicada por Ámbito Financiero), Reserva Federal y BIS.
+
+**Validación fuera de muestra del empalme del EMBI.** Relación estimada solo con 1998T4-2000T4 y aplicada a 2001:
+
+| Trimestre | EMBI observado | Pronóstico fuera de muestra |
+|---|---|---|
+| 2001T1 | 750 | 744 |
+| 2001T2 | 973 | 801 |
+| 2001T3 | 1469 | 1033 |
+
+El empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los resultados casi no cambian (sección A.9).
+
+| Trimestre | EMBI empalmado (pb) | TCRM empalmado |
+|---|---|---|
+| 1996T1 | 598 | 1,235 |
+| 1996T2 | 576 | 1,248 |
+| 1996T3 | 645 | 1,252 |
+| 1996T4 | 666 | 1,244 |
+| 1997T1 | 637 |  |
+| 1997T2 | 595 |  |
+| 1997T3 | 667 |  |
+| 1997T4 | 740 |  |
+| 1998T1 | 672 |  |
+| 1998T2 | 612 |  |
+| 1998T3 | 712 |  |
+
+Fuente: elaboración propia.
+
+![Figura A.1. Empalmes del EMBI y del TCRM. Series observadas y reconstruidas con las variables puente; el sombreado marca la superposición del EMBI. Fuente: elaboración propia con datos del BCRA, J.P. Morgan, Reserva Federal y BIS.](../tesis/figuras/figA_1_empalmes.png)
+
+## A.3 Propiedades de las series
+
+**Raíz unitaria.** ADF (Dickey y Fuller, 1979; hipótesis nula: raíz unitaria) y KPSS (Kwiatkowski et al., 1992; hipótesis nula: estacionariedad), con constante. Una serie se clasifica como estacionaria solo si ADF rechaza y KPSS no rechaza al 5%, y con raíz unitaria en el caso inverso. Zivot y Andrews (1992) permiten un quiebre endógeno en el nivel. Ventana 1996-2025.
 
 | Serie | ADF (p) | KPSS (p) | Clasificación | Zivot-Andrews (p) | Quiebre de Zivot-Andrews |
 |---|---|---|---|---|---|
-| Resultado primario | 0,651 | 0,010 | raíz unitaria | 0,984 | 2021T4 |
-| Crecimiento real | 0,005 | 0,100 | estacionaria | 0,122 | 2020T4 |
-| EMBI+ | 0,330 | 0,100 | ambigua | 0,163 | 2005T2 |
-| TCRM | 0,272 | 0,054 | ambigua | 0,852 | 2009T4 |
-| Deuda federal bruta | 0,091 | 0,100 | ambigua | 0,275 | 2005T1 |
-| Deuda consolidada con el BCRA | 0,101 | 0,100 | ambigua | 0,396 | 2005T1 |
-| Tasa de la FED (nivel) | 0,014 | 0,046 | ambigua | 0,073 | 2007T3 |
-| VIX | 0,000 | 0,100 | estacionaria | 0,049 | 2011T4 |
+| Resultado primario | 0,580 | 0,010 | raíz unitaria | 0,997 | 2012T3 |
+| Crecimiento real | 0,053 | 0,100 | ambigua | 0,236 | 2003T1 |
+| EMBI | 0,154 | 0,100 | ambigua | 0,084 | 2005T2 |
+| TCRM | 0,249 | 0,100 | ambigua | 0,000 | 2001T4 |
+| Deuda federal bruta | 0,094 | 0,100 | ambigua | 0,457 | 2005T1 |
+| Deuda consolidada con el BCRA | 0,094 | 0,100 | ambigua | 0,568 | 2005T1 |
+| Tasa de la FED (nivel) | 0,031 | 0,013 | ambigua | 0,125 | 2021T2 |
+| VIX | 0,000 | 0,100 | estacionaria | 0,028 | 2019T4 |
 
 **Quiebres estructurales.** El procedimiento de Bai y Perron (2003) sobre la media de la deuda federal bruta (1996-2025), con el número de quiebres elegido por el criterio de Schwarz, encuentra 3 quiebres: 2001T4, 2006T2, 2018T1. Entran como variables binarias de escalón en el SVARX.
 
-**Cointegración.** Prueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI+, TCRM y deuda), con los rezagos del VAR. El crecimiento se excluye porque es una tasa de variación.
+**Cointegración.** Prueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI, TCRM y deuda), con los rezagos del VAR. El crecimiento se excluye porque es una tasa de variación.
 
 | Hipótesis nula | Traza | Valor crítico 5% | Rechaza |
 |---|---|---|---|
-| rango ≤ 0 | 45,0 | 47,9 | no |
-| rango ≤ 1 | 24,0 | 29,8 | no |
-| rango ≤ 2 | 9,6 | 15,5 | no |
-| rango ≤ 3 | 2,9 | 3,8 | no |
+| rango ≤ 0 | 42,7 | 47,9 | no |
+| rango ≤ 1 | 22,0 | 29,8 | no |
+| rango ≤ 2 | 10,9 | 15,5 | no |
+| rango ≤ 3 | 3,3 | 3,8 | no |
 
-## A.3 Selección del orden del VAR
+## A.4 Selección del orden del VAR
 
-Muestra efectiva común 2000-2025 (102 trimestres) para todos los órdenes (sección 4.5). El punto de partida es el orden que elige el criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005); si sus residuos rechazan la ausencia de autocorrelación, se toma el menor orden mayor que no la rechaza.
+Muestra efectiva común 1998-2025 (111 trimestres) para todos los órdenes (sección 4.5). El punto de partida es el orden que elige el criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005); si sus residuos rechazan la ausencia de autocorrelación, se toma el menor orden mayor que no la rechaza.
 
 **Deuda federal bruta (principal).** Orden del criterio de Schwarz: 1. Orden elegido: 2.
 
 | p | AIC | BIC | HQ | Raíz máxima | Estable | Portmanteau (p) |
 |---|---|---|---|---|---|---|
-| 1 | 12,570 | 14,217 | 13,237 | 0,828 | sí | 0,000 |
-| 2 | 12,315 | 14,374 | 13,149 | 0,849 | sí | 0,296 |
-| 3 | 12,409 | 14,879 | 13,409 | 0,922 | sí | 0,141 |
-| 4 | 12,348 | 15,231 | 13,516 | 0,972 | sí | 0,026 |
-| 5 | 12,241 | 15,535 | 13,575 | 0,998 | sí | 0,002 |
-| 6 | 12,261 | 15,967 | 13,762 | 1,011 | no | 0,000 |
+| 1 | 12,317 | 13,879 | 12,951 | 0,844 | sí | 0,000 |
+| 2 | 12,017 | 13,970 | 12,809 | 0,896 | sí | 0,056 |
+| 3 | 12,106 | 14,449 | 13,056 | 0,938 | sí | 0,011 |
+| 4 | 12,019 | 14,753 | 13,128 | 0,980 | sí | 0,003 |
+| 5 | 11,956 | 15,081 | 13,224 | 0,999 | sí | 0,000 |
+| 6 | 11,900 | 15,415 | 13,326 | 1,005 | no | 0,000 |
 
-Con la deuda consolidada con el BCRA (extensión), la misma regla elige 2 rezagos (raíz máxima 0,902, Portmanteau p = 0,208).
+Con la deuda consolidada con el BCRA (extensión), la misma regla elige 2 rezagos (raíz máxima 0,907, Portmanteau p = 0,050).
 
-## A.4 Diagnósticos de los residuos
+## A.5 Diagnósticos de los residuos
 
 Portmanteau con 12 rezagos (autocorrelación), Jarque-Bera multivariada (normalidad), ARCH-LM con cuatro rezagos por ecuación (heterocedasticidad condicional) y estabilidad (1 = estable).
 
 | Prueba (p-valor salvo estabilidad) | federal bruta (principal) | consolidada con el BCRA (extensión) |
 |---|---|---|
-| Portmanteau (12 rezagos) | 0,296 | 0,208 |
+| Portmanteau (12 rezagos) | 0,056 | 0,050 |
 | Normalidad multivariada (p-valor) | 0,000 | 0,000 |
 | Estable (1 = sí) | 1,000 | 1,000 |
-| ARCH-LM(4) resultado primario (p-valor) | 0,988 | 0,991 |
-| ARCH-LM(4) crecimiento (p-valor) | 0,868 | 0,851 |
-| ARCH-LM(4) EMBI (p-valor) | 0,998 | 0,999 |
-| ARCH-LM(4) TCRM (p-valor) | 0,114 | 0,108 |
+| ARCH-LM(4) resultado primario (p-valor) | 0,988 | 0,990 |
+| ARCH-LM(4) crecimiento (p-valor) | 0,746 | 0,775 |
+| ARCH-LM(4) EMBI (p-valor) | 0,996 | 0,998 |
+| ARCH-LM(4) TCRM (p-valor) | 0,108 | 0,082 |
 
-## A.5 Matriz de impacto estructural
+## A.6 Matriz de impacto estructural
 
 Efecto en el mismo trimestre de un *shock* estructural de un desvío estándar (especificación principal). Los ceros son las restricciones de identificación de la sección 4.4. Los dos *shocks* del bloque cambiario y de riesgo no tienen interpretación por separado: solo se usa su efecto conjunto.
 
 | Variable | *Shock* fiscal | *Shock* de actividad | *Shock* cambiario y de riesgo 1 | *Shock* cambiario y de riesgo 2 |
 |---|---|---|---|---|
-| Resultado primario | 1,522 | 0,712 | 0,000 | 0,000 |
-| Crecimiento | -0,226 | 2,848 | 0,000 | 0,000 |
-| EMBI+ | -119,761 | -50,001 | 476,137 | 0,000 |
-| TCRM | 0,024 | -0,014 | 0,014 | 0,103 |
+| Resultado primario | 1,427 | 0,712 | 0,000 | 0,000 |
+| Crecimiento | -0,326 | 2,847 | 0,000 | 0,000 |
+| EMBI | -116,752 | -47,890 | 461,409 | 0,000 |
+| TCRM | 0,021 | -0,011 | 0,011 | 0,102 |
 
-## A.6 Ecuación del resultado primario
+## A.7 Ecuación del resultado primario
 
-Ecuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 2000T3-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*. El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es 0,167, con un intervalo de 90% de [0,057; 0,296].
+Ecuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*. El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es 0,199, con un intervalo de 90% de [0,112; 0,328].
 
 | Regresor | Coeficiente | Error estándar | p-valor |
 |---|---|---|---|
-| Variación de la tasa de la FED, rezago 0 | 0,5500 | 0,5865 | 0,348 |
-| Variación de la tasa de la FED, rezago 1 | -0,5875 | 0,6186 | 0,342 |
-| Variación de la tasa de la FED, rezago 2 | -0,2068 | 0,5503 | 0,707 |
-| VIX | -0,0314 | 0,0322 | 0,330 |
-| Deuda federal bruta, rezago 1 (reacción fiscal de impacto) | 0,0495 | 0,0164 | 0,002 |
-| Resultado primario, rezago 1 | 0,2883 | 0,1034 | 0,005 |
-| Crecimiento, rezago 1 | 0,1128 | 0,0656 | 0,085 |
-| EMBI+, rezago 1 | -0,0006 | 0,0004 | 0,113 |
-| TCRM, rezago 1 | 3,6875 | 1,6074 | 0,022 |
-| Resultado primario, rezago 2 | 0,4159 | 0,1077 | 0,000 |
-| Crecimiento, rezago 2 | 0,1235 | 0,0612 | 0,044 |
-| EMBI+, rezago 2 | 0,0003 | 0,0004 | 0,452 |
-| TCRM, rezago 2 | -2,7448 | 1,5735 | 0,081 |
+| Variación de la tasa de la FED, rezago 0 | 0,6196 | 0,5135 | 0,228 |
+| Variación de la tasa de la FED, rezago 1 | -0,4280 | 0,5691 | 0,452 |
+| Variación de la tasa de la FED, rezago 2 | -0,2002 | 0,5043 | 0,691 |
+| VIX | -0,0162 | 0,0298 | 0,587 |
+| Deuda federal bruta, rezago 1 (reacción fiscal de impacto) | 0,0576 | 0,0152 | 0,000 |
+| Resultado primario, rezago 1 | 0,3074 | 0,0973 | 0,002 |
+| Crecimiento, rezago 1 | 0,0844 | 0,0590 | 0,153 |
+| EMBI, rezago 1 | -0,0007 | 0,0004 | 0,046 |
+| TCRM, rezago 1 | 2,1981 | 1,4466 | 0,129 |
+| Resultado primario, rezago 2 | 0,4036 | 0,1015 | 0,000 |
+| Crecimiento, rezago 2 | 0,0971 | 0,0552 | 0,079 |
+| EMBI, rezago 2 | 0,0003 | 0,0003 | 0,459 |
+| TCRM, rezago 2 | -1,3359 | 1,4162 | 0,346 |
 
-## A.7 Resultados completos de la especificación principal
+## A.8 Resultados completos de la especificación principal
 
-Estimación central con los parámetros de MCO y 20.000 trayectorias (error de Monte Carlo de 0,3 puntos en la probabilidad de 2031); intervalos de Hall con 200 réplicas de parámetros y 1.000 trayectorias cada una. Autovalor máximo del VAR: 0,849.
+Estimación central con los parámetros de MCO y 20.000 trayectorias (error de Monte Carlo de 0,3 puntos en la probabilidad de 2031); intervalos de Hall con 200 réplicas de parámetros y 1.000 trayectorias cada una. Autovalor máximo del VAR: 0,896.
 
 | Medida | Estimación central | Intervalo de 90% |
 |---|---|---|
-| No estabilización 2031 (%) | 32,8 | [26,8; 37,9] |
-| No estabilización 2035 (%) | 31,3 | [27,0; 35,3] |
-| No estabilización 2031 con el resultado primario simulado (%) | 35,4 | [30,3; 40,8] |
-| Probabilidad de que la deuda de 2031 supere a la de 2029 (%) | 27,5 | [23,9; 33,1] |
-| Deuda mediana 2031 (% del PIB) | 52,6 | [51,3; 56,2] |
-| Deuda media 2035 (% del PIB) | 44,6 | [40,1; 52,4] |
-| Ancho del abanico 2031 (p5-p95) | 48,3 | [39,9; 63,1] |
-| Varianza 2035: fiscal (%) | 8,7 | [3,8; 17,1] |
-| Varianza 2035: actividad (%) | 12,4 | [3,6; 21,8] |
-| Varianza 2035: cambiario y de riesgo (%) | 32,3 | [20,0; 48,0] |
-| Varianza 2035: externo, FED y VIX (%) | 46,6 | [18,3; 58,6] |
-| No fiscal menos fiscal (puntos) | 82,6 | [65,8; 92,4] |
-| FED, nivel 0,50 pp más alto: diferencia en la probabilidad 2035 (pp) | 1,5 | [0,5; 2,6] |
-| FED, nivel 0,50 pp más alto: diferencia en la deuda media 2035 (pp del PIB) | 1,5 | [0,1; 2,5] |
-| FED, senda 2022-2025: diferencia en la probabilidad 2031 (pp) | 5,1 | [-0,2; 9,1] |
-| FED, senda 2022-2025: diferencia en la probabilidad 2035 (pp) | 11,3 | [4,4; 17,9] |
-| FED, senda 2022-2025: diferencia en la deuda media 2035 (pp del PIB) | 12,6 | [1,2; 21,8] |
+| No estabilización 2031 (%) | 31,8 | [25,2; 36,4] |
+| No estabilización 2035 (%) | 31,0 | [26,8; 35,6] |
+| No estabilización 2031 con el resultado primario simulado (%) | 35,6 | [30,9; 41,1] |
+| Probabilidad de que la deuda de 2031 supere a la de 2029 (%) | 25,8 | [21,8; 31,2] |
+| Deuda mediana 2031 (% del PIB) | 53,1 | [52,2; 56,8] |
+| Deuda media 2035 (% del PIB) | 45,3 | [43,4; 53,3] |
+| Ancho del abanico 2031 (p5-p95) | 46,6 | [36,8; 61,0] |
+| Varianza 2035: fiscal (%) | 10,8 | [6,1; 21,3] |
+| Varianza 2035: actividad (%) | 12,0 | [0,2; 21,2] |
+| Varianza 2035: cambiario y de riesgo (%) | 32,3 | [16,8; 48,9] |
+| Varianza 2035: externo, FED y VIX (%) | 44,9 | [14,6; 59,0] |
+| No fiscal menos fiscal (puntos) | 78,3 | [57,3; 87,9] |
+| FED, nivel 0,50 pp más alto: diferencia en la probabilidad 2035 (pp) | 1,1 | [0,2; 1,9] |
+| FED, nivel 0,50 pp más alto: diferencia en la deuda media 2035 (pp del PIB) | 1,0 | [0,0; 1,8] |
+| FED, senda 2022-2025: diferencia en la probabilidad 2031 (pp) | 5,0 | [0,2; 9,2] |
+| FED, senda 2022-2025: diferencia en la probabilidad 2035 (pp) | 9,7 | [4,2; 16,0] |
+| FED, senda 2022-2025: diferencia en la deuda media 2035 (pp del PIB) | 9,0 | [0,3; 16,2] |
 
-## A.8 Robustez completa
+## A.9 Robustez completa
 
 Entre corchetes, intervalos de 90% de Hall. Todas las especificaciones usan los mismos números aleatorios, de modo que las diferencias entre filas no provienen del sorteo. Las filas a la manera del FMI no tienen intervalo porque ese procedimiento no estima parámetros. Fuente de la última fila: FMI (2026, anexo II, cuadro 7 y párrafo 9).
 
 | Especificación | No estabilización 2031 (%) | No estabilización 2035 (%) | Ancho 2031 | No fiscal menos fiscal (puntos) | Senda de la FED: probabilidad 2035 (pp) | Senda de la FED: deuda 2035 (pp) |
 |---|---|---|---|---|---|---|
-| Principal (deuda federal bruta) | 32,8 [26,8; 37,9] | 31,3 [27,0; 35,3] | 48,3 | 82,6 [65,8; 92,4] | 11,3 [4,4; 17,9] | 12,6 [1,2; 21,8] |
-| Deuda consolidada con el BCRA | 26,8 [20,3; 31,0] | 24,1 [20,4; 29,6] | 38,0 | 67,1 [36,8; 86,1] | 10,1 [2,5; 16,7] | 6,7 [-0,3; 12,4] |
-| Resultado primario sin rentas de la propiedad | 32,4 [26,6; 37,0] | 31,2 [26,4; 35,6] | 47,6 | 75,5 [51,7; 86,3] | 9,6 [2,5; 15,7] | 9,6 [-0,6; 17,1] |
-| Canal de tasas en pesos | 33,6 [28,7; 38,3] | 34,2 [29,8; 39,8] | 59,9 | 87,1 [74,5; 97,6] | 11,8 [4,8; 20,9] | 15,8 [-0,7; 30,4] |
-| Sin retroalimentación de la deuda | 31,4 [26,0; 36,3] | 29,5 [24,3; 34,8] | 55,5 | 81,5 [63,6; 91,4] | 8,1 [5,6; 10,6] | 14,3 [8,1; 22,6] |
-| Un rezago (criterio de Schwarz) | 32,4 [28,5; 38,8] | 32,6 [26,2; 37,8] | 49,4 | 90,1 [80,4; 96,0] | 13,6 [2,4; 21,8] | 16,2 [-5,9; 30,0] |
-| Tres rezagos | 30,3 [23,0; 35,1] | 29,6 [24,2; 35,5] | 40,8 | 72,3 [46,2; 88,9] | 10,3 [4,1; 17,1] | 8,9 [1,5; 16,0] |
-| Cholesky, resultado primario primero | 32,8 [26,9; 37,9] | 31,3 [27,0; 35,3] | 48,3 | 63,9 [31,4; 75,3] | 11,3 [4,5; 17,9] | 12,6 [1,2; 21,8] |
-| Cholesky, resultado primario último | 32,8 [27,0; 37,7] | 31,3 [27,4; 35,0] | 48,3 | 95,8 [92,0; 100,0] | 11,3 [4,9; 18,5] | 12,6 [1,5; 21,8] |
-| Elasticidad cíclica 0 | 32,8 [26,9; 37,9] | 31,3 [27,0; 35,3] | 48,3 | 63,9 [31,4; 75,3] | 11,3 [4,5; 17,9] | 12,6 [1,2; 21,8] |
-| Elasticidad cíclica 0,5 | 32,8 [27,1; 38,1] | 31,3 [27,0; 35,6] | 48,3 | 96,5 [93,3; 100,0] | 11,3 [4,5; 18,2] | 12,6 [1,2; 21,8] |
-| Sin los *shocks* de 2001T4-2005T3 | 32,6 [26,9; 37,6] | 32,3 [28,3; 37,0] | 48,0 | 81,4 [63,3; 94,4] | 11,6 [4,3; 18,8] | 13,1 [0,9; 23,0] |
-| Datos desde 2004 | 31,9 [27,9; 40,5] | 32,5 [24,0; 41,7] | 35,8 | 86,7 [73,5; 97,4] | 11,0 [-4,8; 17,2] | 8,4 [-35,0; 16,5] |
-| Sin variables binarias de quiebre | 31,2 [23,4; 35,5] | 31,2 [26,0; 35,0] | 54,8 | 80,5 [61,4; 90,2] | 13,5 [6,3; 23,2] | 16,7 [-2,5; 31,8] |
-| Ajuste stock-flujo en cero | 29,8 [23,3; 34,9] | 25,5 [22,0; 30,6] | 44,4 | 80,0 [60,7; 89,5] | 10,5 [3,7; 16,8] | 10,1 [0,7; 17,7] |
-| λ = 0,15 | 32,2 [25,5; 37,3] | 30,3 [25,5; 34,5] | 44,1 | 81,6 [63,8; 91,6] | 8,3 [2,8; 13,6] | 8,5 [0,6; 15,1] |
-| λ = 0,40 | 33,1 [27,6; 38,2] | 31,8 [28,0; 36,2] | 51,4 | 83,3 [67,0; 94,8] | 13,2 [5,3; 21,6] | 15,5 [1,9; 26,7] |
-| Escenario del FMI de 2025 | 30,4 [24,0; 35,6] | 26,0 [21,4; 30,7] | 45,6 | 81,6 [63,9; 90,9] | 8,8 [3,5; 14,5] | 8,6 [1,1; 15,7] |
-| Parámetros corregidos por sesgo (Kilian, 1998) | 31,3 [24,2; 36,0] | 31,1 [27,2; 35,7] | 52,1 | 61,3 [32,7; 100,0] | 12,8 [1,6; 20,8] | 11,4 [-15,6; 17,9] |
-| *Shocks* a la manera del FMI, deuda federal bruta | 16,6 | 15,1 | 151,1 | no aplica | no aplica | no aplica |
-| *Shocks* a la manera del FMI, deuda consolidada | 15,3 | 12,3 | 103,4 | no aplica | no aplica | no aplica |
+| Principal (deuda federal bruta) | 31,8 [25,2; 36,4] | 31,0 [26,8; 35,6] | 46,6 | 78,3 [57,3; 87,9] | 9,7 [4,2; 16,0] | 9,0 [0,3; 16,2] |
+| Deuda consolidada con el BCRA | 26,5 [19,1; 30,5] | 24,1 [20,0; 30,0] | 37,3 | 70,2 [43,2; 80,9] | 10,1 [3,7; 17,2] | 6,3 [-0,2; 11,8] |
+| Resultado primario con rentas de la propiedad | 32,0 [25,7; 35,9] | 31,3 [27,4; 36,2] | 47,4 | 85,0 [70,3; 93,9] | 11,3 [5,3; 19,0] | 11,7 [2,1; 21,2] |
+| Canal de tasas en pesos | 33,2 [28,4; 38,0] | 34,8 [32,1; 41,4] | 59,0 | 83,6 [67,7; 93,4] | 9,0 [0,6; 17,2] | 10,4 [-4,0; 21,7] |
+| Sin retroalimentación de la deuda | 30,4 [24,8; 34,6] | 28,5 [23,6; 32,6] | 54,4 | 77,0 [54,7; 87,5] | 7,7 [4,7; 10,9] | 11,6 [4,1; 21,2] |
+| Un rezago (criterio de Schwarz) | 31,4 [27,2; 37,7] | 32,4 [27,2; 38,9] | 48,7 | 90,4 [80,8; 91,6] | 12,2 [2,0; 19,5] | 13,6 [-5,8; 25,0] |
+| Tres rezagos | 30,0 [22,1; 34,5] | 29,5 [24,3; 34,5] | 38,5 | 69,1 [40,3; 82,4] | 8,6 [4,3; 13,6] | 6,5 [1,1; 11,7] |
+| Cholesky, resultado primario primero | 31,8 [25,2; 36,6] | 31,0 [27,0; 35,8] | 46,6 | 60,7 [25,6; 73,4] | 9,7 [4,0; 15,9] | 9,0 [0,3; 16,2] |
+| Cholesky, resultado primario último | 31,8 [24,7; 36,0] | 31,0 [27,1; 35,0] | 46,6 | 91,9 [84,1; 98,5] | 9,7 [4,2; 16,4] | 9,0 [0,1; 16,2] |
+| Elasticidad cíclica 0 | 31,8 [25,2; 36,6] | 31,0 [27,0; 35,8] | 46,6 | 60,7 [25,6; 73,4] | 9,7 [4,0; 15,9] | 9,0 [0,3; 16,2] |
+| Elasticidad cíclica 0,5 | 31,8 [25,5; 36,4] | 31,0 [26,8; 35,5] | 46,6 | 94,4 [89,2; 100,0] | 9,7 [3,5; 16,3] | 9,0 [0,3; 16,2] |
+| Sin los *shocks* de 2001T4-2005T3 | 31,3 [25,4; 36,1] | 32,0 [28,4; 38,5] | 45,4 | 77,1 [54,8; 89,6] | 10,4 [4,7; 17,2] | 9,3 [0,1; 16,9] |
+| Solo EMBI observado (datos desde 1999, sin empalme) | 32,4 [26,6; 37,0] | 31,2 [26,4; 35,6] | 47,6 | 75,5 [51,7; 86,3] | 9,6 [2,5; 15,7] | 9,6 [-0,6; 17,1] |
+| Datos desde 2004 | 31,6 [27,5; 39,5] | 31,8 [24,0; 40,8] | 34,0 | 81,0 [62,2; 90,3] | 10,2 [-5,0; 16,7] | 6,7 [-29,8; 14,6] |
+| Sin variables binarias de quiebre | 30,5 [22,7; 34,8] | 31,0 [26,3; 35,8] | 55,2 | 65,8 [32,6; 80,1] | 10,9 [4,7; 19,5] | 11,6 [-2,9; 23,3] |
+| Ajuste stock-flujo en cero | 28,9 [22,2; 34,0] | 24,9 [20,5; 30,0] | 42,8 | 75,7 [52,5; 84,9] | 8,7 [2,8; 14,2] | 7,2 [-0,5; 13,0] |
+| λ = 0,15 | 31,1 [23,9; 35,5] | 29,8 [24,9; 33,9] | 42,2 | 77,3 [55,4; 85,2] | 6,8 [2,7; 11,4] | 5,9 [-0,6; 11,4] |
+| λ = 0,40 | 32,1 [26,0; 36,7] | 31,8 [28,8; 36,9] | 49,7 | 79,0 [58,5; 89,4] | 11,0 [4,8; 18,0] | 11,1 [-0,4; 19,9] |
+| Escenario del FMI de 2025 | 29,4 [22,0; 34,2] | 25,4 [21,0; 30,4] | 43,8 | 77,4 [55,6; 86,0] | 7,1 [2,4; 12,1] | 6,1 [-1,1; 11,9] |
+| Parámetros corregidos por sesgo (Kilian, 1998) | 30,1 [24,3; 35,6] | 31,4 [25,3; 36,9] | 53,1 | 62,1 [29,4; 100,0] | 9,6 [-0,6; 18,6] | 9,4 [-9,1; 21,7] |
+| *Shocks* a la manera del FMI, deuda federal bruta | 24,1 | 20,6 | 148,4 | no aplica | no aplica | no aplica |
+| *Shocks* a la manera del FMI, deuda consolidada | 22,2 | 16,5 | 100,2 | no aplica | no aplica | no aplica |
 | FMI (2026), deuda federal bruta | 1,0 | menos de 3 | 71,5 | no aplica | no aplica | no aplica |
 

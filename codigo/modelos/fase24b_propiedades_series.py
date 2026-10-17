@@ -51,7 +51,7 @@ def main() -> None:
     series = {
         "Resultado primario": Y["pb_pib"],
         "Crecimiento real": Y["crec"],
-        "EMBI+": Y["EMBI"],
+        "EMBI": Y["EMBI"],
         "TCRM": Y["TCRM"],
         "Deuda federal bruta": X["deuda_l1"].shift(-1).dropna(),
         "Deuda consolidada con el BCRA": Xc["deuda_l1"].shift(-1).dropna(),

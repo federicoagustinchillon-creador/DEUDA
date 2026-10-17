@@ -26,7 +26,7 @@ Arquitectura (Celasun, Debrun y Ostry, 2006; FMI, 2021, parr. 52):
         d_t = d_{t-1} M_t - pb_t + sf_t + ri_t
         M_t = (1 + i_t + (1-a) x_t)(1 + (1-a) e_t) / ((1 + pi_t)(1 + g_t))
      a: proporcion en pesos (fija en el escenario, como en el FMI, 2021, anexo VI, parr. 6);
-     e_t: desvio de la depreciacion real; x_t: desvio de la tasa en dolares (EMBI+ y FED), que
+     e_t: desvio de la depreciacion real; x_t: desvio de la tasa en dolares (EMBI y FED), que
      se reprecia a la velocidad lam. El ajuste stock-flujo del FMI (sobre todo capitalizacion de
      deuda indexada) se escala por la deuda en pesos y la inflacion relativa por la deuda en
      moneda extranjera, ambas relativas a las del FMI. El desvio del crecimiento anual es la
@@ -356,7 +356,7 @@ def impacto(u: np.ndarray) -> np.ndarray:
     if IDENT == "cholesky_fiscal_primero":
         return np.linalg.cholesky(np.cov(u, rowvar=False))
     if IDENT == "cholesky_fiscal_ultimo":
-        # Orden crecimiento, TCRM, EMBI+, resultado primario; filas y columnas vuelven al orden
+        # Orden crecimiento, TCRM, EMBI, resultado primario; filas y columnas vuelven al orden
         # de ENDOG (pb, crec, EMBI, TCRM) para que los bloques sigan valiendo.
         orden = [1, 3, 2, 0]
         L = np.linalg.cholesky(np.cov(u[:, orden], rowvar=False))
@@ -567,7 +567,7 @@ def main() -> None:
     if a.alpha_y is not None:
         f24.ALPHA_Y = a.alpha_y
     if a.pb_alternativa:
-        f24.PB_COLUMNA = "pb_pib_trim_sin_rentas" if a.deuda == "federal" else "pb_pib_trim"
+        f24.PB_COLUMNA = "pb_pib_trim"
     if a.desde:
         f24.DESDE = a.desde
     f24.SIN_QUIEBRES = a.sin_quiebres
@@ -651,7 +651,7 @@ def main() -> None:
 
     if a.suficiencia:
         filas = []
-        for dpb in np.arange(0, 8.01, 0.25):
+        for dpb in np.arange(0, 10.01, 0.25):
             s = simular(central, shocks_c, ext_c, fed["base"], esc, d0, alfa, a_fmi, tcrm0, a.canal_domestico,
                         dpb=dpb, sf_cero=a.sf_cero)
             filas.append({"dpb": dpb, "pb_2026": float(esc.loc[2026, "pb"] + dpb),

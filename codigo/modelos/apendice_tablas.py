@@ -24,12 +24,12 @@ import fase24_svarx_1996_2025 as f24  # noqa: E402
 BASE = pathlib.Path(__file__).resolve().parent.parent.parent
 TABLAS = BASE / "resultados" / "tablas"
 SALIDA = BASE / "tesis_oficial_borradores" / "apendice.md"
-NOMBRES = {"pb_pib": "Resultado primario", "crec": "Crecimiento", "EMBI": "EMBI+", "TCRM": "TCRM"}
+NOMBRES = {"pb_pib": "Resultado primario", "crec": "Crecimiento", "EMBI": "EMBI", "TCRM": "TCRM"}
 SERIES = {"federal": "federal bruta (principal)", "consolidada": "consolidada con el BCRA (extensión)"}
 ROBUSTEZ = {
     "federal": "Principal (deuda federal bruta)",
     "consolidada": "Deuda consolidada con el BCRA",
-    "federal_pb_alt": "Resultado primario sin rentas de la propiedad",
+    "federal_pb_alt": "Resultado primario con rentas de la propiedad",
     "federal_dom": "Canal de tasas en pesos",
     "federal_sin_retro": "Sin retroalimentación de la deuda",
     "federal_p1": "Un rezago (criterio de Schwarz)",
@@ -39,6 +39,7 @@ ROBUSTEZ = {
     "federal_alfa0": "Elasticidad cíclica 0",
     "federal_alfa0.5": "Elasticidad cíclica 0,5",
     "federal_sin_default": "Sin los *shocks* de 2001T4-2005T3",
+    "federal_desde1999": "Solo EMBI observado (datos desde 1999, sin empalme)",
     "federal_desde2004": "Datos desde 2004",
     "federal_sin_quiebres": "Sin variables binarias de quiebre",
     "federal_sf0": "Ajuste stock-flujo en cero",
@@ -74,7 +75,7 @@ def seccion_descriptivos() -> str:
     Y, X, p, _ = muestra_principal()
     muestra = pd.concat([Y.iloc[p:], X.iloc[p:][["deuda_l1", "dFED_l0", "VIX"]]], axis=1)
     nombres = {"pb_pib": "Resultado primario (% del PIB, trimestral anualizado)", "crec": "Crecimiento real trimestral (%)",
-               "EMBI": "EMBI+ (puntos básicos)", "TCRM": "TCRM (diciembre de 2001 = 1)",
+               "EMBI": "EMBI (puntos básicos)", "TCRM": "TCRM (diciembre de 2001 = 1)",
                "deuda_l1": "Deuda federal bruta, rezagada (% del PIB)",
                "dFED_l0": "Variación de la tasa de la FED (puntos)", "VIX": "VIX"}
     filas = [[nombres[c], num(muestra[c].mean(), 2), num(muestra[c].std(ddof=1), 2), num(muestra[c].min(), 2),
@@ -82,6 +83,45 @@ def seccion_descriptivos() -> str:
     d = pd.DataFrame(filas, columns=["Variable", "Media", "Desvío estándar", "Mínimo", "Máximo"])
     return (f"## A.1 Estadísticos descriptivos\n\nMuestra efectiva de estimación, {trim(muestra.index[0])}-"
             f"{trim(muestra.index[-1])} ({len(muestra)} trimestres).\n\n" + tabla(d) + "\n")
+
+
+def seccion_empalmes() -> str:
+    """Empalmes del EMBI (1996T1-1998T3) y del TCRM (1996) con su validacion."""
+    v = pd.read_csv(TABLAS / "empalmes_validacion.csv").set_index("empalme")
+    e, tc = v.loc["EMBI"], v.loc["TCRM"]
+    emp = pd.read_csv(BASE / "datos" / "procesados" / "empalmes_1996_1998.csv", index_col=0, parse_dates=True)
+    filas = [["EMBI", "Tasa de préstamos interfinancieros en dólares (BCRA) menos tasa de fondos federales",
+              "1998T4-2001T3", int(e["n"]), num(e["correlacion"], 3), num(e["r2"], 2),
+              f"Error típico dejando un trimestre afuera: {num(e['rmse_dejando_uno_afuera'], 0)} pb (desvío del EMBI: {num(e['desvio_embi_superposicion'], 0)} pb)"],
+             ["TCRM", "Tipo de cambio real efectivo amplio del BIS (invertido)", "1997T2-2025T4", int(tc["n"]),
+              num(tc["correlacion"], 3), num(tc["r2"], 2),
+              f"Correlación de las variaciones en 1997-2001: {num(tc['correlacion_1997_2001'], 3)}"]]
+    d = pd.DataFrame(filas, columns=["Serie", "Variable puente", "Superposición", "n", "Correlación", "R²", "Validación"])
+    real = e["fuera_de_muestra_2001_real"].replace(";", " ;").split(";")
+    pron = e["fuera_de_muestra_2001_pronostico"].split(";")
+    oos = pd.DataFrame({"Trimestre": ["2001T1", "2001T2", "2001T3"],
+                        "EMBI observado": [r.strip() for r in real], "Pronóstico fuera de muestra": [x.strip() for x in pron]})
+    vals = pd.DataFrame({"Trimestre": [trim(i) for i in emp.index],
+                         "EMBI empalmado (pb)": emp["EMBI"].map(lambda x: "" if pd.isna(x) else num(x, 0)),
+                         "TCRM empalmado": emp["TCRM"].map(lambda x: "" if pd.isna(x) else num(x, 3))})
+    return ("## A.2 Empalmes de 1996-1998\n\n"
+            "La serie diaria pública del EMBI para Argentina comienza el 11 de diciembre de 1998 y el índice de tipo de cambio "
+            "real multilateral del BCRA, en enero de 1997. Para completar la ventana 1996-2025, el EMBI de 1996T1-1998T3 se "
+            f"reconstruye con la relación EMBI = {num(e['a'], 1)} + {num(e['b'], 3)} × diferencial, estimada en la superposición, "
+            "donde el diferencial es la tasa de préstamos interfinancieros en dólares del BCRA menos la tasa de fondos federales. "
+            "La superposición termina en 2001T3 porque el corralito de diciembre de 2001 interrumpe el mercado interbancario en "
+            "dólares. El TCRM de 1996 se encadena hacia atrás con las variaciones del tipo de cambio real efectivo del BIS. La "
+            "Figura A.1 compara las series observadas con las reconstruidas.\n\n"
+            + tabla(d) + "\nFuente: elaboración propia con datos del BCRA, J.P. Morgan (serie diaria publicada por Ámbito "
+            "Financiero), Reserva Federal y BIS.\n\n"
+            "**Validación fuera de muestra del empalme del EMBI.** Relación estimada solo con 1998T4-2000T4 y aplicada a 2001:\n\n"
+            + tabla(oos) + "\nEl empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa "
+            "la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los "
+            "resultados casi no cambian (sección A.9).\n\n"
+            + tabla(vals) + "\nFuente: elaboración propia.\n\n"
+            "![Figura A.1. Empalmes del EMBI y del TCRM. Series observadas y reconstruidas con las variables puente; el "
+            "sombreado marca la superposición del EMBI. Fuente: elaboración propia con datos del BCRA, J.P. Morgan, Reserva "
+            "Federal y BIS.](../tesis/figuras/figA_1_empalmes.png)\n\n")
 
 
 def seccion_propiedades() -> str:
@@ -102,23 +142,23 @@ def seccion_propiedades() -> str:
                       "Traza": jn["traza"].map(lambda v: num(v, 1)), "Valor crítico 5%": jn["critico_95"].map(lambda v: num(v, 1)),
                       "Rechaza": jn["rechaza_95"].map({True: "sí", False: "no"})})
     fechas = ", ".join(trim(q) for q in quiebres)
-    return ("## A.2 Propiedades de las series\n\n"
+    return ("## A.3 Propiedades de las series\n\n"
             "**Raíz unitaria.** ADF (Dickey y Fuller, 1979; hipótesis nula: raíz unitaria) y KPSS (Kwiatkowski et al., 1992; "
             "hipótesis nula: estacionariedad), con constante. Una serie se clasifica como estacionaria solo si ADF rechaza y KPSS "
             "no rechaza al 5%, y con raíz unitaria en el caso inverso. Zivot y Andrews (1992) permiten un quiebre endógeno en el "
-            "nivel. Datos desde 1999T1.\n\n"
+            "nivel. Ventana 1996-2025.\n\n"
             + tabla(d.reset_index(drop=True)) +
             f"\n**Quiebres estructurales.** El procedimiento de Bai y Perron (2003) sobre la media de la deuda federal bruta "
             f"(1996-2025), con el número de quiebres elegido por el criterio de Schwarz, encuentra {m} quiebres: {fechas}. Entran "
             "como variables binarias de escalón en el SVARX.\n\n"
-            "**Cointegración.** Prueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI+, "
+            "**Cointegración.** Prueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI, "
             "TCRM y deuda), con los rezagos del VAR. El crecimiento se excluye porque es una tasa de variación.\n\n"
             + tabla(j.reset_index(drop=True)) + "\n")
 
 
 def seccion_rezagos() -> str:
     t0 = pd.read_csv(TABLAS / "fase24_federal_rezagos.csv")
-    out = ("## A.3 Selección del orden del VAR\n\n"
+    out = ("## A.4 Selección del orden del VAR\n\n"
            f"Muestra efectiva común {t0['inicio'].iloc[-1][:4]}-2025 ({int(t0['n_efectivo'].iloc[0])} trimestres) para todos "
            "los órdenes (sección 4.5). El punto de partida es el orden que elige el criterio de Schwarz entre los órdenes "
            "estables (Ivanov y Kilian, 2005); si sus residuos rechazan la ausencia de autocorrelación, se toma el menor orden "
@@ -147,7 +187,7 @@ def seccion_diagnosticos() -> str:
     d.index = [i.replace("(1 = si)", "(1 = sí)").replace("pb_pib", "resultado primario").replace("crec", "crecimiento") for i in d.index]
     d = d.map(lambda v: num(v))
     d.insert(0, "Prueba (p-valor salvo estabilidad)", d.index)
-    return ("## A.4 Diagnósticos de los residuos\n\nPortmanteau con 12 rezagos (autocorrelación), Jarque-Bera multivariada "
+    return ("## A.5 Diagnósticos de los residuos\n\nPortmanteau con 12 rezagos (autocorrelación), Jarque-Bera multivariada "
             "(normalidad), ARCH-LM con cuatro rezagos por ecuación (heterocedasticidad condicional) y estabilidad (1 = estable).\n\n"
             + tabla(d.reset_index(drop=True)) + "\n")
 
@@ -158,7 +198,7 @@ def seccion_impacto() -> str:
     S.columns = ["*Shock* fiscal", "*Shock* de actividad", "*Shock* cambiario y de riesgo 1", "*Shock* cambiario y de riesgo 2"]
     S = S.map(lambda v: num(0.0 if abs(v) < 1e-10 else v))
     S.insert(0, "Variable", S.index)
-    return ("## A.5 Matriz de impacto estructural\n\nEfecto en el mismo trimestre de un *shock* estructural de un desvío "
+    return ("## A.6 Matriz de impacto estructural\n\nEfecto en el mismo trimestre de un *shock* estructural de un desvío "
             "estándar (especificación principal). Los ceros son las restricciones de identificación de la sección 4.4. Los dos "
             "*shocks* del bloque cambiario y de riesgo no tienen interpretación por separado: solo se usa su efecto conjunto.\n\n"
             + tabla(S.reset_index(drop=True)) + "\n")
@@ -186,7 +226,7 @@ def seccion_fiscal() -> str:
     nota = (" El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El "
             "multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es "
             f"{num(lp['p50'], 3)}, con un intervalo de 90% de [{num(lp['p05'], 3)}; {num(lp['p95'], 3)}].")
-    return ("## A.6 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, "
+    return ("## A.7 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, "
             f"especificación principal (MCO, {trim(Y.index[p])}-{trim(Y.index[-1])}). No se muestran la constante, las "
             "variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se "
             "informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et "
@@ -218,7 +258,7 @@ def seccion_principal() -> str:
             f"{num(100 * t.loc['error_mc_p_noest_2031', 'estimacion'], 1)} puntos en la probabilidad de 2031); intervalos de Hall con "
             f"{meta['B']} réplicas de parámetros y {miles(meta['N'])} trayectorias cada una. Autovalor máximo del VAR: "
             f"{num(meta['raiz_max_estimada'], 3)}.")
-    return "## A.7 Resultados completos de la especificación principal\n\n" + nota + "\n\n" + tabla(d) + "\n"
+    return "## A.8 Resultados completos de la especificación principal\n\n" + nota + "\n\n" + tabla(d) + "\n"
 
 
 def seccion_robustez() -> str:
@@ -240,7 +280,7 @@ def seccion_robustez() -> str:
     d = pd.DataFrame(filas, columns=["Especificación", "No estabilización 2031 (%)", "No estabilización 2035 (%)",
                                      "Ancho 2031", "No fiscal menos fiscal (puntos)", "Senda de la FED: probabilidad 2035 (pp)",
                                      "Senda de la FED: deuda 2035 (pp)"])
-    return ("## A.8 Robustez completa\n\nEntre corchetes, intervalos de 90% de Hall. Todas las especificaciones usan los mismos "
+    return ("## A.9 Robustez completa\n\nEntre corchetes, intervalos de 90% de Hall. Todas las especificaciones usan los mismos "
             "números aleatorios, de modo que las diferencias entre filas no provienen del sorteo. Las filas a la manera del FMI "
             "no tienen intervalo porque ese procedimiento no estima parámetros. Fuente de la última fila: FMI (2026, anexo II, "
             "cuadro 7 y párrafo 9).\n\n" + tabla(d) + "\n")
@@ -248,7 +288,7 @@ def seccion_robustez() -> str:
 
 def main() -> None:
     texto = "# Apéndice estadístico\n\nFuente de todas las tablas, salvo indicación: elaboración propia.\n\n"
-    texto += (seccion_descriptivos() + seccion_propiedades() + seccion_rezagos() + seccion_diagnosticos()
+    texto += (seccion_descriptivos() + seccion_empalmes() + seccion_propiedades() + seccion_rezagos() + seccion_diagnosticos()
               + seccion_impacto() + seccion_fiscal() + seccion_principal() + seccion_robustez())
     SALIDA.write_text(texto, encoding="utf-8")
     print(f"[OK] {SALIDA.relative_to(BASE)}")

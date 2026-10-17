@@ -48,7 +48,7 @@ def _limpiar(md: str) -> str:
     """Quita la numeracion manual de los titulos y la ruta de las figuras."""
     md = re.sub(r"^(#{1,6})\s+\d+(?:\.\d+)*\.?\s+", r"\1 ", md, flags=re.M)
     md = re.sub(r"^(#{1,6})\s+[A-Z]\.\d+\s+", r"\1 ", md, flags=re.M)  # A.1, A.2 del apendice
-    md = re.sub(r"!\[Figura \d+\.\d+\.\s*", "![", md)  # LaTeX numera la figura
+    md = re.sub(r"!\[Figura [A-Z0-9]+\.\d+\.\s*", "![", md)  # LaTeX numera la figura (6.2, A.1)
     return md.replace("../tesis/figuras/", "")
 
 

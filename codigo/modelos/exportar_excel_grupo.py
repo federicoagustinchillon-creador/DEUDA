@@ -21,7 +21,7 @@ R = BASE / "resultados" / "tablas"
 SALIDA = BASE / "tesis_oficial_borradores" / "para_el_grupo" / "Datos_y_resultados.xlsx"
 
 HOJAS: dict[str, tuple[pathlib.Path, str]] = {
-    "Datos_trimestrales": (D / "dataset_consolidado_1996_2025.csv", "Base trimestral 1996-2025: EMBI+, TCRM, PIB real y demas variables"),
+    "Datos_trimestrales": (D / "dataset_consolidado_1996_2025.csv", "Base trimestral 1996-2025: EMBI, TCRM, PIB real y demas variables"),
     "Deuda": (D / "procesados" / "deuda_consolidada_neta_nominal_1996_2025.csv",
               "Deuda en % del PIB: bruta_federal_pib (principal) y deuda_consolidada_neta_nominal_pib (extension)"),
     "Resultado_primario": (D / "procesados" / "resultado_primario_1996_2025.csv",

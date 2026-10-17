@@ -69,7 +69,7 @@ sostenibilidad de la deuda argentina. Como extensión se estudia la deuda
 del sector público consolidado con el Banco Central de la República
 Argentina (BCRA). La pregunta principal tiene dos partes. La primera es:
 ¿en qué medida el crecimiento, el tipo de cambio real, el riesgo país y
-el resultado primario de Argentina (1999-2025) condicionan la
+el resultado primario de Argentina en 1996-2025 condicionan la
 sostenibilidad de la deuda pública en el horizonte 2026-2035? La segunda
 es: ¿cuál es la probabilidad de que la deuda no se estabilice bajo el
 escenario base?
@@ -97,7 +97,7 @@ esterilización monetaria pasara al Tesoro (FMI, 2026, anexo II, cuadro
 \section{Objetivos}
 
 El objetivo general es evaluar la dinámica de la deuda pública argentina
-a partir de sus determinantes macroeconómicos históricos (1999-2025),
+a partir de sus determinantes macroeconómicos históricos en 1996-2025,
 para proyectarla en el horizonte 2026-2035 y estimar la probabilidad de
 que no se estabilice.
 
@@ -108,9 +108,9 @@ Para alcanzarlo, se plantean los siguientes objetivos específicos:
 \tightlist
 \item
   Construir series trimestrales de la deuda federal bruta y de la deuda
-  consolidada con el BCRA (deuda del Tesoro nacional neta de la que está
-  en poder del BCRA, más los pasivos remunerados del BCRA) para
-  1996-2025.
+  consolidada con el BCRA para 1996-2025. La segunda es la deuda del
+  Tesoro nacional que no está en poder del BCRA, más los pasivos
+  remunerados del BCRA, menos los depósitos del Tesoro en el BCRA.
 \item
   Analizar las propiedades estocásticas de las series (raíz unitaria y
   quiebres estructurales).
@@ -118,8 +118,8 @@ Para alcanzarlo, se plantean los siguientes objetivos específicos:
   Estimar un modelo de vectores autorregresivos estructural con
   variables exógenas (SVARX), en el que la deuda pública interactúa con
   el crecimiento, el tipo de cambio real, el riesgo país y el resultado
-  primario, y en el que la tasa de la FED y la volatilidad financiera
-  global entran como variables exógenas.
+  primario, y en el que la tasa de política monetaria de la FED y la
+  volatilidad financiera global entran como variables exógenas.
 \item
   Medir la contribución de los bloques de \emph{shocks}\footnote{\emph{Shock}:
     perturbación inesperada que afecta a una variable del sistema y se
@@ -139,7 +139,7 @@ Para alcanzarlo, se plantean los siguientes objetivos específicos:
 \section{Hipótesis}
 
 H1a. Los determinantes macroeconómicos históricos de Argentina en
-1999-2025 (el crecimiento, el tipo de cambio real, el riesgo país y el
+1996-2025 (el crecimiento, el tipo de cambio real, el riesgo país y el
 resultado primario) condicionan la sostenibilidad de la deuda pública
 (la federal bruta en la especificación principal y la consolidada con el
 BCRA como extensión), de modo que el superávit primario, por sí solo, no
@@ -167,18 +167,26 @@ la tasa en 2022-2025.
 \section{Estrategia metodológica}
 
 Para contrastar estas hipótesis se estima un SVARX con datos
-trimestrales de Argentina desde 1999; la muestra de estimación cubre
-2000-2025. La deuda federal bruta entra rezagada en todas las ecuaciones
-del sistema y se acumula con la identidad contable, de modo que los
-\emph{shocks} se transmiten en ambos sentidos: la deuda responde al
-riesgo país, al tipo de cambio y al resultado fiscal, y a la vez los
-afecta en los trimestres siguientes. La identidad de acumulación
-distingue el tramo en moneda local del tramo en moneda extranjera e
-incorpora el ajuste stock-flujo del escenario del FMI. El modelo
-estimado alimenta simulaciones de Monte Carlo alrededor del escenario
-base del FMI, con su mismo punto de partida, que generan distribuciones
-de probabilidad sobre la trayectoria de la deuda en 2026-2035. Los
-resultados se resumen en gráficos de abanico (\emph{fan
+trimestrales de Argentina de 1996-2025. Las variables endógenas son el
+resultado primario, el crecimiento, el riesgo país, medido por el
+diferencial del índice EMBI de J.P. Morgan para Argentina (EMBI), y el
+tipo de cambio real multilateral (TCRM). La tasa de política monetaria
+de la FED y el índice de volatilidad VIX entran como exógenas. Los
+\emph{shocks} se identifican con restricciones de impacto en la línea de
+Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con un
+bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto;
+como robustez se usan dos ordenamientos de Cholesky (resultado primario
+primero y resultado primario último). La deuda federal bruta entra
+rezagada en todas las ecuaciones del sistema y se acumula con la
+identidad contable, de modo que los \emph{shocks} se transmiten en ambos
+sentidos: la deuda responde al EMBI, al TCRM y al resultado primario, y
+a la vez los afecta en los trimestres siguientes. La identidad de
+acumulación distingue el tramo en moneda local del tramo en moneda
+extranjera e incorpora el ajuste stock-flujo del escenario del FMI. El
+modelo estimado alimenta simulaciones de Monte Carlo alrededor del
+escenario base del FMI, con su mismo punto de partida, que generan
+distribuciones de probabilidad sobre la trayectoria de la deuda en
+2026-2035. Los resultados se resumen en gráficos de abanico (\emph{fan
 charts})\footnote{Gráficos que muestran la distribución de trayectorias
   posibles de una variable mediante bandas de percentiles.} y en la
 métrica de no estabilización que utiliza el FMI. El mismo ejercicio se
@@ -187,16 +195,16 @@ repite con la deuda consolidada con el BCRA.
 \section{Justificación}
 
 La Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda
-Pública (2021) dio al Congreso un papel mayor en las decisiones de
-endeudamiento. Exige una ley especial para emitir títulos en moneda
-extranjera bajo legislación y jurisdicción extranjeras por encima del
-máximo que fije la Ley de Presupuesto (art. 1) y una ley que apruebe de
-manera expresa cada programa con el FMI y sus ampliaciones (art. 2).
-Para esas decisiones hacen falta evaluaciones de la sostenibilidad de la
-deuda, y en la literatura revisada (sección 2.9) no se encontró una
-estimación para Argentina con \emph{shocks} identificados cuyo resultado
-se exprese en la métrica del FMI, sobre el perímetro y el escenario del
-propio FMI.
+Pública, sancionada en 2021, dio al Congreso un papel mayor en las
+decisiones de endeudamiento. Exige una ley especial para emitir títulos
+en moneda extranjera bajo legislación y jurisdicción extranjeras por
+encima del máximo que fije la Ley de Presupuesto (art. 1) y una ley que
+apruebe de manera expresa cada programa con el FMI y sus ampliaciones
+(art. 2). Para esas decisiones hacen falta evaluaciones de la
+sostenibilidad de la deuda, y en la literatura revisada (sección 2.9) no
+se encontró una estimación para Argentina con \emph{shocks}
+identificados cuyo resultado se exprese en la métrica del FMI, sobre el
+perímetro y el escenario del propio FMI.
 
 El precedente metodológico es la arquitectura de Celasun et al.~(2006),
 desarrollada en el FMI y extendida por Medeiros (2012) en la Comisión

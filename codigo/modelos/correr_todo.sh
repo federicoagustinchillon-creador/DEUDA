@@ -14,6 +14,7 @@ correr() {  # nombre, comando...
     "$@" > "$R/$nombre.log" 2>&1 || echo "  FALLO $nombre (ver $R/$nombre.log)"
 }
 
+correr empalmes python codigo/ingesta_datos/empalme_embi_tcrm_1996_1998.py
 correr f24_federal python $M/fase24_svarx_1996_2025.py --deuda federal
 correr f24_consolidada python $M/fase24_svarx_1996_2025.py --deuda consolidada
 correr f24b_propiedades python $M/fase24b_propiedades_series.py
@@ -31,6 +32,7 @@ correr f25_chol_ultimo $S --identificacion cholesky_fiscal_ultimo
 correr f25_alfa0 $S --alpha-y 0
 correr f25_alfa05 $S --alpha-y 0.5
 correr f25_sin_default $S --sin-default
+correr f25_desde1999 $S --desde 1999-01-01
 correr f25_desde2004 $S --desde 2004-01-01
 correr f25_sin_quiebres $S --sin-quiebres
 correr f25_sf0 $S --sf-cero

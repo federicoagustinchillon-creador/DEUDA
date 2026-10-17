@@ -80,7 +80,7 @@ def fig5_1() -> None:
 def fig5_2() -> None:
     Y, _, quiebres = f24.cargar_datos("federal", 2)
     titulos = {"pb_pib": "Resultado primario (% del PIB, trimestral anualizado)",
-               "crec": "Crecimiento real trimestral (%)", "EMBI": "EMBI+ Argentina (puntos básicos)",
+               "crec": "Crecimiento real trimestral (%)", "EMBI": "EMBI Argentina (puntos básicos)",
                "TCRM": "Tipo de cambio real multilateral (índice)"}
     fig, axs = plt.subplots(2, 2, figsize=(7, 4.8), sharex=True)
     for ax, c in zip(axs.flat, f24.ENDOG):
@@ -111,7 +111,7 @@ def fig6_1() -> None:
     q = pd.read_csv(TABLAS / "fase24_federal_bootstrap.csv", index_col=0)
     punto = pd.read_csv(TABLAS / "fase24_federal_respuesta_fed.csv", index_col=0)
     titulos = {"pb_pib": "Resultado primario (pp del PIB)", "crec": "Crecimiento real (pp)",
-               "EMBI": "EMBI+ (puntos básicos)", "TCRM": "TCRM (índice)"}
+               "EMBI": "EMBI (puntos básicos)", "TCRM": "TCRM (índice)"}
     fig, axs = plt.subplots(2, 2, figsize=(7, 4.6), sharex=True)
     for ax, c in zip(axs.flat, f24.ENDOG):
         filas = [f"fed_{c}_h{h}" for h in punto.index]
@@ -176,12 +176,12 @@ def fig6_4() -> None:
 
 def fig6_5() -> None:
     t = pd.read_csv(TABLAS / "fase25_federal_suficiencia.csv")
-    pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib"]
-    maximo = float(pb[pb.index.quarter == 4].loc["1999":].max())  # anio calendario, definicion del FMI
+    pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib_sin_rentas"]
+    maximo = float(pb[pb.index.quarter == 4].loc["1996":].max())  # anio calendario, sin rentas de la propiedad
     fig, ax = plt.subplots(figsize=(6.5, 3.4))
     ax.plot(t["pb_2031"], 100 * t["p_noest_2031"], color=AZUL, lw=1.8, marker="o", ms=3, label="Probabilidad de no estabilización en 2031")
     ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026): 1%")
-    ax.axvline(maximo, color=GRIS, lw=1.0, ls=":", label=f"Máximo anual 1999-2025: {maximo:.1f}%".replace(".", ","))
+    ax.axvline(maximo, color=GRIS, lw=1.0, ls=":", label=f"Máximo anual 1996-2025: {maximo:.1f}%".replace(".", ","))
     ax.axvline(float(t["pb_2031"].iloc[0]), color=AZUL, lw=0.8, ls=":", label="Escenario base del FMI")
     ax.set_xlabel("Resultado primario en 2031 (% del PIB)")
     ax.set_ylabel("%")
@@ -217,9 +217,39 @@ def fig7_2() -> None:
     guardar(fig, "fig7_2_impulsores_historicos.png")
 
 
+def figA_1() -> None:
+    """Empalmes de 1996-1998: serie oficial contra la reconstruida con la variable puente."""
+    v = pd.read_csv(TABLAS / "empalmes_validacion.csv").set_index("empalme")
+    a_, b_ = float(v.loc["EMBI", "a"]), float(v.loc["EMBI", "b"])
+    tasa = pd.read_csv(DATOS / "crudos" / "empalmes" / "bcra_tasa_interbancaria_usd_mensual.csv", parse_dates=["Date"], index_col="Date").iloc[:, 0]
+    fed = leer("procesados/tasa_fed_trimestral_1996_2025.csv")["fedfunds"]
+    puente = a_ + b_ * (tasa.resample("QE").mean() - fed) * 100
+    base = leer("dataset_consolidado_1996_2025.csv")
+    obs = base["EMBI"].where(base["EMBI_fuente"].str.startswith("J.P."))
+    reer = pd.read_csv(DATOS / "crudos" / "empalmes" / "bis_reer_amplio_argentina_mensual.csv", parse_dates=["Date"], index_col="Date").iloc[:, 0]
+    inv = 1.0 / reer.resample("QE").mean()
+    t_obs = base["TCRM"].where(base["TCRM_fuente"].str.startswith("BCRA"))
+    ancla = pd.Timestamp("1997-03-31")
+    t_bis = t_obs.loc[ancla] * inv / inv.loc[ancla]
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(7, 5.2))
+    a1.plot(obs.loc[:"2001-12-31"].index, obs.loc[:"2001-12-31"], color=AZUL, lw=1.8, label="EMBI observado (J.P. Morgan)")
+    a1.plot(puente.loc["1996":"2001-09-30"].index, puente.loc["1996":"2001-09-30"], color=ROJO, lw=1.2, ls="--",
+            label="Reconstruido con la tasa interbancaria en dólares (BCRA)")
+    a1.axvspan(pd.Timestamp("1998-10-01"), pd.Timestamp("2001-09-30"), color=GRIS, alpha=0.12, lw=0)
+    a1.set_ylabel("Puntos básicos")
+    a1.set_title("EMBI: superposición 1998T4-2001T3 (sombreada) y tramo empalmado 1996-1998", fontsize=8)
+    a1.legend(fontsize=7, loc="upper left")
+    a2.plot(t_obs.loc[:"2003-12-31"].index, t_obs.loc[:"2003-12-31"], color=AZUL, lw=1.8, label="TCRM del BCRA")
+    a2.plot(t_bis.loc["1996":"2003-12-31"].index, t_bis.loc["1996":"2003-12-31"], color=ROJO, lw=1.2, ls="--",
+            label="Encadenado con el tipo de cambio real efectivo del BIS")
+    a2.set_title("TCRM: tramo empalmado 1996 y comparación 1997-2003", fontsize=8)
+    a2.legend(fontsize=7, loc="upper left")
+    guardar(fig, "figA_1_empalmes.png")
+
+
 def main() -> None:
     FIG.mkdir(parents=True, exist_ok=True)
-    for f in (fig5_1, fig5_2, fig5_3, fig6_1, fig6_3, fig6_4, fig6_5, fig7_1, fig7_2):
+    for f in (fig5_1, fig5_2, fig5_3, fig6_1, fig6_3, fig6_4, fig6_5, fig7_1, fig7_2, figA_1):
         f()
     fig_abanico_deuda.main()
 
