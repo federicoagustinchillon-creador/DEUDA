@@ -268,15 +268,6 @@ def seccion_cholesky() -> str:
     return salida
 
 
-def seccion_replicabilidad() -> str:
-    return ("## A.10 Replicabilidad\n\nLas cifras, tablas y figuras de la tesis se obtienen de los programas del repositorio a partir de "
-            "las series de `datos/procesados/`; los resultados quedan en `resultados/tablas/`. El orden de ejecución, el entorno y los "
-            "tiempos están descriptos en `codigo/GUIA_DE_EJECUCION.md`, y `codigo/modelos/correr_todo.sh` reproduce la estimación del "
-            "SVARX, la simulación, las variantes de robustez, las figuras y este Apéndice. Las semillas son fijas, de modo que una nueva "
-            "corrida da las mismas cifras. El archivo Excel de datos y resultados se genera con `codigo/modelos/exportar_excel_grupo.py` "
-            "a partir de esos mismos archivos.\n")
-
-
 def seccion_fiscal() -> str:
     Y, X, p, _ = muestra_principal()
     res = f24.VAR(Y, exog=X).fit(maxlags=p, ic=None, trend="c")
@@ -369,8 +360,7 @@ def seccion_robustez() -> str:
 def main() -> None:
     texto = "# Apéndice estadístico\n\nFuente de todas las tablas, salvo indicación: elaboración propia.\n\n"
     texto += (seccion_descriptivos() + seccion_empalmes() + seccion_propiedades() + seccion_rezagos() + seccion_diagnosticos()
-              + seccion_impacto() + seccion_cholesky() + seccion_fiscal() + seccion_principal() + seccion_robustez()
-              + seccion_replicabilidad())
+              + seccion_impacto() + seccion_cholesky() + seccion_fiscal() + seccion_principal() + seccion_robustez())
     SALIDA.write_text(texto, encoding="utf-8")
     print(f"[OK] {SALIDA.relative_to(BASE)}")
 

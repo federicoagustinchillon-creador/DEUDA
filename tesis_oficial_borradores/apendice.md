@@ -252,6 +252,3 @@ Entre corchetes, intervalos de 90% de Hall. Todas las especificaciones usan los 
 | *Shocks* a la manera del FMI, deuda consolidada | 26,2 | 19,4 | 63,4 | no aplica | no aplica | no aplica |
 | FMI (2026), deuda federal bruta | 1,0 | menos de 3 | 71,5 | no aplica | no aplica | no aplica |
 
-## A.10 Replicabilidad
-
-Las cifras, tablas y figuras de la tesis se obtienen de los programas del repositorio a partir de las series de `datos/procesados/`; los resultados quedan en `resultados/tablas/`. El orden de ejecución, el entorno y los tiempos están descriptos en `codigo/GUIA_DE_EJECUCION.md`, y `codigo/modelos/correr_todo.sh` reproduce la estimación del SVARX, la simulación, las variantes de robustez, las figuras y este Apéndice. Las semillas son fijas, de modo que una nueva corrida da las mismas cifras. El archivo Excel de datos y resultados se genera con `codigo/modelos/exportar_excel_grupo.py` a partir de esos mismos archivos.
