@@ -53,7 +53,10 @@ ROBUSTEZ = {
 
 def num(x: float, d: int = 3) -> str:
     """Formato con coma decimal."""
-    return f"{x:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    cad = f"{x:,.{d}f}"
+    if float(cad.replace(",", "")) == 0:  # evita "-0,0"
+        cad = cad.lstrip("-")
+    return cad.replace(",", "X").replace(".", ",").replace("X", ".")
 
 
 def pval(v: float, kpss: bool = False) -> str:
@@ -133,7 +136,7 @@ def seccion_empalmes() -> str:
             "**Validación fuera de muestra del empalme del EMBI.** Relación estimada solo con 1998T4-2000T4 y aplicada a 2001:\n\n"
             + tabla(oos) + "\nEl empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa "
             "la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los "
-            "resultados casi no cambian (sección A.9).\n\n"
+            "resultados casi no cambian (sección A.10).\n\n"
             + tabla(vals) + "\nFuente: elaboración propia.\n\n"
             "![Figura A.1. Empalmes del EMBI y del TCRM. Series observadas y reconstruidas con las variables puente; el "
             "sombreado marca la superposición del EMBI. Fuente: elaboración propia con datos del BCRA, J.P. Morgan, Reserva "
@@ -157,7 +160,9 @@ def seccion_propiedades() -> str:
     j = pd.DataFrame({"Hipótesis nula": jn["rango_nulo"].str.replace("r <= ", "rango ≤ "),
                       "Traza": jn["traza"].map(lambda v: num(v, 1)), "Valor crítico 5%": jn["critico_95"].map(lambda v: num(v, 1)),
                       "Rechaza": jn["rechaza_95"].map({True: "sí", False: "no"})})
-    fechas = ", ".join(trim(q) for q in quiebres)
+    qg = pd.read_csv(TABLAS / "fase24_federal_quiebres_y_gobiernos.csv")
+    fechas = ", ".join(qg["quiebre"])
+    cons = ", ".join(trim(q) for q in quiebres)
     return ("## A.3 Propiedades de las series\n\n"
             "**Raíz unitaria.** ADF (Dickey y Fuller, 1979; hipótesis nula: raíz unitaria) y KPSS (Kwiatkowski et al., 1992; "
             "hipótesis nula: estacionariedad), con constante. Una serie se clasifica como estacionaria solo si ADF rechaza y KPSS "
@@ -169,7 +174,7 @@ def seccion_propiedades() -> str:
             + tabla(d.reset_index(drop=True)) +
             f"\n**Quiebres estructurales.** El procedimiento de Bai y Perron (2003) sobre la media de la deuda federal bruta "
             f"(1996-2025), con el número de quiebres elegido por el criterio de Schwarz, encuentra {m} quiebres: {fechas}. Entran "
-            "como variables binarias de escalón en el SVARX, salvo el que coincide con un cambio de gobierno, que reemplazan las "
+            f"como variables binarias de escalón en el SVARX los de {cons.replace(', ', ' y ')}; el que coincide con un cambio de gobierno lo reemplazan las "
             "binarias presidenciales.\n\n"
             "**Cointegración.** Prueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI, "
             "TCRM y deuda), con los rezagos del VAR. El crecimiento se excluye porque es una tasa de variación. Términos "
@@ -249,11 +254,11 @@ def seccion_impacto() -> str:
 
 
 def seccion_cholesky() -> str:
-    """Matrices de impacto de los dos ordenamientos de Cholesky de la robustez (A.6 bis)."""
+    """Matrices de impacto de los dos ordenamientos de Cholesky de la robustez (A.7)."""
     cols = ["*Shock* del resultado primario", "*Shock* del crecimiento", "*Shock* del EMBI", "*Shock* del TCRM"]
     textos = {"pb_primero": ("Resultado primario primero", "resultado primario, crecimiento, EMBI, TCRM"),
               "pb_ultimo": ("Resultado primario último", "crecimiento, TCRM, EMBI, resultado primario")}
-    salida = ("## A.6 bis Matrices de impacto de los ordenamientos de Cholesky\n\nEfecto en el mismo trimestre de un *shock* "
+    salida = ("## A.7 Matrices de impacto de los ordenamientos de Cholesky\n\nEfecto en el mismo trimestre de un *shock* "
               "de un desvío estándar, con el mismo formato que la matriz estructural (A.6). En una descomposición de Cholesky "
               "cada variable responde en el trimestre a los *shocks* de las que la preceden en el orden y no a los de las que la "
               "siguen, de modo que los ceros de cada matriz indican el orden causal. Las filas están en el orden del sistema y las "
@@ -292,7 +297,7 @@ def seccion_fiscal() -> str:
     nota = (" El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El "
             "multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es "
             f"{num(lp['p50'], 3)}, con un intervalo de 90% de [{num(lp['p05'], 3)}; {num(lp['p95'], 3)}].")
-    return ("## A.7 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, "
+    return ("## A.8 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, "
             f"especificación principal (MCO, {trim(Y.index[p])}-{trim(Y.index[-1])}). No se muestran la constante, las "
             "variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se "
             "informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et "
@@ -329,7 +334,7 @@ def seccion_principal() -> str:
             f"{num(100 * t.loc['error_mc_p_noest_2031', 'estimacion'], 1)} puntos en la probabilidad de 2031); intervalos de Hall con "
             f"{meta['B']} réplicas de parámetros y {miles(meta['N'])} trayectorias cada una. Autovalor máximo del VAR: "
             f"{num(meta['raiz_max_estimada'], 3)}.")
-    return "## A.8 Resultados completos de la especificación principal\n\n" + nota + "\n\n" + tabla(d) + "\n"
+    return "## A.9 Resultados completos de la especificación principal\n\n" + nota + "\n\n" + tabla(d) + "\n"
 
 
 def seccion_robustez() -> str:
@@ -340,8 +345,13 @@ def seccion_robustez() -> str:
             raise FileNotFoundError(archivo)
         t = pd.read_csv(archivo, index_col=0)
         iv = lambda k, f=100, dd=1: f"{num(t.loc[k, 'estimacion'] * f, dd)} [{num(t.loc[k, 'p05'] * f, dd)}; {num(t.loc[k, 'p95'] * f, dd)}]"
+        # Trayectorias explosivas: la media de la deuda (y las varianzas) de una replica quedan dominadas por unas pocas.
+        rep = pd.read_csv(TABLAS / f"fase25_{s}_replicas.csv")
+        expl = float((rep["base_d2035_media"].abs() > 1000).mean())
+        d_fed = "no se informa" if expl > 0.01 else iv("dif_fed_2022_2025_d2035", 1)
+        h1a = "no se informa" if expl > 0.10 else iv("h1a_nofiscal_menos_fiscal", 1)
         filas.append([nombre, iv("base_p_noest_2031"), iv("base_p_noest_2035"), num(t.loc["base_ancho_p5_p95_2031", "estimacion"], 1),
-                      iv("h1a_nofiscal_menos_fiscal", 1), iv("dif_fed_2022_2025_p_noest_2035"), iv("dif_fed_2022_2025_d2035", 1)])
+                      h1a, iv("dif_fed_2022_2025_p_noest_2035"), d_fed])
     for s, nombre in (("federal_fmi", "*Shocks* a la manera del FMI, deuda federal bruta"),
                       ("consolidada_fmi", "*Shocks* a la manera del FMI, deuda consolidada")):
         v = pd.read_csv(TABLAS / f"fase25_{s}_resumen.csv", index_col=0)["valor"]
@@ -351,7 +361,7 @@ def seccion_robustez() -> str:
     d = pd.DataFrame(filas, columns=["Especificación", "No estabilización 2031 (%)", "No estabilización 2035 (%)",
                                      "Ancho 2031", "No fiscal menos fiscal (puntos)", "Senda de la FED: probabilidad 2035 (pp)",
                                      "Senda de la FED: deuda 2035 (pp)"])
-    return ("## A.9 Robustez completa\n\nEntre corchetes, intervalos de 90% de Hall. Todas las especificaciones usan los mismos "
+    return ("## A.10 Robustez completa\n\nEntre corchetes, intervalos de 90%: de Hall, salvo las participaciones y varianzas y la diferencia entre *shocks* no fiscales y fiscal, que usan percentiles simples de las réplicas. «No se informa»: más de 1% de las réplicas (10% en la columna del reparto de la varianza) tiene trayectorias explosivas que dominan la media de la deuda. Todas las especificaciones usan los mismos "
             "números aleatorios, de modo que las diferencias entre filas no provienen del sorteo. Las filas a la manera del FMI "
             "no tienen intervalo porque ese procedimiento no estima parámetros. Fuente de la última fila: FMI (2026, anexo II, "
             "cuadro 7 y párrafo 9).\n\n" + tabla(d) + "\n")

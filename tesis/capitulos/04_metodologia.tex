@@ -185,7 +185,10 @@ gobierno de Duhalde, las binarias presidenciales reemplazan a la de
 quiebre; los quiebres dentro de un mandato (2006T2 y 2018T1) se
 conservan. Los quiebres se recalculan al reestimar con una muestra
 distinta, de modo que esta correspondencia es válida para la ventana
-principal. \#\# Identificación de los \emph{shocks} domésticos
+principal.
+
+\section{\texorpdfstring{Identificación de los \emph{shocks}
+domésticos}{Identificación de los shocks domésticos}}
 
 Los residuos del VAR, u, se relacionan con cuatro \emph{shocks}
 estructurales, ε, mediante u = S ε. La identificación usa restricciones
@@ -218,8 +221,8 @@ trimestre del impacto (Tabla 4.3):
   respecto de la depreciación y el gasto se fija en el presupuesto, pero
   no se descarta; por eso la identificación con el resultado primario
   último, que lo deja responder en el trimestre, se presenta como una
-  alternativa de igual peso (Apéndice, sección A.6 bis). Dentro del
-  bloque se usa una ortonormalización arbitraria y solo se informa la
+  alternativa de igual peso (Apéndice, sección A.7). Dentro del bloque
+  se usa una ortonormalización arbitraria y solo se informa la
   contribución conjunta, que no depende de ella.
 \end{itemize}
 
@@ -261,11 +264,11 @@ dispone de una estimación para Argentina. Con ese cambio de frecuencia,
 una magnitud calibrada; por eso la simulación se repite con
 elasticidades de 0 y 0,5. La robustez incluye también dos ordenamientos
 de Cholesky (resultado primario primero y resultado primario último),
-cuyas matrices de impacto se muestran en el Apéndice (sección A.6 bis)
-con el mismo formato que la matriz estructural y el orden de las
-variables. Las variables externas no requieren identificación: forman un
-cuarto bloque, externo, medido con las innovaciones históricas de la FED
-y del VIX (sección 4.6).
+cuyas matrices de impacto se muestran en el Apéndice (sección A.7) con
+el mismo formato que la matriz estructural y el orden de las variables.
+Las variables externas no requieren identificación: forman un cuarto
+bloque, externo, medido con las innovaciones históricas de la FED y del
+VIX (sección 4.6).
 
 \section{Ventana, niveles, rezagos e inferencia}
 
@@ -342,11 +345,16 @@ y del VIX (sección 4.6).
   reproduce la estructura de cuarto orden de las innovaciones, de la que
   dependen las respuestas estructurales; por eso no se usa. Los
   intervalos son percentiles de Hall (1992), que corrigen el sesgo de la
-  distribución \emph{bootstrap} respecto de la estimación puntual. La
-  corrección de sesgo de Kilian (1998) se informa como robustez. Se usan
-  1.000 réplicas: con 200, cada cola de un intervalo de 95\%, que es el
-  que se emplea para la corrección de Bonferroni, quedaba definida por
-  unas cinco observaciones y su precisión empírica era insuficiente.
+  distribución \emph{bootstrap} respecto de la estimación puntual. Como
+  el remuestreo es en bloques, preserva la heterocedasticidad
+  condicional de forma desconocida, que aparece en la ecuación del TCRM
+  (Apéndice, sección A.5). Para las varianzas y las participaciones de
+  la descomposición, que son cantidades acotadas, los intervalos son
+  percentiles simples de las réplicas y no de Hall. La corrección de
+  sesgo de Kilian (1998) se informa como robustez. Se usan 1.000
+  réplicas: con 200, cada cola de un intervalo de 95\%, que es el que se
+  emplea para la corrección de Bonferroni, quedaba definida por unas
+  cinco observaciones y su precisión empírica era insuficiente.
 \end{itemize}
 
 \section{Simulación de Monte Carlo}
@@ -504,7 +512,8 @@ H1a & Contribución de cada bloque de \emph{shocks} a la varianza de la
 deuda simulada en 2035; y suficiencia del superávit & (i) La
 contribución de los bloques no fiscales supera a la del fiscal, con un
 intervalo de 90\% de la diferencia que excluye el cero. (ii) Con el
-resultado primario en su máximo anual de 1996-2025 en todos los años, la
+resultado primario de todos los años desplazado en la misma magnitud
+hasta que el de 2031 alcanza su máximo anual de 1996-2025, la
 probabilidad de no estabilización en 2031 sigue superando la cifra del
 FMI (1\%). H1a se acepta si se cumplen las dos condiciones. \\
 H1b & Probabilidad de no estabilización con el escenario base del FMI,
@@ -527,7 +536,7 @@ conclusión resiste la corrección de Bonferroni, con intervalos de 95\%.
 
 La condición (ii) de H1a se evalúa con un análisis de la suficiencia del
 superávit: se desplaza en la misma magnitud el resultado primario de
-todos los años y se informan la probabilidad con el máximo anual de
-1996-2025 y el desplazamiento que lleva la de 2031 al 1\% que estima el
-FMI para Argentina, cifra que es una estimación para el país y no un
-umbral de riesgo.
+todos los años y se informan la probabilidad cuando el de 2031 alcanza
+el máximo anual de 1996-2025 y el desplazamiento que lleva la de 2031 al
+1\% que estima el FMI para Argentina, cifra que es una estimación para
+el país y no un umbral de riesgo.

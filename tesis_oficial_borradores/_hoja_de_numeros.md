@@ -14,7 +14,7 @@
 - Empalme EMBI 1996T1-1998T3 con la tasa interbancaria en dólares del BCRA menos la tasa de fondos federales: superposición 1998T4-2001T3, n = 12, EMBI = 550,3 + 1,171 × diferencial, R2 = 0,89, correlación 0,944, RMSE dejando uno afuera 102 pb (desvío del EMBI 240 pb); fuera de muestra 2001T1-T3: real 750; 973; 1469, pronóstico 744; 801; 1033.
 - Empalme TCRM 1996 con el tipo de cambio real efectivo amplio del BIS (inversa): correlación de variaciones trimestrales 0,92 (n = 115) y 0,98 en 1997-2001 (n = 19).
 - Valores empalmados EMBI: 1996-03 598, 1996-06 576, 1996-09 645, 1996-12 666, 1997-03 637, 1997-06 595, 1997-09 667, 1997-12 740, 1998-03 672, 1998-06 612, 1998-09 712; TCRM 1996: 1996-03 1,235, 1996-06 1,248, 1996-09 1,252, 1996-12 1,244
-- Sin empalme (datos desde 1999): no estabilización 2031 29,5 [22,5; 36,7], 2035 30,7 [27,4; 38,2]; no fiscal menos fiscal 95,7 [91,6; 100,0]; senda FED prob 2035 18,0 [5,6; 28,3].
+- Sin empalme (datos desde 1999): no estabilización 2031 29,5 [22,5; 36,7], 2035 30,7 [27,4; 38,2]; no fiscal menos fiscal 95,7 [88,9; 99,8]; senda FED prob 2035 18,0 [5,6; 28,3].
 
 ## Estimación (fase24, intervalos de Hall al 90%)
 - federal: reacción fiscal de impacto 0,0466 [0,0231; 0,0835]; largo plazo 0,079 [0,062; 0,147]
@@ -26,7 +26,7 @@
   - deuda → EMBI: 36,7360 [13,1464; 52,3615]
   - deuda → TCRM: 0,0006 [-0,0031; 0,0010]
 - Respuestas a la FED: 11 de 84 intervalos excluyen el cero: fed_pb_pib_h0 0,317 [0,016; 0,705], fed_TCRM_h2 -0,031 [-0,049; -0,006], fed_TCRM_h3 -0,029 [-0,051; -0,006], fed_EMBI_h4 62,306 [1,529; 122,240], fed_pb_pib_h5 -0,109 [-0,240; -0,004], fed_EMBI_h5 62,685 [16,757; 128,045], fed_pb_pib_h6 -0,104 [-0,207; -0,003], fed_EMBI_h6 43,152 [2,016; 99,602], fed_pb_pib_h7 -0,097 [-0,193; -0,019], fed_pb_pib_h8 -0,072 [-0,153; -0,015], fed_pb_pib_h9 -0,047 [-0,110; -0,002]
-- Redondeos para el texto: deuda → EMBI federal 34,9, 13,9, 47,6; consolidada 36,7, 13,1, 52,4; deuda → crec federal 0,07, -0,00, 0,13; coeficiente de Bohn de referencia 0,05; respuestas del resultado primario a la FED entre -0,05 y -0,11; parte indirecta del efecto de la FED en la deuda 2035: 4,5 pp (diferencia entre el total y el costo directo).
+- Redondeos para el texto: deuda → EMBI federal 34,9, 13,9, 47,6; consolidada 36,7, 13,1, 52,4; deuda → crec federal 0,07, -0,00, 0,13; deuda → crec federal con tres decimales -0,001, 0,126; coeficiente de enlace del PIB 1993-2004 (informe de construcción de datos) 1,751; coeficiente de Bohn de referencia 0,05; respuestas del resultado primario a la FED entre -0,05 y -0,11; parte indirecta del efecto de la FED en la deuda 2035: 4,5 pp (diferencia entre el total y el costo directo).
 
 ## Simulación principal (deuda federal bruta, intervalos de Hall al 90%)
 - Percentiles de la deuda (p5, p25, mediana, p75, p95): 2026: 67,2, 70,3, 72,5, 74,9, 87,7; 2028: 54,1, 60,4, 64,8, 70,2, 80,4; 2031: 36,0, 45,7, 52,9, 61,4, 76,5; 2033: 26,7, 38,1, 47,4, 58,6, 78,9; 2035: 17,7, 30,4, 41,4, 55,9, 84,3
@@ -40,8 +40,8 @@
 - Límite inferior al 95% (unilateral 2,50%): 2031 19,0, 2035 24,1.
 - Límite inferior al 97.5% (unilateral 1,25%): 2031 17,6, 2035 23,3.
 - Ancho del abanico 2031: 40,5 [32,4; 54,5]; mediana 2031 52,9; media 2035 45,0.
-- Varianza 2035 por bloque: fiscal 1,6 [0,0; 3,1]; actividad 10,7 [0,0; 19,8]; cambiario_y_riesgo 28,3 [14,0; 48,8]; externo 59,4 [30,5; 78,5]; externo_vix 113,2 [4,0; 174,9]; externo_fed 13,3 [0,0; 23,6]; externo_fed_directo 7,6 [0,0; 11,4]
-- H1a, no fiscal menos fiscal: 96,8 [93,9; 100,0] puntos.
+- Varianza 2035 por bloque: fiscal 1,6 [0,1; 4,6]; actividad 10,7 [1,6; 24,1]; cambiario_y_riesgo 28,3 [7,8; 42,6]; externo 59,4 [40,3; 88,3]; externo_vix 113,2 [51,6; 222,5]; externo_fed 13,3 [2,9; 55,6]; externo_fed_directo 7,6 [3,7; 29,1]
+- H1a, no fiscal menos fiscal: 96,8 [90,8; 99,8] puntos.
 - dif_fed_1de_p_noest_2031: 1,0 [-0,3; 1,6]; al 95% (Bonferroni para dos escenarios): [-0,6; 1,7]
 - dif_fed_1de_p_noest_2035: 1,9 [0,3; 3,2]; al 95% (Bonferroni para dos escenarios): [-0,1; 3,3]
 - dif_fed_1de_d2035: 2,0 [0,4; 3,2]; al 95% (Bonferroni para dos escenarios): [-0,4; 3,4]
@@ -53,12 +53,13 @@
 
 ## Suficiencia del superávit (H1a, complemento)
 - Máximo anual del resultado primario 1996-2025 sin rentas de la propiedad (definición principal): 3,29 en 2004; con rentas: 3,58 en 2004.
-- Con el resultado primario en el máximo histórico en todos los años: P(2031) = 23,0% con 3,29 (sin rentas) y 21,6% con 3,58 (con rentas).
+- Con un desplazamiento uniforme que lleva el resultado primario de 2031 al máximo histórico: P(2031) = 23,0% con 3,29 (sin rentas) y 21,6% con 3,58 (con rentas).
+- Resultado primario del escenario base: 2026 1,40%, 2031 2,30%; con el desplazamiento al máximo de 2031, 2026 queda en 2,39%.
 - Primer desplazamiento con P(2031) ≤ 1%: +7,25 pp, pb 2026 = 8,6% y pb 2031 = 9,5%.
 - P(2035) mínima 0,12% con +6,25 pp; después sube a 1,99% con +10,00 (no monótona).
 
 ## Extensión consolidada
-- No estabilización 2031 31,1 [27,6; 41,5]; 2035 35,0 [32,3; 49,8]; ancho 55,2; no fiscal menos fiscal 100,0 [100,0; 100,0]; senda FED prob 2035 19,2 [3,2; 33,8]; réplicas con media de la deuda 2035 explosiva (|d|>1000): 368 de 1000 (no se informa la media de la deuda consolidada); senda base 2031 31,9, 2035 21,8.
+- No estabilización 2031 31,1 [27,6; 41,5]; 2035 35,0 [32,3; 49,8]; ancho 55,2; no fiscal menos fiscal 100,0 [96,8; 100,0]; senda FED prob 2035 19,2 [3,2; 33,8]; réplicas con media de la deuda 2035 explosiva (|d|>1000): 368 de 1000 (no se informa la media de la deuda consolidada); senda base 2031 31,9, 2035 21,8.
 
 ## Shocks a la manera del FMI
 - federal_fmi: P2031 24,1%, P2035 20,6%, ancho 148,4.
@@ -69,7 +70,8 @@
 ## Robustez: rango entre especificaciones del SVARX (ver Apéndice A.9)
 - base_p_noest_2031: estimaciones entre 25,3 (federal_sf0) y 31,8 (federal_sin_presidenciales); menor límite inferior 16,2 (federal_p3).
 - base_p_noest_2035: estimaciones entre 22,4 (federal_sf0) y 35,0 (consolidada); menor límite inferior 18,0 (federal_sf0).
-- h1a_nofiscal_menos_fiscal: menor límite inferior 56,4 (federal_sin_presidenciales); todas las especificaciones excluyen el cero: True.
+- Diferencia no fiscal menos fiscal por especificación (estimación [p5; p95]): consolidada: 100,0 [96,8; 100,0]; federal: 96,8 [90,8; 99,8]; federal_alfa0: 85,6 [72,3; 99,5]; federal_alfa0.5: 99,4 [88,0; 99,7]; federal_chol: 85,6 [72,3; 99,5]; federal_chol_ultimo: 99,4 [93,9; 99,8]; federal_cr2595: 96,4 [90,1; 99,8]; federal_desde1999: 95,7 [88,9; 99,8]; federal_desde2004: 90,3 [83,4; 100,0]; federal_dom: 98,9 [94,5; 100,0]; federal_kilian: 93,6 [78,1; 99,8]; federal_lam0.15: 96,0 [89,3; 99,7]; federal_lam0.4: 97,3 [91,9; 99,9]; federal_p1: 99,9 [90,7; 99,9]; federal_p3: 91,6 [80,2; 99,6]; federal_pb_alt: 99,5 [92,0; 99,8]; federal_sf0: 95,9 [89,4; 99,8]; federal_sin_default: 97,1 [91,1; 99,8]; federal_sin_presidenciales: 77,9 [67,3; 99,4]; federal_sin_quiebres: 93,9 [88,2; 99,8]; federal_sin_retro: 95,1 [88,1; 99,6]
+- h1a_nofiscal_menos_fiscal: menor límite inferior 67,3 (federal_sin_presidenciales); todas las especificaciones excluyen el cero: True.
 - dif_fed_2022_2025_p_noest_2035: incluyen el cero en 1 de 21: federal_desde2004.
 - dif_fed_2022_2025_d2035: incluyen el cero en 10 de 21: consolidada, federal, federal_desde1999, federal_desde2004, federal_dom, federal_kilian, federal_lam0.4, federal_p1, federal_sin_default, federal_sin_presidenciales.
 - dif_fed_1de_p_noest_2035: incluyen el cero en 2 de 21: federal_desde2004, federal_sin_presidenciales.

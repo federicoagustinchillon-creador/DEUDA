@@ -90,7 +90,7 @@ def main() -> None:
     # Redondeos usados en el texto del capitulo 6 (1 y 2 decimales) y referencia de Bohn.
     _bf = pd.read_csv(T / "fase24_federal_bootstrap.csv", index_col=0)
     _bc = pd.read_csv(T / "fase24_consolidada_bootstrap.csv", index_col=0)
-    L.append("- Redondeos para el texto: deuda → EMBI federal " + ", ".join(n(_bf.loc["deuda_a_EMBI", k], 1) for k in ("p50", "p05", "p95")) + "; consolidada " + ", ".join(n(_bc.loc["deuda_a_EMBI", k], 1) for k in ("p50", "p05", "p95")) + "; deuda → crec federal " + ", ".join(n(_bf.loc["deuda_a_crec", k], 2) for k in ("p50", "p05", "p95")) + "; coeficiente de Bohn de referencia 0,05; respuestas del resultado primario a la FED entre -0,05 y -0,11; parte indirecta del efecto de la FED en la deuda 2035: " + n(19.3 - 14.8) + " pp (diferencia entre el total y el costo directo).")
+    L.append("- Redondeos para el texto: deuda → EMBI federal " + ", ".join(n(_bf.loc["deuda_a_EMBI", k], 1) for k in ("p50", "p05", "p95")) + "; consolidada " + ", ".join(n(_bc.loc["deuda_a_EMBI", k], 1) for k in ("p50", "p05", "p95")) + "; deuda → crec federal " + ", ".join(n(_bf.loc["deuda_a_crec", k], 2) for k in ("p50", "p05", "p95")) + "; deuda → crec federal con tres decimales " + ", ".join(n(_bf.loc["deuda_a_crec", k], 3) for k in ("p05", "p95")) + "; coeficiente de enlace del PIB 1993-2004 (informe de construcción de datos) 1,751; coeficiente de Bohn de referencia 0,05; respuestas del resultado primario a la FED entre -0,05 y -0,11; parte indirecta del efecto de la FED en la deuda 2035: " + n(19.3 - 14.8) + " pp (diferencia entre el total y el costo directo).")
     L.append("\n## Simulación principal (deuda federal bruta, intervalos de Hall al 90%)")
     fc = pd.read_csv(T / "fase25_federal_fanchart.csv", index_col="anio")
     L.append("- Percentiles de la deuda (p5, p25, mediana, p75, p95): " + "; ".join(
@@ -128,7 +128,8 @@ def main() -> None:
     L.append(f"- Máximo anual del resultado primario 1996-2025 sin rentas de la propiedad (definición principal): {n(mx, 2)} en {anual['pb_pib_sin_rentas'].idxmax().year}; con rentas: {n(mx_con, 2)} en {anual['pb_pib'].idxmax().year}.")
     p_mx = np.interp(mx, su.pb_2031, su.p_noest_2031)
     p_mx_con = np.interp(mx_con, su.pb_2031, su.p_noest_2031)
-    L.append(f"- Con el resultado primario en el máximo histórico en todos los años: P(2031) = {n(100 * p_mx)}% con {n(mx, 2)} (sin rentas) y {n(100 * p_mx_con)}% con {n(mx_con, 2)} (con rentas).")
+    L.append(f"- Con un desplazamiento uniforme que lleva el resultado primario de 2031 al máximo histórico: P(2031) = {n(100 * p_mx)}% con {n(mx, 2)} (sin rentas) y {n(100 * p_mx_con)}% con {n(mx_con, 2)} (con rentas).")
+    L.append(f"- Resultado primario del escenario base: 2026 {n(su.pb_2026.iloc[0], 2)}%, 2031 {n(su.pb_2031.iloc[0], 2)}%; con el desplazamiento al máximo de 2031, 2026 queda en {n(su.pb_2026.iloc[0] + mx - su.pb_2031.iloc[0], 2)}%.")
     cruce = su[su.p_noest_2031 <= 0.01].iloc[0]
     L.append(f"- Primer desplazamiento con P(2031) ≤ 1%: +{n(cruce.dpb, 2)} pp, pb 2026 = {n(cruce.pb_2026)}% y pb 2031 = {n(cruce.pb_2031)}%.")
     imin = su.p_noest_2035.idxmin()
@@ -161,6 +162,7 @@ def main() -> None:
         lo = min((v.loc[k, "p05"], s) for s, v in vals.items())
         e = sorted((v.loc[k, "estimacion"], s) for s, v in vals.items())
         L.append(f"- {k}: estimaciones entre {n(100 * e[0][0])} ({e[0][1]}) y {n(100 * e[-1][0])} ({e[-1][1]}); menor límite inferior {n(100 * lo[0])} ({lo[1]}).")
+    L.append("- Diferencia no fiscal menos fiscal por especificación (estimación [p5; p95]): " + "; ".join(f"{s_}: {n(v.loc['h1a_nofiscal_menos_fiscal', 'estimacion'])} [{n(v.loc['h1a_nofiscal_menos_fiscal', 'p05'])}; {n(v.loc['h1a_nofiscal_menos_fiscal', 'p95'])}]" for s_, v in sorted(vals.items())))
     k = "h1a_nofiscal_menos_fiscal"
     lo = min((v.loc[k, "p05"], s) for s, v in vals.items())
     L.append(f"- {k}: menor límite inferior {n(lo[0])} ({lo[1]}); todas las especificaciones excluyen el cero: {all(v.loc[k, 'p05'] > 0 for v in vals.values())}.")

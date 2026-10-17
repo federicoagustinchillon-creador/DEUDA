@@ -165,7 +165,7 @@ Los +100 puntos básicos de una versión anterior no estaban justificados y se s
 | No discutir en el texto si el riesgo país es endógeno (17/9) | No aparece; queda como respuesta oral en la guía de defensa |
 | Justificar la matriz del SVAR, "donde gira todo" | Secciones 4.4 (identificación) y 4.3 (canales de la FED) |
 | Panel Argentina-Chile como línea futura | Capítulo 8 |
-| Bajar la extensión | La tabla completa de robustez pasó al Apéndice (A.9) y los ejes 2, 3 y 8 de Antecedentes se redujeron a lo esencial |
+| Bajar la extensión | La tabla completa de robustez pasó al Apéndice (A.10) y los ejes 2, 3 y 8 de Antecedentes se redujeron a lo esencial |
 
 **Propuesta metodológica**
 
@@ -175,7 +175,7 @@ Los +100 puntos básicos de una versión anterior no estaban justificados y se s
 | Selección de rezagos por AIC y BIC con residuos sin autocorrelación | Criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005); si sus residuos están autocorrelacionados, el menor orden mayor que no lo está. Schwarz elige 1, con residuos autocorrelacionados (p = 0,000); ningún orden estable pasa la prueba con la muestra corregida; regla de reserva: el estable de mayor p-valor, 2 rezagos (Portmanteau p = 0,031), el mismo orden que elige Hannan-Quinn | 4.5 y A.4 |
 | Variables binarias por quiebres | Hecho | 4.2 |
 | Deuda como variable del sistema, la "esponja contable" (retroalimentación) | La deuda rezagada (federal bruta en la especificación principal, consolidada con el BCRA en la extensión) entra en las cuatro ecuaciones y se acumula con la identidad. Un punto más de deuda federal bruta sube el EMBI 34,9 puntos básicos, con un intervalo de 90% de 13,9 a 47,6 (con la versión anterior, sin binarias presidenciales, el intervalo incluía el cero) | 6.1 |
-| Contraste con y sin retroalimentación | Hecho: sin retroalimentación, la probabilidad de no estabilización de 2031 es 27,2%, frente a 27,7% con ella | 6.6 y A.9 |
+| Contraste con y sin retroalimentación | Hecho: sin retroalimentación, la probabilidad de no estabilización de 2031 es 27,2%, frente a 27,7% con ella | 6.6 y A.10 |
 | Cholesky con orden crecimiento, TCRM, EMBI, resultado primario | Como robustez, con dos ordenamientos de Cholesky (resultado primario primero y resultado primario último). La identificación principal son restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con un bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto, la que validaron Pablo y el equipo | 6.6 |
 | Opción B: tasa en dólares desde el EMBI y tasa en pesos aparte | Es la especificación principal; la variante con el riesgo país en la tasa en pesos se informa como robustez | 4.6 y 6.6 |
 | Shock de la FED con la tasa sombra | Hecho (Wu y Xia, 2016), con el empalme de 2022T1 calculado con la tasa efectiva en ambos trimestres | 5.4 |
@@ -195,7 +195,7 @@ Los +100 puntos básicos de una versión anterior no estaban justificados y se s
 | Rezagos (D3) | 2, por la regla de Schwarz con residuos sin autocorrelación |
 | Resultado primario (D4) | Una sola definición: resultado primario del Sector Público Nacional sin rentas de la propiedad, porque el FMI excluye las transferencias de utilidades del BCRA (FMI, 2026, cuadro 1, nota 4) y el MECON no las separa del resto de las rentas. La serie con rentas es robustez. Máximo 1996-2025: 3,29% del PIB en 2004 (3,58% con rentas). Se corrigió la versión anterior, que presentaba la serie con rentas como la definición del FMI |
 | Inferencia (D7 y D8) | Remuestreo de *shocks* en bloques de ocho trimestres; intervalos por *bootstrap* de bloques móviles (Brüggemann et al., 2016) con percentiles de Hall (1992); se abandona el *bootstrap* salvaje |
-| H1a (D10) | Criterio original (descomposición de la varianza): 96,8 puntos [93,9; 100,0] (77,9 [56,4; 88,6] sin binarias presidenciales); se cumple en las 21 especificaciones. Se agrega un criterio formal de suficiencia del superávit: con el máximo histórico sostenido, la probabilidad de 2031 es 23,0%, mayor que el 1% del FMI |
+| H1a (D10) | Criterio original (descomposición de la varianza): 96,8 puntos [90,8; 99,8] (77,9 [67,3; 99,4] sin binarias presidenciales); se cumple en las 21 especificaciones. Se agrega un criterio formal de suficiencia del superávit: con el máximo histórico sostenido, la probabilidad de 2031 es 23,0%, mayor que el 1% del FMI |
 | H1b (D11) | Mismo perímetro, punto de partida, escenario y métrica que el FMI: 27,7% [20,6; 34,7] en 2031 y 29,0% [25,0; 36,1] en 2035; se cumple en las 21 especificaciones |
 | H2 (D12) | Criterio sin cambios, con regla de informe: parcialmente respaldada. Efecto de la senda de 2022-2025 sobre la probabilidad: +18,4 puntos en 2035, robusto a Bonferroni y en 20 de 21 especificaciones. El efecto sobre la deuda esperada (+19,3 [-0,3; 31,3]) no excluye el cero y el del desvío estándar no resiste Bonferroni; el 77% del efecto sobre la deuda es el costo directo de la deuda en dólares |
 | Título (D13) | "Probabilidad de no estabilización de la deuda pública argentina, 2026-2035: un modelo SVARX con determinantes macroeconómicos y política monetaria de Estados Unidos" |

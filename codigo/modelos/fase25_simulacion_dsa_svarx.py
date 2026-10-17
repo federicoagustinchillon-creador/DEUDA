@@ -529,9 +529,17 @@ def medidas(par: dict, shocks: np.ndarray, ext: np.ndarray, fed: dict[str, np.nd
 
 
 def resumen_hall(cen: dict, res: pd.DataFrame) -> pd.DataFrame:
-    """Estimacion central e intervalo de 90% de Hall, acotado al rango posible de cada medida."""
-    h = f24.intervalo_hall(pd.Series(cen), res.drop(columns="replica").reindex(columns=list(cen)))
-    return acotar(h).rename(columns={"inf": "p05", "sup": "p95"})
+    """Estimacion central e intervalo de 90% (Hall; percentiles simples para varianzas y participaciones)."""
+    rep = res.drop(columns="replica").reindex(columns=list(cen))
+    h = f24.intervalo_hall(pd.Series(cen), rep)
+    h = acotar(h)
+    # Varianzas y participaciones son cantidades acotadas: el intervalo de Hall puede salir del rango posible
+    # y, al truncarlo, queda pegado al borde. Para ellas se usan percentiles simples de las replicas.
+    simples = h.index.str.startswith(("vshare_", "var_", "h1a_"))
+    q = rep.quantile([0.05, 0.95]).T.reindex(h.index)
+    h.loc[simples, "inf"] = q.loc[simples, 0.05]
+    h.loc[simples, "sup"] = q.loc[simples, 0.95]
+    return h.rename(columns={"inf": "p05", "sup": "p95"})
 
 
 def acotar(h: pd.DataFrame, cols: tuple[str, str] = ("inf", "sup")) -> pd.DataFrame:
