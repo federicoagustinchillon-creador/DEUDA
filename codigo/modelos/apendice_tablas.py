@@ -157,7 +157,7 @@ def seccion_propiedades() -> str:
     m = int(bp["m_optimo"].iloc[0])
     jo = pd.read_csv(TABLAS / "fase24b_johansen.csv")
     jn = jo[jo["variables"] == "niveles (sin crecimiento)"]
-    j = pd.DataFrame({"Hipótesis nula": jn["rango_nulo"].str.replace("r <= ", "rango ≤ "),
+    j = pd.DataFrame({"Hipótesis nula": jn["rango_nulo"].str.replace("r <= 0", "rango = 0").str.replace("r <= ", "rango ≤ "),
                       "Traza": jn["traza"].map(lambda v: num(v, 1)), "Valor crítico 5%": jn["critico_95"].map(lambda v: num(v, 1)),
                       "Rechaza": jn["rechaza_95"].map({True: "sí", False: "no"})})
     qg = pd.read_csv(TABLAS / "fase24_federal_quiebres_y_gobiernos.csv")
@@ -220,7 +220,7 @@ def seccion_rezagos() -> str:
     fila_c = tc[tc["p"] == tc["p_elegido"].iloc[0]].iloc[0]
     out += (f"**Deuda {SERIES['federal']}.** Orden del criterio de Schwarz: {int(t['p_sic'].iloc[0])}. "
             f"Orden elegido: {int(t['p_elegido'].iloc[0])}.\n\n" + tabla(d) +
-            f"\nCon la deuda {SERIES['consolidada']}, la misma regla elige {int(fila_c['p'])} rezagos (raíz máxima "
+            f"\nCon la deuda {SERIES['consolidada']}, la misma regla elige {int(fila_c['p'])} {'rezago' if int(fila_c['p']) == 1 else 'rezagos'} (raíz máxima "
             f"{num(fila_c['modulo_raiz_max'])}, Portmanteau p = {num(fila_c['portmanteau_12_p'])}); muestra efectiva "
             f"{fila_c['inicio'][:4]}-2025 ({int(fila_c['n_efectivo'])} trimestres), desde 2002 (sección 5.2).\n\n")
     return out

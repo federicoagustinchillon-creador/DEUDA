@@ -131,7 +131,7 @@ def main() -> None:
     L.append(f"- Con un desplazamiento uniforme que lleva el resultado primario de 2031 al máximo histórico: P(2031) = {n(100 * p_mx)}% con {n(mx, 2)} (sin rentas) y {n(100 * p_mx_con)}% con {n(mx_con, 2)} (con rentas).")
     L.append(f"- Resultado primario del escenario base: 2026 {n(su.pb_2026.iloc[0], 2)}%, 2031 {n(su.pb_2031.iloc[0], 2)}%; con el desplazamiento al máximo de 2031, 2026 queda en {n(su.pb_2026.iloc[0] + mx - su.pb_2031.iloc[0], 2)}%.")
     cruce = su[su.p_noest_2031 <= 0.01].iloc[0]
-    L.append(f"- Primer desplazamiento con P(2031) ≤ 1%: +{n(cruce.dpb, 2)} pp, pb 2026 = {n(cruce.pb_2026)}% y pb 2031 = {n(cruce.pb_2031)}%.")
+    L.append(f"- Primer desplazamiento con P(2031) ≤ 1%: +{n(cruce.dpb, 2)} pp, pb 2026 = {n(cruce.pb_2026, 2)}% y pb 2031 = {n(cruce.pb_2031, 2)}%.")
     imin = su.p_noest_2035.idxmin()
     L.append(f"- P(2035) mínima {n(100 * su.p_noest_2035[imin], 2)}% con +{n(su.dpb[imin], 2)} pp; después sube a {n(100 * su.p_noest_2035.iloc[-1], 2)}% con +{n(su.dpb.iloc[-1], 2)} (no monótona).")
 

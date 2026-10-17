@@ -78,7 +78,7 @@ Fuente: elaboración propia.
 
 | Hipótesis nula | Traza | Valor crítico 5% | Rechaza |
 |---|---|---|---|
-| rango ≤ 0 | 42,7 | 47,9 | no |
+| rango = 0 | 42,7 | 47,9 | no |
 | rango ≤ 1 | 22,0 | 29,8 | no |
 | rango ≤ 2 | 10,9 | 15,5 | no |
 | rango ≤ 3 | 3,3 | 3,8 | no |
@@ -116,7 +116,7 @@ Muestra efectiva común 1998-2025 (111 trimestres) para todos los órdenes (secc
 | 5 | 11,909 | 15,619 | 13,414 | 1,005 | no | < 0,001 |
 | 6 | 11,828 | 15,928 | 13,491 | 1,008 | no | < 0,001 |
 
-Con la deuda consolidada con el BCRA (extensión), la misma regla elige 1 rezagos (raíz máxima 0,683, Portmanteau p = 0,147); muestra efectiva 2003-2025 (90 trimestres), desde 2002 (sección 5.2).
+Con la deuda consolidada con el BCRA (extensión), la misma regla elige 1 rezago (raíz máxima 0,683, Portmanteau p = 0,147); muestra efectiva 2003-2025 (90 trimestres), desde 2002 (sección 5.2).
 
 ## A.5 Diagnósticos de los residuos
 

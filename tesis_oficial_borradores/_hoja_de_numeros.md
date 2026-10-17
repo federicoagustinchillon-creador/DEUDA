@@ -55,7 +55,7 @@
 - Máximo anual del resultado primario 1996-2025 sin rentas de la propiedad (definición principal): 3,29 en 2004; con rentas: 3,58 en 2004.
 - Con un desplazamiento uniforme que lleva el resultado primario de 2031 al máximo histórico: P(2031) = 23,0% con 3,29 (sin rentas) y 21,6% con 3,58 (con rentas).
 - Resultado primario del escenario base: 2026 1,40%, 2031 2,30%; con el desplazamiento al máximo de 2031, 2026 queda en 2,39%.
-- Primer desplazamiento con P(2031) ≤ 1%: +7,25 pp, pb 2026 = 8,6% y pb 2031 = 9,5%.
+- Primer desplazamiento con P(2031) ≤ 1%: +7,25 pp, pb 2026 = 8,65% y pb 2031 = 9,55%.
 - P(2035) mínima 0,12% con +6,25 pp; después sube a 1,99% con +10,00 (no monótona).
 
 ## Extensión consolidada
