@@ -61,7 +61,9 @@ def test_regla_de_rezagos() -> None:
     p, _, tabla = f24.elegir_rezagos(Y, X)
     fila = tabla[tabla.p == p].iloc[0]
     assert bool(fila.estable)
-    assert fila.portmanteau_12_p >= 0.05 or p == int(tabla.p_sic.iloc[0])
+    candidatos = tabla[tabla.estable.astype(bool) & (tabla.p >= int(tabla.p_sic.iloc[0]))]
+    # Si ningun orden estable pasa el Portmanteau, se elige el de mayor p-valor (regla de reserva).
+    assert fila.portmanteau_12_p >= 0.05 or fila.portmanteau_12_p >= candidatos.portmanteau_12_p.max() - 1e-12
     assert p >= int(tabla.p_sic.iloc[0])
 
 

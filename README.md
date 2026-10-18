@@ -179,7 +179,7 @@ Hay dos paneles consolidados — ver [`datos/README.md`](datos/README.md) para p
 | `TCRM` | Tipo de Cambio Real Multilateral | BCRA | Índice dic-2001=1, promedio trimestral |
 | `VIX` | CBOE Volatility Index | Chicago Board Options Exchange | Promedio trimestral |
 | `CER` | Coeficiente de Estabilización de Referencia | BCRA | Var. % acumulada trimestral |
-| `es_interpolado` | Marca observaciones del tramo 1999–2003 obtenidas por empalme histórico vs. serie original | N/A | Booleano |
+| `es_interpolado` | Marca los seis trimestres de deuda interpolados (no diciembre de 1996-1997); ver también `es_empalme_pib`, `es_empalme_embi` y `es_interpolado_tcrm` en `datos/codebook.md` | N/A | Booleano |
 
 Definiciones completas, fuentes de fallback y notas metodológicas: [`datos/codebook.md`](datos/codebook.md).
 
