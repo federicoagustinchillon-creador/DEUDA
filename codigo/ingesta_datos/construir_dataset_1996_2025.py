@@ -91,7 +91,16 @@ def main():
 
     df = df.loc[VENTANA_INICIO:VENTANA_FIN]
 
-    df["es_interpolado"] = (df.index < "2004-01-01").astype(int)
+    # Marcas por serie (cada una identifica solo lo que esa serie tiene de reconstruido):
+    #  - es_interpolado: deuda federal bruta interpolada linealmente en dolares (trimestres que
+    #    no son de diciembre de 1996-1997; el MECON publica la serie trimestral desde 1998T1).
+    #  - es_empalme_pib: PIB real 1996-2003 de la base 1993 del INDEC empalmado con k de enlace.
+    #  - es_empalme_embi: EMBI 1996T1-1998T3 reconstruido con variables puente.
+    #  - es_interpolado_tcrm: TCRM de 1996 reconstruido (retroproyeccion).
+    mes_no_dic = df.index.month != 12
+    df["es_interpolado"] = ((df.index < "1998-01-01") & mes_no_dic).astype(int)
+    df["es_empalme_pib"] = (df.index < "2004-01-01").astype(int)
+    df["es_empalme_embi"] = (df.index <= "1998-09-30").astype(int)
     df["es_interpolado_tcrm"] = (df.index < "1997-01-01").astype(int)
 
     df["g_gap"] = compute_output_gap(df["PIB_real"])
@@ -99,7 +108,9 @@ def main():
     print("Dataset 1996-2025 (30 anios):")
     print(f"  Ventana: {df.index.min().date()} -> {df.index.max().date()}")
     print(f"  Observaciones: {len(df)}")
-    print(f"  Trimestres empalmados (deuda/pb/PIB, es_interpolado=1): {df['es_interpolado'].sum()}")
+    print(f"  Trimestres de deuda interpolados (es_interpolado=1): {df['es_interpolado'].sum()}")
+    print(f"  Trimestres de PIB empalmado (es_empalme_pib=1): {df['es_empalme_pib'].sum()}")
+    print(f"  Trimestres de EMBI reconstruido (es_empalme_embi=1): {df['es_empalme_embi'].sum()}")
     print(f"  Trimestres TCRM extrapolado (es_interpolado_tcrm=1): {df['es_interpolado_tcrm'].sum()}")
     print(f"  NaN por columna:\n{df.isna().sum()}")
 

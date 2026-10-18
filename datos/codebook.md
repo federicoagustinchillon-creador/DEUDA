@@ -41,6 +41,15 @@ Solo en `dataset_consolidado_real_ext.csv` (empalme histórico):
 |---|---|
 | es_interpolado | Booleano: `True` si la observación (tramo 1999–2003) proviene del empalme histórico en vez de la serie original directa |
 
+Marcas de reconstrucción en `dataset_consolidado_1996_2025.csv` (una por serie, 1 = reconstruido):
+
+| Variable | Descripción | Trimestres |
+|---|---|---|
+| es_interpolado | Deuda federal bruta interpolada linealmente en dólares: trimestres que no son de diciembre de 1996-1997 (el MECON publica la serie trimestral desde 1998T1). Solo interviene en la detección de quiebres | 6 |
+| es_empalme_pib | PIB real 1996-2003, base 1993 del INDEC empalmada a la base 2004 con el coeficiente de enlace | 32 |
+| es_empalme_embi | EMBI de 1996T1-1998T3 reconstruido con la tasa interbancaria en dólares como variable puente | 11 |
+| es_interpolado_tcrm | TCRM de 1996 retroproyectado con tendencia | 4 |
+
 ## Notas Metodológicas
 1. **Signo pb_pib:** Positivo = superávit primario; negativo = déficit primario.
 2. **Deuda consolidada:** Incluye deuda intra-sector público (FGS-ANSES); la corrección neta reduce el ratio bruto en ~15-20 pp según el año.
