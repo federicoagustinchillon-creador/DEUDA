@@ -9,7 +9,7 @@ Cada crítica tiene uno de dos estados:
 - **Resuelto:** se corrigió en el modelo o en el texto; se indica la decisión y el resultado.
 - **Limitación declarada:** no tiene solución dentro del alcance de la tesis; se indica dónde se declara.
 
-Lo único que queda abierto es la validación del grupo de D1 y D13 y el recorte a unas 60 páginas, si todavía hace falta (sección 7).
+Lo único que queda abierto es documentar mejor las tenencias del FGS (sección 8).
 
 # 1. Problemas de fondo
 
@@ -23,7 +23,7 @@ Lo único que queda abierto es la validación del grupo de D1 y D13 y el recorte
 
 **Crítica.** La tesis comparaba una probabilidad calculada sobre la deuda consolidada con el BCRA con la del FMI para la deuda federal bruta, con otro punto de partida. El procedimiento de *shocks* del FMI aplicado a los datos de la tesis no reproducía el 1%. Un evaluador podía sostener que H1b se cumplía casi por construcción y que no era una hipótesis en sentido estricto.
 
-**Estado: Resuelto en el perímetro (D1 y D11); la métrica quedó abierta (D16, sección 9).** H1b compara ahora con el mismo perímetro, el mismo punto de partida (80,3% del PIB), el mismo escenario y el mismo horizonte del FMI. La métrica no era la misma: con la métrica anual de la tesis, 27,7% [20,6; 34,7] en 2031 y 29,0% [25,0; 36,1] en 2035 (con Bonferroni, límites inferiores de 19,0 y 24,1; se cumple en las 21 especificaciones); con la definición operativa del FMI, 3,1% [0,0; 6,3] y 5,1% [0,0; 10,2], y no se cumple. La hipótesis se presenta con el mismo esquema que las otras (unidad de análisis, variables, relación esperada y criterio de contraste). El argumento de que se cumple por construcción no se sostiene: el abanico del FMI es más ancho que el nuestro (71,5 puntos contra 46,6 en 2031) y aun así da 1%.
+**Estado: Resuelto en el perímetro (D1 y D11); la métrica se resolvió en D16 (sección 9).** H1b compara ahora con el mismo perímetro, el mismo punto de partida (80,3% del PIB), el mismo escenario y el mismo horizonte del FMI. La métrica no era la misma: con la métrica anual de la tesis, 27,7% [20,6; 34,7] en 2031 y 29,0% [25,0; 36,1] en 2035 (con Bonferroni, límites inferiores de 19,0 y 24,1; se cumple en las 21 especificaciones); con la definición operativa del FMI, 3,1% [0,0; 6,3] y 5,1% [0,0; 10,2], y no se cumple. La hipótesis se presenta con el mismo esquema que las otras (unidad de análisis, variables, relación esperada y criterio de contraste). El argumento de que se cumple por construcción no se sostiene: el abanico del FMI es más ancho que el nuestro (71,5 puntos contra 46,6 en 2031) y aun así da 1%.
 
 **Limitación declarada (Capítulo 7 y Guía de defensa).** Con el procedimiento de *shocks* del FMI aplicado a la historia argentina de la ventana, sobre el mismo perímetro, se obtiene 24,1% en 2031 y un ancho de 148,4: tampoco se reproduce el 1%. La diferencia proviene de la distribución de *shocks* que usa el FMI, que no publica. El propio FMI reconoce que sus abanicos subestiman la incertidumbre porque no incluyen retroalimentación y fijan la composición por monedas (FMI, 2021, anexo VI, párr. 6). La tesis no atribuye la brecha a una causa que no puede verificar.
 
@@ -39,13 +39,13 @@ Lo único que queda abierto es la validación del grupo de D1 y D13 y el recorte
 
 **Crítica.** "Solvencia intertemporal" y "post-2025" prometían algo más amplio que lo que se mide.
 
-**Estado: Resuelto (D13), pendiente de validación del grupo.** Título nuevo: "Probabilidad de no estabilización de la deuda pública argentina, 2026-2035: un modelo SVARX con determinantes macroeconómicos y política monetaria de Estados Unidos".
+**Estado: Resuelto (D13).** Título nuevo: "Probabilidad de no estabilización de la deuda pública argentina, 2026-2035: un modelo SVARX con determinantes macroeconómicos y política monetaria de Estados Unidos".
 
 ## 1.5 El área de vacancia se debilitaba con los propios resultados
 
 **Crítica.** La vacancia se apoyaba en el perímetro consolidado, en la identificación y en el *shock* de la FED, y los resultados anteriores debilitaban los tres. Algunas afirmaciones de ausencia eran exageradas.
 
-**Estado: Resuelto (D1).** La vacancia se formula como "en la literatura revisada no se encontró" y reconoce los trabajos previos. Los tres aportes quedan así: una probabilidad con *shocks* identificados comparable con la del FMI (con el mismo perímetro, y con dos métricas que llevan a veredictos distintos sobre H1b); la traducción del *shock* de la FED en un cambio de esa probabilidad (+18,4 puntos en 2035 [6,3; 29,1] con la senda de 2022-2025); y la estimación de la dinámica de la deuda consolidada, que se presenta como exploratoria. La tesis no presenta la identificación como un aporte para la probabilidad, porque no la cambia por construcción.
+**Estado: Resuelto (D1).** La vacancia se formula como "en la literatura revisada no se encontró" y reconoce los trabajos previos. Los tres aportes quedan así: una probabilidad con *shocks* identificados comparable con la del FMI (con el mismo perímetro y la definición operativa del FMI); la traducción del *shock* de la FED en un cambio de esa probabilidad (+18,4 puntos en 2035 [6,3; 29,1] con la senda de 2022-2025); y la estimación de la dinámica de la deuda consolidada, que se presenta como exploratoria. La tesis no presenta la identificación como un aporte para la probabilidad, porque no la cambia por construcción.
 
 # 2. Problemas graves de método
 
@@ -146,7 +146,7 @@ Lo único que queda abierto es la validación del grupo de D1 y D13 y el recorte
 - **Tablas y figuras.** Resuelto: la tabla completa de robustez pasó al Apéndice (A.10) y Resultados conserva una tabla corta (D14).
 - **Referencias en formato APA.** Resuelto en lo verificable; se agregan Brüggemann et al. (2016) y Hall (1992).
 - **Carátula y resumen.** Resueltos en la versión anterior.
-- **Extensión.** Pendiente de verificar con el texto reescrito (sección 6).
+- **Extensión.** La versión final tiene 94 páginas con referencias y apéndice. Si la cátedra fija un máximo menor, hay que recortar.
 
 # 5. Revisión de un compañero del grupo (octubre de 2026)
 
@@ -217,10 +217,7 @@ Efecto en las cifras principales: la probabilidad de 2031 pasa de 31,8% a 27,7% 
 
 # 8. Qué queda abierto
 
-1. **Decisión del grupo y de Pablo sobre la métrica principal (D16).** Es la más importante: cambia el veredicto de H1b y de la condición (ii) de H1a.
-2. Validación de Pablo y del equipo de D1 (deuda federal bruta como especificación principal), de las binarias presidenciales en la especificación principal y de las dos condiciones de H1a.
-3. Validación del grupo de D13 (título).
-4. Bajar a mano los informes del FGS para documentar mejor la limitación de la serie consolidada (no cambia la especificación principal).
+1. Bajar a mano los informes del FGS para documentar mejor la limitación de la serie consolidada (no cambia la especificación principal).
 
 La ventana 1996-2025 (D2) ya no está abierta: es una decisión del grupo. Las limitaciones declaradas no están pendientes: son límites del alcance de la tesis y se informan en el texto.
 
@@ -232,7 +229,7 @@ Una revisión hecha como la haría un jurado, sobre la versión del 19/10, encon
 
 **Crítica.** El texto decía que la comparación con el FMI usaba la misma métrica. La de la tesis compara cada año el resultado primario previsto con el que estabiliza la deuda ese año, con la valuación de la deuda en moneda extranjera y el ajuste *stock*-flujo: equivale a que la deuda suba ese año. La definición operativa del FMI (FMI, 2022, recuadro 3), que es la que produce el 1%, promedia las variables a lo largo de la trayectoria y deja afuera el tipo de cambio real y el ajuste *stock*-flujo.
 
-**Estado: Corregido, con una decisión pendiente (D16).** El código calcula las dos métricas, más la lectura literal del recuadro 3, con las 1.000 réplicas, y la tesis las informa con el mismo peso. Con la definición del FMI: 3,1% [0,0; 6,3] en 2031 y 5,1% [0,0; 10,2] en 2035, de modo que H1b no se respalda; la condición (ii) de H1a tampoco (0,9% con el máximo histórico); H2 se mantiene (+17,1 [0,6; 32,6]). Cuál métrica es la principal lo deciden el grupo y Pablo.
+**Estado: Resuelto (D16).** El código calcula las dos métricas, más la lectura literal del recuadro 3, con las 1.000 réplicas. La definición operativa del FMI decide el contraste, porque de ella salen las cifras de comparación; la métrica anual se informa como complemento. Con la definición del FMI: 3,1% [0,0; 6,3] en 2031 y 5,1% [0,0; 10,2] en 2035, de modo que H1b no se respalda; la condición (ii) de H1a tampoco (0,9% con el máximo histórico); H2 se mantiene (+17,1 [0,6; 32,6]). H1a y H1b quedan no respaldadas y H2, parcialmente respaldada.
 
 ## 9.2 Otros puntos corregidos
 
