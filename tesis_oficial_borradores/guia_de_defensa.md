@@ -1,136 +1,162 @@
 # Guía de defensa: qué hicimos, por qué y qué nos pueden discutir
 
-Documento interno del grupo. No forma parte de la tesis. Resume cada paso del trabajo empírico con su justificación, según la versión del modelo reestimada con la ventana 1996-2025 (17/10/2026; decisiones D1 a D14), las críticas que se resolvieron y las que todavía puede hacer un jurado, con la respuesta. Todos los números salen de la hoja de números y del Apéndice.
+Documento interno del grupo. No forma parte de la tesis. Resume cada paso del trabajo empírico con su justificación, según la versión final (19/10/2026): ventana 1996-2025 con empalmes validados, binarias presidenciales, cuatro transiciones de la tasa de la FED corregidas, 1.000 réplicas y deuda consolidada desde 2002. Incluye las críticas que se resolvieron y las que todavía puede hacer un jurado, con la respuesta. Todos los números salen de la hoja de números (`_hoja_de_numeros.md`) y del Apéndice.
+
+**Lo más importante, antes que nada: la métrica.** La probabilidad de no estabilización se informa con dos métricas, y los veredictos cambian según cuál se use. Con la **métrica anual** (la que usamos siempre: cada año, ¿el resultado primario previsto alcanza para que la deuda no suba ese año?) da 27,7% en 2031 y H1b se cumple. Con la **definición operativa del FMI** (promedia los *shocks* de la trayectoria y deja afuera el tipo de cambio real y el ajuste *stock*-flujo; FMI, 2022, recuadro 3), que es la que produce el 1% del FMI, da 3,1% [0,0; 6,3] y H1b no se cumple. La tesis informa las dos con el mismo peso y no elige; **cuál es la principal es una decisión del grupo con Pablo, antes de la defensa** (ver D16 en `_decisiones_finales.md`). Hay que saber explicar esto mejor que cualquier otra cosa: es lo primero que va a preguntar un jurado que conozca el marco del FMI.
+
+**Cómo usar esta guía.** La Parte 1 es la exposición: el orden en que conviene contar el trabajo. La Parte 3 es el ensayo de preguntas: conviene que cada uno de los tres pueda responder cualquiera de ellas sin leer. La Parte 4 tiene los números que hay que saber de memoria.
 
 ## Parte 1. Qué hicimos, paso a paso
 
 ### Paso 1. Pregunta e hipótesis
 
-- **H1a:** los determinantes condicionan la sostenibilidad y el superávit, por sí solo, no basta para estabilizar la deuda. Criterio, el original: la contribución de los *shocks* no fiscales a la varianza de la deuda en 2035 supera a la del *shock* fiscal, con un intervalo de 90% que excluye el cero.
-- **H1b:** nuestra probabilidad de no estabilización de la deuda federal bruta es mayor que la del FMI para esa misma deuda en 2031 y en 2035. Criterio: el límite inferior del intervalo de 90% supera 1% y 3%; se informa Bonferroni por los dos horizontes (95%).
-- **H2:** un endurecimiento de la FED eleva la deuda esperada y la probabilidad de no estabilización. Criterio: el intervalo de 90% de la diferencia con el escenario base excluye el cero en 2035, en la probabilidad y en la deuda; 2031 se informa.
-- **Cifras de comparación:** las del análisis de sostenibilidad más reciente del FMI (2026, Artículo IV y segunda revisión): 1% a mediano plazo (2031) y menos de 3% en su abanico de diez años (2035). El 1% es la estimación puntual del FMI para Argentina, no un umbral de riesgo bajo.
+- **Pregunta.** ¿En qué medida el crecimiento, el tipo de cambio real, el riesgo país y el resultado primario condicionan la sostenibilidad de la deuda pública argentina en 2026-2035, y cuál es la probabilidad de que no se estabilice bajo el escenario base? Pregunta específica: ¿qué pasa si la FED endurece su política?
+- **H1a:** el superávit primario, por sí solo, no basta para estabilizar la deuda. Se contrasta con dos condiciones, y se acepta si se cumplen las dos: (i) la contribución de los *shocks* no fiscales a la varianza de la deuda en 2035 supera a la del *shock* fiscal, con un intervalo de 90% de la diferencia que excluye el cero; (ii) con el resultado primario de todos los años desplazado en la misma magnitud hasta que el de 2031 llega a su máximo histórico, la probabilidad de no estabilización en 2031 sigue por encima del 1% del FMI. La condición (ii) se evalúa con cada métrica; la (i) no depende de la métrica. Como las participaciones suman 100, la (i) equivale a que el bloque fiscal explique menos de la mitad de la varianza.
+- **H1b:** nuestra probabilidad de no estabilización de la deuda federal bruta es mayor que la del FMI para esa misma deuda, en 2031 y en 2035. Criterio: el límite inferior del intervalo de 90% supera 1% y 3%; se informa Bonferroni por los dos horizontes (95%). Se evalúa con la métrica anual y con la definición operativa del FMI.
+- **H2:** un endurecimiento de la FED eleva la deuda esperada y la probabilidad de no estabilización en 2035. Criterio: el intervalo de 90% de la diferencia con el escenario base excluye el cero en las dos medidas. Si se cumple en una medida o en un escenario y no en los otros, H2 se declara parcialmente respaldada. La hipótesis se refiere al efecto total; los canales se examinan aparte.
+- **Cifras de comparación:** las del análisis de sostenibilidad más reciente del FMI (2026, Artículo IV y segunda revisión): 1% a mediano plazo (2031) y menos de 3% en el abanico de diez años (2035). El 1% es la estimación del FMI para Argentina, no un umbral de riesgo.
 
 ### Paso 2. Datos y perímetro
 
-- **Perímetro principal (D1):** deuda federal bruta, el perímetro del FMI. La simulación parte del *stock* del FMI a fines de 2025, 80,3% del PIB (cuadro 2, línea 1). Nuestra serie, construida con datos del MECON, da 77,7%; la diferencia son los intereses capitalizados, la deuda no presentada al canje, los reclamos por los cupones PBI y la medición del PIB.
-- **Extensión:** deuda consolidada con el BCRA en la definición del FMI (cuadro 2, línea 5), 52,1% del PIB a fines de 2025, con 68,5% en moneda extranjera. La dinámica se estima con nuestra serie consolidada (Tesoro más BCRA, Letras a valor nominal).
-- **Ventana (D2):** 1996-2025 para todo el estudio y 2026-2035 para la proyección, por decisión del grupo. Las ecuaciones se estiman con 1998T2-2025T4, 111 trimestres, porque los primeros trimestres de la ventana son condiciones iniciales de los rezagos: la variación de la tasa de la FED entra con dos rezagos y todos los órdenes hasta seis se comparan sobre los mismos trimestres (Lütkepohl, 2005, sec. 4.3). La ventana del estudio sigue siendo 1996-2025.
+- **Perímetro principal (D1):** deuda federal bruta, el perímetro del FMI. La simulación parte del *stock* del FMI a fines de 2025, 80,3% del PIB (cuadro 2, línea 1). Nuestra serie, construida con datos del MECON, da 77,7%; la diferencia son los intereses capitalizados, la deuda no presentada al canje, los reclamos por los cupones atados al PIB y la medición del PIB.
+- **Extensión:** deuda consolidada con el BCRA, 52,1% del PIB a fines de 2025 en la definición del FMI, con 68,5% en moneda extranjera. Se estima desde 2002, porque antes el BCRA operaba con la autonomía de la Carta Orgánica de 1992 y la Convertibilidad, con límites estrictos a la asistencia al Tesoro, y el criterio del FMI para consolidar es que el banco financie al gobierno o haga actividades cuasifiscales. Nuestra serie no descuenta la deuda en poder del FGS; por eso el nombre exacto es "deuda del Tesoro neta de la que está en poder del BCRA, más los pasivos remunerados del BCRA", y la llamamos deuda consolidada con el BCRA por brevedad.
+- **Ventana (D2):** 1996-2025 para todo el estudio y 2026-2035 para la proyección. Las ecuaciones se estiman con 1998T2-2025T4, 111 trimestres, porque la deuda federal trimestral del MECON empieza en 1998T1 y entra rezagada; los trimestres anteriores son condiciones iniciales de los demás rezagos, y todos los órdenes hasta seis se comparan sobre los mismos trimestres (Lütkepohl, 2005, sec. 4.3). Ojo: por eso el TCRM empalmado de 1996 no entra en la estimación, y el EMBI empalmado solo pesa en 1997T4-1998T3.
+- **Resultado primario (D4):** una sola definición, Sector Público Nacional sin rentas de la propiedad. El FMI excluye de su resultado primario las utilidades que el BCRA transfiere al Tesoro (FMI, 2026, cuadro 1, nota 4), y el MECON no las publica separadas del resto de las rentas: la serie sin rentas es la única pública que las deja afuera. La serie con rentas es robustez.
+- **PIB real:** INDEC base 1993 empalmada a base 2004 para 1996-2003 con un coeficiente de enlace (k = 1,751); el empalme cambia el nivel, no las tasas de crecimiento. Serie original, sin desestacionalizar, con binarias estacionales.
 
-**Empalmes y por qué son correctos.** El riesgo país, medido por el diferencial del índice EMBI de J.P. Morgan para Argentina (EMBI), tiene serie diaria pública desde el 11 de diciembre de 1998, y el índice del tipo de cambio real multilateral (TCRM) del BCRA empieza en enero de 1997. Para cubrir la ventana completa se hicieron dos empalmes, con código propio (`codigo/ingesta_datos/empalme_embi_tcrm_1996_1998.py`) y validación en el Apéndice A.2 y la Figura A.1.
+**Empalmes y por qué son correctos.** El EMBI tiene serie diaria pública desde el 11 de diciembre de 1998, y el TCRM del BCRA empieza en enero de 1997. Para cubrir la ventana se hicieron dos empalmes, con código propio (`codigo/ingesta_datos/empalme_embi_tcrm_1996_1998.py`) y validación en el Apéndice A.2 y la Figura A.1.
 
-- **EMBI 1996T1-1998T3.** Se usa el diferencial entre la tasa de préstamos interfinancieros en dólares del BCRA (serie oficial, mensual desde octubre de 1994) y la tasa de fondos federales. Con la convertibilidad, lo que pagaba un banco en la Argentina por un dólar prestado, por encima de la tasa de Estados Unidos, medía el riesgo argentino. La relación se estima en la superposición 1998T4-2001T3, doce trimestres que terminan antes del corralito, que rompe ese mercado: EMBI = 550,3 + 1,171 × diferencial, R² = 0,89, correlación 0,944.
-- **Validación del EMBI.** Dejando un trimestre afuera por vez, el error típico es de 102 puntos básicos, contra un desvío del EMBI de 240. Estimando solo con 1998T4-2000T4 y pronosticando 2001, el empalme da 744, 801 y 1.033 contra 750, 973 y 1.469 observados: acierta el nivel y subestima el salto de la crisis. Si sesga, atenúa la volatilidad de 1996-1998, y con eso las probabilidades quedan del lado conservador.
-- **TCRM 1996.** Se encadena hacia atrás con las variaciones del tipo de cambio real efectivo amplio del BIS, invertido porque ese índice sube con la apreciación. Las variaciones trimestrales de los dos índices tienen una correlación de 0,92 en todo el período común y de 0,98 en 1997-2001. Con dos rezagos, los cuatro trimestres de 1996 solo intervienen como condiciones iniciales.
-- **Variante sin empalme.** Con datos desde 1999, solo con el EMBI observado, la probabilidad de no estabilización en 2031 es 32,4% [26,6; 37,0], contra 31,8% [25,2; 36,4] con la ventana completa. H1a (75,5 puntos [51,7; 86,3]) y H2 (senda de la FED, 9,6 puntos [2,5; 15,7]) no cambian (Apéndice A.9).
-- **Lo que había antes.** La base anterior tenía valores del EMBI de 1993-1998 escritos a mano, sin fuente. Se eliminaron y no se usan en ninguna parte. Si el jurado pregunta por versiones viejas, la respuesta es esa.
+- **EMBI 1996T1-1998T3.** Se usa el diferencial entre la tasa de préstamos interfinancieros en dólares del BCRA y la tasa de fondos federales. Con la Convertibilidad, lo que pagaba un banco en la Argentina por un dólar prestado, por encima de la tasa de Estados Unidos, medía el riesgo argentino. La relación se estima en la superposición 1998T4-2001T3, doce trimestres que terminan antes del corralito: EMBI = 550,3 + 1,171 × diferencial, R² = 0,89, correlación 0,944.
+- **Validación del EMBI.** Dejando un trimestre afuera por vez, el error típico es de 102 puntos básicos, contra un desvío del EMBI de 240. Estimando solo con 1998T4-2000T4 y pronosticando 2001, el empalme da 744, 801 y 1.033 contra 750, 973 y 1.469 observados: acierta el nivel y subestima el salto de la crisis. Si sesga, atenúa la volatilidad y las probabilidades quedan del lado conservador.
+- **TCRM 1996.** Se encadena con las variaciones del tipo de cambio real efectivo amplio del BIS (invertido). Las variaciones trimestrales de los dos índices tienen una correlación de 0,92 en todo el período común y de 0,98 en 1997-2001. Como la estimación empieza en 1998T2, el TCRM de 1996 no entra en el SVARX; solo lo usa la variante a la manera del FMI, para la depreciación real de 1997.
+- **Variante sin empalme.** Con datos desde 1999, solo con el EMBI observado, la probabilidad de no estabilización en 2031 es 29,5% [22,5; 36,7], contra 27,7% [20,6; 34,7] con la ventana completa. H1a (95,7 puntos) y el efecto de la senda de la FED sobre la probabilidad (18,0 puntos) no cambian.
+- **Lo que había antes.** La base anterior tenía valores del EMBI de 1993-1998 escritos a mano, sin fuente. Se eliminaron y no se usan.
 
-| Serie | Fuente | Construcción | Por qué así |
-|---|---|---|---|
-| Deuda federal bruta | MECON; *stock* inicial del FMI (2026) | Deuda bruta de la Administración Central sobre el PIB de los últimos cuatro trimestres | Es la deuda del análisis del FMI |
-| Deuda consolidada con el BCRA | MECON y BCRA | Deuda del Tesoro + pasivos remunerados del BCRA − deuda del Tesoro en poder del BCRA − depósitos del Tesoro | Es la consolidación del FMI (2021, anexo II) |
-| Resultado primario (D4) | MECON | Flujo trimestral anualizado del Sector Público Nacional, sin rentas de la propiedad, una sola definición para los dos perímetros; con rentas, como robustez | El FMI excluye las utilidades del BCRA de su resultado primario (FMI, 2026, cuadro 1, nota 4) y el MECON no las separa del resto de las rentas |
-| PIB real | INDEC | Base 1993 empalmada a base 2004 | La base 2004 empieza en 2004 |
-| EMBI | J.P. Morgan, serie diaria publicada por Ámbito Financiero; BCRA y Reserva Federal para el empalme | Promedio trimestral; 1996T1-1998T3 con el empalme validado | Serie diaria desde diciembre de 1998; el empalme usa series oficiales |
-| TCRM | BCRA; BIS para el empalme | Promedio trimestral; 1996 encadenado con el BIS | El índice del BCRA empieza en enero de 1997 |
-| Tasa de la FED (D5) | FRED y tasa sombra de Wu y Xia (2016) | Sombra en el límite cero; en 2022T1 la variación se calcula con la tasa efectiva en los dos trimestres | En el límite cero la tasa efectiva no refleja la política, y el cambio de serie no es un cambio de política |
-| VIX | CBOE | Promedio trimestral | Medida estándar de aversión global al riesgo |
+**Tasa de la FED (D5).** Tasa de fondos federales, con la tasa sombra de Wu y Xia (2016) en el límite cero. La serie cambia de tramo cuatro veces: entra al límite cero en 2009T1 y 2020T2 y sale en 2016T1 y 2022T1. En esas cuatro transiciones la variación se calcula con la tasa efectiva en los dos trimestres. Sin esa corrección, la variación de 2009T1 salía positiva (+0,24) cuando la FED estaba bajando la tasa: era la diferencia entre dos series, no un cambio de política. Desvío estándar de la variación trimestral: 0,501 puntos.
 
 **Controles.** La identidad reproduce la senda de deuda del FMI con un desvío máximo de 0,12 puntos.
 
 ### Paso 3. El modelo: un SVARX
 
-- **Variables:** cuatro endógenas (resultado primario, crecimiento, EMBI, TCRM); exógenas: variación de la tasa de la FED (rezagos 0 a 2), VIX, binarias estacionales y binarias de los quiebres de Bai y Perron sobre la deuda (2001T4, 2006T2, 2018T1). La deuda rezagada entra en todas las ecuaciones.
-- **Por qué un VAR:** las cuatro variables se determinan juntas; es la arquitectura del abanico estocástico de Celasun et al. (2006).
-- **Por qué la FED es exógena:** Argentina es una economía pequeña y abierta (Cushman y Zha, 1997; Canova, 2005).
-- **Por qué en niveles:** las estimaciones son consistentes sin imponer cointegración (Sims et al., 1990). Las pruebas de raíz unitaria son ambiguas para la deuda, el EMBI y el TCRM, y Johansen no rechaza rango cero (traza 42,7 contra 47,9). La inferencia se hace con *bootstrap*.
-- **Rezagos (D3):** criterio de Schwarz entre los órdenes estables, que Ivanov y Kilian (2005) recomiendan para datos trimestrales con menos de 120 observaciones; si sus residuos están autocorrelacionados (Portmanteau, 12 rezagos, 5%), el menor orden mayor que no lo esté (Lütkepohl, 2005, sec. 4.4). Schwarz elige 1, con residuos autocorrelacionados (p = 0,000); se usan 2 (p = 0,056), el mismo orden que elige Hannan-Quinn. Autovalor máximo 0,896.
+- **Variables:** cuatro endógenas (resultado primario, crecimiento, EMBI, TCRM). Exógenas: variación de la tasa de la FED (rezagos 0 a 2), VIX, binarias estacionales, binarias de quiebre (2006T2 y 2018T1) y siete binarias por mandato presidencial. La deuda rezagada entra en todas las ecuaciones.
+- **Por qué un VAR:** las cuatro variables se determinan juntas; es la arquitectura del abanico estocástico de Celasun et al. (2006), que el FMI incorporó a su marco de 2021.
+- **Por qué la FED y el VIX son exógenos:** Argentina es una economía pequeña y abierta (Cushman y Zha, 1997; Canova, 2005).
+- **Por qué en niveles:** las estimaciones son consistentes sin imponer cointegración (Sims et al., 1990), y Bohn (2007) muestra que la ausencia de cointegración no prueba insostenibilidad. Las pruebas de raíz unitaria son ambiguas para la deuda, el EMBI y el TCRM, y Johansen no rechaza rango cero (traza 42,7 contra 47,9). La inferencia se hace con *bootstrap*.
+- **Binarias presidenciales.** Una por mandato, con Menem como referencia: De la Rúa, Duhalde, N. Kirchner, C. Fernández de Kirchner, Macri, A. Fernández y Milei. Cada trimestre se asigna al presidente en funciones al cierre, salvo 2001T4, que terminó con presidentes interinos y se asigna a Duhalde. Las pruebas de Wald las rechazan conjuntamente en las ecuaciones del resultado primario (p = 0,014), del EMBI (p < 0,001) y del TCRM (p = 0,005), no en la del crecimiento (p = 0,127); la razón de verosimilitud del sistema, con la corrección de Sims (1980), da p < 0,001. El quiebre de 2001T4 coincide con el inicio del gobierno de Duhalde, así que lo reemplazan las binarias.
+- **Rezagos (D3).** Regla: criterio de Schwarz entre los órdenes estables (Ivanov y Kilian, 2005, para datos trimestrales con menos de 120 observaciones); si sus residuos están autocorrelacionados, el menor orden mayor que no lo esté (Lütkepohl, 2005, sec. 4.4). Schwarz elige 1, con autocorrelación (p < 0,001). Con las binarias y la FED corregida, ningún orden estable pasa el Portmanteau al 5%, así que se aplica la regla de reserva: el orden estable, no menor que el de Schwarz, con el mayor p-valor, que es 2 (p = 0,031), el mismo que elige Hannan-Quinn. Autovalor máximo 0,776. La autocorrelación residual leve se declara como limitación, y se informan 1 y 3 rezagos como robustez.
 
 ### Paso 4. Identificación de los *shocks*
 
 - **Nombre (D2b):** restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con un bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto. Siempre con estas palabras.
 - **Fiscal:** se descuenta la respuesta automática al ciclo con una elasticidad de 0,25 (Blanchard y Perotti, 2002; Girouard y André, 2005).
 - **Actividad:** puede responder al *shock* fiscal en el trimestre.
-- **Bloque cambiario y de riesgo:** el EMBI y el TCRM sin orden entre sí; solo se interpreta el efecto conjunto (Christiano et al., 1999). El resultado primario y el crecimiento no responden en el trimestre a ese bloque.
-- **Robusteces:** dos ordenamientos de Cholesky (resultado primario primero y resultado primario último), y elasticidades de 0 y 0,5.
-- **Dato clave:** la identificación no cambia la probabilidad de no estabilización, porque los *shocks* estructurales reconstruyen los mismos residuos. Con números aleatorios comunes, las identificaciones alternativas dan exactamente la misma probabilidad (31,8% en 2031). La identificación hace falta para dos cosas: repartir la varianza de la deuda por bloque, que es el criterio de H1a, y definir el *shock* fiscal.
+- **Bloque cambiario y de riesgo:** el EMBI y el TCRM sin orden entre sí; solo se interpreta el efecto conjunto. El resultado primario y el crecimiento no responden en el trimestre a ese bloque.
+- **Robusteces:** dos ordenamientos de Cholesky (resultado primario primero y resultado primario último), con sus matrices de impacto en el Apéndice A.7, y elasticidades de 0 y 0,5.
+- **Dato clave:** la identificación no cambia la estimación central de la probabilidad (27,7% en 2031 con la métrica anual y 3,1% con la definición del FMI, con cualquier identificación), porque los *shocks* estructurales reconstruyen los mismos residuos. Los intervalos cambian levemente, porque en cada réplica la matriz S se reestima. La identificación hace falta para repartir la varianza por bloque, que es la condición (i) de H1a.
 
 ### Paso 5. Retroalimentación entre la deuda y las variables
 
-La deuda rezagada entra en las cuatro ecuaciones y se acumula con la identidad (Favero y Giavazzi, 2007). En la simulación se actualiza al cierre de cada año, porque la identidad del FMI es anual. La deuda se asocia con más superávit: coeficiente de impacto 0,0576 [0,0220; 0,0822] y multiplicador de largo plazo 0,199 [0,112; 0,328]. Con el EMBI la estimación es de unos 15 puntos básicos por punto de deuda, con un intervalo que incluye el cero. Sin retroalimentación, la probabilidad en 2031 casi no cambia (30,4%) y el abanico se abre (54,4 puntos contra 46,6).
+La deuda rezagada entra en las cuatro ecuaciones y se acumula con la identidad (Favero y Giavazzi, 2007). En la simulación se actualiza al cierre de cada año, porque la identidad del FMI es anual.
+
+- **Reacción fiscal:** coeficiente de impacto 0,0466 [0,0231; 0,0835] y multiplicador de largo plazo 0,079 [0,062; 0,147], del orden del 0,05 de Bohn (1998). Con 0,079 la regla estabiliza la deuda solo si (r − g)/(1 + g) queda por debajo de unos ocho puntos, y en los años de estrés la depreciación real lleva el diferencial muy por encima.
+- **Deuda y EMBI:** unos 35 puntos básicos por punto de deuda, [13,9; 47,6]. Ojo: sin las binarias presidenciales el intervalo incluye el cero (15,3 [-5,3; 30,4]). Se presenta como un resultado sujeto a la especificación.
+- **Sin retroalimentación**, la probabilidad en 2031 casi no cambia con la métrica anual (27,2%); con la definición del FMI baja de 3,1% a 1,3%.
 
 ### Paso 6. Inferencia
 
-- **Estimación central (D8):** parámetros de MCO (autovalor máximo 0,896) y 20.000 trayectorias; error de Monte Carlo de 0,33 puntos.
-- **Intervalos de 90%:** *bootstrap* de bloques móviles de cuatro trimestres sobre los residuos, de diseño recursivo, en el que la deuda también se regenera (Brüggemann et al., 2016), con percentiles de Hall (1992), que corrigen el sesgo de la distribución *bootstrap* respecto de la estimación puntual. 200 réplicas con 1.000 trayectorias cada una. Mediana del autovalor máximo en las réplicas: 0,842.
-- **Por qué se abandonó el *bootstrap* salvaje:** Brüggemann et al. (2016) muestran que no reproduce la estructura de cuarto orden de las innovaciones de la que dependen las respuestas estructurales.
-- **Números aleatorios comunes:** todas las especificaciones usan los mismos, de modo que las diferencias entre filas no vienen del sorteo.
-- **Corrección de sesgo de Kilian (1998):** como robustez (30,1% en 2031).
+- **Estimación central (D8):** parámetros de MCO y 20.000 trayectorias; error de Monte Carlo de 0,32 puntos.
+- **Intervalos de 90%:** *bootstrap* de bloques móviles de cuatro trimestres sobre los residuos, recursivo, con la deuda regenerada (Brüggemann et al., 2016), y percentiles de Hall (1992). 1.000 réplicas con 1.000 trayectorias cada una: con 200, cada cola del intervalo de 95% de Bonferroni quedaba definida por unas cinco observaciones. Para las participaciones de la varianza, que están acotadas, los intervalos son percentiles simples.
+- **Por qué no el *bootstrap* salvaje:** no reproduce la estructura de cuarto orden de las innovaciones (Brüggemann et al., 2016). Los bloques preservan la heterocedasticidad condicional, que aparece en la ecuación del TCRM (ARCH p < 0,001).
+- **Números aleatorios comunes:** todas las especificaciones usan los mismos.
+- **Corrección de sesgo de Kilian (1998):** robustez, 29,1% en 2031.
 
 ### Paso 7. Simulación
 
-1. **Escenario base del FMI (2026, cuadro 6):** crecimiento, deflactor, tasa efectiva, resultado primario, ajuste *stock*-flujo e inflación relativa, para la deuda a la que corresponde.
-2. **Desvíos:** el SVARX se simula trimestre a trimestre con los *shocks* estructurales remuestreados en bloques de ocho trimestres (D7), como los bloques de dos años del abanico del FMI (FMI, 2021, anexo VI).
-3. **Variables externas (D6):** el VIX y el nivel de la tasa de la FED siguen procesos AR(1) estimados en la muestra (0,703 y 0,970); sus innovaciones se remuestrean junto con los *shocks* estructurales, por fecha. La varianza tiene un cuarto bloque, externo.
-4. **Identidad (D9):** separa moneda local (proporción en pesos 0,422, fija como en el FMI) y extranjera; la tasa en dólares se reprecia con λ = 0,282 por año. El ajuste *stock*-flujo se escala por la deuda en pesos simulada y la inflación relativa por la deuda en moneda extranjera. El desvío del crecimiento anual es la variación del promedio anual del nivel del PIB.
-5. **Métrica del FMI:** la deuda no se estabiliza en T si el resultado primario del escenario es menor que pb* = d(T-1)(M(T) − 1) + sf(T) + ri(T), el que la estabilizaría incluido el ajuste *stock*-flujo (FMI, 2021, párr. 53).
-6. **Escenarios de la FED:** (i) nivel 0,494 puntos más alto en forma permanente desde 2026T1 (un desvío estándar de la variación trimestral); (ii) repetición de la senda trimestral de 2022-2025 en 2026-2029: sube 5,25 puntos, baja 1,43 y desde 2030 queda 3,82 puntos por encima del base hasta 2035.
+1. **Escenario base del FMI (2026, cuadro 6):** crecimiento, deflactor, tasa efectiva, resultado primario, ajuste *stock*-flujo e inflación relativa.
+2. **Desvíos:** el SVARX se simula 40 trimestres en desvíos respecto del escenario, con los *shocks* estructurales remuestreados por fecha en bloques de ocho trimestres (D7), como los bloques de dos años del FMI. Las binarias no intervienen en la proyección.
+3. **Variables externas (D6):** el VIX y el nivel de la tasa de la FED siguen procesos AR(1) (0,703 y 0,972); sus innovaciones se remuestrean junto con los *shocks*. La varianza tiene un cuarto bloque, externo.
+4. **Identidad (D9):** separa moneda local (proporción en pesos 0,422, fija como en el FMI) y extranjera; la tasa en dólares se reprecia con λ = 0,282 por año.
+5. **Métricas (D9 y D16):** (a) anual: la deuda no se estabiliza en T si el resultado primario del escenario es menor que pb* = d(T−1)(M(T) − 1) + sf(T) + ri(T), es decir, si con ese resultado la deuda sube en T (FMI, 2021, párr. 53, aplicado año por año); (b) definición operativa del FMI (FMI, 2022, recuadro 3): el mismo cálculo sin tipo de cambio real ni ajuste *stock*-flujo, con los impulsores del escenario en T más el *shock* promedio de 2026 a T. La lectura literal del recuadro, que promedia también el escenario, da todavía menos (0,0% y 0,9%).
+6. **Escenarios de la FED:** (i) nivel 0,501 puntos más alto en forma permanente desde 2026T1; (ii) repetición de la senda de 2022-2025 en 2026-2029: sube 5,25 puntos, baja 1,43 y desde 2030 queda 3,82 por encima del base.
+7. **Descomposición de la varianza:** para cada bloque se simula la deuda de 2035 solo con sus *shocks* y se calcula la varianza; la participación es esa varianza sobre la suma de las de los cuatro bloques. El bloque externo se abre en VIX, FED y FED solo con su efecto directo. Las aperturas no suman.
 
 ### Paso 8. Resultados
 
-- **H1a, respaldada.** No fiscal menos fiscal: 78,3 puntos [57,3; 87,9]. Reparto de la varianza en 2035: externo 44,9%, cambiario y de riesgo 32,3%, actividad 12,0%, fiscal 10,8%. Se cumple en las 20 especificaciones (menor límite inferior: 25,6, con elasticidad cíclica 0, una de las variantes de robustez). Complemento descriptivo: con el resultado primario en su máximo de 1996-2025 (3,29% sin rentas, 2004) todos los años, la probabilidad en 2031 es 26,1% (24,5% con el máximo con rentas, 3,58%); para llevarla al 1% haría falta sumar 8,00 puntos (9,4% del PIB en 2026 y 10,3% en 2031).
-- **H1b, respaldada.** 31,8% [25,2; 36,4] en 2031 y 31,0% [26,8; 35,6] en 2035; con Bonferroni, límites inferiores de 24,2 y 26,6. Se cumple en las 20 especificaciones (menor límite inferior 19,1, deuda consolidada con el BCRA).
-- **H2, respaldada en parte.** Senda 2022-2025: +9,7 puntos de probabilidad en 2035 [4,2; 16,0], robusto, y +9,0 de deuda [0,3; 16,2], no robusto. Nivel 0,494 más alto: +1,1 [0,2; 1,9] y +1,0 [0,0; 1,8]; el efecto sobre la probabilidad no resiste Bonferroni ([-0,0; 2,0]). El 96% del efecto de la senda sobre la deuda es el costo directo de la deuda en dólares; los canales que nombra la hipótesis no se distinguen.
+- **H1b: depende de la métrica.** Métrica anual: 27,7% [20,6; 34,7] en 2031 y 29,0% [25,0; 36,1] en 2035, contra 1% y menos de 3% del FMI; con Bonferroni, límites inferiores de 19,0 y 24,1; se cumple en las 21 especificaciones (menor límite inferior: 16,2 en 2031, con tres rezagos; 18,0 en 2035, sin ajuste *stock*-flujo y con el escenario de 2025). Definición operativa del FMI: 3,1% [0,0; 6,3] en 2031 y 5,1% [0,0; 10,2] en 2035; la estimación central supera la del FMI pero el intervalo la incluye; el límite inferior supera la cifra del FMI solo en 2 de 21 (consolidada y canal de tasas en pesos). **Respaldada con la anual, no respaldada con la del FMI.** Medidas alternativas: con el resultado primario simulado, 29,7%; probabilidad de que la deuda de 2031 supere a la de 2029, 20,0% [17,3; 26,7].
+- **H1a: depende de la métrica en la condición (ii).** (i) No fiscal menos fiscal: 96,8 puntos [90,8; 99,8]. Reparto de la varianza en 2035: externo 59,4%, cambiario y de riesgo 28,3%, actividad 10,7%, fiscal 1,6%. Sin binarias presidenciales: 77,9 [67,3; 99,4]. Se cumple en las 20 especificaciones en que se informa (en la consolidada no se informa). (ii) Suficiencia, métrica anual: con un desplazamiento uniforme que lleva el resultado primario de 2031 a su máximo de 1996-2025 (3,29% en 2004; el de 2026 queda en 2,39%), la probabilidad en 2031 es 23,0% (21,6% con el máximo con rentas, 3,58%); para llevarla al 1% hay que sumar 7,25 puntos todos los años (8,65% del PIB en 2026 y 9,55% en 2031). Con la definición del FMI, en el máximo histórico baja a 0,9%: **no se cumple**; alcanza con sumar 1,00 punto.
+- **H2, parcialmente respaldada con las dos métricas.** Senda de 2022-2025: +18,4 puntos de probabilidad en 2035 [6,3; 29,1], que resiste Bonferroni [4,1; 30,8] y 20 de 21 especificaciones; con la definición del FMI, +17,1 [0,6; 32,6], que no resiste Bonferroni. +19,3 de deuda [-0,3; 31,3], que no excluye el cero (la deuda no depende de la métrica). Nivel 0,501 más alto: +1,9 de probabilidad [0,3; 3,2] y +2,0 de deuda [0,4; 3,2], pequeños y sin resistir Bonferroni. El 77% del efecto de la senda sobre la deuda (14,8 de 19,3 puntos) es el costo directo de la deuda en dólares. Sin binarias presidenciales, el efecto de la senda es la mitad: +9,7 puntos de probabilidad.
+- **Extensión consolidada, exploratoria.** 31,1% [27,6; 41,5] en 2031 y 35,0% [32,3; 49,8] en 2035; la senda de la FED suma 19,2 puntos. No se informan la varianza ni la deuda media porque 368 de las 1.000 réplicas tienen trayectorias explosivas.
 
-## Parte 2. Qué cambió en la revisión de octubre de 2026
+## Parte 2. Qué cambió y por qué
+
+### Revisión de octubre de 2026 (decisiones D1 a D15)
 
 | Problema de la versión anterior | Decisión | Resultado |
 |---|---|---|
-| La comparación con el FMI mezclaba perímetros | D1: deuda federal bruta como principal, con el punto de partida, el escenario y la métrica del FMI; consolidada con el BCRA como extensión | H1b compara lo mismo con lo mismo |
-| EMBI de 1993-1998 escrito a mano sin fuente y TCRM de 1996 sin método documentado | D2: ventana única 1996-2025, con empalmes documentados y validados; los valores a mano se eliminaron | Con datos desde 1999, sin empalme, 32,4% en 2031 contra 31,8% |
-| Período de estudio y nombres de variables distintos entre documentos | D2b: reglas de consistencia y control automático (`verificar_consistencia.py`) | Un solo período, un solo nombre para el EMBI y para la identificación |
-| Regla de rezagos sin respaldo y cita de Ivanov y Kilian mal usada | D3: Schwarz más adecuación de residuos | 2 rezagos, residuos sin autocorrelación (p = 0,056) |
-| Resultado primario con utilidades del BCRA, justificado con una definición del FMI que era falsa | D4: una sola definición, sin rentas de la propiedad, que excluye las utilidades del BCRA como el FMI | Con rentas, como robustez; los resultados casi no cambian |
-| Salto de la FED en 2022T1 por cambio de serie | D5: variación con la tasa efectiva en los dos trimestres | El desvío (0,494) no incluye el cambio de serie |
-| VIX y FED fijos en la simulación | D6: procesos AR(1) con innovaciones remuestreadas | Bloque externo en la varianza |
+| La comparación con el FMI mezclaba perímetros | D1: deuda federal bruta como principal, con punto de partida y escenario del FMI | H1b compara la misma deuda |
+| EMBI de 1993-1998 escrito a mano y TCRM de 1996 sin método | D2: ventana 1996-2025 con empalmes documentados y validados | Con datos desde 1999, 29,5% en 2031 contra 27,7% |
+| Período y nombres distintos entre documentos | D2b: reglas de consistencia y control automático | Un solo período y un solo nombre para cada variable |
+| Regla de rezagos sin respaldo y cita de Ivanov y Kilian mal usada | D3: Schwarz más adecuación de residuos, con regla de reserva | 2 rezagos; autocorrelación leve declarada |
+| Resultado primario con utilidades del BCRA, justificado con una definición falsa del FMI | D4: una sola definición, sin rentas | Con rentas, 28,5% en 2031 |
+| Saltos de la FED por cambio de serie | D5: las cuatro transiciones con la tasa efectiva | Desvío 0,501 sin cambios de serie |
+| VIX y FED fijos en la simulación | D6: procesos AR(1) | Bloque externo en la varianza |
 | Remuestreo independiente con residuos autocorrelacionados | D7: bloques de ocho trimestres | Conserva la autocorrelación remanente |
-| Estimación central casi con raíz unitaria e intervalos descentrados | D8: MCO, *bootstrap* de bloques y percentiles de Hall | Autovalor 0,896; Kilian como robustez |
-| Ajuste *stock*-flujo sin escalar y métrica sin él | D9: escalado por moneda y pb* con el ajuste | Identidad y métrica coherentes |
-| Criterio de H1a cambiado después de estimar | D10: criterio original | Se cumple en las 20 especificaciones |
-| H1b contra el FMI sin perímetro común | D11 | Se cumple en las 20 especificaciones |
-| H2 sin horizonte fundado | D12: 2035, porque el efecto se acumula | Se cumple en la principal; robusto solo el efecto de la senda sobre la probabilidad; mecanismo no distinguible |
+| Intervalos descentrados | D8: MCO, bloques y Hall; 1.000 réplicas | Colas del 95% bien definidas |
+| Criterio de H1a cambiado después de estimar | D10: criterio original de varianza más la condición de suficiencia | H1a con dos condiciones explícitas |
+| H1b sin perímetro común | D11 | Se cumple en las 21 especificaciones |
+| H2 sin horizonte fundado | D12: 2035 | Parcialmente respaldada, con regla escrita |
+| Las binarias presidenciales cambian la magnitud de H2 | D15: se mantienen en la principal; la variante sin ellas se informa | Efecto de la senda: 18,4 con binarias, 9,7 sin ellas |
+| La tesis decía usar "la misma métrica" que el FMI y no era así | D16: se informan la métrica anual y la definición operativa del FMI con el mismo peso | H1b y H1a (ii) dependen de la métrica; decisión pendiente |
 
-## Parte 3. Críticas que puede hacer el jurado y respuesta honesta
+### Cambios del equipo del 15/10 (lista de cambios A1 a E)
 
-### Críticas que la versión actual resuelve
+Ventana extendida a 1996 (A1) con empalmes (A2); fechas unificadas (A3); deuda consolidada desde 2002 (A4); binarias presidenciales (A5); matrices de Cholesky en el Apéndice (A6); hipótesis alineadas con sus criterios (B1 a B3); coeficiente fiscal, identificación, intervalos, descomposición, réplicas, quiebres y tasa sombra explicados (C1 a C8); inconsistencias numéricas y de redacción (D1 a D6); forma y referencias (E).
 
-1. **"Cambiaron los criterios después de ver los resultados."** Ya no. H1a se contrasta con su criterio original (D10) y H2 mantiene el suyo (D12). Los dos tamaños del *shock* de la FED tienen una justificación externa a los resultados: un desvío estándar, que es la convención de la literatura de VAR, y la repetición del episodio de 2022-2025.
-2. **"H1b compara cosas que no son comparables."** Ahora compara lo mismo: perímetro, punto de partida (80,3%), escenario, horizonte y métrica del FMI (D11). Con el procedimiento de *shocks* del FMI aplicado a la historia argentina de la ventana, sobre el mismo perímetro, se obtiene 24,1% en 2031 y un ancho de 148,4, así que tampoco se reproduce el 1%. La diferencia viene de la distribución de *shocks* que usa el FMI, que no publica. El propio FMI reconoce que sus abanicos subestiman la incertidumbre porque no incluyen retroalimentación y fijan la composición por monedas (FMI, 2021, anexo VI, párr. 6). No atribuimos la brecha a una causa que no podemos verificar.
-3. **"La estimación central es casi una raíz unitaria."** Ya no. La estimación central usa MCO, con autovalor máximo 0,896; la mediana de las réplicas es 0,842. Los percentiles de Hall corrigen el sesgo de la distribución *bootstrap*. La corrección de Kilian (1998) queda como robustez y da 30,1% en 2031.
-4. **"La regla de rezagos es ad hoc."** La regla tiene respaldo citado: Schwarz entre los órdenes estables, que Ivanov y Kilian (2005) recomiendan para datos trimestrales con menos de 120 observaciones, y adecuación de residuos (Lütkepohl, 2005, sec. 4.4). La versión anterior citaba a Ivanov y Kilian para el AIC, y esa cita era incorrecta. Con 1 y 3 rezagos la probabilidad en 2031 es 31,4% y 30,0%.
-5. **"Hay autocorrelación residual y remuestrean como si no la hubiera."** Con 2 rezagos los residuos no rechazan la ausencia de autocorrelación (p = 0,056). La simulación remuestrea en bloques de ocho trimestres y la inferencia usa bloques móviles de cuatro, que conservan la autocorrelación remanente.
-6. **"Usan un *bootstrap* salvaje sin heterocedasticidad condicional."** Se abandonó. Las pruebas ARCH no rechazan al 5% (en la principal, p entre 0,108 y 0,996), y Brüggemann et al. (2016) muestran que el *bootstrap* salvaje no reproduce la estructura de cuarto orden de las innovaciones.
-7. **"El resultado primario incluye las utilidades del BCRA."** Ya no. La versión anterior usaba para la deuda federal el resultado primario con rentas de la propiedad y lo justificaba como la definición del FMI. Era falso: el FMI excluye de su resultado primario las transferencias de utilidades del BCRA (FMI, 2026, cuadro 1, nota 4). Lo detectamos nosotros en la lectura final. Como el MECON no publica esas transferencias separadas del resto de las rentas de la propiedad, la única serie pública que las deja afuera es la que excluye todas las rentas. Por eso la tesis usa una sola definición, sin rentas, para los dos perímetros (D4); en el consolidado esas utilidades también son un flujo interno. La serie con rentas queda como robustez. El costo de la corrección es mínimo: la probabilidad de 2031 es 31,8% [25,2; 36,4] sin rentas, y las conclusiones de H1a, H1b y H2 no cambian (Apéndice A.9). Si el jurado pregunta por qué no se separan solo las utilidades, la respuesta es que la fuente pública no lo permite y que excluir todas las rentas es el criterio más cercano al del FMI que se puede replicar.
-8. **"El escenario del FMI es para otra deuda."** Ahora se aplica a la deuda para la que fue construido, y la identidad reproduce la senda del FMI con un desvío máximo de 0,12 puntos.
-9. **"El EMBI de 1996-1998 es inventado."** El EMBI de 1996T1-1998T3 sale de un empalme con series oficiales (la tasa interfinanciera en dólares del BCRA menos la tasa de fondos federales), estimado en la superposición 1998T4-2001T3 con R² = 0,89, error típico de 102 puntos básicos dejando un trimestre afuera y un pronóstico fuera de muestra de 2001 que acierta el nivel. Con datos desde 1999, solo con el EMBI observado, la probabilidad en 2031 es 32,4% contra 31,8%, y H1a y H2 no cambian. Los valores de 1993-1998 escritos a mano de la base anterior se eliminaron.
-10. **"La identificación no aporta nada a la probabilidad."** Es así por construcción, y la tesis lo dice: las identificaciones alternativas dan exactamente la misma probabilidad. La identificación sigue siendo necesaria para repartir la varianza por bloque, que es el criterio de H1a, y para definir el *shock* fiscal. Con los dos ordenamientos de Cholesky de robustez el reparto cambia (60,7 y 91,9 puntos), y el criterio de H1a se cumple en todas las variantes.
-11. **"La elasticidad de 0,25 es de la OCDE."** Solo afecta el reparto de la varianza. Con 0 y 0,5 la diferencia no fiscal menos fiscal es 60,7 y 94,4, y las dos excluyen el cero.
-12. **"El abanico se angostaba porque el VIX y la FED quedaban fijos."** Ahora se simulan con sus procesos AR(1), y el bloque externo explica 44,9% de la varianza en 2035.
+## Parte 3. Preguntas probables del jurado y respuesta
 
-### Debilidades que siguen y cómo responderlas
+### Sobre la comparación con el FMI
 
-1. **El mecanismo de H2 no aparece.** Solo 2 de 84 intervalos de respuesta excluyen el cero, los dos del TCRM y con signo de apreciación. El 96% del efecto de la senda sobre la deuda en 2035 es el costo directo de la deuda en dólares, que la identidad incorpora (8,6 de 9,0 puntos). H2 se respalda en el efecto de la senda sobre la probabilidad; sus canales no se distinguen.
-2. **El efecto sobre la deuda esperada y el del desvío estándar no son robustos.** Con Bonferroni (95%), el efecto sobre la deuda no excluye el cero en ningún escenario ([-0,5; 2,0] y [-4,1; 17,4]), y el del desvío estándar sobre la probabilidad tampoco ([-0,0; 2,0]). Solo el efecto de la senda sobre la probabilidad lo excluye ([3,6; 16,8]). En las robusteces, el efecto de la senda sobre la probabilidad excluye el cero en 18 de 20 especificaciones (no con datos desde 2004 ni con la corrección de Kilian); sobre la deuda, en 9 de 20.
-3. **Retroalimentación al cierre del año.** Dentro del año, la deuda que entra en las ecuaciones es la del cierre del año anterior. Es coherente con la identidad anual del FMI, pero pierde la reacción dentro del año.
-4. **Composición por monedas fija.** La proporción en pesos no cambia en la simulación, aunque una depreciación la cambiaría. Es el mismo supuesto del FMI (2021, anexo VI, párr. 6).
-5. **El escenario del FMI se toma como dado.** No construimos un escenario propio. Con el escenario del FMI de 2025 la probabilidad en 2031 es 29,4%, y con el ajuste *stock*-flujo en cero, 28,9%.
-6. **La extensión consolidada usa el escenario del FMI con flujos escalados.** El ajuste *stock*-flujo y la inflación relativa se escalan por la deuda en pesos y en moneda extranjera de ese perímetro, pero el escenario se construyó para la deuda federal.
-7. **El FGS no se descuenta en la serie histórica consolidada.** La simulación de la extensión parte del *stock* del FMI, que sí lo descuenta, pero la dinámica se estima con una serie que no lo hace.
-8. **Muestra pequeña.** Son 111 trimestres para cuatro ecuaciones con dos rezagos, la deuda, las exógenas y las binarias.
-9. **El empalme del EMBI atenúa la crisis.** En el pronóstico fuera de muestra subestima el salto de 2001 (1.033 contra 1.469 en 2001T3). Si sesga, atenúa la volatilidad de 1996-1998 y vuelve conservadoras las probabilidades, y la variante con datos desde 1999 da casi lo mismo.
-10. **Se rechaza la normalidad** (p = 0,000). La simulación y el *bootstrap* remuestrean los residuos empíricos y no suponen normalidad, pero los errores estándar de MCO del Apéndice son solo referencia.
-11. **Fechas de quiebre estimadas sobre la deuda.** Los quiebres de Bai y Perron se estiman con la serie de deuda y entran en todas las ecuaciones. Sin esas binarias la probabilidad en 2031 es 30,5%.
-12. **Endogeneidad del riesgo país** (no está en el texto por decisión del director): en series de tiempo todo es endógeno salvo los *shocks* de mayor frecuencia que el sistema; por eso el VIX y la tasa de la FED entran como exógenas.
+1. **"¿Cómo puede dar 27,7% si el FMI dice 1%?"** Porque el 27,7% usa otra métrica. Con la definición operativa del FMI, la nuestra da 3,1% [0,0; 6,3]: del mismo orden que el 1% y estadísticamente indistinguible. El 27,7% es la métrica anual: pregunta si la deuda sube un año determinado, incluida la valuación de la deuda en dólares; la del FMI promedia los *shocks* de toda la trayectoria y deja afuera el tipo de cambio real. Lo decimos en la tesis y damos los dos resultados con el mismo peso. Dato extra: con el procedimiento de *shocks* del propio FMI sobre la historia argentina y su misma definición, da 29,1%, así que la historia argentina no da 1%; el SVARX da poco con la definición del FMI porque sus *shocks* son sorpresas, más chicas que los desvíos respecto de una media histórica.
+1b. **"¿Entonces cuál métrica es la correcta?"** La comparación estricta con el FMI es su definición operativa. La anual tiene un argumento propio: con 57,8% de la deuda en moneda extranjera, una depreciación real de un año cambia mucho la deuda, y promediar la trayectoria lo esconde. No decidimos que una sea la correcta: informamos las dos y decimos qué hipótesis se sostiene con cada una. (Si el grupo y Pablo eligen una como principal antes de la defensa, esta respuesta se ajusta.)
+2. **"Comparan un intervalo con una cifra puntual."** Sí, y lo decimos (sección 7.1). La cifra del FMI no tiene intervalo público e incluye juicio del equipo técnico. Por eso H1b contrasta si el valor del FMI queda fuera del rango que sostienen los datos con su propio escenario, no si el FMI está equivocado.
+3. **"Su métrica anual se activa con un solo mal año."** Es cierto: dice que la deuda no se estabiliza en T si sube ese año, aunque la tendencia de varios años siga siendo descendente. Por eso informamos también la definición del FMI (3,1%) y una medida intermedia, que exige que la deuda suba en dos años: la probabilidad de que la deuda de 2031 supere a la de 2029 es 20,0% [17,3; 26,7]. Y la mediana simulada baja de 80,3% a 52,9% en 2031: no decimos que la deuda vaya a explotar.
+4. **"Su abanico es más angosto que el del FMI y la probabilidad es mayor. ¿No es contradictorio?"** No. El ancho mide la dispersión acumulada (40,5 puntos contra 71,5); la métrica anual mira la volatilidad de un año. Con más de la mitad de la deuda en moneda extranjera, basta un año de depreciación real para que la deuda suba ese año. Con la definición del FMI, que promedia la trayectoria, la probabilidad es chica (3,1%), coherente con un abanico más angosto.
+
+### Sobre los datos
+
+5. **"El EMBI de 1996-1998 es inventado."** Sale de un empalme con series oficiales, validado: R² de 0,89, error típico de 102 puntos básicos dejando un trimestre afuera, y un pronóstico fuera de muestra de 2001 que acierta el nivel. Y los resultados no dependen de él: con datos desde 1999, 29,5% contra 27,7%.
+6. **"¿Por qué la consolidada da más que la federal, si tiene menos deuda en dólares?"** Primero, una precisión: tiene menos deuda en dólares en puntos del PIB, pero una proporción mayor (68,5% contra 57,8% de la federal). Porque las dos estimaciones usan muestras distintas (la consolidada desde 2002) y órdenes de rezagos distintos, y en la consolidada 368 de 1.000 réplicas tienen trayectorias explosivas. Por eso la presentamos como exploratoria: solo respalda el orden de magnitud.
+7. **"No descuentan el FGS."** En la serie histórica consolidada, no, porque no hay una serie pública que separe esas tenencias para todo el período. La simulación de la extensión parte del *stock* del FMI, que sí lo descuenta. La especificación principal no se ve afectada.
+8. **"¿Por qué sin rentas de la propiedad?"** Porque el FMI excluye las utilidades del BCRA y el MECON no las separa. Lo detectamos nosotros: la versión anterior usaba la serie con rentas con una justificación incorrecta. Con rentas, 28,5% en 2031: casi no cambia.
+
+### Sobre el modelo
+
+9. **"Hay autocorrelación en los residuos."** Leve, con p = 0,031 en el Portmanteau con dos rezagos, y ningún orden estable la elimina en esta muestra. Por eso la remuestreamos en bloques (ocho trimestres en la simulación, cuatro en el *bootstrap*), que conservan la autocorrelación remanente, e informamos uno y tres rezagos: 29,4% y 25,9% en 2031.
+10. **"Siete binarias presidenciales en cuatro ecuaciones con 111 trimestres es mucho."** Consumen grados de libertad, y lo declaramos. Pero las pruebas de Wald y de razón de verosimilitud rechazan que no importen (p < 0,001 en el sistema). Su peso es real: sin ellas, el efecto de la senda de la FED se reduce a la mitad (9,7 puntos) y la participación fiscal sube. H1a y H1b no cambian. No intervienen en la proyección porque la simulación es en desvíos.
+11. **"La binaria de Milei tiene nueve trimestres."** Sí: su coeficiente es de nivel y está estimado con pocas observaciones. No afecta la proyección, porque las binarias no entran en los desvíos.
+12. **"La elasticidad de 0,25 es de la OCDE."** Solo afecta el reparto de la varianza, no la probabilidad. Las unidades son compatibles en el trimestre del impacto, y con 0 y 0,5 la diferencia no fiscal menos fiscal es 85,6 y 99,4, siempre excluyendo el cero.
+13. **"El resultado primario podría responder en el trimestre al tipo de cambio (derechos de exportación)."** Puede, aunque el efecto debería ser chico porque la recaudación llega con rezago. Por eso el ordenamiento de Cholesky con el resultado primario último, que lo permite, tiene el mismo peso: da 99,4 puntos en H1a y la misma probabilidad.
+14. **"Los quiebres de Bai y Perron sobre una serie tan persistente pueden ser espurios."** Pueden; los aceptamos porque la deuda tuvo cambios de nivel discretos y de origen conocido, y sin ellos la probabilidad en 2031 es 27,1%.
+15. **"La identificación no cambia la probabilidad: ¿para qué sirve?"** Para repartir la varianza por bloque, que es la condición (i) de H1a, y para definir el *shock* fiscal. Que la probabilidad no cambie es una propiedad: los *shocks* estructurales reconstruyen los mismos residuos.
+
+### Sobre los resultados
+
+16. **"La participación fiscal de 1,6% es inverosímil."** No mide la importancia de la política fiscal, sino cuánta incertidumbre viene de sorpresas del resultado primario respecto del escenario. Además, parte de esa variación la absorben las binarias presidenciales: sin ellas la diferencia es 77,9 puntos. Lo robusto es el orden de magnitud.
+17. **"El VIX solo explica 113%: ¿cómo puede pasar 100%?"** Porque las aperturas del bloque externo usan como base la suma de las varianzas de los cuatro bloques y no son aditivas: los *shocks* se remuestrean por fecha, los picos del VIX coinciden con los recortes de la FED de 2008 y 2020, y la deuda que generan uno y otro por separado se mueve en sentidos opuestos, así que juntos explican menos que el VIX solo. Lo que importa es que el costo directo de la FED es una parte menor (7,6%).
+18. **"¿H2 se cumple o no?"** Parcialmente, con las dos métricas y con la regla escrita en la Tabla 4.4: el efecto de la senda sobre la probabilidad se cumple (18,4 con la anual, 17,1 con la del FMI), resiste Bonferroni con la anual y 20 de 21 especificaciones, aunque su magnitud depende de las binarias y de λ (de 11,1 a 23,0); el efecto sobre la deuda esperada no excluye el cero por un margen mínimo; y el 77% del efecto sobre la deuda es el costo directo de la deuda en dólares, que la identidad incorpora. Los canales domésticos se verifican solo en parte, con el EMBI de cuatro a seis trimestres después.
+19. **"Con 84 respuestas al impulso, 11 significativas es azar."** Casi: el azar daría unas ocho con intervalos de 90%. Por eso no nos apoyamos en ninguna respuesta aislada. El patrón del EMBI (sube cuatro a seis trimestres después) es coherente con la teoría, pero no lo presentamos como prueba.
+20. **"Si el superávit no alcanza, ¿qué proponen?"** La tesis no simula cambios en la composición por moneda ni en los plazos de la deuda, así que no evalúa alternativas. Con la métrica anual, llevar la probabilidad al 1% exigiría un superávit cercano al 9% del PIB todos los años, sin precedentes; con la definición del FMI alcanza con el máximo histórico. Lo que no depende de la métrica es que la mayor parte de la incertidumbre viene de *shocks* externos y cambiarios.
+
+### Debilidades que conviene reconocer antes de que las pregunten
+
+- La conclusión sobre el FMI (H1b) y la condición (ii) de H1a dependen de la métrica. Es la debilidad más importante, y conviene plantearla nosotros antes que el jurado.
+- Una sola serie trimestral de treinta años: los efectos de la FED y de la retroalimentación tienen intervalos amplios.
+- Autocorrelación residual leve (p = 0,031).
+- El escenario del FMI se toma como dado; con el de 2025 la probabilidad en 2031 es 25,7%.
+- Composición por monedas fija, como en el FMI: si la depreciación eleva la proporción en dólares, el riesgo está subestimado.
+- La magnitud de H2 depende de las binarias presidenciales.
+- El *shock* de la FED es la variación observada de la tasa, no un *shock* identificado con datos de alta frecuencia (línea futura).
+- Endogeneidad del riesgo país (no está en el texto por decisión del director): en series de tiempo todo es endógeno salvo los *shocks* de mayor frecuencia que el sistema; por eso el VIX y la tasa de la FED entran como exógenas.
 
 ## Parte 4. Números clave
 
@@ -138,28 +164,32 @@ La deuda rezagada entra en las cuatro ecuaciones y se acumula con la identidad (
 |---|---|
 | 80,3% del PIB | Deuda federal bruta del FMI a fines de 2025, punto de partida (serie propia: 77,7%) |
 | 52,1% del PIB | Deuda consolidada con el BCRA del FMI a fines de 2025 (extensión) |
-| 1996-2025 | Ventana del estudio; proyección 2026-2035 |
-| 1998T2-2025T4, 111 trimestres | Trimestres con que se estiman las ecuaciones (los anteriores son condiciones iniciales) |
+| 1996-2025; 2026-2035 | Ventana del estudio y proyección |
+| 1998T2-2025T4, 111 trimestres | Muestra de estimación |
 | R² = 0,89; 102 pb | Empalme del EMBI: ajuste en la superposición y error típico dejando un trimestre afuera |
-| 32,4% contra 31,8% | No estabilización en 2031 con datos desde 1999 (sin empalme) y con la ventana completa |
-| 2 rezagos | Schwarz elige 1 (Portmanteau p = 0,000); con 2, p = 0,056 |
-| 0,896 | Autovalor máximo del VAR principal |
-| 0,0576 [0,0220; 0,0822] | Reacción fiscal de impacto |
-| 0,199 [0,112; 0,328] | Reacción fiscal de largo plazo |
-| 31,8% [25,2; 36,4] | No estabilización en 2031 (FMI: 1%) |
-| 31,0% [26,8; 35,6] | No estabilización en 2035 (FMI: menos de 3%) |
-| 24,2 y 26,6 | Límites inferiores con Bonferroni (95%), 2031 y 2035 |
-| 78,3 [57,3; 87,9] | H1a: no fiscal menos fiscal, varianza de 2035 |
-| 44,9 / 32,3 / 12,0 / 10,8 | Varianza de 2035: externo / cambiario y de riesgo / actividad / fiscal (%) |
-| 3,29% del PIB | Máximo anual del resultado primario sin rentas 1996-2025 (2004), definición principal; con rentas, 3,58% |
-| 26,1% | Probabilidad en 2031 con el resultado primario en su máximo histórico (3,29%) todos los años |
-| +8,00 puntos | Aumento del resultado primario necesario para llevar la probabilidad de 2031 al 1% |
-| +9,7 [4,2; 16,0] | Senda de la FED 2022-2025: efecto sobre la probabilidad en 2035 (pp), robusto |
-| +9,0 [0,3; 16,2] | Senda de la FED 2022-2025: efecto sobre la deuda en 2035 (pp del PIB), no robusto |
-| +1,1 [0,2; 1,9] | Nivel de la FED 0,494 más alto: efecto sobre la probabilidad en 2035 (pp), no resiste Bonferroni |
-| 8,6 de 9,0 | Costo directo de la deuda en dólares en el efecto de la senda (96%) |
-| 2 de 84 | Intervalos de respuesta a la FED que excluyen el cero |
-| 24,1% | No estabilización en 2031 con *shocks* a la manera del FMI |
-| 46,6 contra 71,5 | Ancho del abanico en 2031: nuestro contra el del FMI |
-| 26,5% y 24,1% | Extensión consolidada: no estabilización en 2031 y 2035 |
-| 20 | Especificaciones de robustez del SVARX (Apéndice A.9) |
+| 2 rezagos; p = 0,031 | Orden elegido y Portmanteau |
+| 0,776 | Autovalor máximo del VAR principal |
+| 0,0466 y 0,079 | Reacción fiscal de impacto y de largo plazo |
+| 27,7% [20,6; 34,7] | No estabilización en 2031, métrica anual (FMI: 1%) |
+| 29,0% [25,0; 36,1] | No estabilización en 2035, métrica anual (FMI: menos de 3%) |
+| 3,1% [0,0; 6,3] y 5,1% [0,0; 10,2] | No estabilización en 2031 y 2035, definición operativa del FMI |
+| 0,9% | H1a (ii) con la definición del FMI: probabilidad en 2031 con el máximo histórico |
+| 29,1% | *Shocks* a la manera del FMI con su definición, 2031 |
+| 57,8% | Deuda federal bruta en moneda extranjera |
+| 19,0 y 24,1 | Límites inferiores con Bonferroni, 2031 y 2035 |
+| 20,0% | Probabilidad de que la deuda de 2031 supere a la de 2029 |
+| 96,8 [90,8; 99,8] | H1a (i): no fiscal menos fiscal; 77,9 sin binarias presidenciales |
+| 59,4 / 28,3 / 10,7 / 1,6 | Varianza de 2035: externo / cambiario y de riesgo / actividad / fiscal (%) |
+| 3,29% | Máximo del resultado primario sin rentas 1996-2025 (2004) |
+| 23,0% | H1a (ii), métrica anual: probabilidad en 2031 con el resultado primario de 2031 en ese máximo |
+| +7,25 puntos | Desplazamiento necesario para llevar la probabilidad de 2031 al 1% |
+| +18,4 [6,3; 29,1] | Senda de la FED: efecto sobre la probabilidad en 2035 (pp) |
+| +19,3 [-0,3; 31,3] | Senda de la FED: efecto sobre la deuda en 2035 (pp del PIB) |
+| 14,8 de 19,3 (77%) | Costo directo de la deuda en dólares en el efecto de la senda |
+| 9,7 | Efecto de la senda sobre la probabilidad sin binarias presidenciales |
+| 0,501 | Desvío estándar de la variación trimestral de la tasa de la FED |
+| 24,1% | No estabilización en 2031 con *shocks* a la manera del FMI, métrica anual |
+| 40,5 contra 71,5 | Ancho del abanico en 2031: nuestro contra el del FMI |
+| 31,1% | Extensión consolidada, 2031 (exploratoria) |
+| 21 | Especificaciones del SVARX |
+| 1.000 | Réplicas del *bootstrap* |

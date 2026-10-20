@@ -61,7 +61,7 @@ def main() -> None:
     L.append(f"- Quiebres de Bai y Perron (deuda federal bruta 1996-2025): " + ", ".join(f"{q.year}T{q.quarter}" for q in quiebres))
     L.append(f"- Diagnósticos: normalidad multivariada p = {n(dg['Normalidad multivariada (p-valor)'], 3)}; ARCH-LM p: " + ", ".join(f"{k.split()[1]} {n(v, 3)}" for k, v in dg.items() if k.startswith("ARCH")))
     L.append(f"- Desvío de la variación trimestral de la FED en la muestra: {n(meta['sd_dfed'], 3)} pp. AR(1) del VIX: {n(meta['phi_vix'], 3)}; del nivel de la tasa de la FED: {n(meta['phi_fed'], 3)}.")
-    L.append(f"- Proporción en pesos: federal {n(meta['alfa_pesos'], 3)} (MECON, dic-2025); consolidada {n(16.4 / 52.1, 3)} (FMI, cuadro 2). λ = {n(meta['lam'], 3)}. Desvío máximo de la identidad respecto de la senda del FMI: {n(meta['desvio_max_senda_fmi'], 2)} pp.")
+    L.append(f"- Proporción en pesos: federal {n(meta['alfa_pesos'], 3)} (MECON, dic-2025; {n(100 * (1 - meta['alfa_pesos']), 1)}% en moneda extranjera); consolidada {n(16.4 / 52.1, 3)} (FMI, cuadro 2). λ = {n(meta['lam'], 3)}. Desvío máximo de la identidad respecto de la senda del FMI: {n(meta['desvio_max_senda_fmi'], 2)} pp.")
 
     ru = pd.read_csv(T / "fase24b_raiz_unitaria.csv")
     L.append("- Raíz unitaria (ADF p / KPSS p / clasificación): " + "; ".join(f"{s}: {n(a, 3)} / {n(k, 3)} / {c}" for s, a, k, c in zip(ru.serie, ru.adf_p, ru.kpss_p, ru.clasificacion)))
@@ -101,6 +101,21 @@ def main() -> None:
                    ("base_p_sube2_2035", "Deuda 2035 > 2033")]:
         L.append(f"- {nom}: {iv(r, k)} %")
     L.append(f"- Error de Monte Carlo 2031: {n(100 * r.loc['error_mc_p_noest_2031', 'estimacion'], 2)} pp.")
+    # Definicion operativa del FMI (Guia del SRDSF, 2022): shock promedio de la trayectoria, sin TCR ni ajuste stock-flujo.
+    for k, nom in [("base_p_noest_fmi_2031", "No estabilización 2031, definición operativa del FMI"),
+                   ("base_p_noest_fmi_2035", "No estabilización 2035, definición operativa del FMI"),
+                   ("base_p_noest_fmi_sim_2031", "No estabilización 2031, definición operativa del FMI con pb simulado"),
+                   ("base_p_noest_fmi_sim_2035", "No estabilización 2035, definición operativa del FMI con pb simulado"),
+                   ("base_p_noest_fmi_prom_2031", "No estabilización 2031, recuadro 3 con todo promediado en la trayectoria"),
+                   ("base_p_noest_fmi_prom_2035", "No estabilización 2035, recuadro 3 con todo promediado en la trayectoria")]:
+        L.append(f"- {nom}: {iv(r, k)} %")
+    for nivel in (0.95,):
+        lo31, _ = hall(rep, r.loc["base_p_noest_fmi_2031", "estimacion"], "base_p_noest_fmi_2031", nivel)
+        lo35, _ = hall(rep, r.loc["base_p_noest_fmi_2035", "estimacion"], "base_p_noest_fmi_2035", nivel)
+        L.append(f"- Definición operativa del FMI, límite inferior al 95% (Bonferroni): 2031 {n(100 * lo31)}, 2035 {n(100 * lo35)}.")
+    for k in ("dif_fed_1de_p_noest_fmi_2035", "dif_fed_2022_2025_p_noest_fmi_2031", "dif_fed_2022_2025_p_noest_fmi_2035"):
+        lo, hi = hall(rep, r.loc[k, "estimacion"], k, 0.95)
+        L.append(f"- {k}: {iv(r, k)}; al 95%: [{n(lo * 100)}; {n(hi * 100)}]")
     for nivel in (0.95, 0.975):
         lo31, _ = hall(rep, r.loc["base_p_noest_2031", "estimacion"], "base_p_noest_2031", nivel)
         lo35, _ = hall(rep, r.loc["base_p_noest_2035", "estimacion"], "base_p_noest_2035", nivel)
@@ -132,6 +147,11 @@ def main() -> None:
     L.append(f"- Resultado primario del escenario base: 2026 {n(su.pb_2026.iloc[0], 2)}%, 2031 {n(su.pb_2031.iloc[0], 2)}%; con el desplazamiento al máximo de 2031, 2026 queda en {n(su.pb_2026.iloc[0] + mx - su.pb_2031.iloc[0], 2)}%.")
     cruce = su[su.p_noest_2031 <= 0.01].iloc[0]
     L.append(f"- Primer desplazamiento con P(2031) ≤ 1%: +{n(cruce.dpb, 2)} pp, pb 2026 = {n(cruce.pb_2026, 2)}% y pb 2031 = {n(cruce.pb_2031, 2)}%.")
+    if "p_noest_fmi_2031" in su:
+        p_mx_f = np.interp(mx, su.pb_2031, su.p_noest_fmi_2031)
+        cr_f = su[su.p_noest_fmi_2031 <= 0.01]
+        L.append(f"- Definición operativa del FMI: P(2031) con el máximo histórico = {n(100 * p_mx_f)}%; sin desplazamiento = {n(100 * su.p_noest_fmi_2031.iloc[0])}%; "
+                 + (f"primer desplazamiento con P(2031) ≤ 1%: +{n(cr_f.dpb.iloc[0], 2)} pp." if len(cr_f) else "no llega a 1% en la grilla."))
     imin = su.p_noest_2035.idxmin()
     L.append(f"- P(2035) mínima {n(100 * su.p_noest_2035[imin], 2)}% con +{n(su.dpb[imin], 2)} pp; después sube a {n(100 * su.p_noest_2035.iloc[-1], 2)}% con +{n(su.dpb.iloc[-1], 2)} (no monótona).")
 
@@ -141,7 +161,7 @@ def main() -> None:
     L.append("\n## Shocks a la manera del FMI")
     for s in ("federal_fmi", "consolidada_fmi"):
         v = pd.read_csv(T / f"fase25_{s}_resumen.csv", index_col=0)["valor"]
-        L.append(f"- {s}: P2031 {n(100 * v['p_noest_2031'])}%, P2035 {n(100 * v['p_noest_2035'])}%, ancho {n(v['ancho_p5_p95_2031'])}.")
+        L.append(f"- {s}: P2031 {n(100 * v['p_noest_2031'])}%, P2035 {n(100 * v['p_noest_2035'])}%, ancho {n(v['ancho_p5_p95_2031'])}; definición operativa del FMI: P2031 {n(100 * v['p_noest_fmi_2031'])}%, P2035 {n(100 * v['p_noest_fmi_2035'])}%.")
     dgn = pd.read_csv(T / "fase25b_diagnostico_abanico_fmi.csv")
     L.append("- Diagnóstico (P2031, P2035, ancho): " + "; ".join(f"{a}: {n(100 * b_)}, {n(100 * c_)}, {n(d_)}" for a, b_, c_, d_ in dgn.values))
 
@@ -150,7 +170,7 @@ def main() -> None:
     L.append(f"- Impulsores {imp.index.min()}-{imp.index.max()}: depreciación real media {n(imp.z.mean())}% (sin 2002: {n(sin02.z.mean())}%); "
              f"años con depreciación sobre la media {n(100 * ((imp.z - imp.z.mean()) > 0).mean(), 0)}% (sin 2002: {n(100 * ((sin02.z - sin02.z.mean()) > 0).mean(), 0)}%); "
              f"correlación crecimiento-depreciación {n(imp.corr().loc['g', 'z'], 2)}, crecimiento-resultado primario {n(imp.corr().loc['g', 'pb'], 2)}.")
-    L.append("\n## Robustez: rango entre especificaciones del SVARX (ver Apéndice A.9)")
+    L.append("\n## Robustez: rango entre especificaciones del SVARX (ver Apéndice A.10)")
     vals = {}
     for f_ in T.glob("fase25_*_resumen.csv"):
         s = f_.stem[7:-8]
@@ -158,7 +178,7 @@ def main() -> None:
             continue
         rr = pd.read_csv(f_, index_col=0)
         vals[s] = rr
-    for k in ("base_p_noest_2031", "base_p_noest_2035"):
+    for k in ("base_p_noest_2031", "base_p_noest_2035", "base_p_noest_fmi_2031", "base_p_noest_fmi_2035"):
         lo = min((v.loc[k, "p05"], s) for s, v in vals.items())
         e = sorted((v.loc[k, "estimacion"], s) for s, v in vals.items())
         L.append(f"- {k}: estimaciones entre {n(100 * e[0][0])} ({e[0][1]}) y {n(100 * e[-1][0])} ({e[-1][1]}); menor límite inferior {n(100 * lo[0])} ({lo[1]}).")
@@ -166,6 +186,10 @@ def main() -> None:
     k = "h1a_nofiscal_menos_fiscal"
     lo = min((v.loc[k, "p05"], s) for s, v in vals.items())
     L.append(f"- {k}: menor límite inferior {n(lo[0])} ({lo[1]}); todas las especificaciones excluyen el cero: {all(v.loc[k, 'p05'] > 0 for v in vals.values())}.")
+    for k in ("base_p_noest_fmi_2031", "base_p_noest_fmi_2035"):
+        sobre = sorted(s for s, v in vals.items() if v.loc[k, "p05"] > 0.01 + (0.02 if k.endswith("2035") else 0))
+        L.append(f"- {k}: límite inferior por encima de la cifra del FMI (1% en 2031, 3% en 2035) en {len(sobre)} de {len(vals)}: {', '.join(sobre) if sobre else 'ninguna'}.")
+        L.append(f"  Estimaciones por especificación: " + "; ".join(f"{s_} {n(100 * v.loc[k, 'estimacion'])} [{n(100 * v.loc[k, 'p05'])}; {n(100 * v.loc[k, 'p95'])}]" for s_, v in sorted(vals.items())))
     for k in ("dif_fed_2022_2025_p_noest_2035", "dif_fed_2022_2025_d2035", "dif_fed_1de_p_noest_2035", "dif_fed_1de_d2035"):
         no = sorted(s for s, v in vals.items() if v.loc[k, "p05"] <= 0 <= v.loc[k, "p95"])
         L.append(f"- {k}: incluyen el cero en {len(no)} de {len(vals)}: {', '.join(no) if no else 'ninguna'}.")

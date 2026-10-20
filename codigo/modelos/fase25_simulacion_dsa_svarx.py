@@ -35,6 +35,14 @@ Arquitectura (Celasun, Debrun y Ostry, 2006; FMI, 2021, parr. 52):
      del escenario base es menor que el que estabiliza la deuda en T,
         pb*_T = d_{T-1} (M_T - 1) + sf_T + ri_T.
      Se mide en T = 2031 (t+5 del informe del FMI) y T = 2035 (abanico de diez anios del FMI).
+     Definicion operativa del FMI (Guia del SRDSF, FMI, 2022, seccion VI y recuadro 3): el resultado
+     primario que estabiliza la deuda se calcula con los impulsores del escenario en el anio final
+     mas el shock promedio de la trayectoria (2026..T), sin variacion del tipo de cambio real y sin
+     ajuste stock-flujo:  pb*_T = d_{T-1} (Mbar_T - 1) + ri_T,
+        Mbar_T = (1 + i_T + (1-a) xbar) / ((1 + pi_T)(1 + g_T + gbar)).
+     Se informa como no_est_fmi_T (medida de comparacion directa con el FMI). Como sensibilidad,
+     no_est_fmi_prom_T aplica la lectura literal del recuadro 3: todas las variables, escenario base
+     incluido, promediadas a lo largo de la trayectoria, frente al resultado primario base promedio.
 
 Inferencia:
   - Estimacion central: parametros de minimos cuadrados, 20.000 trayectorias; se informa el
@@ -235,6 +243,10 @@ def simular(par: dict, shocks: np.ndarray, ext: np.ndarray, fed_path: np.ndarray
     prom_ant = np.zeros(N)    # promedio anual del desvio del nivel del anio anterior
     niveles: list[np.ndarray] = []
     out: dict[str, np.ndarray] = {}
+    suma_g = np.zeros(N)      # suma de los desvios anuales del crecimiento (metrica operativa del FMI)
+    suma_x = np.zeros(N)      # suma de los desvios anuales de la tasa en dolares
+    suma_xp = np.zeros(N)     # idem tasa en pesos (canal domestico)
+    suma_pb = np.zeros(N)     # suma de los desvios anuales del resultado primario
     for t in range(TRIM):
         v_dev = phi_v * v_dev + ext[:, t, 0]
         f_nuevo = phi_f * f_dev + ext[:, t, 1]
@@ -251,15 +263,20 @@ def simular(par: dict, shocks: np.ndarray, ext: np.ndarray, fed_path: np.ndarray
         yy = y[:, p + t - 3: p + t + 1]
         fila = esc.iloc[a - 1]
         prom = np.mean(niveles[-4:], axis=0)
-        g = fila.g / 100 + (prom - prom_ant) / 100
+        g_dev = (prom - prom_ant) / 100
+        g = fila.g / 100 + g_dev
+        suma_g = suma_g + g_dev
         prom_ant = prom
         pb_base = fila.pb + dpb
         pb = pb_base + yy[:, :, 0].mean(axis=1)
+        suma_pb = suma_pb + yy[:, :, 0].mean(axis=1)
         e = (yy[:, -1, 3] - y[:, p + t - 4, 3]) / tcrm0
         x = (1 - LAM) * x + LAM * (yy[:, :, 2].mean(axis=1) / 1e4 + (f_dev + fed_esc[t]) / 1e2)
         if dom:
             x_pes = (1 - LAM) * x_pes + LAM * yy[:, :, 2].mean(axis=1) / 1e4
         M = (1 + fila.i / 100 + (1 - alfa) * x + alfa * x_pes) * (1 + (1 - alfa) * e) / ((1 + fila.pi / 100) * (1 + g))
+        suma_x = suma_x + x
+        suma_xp = suma_xp + x_pes
         sf, ri = flujos_escalados(fila, d[:, a - 1], alfa, a_fmi)
         sf = 0.0 * sf if sf_cero else sf
         d[:, a] = d[:, a - 1] * M - pb + sf + ri
@@ -270,6 +287,20 @@ def simular(par: dict, shocks: np.ndarray, ext: np.ndarray, fed_path: np.ndarray
             out[f"no_est_{anio}"] = pb_base < pb_estab
             out[f"no_est_sim_{anio}"] = pb < pb_estab
             out[f"sube2_{anio}"] = d[:, a] > d[:, a - 2]
+            # Definicion operativa del FMI (2022): shock promedio de la trayectoria, sin tipo de cambio
+            # real ni ajuste stock-flujo.
+            M_fmi = ((1 + fila.i / 100 + (1 - alfa) * suma_x / a + alfa * suma_xp / a)
+                     / ((1 + fila.pi / 100) * (1 + fila.g / 100 + suma_g / a)))
+            pb_estab_fmi = d[:, a - 1] * (M_fmi - 1) + ri
+            out[f"no_est_fmi_{anio}"] = pb_base < pb_estab_fmi
+            out[f"no_est_fmi_sim_{anio}"] = pb_base + suma_pb / a < pb_estab_fmi
+            # Lectura literal del recuadro 3 (FMI, 2022): todas las variables, escenario base incluido,
+            # promediadas a lo largo de la trayectoria (2026..T); se compara con el resultado primario
+            # base promedio. Sensibilidad de la definicion operativa.
+            E = esc.iloc[:a]
+            M_p = ((1 + E.i.mean() / 100 + (1 - alfa) * suma_x / a + alfa * suma_xp / a)
+                   / ((1 + E.pi.mean() / 100) * (1 + E.g.mean() / 100 + suma_g / a)))
+            out[f"no_est_fmi_prom_{anio}"] = (E.pb.mean() + dpb) < d[:, a - 1] * (M_p - 1) + ri
     out["d"] = d
     return out
 
@@ -347,6 +378,10 @@ def simular_fmi(dr: pd.DataFrame, esc: pd.DataFrame, d0: float, alfa: float, a_f
         d[:, a] = d[:, a - 1] * M - (fila.pb + s[:, a - 1, 3]) + sf + ri
         if ANIOS[a - 1] in METRICA:
             out[f"no_est_{ANIOS[a - 1]}"] = fila.pb < d[:, a - 1] * (M - 1) + sf + ri
+            g_bar = fila.g / 100 + s[:, :a, 0].mean(axis=1) / 100
+            i_bar = fila.i / 100 + s[:, :a, 1].mean(axis=1) / 100 * (1 + fila.pi / 100)
+            M_fmi = (1 + i_bar) / ((1 + fila.pi / 100) * (1 + g_bar))
+            out[f"no_est_fmi_{ANIOS[a - 1]}"] = fila.pb < d[:, a - 1] * (M_fmi - 1) + ri
     out["d"] = d
     return out
 
@@ -489,6 +524,10 @@ def medidas(par: dict, shocks: np.ndarray, ext: np.ndarray, fed: dict[str, np.nd
     for T in METRICA:
         f[f"base_p_noest_sim_{T}"] = float(b[f"no_est_sim_{T}"].mean())
         f[f"base_p_sube2_{T}"] = float(b[f"sube2_{T}"].mean())
+        for nom, s_ in sims.items():
+            f[f"{nom}_p_noest_fmi_{T}"] = float(s_[f"no_est_fmi_{T}"].mean())
+        f[f"base_p_noest_fmi_sim_{T}"] = float(b[f"no_est_fmi_sim_{T}"].mean())
+        f[f"base_p_noest_fmi_prom_{T}"] = float(b[f"no_est_fmi_prom_{T}"].mean())
     i31 = ANIOS.index(2031) + 1
     f["base_ancho_p5_p95_2031"] = float(np.subtract(*np.percentile(b["d"][:, i31], [95, 5])))
     f["base_d2031_mediana"] = float(np.median(b["d"][:, i31]))
@@ -496,6 +535,7 @@ def medidas(par: dict, shocks: np.ndarray, ext: np.ndarray, fed: dict[str, np.nd
         if nom != "base":
             for T in METRICA:
                 f[f"dif_{nom}_p_noest_{T}"] = f[f"{nom}_p_noest_{T}"] - f[f"base_p_noest_{T}"]
+                f[f"dif_{nom}_p_noest_fmi_{T}"] = f[f"{nom}_p_noest_fmi_{T}"] - f[f"base_p_noest_fmi_{T}"]
             f[f"dif_{nom}_d2035"] = f[f"{nom}_d2035_media"] - f["base_d2035_media"]
     # Varianza de la deuda en 2035 por bloque: cada bloque simulado solo (el externo agrupa las
     # innovaciones del VIX y de la tasa de la FED).
@@ -522,6 +562,7 @@ def medidas(par: dict, shocks: np.ndarray, ext: np.ndarray, fed: dict[str, np.nd
                           sf_cero=sf_cero)["d"][:, -1].var())
     f["vshare_externo_vix"], f["vshare_externo_fed"] = 100 * v_vix / tot, 100 * v_fed / tot
     f["vshare_externo_fed_directo"] = 100 * v_dir / tot
+    f["vshare_externo_fed_indirecto"] = 100 * (v_fed - v_dir) / tot
     f["var_total_2035"] = float(b["d"][:, -1].var())
     f["var_suma_bloques_2035"] = tot
     f["h1a_nofiscal_menos_fiscal"] = 100 - 2 * f["vshare_fiscal"]
@@ -624,6 +665,7 @@ def main() -> None:
         s = simular_fmi(dr, esc, d0, alfa, a_fmi, a.N_central, rng_c)
         i31 = ANIOS.index(2031) + 1
         out = pd.Series({**{f"p_noest_{T}": s[f"no_est_{T}"].mean() for T in METRICA},
+                         **{f"p_noest_fmi_{T}": s[f"no_est_fmi_{T}"].mean() for T in METRICA},
                          "d2035_media": s["d"][:, -1].mean(),
                          "ancho_p5_p95_2031": np.subtract(*np.percentile(s["d"][:, i31], [95, 5]))})
         pct = np.percentile(s["d"], [5, 10, 25, 50, 75, 90, 95], axis=0)
@@ -684,7 +726,9 @@ def main() -> None:
                         dpb=dpb, sf_cero=a.sf_cero)
             filas.append({"dpb": dpb, "pb_2026": float(esc.loc[2026, "pb"] + dpb),
                           "pb_2031": float(esc.loc[2031, "pb"] + dpb),
-                          "p_noest_2031": float(s["no_est_2031"].mean()), "p_noest_2035": float(s["no_est_2035"].mean())})
+                          "p_noest_2031": float(s["no_est_2031"].mean()), "p_noest_2035": float(s["no_est_2035"].mean()),
+                          "p_noest_fmi_2031": float(s["no_est_fmi_2031"].mean()),
+                          "p_noest_fmi_2035": float(s["no_est_fmi_2035"].mean())})
         pd.DataFrame(filas).to_csv(TABLAS / f"fase25_{suf}_suficiencia.csv", index=False)
 
     filas = []

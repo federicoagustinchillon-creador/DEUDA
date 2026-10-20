@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper,oneside]{report}
 % Fuentes: ver la carga de fontspec mas abajo (se compila con XeLaTeX).
 \usepackage[spanish]{babel}
+\AtBeginDocument{\spanishplainpercent} % "(% del PIB" sin espacio despues del parentesis
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -46,6 +47,9 @@
   {\normalfont\bfseries\centering}{\chaptertitlename\ \thechapter}{12pt}{\Large}
 
 \usepackage{hyperref}
+\hypersetup{hidelinks} % enlaces sin recuadros de color
+\makeatletter\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.8em}}\makeatother % deja lugar para A.10 en el indice
+\usepackage{needspace} % titulos de tabla junto a su tabla
 \usepackage[nohyperlinks]{acronym}
 
 % Las citas van en el texto en formato autor-anio (APA) y la lista de referencias se genera

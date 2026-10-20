@@ -216,7 +216,10 @@ def fig6_5() -> None:
     pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib_sin_rentas"]
     maximo = float(pb[pb.index.quarter == 4].loc["1996":].max())  # anio calendario, sin rentas de la propiedad
     fig, ax = plt.subplots(figsize=(6.5, 3.4))
-    ax.plot(t["pb_2031"], 100 * t["p_noest_2031"], color=AZUL, lw=1.8, marker="o", ms=3, label="Probabilidad de no estabilización en 2031")
+    ax.plot(t["pb_2031"], 100 * t["p_noest_2031"], color=AZUL, lw=1.8, marker="o", ms=3, label="No estabilización en 2031, métrica anual")
+    if "p_noest_fmi_2031" in t:
+        ax.plot(t["pb_2031"], 100 * t["p_noest_fmi_2031"], color=GRIS, lw=1.5, ls="-.",
+                label="No estabilización en 2031, definición operativa del FMI")
     ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026): 1%")
     ax.axvline(maximo, color=GRIS, lw=1.0, ls=":", label=f"Máximo anual 1996-2025: {maximo:.1f}%".replace(".", ","))
     ax.axvline(float(t["pb_2031"].iloc[0]), color=AZUL, lw=0.8, ls=":", label="Escenario base del FMI")

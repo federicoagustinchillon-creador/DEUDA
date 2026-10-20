@@ -132,7 +132,12 @@ def seccion_empalmes() -> str:
             "dólares. El TCRM de 1996 se encadena hacia atrás con las variaciones del tipo de cambio real efectivo del BIS. La "
             "Figura A.1 compara las series observadas con las reconstruidas.\n\n"
             + tabla(d) + "\nFuente: elaboración propia con datos del BCRA, J.P. Morgan (serie diaria publicada por Ámbito "
-            "Financiero), Reserva Federal y BIS.\n\n"
+            "Financiero), Reserva Federal y BIS. La correlación y el R² del EMBI son de niveles trimestrales, entre el EMBI y el "
+            "diferencial; los del TCRM son de variaciones trimestrales, entre el índice del BCRA y el del BIS, porque el "
+            "empalme encadena variaciones.\n\n"
+            "Como la estimación empieza en 1998T2 (sección 4.5) y el modelo tiene dos rezagos, el TCRM de 1996 no entra en "
+            "el SVARX y el EMBI reconstruido solo aparece en 1997T4-1998T3. El TCRM de 1996 sí entra en la variante a la "
+            "manera del FMI, para calcular la depreciación real de 1997; el EMBI no se usa en esa variante.\n\n"
             "**Validación fuera de muestra del empalme del EMBI.** Relación estimada solo con 1998T4-2000T4 y aplicada a 2001:\n\n"
             + tabla(oos) + "\nEl empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa "
             "la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los "
@@ -185,6 +190,14 @@ def seccion_propiedades() -> str:
             + tabla(j.reset_index(drop=True)) + "\n" + seccion_presidenciales())
 
 
+PRESIDENTES = {"De_la_Rua": "De la Rúa", "Duhalde": "Duhalde", "N_Kirchner": "N. Kirchner", "CF_Kirchner": "C. Fernández de Kirchner",
+           "Macri": "Macri", "A_Fernandez": "A. Fernández", "Milei": "Milei", "Menem": "Menem"}
+
+
+def presidente(c: str) -> str:
+    return PRESIDENTES.get(c, c.replace("_", " "))
+
+
 def seccion_presidenciales() -> str:
     """Significancia conjunta de las binarias presidenciales y mapa de quiebres y gobiernos."""
     w = pd.read_csv(TABLAS / "fase24_federal_wald_presidenciales.csv")
@@ -193,8 +206,8 @@ def seccion_presidenciales() -> str:
         "crec", "crecimiento"), "Estadístico": w["estadistico"].map(lambda v: num(v, 2)), "Grados de libertad": w["gl"],
         "p-valor": w["p_valor"].map(pval)})
     q = pd.read_csv(TABLAS / "fase24_federal_quiebres_y_gobiernos.csv")
-    q = pd.DataFrame({"Quiebre": q["quiebre"], "Gobierno en funciones": q["gobierno_en_funciones"].str.replace("_", " "),
-                      "Inicio de gobierno más cercano": q["inicio_de_gobierno_mas_cercano"].str.replace("_", " "),
+    q = pd.DataFrame({"Quiebre": q["quiebre"], "Gobierno en funciones": q["gobierno_en_funciones"].map(presidente),
+                      "Inicio de gobierno más cercano": q["inicio_de_gobierno_mas_cercano"].map(presidente),
                       "Distancia (trimestres)": q["distancia_trimestres"], "Tratamiento": q["tratamiento"]})
     return ("**Binarias presidenciales.** Significancia conjunta de las siete binarias por mandato (Menem es la referencia): "
             "prueba de Wald (estadístico F) en cada ecuación y razón de verosimilitud del sistema con la corrección de Sims "
@@ -287,7 +300,7 @@ def seccion_fiscal() -> str:
         elif k.startswith("dFED_l"):
             nom = f"Variación de la tasa de la FED, rezago {k[-1]}"
         elif k.startswith("P_"):
-            nom = "Binaria presidencial: " + k[2:].replace("_", " ")
+            nom = "Binaria presidencial: " + presidente(k[2:])
         else:
             nom = {"deuda_l1": "Deuda federal bruta, rezago 1 (reacción fiscal de impacto)", "VIX": "VIX"}[k]
         filas.append([nom, num(par[k], 4), num(se[k], 4), pval(pv[k])])
@@ -306,9 +319,14 @@ def seccion_fiscal() -> str:
 
 def seccion_principal() -> str:
     t = pd.read_csv(TABLAS / "fase25_federal_resumen.csv", index_col=0)
-    ind = {"base_p_noest_2031": ("No estabilización 2031 (%)", 100), "base_p_noest_2035": ("No estabilización 2035 (%)", 100),
-           "base_p_noest_sim_2031": ("No estabilización 2031 con el resultado primario simulado (%)", 100),
+    ind = {"base_p_noest_2031": ("No estabilización 2031, métrica anual (%)", 100), "base_p_noest_2035": ("No estabilización 2035, métrica anual (%)", 100),
+           "base_p_noest_sim_2031": ("No estabilización 2031, métrica anual con el resultado primario simulado (%)", 100),
            "base_p_sube2_2031": ("Probabilidad de que la deuda de 2031 supere a la de 2029 (%)", 100),
+           "base_p_noest_fmi_2031": ("No estabilización 2031, definición operativa del FMI (%)", 100),
+           "base_p_noest_fmi_2035": ("No estabilización 2035, definición operativa del FMI (%)", 100),
+           "base_p_noest_fmi_sim_2031": ("No estabilización 2031, definición operativa del FMI, resultado primario simulado (%)", 100),
+           "base_p_noest_fmi_prom_2031": ("No estabilización 2031, lectura literal del recuadro 3 del FMI (%)", 100),
+           "base_p_noest_fmi_prom_2035": ("No estabilización 2035, lectura literal del recuadro 3 del FMI (%)", 100),
            "base_d2031_mediana": ("Deuda mediana 2031 (% del PIB)", 1), "base_d2035_media": ("Deuda media 2035 (% del PIB)", 1),
            "base_ancho_p5_p95_2031": ("Ancho del abanico 2031 (p5-p95)", 1),
            "vshare_fiscal": ("Varianza 2035: fiscal (%)", 1), "vshare_actividad": ("Varianza 2035: actividad (%)", 1),
@@ -317,6 +335,7 @@ def seccion_principal() -> str:
            "vshare_externo_vix": ("Varianza 2035: solo VIX, mismo denominador (%)", 1),
            "vshare_externo_fed": ("Varianza 2035: solo tasa de la FED (%)", 1),
            "vshare_externo_fed_directo": ("Varianza 2035: tasa de la FED, solo efecto directo en la identidad (%)", 1),
+           "vshare_externo_fed_indirecto": ("Varianza 2035: tasa de la FED, efecto indirecto (diferencia) (%)", 1),
            "var_total_2035": ("Varianza total de la deuda 2035 (puntos del PIB al cuadrado)", 1),
            "var_suma_bloques_2035": ("Suma de las varianzas de los cuatro bloques", 1),
            "h1a_nofiscal_menos_fiscal": ("No fiscal menos fiscal (puntos)", 1),
@@ -324,7 +343,8 @@ def seccion_principal() -> str:
            "dif_fed_1de_d2035": ("FED, nivel 0,50 pp más alto: diferencia en la deuda media 2035 (pp del PIB)", 1),
            "dif_fed_2022_2025_p_noest_2031": ("FED, senda 2022-2025: diferencia en la probabilidad 2031 (pp)", 100),
            "dif_fed_2022_2025_p_noest_2035": ("FED, senda 2022-2025: diferencia en la probabilidad 2035 (pp)", 100),
-           "dif_fed_2022_2025_d2035": ("FED, senda 2022-2025: diferencia en la deuda media 2035 (pp del PIB)", 1)}
+           "dif_fed_2022_2025_d2035": ("FED, senda 2022-2025: diferencia en la deuda media 2035 (pp del PIB)", 1),
+           "dif_fed_2022_2025_p_noest_fmi_2035": ("FED, senda 2022-2025: diferencia en la probabilidad 2035, definición operativa del FMI (pp)", 100)}
     filas = [[nombre, num(t.loc[k, "estimacion"] * f, 1), f"[{num(t.loc[k, 'p05'] * f, 1)}; {num(t.loc[k, 'p95'] * f, 1)}]"]
              for k, (nombre, f) in ind.items()]
     d = pd.DataFrame(filas, columns=["Medida", "Estimación central", "Intervalo de 90%"])
@@ -332,7 +352,7 @@ def seccion_principal() -> str:
     miles = lambda v: f"{v:,}".replace(",", ".")
     nota = (f"Estimación central con los parámetros de MCO y {miles(meta['N_central'])} trayectorias (error de Monte Carlo de "
             f"{num(100 * t.loc['error_mc_p_noest_2031', 'estimacion'], 1)} puntos en la probabilidad de 2031); intervalos de Hall con "
-            f"{meta['B']} réplicas de parámetros y {miles(meta['N'])} trayectorias cada una. Autovalor máximo del VAR: "
+            f"{miles(meta['B'])} réplicas de parámetros y {miles(meta['N'])} trayectorias cada una. Autovalor máximo del VAR: "
             f"{num(meta['raiz_max_estimada'], 3)}.")
     return "## A.9 Resultados completos de la especificación principal\n\n" + nota + "\n\n" + tabla(d) + "\n"
 
@@ -348,20 +368,20 @@ def seccion_robustez() -> str:
         # Trayectorias explosivas: la media de la deuda (y las varianzas) de una replica quedan dominadas por unas pocas.
         rep = pd.read_csv(TABLAS / f"fase25_{s}_replicas.csv")
         expl = float((rep["base_d2035_media"].abs() > 1000).mean())
-        d_fed = "no se informa" if expl > 0.01 else iv("dif_fed_2022_2025_d2035", 1)
+        d_fed = "no se informa" if expl > 0.01 else iv("dif_fed_2022_2025_d2035", 1, 2)
         h1a = "no se informa" if expl > 0.10 else iv("h1a_nofiscal_menos_fiscal", 1)
-        filas.append([nombre, iv("base_p_noest_2031"), iv("base_p_noest_2035"), num(t.loc["base_ancho_p5_p95_2031", "estimacion"], 1),
-                      h1a, iv("dif_fed_2022_2025_p_noest_2035"), d_fed])
+        filas.append([nombre, iv("base_p_noest_2031"), iv("base_p_noest_2035"), iv("base_p_noest_fmi_2031"), iv("base_p_noest_fmi_2035"),
+                      num(t.loc["base_ancho_p5_p95_2031", "estimacion"], 1), h1a, iv("dif_fed_2022_2025_p_noest_2035"), d_fed])
     for s, nombre in (("federal_fmi", "*Shocks* a la manera del FMI, deuda federal bruta"),
                       ("consolidada_fmi", "*Shocks* a la manera del FMI, deuda consolidada")):
         v = pd.read_csv(TABLAS / f"fase25_{s}_resumen.csv", index_col=0)["valor"]
-        filas.append([nombre, num(100 * v["p_noest_2031"], 1), num(100 * v["p_noest_2035"], 1),
+        filas.append([nombre, num(100 * v["p_noest_2031"], 1), num(100 * v["p_noest_2035"], 1), num(100 * v["p_noest_fmi_2031"], 1), num(100 * v["p_noest_fmi_2035"], 1),
                       num(v["ancho_p5_p95_2031"], 1), "no aplica", "no aplica", "no aplica"])
-    filas.append(["FMI (2026), deuda federal bruta", "1,0", "menos de 3", "71,5", "no aplica", "no aplica", "no aplica"])
-    d = pd.DataFrame(filas, columns=["Especificación", "No estabilización 2031 (%)", "No estabilización 2035 (%)",
-                                     "Ancho 2031", "No fiscal menos fiscal (puntos)", "Senda de la FED: probabilidad 2035 (pp)",
+    filas.append(["FMI (2026), deuda federal bruta", "1,0", "menos de 3", "1,0", "menos de 3", "71,5", "no aplica", "no aplica", "no aplica"])
+    d = pd.DataFrame(filas, columns=["Especificación", "No estabilización 2031, métrica anual (%)", "No estabilización 2035, métrica anual (%)",
+                                     "No estabilización 2031, definición operativa del FMI (%)", "No estabilización 2035, definición operativa del FMI (%)", "Ancho 2031", "No fiscal menos fiscal (puntos)", "Senda de la FED: probabilidad 2035 (pp)",
                                      "Senda de la FED: deuda 2035 (pp)"])
-    return ("## A.10 Robustez completa\n\nEntre corchetes, intervalos de 90%: de Hall, salvo las participaciones y varianzas y la diferencia entre *shocks* no fiscales y fiscal, que usan percentiles simples de las réplicas. «No se informa»: más de 1% de las réplicas (10% en la columna del reparto de la varianza) tiene trayectorias explosivas que dominan la media de la deuda. Todas las especificaciones usan los mismos "
+    return ("## A.10 Robustez completa\n\nEntre corchetes, intervalos de 90%: de Hall, salvo las participaciones y varianzas y la diferencia entre *shocks* no fiscales y fiscal, que usan percentiles simples de las réplicas. Las columnas de la definición operativa del FMI usan la reconstrucción de la sección 4.6: los impulsores del escenario en el año final más el *shock* promedio de cada trayectoria, sin variación del tipo de cambio real ni ajuste *stock*-flujo (FMI, 2022, recuadro 3). La columna de la deuda de la senda de la FED se muestra con dos decimales para distinguir los intervalos que tocan el cero. «No se informa»: más de 1% de las réplicas (10% en la columna del reparto de la varianza) tiene trayectorias explosivas que dominan la media de la deuda. Todas las especificaciones usan los mismos "
             "números aleatorios, de modo que las diferencias entre filas no provienen del sorteo. Las filas a la manera del FMI "
             "no tienen intervalo porque ese procedimiento no estima parámetros. Fuente de la última fila: FMI (2026, anexo II, "
             "cuadro 7 y párrafo 9).\n\n" + tabla(d) + "\n")
