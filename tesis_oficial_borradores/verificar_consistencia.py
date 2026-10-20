@@ -42,7 +42,11 @@ PERMITIDO_PERIODO = re.compile(r"desde 1999|datos desde 2004|desde 2004")
 
 def numeros_validos() -> set[str]:
     t = "".join((BASE / f).read_text(encoding="utf-8") for f in ("_hoja_de_numeros.md", "apendice.md", "_decisiones_finales.md"))
-    return set(re.findall(r"-?\d+,\d+", t))
+    nums = set(re.findall(r"-?\d+,\d+", t))
+    # Las columnas con dos decimales del Apéndice se citan en el texto redondeadas a uno.
+    for x in [x for x in nums if len(x.split(",")[1]) == 2]:
+        nums.add(f"{float(x.replace(',', '.')):.1f}".replace(".", ","))
+    return nums
 
 
 def main() -> None:

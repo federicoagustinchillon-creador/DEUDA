@@ -1,21 +1,20 @@
 \chapter{Datos}
 
-Las series son trimestrales y cubren 1996-2025. Los primeros trimestres
-de la ventana se usan como condiciones iniciales de los rezagos (la
-variación de la tasa de la FED entra con dos rezagos y los órdenes de
-hasta seis rezagos se comparan sobre una muestra común; Lütkepohl, 2005,
-sec.~4.3), de modo que las ecuaciones se estiman con los trimestres
-1998T2-2025T4 (111 observaciones; sección 4.5). Las fuentes,
-secundarias, son el Ministerio de Economía de la Nación (MECON), el
-BCRA, el Instituto Nacional de Estadística y Censos (INDEC), la Reserva
-Federal, J.P. Morgan y el Banco de Pagos Internacionales. Dos series no
-tienen dato publicado en toda la ventana, el EMBI antes de diciembre de
-1998 y el TCRM en 1996, y se completan con empalmes validados (sección
-5.4). Los estadísticos descriptivos están en el Apéndice, sección A.1.
+Las series son trimestrales y cubren 1996-2025. Las ecuaciones se
+estiman con los trimestres 1998T2-2025T4 (111 observaciones; sección
+4.5), porque la deuda federal bruta trimestral del MECON empieza en
+1998T1 y entra rezagada; los trimestres anteriores sirven como
+condiciones iniciales de los demás rezagos. Las fuentes, secundarias,
+son el Ministerio de Economía de la Nación (MECON), el BCRA, el
+Instituto Nacional de Estadística y Censos (INDEC), la Reserva Federal,
+J.P. Morgan y el Banco de Pagos Internacionales. Dos series no tienen
+dato publicado en toda la ventana, el EMBI antes de diciembre de 1998 y
+el TCRM en 1996, y se completan con empalmes validados (sección 5.4).
+Los estadísticos descriptivos están en el Apéndice, sección A.1.
 
 \section{Series y fuentes}
 
-\addcontentsline{lot}{table}{Tabla 5.1. Series del modelo: rol, fuente y construcción}\textbf{Tabla 5.1. Series del modelo: rol, fuente y construcción}
+\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 5.1. Series del modelo: rol, fuente y construcción}\textbf{Tabla 5.1. Series del modelo: rol, fuente y construcción}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
@@ -96,14 +95,15 @@ La deuda consolidada con el BCRA, de la extensión, sigue la
 consolidación del FMI (2021, anexo II). Se construye para 1996-2025,
 pero la extensión se estima desde 2002: hasta 2001 el BCRA operó con la
 autonomía formal de la Carta Orgánica de 1992 y bajo la Convertibilidad,
-sin financiar al Tesoro, y el criterio del FMI para consolidar al banco
-central con el gobierno es precisamente que lo financie o realice
-actividades cuasifiscales (sección 2.9). Antes de 2002 la consolidación
-no tiene fundamento en ese criterio. Por eso la extensión usa una
-muestra más corta que la especificación principal (sección 7.6). Aunque
-la serie se llama deuda consolidada con el BCRA, solo consolida al
-Tesoro con el BCRA y no descuenta la deuda del Tesoro en poder del FGS,
-de modo que no equivale a la deuda consolidada del FMI (sección 5.6):
+con límites estrictos a la asistencia al Tesoro, y el criterio del FMI
+para consolidar al banco central con el gobierno es precisamente que lo
+financie o realice actividades cuasifiscales (sección 2.9). Antes de
+2002 la consolidación no tiene fundamento en ese criterio. Por eso la
+extensión usa una muestra más corta que la especificación principal
+(sección 7.6). Aunque la serie se llama deuda consolidada con el BCRA,
+solo consolida al Tesoro con el BCRA y no descuenta la deuda del Tesoro
+en poder del FGS, de modo que no equivale a la deuda consolidada del FMI
+(sección 5.6):
 
 D = B − T + L − DEP
 
@@ -186,15 +186,17 @@ publica el Banco de Pagos Internacionales (Bank for International
 Settlements {[}BIS{]}, s. f.), invertido porque ese índice sube cuando
 el peso se aprecia. Las variaciones trimestrales de los dos índices
 tienen una correlación de 0,92 entre 1997 y 2025 y de 0,98 en 1997-2001.
-Con dos rezagos, los valores de 1996 intervienen solo como condiciones
-iniciales.
+Con dos rezagos, los valores de 1996 no entran en la estimación, que
+empieza en 1998T2; los usa la variante a la manera del FMI, cuyos
+impulsores anuales empiezan en 1997.
 
 \textbf{Los resultados no dependen de los empalmes.} Con datos desde
 1999, que solo usan el EMBI observado, la probabilidad de no
-estabilización de la deuda federal bruta en 2031 es de 29,5\% {[}22,5;
-36,7{]}, contra 27,7\% {[}20,6; 34,7{]} con la ventana completa, y las
-conclusiones sobre H1a y sobre el efecto de la FED en la probabilidad no
-cambian (Apéndice, sección A.10).
+estabilización de la deuda federal bruta en 2031, con la métrica anual,
+es de 29,5\% {[}22,5; 36,7{]}, contra 27,7\% {[}20,6; 34,7{]} con la
+ventana completa, y las conclusiones sobre la condición (i) de H1a y
+sobre el efecto de la FED en la probabilidad no cambian (Apéndice,
+sección A.10).
 
 La tasa de la FED es la de fondos federales, salvo en los trimestres en
 el límite cero (2009-2015 y 2020-2021), donde la tasa efectiva deja de
@@ -234,7 +236,7 @@ descargados de Yahoo Finance.}
 
 \section{Contraste con el FMI}
 
-\addcontentsline{lot}{table}{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB, diciembre)}\textbf{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB,
+\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB, diciembre)}\textbf{Tabla 5.2. Deuda pública: esta tesis y FMI (\% del PIB,
 diciembre)}
 
 \begin{longtable}[]{@{}

@@ -77,7 +77,7 @@ def _epigrafe_corto(tex: str) -> str:
             nivel += {"{": 1, "}": -1}.get(tex[j], 0)
             j += 1
         cuerpo = tex[k + len("\\caption{"): j - 1]
-        corto = re.split(r"(?<=[A-Za-záéíóú0-9)])\.\s+", cuerpo, maxsplit=1)[0].rstrip(".")
+        corto = re.split(r"(?<=[A-Za-záéíóú0-9)}])\.\s+", cuerpo, maxsplit=1)[0].rstrip(".")
         corto = re.sub(r"\s+", " ", corto)
         salida.append(tex[i:k] + f"\\caption[{corto}]{{{cuerpo}}}")
         i = j
@@ -94,7 +94,8 @@ def _indice_tablas(tex: str) -> str:
             nivel += {"{": 1, "}": -1}.get(tex[j], 0)
             j += 1
         titulo = re.sub(r"\s+", " ", tex[k + len("\\textbf{"): j - 1]).strip()
-        salida.append(tex[i:k] + f"\\addcontentsline{{lot}}{{table}}{{{titulo}}}" + tex[k:j])
+        # \needspace evita que el titulo quede al pie de una pagina y la tabla en la siguiente
+        salida.append(tex[i:k] + f"\\needspace{{8\\baselineskip}}\\addcontentsline{{lot}}{{table}}{{{titulo}}}" + tex[k:j])
         i = j
     return "".join(salida) + tex[i:]
 
