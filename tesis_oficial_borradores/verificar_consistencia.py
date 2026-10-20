@@ -57,7 +57,7 @@ def main() -> None:
         if f == "introduccion.md":
             texto = texto[: texto.index("## Referencias\n")]
         if f == "plan_de_labor.md":
-            texto = texto[: texto.index("# 5. Referencias")]
+            texto = texto[: texto.index("# Referencias")]
         for n, linea in enumerate(texto.splitlines(), start=1):
             for patron, motivo in REGLAS:
                 for m in re.finditer(patron, linea):
