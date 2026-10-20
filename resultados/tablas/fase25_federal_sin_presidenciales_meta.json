@@ -3,7 +3,7 @@
  "delta_central": 1.0,
  "raiz_max_estimada": 0.8986680569564703,
  "raiz_max_central": 0.8986680569564703,
- "raiz_max_mediana_replicas": 0.8439562090557233,
+ "raiz_max_mediana_replicas": 0.8439562090557056,
  "replicas_fallidas_o_inestables": 2,
  "escenario": "cr26105",
  "deuda": "federal",
