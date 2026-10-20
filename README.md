@@ -1,223 +1,116 @@
-# Sostenibilidad de la Deuda Pública Consolidada en Argentina (2004–2023)
+# Probabilidad de no estabilización de la deuda pública argentina, 2026-2035
+
+Un modelo SVARX con determinantes macroeconómicos y política monetaria de Estados Unidos.
+
+Tesis Final de Grado, Facultad de Ciencias Económicas, Universidad Nacional de Cuyo (Mendoza, 2026).
+Autores: Santiago Páez, Federico Chillón y Emiliano Carricondo. Director: Pablo Mahnic.
 
 [![Licencia](https://img.shields.io/badge/Licencia-CC--BY--4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![LaTeX](https://img.shields.io/badge/LaTeX-MiKTeX%20%7C%20TeXLive-green.svg)](https://www.tug.org/texlive/)
-[![Estado](https://img.shields.io/badge/Auditor%C3%ADa-Aprobada-success.svg)](#)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
 
-Investigación econométrica y tesis de grado orientada a determinar la sostenibilidad de la deuda pública consolidada argentina integrando los pasivos remunerados del Banco Central (LELIQ/Pases), estimación VECM multivariada, modelos no lineales de umbral (Hansen) y simulación estocástica DSA.
+## 0. Qué mirar primero
 
-## 📌 Metodología Econométrica
+| Si querés... | Andá a |
+|---|---|
+| Leer la tesis | [`tesis/Tesis.pdf`](tesis/Tesis.pdf) |
+| Comentar el texto en Word | [`tesis_oficial_borradores/para_el_grupo/Tesis_borrador.docx`](tesis_oficial_borradores/para_el_grupo/Tesis_borrador.docx) |
+| Editar un capítulo | [`tesis_oficial_borradores/`](tesis_oficial_borradores/): un `.md` por capítulo (`resumen`, `introduccion`, `antecedentes`, `marco_teorico`, `metodologia`, `datos`, `resultados`, `discusion`, `conclusiones`, `apendice`). El LaTeX de `tesis/capitulos/` se genera desde ahí, no se edita a mano |
+| Saber de dónde sale un número | [`tesis_oficial_borradores/_hoja_de_numeros.md`](tesis_oficial_borradores/_hoja_de_numeros.md), generada por `codigo/modelos/hoja_de_numeros.py` a partir de `resultados/tablas/` |
+| Ver qué se decidió y por qué | [`tesis_oficial_borradores/_decisiones_finales.md`](tesis_oficial_borradores/_decisiones_finales.md) (decisiones D1 a D16) y [`revision_critica.md`](tesis_oficial_borradores/revision_critica.md) |
+| Replicar las cifras | [`codigo/GUIA_DE_EJECUCION.md`](codigo/GUIA_DE_EJECUCION.md) |
+| Documentos para el grupo y el director | [`tesis_oficial_borradores/para_el_grupo/`](tesis_oficial_borradores/para_el_grupo/): plan de labor, propuesta metodológica, guía de defensa, revisión crítica, seguimiento de tareas y Excel de datos y resultados |
 
-- **Consolidación del Balance Público:** Integración de la deuda del Sector Público Nacional No Financiero (SPNF) con el balance cuasifiscal del BCRA.
-- **Cointegración y Relaciones de Largo Plazo:** Estimación por Mínimos Cuadrados Ordinarios Dinámicos (DOLS) y corrección de endogeneidad por Variables Instrumentales / Mínimos Cuadrados en Dos Etapas (IV-2SLS).
-- **Quiebres Estructurales Endógenos:** Test de Bai-Perron para identificar regímenes de política fiscal y monetaria sin sesgo de selección previa.
-- **Efectos de Umbral No Lineales:** Modelos de umbral de Hansen para evaluar el ratio deuda/PBI crítico a partir del cual el costo de financiamiento se vuelve insostenible.
-## 0. Guía Rápida: qué mirar primero y en qué orden
+**Ramas.** El trabajo del grupo avanza por ramas y *pull requests*. La versión más reciente está en `revision-final-19-10`; `main` queda en la versión del 17 de octubre de 2026 hasta que el grupo fusione la revisión final. Las ramas `revision-var-vecm` y `var-restringido` guardan versiones anteriores del modelo (VECM y DOLS sobre 2004-2025) que ya no intervienen en la tesis.
 
-**¿Solo querés leer la tesis?** → [`tesis/Tesis.pdf`](tesis/Tesis.pdf). No hace falta tocar nada más.
+## 1. Pregunta y diseño
 
-**¿Querés editar el texto de un capítulo?** → [`tesis/capitulos/`](tesis/capitulos/), un `.tex` por capítulo (`00_abstract`, `01_introduccion`, ..., `09_apendice`). Después de editar, compilar según el paso 4 de la sección 3.
+La tesis estima la probabilidad de que la deuda pública argentina no se estabilice en 2026-2035 y qué parte de esa incertidumbre explican el crecimiento, el tipo de cambio real, el riesgo país, el resultado primario y la tasa de la Reserva Federal (FED).
 
-**¿Querés ver de dónde sale un número que aparece en la tesis, o recorrer el análisis estadístico paso a paso?** → **[`codigo/modelos/README.md`](codigo/modelos/README.md)** es el índice único y ordenado de las 18 fases: qué hace cada script, qué CSV produce y en qué tabla/sección de la tesis termina. Es la puerta de entrada al análisis completo.
+- **Datos.** Trimestrales, ventana 1996-2025. Las ecuaciones se estiman con 1998T2-2025T4 (111 trimestres), porque los primeros trimestres son condiciones iniciales de los rezagos. El EMBI de 1996T1-1998T3 se empalma con la tasa interbancaria en dólares del BCRA menos la tasa de fondos federales, y el TCRM de 1996 con el tipo de cambio real efectivo del BIS; la validación de ambos empalmes está en el Apéndice A.2 y la figura A.1.
+- **Modelo.** SVARX con cuatro variables endógenas: resultado primario del Sector Público Nacional sin rentas de la propiedad, crecimiento real, riesgo país (diferencial del índice EMBI de J.P. Morgan para Argentina) y tipo de cambio real multilateral (TCRM). Exógenas: variación de la tasa de la FED (tasa sombra de Wu y Xia en el límite cero), VIX, estacionales, binarias por mandato presidencial, quiebres de Bai y Perron dentro de cada mandato y la deuda rezagada, que retroalimenta el sistema.
+- **Identificación.** Restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con el bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto. Dos ordenamientos de Cholesky se informan como robustez.
+- **Simulación.** La deuda federal bruta, el perímetro del análisis de sostenibilidad del FMI, se simula alrededor del escenario base del FMI (Informe de País 26/105, mayo de 2026) desde su mismo punto de partida, 80,3% del PIB a fines de 2025. Los intervalos de 90% salen de 1.000 réplicas de un *bootstrap* de bloques móviles con percentiles de Hall. La deuda consolidada con el BCRA, estimada desde 2002, es una extensión.
+- **Métrica de no estabilización.** La definición operativa del FMI decide las hipótesis; una métrica anual, que suma la valuación de la deuda en moneda extranjera de cada año, se informa como complemento (decisión D16).
+- **Robustez.** 21 especificaciones: rezagos, elasticidades, ordenamientos de Cholesky, sin binarias presidenciales, sin quiebres, sin retroalimentación, datos desde 1999 y desde 2004, corrección de sesgo de Kilian, canal de tasas en pesos y deuda consolidada, entre otras.
 
-**¿Querés entender los datos antes que los modelos?** → **[`datos/README.md`](datos/README.md)**: explica los tres niveles (crudos → procesados → panel consolidado), por qué hay dos versiones del dataset (ventana original de 88 obs. vs. ventana ampliada de 108) y remite al [`codebook.md`](datos/codebook.md) para el detalle de cada variable.
+## 2. Resultados principales
 
-**¿Querés re-correr todo el pipeline desde cero?** → [`codigo/README.md`](codigo/README.md) explica el orden de las tres subcarpetas (`ingesta_datos/` → `modelos/` → `graficos/`); Sección 3 de este README tiene los comandos exactos.
+Cifras de la especificación principal, con intervalos de 90% entre corchetes. Fuente: [`_hoja_de_numeros.md`](tesis_oficial_borradores/_hoja_de_numeros.md).
 
-**¿Querés entender la bibliografía?** → [`Bibliografia/`](Bibliografia/): `marco_legal/` (leyes citadas), `descargas_verificacion/` (papers descargados con verificación de que existen y dicen lo que la tesis les atribuye), `auditorias/busqueda_literatura_refutacion/` (búsqueda activa de trabajos que contradigan los hallazgos, con veredicto).
+| Medida | 2031 | 2035 |
+|---|---|---|
+| Probabilidad de no estabilización, definición operativa del FMI | 3,1% [0,0; 6,3] | 5,1% [0,0; 10,2] |
+| Probabilidad de no estabilización, métrica anual (complemento) | 27,7% [20,6; 34,7] | 29,0% [25,0; 36,1] |
+| Cifra del FMI | cerca de 1% | menos de 3% |
 
-**¿Buscás versiones anteriores o el historial de decisiones metodológicas?** → [`historial_proyecto/`](historial_proyecto/).
+- **H1b** (la probabilidad supera la del FMI): no respaldada con la definición del FMI; los intervalos incluyen las cifras del organismo.
+- **H1a** (los *shocks* no fiscales dominan la incertidumbre): su contribución a la varianza de la deuda de 2035 supera a la del *shock* fiscal en 96,8 puntos [90,8; 99,8]; la condición de suficiencia del superávit no se cumple con la definición del FMI, de modo que H1a queda no respaldada.
+- **H2** (la tasa de la FED eleva el riesgo): repetir en 2026-2029 la senda de 2022-2025 eleva la probabilidad de 2035 en 17,1 puntos [0,6; 32,6] con la definición del FMI y en 18,4 con la métrica anual. Parcialmente respaldada: el efecto sobre la deuda esperada incluye el cero, y el 77% del aumento de la deuda es el costo directo de la deuda en dólares.
 
-**Ramas de git**: `main` conserva la versión original de la tesis (DOLS como técnica de referencia, ventana 2004-2025) como respaldo. `revision-var-vecm` es la versión vigente (VECM como técnica de referencia sobre ventana ampliada 1999-2025, DOLS como robustez) — es la que hay que mirar salvo que se busque explícitamente el original.
-
-**Carpetas que NO son parte de la tesis** (para no perder tiempo buscando ahí): `_material_cursada_NO_es_parte_de_la_tesis/` es material de la cursada (consignas de TP, no insumo de la investigación) — el prefijo `_` es a propósito, para que no se confunda con las carpetas de la investigación.
-
-**Dentro de `Bibliografia/`**: `descargas_verificacion/` tiene los PDFs de los papers efectivamente citados. `auditorias/` tiene los informes de verificación (qué se chequeó de cada cita, y la búsqueda de literatura que pudiera refutar el trabajo). `marco_legal/` tiene las leyes citadas. `material_metodologico_catedra/` es bibliografía metodológica de referencia (Marradi, plantilla de DSA).
-
-**Un solo PDF de la tesis, sin ambigüedad**: `tesis/Tesis.pdf` es el único PDF versionado del repositorio, visible apenas entrás a la carpeta `tesis/`. El código fuente LaTeX vive en `tesis/fuente/` (`Tesis.tex`, `referencias.bib`); ahí también se genera una copia de trabajo del PDF al compilar, pero esa es solo un artefacto de build (`.gitignore`), no la oficial.
-
----
-
-## 1. Resumen Ejecutivo
-
-Este proyecto evalúa empíricamente la sostenibilidad fiscal e intertemporal de la deuda pública soberana de la República Argentina, sobre dos ventanas muestrales: la original, 2004T1–2025T4 ($n=88$), y una ampliada por empalme histórico, 1999T1–2025T4 ($n=108$). Se extiende la metodología econométrica tradicional mediante tres contribuciones centrales:
-
-1. **Consolidación del Sector Público**: Integración de la deuda del Sector Público No Financiero (SPNF) con los pasivos monetarios y remunerados (LELIQ, NOTALIQ y Pases Pasivos) del Banco Central de la República Argentina (BCRA).
-2. **VECM como técnica de referencia**: Estimación de la Función de Reacción Fiscal de Bohn (1998) mediante un Modelo de Vectores con Corrección de Error (VECM) sobre la ventana ampliada, que trata la endogeneidad del sistema completo (deuda, resultado primario, riesgo soberano, tipo de cambio) de forma estructural. DOLS con corrección IV-2SLS se conserva como ejercicio de robustez sobre la ventana original.
-3. **DSA estocástico**: Análisis de Sostenibilidad de Deuda con calibración multivariada $t$-Student ($\nu \approx 4.8$, por método de momentos) y matrices de varianza-covarianza dinámica [[dcc-garch-dynamic-correlation|DCC-GARCH]].
-
-### Principales Hallazgos Empíricos
-
-- **Reacción Fiscal Débil, convergente entre técnicas**: Ni DOLS ($\rho=-0.0071$, $p=0.564$) ni el VECM sobre ninguna de las dos ventanas ($\alpha_{pb}=0.0044$, $p=0.204$ ampliada; $\alpha_{pb}=0.0014$, $p=0.559$ original) encuentran una reacción fiscal de largo plazo significativa.
-- **Umbral de fatiga fiscal mixto**: marginal en niveles (Sup-LM $p=0.076$, partición muestral desigual) y sólido en primera diferencia ($p<0.001$).
-- **Identificación instrumental robusta**: IV-2SLS con el spread soberano del ETF EMB Brasil como instrumento muestra relevancia de primera etapa ($F=13.00>10$) y no rechaza la validez de sobreidentificación (Sargan $p=0.436$).
-- **Quiebres Estructurales Múltiples**: Bai & Perron (2003) identifica quiebres en 2007T2, 2014T3 y 2018T1 (deuda SPNF) y en 2007T2 y 2016T4 (deuda consolidada).
-- **Riesgo estocástico de insolvencia**: el DSA estocástico proyecta a 2035 una probabilidad de superar el 100% del PIB del $31.2\%$ (escenario de Referencia).
-
-Para el detalle completo y las cifras exactas de cada estimación, ver [`tesis/Tesis.pdf`](tesis/Tesis.pdf) — este resumen es orientativo, no reemplaza al documento.
-
----
-
-## 2. Arquitectura del Repositorio
+## 3. Estructura del repositorio
 
 ```text
 Deuda/
-├── .agents/AGENTS.md                # Directivas de gobernanza científica para asistentes de IA
-├── Bibliografia/                    # Acervo bibliográfico y normativo completo — ver Bibliografia/README.md
-│   ├── descargas_verificacion/      # PDFs de los papers centrales y metodología de frontera
-│   ├── analisis_deuda_argentina_multienfoque/ # Acervo exhaustivo de análisis de deuda en Argentina (5 pilares)
-│   ├── auditorias/                  # Informes de verificación de citas + análisis bibliométrico y red de citas
-│   ├── marco_legal/                 # Textos oficiales de Leyes (24.144, 24.156, 25.152, 27.541, 27.612)
-│   └── material_metodologico_catedra/ # Bibliografía metodológica de referencia
-├── codigo/                          # Código fuente econométrico reproducible — ver codigo/README.md
-│   ├── ingesta_datos/               # Paso 1: extracción y consolidación de series primarias
-│   ├── modelos/                     # Paso 2: las 18 fases del análisis — ÍNDICE PRINCIPAL, ver modelos/README.md
-│   ├── graficos/                    # Paso 3: generación de figuras vectoriales para la tesis
-│   ├── codigo_completo_deuda.py     # Script único integrado de lectura secuencial
-│   └── requirements.txt             # Dependencias del entorno Python
-├── datos/                           # Data Pipeline — ver datos/README.md
-│   ├── crudos/                      # Descargas originales sin procesar
-│   ├── procesados/                  # Series intermedias por fuente, ya limpias
-│   ├── dataset_consolidado_real.csv     # Panel ventana original 2004-2025 (n=88)
-│   ├── dataset_consolidado_real_ext.csv # Panel ventana ampliada 1999-2025 (n=108) — referencia actual
-│   └── codebook.md                  # Libro de códigos y metadatos de variables
-├── historial_proyecto/              # Archivo histórico (planes, decisiones) -- NO la especificación vigente
-├── resultados/tablas/               # Salida CSV de cada fase econométrica — ver tablas/README.md
-├── tesis/                           # Manuscrito completo en LaTeX
-│   ├── Tesis.pdf                    # EL PDF PARA LEER — único entregable oficial, versionado
-│   ├── capitulos/                   # Archivos TeX por capítulo (00 a 09)
-│   ├── figuras/                     # Gráficos e imágenes institucionales
-│   └── fuente/                      # Código fuente LaTeX (Tesis.tex, referencias.bib)
-├── _material_cursada_NO_es_parte_de_la_tesis/ # Apuntes/parciales de cursada previa -- no es la tesis
-├── LICENSE                          # Licencia CC BY 4.0
-└── README.md                        # Este documento
+├── tesis/
+│   ├── Tesis.pdf                  # PDF oficial de la tesis
+│   ├── capitulos/                 # LaTeX por capítulo, generado desde tesis_oficial_borradores/
+│   ├── figuras/                   # figuras del texto
+│   └── fuente/                    # Tesis.tex y referencias
+├── tesis_oficial_borradores/      # texto fuente (.md), hoja de números, decisiones y documentos del grupo
+│   └── para_el_grupo/             # Word y Excel para el grupo y el director
+├── codigo/
+│   ├── ingesta_datos/             # construcción de las series 1996-2025 y empalmes
+│   ├── modelos/                   # fase24 (estimación), fase25 (simulación), figuras, apéndice, hoja de números
+│   └── GUIA_DE_EJECUCION.md       # cómo replicar las cifras
+├── datos/
+│   ├── dataset_consolidado_1996_2025.csv   # base trimestral del modelo
+│   ├── procesados/                # deuda, resultado primario, tasa de la FED, escenario del FMI, empalmes
+│   ├── crudos/                    # descargas originales
+│   └── codebook.md                # definición de cada variable
+├── resultados/tablas/             # salidas CSV de fase24 y fase25 por especificación
+├── tests/                         # pruebas automáticas (pytest)
+├── Bibliografia/                  # papers citados, marco legal, auditorías de citas
+└── historial_proyecto/            # versiones y planes anteriores; no es la especificación vigente
 ```
 
+Los *scripts* de `codigo/modelos/` con números de fase menores que 24 corresponden a versiones anteriores y no intervienen en las cifras de la tesis. `_material_cursada_NO_es_parte_de_la_tesis/` es material de la cursada.
 
----
-
-## 3. Guía de Reproducción Empírica
-
-### Requisitos Previos
-
-- **Python**: Versión 3.10 o superior.
-- **LaTeX**: Distribución MiKTeX (Windows) o TeX Live (Linux/macOS) con `biber`.
-
-### 1. Configuración del Entorno Virtual
+## 4. Cómo replicar
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/usuario/Deuda.git
-cd Deuda
-
-# Crear y activar entorno virtual
-python -m venv venv
-# En Windows:
-venv\Scripts\activate
-# En Linux/macOS:
-source venv/bin/activate
-
-# Instalar dependencias
 pip install -r codigo/requirements.txt
+bash codigo/modelos/correr_todo.sh
 ```
 
-### 2. Ingestión de Datos y Construcción del Panel
+`correr_todo.sh` reestima el modelo y todas las variantes de robustez, genera figuras, Apéndice, hoja de números y Excel, y corre las pruebas. Las semillas son fijas, de modo que las cifras se reproducen exactamente. Los pasos por separado y los parámetros están en [`codigo/GUIA_DE_EJECUCION.md`](codigo/GUIA_DE_EJECUCION.md).
 
-Detalle completo del orden en [`codigo/ingesta_datos/README.md`](codigo/ingesta_datos/README.md). Resumen:
+Para regenerar el texto y verificarlo:
 
 ```bash
-# Panel ventana original (2004-2025, n=88)
-python codigo/ingesta_datos/construccion_dataset.py
-
-# Panel ventana ampliada (1999-2025, n=108) -- técnica de referencia actual
-python codigo/ingesta_datos/construir_dataset_ampliado.py
+python tesis_oficial_borradores/generar_latex.py --compilar
+python tesis_oficial_borradores/verificar_consistencia.py
+python tesis_oficial_borradores/generar_docx_grupo.py
 ```
 
-### 3. Ejecución de Modelos Econométricos
+`verificar_consistencia.py` controla que el texto use un solo período, un solo nombre para cada variable y la identificación, y que cada número citado figure en la hoja de números.
 
-Las 18 fases, en orden y con su mapeo a resultados, están documentadas en **[`codigo/modelos/README.md`](codigo/modelos/README.md)**. Para correr todo de una vez:
+## 5. Datos
 
-```bash
-python codigo/codigo_completo_deuda.py
-```
+La base del modelo es [`datos/dataset_consolidado_1996_2025.csv`](datos/dataset_consolidado_1996_2025.csv). Las columnas `EMBI_fuente` y `TCRM_fuente` indican el origen de cada trimestre, y `es_interpolado`, `es_empalme_pib`, `es_empalme_embi` y `es_interpolado_tcrm` marcan los valores reconstruidos. Fuentes: Secretaría de Finanzas y Secretaría de Hacienda (MECON), INDEC, BCRA, J.P. Morgan (vía Ámbito Financiero), BIS, Reserva Federal, Wu y Xia (2016), CBOE y FMI. Definiciones completas en [`datos/codebook.md`](datos/codebook.md).
 
-O una fase puntual, por ejemplo:
-
-```bash
-python codigo/modelos/fase16_vecm_dataset_ampliado.py   # VECM, técnica de referencia
-python codigo/modelos/fase3_reaccion_fiscal.py           # DOLS
-python codigo/modelos/fase6_sostenibilidad_deuda.py      # DSA
-```
-
-### 4. Compilación del Manuscrito LaTeX
-
-```bash
-cd tesis/fuente
-xelatex -interaction=nonstopmode Tesis.tex
-biber Tesis
-xelatex -interaction=nonstopmode Tesis.tex
-xelatex -interaction=nonstopmode Tesis.tex
-cd ..
-cp fuente/Tesis.pdf Tesis.pdf   # el compilador escribe en fuente/; el oficial va un nivel arriba
-```
-
----
-
-## 4. Estructura de Datos y Codebook
-
-Hay dos paneles consolidados — ver [`datos/README.md`](datos/README.md) para por qué son distintos. El de referencia actual es [`datos/dataset_consolidado_real_ext.csv`](datos/dataset_consolidado_real_ext.csv) (1999T1–2025T4, n=108). Columnas (nombres reales, tal como aparecen en el CSV):
-
-| Variable | Descripción | Fuente Primaria | Transformación |
-|---|---|---|---|
-| `Date` | Trimestre de observación | N/A | Formato fecha |
-| `deuda_pib` | Deuda pública / PIB (%) | Secretaría de Finanzas / MECON | % del PIB, fin de trimestre |
-| `pb_pib` | Resultado primario SPNF / PIB (%) | Secretaría de Hacienda / MECON | % del PIB |
-| `PIB_real` | PIB a precios constantes | INDEC | Índice de volumen |
-| `g_gap` | Brecha del producto (output gap) | Derivado de `PIB_real` | Filtro HP, λ=1600 |
-| `EMBI` | Riesgo país EMBI+ Argentina (puntos básicos) | Ámbito Financiero / BCRA / JP Morgan | Promedio trimestral |
-| `TCRM` | Tipo de Cambio Real Multilateral | BCRA | Índice dic-2001=1, promedio trimestral |
-| `VIX` | CBOE Volatility Index | Chicago Board Options Exchange | Promedio trimestral |
-| `CER` | Coeficiente de Estabilización de Referencia | BCRA | Var. % acumulada trimestral |
-| `es_interpolado` | Marca los seis trimestres de deuda interpolados (no diciembre de 1996-1997); ver también `es_empalme_pib`, `es_empalme_embi` y `es_interpolado_tcrm` en `datos/codebook.md` | N/A | Booleano |
-
-Definiciones completas, fuentes de fallback y notas metodológicas: [`datos/codebook.md`](datos/codebook.md).
-
----
-
-## 5. Acervo Bibliográfico y Marco Legal
-
-El repositorio incluye la totalidad de las fuentes secundarias y primarias citadas en la tesis:
-
-- **Marco Legal Descargado**: Alojado en [`Bibliografia/marco_legal/`](Bibliografia/marco_legal/), con copias oficiales de la Ley N° 24.156, Ley N° 24.144 (Carta Orgánica BCRA) y Ley N° 27.612.
-- **Documentos de Auditoría**: Informe AGN Actuación 294/2023 sobre la deuda con el FMI en [`datos/crudos/descargas_drive/`](datos/crudos/descargas_drive/).
-- **Trazabilidad Bibliográfica**: Manifiesto de verificación exhaustiva de citas en [`Bibliografia/auditorias/verificacion_bibliografia_completa.md`](Bibliografia/auditorias/verificacion_bibliografia_completa.md).
-
----
-
-## 6. Reglas de Gobernanza
-
-Los asistentes de IA que colaboren en este repositorio deben ceñirse a las directivas definidas en [`.agents/AGENTS.md`](.agents/AGENTS.md).
-
----
-
-## 7. Citación Académica
-
-Si utiliza este código, dataset o manuscrito en investigaciones académicas, por favor cite de la siguiente forma:
+## 6. Citación
 
 ```bibtex
 @thesis{paez_chillon_carricondo_2026,
-  author       = {P{\'a}ez, Santiago and Chill{\'o}n, Federico and Carricondo, Emiliano},
-  title        = {La solvencia intertemporal de la deuda p{\'u}blica consolidada argentina post-2025: proyecciones a partir de sus determinantes macroecon{\'o}micos (2004--2025)},
-  school       = {Facultad de Ciencias Econ{\'o}micas, Universidad Nacional de Cuyo},
-  year         = {2026},
-  type         = {Tesis Final de Grado},
-  address      = {Mendoza, Argentina}
+  author  = {P{\'a}ez, Santiago and Chill{\'o}n, Federico and Carricondo, Emiliano},
+  title   = {Probabilidad de no estabilizaci{\'o}n de la deuda p{\'u}blica argentina, 2026-2035: un modelo SVARX con determinantes macroecon{\'o}micos y pol{\'i}tica monetaria de Estados Unidos},
+  school  = {Facultad de Ciencias Econ{\'o}micas, Universidad Nacional de Cuyo},
+  year    = {2026},
+  type    = {Tesis Final de Grado},
+  address = {Mendoza, Argentina}
 }
 ```
 
----
-
 ## Licencia
 
-Este proyecto está bajo la Licencia Creative Commons Atribución 4.0 Internacional ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es)).
+Creative Commons Atribución 4.0 Internacional ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es)).
