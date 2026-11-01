@@ -20,18 +20,17 @@ Autores: Santiago Páez, Federico Chillón y Emiliano Carricondo. Director: Pabl
 | Replicar las cifras | [`codigo/GUIA_DE_EJECUCION.md`](codigo/GUIA_DE_EJECUCION.md) |
 | Documentos para el grupo y el director | [`tesis_oficial_borradores/para_el_grupo/`](tesis_oficial_borradores/para_el_grupo/): plan de labor, propuesta metodológica, guía de defensa, revisión crítica, seguimiento de tareas y Excel de datos y resultados |
 
-**Ramas.** El trabajo del grupo avanza por ramas y *pull requests*. La versión más reciente está en `revision-final-19-10`; `main` queda en la versión del 17 de octubre de 2026 hasta que el grupo fusione la revisión final. Las ramas `revision-var-vecm` y `var-restringido` guardan versiones anteriores del modelo (VECM y DOLS sobre 2004-2025) que ya no intervienen en la tesis.
+El trabajo del grupo avanza por ramas y *pull requests*. La rama `auditoria-tesis` contiene la versión más reciente; `main` queda en la versión del 17 de octubre de 2026 hasta que el grupo fusione la revisión final. Las ramas `revision-var-vecm` y `var-restringido` guardan versiones anteriores del modelo (VECM y DOLS sobre 2004-2025) que ya no intervienen en la tesis.
 
 ## 1. Pregunta y diseño
 
 La tesis estima la probabilidad de que la deuda pública argentina no se estabilice en 2026-2035 y qué parte de esa incertidumbre explican el crecimiento, el tipo de cambio real, el riesgo país, el resultado primario y la tasa de la Reserva Federal (FED).
 
-- **Datos.** Trimestrales, ventana 1996-2025. Las ecuaciones se estiman con 1998T2-2025T4 (111 trimestres), porque los primeros trimestres son condiciones iniciales de los rezagos. El EMBI de 1996T1-1998T3 se empalma con la tasa interbancaria en dólares del BCRA menos la tasa de fondos federales, y el TCRM de 1996 con el tipo de cambio real efectivo del BIS; la validación de ambos empalmes está en el Apéndice A.2 y la figura A.1.
-- **Modelo.** SVARX con cuatro variables endógenas: resultado primario del Sector Público Nacional sin rentas de la propiedad, crecimiento real, riesgo país (diferencial del índice EMBI de J.P. Morgan para Argentina) y tipo de cambio real multilateral (TCRM). Exógenas: variación de la tasa de la FED (tasa sombra de Wu y Xia en el límite cero), VIX, estacionales, binarias por mandato presidencial, quiebres de Bai y Perron dentro de cada mandato y la deuda rezagada, que retroalimenta el sistema.
-- **Identificación.** Restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con el bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto. Dos ordenamientos de Cholesky se informan como robustez.
-- **Simulación.** La deuda federal bruta, el perímetro del análisis de sostenibilidad del FMI, se simula alrededor del escenario base del FMI (Informe de País 26/105, mayo de 2026) desde su mismo punto de partida, 80,3% del PIB a fines de 2025. Los intervalos de 90% salen de 1.000 réplicas de un *bootstrap* de bloques móviles con percentiles de Hall. La deuda consolidada con el BCRA, estimada desde 2002, es una extensión.
-- **Métrica de no estabilización.** La definición operativa del FMI decide las hipótesis; una métrica anual, que suma la valuación de la deuda en moneda extranjera de cada año, se informa como complemento (decisión D16).
-- **Robustez.** 21 especificaciones: rezagos, elasticidades, ordenamientos de Cholesky, sin binarias presidenciales, sin quiebres, sin retroalimentación, datos desde 1999 y desde 2004, corrección de sesgo de Kilian, canal de tasas en pesos y deuda consolidada, entre otras.
+Los datos son trimestrales y cubren 1996-2025. Las ecuaciones se estiman con 1998T2-2025T4 (111 trimestres), porque los primeros trimestres son condiciones iniciales de los rezagos. El EMBI de 1996T1-1998T3 se empalma con la tasa interbancaria en dólares del BCRA menos la tasa de fondos federales, y el TCRM de 1996 con el tipo de cambio real efectivo del BIS; la validación de ambos empalmes está en el Apéndice A.2 y la figura A.1. El modelo es un SVARX con cuatro variables endógenas: resultado primario del Sector Público Nacional sin rentas de la propiedad, crecimiento real, riesgo país (diferencial del índice EMBI de J.P. Morgan para Argentina) y tipo de cambio real multilateral (TCRM). Las exógenas son la variación de la tasa de la FED (tasa sombra de Wu y Xia en el límite cero), el VIX, variables estacionales, binarias por mandato presidencial y quiebres de Bai y Perron dentro de cada mandato, y la deuda rezagada retroalimenta el sistema.
+
+Los *shocks* se identifican con restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con el bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto; dos ordenamientos de Cholesky se informan como robustez. La deuda federal bruta, el perímetro del análisis de sostenibilidad del FMI, se simula alrededor del escenario base del FMI (Informe de País 26/105, mayo de 2026) desde su mismo punto de partida, 80,3% del PIB a fines de 2025. Los intervalos de 90% salen de 1.000 réplicas de un *bootstrap* de bloques móviles con percentiles de Hall. La deuda consolidada con el BCRA, estimada desde 2002, es una extensión.
+
+La definición operativa del FMI decide las hipótesis, y una métrica anual, que suma la valuación de la deuda en moneda extranjera de cada año, se informa como complemento (decisión D16). La robustez abarca 21 especificaciones: rezagos, elasticidades, ordenamientos de Cholesky, sin binarias presidenciales, sin quiebres, sin retroalimentación, datos desde 1999 y desde 2004, corrección de sesgo de Kilian, canal de tasas en pesos y deuda consolidada, entre otras.
 
 ## 2. Resultados principales
 
@@ -43,9 +42,7 @@ Cifras de la especificación principal, con intervalos de 90% entre corchetes. F
 | Probabilidad de no estabilización, métrica anual (complemento) | 27,7% [20,6; 34,7] | 29,0% [25,0; 36,1] |
 | Cifra del FMI | cerca de 1% | menos de 3% |
 
-- **H1b** (la probabilidad supera la del FMI): no respaldada con la definición del FMI; los intervalos incluyen las cifras del organismo.
-- **H1a** (los *shocks* no fiscales dominan la incertidumbre): su contribución a la varianza de la deuda de 2035 supera a la del *shock* fiscal en 96,8 puntos [90,8; 99,8]; la condición de suficiencia del superávit no se cumple con la definición del FMI, de modo que H1a queda no respaldada.
-- **H2** (la tasa de la FED eleva el riesgo): repetir en 2026-2029 la senda de 2022-2025 eleva la probabilidad de 2035 en 17,1 puntos [0,6; 32,6] con la definición del FMI y en 18,4 con la métrica anual. Parcialmente respaldada: el efecto sobre la deuda esperada incluye el cero, y el 77% del aumento de la deuda es el costo directo de la deuda en dólares.
+La hipótesis H1b (la probabilidad supera la del FMI) no queda respaldada con la definición del FMI, porque los intervalos incluyen las cifras del organismo. La H1a (los *shocks* no fiscales dominan la incertidumbre) tampoco: su contribución a la varianza de la deuda de 2035 supera a la del *shock* fiscal en 96,8 puntos [90,8; 99,8], pero la condición de suficiencia del superávit no se cumple con la definición del FMI. La H2 (la tasa de la FED eleva el riesgo) queda parcialmente respaldada: repetir en 2026-2029 la senda de 2022-2025 eleva la probabilidad de 2035 en 17,1 puntos [0,6; 32,6] con la definición del FMI y en 18,4 con la métrica anual, pero el efecto sobre la deuda esperada incluye el cero y el 77% del aumento de la deuda es el costo directo de la deuda en dólares.
 
 ## 3. Estructura del repositorio
 
@@ -60,7 +57,7 @@ Deuda/
 │   └── para_el_grupo/             # Word y Excel para el grupo y el director
 ├── codigo/
 │   ├── ingesta_datos/             # construcción de las series 1996-2025 y empalmes
-│   ├── modelos/                   # fase24 (estimación), fase25 (simulación), figuras, apéndice, hoja de números
+│   ├── modelos/                   # estimación, simulación, figuras, apéndice y hoja de números
 │   └── GUIA_DE_EJECUCION.md       # cómo replicar las cifras
 ├── datos/
 │   ├── dataset_consolidado_1996_2025.csv   # base trimestral del modelo
@@ -73,7 +70,7 @@ Deuda/
 └── historial_proyecto/            # versiones y planes anteriores; no es la especificación vigente
 ```
 
-Los *scripts* de `codigo/modelos/` con números de fase menores que 24 corresponden a versiones anteriores y no intervienen en las cifras de la tesis. `_material_cursada_NO_es_parte_de_la_tesis/` es material de la cursada.
+`_material_cursada_NO_es_parte_de_la_tesis/` es material de la cursada y no forma parte de la tesis.
 
 ## 4. Cómo replicar
 

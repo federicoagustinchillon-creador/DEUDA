@@ -1,30 +1,17 @@
-# Ingesta de Datos — Orden de Ejecución
+# Ingesta de datos
 
-Scripts que descargan y arman las series primarias. Se corren antes que cualquier fase de `codigo/modelos/`.
+Los insumos del modelo ya están guardados en `datos/procesados/`: para reestimar no hace falta descargar nada. Estos scripts reconstruyen esas series desde las fuentes primarias.
 
-## Descarga por fuente (paso 1)
-
-| Script | Qué descarga | Sale a |
+| Script | Qué construye | Sale a |
 |---|---|---|
-| `ingesta_bcra.py` | Series monetarias/cambiarias del BCRA (API v4.0) | `datos/procesados/bcra_trimestral.csv` |
-| `ingesta_bcra_pasivos.py` | Pasivos remunerados del BCRA (LELIQ, NOTALIQ, Pases) | `datos/procesados/bcra_pasivos_trimestral.csv` |
-| `ingesta_mecon_indec.py` | PIB, resultado primario, deuda (MECON/INDEC vía `datos.gob.ar`) | `datos/procesados/macro_trimestral.csv` |
-| `ingesta_datos_financieros.py` | VIX, EMBI+ (Yahoo Finance, Ámbito Financiero) | `datos/procesados/financiero_trimestral.csv` |
-| `ingesta_spread_regional.py` | Spread soberano ETF EMB Brasil (instrumento IV-2SLS) | `datos/procesados/spread_regional_trimestral.csv` |
+| `construir_dataset_1996_2025.py` | Panel trimestral 1996T1-2025T4 del modelo, a partir de la base ampliada anterior | `datos/dataset_consolidado_1996_2025.csv` |
+| `empalme_embi_tcrm_1996_1998.py` | Empalmes del EMBI (1996T1-1998T3) y del TCRM (1996) con su validación | `datos/procesados/empalmes_1996_1998.csv`, `resultados/tablas/empalmes_validacion.csv` |
+| `construir_resultado_primario_1996_2025.py` | Resultado primario del Sector Público Nacional, con y sin rentas de la propiedad | `datos/procesados/resultado_primario_1996_2025.csv` |
+| `construir_pib_real_empalme_indec_1996_2003.py` | PIB real de 1996-2003 empalmado de la base 1993 a la base 2004 | `datos/procesados/pib_real_empalme_indec_1996_2003.csv` |
+| `construir_deuda_consolidada_1996_2025.py`, `construir_deuda_consolidada_neta_1996_2025.py`, `construir_deuda_consolidada_neta_nominal_1996_2025.py` | Deuda federal bruta y deuda consolidada con el BCRA | `datos/procesados/deuda_*_1996_2025.csv` |
+| `construir_tenencias_fgs.py` | Tenencias del sector público y del FGS | `datos/procesados/tenencias_fgs_1996_2025.csv` |
+| `ingesta_tasa_fed_1996_2025.py` | Tasa de la FED trimestral, con la tasa sombra de Wu y Xia | `datos/procesados/tasa_fed_trimestral_1996_2025.csv` |
+| `ingesta_instrumentos_1996_2025.py` | VIX trimestral | `datos/procesados/instrumentos_1996_2025.csv` |
+| `extraer_escenario_base_fmi_cr26105.py` | Escenario base del FMI (Informe de País 26/105) | `datos/procesados/escenario_base_fmi_cr26105.csv` |
 
-## Empalme histórico para la ventana ampliada (paso 2, opcional — solo si se reconstruye `_ext.csv`)
-
-| Script | Qué hace |
-|---|---|
-| `empalme_historico_pre2004.py` | Empalma deuda/PIB y resultado primario 1999–2003 → `datos/empalme_pre2004_deuda_pb.csv` |
-| `empalme_pib_real_pre2004.py` | Empalma PIB real 1996–2003 → `datos/pib_real_empalme_1996_2003.csv` |
-
-## Fusión en panel final (paso 3)
-
-| Script | Qué hace | Sale a |
-|---|---|---|
-| `construccion_dataset.py` | Orquesta paso 1, fusiona y valida → panel ventana original | `datos/dataset_consolidado_real.csv` (n=88) |
-| `construir_dataset_ampliado.py` | Fusiona paso 1 + paso 2 → panel ventana ampliada | `datos/dataset_consolidado_real_ext.csv` (n=108) |
-| `actualizar_tcrm_embi_real.py` | Reemplaza series de contingencia por series primarias reales una vez descargadas | actualiza `datos/dataset_consolidado_real.csv` |
-
-Detalle de columnas y fuentes: ver [`datos/README.md`](../../datos/README.md) y [`datos/codebook.md`](../../datos/codebook.md).
+El resto de los scripts de esta carpeta (`ingesta_bcra*.py`, `ingesta_mecon_indec.py`, `construccion_dataset.py`, `construir_dataset_ampliado.py`, `empalme_historico_pre2004.py`, `empalme_pib_real_pre2004.py` y otros) construyen la base anterior de 2004-2025 y 1999-2025, de la que parte `construir_dataset_1996_2025.py`.

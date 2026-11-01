@@ -8,7 +8,7 @@ Los resultados empíricos de dicho documento revelaron debilidades estadísticas
 
 Frente a estas limitaciones estructurales, se ha propuesto la integración de cinco mejoras fundamentales. Cuatro de ellas son de carácter estrictamente econométrico: contraste de quiebres estructurales múltiples de Bai-Perron, volatilidad multivariada ([[dcc-garch-dynamic-correlation|DCC-GARCH]]), spreads regionales como nuevos instrumentos, y la inclusión de los pasivos remunerados del Banco Central de la República Argentina (BCRA). La quinta mejora es de carácter estructural-estilístico, orientada a blindar el manuscrito frente al tribunal: la depuración algorítmica del exceso de andamiaje epistemológico y la eliminación del tono defensivo en la redacción de los resultados empíricos.
 
-El presente informe formula un plan de implementación determinístico, algorítmico y cien por ciento científico, orquestado a través del agente de línea de comandos Claude Code de Anthropic, detallando los protocolos exactos de utilización, ejecución y terminación, garantizando la excelencia del trabajo (nivel sobresaliente) sin incluir prescripciones de política económica.
+El presente informe formula un plan de implementación determinístico, algorítmico y cien por ciento científico, detallando los protocolos exactos de ejecución y terminación, garantizando la excelencia del trabajo (nivel sobresaliente) sin incluir prescripciones de política económica.
 
 ## Dimensión I: Contraste de Quiebres Estructurales Múltiples de Bai-Perron
 

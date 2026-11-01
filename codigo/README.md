@@ -1,14 +1,7 @@
-> **Para replicar las cifras de la tesis vigente, véase [`GUIA_DE_EJECUCION.md`](GUIA_DE_EJECUCION.md).** Lo que sigue describe la estructura histórica de la carpeta.
+# Código
 
-# Código — Orientación
+Tres carpetas. La replicación completa, con entorno, tiempos y parámetros, está en [`GUIA_DE_EJECUCION.md`](GUIA_DE_EJECUCION.md).
 
-Tres subcarpetas, en el orden en que se ejecutan:
+`ingesta_datos/` arma las series trimestrales de 1996-2025 desde las fuentes primarias, con los empalmes del EMBI y del TCRM (ver su [README](ingesta_datos/README.md)). `modelos/` contiene la estimación del SVARX, la simulación de Monte Carlo con el escenario del FMI, las robusteces, las figuras, el Apéndice y la hoja de números (ver su [README](modelos/README.md)). `requirements.txt` fija las versiones de las bibliotecas de Python.
 
-1. **[`ingesta_datos/`](ingesta_datos/README.md)** — descarga y arma el panel de datos desde las fuentes primarias (BCRA, MECON/INDEC, Yahoo Finance). Corre primero.
-2. **[`modelos/`](modelos/README.md)** — las 18 fases del análisis econométrico (estacionariedad, cointegración, VECM, DOLS, Hansen, DSA, robustez). **Este es el corazón de la tesis** — el README de esa carpeta tiene la tabla completa fase → resultado → capítulo.
-3. **`graficos/`** — genera las figuras del manuscrito a partir de los resultados de `modelos/`. Corre último.
-
-Además:
-- `codigo_completo_deuda.py`: concatena y ejecuta el pipeline íntegro (las tres carpetas de arriba, en orden) en un solo script de lectura secuencial.
-- `notebook_analisis_completo.ipynb` / `notebook_codigo_completo.ipynb`: mismo contenido en formato Jupyter, para exploración interactiva.
-- `requirements.txt`: dependencias Python (`pip install -r codigo/requirements.txt`).
+Las pruebas automáticas están en [`../tests/`](../tests/) y se corren con `pytest tests`.

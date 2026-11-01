@@ -1,7 +1,7 @@
 # Plan de Implementación — Revisión de Pares
 ## Tesis: Sostenibilidad de la Deuda Pública Consolidada Argentina (2004–2025)
 
-> **Instrucciones para Claude Code**: Este documento es la hoja de ruta definitiva. Todas las decisiones metodológicas ya fueron tomadas. Las instrucciones son ejecutables sin interpretación adicional. No buscar nuevos hallazgos. No modificar conclusiones no señaladas aquí. Preservar íntegramente el aporte científico original.
+> **Instrucciones de ejecución**: Este documento es la hoja de ruta definitiva. Todas las decisiones metodológicas ya fueron tomadas. Las instrucciones son ejecutables sin interpretación adicional. No buscar nuevos hallazgos. No modificar conclusiones no señaladas aquí. Preservar íntegramente el aporte científico original.
 
 ---
 
@@ -705,7 +705,7 @@ Corresponde precisar, adicionalmente, que el modelo de \citet{ghosh2013} fue cal
 
 ---
 
-## 6. CHECKLIST PARA CLAUDE CODE
+## 6. Checklist de ejecución
 
 ### Pre-implementación
 
