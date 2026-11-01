@@ -94,10 +94,22 @@ def _indice_tablas(tex: str) -> str:
             nivel += {"{": 1, "}": -1}.get(tex[j], 0)
             j += 1
         titulo = re.sub(r"\s+", " ", tex[k + len("\\textbf{"): j - 1]).strip()
-        # \needspace evita que el titulo quede al pie de una pagina y la tabla en la siguiente
-        salida.append(tex[i:k] + f"\\needspace{{8\\baselineskip}}\\addcontentsline{{lot}}{{table}}{{{titulo}}}" + tex[k:j])
+        # \Needspace (con mayuscula) evita que el titulo quede al pie de una pagina y la tabla en la siguiente;
+        # con \needspace, longtable repite el encabezado de la tabla encima del titulo.
+        salida.append(tex[i:k] + f"\\Needspace{{8\\baselineskip}}\\addcontentsline{{lot}}{{table}}{{{titulo}}}" + tex[k:j])
         i = j
     return "".join(salida) + tex[i:]
+
+
+def _tablas_anchas(tex: str) -> str:
+    """Las tablas de 6 o mas columnas se componen en letra chica y con menos separacion entre columnas,
+    para que las celdas no se salgan del margen."""
+    def envolver(m: re.Match) -> str:
+        columnas = len(re.findall(r"\\raggedright\\arraybackslash\}p\{", m.group(0)))
+        if columnas < 6:
+            return m.group(0)
+        return "{\\footnotesize\\setlength{\\tabcolsep}{3pt}" + m.group(0) + "}"
+    return re.sub(r"\\begin\{longtable\}.*?\\end\{longtable\}", envolver, tex, flags=re.S)
 
 
 def _pandoc(md: str, cursiva: bool = True) -> str:
@@ -109,7 +121,7 @@ def _pandoc(md: str, cursiva: bool = True) -> str:
         ["pandoc", "-f", "markdown-auto_identifiers", "-t", "latex", "--top-level-division=chapter"],
         input=md, capture_output=True, text=True, encoding="utf-8", check=True,
     )
-    return _indice_tablas(_epigrafe_corto(_cortes_texttt(r.stdout)))
+    return _tablas_anchas(_indice_tablas(_epigrafe_corto(_cortes_texttt(r.stdout))))
 
 
 def generar() -> list[Path]:
@@ -126,6 +138,10 @@ def generar() -> list[Path]:
     (CAPS / "00_abstract.tex").write_text(_pandoc(resumen), encoding="utf-8")
     escritos.append(CAPS / "00_abstract.tex")
 
+    abstract = re.sub(r"^# Abstract\s*\n", "", (BASE / "abstract_en.md").read_text(encoding="utf-8"))
+    (CAPS / "00_abstract_en.tex").write_text(_pandoc(abstract, cursiva=False), encoding="utf-8")
+    escritos.append(CAPS / "00_abstract_en.tex")
+
     refs = (BASE / "referencias_y_notas.md").read_text(encoding="utf-8")
     refs = refs[: refs.index("# Notas para el grupo")]
     refs = re.sub(r"^# Referencias\s*\n", "", refs)
@@ -136,8 +152,8 @@ def generar() -> list[Path]:
 
 
 def compilar() -> None:
-    """Dos pasadas de xelatex (indice y referencias cruzadas) y copia del PDF oficial."""
-    for _ in range(2):
+    """Tres pasadas de xelatex (con dos, los indices quedan desfasados) y copia del PDF oficial."""
+    for _ in range(3):
         r = subprocess.run(["xelatex", "-interaction=nonstopmode", "-halt-on-error", "Tesis.tex"],
                            cwd=FUENTE, capture_output=True, text=True, encoding="utf-8", errors="replace")
         if r.returncode != 0:

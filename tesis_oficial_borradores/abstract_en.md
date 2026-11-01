@@ -1,0 +1,11 @@
+# Abstract
+
+This thesis estimates the probability that Argentina's public debt fails to stabilize in 2026-2035 and assesses the role of growth, the real exchange rate, country risk, the primary balance and United States monetary policy. A structural vector autoregression with exogenous variables (SVARX) is estimated with quarterly data for 1996-2025 on gross federal government debt, the perimeter of the International Monetary Fund (IMF) debt sustainability analysis, with the Federal Reserve (Fed) policy rate and global financial volatility as exogenous variables. Debt is simulated around the IMF's 2026 baseline scenario, and non-stabilization is measured with the institution's operational definition and, as a complement, with an annual metric that includes the valuation of foreign-currency debt in each year. Debt consolidated with the Central Bank is an extension.
+
+With the IMF definition, the probability is 3.1% in 2031 (90% interval: 0.0% to 6.3%) and 5.1% in 2035 (0.0% to 10.2%), against about 1% and less than 3% reported by the IMF; the intervals include those figures and the hypothesis that the probability is higher is not supported. With the annual metric it is 27.7% in 2031 (20.6% to 34.7%) and 29.0% in 2035 (25.0% to 36.1%). Non-fiscal shocks contribute 96.8 percentage points more than the fiscal shock to the variance of 2035 debt. Repeating the 2022-2025 path of the Fed rate raises the 2035 probability by 18.4 points, and the hypothesis on the Fed is partially supported: the effect on expected debt includes zero and 77% of the increase comes from the direct cost of dollar-denominated debt.
+
+On the IMF metric, the thesis does not find that the institution underestimates the risk; the difference appears once the annual valuation of foreign-currency debt is included, which that metric excludes. With either measure, most of the uncertainty comes from external, exchange-rate and risk shocks.
+
+Keywords: public debt, fiscal sustainability, SVARX, fan chart, sovereign risk, Argentina.
+
+JEL classification: C32, E62, F34, H63, H68.

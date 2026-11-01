@@ -168,7 +168,8 @@ def fig6_3() -> None:
     ax.bar(list(bloques.values()), [v[0] for v in vals], color=[ROJO, GRIS, AZUL, AZUL],
            yerr=[[v[1] for v in vals], [v[2] for v in vals]], capsize=4, error_kw={"lw": 0.8})
     for k, v in enumerate(vals):
-        ax.text(k, 2, f"{v[0]:.1f}%".replace(".", ","), ha="center", color="white", fontsize=9, fontweight="bold")
+        ax.text(k, v[0] + v[2] + 1.5, f"{v[0]:.1f}%".replace(".", ","), ha="center", va="bottom", fontsize=8.5)
+    ax.set_ylim(0, max(v[0] + v[2] for v in vals) * 1.12)
     ax.set_ylabel("% de la varianza de la deuda en 2035")
     ax.set_title("Participación de cada bloque", fontsize=8.5)
     ax.grid(axis="x", visible=False)
@@ -176,9 +177,15 @@ def fig6_3() -> None:
     bx.bar(list(ext.values()), [v[0] for v in v2], color=[AZUL, VERDE, VERDE],
            yerr=[[v[1] for v in v2], [v[2] for v in v2]], capsize=4, error_kw={"lw": 0.8})
     for k, v in enumerate(v2):
-        bx.text(k, max(v[0] * 0.5, 2), f"{v[0]:.1f}%".replace(".", ","), ha="center", color="white", fontsize=8.5, fontweight="bold")
+        etiqueta = f"{v[0]:.1f}%".replace(".", ",")
+        if k == 0:
+            bx.text(k, v[0] + v[2] + 3, etiqueta, ha="center", va="bottom", fontsize=8.5)
+        else:
+            bx.text(k + 0.22, v[0] + 0.45 * v[2], etiqueta, ha="left", va="center", fontsize=8.5)
+    bx.set_xlim(-0.55, 2.95)
+    bx.set_ylim(0, max(v[0] + v[2] for v in v2) * 1.12)
     bx.axhline(t.loc["vshare_externo", "estimacion"], color=GRIS, lw=0.9, ls="--")
-    bx.text(2.45, t.loc["vshare_externo", "estimacion"], "bloque externo\ncompleto", fontsize=6.5, color=GRIS, ha="right", va="bottom")
+    bx.text(2.95, t.loc["vshare_externo", "estimacion"] + 3, "bloque externo completo", fontsize=6.5, color=GRIS, ha="right", va="bottom")
     bx.set_title("Apertura del bloque externo (no aditiva)", fontsize=8.5)
     bx.grid(axis="x", visible=False)
     guardar(fig, "fig6_3_varianza_por_bloque.png")
@@ -192,7 +199,7 @@ ESPECIFICACIONES = {
 
 
 def fig6_4() -> None:
-    fig, ax = plt.subplots(figsize=(7.2, 3.6))
+    fig, ax = plt.subplots(figsize=(9.2, 4.2))
     specs = [s for s in ESPECIFICACIONES if (TABLAS / f"fase25_{s}_resumen.csv").exists()]
     x = np.arange(len(specs) + 1)
     for anio, color, dx in ((2031, AZUL, -0.17), (2035, GRIS, 0.17)):
@@ -207,7 +214,7 @@ def fig6_4() -> None:
     ax.set_xticks(x, [ESPECIFICACIONES[s] for s in specs] + ["Shocks a la\nmanera del FMI"], fontsize=7)
     ax.set_ylabel("Probabilidad de no estabilización (%)")
     ax.grid(axis="x", visible=False)
-    ax.legend(fontsize=7, loc="upper left")
+    ax.legend(fontsize=7, loc="lower center", ncol=2, bbox_to_anchor=(0.5, 1.0))
     guardar(fig, "fig6_4_probabilidad_no_estabilizacion.png")
 
 

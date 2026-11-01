@@ -55,7 +55,6 @@
 - Hobijn, B., Franses, P. H., y Ooms, M. (2004). Generalizations of the KPSS-test for stationarity. *Statistica Neerlandica*, *58*(4), 483-502. https://doi.org/10.1111/j.1467-9574.2004.00272.x
 - Hodrick, R. J., y Prescott, E. C. (1997). Postwar U.S. business cycles: An empirical investigation. *Journal of Money, Credit and Banking*, *29*(1), 1-16. https://doi.org/10.2307/2953682
 - Hosking, J. R. M. (1980). The multivariate portmanteau statistic. *Journal of the American Statistical Association*, *75*(371), 602-608. https://doi.org/10.1080/01621459.1980.10477520
-- Infobae. (2026, 23 de septiembre). *El riesgo país arriba de los 550 puntos condiciona la primera emisión de deuda internacional de una provincia*. https://www.infobae.com/economia/2026/09/23/el-riesgo-pais-arriba-de-los-550-puntos-condiciona-la-primera-emision-de-deuda-internacional-de-una-provincia/
 - Ivanov, V., y Kilian, L. (2005). A practitioner's guide to lag order selection for VAR impulse response analysis. *Studies in Nonlinear Dynamics and Econometrics*, *9*(1), artículo 2. https://doi.org/10.2202/1558-3708.1219
 - Jarque, C. M., y Bera, A. K. (1987). A test for normality of observations and regression residuals. *International Statistical Review*, *55*(2), 163-172. https://doi.org/10.2307/1403192
 - Johansen, S. (1991). Estimation and hypothesis testing of cointegration vectors in Gaussian vector autoregressive models. *Econometrica*, *59*(6), 1551-1580. https://doi.org/10.2307/2938278

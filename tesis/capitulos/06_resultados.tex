@@ -14,55 +14,61 @@ el bloque fiscal y de actividad, con un bloque cambiario y de riesgo
 
 \section{El SVARX estimado}
 
-\textbf{Propiedades de las series.} El resultado primario se comporta
-como una serie con raíz unitaria, el VIX como estacionaria, y en el
-resto ADF y KPSS no coinciden (Apéndice, sección A.3), lo esperable en
-series cortas con cambios de régimen (Perron, 1989). El procedimiento de
-Bai y Perron (2003) encuentra tres quiebres en la deuda federal bruta,
-en 2001T4, 2006T2 y 2018T1; el de 2001T4 coincide con el inicio del
-gobierno de Duhalde y lo reemplazan las binarias presidenciales
-(Apéndice, sección A.3), de modo que el modelo conserva los de 2006T2 y
-2018T1. Zivot y Andrews (1992) ubican uno en 2005T1, sin rechazar la
-raíz unitaria.
+\subsection{Propiedades de las series}
 
-\textbf{Rezagos y diagnósticos.} Con dos rezagos (sección 4.5), el
-sistema es estable: el autovalor máximo es 0,776, y su mediana entre las
-réplicas del \emph{bootstrap}, 0,773. El criterio de Schwarz elige un
-rezago, pero con ese orden el Portmanteau rechaza la ausencia de
-autocorrelación; ningún orden estable que lo pase existe en esta
-muestra, y se adopta el de mayor p-valor entre los estables que no están
-por debajo del de Schwarz (Portmanteau, p = 0,031; sección 4.5 y
-Apéndice, sección A.4). Esa autocorrelación residual leve es una
-limitación (sección 7.6). Los residuos no muestran heterocedasticidad
-condicional al 5\% en tres de las cuatro ecuaciones (ARCH-LM; Engle,
-1982); en la del TCRM sí (p \textless{} 0,001). Rechazan la normalidad
-multivariada (Jarque y Bera, 1987; p \textless{} 0,001), lo que
-justifica remuestrear \emph{shocks} históricos (Apéndice, sección A.5).
+El resultado primario y el nivel de la tasa de la FED se comportan como
+series con raíz unitaria, el VIX como estacionaria, y en el resto ADF y
+KPSS no coinciden (Apéndice, sección A.3), lo esperable en series cortas
+con cambios de régimen (Perron, 1989). El procedimiento de Bai y Perron
+(2003) encuentra tres quiebres en la deuda federal bruta, en 2001T4,
+2006T2 y 2018T1; el de 2001T4 coincide con el inicio del gobierno de
+Duhalde y lo reemplazan las binarias presidenciales (Apéndice, sección
+A.3), de modo que el modelo conserva los de 2006T2 y 2018T1. Zivot y
+Andrews (1992) ubican uno en 2005T1, sin rechazar la raíz unitaria.
 
-\textbf{Binarias presidenciales.} Las binarias de mandato entran como
-exógenas (sección 4.3). Los contrastes de Wald las rechazan
-conjuntamente en las ecuaciones del resultado primario (p = 0,014), del
-EMBI (p \textless{} 0,001) y del TCRM (p = 0,005), no en la del
-crecimiento (p = 0,127), y la razón de verosimilitud del sistema
-completo las rechaza (p \textless{} 0,001; Apéndice, sección A.3). Pesan
-en los resultados: modifican varias cifras de las secciones 6.3 y 6.5,
-por lo que la variante sin ellas se informa en la Tabla 6.6.
+\subsection{Rezagos y diagnósticos}
 
-\textbf{Reacción fiscal.} El coeficiente de la deuda rezagada en la
-ecuación del resultado primario es el efecto de impacto de la deuda del
-trimestre anterior sobre el resultado primario trimestral. Como el
-resultado primario depende también de sus propios rezagos, el
-multiplicador de largo plazo es mayor (Tabla 6.1; Apéndice, sección
-A.8). Los dos son positivos, con intervalos que excluyen el cero, en los
-dos perímetros.
+Con dos rezagos (sección 4.5), el sistema es estable: el autovalor
+máximo es 0,776, y su mediana entre las réplicas del \emph{bootstrap},
+0,773. El criterio de Schwarz elige un rezago, pero con ese orden el
+Portmanteau rechaza la ausencia de autocorrelación; ningún orden estable
+que lo pase existe en esta muestra, y se adopta el de mayor p-valor
+entre los estables que no están por debajo del de Schwarz (Portmanteau,
+p = 0,031; sección 4.5 y Apéndice, sección A.4). Esa autocorrelación
+residual leve es una limitación (sección 7.6). Los residuos no muestran
+heterocedasticidad condicional al 5\% en tres de las cuatro ecuaciones
+(ARCH-LM; Engle, 1982); en la del TCRM sí (p \textless{} 0,001).
+Rechazan la normalidad multivariada (Jarque y Bera, 1987; p \textless{}
+0,001), lo que justifica remuestrear \emph{shocks} históricos (Apéndice,
+sección A.5).
 
-\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.1. Reacción fiscal según el perímetro de la deuda}\textbf{Tabla 6.1. Reacción fiscal según el perímetro de la deuda}
+\subsection{Binarias presidenciales}
+
+Las binarias de mandato entran como exógenas (sección 4.3). Los
+contrastes de Wald las rechazan conjuntamente en las ecuaciones del
+resultado primario (p = 0,014), del EMBI (p \textless{} 0,001) y del
+TCRM (p = 0,005), no en la del crecimiento (p = 0,127), y la razón de
+verosimilitud del sistema completo las rechaza (p \textless{} 0,001;
+Apéndice, sección A.3). Pesan en los resultados: modifican varias cifras
+de las secciones 6.3 y 6.5, por lo que la variante sin ellas se informa
+en la Tabla 6.6.
+
+\subsection{Reacción fiscal}
+
+El coeficiente de la deuda rezagada en la ecuación del resultado
+primario es el efecto de impacto de la deuda del trimestre anterior
+sobre el resultado primario trimestral. Como el resultado primario
+depende también de sus propios rezagos, el multiplicador de largo plazo
+es mayor (Tabla 6.1; Apéndice, sección A.8). Los dos son positivos, con
+intervalos que excluyen el cero, en los dos perímetros.
+
+\Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.1. Reacción fiscal según el perímetro de la deuda}\textbf{Tabla 6.1. Reacción fiscal según el perímetro de la deuda}
 
 \begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1200}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -101,36 +107,38 @@ baja a seis. Como los años de estrés de la historia argentina superan
 esos valores, el coeficiente positivo no equivale a suficiencia, que es
 lo que H1a pone a prueba.
 
-\textbf{Retroalimentación de la deuda.} La deuda rezagada entra en las
-cuatro ecuaciones del sistema (Favero y Giavazzi, 2007). Fuera de la
-ecuación fiscal, el efecto sobre el riesgo país, medido por el
-diferencial del índice EMBI de J.P. Morgan para Argentina (EMBI), es
-distinguible del cero: la estimación puntual es de unos 35 puntos
-básicos por punto de deuda, con un intervalo de 90\% de {[}13,9; 47,6{]}
-(36,7 {[}13,1; 52,4{]} en la deuda consolidada). Sin las binarias
-presidenciales el intervalo incluye el cero (15,3 {[}-5,3; 30,4{]}), de
-modo que el resultado depende de controlar por los mandatos y se lo
-trata como una estimación sujeta a esa especificación. El efecto sobre
-el crecimiento, 0,07 con un intervalo de {[}-0,001; 0,126{]}, roza el
-cero y es de signo positivo, y con el tipo de cambio real multilateral
-(TCRM) no hay relación.
+\subsection{Retroalimentación de la deuda}
 
-\textbf{Respuesta a la tasa de la FED.} Un aumento de un desvío estándar
-en la variación de la tasa de política monetaria de la Reserva Federal
-(FED), de 0,501 puntos, no produce respuestas sistemáticas de las
-variables domésticas (Figura 6.1). De las 84 respuestas estimadas
-(cuatro variables en 21 horizontes), 11 tienen un intervalo que excluye
-el cero: la del resultado primario en el impacto (+0,32) y de cinco a
-nueve trimestres después (negativas, de -0,05 a -0,11), las del EMBI a
-cuatro, cinco y seis trimestres (de +43 a +63 puntos básicos) y las del
-TCRM a dos y tres trimestres, con signo de apreciación real. Con
-intervalos de 90\% y 84 respuestas, el azar produciría unas ocho
-exclusiones aunque la FED no tuviera efecto, así que 11 es poco más de
-lo esperable; el EMBI y el resultado primario muestran un patrón
-coherente en el tiempo (tasa más alta, mayor riesgo país algunos
-trimestres después), aunque ninguna respuesta aislada resiste una
-corrección por comparaciones múltiples. El modelo no distingue con
-claridad los efectos indirectos de la FED del ruido.
+La deuda rezagada entra en las cuatro ecuaciones del sistema (Favero y
+Giavazzi, 2007). Fuera de la ecuación fiscal, el efecto sobre el riesgo
+país, medido por el diferencial del índice EMBI de J.P. Morgan para
+Argentina (EMBI), es distinguible del cero: la estimación puntual es de
+unos 35 puntos básicos por punto de deuda, con un intervalo de 90\% de
+{[}13,9; 47,6{]} (36,7 {[}13,1; 52,4{]} en la deuda consolidada). Sin
+las binarias presidenciales el intervalo incluye el cero (15,3 {[}-5,3;
+30,4{]}), de modo que el resultado depende de controlar por los mandatos
+y se lo trata como una estimación sujeta a esa especificación. El efecto
+sobre el crecimiento, 0,07 con un intervalo de {[}-0,001; 0,126{]}, roza
+el cero y es de signo positivo, y con el tipo de cambio real
+multilateral (TCRM) no hay relación.
+
+\subsection{Respuesta a la tasa de la FED}
+
+Un aumento de un desvío estándar en la variación de la tasa de política
+monetaria de la Reserva Federal (FED), de 0,501 puntos, no produce
+respuestas sistemáticas de las variables domésticas (Figura 6.1). De las
+84 respuestas estimadas (cuatro variables en 21 horizontes), 11 tienen
+un intervalo que excluye el cero: la del resultado primario en el
+impacto (+0,32) y de cinco a nueve trimestres después (negativas, de
+-0,05 a -0,11), las del EMBI a cuatro, cinco y seis trimestres (de +43 a
++63 puntos básicos) y las del TCRM a dos y tres trimestres, con signo de
+apreciación real. Con intervalos de 90\% y 84 respuestas, el azar
+produciría unas ocho exclusiones aunque la FED no tuviera efecto, así
+que 11 es poco más de lo esperable; el EMBI y el resultado primario
+muestran un patrón coherente en el tiempo (tasa más alta, mayor riesgo
+país algunos trimestres después), aunque ninguna respuesta aislada
+resiste una corrección por comparaciones múltiples. El modelo no
+distingue con claridad los efectos indirectos de la FED del ruido.
 
 \begin{figure}
 \centering
@@ -153,7 +161,7 @@ efectiva menor que la inflación. La distribución es asimétrica hacia
 arriba: en 2035 la deuda media es 45,0\%, por encima de la mediana, y el
 percentil 95 supera el punto de partida.
 
-\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.2. Deuda federal bruta simulada (\% del PIB), percentiles}\textbf{Tabla 6.2. Deuda federal bruta simulada (\% del PIB),
+\Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.2. Deuda federal bruta simulada (\% del PIB), percentiles}\textbf{Tabla 6.2. Deuda federal bruta simulada (\% del PIB),
 percentiles}
 
 \begin{longtable}[]{@{}llllll@{}}
@@ -208,13 +216,13 @@ política fiscal, sino cuánta incertidumbre de la deuda proviene de
 \emph{shocks} no anticipados del resultado primario respecto del
 escenario del FMI.
 
-\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.3. Participación de cada bloque de \emph{shocks} en la varianza de la deuda en 2035}\textbf{Tabla 6.3. Participación de cada bloque de \emph{shocks} en la
+\Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.3. Participación de cada bloque de \emph{shocks} en la varianza de la deuda en 2035}\textbf{Tabla 6.3. Participación de cada bloque de \emph{shocks} en la
 varianza de la deuda en 2035}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2800}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Bloque de \emph{shocks}
@@ -274,32 +282,33 @@ binarias presidenciales; entre las variantes de identificación, el
 ordenamiento de Cholesky con el resultado primario primero y la
 elasticidad cíclica de cero dan 85,6 {[}72,3; 99,5{]}.
 
-\textbf{Suficiencia del superávit.} La segunda condición de H1a (Tabla
-4.4) se evalúa desplazando en la misma magnitud el resultado primario de
-todos los años del escenario base (Figura 6.4). El máximo anual de
-1996-2025 es 3,29\% del PIB, en 2004, con la definición de la tesis (sin
-rentas de la propiedad); con rentas de la propiedad es 3,58\%, el mismo
-año. Con un desplazamiento uniforme que lleva el resultado primario de
-2031 a ese máximo, la probabilidad de no estabilización en 2031 con la
-métrica anual es 23,0\% (el de 2026 queda en 2,39\%, porque el escenario
-base del FMI parte de 1,40\% en 2026 y de 2,30\% en 2031); con el máximo
-de la variante con rentas es 21,6\%. Para llevarla al 1\% que estima el
-FMI para Argentina hay que sumar 7,25 puntos al resultado primario del
-escenario en todos los años: un superávit de 8,65\% del PIB en 2026 y de
-9,55\% en 2031, casi el triple del máximo observado. Con la definición
-operativa del FMI, que es la medida del contraste (sección 4.6), la
-segunda condición de H1a no se cumple: ya sin desplazamiento, el
-intervalo de la probabilidad de 2031, 3,1\% {[}0,0; 6,3{]}, incluye la
-cifra del FMI, y con el resultado primario de 2031 en el máximo
-histórico la estimación central baja a 0,9\%; alcanza un desplazamiento
-de 1,00 punto. Con la métrica anual, en cambio, aun con el resultado
-primario de 2031 en el máximo histórico la probabilidad queda más de
-veinte veces por encima de la cifra del FMI. H1a no queda respaldada: se
-cumple la condición (i), que no depende de la métrica, pero no la (ii).
-La lectura es que, medido como lo mide el FMI, un superávit cercano al
-máximo histórico alcanza para llevar la probabilidad a la cifra del
-organismo; lo que no controla es el riesgo cambiario de cada año, que
-solo capta la métrica anual.
+\subsection{Suficiencia del superávit}
+
+La segunda condición de H1a (Tabla 4.4) se evalúa desplazando en la
+misma magnitud el resultado primario de todos los años del escenario
+base (Figura 6.4). El máximo anual de 1996-2025 es 3,29\% del PIB, en
+2004, con la definición de la tesis (sin rentas de la propiedad); con
+rentas de la propiedad es 3,58\%, el mismo año. Con un desplazamiento
+uniforme que lleva el resultado primario de 2031 a ese máximo, la
+probabilidad de no estabilización en 2031 con la métrica anual es 23,0\%
+(el de 2026 queda en 2,39\%, porque el escenario base del FMI parte de
+1,40\% en 2026 y de 2,30\% en 2031); con el máximo de la variante con
+rentas es 21,6\%. Para llevarla al 1\% que estima el FMI para Argentina
+hay que sumar 7,25 puntos al resultado primario del escenario en todos
+los años: un superávit de 8,65\% del PIB en 2026 y de 9,55\% en 2031,
+casi el triple del máximo observado. Con la definición operativa del
+FMI, que es la medida del contraste (sección 4.6), la segunda condición
+de H1a no se cumple: ya sin desplazamiento, el intervalo de la
+probabilidad de 2031, 3,1\% {[}0,0; 6,3{]}, incluye la cifra del FMI, y
+con el resultado primario de 2031 en el máximo histórico la estimación
+central baja a 0,9\%; alcanza un desplazamiento de 1,00 punto. Con la
+métrica anual, en cambio, aun con el resultado primario de 2031 en el
+máximo histórico la probabilidad queda más de veinte veces por encima de
+la cifra del FMI. H1a no queda respaldada: se cumple la condición (i),
+que no depende de la métrica, pero no la (ii). La lectura es que, medido
+como lo mide el FMI, un superávit cercano al máximo histórico alcanza
+para llevar la probabilidad a la cifra del organismo; lo que no controla
+es el riesgo cambiario de cada año, que solo capta la métrica anual.
 
 Con la métrica anual, la relación en 2035 no es monótona. La
 probabilidad baja hasta 0,12\% con un desplazamiento de 6,25 puntos y
@@ -329,15 +338,15 @@ contra la cifra del FMI correspondiente con la definición operativa del
 organismo, y se informa al lado la métrica anual (sección 4.6; Tabla
 6.4).
 
-\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.4. Contraste de H1b}\textbf{Tabla 6.4. Contraste de H1b}
+\Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.4. Contraste de H1b}\textbf{Tabla 6.4. Contraste de H1b}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1400}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Horizonte
@@ -364,7 +373,7 @@ Criterio
 {[}0,0; 10,2{]} & menos de 3\% & No se cumple \\
 2035 (diez años) & Anual (complemento) & 29,0\% & {[}25,0; 36,1{]} &
 menos de 3\% & Lo supera \\
-\end{longtable}
+\end{longtable}}
 
 Fuente: elaboración propia. Error de Monte Carlo de la estimación
 central con la métrica anual: 0,32 puntos. Los límites inferiores de
@@ -407,13 +416,16 @@ FMI excluye (sección 7.1).
 
 \section{Contraste de H2}
 
-\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.5. Efecto de la FED sobre la deuda federal bruta}\textbf{Tabla 6.5. Efecto de la FED sobre la deuda federal bruta}
+La Tabla 6.5 muestra el efecto de los dos escenarios de la FED sobre la
+deuda federal bruta.
+
+\Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.5. Efecto de la FED sobre la deuda federal bruta}\textbf{Tabla 6.5. Efecto de la FED sobre la deuda federal bruta}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2200}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Escenario
@@ -502,17 +514,17 @@ contraste; las demás probabilidades, la métrica anual. La tabla
 completa, con las 21 especificaciones del SVARX, las dos filas a la
 manera del FMI y la cifra del FMI, está en el Apéndice, sección A.10.
 
-\needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.6. Robustez (selección)}\textbf{Tabla 6.6. Robustez (selección)}
+\Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.6. Robustez (selección)}\textbf{Tabla 6.6. Robustez (selección)}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}@{}}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1300}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0900}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Especificación
@@ -566,7 +578,7 @@ Parámetros corregidos por sesgo (Kilian, 1998) & 6,0\% {[}0,0; 11,5{]} &
 & 20,6\% & 148,4 & no aplica & no aplica & no aplica \\
 FMI (2026), deuda federal bruta & 1\% & 1\% & menos de 3\% & 71,5 & no
 aplica & no aplica & no aplica \\
-\end{longtable}
+\end{longtable}}
 
 Fuente: elaboración propia y FMI (2026, anexo II). Entre corchetes,
 intervalos de 90\%. La fila a la manera del FMI no tiene intervalo
@@ -579,9 +591,11 @@ las mismas réplicas, de modo que en la deuda consolidada también son
 menos confiables. En la deuda consolidada tampoco se informa el reparto
 de la varianza, que esas trayectorias dominan.
 
-\textbf{Hipótesis.} Con la definición operativa del FMI, el criterio de
-H1b se cumple solo en 2 de las 21 especificaciones, la deuda consolidada
-y el canal de tasas en pesos, de modo que el veredicto no depende de la
+\subsection{Efecto sobre las hipótesis}
+
+Con la definición operativa del FMI, el criterio de H1b se cumple solo
+en 2 de las 21 especificaciones, la deuda consolidada y el canal de
+tasas en pesos, de modo que el veredicto no depende de la
 especificación. Con la métrica anual, el límite inferior supera las
 cifras del FMI en todas, con valores de entre 16,2\% (tres rezagos) y
 27,7\% (un rezago) en 2031 y de entre 18,0\% y 32,3\% en 2035. La
@@ -602,52 +616,57 @@ reparto de la varianza entre bloques y, levemente, los intervalos,
 porque en cada réplica la matriz de identificación se reestima (sección
 4.6).
 
-\textbf{Resultado primario con rentas de la propiedad.} Con la serie que
-incluye las rentas de la propiedad, que contienen las utilidades del
-BCRA en los años en que el Tesoro las registró como ingreso, la
-probabilidad de no estabilización en 2031 es 28,5\% {[}22,3; 36,0{]},
-contra 27,7\% con la definición de la tesis. H1a y H1b no cambian; H2 se
-respalda en las dos medidas, porque el efecto de la senda de la FED
-sobre la deuda esperada, 21,3 {[}3,5; 34,7{]}, excluye el cero.
+\subsection{Resultado primario con rentas de la propiedad}
 
-\textbf{Empalme del EMBI.} Con datos desde 1999, que usan solo el EMBI
-observado, la probabilidad de no estabilización es 29,5\% {[}22,5;
-36,7{]} en 2031, contra 27,7\% {[}20,6; 34,7{]} con la ventana completa,
-y en 2035 es 30,7\%, contra 29,0\%. La diferencia entre los
-\emph{shocks} no fiscales y el fiscal y el efecto de la senda de la FED
-sobre la probabilidad siguen excluyendo el cero. Los resultados no
-dependen del empalme del EMBI, que en la especificación principal solo
-afecta a 1997T4-1998T3. La calidad del empalme del EMBI con la tasa
-interbancaria en dólares, que se apoya en 12 observaciones superpuestas,
-se discute en la sección 5.4.
+Con la serie que incluye las rentas de la propiedad, que contienen las
+utilidades del BCRA en los años en que el Tesoro las registró como
+ingreso, la probabilidad de no estabilización en 2031 es 28,5\% {[}22,3;
+36,0{]}, contra 27,7\% con la definición de la tesis. H1a y H1b no
+cambian; H2 se respalda en las dos medidas, porque el efecto de la senda
+de la FED sobre la deuda esperada, 21,3 {[}3,5; 34,7{]}, excluye el
+cero.
 
-\textbf{Extensión consolidada.} Con la deuda consolidada con el BCRA,
-que parte de 52,1\% del PIB y se estima desde 2002, la senda base llega
-a 31,9\% en 2031 y a 21,8\% en 2035, pero el abanico es más ancho que el
-federal (55,2 contra 40,5 puntos en 2031). La probabilidad de no
-estabilización, 31,1\% {[}27,6; 41,5{]} en 2031 y 35,0\% {[}32,3;
-49,8{]} en 2035, supera con holgura las cifras del FMI, y la senda de la
-FED eleva la probabilidad en 19,2 puntos {[}3,2; 33,8{]}. No se informan
-el reparto de la varianza ni el efecto sobre la deuda esperada, porque
-trayectorias explosivas dominan las varianzas y las medias en más de un
-tercio de las réplicas (368 de 1.000), y con 90 trimestres la estimación
-es poco estable. Por eso esta extensión se presenta como exploratoria:
-confirma el orden de magnitud de la probabilidad de no estabilización,
-pero no sirve para contrastar H1a ni la parte de H2 sobre la deuda
-esperada.
+\subsection{Empalme del EMBI}
 
-\textbf{Procedimiento del FMI.} Con \emph{shocks} generados a la manera
-del FMI sobre la historia argentina de la ventana 1996-2025, la
-probabilidad en 2031 es 24,1\% con la métrica anual, cerca de nueve
-décimas de la del SVARX (27,7\%) y muy superior a la del FMI, con un
-abanico más de dos veces más ancho que el del organismo (148,4 contra
-71,5 puntos; Capítulo 7). Con la definición operativa del FMI, ese
-procedimiento da 29,1\% en 2031 y 19,1\% en 2035, muy por encima del
-SVARX con la misma definición (3,1\% y 5,1\%): con la historia
-argentina, el procedimiento del propio FMI no reproduce el 1\%, y la
-diferencia con el SVARX está en los \emph{shocks}, que en el SVARX son
-sorpresas y en ese procedimiento, desvíos respecto de una media de largo
-plazo.
+Con datos desde 1999, que usan solo el EMBI observado, la probabilidad
+de no estabilización es 29,5\% {[}22,5; 36,7{]} en 2031, contra 27,7\%
+{[}20,6; 34,7{]} con la ventana completa, y en 2035 es 30,7\%, contra
+29,0\%. La diferencia entre los \emph{shocks} no fiscales y el fiscal y
+el efecto de la senda de la FED sobre la probabilidad siguen excluyendo
+el cero. Los resultados no dependen del empalme del EMBI, que en la
+especificación principal solo afecta a 1997T4-1998T3. La calidad del
+empalme del EMBI con la tasa interbancaria en dólares, que se apoya en
+12 observaciones superpuestas, se discute en la sección 5.4.
+
+\subsection{Extensión consolidada}
+
+Con la deuda consolidada con el BCRA, que parte de 52,1\% del PIB y se
+estima desde 2002, la senda base llega a 31,9\% en 2031 y a 21,8\% en
+2035, pero el abanico es más ancho que el federal (55,2 contra 40,5
+puntos en 2031). La probabilidad de no estabilización, 31,1\% {[}27,6;
+41,5{]} en 2031 y 35,0\% {[}32,3; 49,8{]} en 2035, supera con holgura
+las cifras del FMI, y la senda de la FED eleva la probabilidad en 19,2
+puntos {[}3,2; 33,8{]}. No se informan el reparto de la varianza ni el
+efecto sobre la deuda esperada, porque trayectorias explosivas dominan
+las varianzas y las medias en más de un tercio de las réplicas (368 de
+1.000), y con 90 trimestres la estimación es poco estable. Por eso esta
+extensión se presenta como exploratoria: confirma el orden de magnitud
+de la probabilidad de no estabilización, pero no sirve para contrastar
+H1a ni la parte de H2 sobre la deuda esperada.
+
+\subsection{Procedimiento del FMI}
+
+Con \emph{shocks} generados a la manera del FMI sobre la historia
+argentina de la ventana 1996-2025, la probabilidad en 2031 es 24,1\% con
+la métrica anual, cerca de nueve décimas de la del SVARX (27,7\%) y muy
+superior a la del FMI, con un abanico más de dos veces más ancho que el
+del organismo (148,4 contra 71,5 puntos; Capítulo 7). Con la definición
+operativa del FMI, ese procedimiento da 29,1\% en 2031 y 19,1\% en 2035,
+muy por encima del SVARX con la misma definición (3,1\% y 5,1\%): con la
+historia argentina, el procedimiento del propio FMI no reproduce el 1\%,
+y la diferencia con el SVARX está en los \emph{shocks}, que en el SVARX
+son sorpresas y en ese procedimiento, desvíos respecto de una media de
+largo plazo.
 
 \begin{figure}
 \centering

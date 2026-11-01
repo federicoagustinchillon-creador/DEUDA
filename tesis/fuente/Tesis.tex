@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper,oneside]{report}
 % Fuentes: ver la carga de fontspec mas abajo (se compila con XeLaTeX).
-\usepackage[spanish]{babel}
+\usepackage[english,spanish]{babel}
 \AtBeginDocument{\spanishplainpercent} % "(% del PIB" sin espacio despues del parentesis
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -120,6 +120,14 @@
 \input{../capitulos/00_abstract}
 \newpage
 
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\begin{otherlanguage}{english}
+\input{../capitulos/00_abstract_en}
+\end{otherlanguage}
+\newpage
+
+\setcounter{tocdepth}{1}
 \tableofcontents
 \newpage
 

@@ -4,10 +4,12 @@ Las series son trimestrales y cubren 1996-2025. Las ecuaciones se estiman con lo
 
 ## 5.1 Series y fuentes
 
+La Tabla 5.1 resume el rol, la fuente y la construcción de cada serie del modelo.
+
 **Tabla 5.1. Series del modelo: rol, fuente y construcción**
 
 | Variable | Rol en el modelo | Fuente | Construcción |
-|---|---|---|---|
+|----------------------|--------------|----------------------------------|------------------------------|
 | Deuda federal bruta (% del PIB) | Especificación principal | MECON, Informe de Deuda Pública (Administración Central) | Sección 5.2 |
 | Deuda consolidada con el BCRA (% del PIB) | Extensión, estimada desde 2002 | MECON (deuda de la Administración Central) y BCRA (balance y estadísticas monetarias) | Sección 5.2; no descuenta las tenencias del FGS (sección 5.6) |
 | Resultado primario (% del PIB) | Endógena | MECON, esquema ahorro-inversión-financiamiento del Sector Público Nacional, base caja | Suma mensual por trimestre, anualizada; sin rentas de la propiedad (sección 5.3) |
@@ -45,11 +47,11 @@ El EMBI mide la diferencia de rendimiento (*spread*) entre los bonos soberanos a
 
 El EMBI de 1996T1-1998T3 y el TCRM de 1996 se completan con dos empalmes, cuya validación está en el Apéndice, sección A.2 (Figura A.1).
 
-**EMBI de 1996T1-1998T3.** Para los trimestres anteriores a la serie diaria se usa el diferencial entre la tasa de préstamos interfinancieros en dólares del BCRA, serie oficial mensual desde octubre de 1994, y la tasa de fondos federales. Durante la convertibilidad, lo que costaba el dólar en el sistema financiero argentino por encima de la tasa de Estados Unidos reflejaba el riesgo argentino. La relación se estima en la superposición de las dos series, 1998T4-2001T3 (12 trimestres), que termina antes del corralito de diciembre de 2001 porque este interrumpió el mercado interbancario en dólares: EMBI = 550,3 + 1,171 × diferencial, con un R² de 0,89 y una correlación de 0,944. En la validación cruzada que deja un trimestre afuera, el error típico es de 102 puntos básicos, frente a un desvío del EMBI de 240. Estimada solo con 1998T4-2000T4, la relación pronostica para los tres primeros trimestres de 2001 valores de 744, 801 y 1.033 puntos básicos, contra 750, 973 y 1.469 observados: acierta el nivel y subestima el salto de la crisis. Si el empalme tiene un sesgo, atenúa la volatilidad de 1996-1998 y vuelve conservadoras las probabilidades.
+Para los trimestres anteriores a la serie diaria se usa el diferencial entre la tasa de préstamos interfinancieros en dólares del BCRA, serie oficial mensual desde octubre de 1994, y la tasa de fondos federales. Durante la convertibilidad, lo que costaba el dólar en el sistema financiero argentino por encima de la tasa de Estados Unidos reflejaba el riesgo argentino. La relación se estima en la superposición de las dos series, 1998T4-2001T3 (12 trimestres), que termina antes del corralito de diciembre de 2001 porque este interrumpió el mercado interbancario en dólares: EMBI = 550,3 + 1,171 × diferencial, con un R² de 0,89 y una correlación de 0,944. En la validación cruzada que deja un trimestre afuera, el error típico es de 102 puntos básicos, frente a un desvío del EMBI de 240. Estimada solo con 1998T4-2000T4, la relación pronostica para los tres primeros trimestres de 2001 valores de 744, 801 y 1.033 puntos básicos, contra 750, 973 y 1.469 observados: acierta el nivel y subestima el salto de la crisis. Si el empalme tiene un sesgo, atenúa la volatilidad de 1996-1998 y vuelve conservadoras las probabilidades.
 
-**TCRM de 1996.** El índice del BCRA se encadena hacia atrás con las variaciones del tipo de cambio real efectivo amplio de Argentina que publica el Banco de Pagos Internacionales (Bank for International Settlements [BIS], s. f.), invertido porque ese índice sube cuando el peso se aprecia. Las variaciones trimestrales de los dos índices tienen una correlación de 0,92 entre 1997 y 2025 y de 0,98 en 1997-2001. Con dos rezagos, los valores de 1996 no entran en la estimación, que empieza en 1998T2; los usa la variante a la manera del FMI, cuyos impulsores anuales empiezan en 1997.
+Para 1996, el índice del TCRM del BCRA se encadena hacia atrás con las variaciones del tipo de cambio real efectivo amplio de Argentina que publica el Banco de Pagos Internacionales (Bank for International Settlements [BIS], s. f.), invertido porque ese índice sube cuando el peso se aprecia. Las variaciones trimestrales de los dos índices tienen una correlación de 0,92 entre 1997 y 2025 y de 0,98 en 1997-2001. Con dos rezagos, los valores de 1996 no entran en la estimación, que empieza en 1998T2; los usa la variante a la manera del FMI, cuyos impulsores anuales empiezan en 1997.
 
-**Los resultados no dependen de los empalmes.** Con datos desde 1999, que solo usan el EMBI observado, la probabilidad de no estabilización de la deuda federal bruta en 2031, con la métrica anual, es de 29,5% [22,5; 36,7], contra 27,7% [20,6; 34,7] con la ventana completa, y las conclusiones sobre la condición (i) de H1a y sobre el efecto de la FED en la probabilidad no cambian (Apéndice, sección A.10).
+Los resultados no dependen de los empalmes. Con datos desde 1999, que solo usan el EMBI observado, la probabilidad de no estabilización de la deuda federal bruta en 2031, con la métrica anual, es de 29,5% [22,5; 36,7], contra 27,7% [20,6; 34,7] con la ventana completa, y las conclusiones sobre la condición (i) de H1a y sobre el efecto de la FED en la probabilidad no cambian (Apéndice, sección A.10).
 
 La tasa de la FED es la de fondos federales, salvo en los trimestres en el límite cero (2009-2015 y 2020-2021), donde la tasa efectiva deja de reflejar la orientación de la política y se usa la tasa sombra de Wu y Xia (2016). En el modelo entra su variación trimestral. La serie cambia de tramo cuatro veces: entra al límite cero en 2009T1 y 2020T2 y sale de él en 2016T1 y 2022T1. En cada una de esas transiciones la variación se calcula con la tasa efectiva en ambos trimestres, para no confundir el cambio de serie con un cambio de política; sin esa corrección, la variación de 2009T1 saldría de la diferencia entre una tasa sombra y una efectiva. Dentro de cada tramo se usa la propia serie. Su desvío estándar en la muestra, 0,501 puntos, es el tamaño del primer escenario de la FED (sección 4.6). Las Figuras 5.2 y 5.3 muestran las variables endógenas y las exógenas.
 
@@ -59,10 +61,12 @@ La tasa de la FED es la de fondos federales, salvo en los trimestres en el lími
 
 ## 5.5 Contraste con el FMI
 
+La Tabla 5.2 compara las series de deuda de esta tesis con las del FMI a fines de 2023, 2024 y 2025.
+
 **Tabla 5.2. Deuda pública: esta tesis y FMI (% del PIB, diciembre)**
 
 | Concepto | 2023, tesis | 2023, FMI | 2024, tesis | 2024, FMI | 2025, tesis | 2025, FMI |
-|---|---|---|---|---|---|---|
+|------------------------|-------------|-------------|-------------|-------------|------------|------------|
 | Deuda federal bruta | 153,5 | 154,6 | 82,1 | 84,7 | 77,7 | 80,3 |
 | Deuda del Tesoro en poder del sector público | 39,4 (solo BCRA) | 62,1 (BCRA y FGS) | 20,4 (solo BCRA) | 33,7 (BCRA y FGS) | 17,2 (solo BCRA) | 31,4 (BCRA y FGS) |
 | Pasivos del BCRA | 14,6 | 19,2 | 1,6 | 2,6 | 1,3 | 3,3 |

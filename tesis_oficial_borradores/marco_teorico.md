@@ -56,13 +56,23 @@ El FMI propone consolidar al banco central con el gobierno cuando el banco tiene
 
 La pregunta específica de la tesis es qué ocurre con la deuda pública ante un endurecimiento de la política monetaria de la Reserva Federal (FED). La literatura identifica cuatro canales, de los cuales el modelo incluye los tres primeros. El modelo suma además dos mecanismos que no son canales de la literatura sino parte de su estructura: la respuesta fiscal, que cambia el flujo que reduce la deuda, y el costo directo de la deuda en dólares, porque la identidad suma la tasa de la FED a la tasa en dólares. Este último explica la mayor parte del efecto contable de la FED sobre la deuda (Capítulo 6). La Tabla 4.2 enumera los cinco.
 
-*Riesgo soberano.* Uribe y Yue (2006) estiman que los *shocks* de la tasa de Estados Unidos explican alrededor de 20% de los movimientos de la actividad en las economías emergentes en frecuencias de ciclo, sobre todo a través de la prima de riesgo soberano. Kalemli-Özcan (2019) encuentra que esa política afecta el costo del crédito interno de otros países a través de la percepción de riesgo de los inversores globales, con más intensidad en los emergentes, y Rey (2013) sostiene que flujos de capital, precios de activos y crédito se mueven con un ciclo financiero global asociado al VIX, del que la política monetaria del centro es un factor. Por eso el riesgo país, medido por el diferencial (*spread*) del índice EMBI de J.P. Morgan para Argentina (EMBI), es endógeno, la tasa en dólares se construye como tasa de la FED más EMBI y el VIX entra como variable exógena de condiciones financieras globales, como en Adler y Sosa (2013).
+### Riesgo soberano
 
-*Tipo de cambio real y valuación.* Los *shocks* de Estados Unidos llegan a América Latina por vía financiera y desestabilizaron los tipos de cambio en las crisis de Argentina y de Brasil (Canova, 2005). Una vez que el tipo de cambio real se deprecia, opera el efecto de valuación de la sección 3.2, y por eso el tipo de cambio real es endógeno.
+Uribe y Yue (2006) estiman que los *shocks* de la tasa de Estados Unidos explican alrededor de 20% de los movimientos de la actividad en las economías emergentes en frecuencias de ciclo, sobre todo a través de la prima de riesgo soberano. Kalemli-Özcan (2019) encuentra que esa política afecta el costo del crédito interno de otros países a través de la percepción de riesgo de los inversores globales, con más intensidad en los emergentes, y Rey (2013) sostiene que flujos de capital, precios de activos y crédito se mueven con un ciclo financiero global asociado al VIX, del que la política monetaria del centro es un factor. Por eso el riesgo país, medido por el diferencial (*spread*) del índice EMBI de J.P. Morgan para Argentina (EMBI), es endógeno, la tasa en dólares se construye como tasa de la FED más EMBI y el VIX entra como variable exógena de condiciones financieras globales, como en Adler y Sosa (2013).
 
-*Crecimiento y diferencial $r-g$.* Neumeyer y Perri (2005) descomponen la tasa real de una economía emergente en una tasa internacional y un componente de riesgo país; con datos argentinos, eliminar el riesgo país reduce la volatilidad del producto en 27%, y estabilizar la tasa internacional, en menos de 3%. El canal relevante es la prima de riesgo país, y el crecimiento endógeno hace que el diferencial $r-g$ se mueva por el numerador y el denominador.
+### Tipo de cambio real y valuación
 
-*Tasas domésticas y costo cuasifiscal.* Una suba de la tasa externa presiona sobre las tasas en pesos y sobre el costo de los pasivos remunerados del banco central (sección 3.3). El modelo no incluye una tasa doméstica, de modo que este canal queda absorbido en la tasa efectiva del escenario base y, en la extensión, en la dinámica de la deuda consolidada.
+Los *shocks* de Estados Unidos llegan a América Latina por vía financiera y desestabilizaron los tipos de cambio en las crisis de Argentina y de Brasil (Canova, 2005). Una vez que el tipo de cambio real se deprecia, opera el efecto de valuación de la sección 3.2, y por eso el tipo de cambio real es endógeno.
+
+### Crecimiento y diferencial $r-g$
+
+Neumeyer y Perri (2005) descomponen la tasa real de una economía emergente en una tasa internacional y un componente de riesgo país; con datos argentinos, eliminar el riesgo país reduce la volatilidad del producto en 27%, y estabilizar la tasa internacional, en menos de 3%. El canal relevante es la prima de riesgo país, y el crecimiento endógeno hace que el diferencial $r-g$ se mueva por el numerador y el denominador.
+
+### Tasas domésticas y costo cuasifiscal
+
+Una suba de la tasa externa presiona sobre las tasas en pesos y sobre el costo de los pasivos remunerados del banco central (sección 3.3). El modelo no incluye una tasa doméstica, de modo que este canal queda absorbido en la tasa efectiva del escenario base y, en la extensión, en la dinámica de la deuda consolidada.
+
+### Exogeneidad de la FED y del VIX
 
 La FED y el VIX son exógenos porque Argentina es una economía pequeña y abierta; Canova (2005) trata del mismo modo los *shocks* de Estados Unidos respecto de los países latinoamericanos.
 
@@ -82,7 +92,9 @@ La regla lineal de Bohn supone una respuesta constante. Ghosh et al. (2013) sost
 
 En la tesis la fatiga fiscal no se contrasta: recuerda que el superávit primario que una sociedad sostiene de manera prolongada tiene un techo, de modo que la regla lineal estimada describe la respuesta fiscal dentro del rango de deuda observado y no debe extrapolarse a niveles muy superiores.
 
-**Economía política del endeudamiento.** La política fiscal no es una función única e invariable: los gobiernos difieren en sus preferencias y usan la deuda de manera estratégica frente a sus sucesores (Alesina y Tabellini, 1990), de modo que la reacción del resultado primario ante la deuda y el nivel de endeudamiento que se acepta pueden cambiar con la orientación de cada administración. En una muestra de 1996-2025 hay ocho mandatos con orientaciones distintas, desde la Convertibilidad hasta el programa de 2023. Por eso la tesis controla con una variable binaria por mandato (sección 4.3) y no supone una función de reacción idéntica en toda la muestra. Esas variables absorben diferencias de nivel entre gobiernos; no estiman un coeficiente de reacción distinto para cada uno, lo que exigiría más observaciones de las que tiene cada mandato.
+### Economía política del endeudamiento
+
+La política fiscal no es una función única e invariable: los gobiernos difieren en sus preferencias y usan la deuda de manera estratégica frente a sus sucesores (Alesina y Tabellini, 1990), de modo que la reacción del resultado primario ante la deuda y el nivel de endeudamiento que se acepta pueden cambiar con la orientación de cada administración. En una muestra de 1996-2025 hay ocho mandatos con orientaciones distintas, desde la Convertibilidad hasta el programa de 2023. Por eso la tesis controla con una variable binaria por mandato (sección 4.3) y no supone una función de reacción idéntica en toda la muestra. Esas variables absorben diferencias de nivel entre gobiernos; no estiman un coeficiente de reacción distinto para cada uno, lo que exigiría más observaciones de las que tiene cada mandato.
 
 ## 3.7 Alcances y límites del marco
 

@@ -72,8 +72,25 @@ def trim(f: pd.Timestamp) -> str:
     return f"{f.year}T{f.quarter}"
 
 
+ANCHOS = {  # (dos primeras columnas) -> ancho relativo de cada columna; sin entrada, columnas iguales
+    ("Variable", "Media"): [44, 14, 14, 14, 14],
+    ("Serie", "Variable puente"): [9, 30, 13, 5, 11, 6, 26],
+    ("Serie", "ADF (p)"): [26, 11, 11, 14, 14, 14],
+    ("Quiebre", "Gobierno en funciones"): [10, 20, 28, 16, 26],
+    ("Prueba (p-valor salvo estabilidad)", "federal bruta (principal)"): [44, 28, 28],
+    ("Variable", "*Shock* fiscal"): [24, 19, 19, 19, 19],
+    ("Variable", "*Shock* del resultado primario"): [24, 19, 19, 19, 19],
+    ("Regresor", "Coeficiente"): [52, 16, 16, 16],
+    ("Medida", "Estimación central"): [64, 16, 20],
+    ("Especificación", "2031, métrica anual (%)"): [26, 15, 15, 15, 15, 14],
+    ("Especificación", "No fiscal menos fiscal (puntos)"): [34, 22, 22, 22],
+}
+
+
 def tabla(df: pd.DataFrame) -> str:
-    cab = "| " + " | ".join(df.columns) + " |\n|" + "---|" * len(df.columns) + "\n"
+    anchos = ANCHOS.get(tuple(df.columns[:2]))
+    guiones = "|" + "|".join("-" * a for a in anchos) + "|" if anchos and len(anchos) == len(df.columns) else "|" + "---|" * len(df.columns)
+    cab = "| " + " | ".join(df.columns) + " |\n" + guiones + "\n"
     return cab + "".join("| " + " | ".join(str(v) for v in fila) + " |\n" for fila in df.values)
 
 
@@ -98,8 +115,8 @@ def seccion_descriptivos() -> str:
                           index_col="Date")[f24.SERIES_DEUDA["federal"][1]].dropna()
     dic23 = serie_d[serie_d.index == "2023-12-31"].iloc[0]
     nota = (f"\nEl máximo de la deuda federal bruta propia, {num(serie_d.max(), 2)}%, corresponde a {trim(serie_d.idxmax())}, "
-            f"después de la devaluación de 2002. No proviene de la cifra del FMI para diciembre de 2023 (154,6%), con la que "
-            f"coincide por casualidad: la serie propia da {num(dic23, 1)}% en esa fecha (Tabla 5.2).\n")
+            f"después de la devaluación de 2002. Para diciembre de 2023 la serie propia da {num(dic23, 1)}% (Tabla 5.2), por debajo "
+            f"de la cifra del FMI (154,6%).\n")
     return (f"## A.1 Estadísticos descriptivos\n\nMuestra efectiva de estimación, {trim(muestra.index[0])}-"
             f"{trim(muestra.index[-1])} ({len(muestra)} trimestres).\n\n" + tabla(d) + nota + "\n")
 
@@ -118,8 +135,9 @@ def seccion_empalmes() -> str:
     d = pd.DataFrame(filas, columns=["Serie", "Variable puente", "Superposición", "n", "Correlación", "R²", "Validación"])
     real = e["fuera_de_muestra_2001_real"].replace(";", " ;").split(";")
     pron = e["fuera_de_muestra_2001_pronostico"].split(";")
+    miles_txt = lambda s: f"{int(round(float(s))):,}".replace(",", ".")
     oos = pd.DataFrame({"Trimestre": ["2001T1", "2001T2", "2001T3"],
-                        "EMBI observado": [r.strip() for r in real], "Pronóstico fuera de muestra": [x.strip() for x in pron]})
+                        "EMBI observado": [miles_txt(r) for r in real], "Pronóstico fuera de muestra": [miles_txt(x) for x in pron]})
     vals = pd.DataFrame({"Trimestre": [trim(i) for i in emp.index],
                          "EMBI empalmado (pb)": emp["EMBI"].map(lambda x: "" if pd.isna(x) else num(x, 0)),
                          "TCRM empalmado": emp["TCRM"].map(lambda x: "" if pd.isna(x) else num(x, 3))})
@@ -138,7 +156,7 @@ def seccion_empalmes() -> str:
             "Como la estimación empieza en 1998T2 (sección 4.5) y el modelo tiene dos rezagos, el TCRM de 1996 no entra en "
             "el SVARX y el EMBI reconstruido solo aparece en 1997T4-1998T3. El TCRM de 1996 sí entra en la variante a la "
             "manera del FMI, para calcular la depreciación real de 1997; el EMBI no se usa en esa variante.\n\n"
-            "**Validación fuera de muestra del empalme del EMBI.** Relación estimada solo con 1998T4-2000T4 y aplicada a 2001:\n\n"
+            "### Validación fuera de muestra del empalme del EMBI\n\nRelación estimada solo con 1998T4-2000T4 y aplicada a 2001:\n\n"
             + tabla(oos) + "\nEl empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa "
             "la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los "
             "resultados casi no cambian (sección A.10).\n\n"
@@ -169,7 +187,7 @@ def seccion_propiedades() -> str:
     fechas = ", ".join(qg["quiebre"])
     cons = ", ".join(trim(q) for q in quiebres)
     return ("## A.3 Propiedades de las series\n\n"
-            "**Raíz unitaria.** ADF (Dickey y Fuller, 1979; hipótesis nula: raíz unitaria) y KPSS (Kwiatkowski et al., 1992; "
+            "### Raíz unitaria\n\nADF (Dickey y Fuller, 1979; hipótesis nula: raíz unitaria) y KPSS (Kwiatkowski et al., 1992; "
             "hipótesis nula: estacionariedad), con constante. Una serie se clasifica como estacionaria solo si ADF rechaza y KPSS "
             "no rechaza al 5%, y con raíz unitaria en el caso inverso. Zivot y Andrews (1992) permiten un quiebre endógeno en el "
             "nivel. Ventana 1996-2025. Especificación: en ADF y en Zivot y Andrews, el número de rezagos de las diferencias se "
@@ -177,11 +195,11 @@ def seccion_propiedades() -> str:
             "con constante, el ancho de banda es el que elige el procedimiento automático de Hobijn et al. (2004). Los p-valores de "
             "KPSS se interpolan entre 0,01 y 0,10, por lo que se escriben como desigualdades en los extremos.\n\n"
             + tabla(d.reset_index(drop=True)) +
-            f"\n**Quiebres estructurales.** El procedimiento de Bai y Perron (2003) sobre la media de la deuda federal bruta "
+            f"\n### Quiebres estructurales\n\nEl procedimiento de Bai y Perron (2003) sobre la media de la deuda federal bruta "
             f"(1996-2025), con el número de quiebres elegido por el criterio de Schwarz, encuentra {m} quiebres: {fechas}. Entran "
             f"como variables binarias de escalón en el SVARX los de {cons.replace(', ', ' y ')}; el que coincide con un cambio de gobierno lo reemplazan las "
             "binarias presidenciales.\n\n"
-            "**Cointegración.** Prueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI, "
+            "### Cointegración\n\nPrueba de la traza de Johansen (1991) sobre las variables en niveles (resultado primario, EMBI, "
             "TCRM y deuda), con los rezagos del VAR. El crecimiento se excluye porque es una tasa de variación. Términos "
             "determinísticos: una constante en el VAR en niveles, sin tendencia (det_order = 0 en la implementación de "
             "*statsmodels*), con el número de rezagos del VAR menos uno en las diferencias; los valores críticos son los de la "
@@ -209,9 +227,9 @@ def seccion_presidenciales() -> str:
     q = pd.DataFrame({"Quiebre": q["quiebre"], "Gobierno en funciones": q["gobierno_en_funciones"].map(presidente),
                       "Inicio de gobierno más cercano": q["inicio_de_gobierno_mas_cercano"].map(presidente),
                       "Distancia (trimestres)": q["distancia_trimestres"], "Tratamiento": q["tratamiento"]})
-    return ("**Binarias presidenciales.** Significancia conjunta de las siete binarias por mandato (Menem es la referencia): "
+    return ("### Binarias presidenciales\n\nSignificancia conjunta de las siete binarias por mandato (Menem es la referencia): "
             "prueba de Wald (estadístico F) en cada ecuación y razón de verosimilitud del sistema con la corrección de Sims "
-            "(1980).\n\n" + tabla(w) + "\n**Coincidencia de los quiebres con los cambios de gobierno.** Los quiebres se "
+            "(1980).\n\n" + tabla(w) + "\n### Coincidencia de los quiebres con los cambios de gobierno\n\nLos quiebres se "
             "recalculan al reestimar con otra serie o muestra. Cuando uno coincide con el inicio de un gobierno, las binarias "
             "presidenciales lo reemplazan; los que caen dentro de un mandato se conservan.\n\n" + tabla(q) + "\n")
 
@@ -231,7 +249,7 @@ def seccion_rezagos() -> str:
     })
     tc = pd.read_csv(TABLAS / "fase24_consolidada_rezagos.csv")
     fila_c = tc[tc["p"] == tc["p_elegido"].iloc[0]].iloc[0]
-    out += (f"**Deuda {SERIES['federal']}.** Orden del criterio de Schwarz: {int(t['p_sic'].iloc[0])}. "
+    out += (f"### Deuda {SERIES['federal']}\n\nOrden del criterio de Schwarz: {int(t['p_sic'].iloc[0])}. "
             f"Orden elegido: {int(t['p_elegido'].iloc[0])}.\n\n" + tabla(d) +
             f"\nCon la deuda {SERIES['consolidada']}, la misma regla elige {int(fila_c['p'])} {'rezago' if int(fila_c['p']) == 1 else 'rezagos'} (raíz máxima "
             f"{num(fila_c['modulo_raiz_max'])}, Portmanteau p = {num(fila_c['portmanteau_12_p'])}); muestra efectiva "
@@ -282,7 +300,7 @@ def seccion_cholesky() -> str:
         S.columns = cols
         S = S.map(lambda v: num(0.0 if abs(v) < 1e-10 else v))
         S.insert(0, "Variable", S.index)
-        salida += f"**{titulo}.** Orden de las variables, de la primera a la última: {orden}.\n\n" + tabla(S.reset_index(drop=True)) + "\n"
+        salida += f"### {titulo}\n\nOrden de las variables, de la primera a la última: {orden}.\n\n" + tabla(S.reset_index(drop=True)) + "\n"
     return salida
 
 
@@ -378,13 +396,16 @@ def seccion_robustez() -> str:
         filas.append([nombre, num(100 * v["p_noest_2031"], 1), num(100 * v["p_noest_2035"], 1), num(100 * v["p_noest_fmi_2031"], 1), num(100 * v["p_noest_fmi_2035"], 1),
                       num(v["ancho_p5_p95_2031"], 1), "no aplica", "no aplica", "no aplica"])
     filas.append(["FMI (2026), deuda federal bruta", "1,0", "menos de 3", "1,0", "menos de 3", "71,5", "no aplica", "no aplica", "no aplica"])
-    d = pd.DataFrame(filas, columns=["Especificación", "No estabilización 2031, métrica anual (%)", "No estabilización 2035, métrica anual (%)",
-                                     "No estabilización 2031, definición operativa del FMI (%)", "No estabilización 2035, definición operativa del FMI (%)", "Ancho 2031", "No fiscal menos fiscal (puntos)", "Senda de la FED: probabilidad 2035 (pp)",
-                                     "Senda de la FED: deuda 2035 (pp)"])
-    return ("## A.10 Robustez completa\n\nEntre corchetes, intervalos de 90%: de Hall, salvo las participaciones y varianzas y la diferencia entre *shocks* no fiscales y fiscal, que usan percentiles simples de las réplicas. Las columnas de la definición operativa del FMI usan la reconstrucción de la sección 4.6: los impulsores del escenario en el año final más el *shock* promedio de cada trayectoria, sin variación del tipo de cambio real ni ajuste *stock*-flujo (FMI, 2022, recuadro 3). La columna de la deuda de la senda de la FED se muestra con dos decimales para distinguir los intervalos que tocan el cero. «No se informa»: más de 1% de las réplicas (10% en la columna del reparto de la varianza) tiene trayectorias explosivas que dominan la media de la deuda. Todas las especificaciones usan los mismos "
+    d = pd.DataFrame(filas, columns=["Especificación", "2031, métrica anual (%)", "2035, métrica anual (%)",
+                                     "2031, definición del FMI (%)", "2035, definición del FMI (%)", "Ancho del abanico 2031", "No fiscal menos fiscal (puntos)",
+                                     "Senda de la FED: probabilidad 2035 (pp)", "Senda de la FED: deuda 2035 (pp)"])
+    primera = d.iloc[:, :6]
+    segunda = d.iloc[:, [0, 6, 7, 8]]
+    segunda = segunda[segunda.iloc[:, 1] != "no aplica"]
+    return ("## A.10 Robustez completa\n\nLa primera tabla muestra la probabilidad de no estabilización y el ancho del abanico, y la segunda, el reparto de la varianza y el efecto de la FED. Entre corchetes, intervalos de 90%: de Hall, salvo las participaciones y varianzas y la diferencia entre *shocks* no fiscales y fiscal, que usan percentiles simples de las réplicas. Las columnas de la definición operativa del FMI usan la reconstrucción de la sección 4.6: los impulsores del escenario en el año final más el *shock* promedio de cada trayectoria, sin variación del tipo de cambio real ni ajuste *stock*-flujo (FMI, 2022, recuadro 3). La columna de la deuda de la senda de la FED se muestra con dos decimales para distinguir los intervalos que tocan el cero. «No se informa»: más de 1% de las réplicas (10% en la columna del reparto de la varianza) tiene trayectorias explosivas que dominan la media de la deuda. Todas las especificaciones usan los mismos "
             "números aleatorios, de modo que las diferencias entre filas no provienen del sorteo. Las filas a la manera del FMI "
             "no tienen intervalo porque ese procedimiento no estima parámetros. Fuente de la última fila: FMI (2026, anexo II, "
-            "cuadro 7 y párrafo 9).\n\n" + tabla(d) + "\n")
+            "cuadro 7 y párrafo 9).\n\n" + tabla(primera) + "\nSegunda tabla: reparto de la varianza entre *shocks* y efecto de la senda de la FED de 2022-2025.\n\n" + tabla(segunda) + "\n")
 
 
 def main() -> None:

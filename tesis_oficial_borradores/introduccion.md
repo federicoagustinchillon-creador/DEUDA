@@ -4,7 +4,7 @@
 
 La historia macroeconómica de América Latina, y de la República Argentina en particular, está atravesada por un patrón recurrente de dependencia del crédito externo, vulnerabilidad ante la interrupción repentina de los flujos de capital (*sudden stops*)[^1] y crisis de impago soberano (Comín Comín, 2014, p. 699; Reinhart y Rogoff, 2009). En el caso argentino, ese patrón fue relevado por la historiografía económica (Díaz Alejandro, 1970; della Paolera y Taylor, 2001; Rapoport, 2020) y volvió a manifestarse en el default[^en-default] de 2001 y en la reestructuración de 2020. Ambos episodios dejaron en evidencia la vulnerabilidad de una economía condicionada por la restricción externa de divisas.
 
-La administración que asumió en diciembre de 2023 recibió un elevado stock[^en-stock] de pasivos y un acceso muy limitado al crédito voluntario. El regreso a los mercados fue gradual: la primera colocación en dólares se realizó en diciembre de 2025, con un bono a 2029 bajo legislación local por USD 1.000 millones de valor nominal y un rendimiento de 9,26% anual. El precio de corte fue de USD 910 por cada USD 1.000 nominales, de modo que el Tesoro recaudó USD 910 millones (Secretaría de Finanzas, 2025). En 2026 el Tesoro siguió financiándose con bonos en dólares bajo ley local y no emitió bajo legislación de Nueva York: en septiembre, en un encuentro con inversores en Nueva York, el ministro de Economía afirmó que el Gobierno no tenía planes de emitir deuda internacional (Infobae, 2026). A fines de julio de 2026, la deuda en moneda extranjera de la Administración Central sumaba USD 248.458 millones, y los vencimientos en divisas previstos para el resto del año alcanzaban USD 5.080 millones, de los cuales el 53,5% correspondía a pagos al Fondo Monetario Internacional (FMI) (Oficina de Presupuesto del Congreso [OPC], 2026).
+La administración que asumió en diciembre de 2023 recibió un elevado stock[^en-stock] de pasivos y un acceso muy limitado al crédito voluntario. El regreso a los mercados fue gradual: la primera colocación en dólares se realizó en diciembre de 2025, con un bono a 2029 bajo legislación local por USD 1.000 millones de valor nominal y un rendimiento de 9,26% anual. El precio de corte fue de USD 910 por cada USD 1.000 nominales, de modo que el Tesoro recaudó USD 910 millones (Secretaría de Finanzas, 2025). A fines de julio de 2026, la deuda en moneda extranjera de la Administración Central sumaba USD 248.458 millones, y los vencimientos en divisas previstos para el resto del año alcanzaban USD 5.080 millones, de los cuales el 53,5% correspondía a pagos al Fondo Monetario Internacional (FMI) (Oficina de Presupuesto del Congreso [OPC], 2026).
 
 ## 1.2 Planteamiento del problema
 
@@ -66,24 +66,4 @@ El Capítulo 2 revisa los antecedentes y delimita el área de vacancia. El Capí
 
 ## Referencias
 
-Ver `referencias_y_notas.md` (lista única de Introducción y Antecedentes, verificada).
-
-## Nota 1: criterio de H1b
-
-Ver `referencias_y_notas.md`, nota 1 (versión vigente del criterio).
-
-## Nota 2: tamaño del shock de la FED (decidido)
-
-Los "+100 puntos básicos" de una versión anterior no estaban justificados y se sacaron. Se usan
-los dos criterios (ver `referencias_y_notas.md`, nota 2): un nivel de la tasa más alto en forma
-permanente, en un desvío estándar de su variación trimestral en la muestra (0,501 puntos), y la
-repetición de la senda trimestral de 2022-2025 en 2026-2029.
-
-## Nota 3: el área de vacancia (ver `antecedentes.md`)
-
-La versión anterior decía que el marco del FMI "excluye los pasivos remunerados del Banco Central".
-**No es correcto.** La revisión del marco (FMI, 2021, anexo II, párr. 5) establece que las
-letras de liquidez del banco central se incluyen en la deuda pública cuando pueden financiar al
-gobierno, cuando el gobierno responde de hecho por su servicio o cuando representan un riesgo
-fiscal material, y cita expresamente a Argentina: esas letras sumaban 5% del PIB a fines
-de 2018 (nota 8). La vacancia se reescribe en el archivo aparte.
+Ver `referencias_y_notas.md`.
