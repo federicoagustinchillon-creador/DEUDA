@@ -265,12 +265,15 @@ argentina depende más del comercio exterior y de la inflación que la de
 los países de la OCDE. Con ese cambio de frecuencia, 0,25 funciona como
 una cota plausible del ajuste automático y no como una magnitud
 calibrada; por eso la simulación se repite con elasticidades de 0 y 0,5.
+
 La robustez incluye también dos ordenamientos de Cholesky (resultado
 primario primero y resultado primario último), cuyas matrices de impacto
 se muestran en el Apéndice (sección A.7) con el mismo formato que la
-matriz estructural y el orden de las variables. Las variables externas
-no requieren identificación: forman un cuarto bloque, externo, medido
-con las innovaciones históricas de la FED y del VIX (sección 4.6).
+matriz estructural y el orden de las variables.
+
+Las variables externas no requieren identificación: forman un cuarto
+bloque, externo, medido con las innovaciones históricas de la FED y del
+VIX (sección 4.6).
 
 \section{Ventana, niveles, rezagos e inferencia}
 
@@ -415,12 +418,14 @@ operativa del FMI, porque las cifras con que se compara H1b surgen de
 ella y la hipótesis exige comparar magnitudes equivalentes. La medida
 complementaria es una métrica anual, que la tesis agrega porque capta un
 riesgo que la definición del FMI deja afuera por construcción: la
-valuación de la deuda en moneda extranjera año por año. Se presenta
-primero la métrica anual, porque la definición del FMI se obtiene a
-partir de ella. La métrica anual aplica la definición del FMI (2021,
-párr. 53) año por año: la deuda no se estabiliza en el año \(T\) si el
-resultado primario del escenario base es menor que el que la
-estabilizaría ese año en la trayectoria simulada,
+valuación de la deuda en moneda extranjera año por año. Se define
+primero la métrica anual, porque la del FMI se obtiene de ella como caso
+particular.
+
+La métrica anual aplica la definición del FMI (2021, párr. 53) año por
+año: la deuda no se estabiliza en el año \(T\) si el resultado primario
+del escenario base es menor que el que la estabilizaría ese año en la
+trayectoria simulada,
 
 \[pb^*_T = d_{T-1}\,(M_T - 1) + sf_T + ri_T,\]
 
