@@ -20,7 +20,7 @@ Autores: Santiago Páez, Federico Chillón y Emiliano Carricondo. Director: Pabl
 | Replicar las cifras | [`codigo/GUIA_DE_EJECUCION.md`](codigo/GUIA_DE_EJECUCION.md) |
 | Documentos para el grupo y el director | [`tesis_oficial_borradores/para_el_grupo/`](tesis_oficial_borradores/para_el_grupo/): plan de labor, propuesta metodológica, guía de defensa, revisión crítica, seguimiento de tareas y Excel de datos y resultados |
 
-El trabajo del grupo avanza por ramas y *pull requests*. La rama `auditoria-tesis` contiene la versión más reciente; `main` queda en la versión del 17 de octubre de 2026 hasta que el grupo fusione la revisión final. Las ramas `revision-var-vecm` y `var-restringido` guardan versiones anteriores del modelo (VECM y DOLS sobre 2004-2025) que ya no intervienen en la tesis.
+El trabajo del grupo avanza por ramas y *pull requests*. La rama `main` contiene la versión más reciente, con la auditoría integral de noviembre de 2026. Las ramas `revision-var-vecm` y `var-restringido` guardan versiones anteriores del modelo (VECM y DOLS sobre 2004-2025) que ya no intervienen en la tesis.
 
 ## 1. Pregunta y diseño
 
