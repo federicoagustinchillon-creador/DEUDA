@@ -330,3 +330,9 @@ la tabla de consistencia en el capítulo 8.
 
 `Tesis.pdf`: 90 páginas (post 8a) → 85 páginas (post 8c) → **81 páginas** (post 8d).
 Recompilado y verificado en cada paso, sin referencias ni citas rotas.
+
+## Fase 9, formato del plan de labor sin marcas de IA: HECHO (2026-10-31)
+
+El director observó que el plan de labor tenía demasiado uso de IA en el formato (negritas, viñetas, frases cortas y símbolos) y una bibliografía con demasiadas obras para un plan, salvo que cada una estuviera justificada. Se reescribió `plan_de_labor.md` en prosa continua, sin negritas ni viñetas: la pregunta, los objetivos, las hipótesis, los pasos del análisis, los criterios de contraste y la justificación metodológica pasaron a párrafos. Se conservaron todas las cifras, los criterios de contraste de H1a, H1b y H2 y la tabla de variables, y se regeneró `para_el_grupo/Plan_de_labor.docx` con el formato de la cátedra (13 páginas).
+
+De la bibliografía salieron Díaz Alejandro (1970) y Rapoport (2020), que respaldaban solo una frase de contexto histórico y no tienen copia en `Bibliografia/`, y Uhlig (2005) y Blanchard y Quah (1989), que solo servían para nombrar métodos descartados: ese argumento queda sostenido por Fry y Pagan (2011). Las 31 referencias que quedan respaldan una afirmación puntual del texto o un dato de la tabla de variables, y se cruzaron una por una contra el cuerpo del plan. El texto pasa `verificar_consistencia.py` sin problemas. Falta verificar contra la fuente las referencias que no tienen copia en `Bibliografia/` ni figuran en `verificacion_citas.md`.
