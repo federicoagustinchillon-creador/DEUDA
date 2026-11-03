@@ -96,6 +96,11 @@ def main() -> None:
     L.append("- Percentiles de la deuda (p5, p25, mediana, p75, p95): " + "; ".join(
         f"{a}: {n(fc.loc[a, 'p5'])}, {n(fc.loc[a, 'p25'])}, {n(fc.loc[a, 'p50'])}, {n(fc.loc[a, 'p75'])}, {n(fc.loc[a, 'p95'])}" for a in (2026, 2028, 2031, 2033, 2035)))
     L.append(f"- Senda base (identidad sin shocks): 2031 {n(r.loc['senda_base_d2031', 'estimacion'])}, 2035 {n(r.loc['senda_base_d2035', 'estimacion'])}.")
+    L.append("- Senda base publicada por el FMI (2026, cuadro 6): 2031 53,9, 2035 42,8.")
+    _rep = pd.read_csv(T / "fase25_federal_replicas.csv")
+    for _h, _c, _cifra in ((2031, "base_p_noest_fmi_2031", 0.01), (2035, "base_p_noest_fmi_2035", 0.03)):
+        _q = _rep[_c].quantile([0.05, 0.95])
+        L.append(f"- Definición del FMI, percentiles simples de las réplicas, {_h}: [{n(_q.iloc[0] * 100)}; {n(_q.iloc[1] * 100)}]; réplicas con probabilidad igual o menor que la cifra del FMI: {n((_rep[_c] <= _cifra).mean() * 100, 0)}%.")
     for k, nom in [("base_p_noest_2031", "No estabilización 2031"), ("base_p_noest_2035", "No estabilización 2035"),
                    ("base_p_noest_sim_2031", "No estabilización 2031 con pb simulado"), ("base_p_sube2_2031", "Deuda 2031 > 2029"),
                    ("base_p_sube2_2035", "Deuda 2035 > 2033")]:

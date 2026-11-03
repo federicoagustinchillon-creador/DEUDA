@@ -31,6 +31,9 @@
 ## Simulación principal (deuda federal bruta, intervalos de Hall al 90%)
 - Percentiles de la deuda (p5, p25, mediana, p75, p95): 2026: 67,2, 70,3, 72,5, 74,9, 87,7; 2028: 54,1, 60,4, 64,8, 70,2, 80,4; 2031: 36,0, 45,7, 52,9, 61,4, 76,5; 2033: 26,7, 38,1, 47,4, 58,6, 78,9; 2035: 17,7, 30,4, 41,4, 55,9, 84,3
 - Senda base (identidad sin shocks): 2031 53,9, 2035 42,7.
+- Senda base publicada por el FMI (2026, cuadro 6): 2031 53,9, 2035 42,8.
+- Definición del FMI, percentiles simples de las réplicas, 2031: [0,0; 8,3]; réplicas con probabilidad igual o menor que la cifra del FMI: 30%.
+- Definición del FMI, percentiles simples de las réplicas, 2035: [0,0; 13,4]; réplicas con probabilidad igual o menor que la cifra del FMI: 48%.
 - No estabilización 2031: 27,7 [20,6; 34,7] %
 - No estabilización 2035: 29,0 [25,0; 36,1] %
 - No estabilización 2031 con pb simulado: 29,7 [23,5; 37,3] %
