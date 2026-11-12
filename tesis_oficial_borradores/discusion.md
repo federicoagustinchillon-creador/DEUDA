@@ -67,7 +67,7 @@ El 77% del aumento de la deuda en 2035 (14,8 de 19,3 puntos) viene del mayor cos
 
 ## 7.5 Diálogo con la literatura
 
-Levy Yeyati y Sturzenegger (2023) encuentran que una devaluación real de 20% casi no modifica el patrimonio neto del sector público argentino, porque el mayor costo de la deuda en dólares se compensa con más recaudación de bienes transables. Esta tesis mide el cociente de deuda, cuya varianza dominan los *shocks* cambiarios, de riesgo y externos. Las dos conclusiones son compatibles: el cociente puede no estabilizarse aunque el patrimonio neto se mantenga, y por eso Rodríguez (2023) advierte que es una medida engañosa después de un salto cambiario.
+Levy Yeyati y Sturzenegger (2023) encuentran que una devaluación real de 20% casi no modifica el patrimonio neto del sector público argentino, porque el mayor costo de la deuda en dólares se compensa con más recaudación de bienes transables. Esta tesis mide el cociente de deuda, cuya varianza dominan los *shocks* cambiarios, de riesgo y externos. Las dos conclusiones son compatibles: el cociente puede no estabilizarse aunque el patrimonio neto se mantenga, y Rodríguez (2023) advierte que la ratio pondera demasiado la evolución de los precios y del tipo de cambio, de modo que debe usarse con prudencia.
 
 Blanchard (2019) muestra que, con una tasa de interés menor que el crecimiento, la deuda se licua sin necesidad de superávit. El escenario del FMI tiene esa propiedad toda la década, y la mediana simulada baja en consecuencia; la licuación, sin embargo, no garantiza la estabilización año por año con una parte grande de la deuda en moneda extranjera.
 

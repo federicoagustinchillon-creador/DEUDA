@@ -23,7 +23,7 @@ Orden alfabético por apellido del primer autor, igual que en la bibliografía i
 | `blanchard2019` | Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, 109(4). | [PDF](descargas_verificacion/blanchard2019_piie_wp19_4.pdf) |
 | `blanchard2021` | Blanchard, O. (2019). Public debt: Fiscal and welfare costs in a time of low interest rates. *PIIE Policy Brief* 19-2. | [PDF](descargas_verificacion/blanchard2019_piie_pb19_2.pdf) |
 | `blanchard2022` | Blanchard, O. (2022). Deciding when debt becomes unsafe. *Finance & Development*, 59(1). | [Enlace oficial](https://www.imf.org/en/Publications/fandd/issues/2022/03/Deciding-when-debt-becomes-unsafe-Blanchard) |
-| `bohn1998` | Bohn, H. (1998). The Behavior of U.S. Public Debt and Deficits. *QJE*, 113(3). | [PDF](descargas_verificacion/bohn_1998_nber_w5529_qje_paper.pdf) |
+| `bohn1998` | Bohn, H. (1998). The Behavior of U.S. Public Debt and Deficits. *QJE*, 113(3). | [Enlace oficial](https://doi.org/10.1162/003355398555793) |
 | `bohn2005` | Bohn, H. (2005). The sustainability of fiscal policy in the United States. *CESifo WP* 1446. | [PDF](descargas_verificacion/bohn2005_cesifo_wp1446.pdf) |
 | `bohn2007` | Bohn, H. (2007). Are stationarity and cointegration restrictions really necessary for the intertemporal budget constraint? *J. Monetary Economics*, 54(7). | [Enlace oficial](https://doi.org/10.1016/j.jmoneco.2006.12.013) |
 | `bohoslavsky2024` | Bohoslavsky, J.P. y Cantamutto, F.J. (2024). Deuda pública y desarrollo (no)sustentable en Argentina. *FACES*, 30(62). | [PDF](descargas_verificacion/bohoslavsky_cantamutto_2024_FACES.pdf) |

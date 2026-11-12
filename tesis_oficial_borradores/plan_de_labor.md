@@ -170,7 +170,7 @@ Kilian, L. (1998). Small-sample confidence intervals for impulse response functi
 
 Levy Yeyati, E., y Sturzenegger, F. (2023). A balance-sheet approach to fiscal sustainability. *Fiscal Studies*, *44*(1), 61-84. https://doi.org/10.1111/1475-5890.12319
 
-Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública. (2021, 3 de marzo). Boletín Oficial de la República Argentina. https://www.argentina.gob.ar/normativa/nacional/norma-347532/texto
+Ley 27.612 de Fortalecimiento de la Sostenibilidad de la Deuda Pública. (2021, 3 de marzo). Boletín Oficial de la República Argentina.
 
 Lütkepohl, H. (2005). *New introduction to multiple time series analysis*. Springer.
 
