@@ -23,7 +23,7 @@ El máximo de la deuda federal bruta propia, 154,59%, corresponde a 2002T3, desp
 La serie diaria pública del EMBI para Argentina comienza el 11 de diciembre de 1998 y el índice de tipo de cambio real multilateral del BCRA, en enero de 1997. Para completar la ventana 1996-2025, el EMBI de 1996T1-1998T3 se reconstruye con la relación EMBI = 550,3 + 1,171 × diferencial, estimada en la superposición, donde el diferencial es la tasa de préstamos interfinancieros en dólares del BCRA menos la tasa de fondos federales. La superposición termina en 2001T3 porque el corralito de diciembre de 2001 interrumpe el mercado interbancario en dólares. El TCRM de 1996 se encadena hacia atrás con las variaciones del tipo de cambio real efectivo del BIS. La Figura A.1 compara las series observadas con las reconstruidas.
 
 | Serie | Variable puente | Superposición | n | Correlación | R² | Validación |
-|---------|------------------------------|-------------|-----|-----------|------|--------------------------|
+|---------|-----------------------------|----------------|-----|-----------|------|------------------------|
 | EMBI | Tasa de préstamos interfinancieros en dólares (BCRA) menos tasa de fondos federales | 1998T4-2001T3 | 12 | 0,944 | 0,89 | Error típico dejando un trimestre afuera: 102 pb (desvío del EMBI: 240 pb) |
 | TCRM | Tipo de cambio real efectivo amplio del BIS (invertido) | 1997T2-2025T4 | 115 | 0,923 | 0,85 | Correlación de las variaciones en 1997-2001: 0,977 |
 
@@ -41,7 +41,7 @@ Relación estimada solo con 1998T4-2000T4 y aplicada a 2001:
 | 2001T2 | 973 | 801 |
 | 2001T3 | 1.469 | 1.033 |
 
-El empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los resultados casi no cambian (sección A.10).
+El empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa la volatilidad de 1996-1998 y tiende a subestimar las probabilidades. Con datos desde 1999, sin empalme, los resultados casi no cambian (sección A.10).
 
 | Trimestre | EMBI empalmado (pb) | TCRM empalmado |
 |---|---|---|
@@ -260,23 +260,23 @@ La primera tabla muestra la probabilidad de no estabilización y el ancho del ab
 | Canal de tasas en pesos | 29,5 [24,3; 36,5] | 34,9 [31,6; 44,1] | 9,0 [2,7; 17,0] | 17,4 [9,7; 32,3] | 51,6 |
 | Sin retroalimentación de la deuda | 27,2 [22,0; 34,1] | 25,6 [20,6; 31,7] | 1,3 [0,0; 2,7] | 0,3 [0,0; 0,6] | 38,1 |
 | Un rezago (criterio de Schwarz) | 29,4 [27,7; 39,2] | 31,0 [27,2; 40,6] | 3,9 [0,0; 7,7] | 7,3 [0,0; 14,4] | 38,5 |
-| Tres rezagos | 25,9 [16,2; 32,5] | 27,5 [22,7; 34,6] | 2,5 [0,0; 5,1] | 3,7 [0,0; 7,4] | 38,1 |
+| Tres rezagos | 25,9 [16,3; 32,5] | 27,5 [22,7; 34,6] | 2,5 [0,0; 5,1] | 3,7 [0,0; 7,4] | 38,1 |
 | Cholesky, resultado primario primero | 27,7 [20,5; 34,8] | 29,0 [25,0; 36,2] | 3,1 [0,0; 6,3] | 5,1 [0,0; 10,2] | 40,5 |
 | Cholesky, resultado primario último | 27,7 [20,3; 34,8] | 29,0 [24,7; 36,2] | 3,1 [0,0; 6,3] | 5,1 [0,0; 10,2] | 40,5 |
 | Elasticidad cíclica 0 | 27,7 [20,5; 34,8] | 29,0 [25,0; 36,2] | 3,1 [0,0; 6,3] | 5,1 [0,0; 10,2] | 40,5 |
 | Elasticidad cíclica 0,5 | 27,7 [20,7; 34,8] | 29,0 [24,9; 36,1] | 3,1 [0,0; 6,3] | 5,1 [0,0; 10,2] | 40,5 |
-| Sin los *shocks* de 2001T4-2005T3 | 31,6 [27,6; 40,5] | 32,8 [29,6; 41,3] | 3,8 [0,0; 7,5] | 6,7 [0,0; 13,3] | 42,7 |
+| Sin los *shocks* de 2001T4-2005T3 | 31,6 [27,6; 40,5] | 32,8 [29,6; 41,4] | 3,8 [0,0; 7,5] | 6,7 [0,0; 13,3] | 42,7 |
 | Solo EMBI observado (datos desde 1999, sin empalme) | 29,5 [22,5; 36,7] | 30,7 [27,4; 38,2] | 3,6 [0,0; 7,2] | 5,6 [0,0; 11,2] | 42,1 |
-| Datos desde 2004 | 31,1 [26,8; 39,3] | 32,2 [23,7; 42,0] | 6,2 [0,0; 12,5] | 4,9 [0,0; 9,8] | 48,4 |
+| Datos desde 2004 | 31,1 [26,8; 39,3] | 32,2 [23,8; 42,0] | 6,3 [0,0; 12,5] | 4,9 [0,0; 9,8] | 48,4 |
 | Sin variables binarias de quiebre | 27,1 [22,1; 33,0] | 27,4 [22,9; 33,1] | 2,3 [0,0; 4,7] | 2,3 [0,0; 4,6] | 38,5 |
-| Sin variables binarias presidenciales | 31,8 [25,2; 36,3] | 31,1 [26,9; 35,9] | 6,2 [0,2; 11,9] | 8,3 [0,3; 16,4] | 47,1 |
-| Ajuste *stock*-flujo en cero | 25,3 [18,2; 32,3] | 22,4 [18,0; 29,0] | 2,2 [0,0; 4,5] | 3,0 [0,0; 6,0] | 35,7 |
+| Sin variables binarias presidenciales | 31,8 [25,2; 36,3] | 31,1 [26,9; 35,9] | 6,2 [0,2; 12,0] | 8,3 [0,3; 16,4] | 47,1 |
+| Ajuste *stock*-flujo en cero | 25,3 [18,2; 32,3] | 22,4 [18,0; 29,0] | 2,2 [0,0; 4,5] | 3,0 [0,0; 6,1] | 35,7 |
 | λ = 0,15 | 27,0 [19,4; 34,2] | 26,9 [22,3; 33,4] | 1,8 [0,0; 3,6] | 1,7 [0,0; 3,4] | 37,0 |
 | λ = 0,40 | 28,3 [21,8; 35,4] | 30,5 [26,7; 37,9] | 4,8 [0,0; 9,3] | 8,1 [0,0; 15,9] | 43,7 |
 | Escenario del FMI de 2025 | 25,7 [18,1; 32,7] | 22,9 [18,0; 29,3] | 0,9 [0,0; 1,8] | 2,0 [0,0; 3,9] | 38,0 |
 | Parámetros corregidos por sesgo (Kilian, 1998) | 29,1 [20,8; 35,0] | 31,4 [26,5; 38,4] | 6,0 [0,0; 11,5] | 10,8 [0,0; 21,2] | 50,0 |
 | *Shocks* a la manera del FMI, deuda federal bruta | 24,1 | 20,6 | 29,1 | 19,1 | 148,4 |
-| *Shocks* a la manera del FMI, deuda consolidada | 26,2 | 19,4 | 16,1 | 7,3 | 63,4 |
+| *Shocks* a la manera del FMI, deuda consolidada | 26,2 | 19,5 | 16,1 | 7,3 | 63,4 |
 | FMI (2026), deuda federal bruta | 1,0 | menos de 3 | 1,0 | menos de 3 | 71,5 |
 
 Segunda tabla: reparto de la varianza entre *shocks* y efecto de la senda de la FED de 2022-2025.
@@ -300,7 +300,7 @@ Segunda tabla: reparto de la varianza entre *shocks* y efecto de la senda de la 
 | Sin variables binarias de quiebre | 93,9 [88,2; 99,8] | 17,0 [5,3; 25,1] | 15,69 [1,21; 24,47] |
 | Sin variables binarias presidenciales | 77,9 [67,3; 99,4] | 9,7 [3,2; 16,5] | 9,24 [-0,19; 17,06] |
 | Ajuste *stock*-flujo en cero | 95,9 [89,4; 99,8] | 15,3 [4,4; 24,5] | 14,40 [1,22; 23,46] |
-| λ = 0,15 | 96,0 [89,3; 99,7] | 11,1 [2,3; 18,0] | 11,21 [0,45; 18,84] |
+| λ = 0,15 | 96,0 [89,3; 99,7] | 11,2 [2,3; 18,0] | 11,21 [0,45; 18,84] |
 | λ = 0,40 | 97,3 [91,9; 99,9] | 23,0 [10,1; 36,2] | 26,60 [-3,06; 43,49] |
 | Escenario del FMI de 2025 | 96,4 [90,1; 99,8] | 12,0 [2,6; 19,6] | 12,01 [0,04; 20,27] |
 | Parámetros corregidos por sesgo (Kilian, 1998) | 93,6 [78,1; 99,8] | 18,8 [5,1; 32,5] | 24,95 [-11,58; 45,43] |

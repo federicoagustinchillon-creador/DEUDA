@@ -12,6 +12,7 @@ Uso: python codigo/modelos/apendice_tablas.py
 from __future__ import annotations
 
 import json
+from decimal import ROUND_HALF_UP, Decimal
 import pathlib
 import re
 import sys
@@ -52,8 +53,9 @@ ROBUSTEZ = {
 
 
 def num(x: float, d: int = 3) -> str:
-    """Formato con coma decimal."""
-    cad = f"{x:,.{d}f}"
+    """Formato con coma decimal. Redondea hacia arriba los empates (36,55 -> 36,6), como se escribe a mano."""
+    q = Decimal(repr(round(float(x), 9))).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP)
+    cad = f"{q:,.{d}f}"
     if float(cad.replace(",", "")) == 0:  # evita "-0,0"
         cad = cad.lstrip("-")
     return cad.replace(",", "X").replace(".", ",").replace("X", ".")
@@ -74,7 +76,7 @@ def trim(f: pd.Timestamp) -> str:
 
 ANCHOS = {  # (dos primeras columnas) -> ancho relativo de cada columna; sin entrada, columnas iguales
     ("Variable", "Media"): [44, 14, 14, 14, 14],
-    ("Serie", "Variable puente"): [9, 30, 13, 5, 11, 6, 26],
+    ("Serie", "Variable puente"): [9, 29, 16, 5, 11, 6, 24],
     ("Serie", "ADF (p)"): [26, 11, 11, 14, 14, 14],
     ("Quiebre", "Gobierno en funciones"): [10, 20, 28, 16, 26],
     ("Prueba (p-valor salvo estabilidad)", "federal bruta (principal)"): [44, 28, 28],
@@ -158,7 +160,7 @@ def seccion_empalmes() -> str:
             "manera del FMI, para calcular la depreciación real de 1997; el EMBI no se usa en esa variante.\n\n"
             "### Validación fuera de muestra del empalme del EMBI\n\nRelación estimada solo con 1998T4-2000T4 y aplicada a 2001:\n\n"
             + tabla(oos) + "\nEl empalme reproduce el nivel y subestima el salto de la crisis de 2001: si tiene un sesgo, atenúa "
-            "la volatilidad de 1996-1998 y vuelve más conservadoras las probabilidades. Con datos desde 1999, sin empalme, los "
+            "la volatilidad de 1996-1998 y tiende a subestimar las probabilidades. Con datos desde 1999, sin empalme, los "
             "resultados casi no cambian (sección A.10).\n\n"
             + tabla(vals) + "\nFuente: elaboración propia.\n\n"
             "![Figura A.1. Empalmes del EMBI y del TCRM. Series observadas y reconstruidas con las variables puente; el "

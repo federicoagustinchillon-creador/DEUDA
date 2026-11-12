@@ -4,7 +4,7 @@ Los insumos del modelo ya están guardados en `datos/procesados/`: para reestima
 
 | Script | Qué construye | Sale a |
 |---|---|---|
-| `construir_dataset_1996_2025.py` | Panel trimestral 1996T1-2025T4 del modelo, a partir de la base ampliada anterior | `datos/dataset_consolidado_1996_2025.csv` |
+| `construir_dataset_1996_2025.py` | Panel trimestral 1996T1-2025T4 con EMBI, TCRM y PIB real, a partir de la base ampliada anterior | `datos/dataset_consolidado_1996_2025.csv` |
 | `empalme_embi_tcrm_1996_1998.py` | Empalmes del EMBI (1996T1-1998T3) y del TCRM (1996) con su validación | `datos/procesados/empalmes_1996_1998.csv`, `resultados/tablas/empalmes_validacion.csv` |
 | `construir_resultado_primario_1996_2025.py` | Resultado primario del Sector Público Nacional, con y sin rentas de la propiedad | `datos/procesados/resultado_primario_1996_2025.csv` |
 | `construir_pib_real_empalme_indec_1996_2003.py` | PIB real de 1996-2003 empalmado de la base 1993 a la base 2004 | `datos/procesados/pib_real_empalme_indec_1996_2003.csv` |

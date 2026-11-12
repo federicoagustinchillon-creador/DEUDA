@@ -6,9 +6,9 @@ Este capítulo presenta la estrategia empírica: un modelo de vectores autorregr
 
 El modelo sigue la arquitectura de Celasun et al. (2006) para economías emergentes: un VAR trimestral sobre los determinantes de la deuda, una función de reacción fiscal y la identidad de acumulación, que separa los tramos en moneda local y extranjera y convierte las proyecciones anualizadas del VAR en abanicos. El marco vigente del FMI (2021, párr. 52) conserva la idea de aplicar al escenario base *shocks* tomados de la historia. Esta tesis agrega dos elementos que justifica la vacancia: los *shocks* domésticos se identifican estructuralmente y la tasa de política monetaria de la Reserva Federal (FED) entra como un *shock* externo con nombre propio.
 
-La especificación principal mide la deuda federal bruta, la del gobierno federal, que es el perímetro del análisis de sostenibilidad del FMI (2026, anexo II). Así el punto de partida, el escenario y el horizonte son los del FMI, y H1b compara magnitudes equivalentes cuando la no estabilización se mide con la definición operativa del organismo (sección 4.6). La simulación parte del stock del FMI a fines de 2025, 80,3% del PIB (cuadro 2, línea 1), que incluye intereses capitalizados, deuda no presentada al canje y reclamos por los cupones atados al PIB; la serie propia da 77,7% (Capítulo 5).
+La especificación principal mide la deuda federal bruta, la del gobierno federal, que es el perímetro del análisis de sostenibilidad del FMI (2026, anexo II). Así el punto de partida, el escenario y el horizonte son los del FMI, y H1b compara magnitudes equivalentes cuando la no estabilización se mide con la definición operativa del organismo (sección 4.6). La simulación parte del stock del FMI a fines de 2025, 80,3% del PIB (FMI, 2026, cuadro 2, línea 1), que incluye intereses capitalizados, deuda no presentada al canje y reclamos por los cupones atados al PIB; la serie propia da 77,7% (Capítulo 5).
 
-La extensión mide la deuda consolidada con el BCRA en la definición del FMI (cuadro 2, línea 5), que parte de 52,1% del PIB con 68,5% en moneda extranjera. Su dinámica se estima con la serie propia de deuda consolidada con el BCRA (Tesoro más BCRA, Letras Intransferibles a valor nominal).
+La extensión mide la deuda consolidada con el BCRA en la definición del FMI (2026, cuadro 2, línea 5), que parte de 52,1% del PIB con 68,5% en moneda extranjera. Su dinámica se estima con la serie propia de deuda consolidada con el BCRA (Tesoro más BCRA, Letras Intransferibles a valor nominal).
 
 ## 4.2 Variables del sistema
 
@@ -17,7 +17,7 @@ El sistema tiene cuatro variables endógenas: el crecimiento real, el resultado 
 **Tabla 4.1. Variables del SVARX**
 
 | Variable | Rol | Fundamento |
-|------------------------|------------------|----------------------------------------------------------|
+|------------------------|----------------------|------------------------------------------------------|
 | Crecimiento real del PIB | Endógena | Entra en la identidad (Celasun et al., 2006). Serie original; la estacionalidad la absorben variables binarias trimestrales (Lütkepohl, 2005). |
 | Resultado primario sin rentas de la propiedad (% del PIB) | Endógena | Entra en la identidad; el coeficiente de la deuda rezagada es la reacción fiscal de Bohn (1998). |
 | EMBI | Endógena | Riesgo país, parte de la tasa en dólares. |

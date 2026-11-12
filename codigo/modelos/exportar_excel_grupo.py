@@ -72,10 +72,8 @@ def main() -> None:
         for hoja, (ruta, _) in HOJAS.items():
             df = pd.read_csv(ruta)
             if hoja == "Datos_trimestrales":
-                # columnas de versiones anteriores que no usa el modelo: se quitan para no confundirlas
-                # (deuda_pib y pb_pib son series viejas; VIX esta incompleta; PIB_real de 1996-2003 no es el empalme del INDEC que usa
-                # el modelo; g_gap y CER no intervienen)
-                df = df.drop(columns=[c for c in ("deuda_pib", "pb_pib", "PIB_real", "VIX", "g_gap", "CER") if c in df.columns])
+                # el PIB real de 1996-2003 del panel no es el empalme del INDEC que usa el modelo
+                df = df.drop(columns=[c for c in ("PIB_real",) if c in df.columns])
             df.to_excel(w, sheet_name=hoja[:31], index=False)
     print(f"[OK] {salida}")
 

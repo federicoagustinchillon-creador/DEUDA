@@ -60,7 +60,7 @@ Deuda/
 │   ├── modelos/                   # estimación, simulación, figuras, apéndice y hoja de números
 │   └── GUIA_DE_EJECUCION.md       # cómo replicar las cifras
 ├── datos/
-│   ├── dataset_consolidado_1996_2025.csv   # base trimestral del modelo
+│   ├── dataset_consolidado_1996_2025.csv   # EMBI, TCRM y PIB real, con marcas de lo reconstruido
 │   ├── procesados/                # deuda, resultado primario, tasa de la FED, escenario del FMI, empalmes
 │   ├── crudos/                    # descargas originales
 │   └── codebook.md                # definición de cada variable
@@ -93,7 +93,7 @@ python tesis_oficial_borradores/generar_docx_grupo.py
 
 ## 5. Datos
 
-La base del modelo es [`datos/dataset_consolidado_1996_2025.csv`](datos/dataset_consolidado_1996_2025.csv). Las columnas `EMBI_fuente` y `TCRM_fuente` indican el origen de cada trimestre, y `es_interpolado`, `es_empalme_pib`, `es_empalme_embi` y `es_interpolado_tcrm` marcan los valores reconstruidos. Fuentes: Secretaría de Finanzas y Secretaría de Hacienda (MECON), INDEC, BCRA, J.P. Morgan (vía Ámbito Financiero), BIS, Reserva Federal, Wu y Xia (2016), CBOE y FMI. Definiciones completas en [`datos/codebook.md`](datos/codebook.md).
+El panel [`datos/dataset_consolidado_1996_2025.csv`](datos/dataset_consolidado_1996_2025.csv) reúne el EMBI, el TCRM y el PIB real; el resto de las series está en `datos/procesados/`. Las columnas `EMBI_fuente` y `TCRM_fuente` indican el origen de cada trimestre, y `es_interpolado`, `es_empalme_pib`, `es_empalme_embi` y `es_interpolado_tcrm` marcan los valores reconstruidos. Fuentes: Secretaría de Finanzas y Secretaría de Hacienda (MECON), INDEC, BCRA, J.P. Morgan (vía Ámbito Financiero), BIS, Reserva Federal, Wu y Xia (2016), CBOE y FMI. Definiciones completas en [`datos/codebook.md`](datos/codebook.md).
 
 ## 6. Citación
 

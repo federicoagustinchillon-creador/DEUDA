@@ -1,65 +1,37 @@
-# Codebook — Dataset Consolidado Tesis
+# Codebook
 
-## Identificación
-- **Título:** Datos para "La solvencia intertemporal de la deuda pública consolidada argentina post-2025"
-- **Autores:** Santiago Páez, Federico Chillón, Emiliano Carricondo
-- **Institución:** Universidad Nacional de Cuyo — FCE
-- **Fecha:** 2026
-- **Dos ventanas muestrales** (ver detalle de por qué hay dos archivos en [`README.md`](README.md)):
-  - `dataset_consolidado_real.csv`: Q1 2004 — Q4 2025 (88 observaciones trimestrales), ventana original.
-  - `dataset_consolidado_real_ext.csv`: Q1 1999 — Q4 2025 (108 observaciones trimestrales), ventana ampliada por empalme histórico — **referencia actual (VECM)**.
+Datos de la tesis "Probabilidad de no estabilización de la deuda pública argentina, 2026-2035". Ventana de estimación 1998T2-2025T4 (111 trimestres); series desde 1996T1 para los rezagos y los empalmes. Las fuentes y el tratamiento de cada serie están en el Capítulo 5 y en el Apéndice A.2.
 
-## Variables núcleo (presentes en ambos archivos)
+## Panel `dataset_consolidado_1996_2025.csv`
 
-| Variable | Descripción | Fuente Primaria | Fuente Fallback | Unidad | Transformación |
-|---|---|---|---|---|---|
-| Date | Trimestre de observación | N/A | — | Fecha | — |
-| VIX | Índice de Volatilidad CBOE | Yahoo Finance (^VIX) | — | Puntos | Promedio trimestral |
-| EMBI | EMBI+ Argentina (Riesgo País) | Ámbito Financiero API / datos.gob.ar | JP Morgan / BCRA / CEPAL cross-check | Puntos básicos | Promedio trimestral |
-| CER | Coeficiente de Estabilización de Referencia | BCRA / datos.gob.ar ID: 94.2_CD_D_0_0_10 | BCRA Informe Monetario | Var. % trimestral | Acumulado trimestral |
-| TCRM | Tipo de Cambio Real Multilateral | datos.gob.ar ID: 116.4_TCRM_0_0_29 | BCRA Informe Monetario | Índice dic-2001=1 | Promedio trimestral |
-| PIB_real | PIB a precios constantes (base 2004) | INDEC / datos.gob.ar ID: 143.3_NO_PR_2004_A_21 | INDEC DNCN | Índice de volumen | Promedio trimestral |
-| pb_pib | Resultado primario SPN / PIB | MECON / datos.gob.ar ID: 11.3_RDP_0_0_32 | MECON Cuadro Fiscal | % del PIB | Anual -> trimestral pro-rata |
-| deuda_pib | Deuda pública neta / PIB | MECON Informe de Deuda / datos.gob.ar | FMI WEO Apr 2024 ARG | % del PIB | Fin de trimestre |
-| g_gap | Brecha del producto (output gap) | Derivado de PIB_real | — | % del PIB potencial | Filtro HP (λ=1600) |
+| Variable | Descripción | Unidad | Fuente |
+|---|---|---|---|
+| Date | Fin de trimestre | Fecha | |
+| PIB_real | PIB a precios constantes de 2004, desde 2004T1 | Índice de volumen | INDEC (datos.gob.ar, serie 143.3_NO_PR_2004_A_21) |
+| TCRM | Tipo de cambio real multilateral | Índice, diciembre de 2001 = 1 | BCRA (serie 116.4_TCRM_0_0_29), promedio trimestral; 1996 encadenado con el tipo de cambio real efectivo amplio del BIS |
+| EMBI | Diferencial soberano del índice EMBI de J.P. Morgan para Argentina | Puntos básicos | J.P. Morgan, serie diaria publicada por Ámbito Financiero desde el 11 de diciembre de 1998, promedio trimestral; 1996T1-1998T3 reconstruido con la tasa interbancaria en dólares del BCRA |
+| EMBI_fuente, TCRM_fuente | Origen de cada trimestre de EMBI y TCRM | Texto | |
+| es_interpolado | Trimestre de deuda federal bruta interpolado linealmente en dólares (no son de diciembre de 1996-1997; el MECON publica la serie trimestral desde 1998T1). Solo interviene en la detección de quiebres | 0/1 (6 trimestres) | |
+| es_empalme_pib | PIB real 1996-2003 empalmado de la base 1993 del INDEC | 0/1 (32 trimestres) | |
+| es_empalme_embi | EMBI de 1996T1-1998T3 reconstruido | 0/1 (11 trimestres) | |
+| es_interpolado_tcrm | TCRM de 1996 reconstruido | 0/1 (4 trimestres) | |
 
-## Variables adicionales
+El modelo toma del panel el EMBI, el TCRM y el PIB real posterior a 2003; el PIB real de 1996-2003 lo toma de `procesados/pib_real_empalme_indec_1996_2003.csv`.
 
-Solo en `dataset_consolidado_real.csv` (usadas por scripts puntuales — IV-2SLS y consolidación de deuda BCRA):
+## Series en `procesados/` que lee el modelo
 
-| Variable | Descripción | Usada por |
-|---|---|---|
-| EMBI_BRASIL | Spread soberano ETF EMB Brasil, instrumento de IV-2SLS | `codigo/modelos/fase4_variables_instrumentales.py` |
-| pasivos_bcra_ars | Pasivos remunerados del BCRA (LELIQ/NOTALIQ/Pases), en pesos corrientes | `codigo/modelos/fase8_deuda_consolidada.py` |
-| pib_nominal_trim | PIB nominal trimestral | Consolidación de deuda (denominador) |
-| pib_nominal_es_extrapolado | Marca si el trimestre de PIB nominal fue extrapolado por no estar aún publicado | Control de calidad de `fase8` |
-| pasivos_bcra_pib | Pasivos remunerados del BCRA / PIB (%) | `codigo/modelos/fase8_deuda_consolidada.py` |
+| Archivo | Columna usada | Descripción | Unidad | Fuente |
+|---|---|---|---|---|
+| `resultado_primario_1996_2025.csv` | `pb_pib_trim_sin_rentas` | Resultado primario del Sector Público Nacional sin rentas de la propiedad, base caja, flujo trimestral anualizado sobre el PIB nominal de cuatro trimestres. Positivo = superávit | % del PIB | MECON, Administración Central e instituciones (datos.gob.ar, conjunto 379) |
+| `deuda_consolidada_neta_nominal_1996_2025.csv` | `bruta_federal_pib` | Deuda bruta del gobierno federal, principal | % del PIB | Secretaría de Finanzas (MECON) |
+| `deuda_consolidada_neta_nominal_1996_2025.csv` | `deuda_consolidada_neta_nominal_pib` | Deuda consolidada con el BCRA, extensión (Letras Intransferibles a valor nominal) | % del PIB | MECON y BCRA |
+| `tasa_fed_trimestral_1996_2025.csv` | `tasa_politica_fed` | Tasa de fondos federales, promedio trimestral; en el límite cero, tasa sombra de Wu y Xia (2016). `fuente_flag` indica cuál se usa en cada trimestre | % anual | FRED y Banco de la Reserva Federal de Atlanta |
+| `instrumentos_1996_2025.csv` | `VIX` | Índice de volatilidad de CBOE, promedio trimestral | Puntos | Yahoo Finance (^VIX) |
+| `empalmes_1996_1998.csv` | `EMBI`, `TCRM` | EMBI y TCRM reconstruidos de 1996-1998 con su fuente | | Apéndice A.2 |
+| `escenario_base_fmi_cr26105.csv` | | Escenario base del FMI, Informe de País 26/105 (mayo de 2026), cuadros 6 y 7 | | FMI |
 
-Solo en `dataset_consolidado_real_ext.csv` (empalme histórico):
+## Notas
 
-| Variable | Descripción |
-|---|---|
-| es_interpolado | Booleano: `True` si la observación (tramo 1999–2003) proviene del empalme histórico en vez de la serie original directa |
-
-Marcas de reconstrucción en `dataset_consolidado_1996_2025.csv` (una por serie, 1 = reconstruido):
-
-| Variable | Descripción | Trimestres |
-|---|---|---|
-| es_interpolado | Deuda federal bruta interpolada linealmente en dólares: trimestres que no son de diciembre de 1996-1997 (el MECON publica la serie trimestral desde 1998T1). Solo interviene en la detección de quiebres | 6 |
-| es_empalme_pib | PIB real 1996-2003, base 1993 del INDEC empalmada a la base 2004 con el coeficiente de enlace | 32 |
-| es_empalme_embi | EMBI de 1996T1-1998T3 reconstruido con la tasa interbancaria en dólares como variable puente | 11 |
-| es_interpolado_tcrm | TCRM de 1996 retroproyectado con tendencia | 4 |
-
-## Notas Metodológicas
-1. **Signo pb_pib:** Positivo = superávit primario; negativo = déficit primario.
-2. **Deuda consolidada:** Incluye deuda intra-sector público (FGS-ANSES); la corrección neta reduce el ratio bruto en ~15-20 pp según el año.
-3. **EMBI+ fuente de fallback:** Los valores del fallback son promedios trimestrales construidos desde series publicadas por BCRA ("Informe Monetario Mensual"), CEPAL STAT y FMI IFS (Argentina, riesgo soberano). Todos los valores fueron cruzados entre mínimo dos fuentes.
-4. **Output gap:** Se aplica filtro HP con λ=1600 (estándar para datos trimestrales). El sesgo de endpoint es reconocido; como análisis de sensibilidad considerar el filtro de Hamilton (2018).
-5. **Período 2023-2025:** Los datos del período Milei incorporan la corrección cambiaria de dic-2023 y el programa de estabilización. Los valores de EMBI+ reflejan la compresión de spreads a partir de la consolidación fiscal.
-
-## Citas de Fuentes Primarias
-- BCRA (2024). *Informe Monetario Mensual*. Buenos Aires: Banco Central de la República Argentina.
-- INDEC (2024). *Cuentas Nacionales: PIB por enfoque del gasto*. Buenos Aires: Instituto Nacional de Estadística y Censos.
-- MECON (2024). *Informe de Deuda Pública*. Buenos Aires: Ministerio de Economía de la Nación.
-- FMI (2024). *World Economic Outlook Database*, April 2024. Washington D.C.: International Monetary Fund.
-- datos.gob.ar (2024). *API de Series de Tiempo*. Buenos Aires: Gobierno de la República Argentina. https://apis.datos.gob.ar/series/
+1. Resultado primario: positivo es superávit y negativo, déficit.
+2. La tesis usa una sola definición del resultado primario, sin rentas de la propiedad. La serie con rentas (`pb_pib_trim`) se usa solo como robustez.
+3. Los datos crudos están en `crudos/` y no se modifican. Los CSV de `crudos/no_referenciados/` no los usa ningún script.

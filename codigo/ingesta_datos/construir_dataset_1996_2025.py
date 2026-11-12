@@ -5,8 +5,8 @@ Ensambla dataset_consolidado_1996_2025.csv: ventana de 30 años (n=120),
 extendiendo dataset_consolidado_real_ext.csv (1999T1-2025T4) hacia atras
 hasta 1996T1. Fusiona:
 
-  - deuda_pib, pb_pib, PIB_real: ya empalmados 1996T1-2003T4 en
-    construir_dataset_ampliado.py (Denton + Compendio Fiscal), sin cambios.
+  - PIB_real: ya empalmado 1996T1-2003T4 en construir_dataset_ampliado.py, sin cambios. El
+    modelo lo reemplaza antes de 2004 por pib_real_empalme_indec_1996_2003.csv.
   - EMBI (riesgo soberano): Spread_Empalmado_pb de
     datos/procesados/spread_soberano_historico_1983_2025.csv (Fase 22),
     que ya es electricamente identico al EMBI+ real de ambito.com desde
@@ -22,16 +22,15 @@ hasta 1996T1. Fusiona:
     columna es_interpolado_tcrm la identifica para que cualquier ejercicio
     de robustez pueda excluirla si hace falta.
 
+El panel solo guarda lo que no tiene serie propia en datos/procesados/: EMBI, TCRM y PIB real.
+La deuda, el resultado primario, la tasa de la FED y el VIX los lee el modelo de datos/procesados/.
+
 Ventana final: 1996T1-2025T4 (120 observaciones, 30 anios exactos).
 """
 
 import pandas as pd
 import numpy as np
 import pathlib
-import sys
-
-sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from ingesta_mecon_indec import compute_output_gap
 
 BASE_DIR = pathlib.Path(__file__).parent.parent.parent
 DATOS = BASE_DIR / "datos"
@@ -66,12 +65,6 @@ def backcast_tcrm_1996():
 
 
 def main():
-    real = pd.read_csv(
-        DATOS / "dataset_consolidado_real.csv", parse_dates=["Date"], index_col="Date"
-    )
-
-    deuda_pib = cargar_serie_empalmada("deuda_pib", DATOS / "empalme_pre2004_deuda_pb.csv")
-    pb_pib = cargar_serie_empalmada("pb_pib", DATOS / "empalme_pre2004_deuda_pb.csv")
     pib_real = cargar_serie_empalmada("PIB_real", DATOS / "pib_real_empalme_1996_2003.csv")
 
     tcrm = backcast_tcrm_1996()
@@ -81,13 +74,7 @@ def main():
         parse_dates=["Date"], index_col="Date"
     )["Spread_Empalmado_pb"].rename("EMBI")
 
-    vix = real["VIX"]
-    cer = real["CER"]
-
-    df = pd.DataFrame({
-        "deuda_pib": deuda_pib, "pb_pib": pb_pib, "PIB_real": pib_real,
-        "TCRM": tcrm, "EMBI": spread, "VIX": vix, "CER": cer,
-    })
+    df = pd.DataFrame({"PIB_real": pib_real, "TCRM": tcrm, "EMBI": spread})
 
     df = df.loc[VENTANA_INICIO:VENTANA_FIN]
 
@@ -102,8 +89,6 @@ def main():
     df["es_empalme_pib"] = (df.index < "2004-01-01").astype(int)
     df["es_empalme_embi"] = (df.index <= "1998-09-30").astype(int)
     df["es_interpolado_tcrm"] = (df.index < "1997-01-01").astype(int)
-
-    df["g_gap"] = compute_output_gap(df["PIB_real"])
 
     print("Dataset 1996-2025 (30 anios):")
     print(f"  Ventana: {df.index.min().date()} -> {df.index.max().date()}")

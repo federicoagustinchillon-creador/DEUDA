@@ -1,6 +1,6 @@
 # Seguimiento de tareas de la tesis (documento interno del grupo)
 
-Documento de trabajo del grupo. Última actualización: 19 de octubre de 2026.
+Documento de trabajo del grupo. Última actualización: 12 de noviembre de 2026.
 
 ## 1. Para qué sirve este documento
 
@@ -69,8 +69,8 @@ Estado: **hecho**, **en curso** o **pendiente**.
 
 ### Etapa 4. Simulación y contrastes (hecha)
 
-- H1a respaldada en sus dos condiciones: (i) 96,8 puntos [90,8; 99,8], en las 21 especificaciones (77,9 sin binarias presidenciales); (ii) con el resultado primario de 2031 en su máximo de 1996-2025 (3,29% del PIB), la probabilidad en 2031 es 23,0%; llevarla al 1% exige sumar 7,25 puntos al resultado primario del escenario.
-- H1b respaldada: 27,7% [20,6; 34,7] en 2031 y 29,0% [25,0; 36,1] en 2035, contra 1% y menos de 3% del FMI, en las 21 especificaciones.
+- H1a no respaldada: la condición (i) se cumple, 96,8 puntos [90,8; 99,8], en las 20 especificaciones en que se informa; la condición (ii), la suficiencia del superávit, se evalúa con la definición operativa del FMI y no se cumple: con el resultado primario de 2031 en su máximo de 1996-2025 (3,29% del PIB) la probabilidad baja a 0,9%, debajo del 1% del FMI. Con la métrica anual sí se cumple (23,0% con ese máximo; llevarla al 1% exige sumar 7,25 puntos al resultado primario del escenario).
+- H1b no respaldada: con la definición operativa del FMI, 3,1% [0,0; 6,3] en 2031 y 5,1% [0,0; 10,2] en 2035, contra 1% y menos de 3% del FMI; los intervalos incluyen las cifras del organismo. Con la métrica anual, 27,7% [20,6; 34,7] y 29,0% [25,0; 36,1], el límite inferior supera las cifras del FMI en las 21 especificaciones.
 - H2 parcialmente respaldada: el efecto de la senda 2022-2025 sobre la probabilidad (+18,4 puntos en 2035 [6,3; 29,1]) es robusto; el efecto sobre la deuda (+19,3 [-0,3; 31,3]) incluye el cero. El 77% del efecto sobre la deuda es el costo directo de la deuda en dólares. Sin binarias presidenciales el efecto de la senda es de 9,7 puntos.
 - Variante sin empalme (datos desde 1999): 29,5% [22,5; 36,7] en 2031; H1a y H2 no cambian.
 - *Shocks* a la manera del FMI sobre la deuda federal bruta: 24,1% en 2031, con un ancho del abanico de 148,4.
@@ -95,7 +95,7 @@ Estado: **hecho**, **en curso** o **pendiente**.
 | D10: H1a con dos condiciones | Pendiente (Pablo) |
 | D13: título nuevo | Pendiente |
 | D15: binarias presidenciales en la especificación principal | Pendiente (Pablo) |
-| **D16: métrica principal (anual, definición del FMI o las dos con el mismo peso)** | **Pendiente (grupo y Pablo). Es la decisión más importante antes de la defensa: cambia el veredicto de H1b.** |
+| **D16: métrica principal (anual, definición del FMI o las dos con el mismo peso)** | **El texto informa las dos y toma la definición operativa del FMI para decidir H1a (ii) y H1b. Pendiente la validación de Pablo: cambia el veredicto de H1b.** |
 
 ### 5.2 Informes del FGS
 

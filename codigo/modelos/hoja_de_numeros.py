@@ -12,6 +12,7 @@ Salida: tesis_oficial_borradores/_hoja_de_numeros.md (documento interno, no se e
 from __future__ import annotations
 
 import json
+from decimal import ROUND_HALF_UP, Decimal
 import pathlib
 import sys
 
@@ -28,7 +29,9 @@ SALIDA = BASE / "tesis_oficial_borradores" / "_hoja_de_numeros.md"
 
 
 def n(x: float, d: int = 1) -> str:
-    return f"{x:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    """Formato con coma decimal; los empates se redondean hacia arriba (36,55 -> 36,6)."""
+    q = Decimal(repr(round(float(x), 9))).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP)
+    return f"{q:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
 def iv(r: pd.DataFrame, k: str, f: float = 100, d: int = 1) -> str:
