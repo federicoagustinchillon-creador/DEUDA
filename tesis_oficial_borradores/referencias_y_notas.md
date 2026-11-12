@@ -13,7 +13,7 @@
 - Blanchard, O. (1990). *Suggestions for a new set of fiscal indicators* (OECD Economics Department Working Papers No. 79). OECD Publishing.
 - Blanchard, O. (2019). Public debt and low interest rates. *American Economic Review*, *109*(4), 1197–1229. https://doi.org/10.1257/aer.109.4.1197
 - Blanchard, O., y Perotti, R. (2002). An empirical characterization of the dynamic effects of changes in government spending and taxes on output. *Quarterly Journal of Economics*, *117*(4), 1329–1368. https://doi.org/10.1162/003355302320935043
-- Board of Governors of the Federal Reserve System (US). (s. f.). *Federal funds effective rate* [FEDFUNDS; conjunto de datos]. Federal Reserve Bank of St. Louis, FRED. https://fred.stlouisfed.org/series/FEDFUNDS
+- Board of Governors of the Federal Reserve System. (s. f.). *Federal funds effective rate* [FEDFUNDS; conjunto de datos]. Federal Reserve Bank of St. Louis, FRED. https://fred.stlouisfed.org/series/FEDFUNDS
 - Bohn, H. (1998). The behavior of U.S. public debt and deficits. *Quarterly Journal of Economics*, *113*(3), 949–963. https://doi.org/10.1162/003355398555793
 - Bohn, H. (2005). *The sustainability of fiscal policy in the United States* (CESifo Working Paper No. 1446). CESifo.
 - Bohn, H. (2007). Are stationarity and cointegration restrictions really necessary for the intertemporal budget constraint? *Journal of Monetary Economics*, *54*(7), 1837–1847. https://doi.org/10.1016/j.jmoneco.2006.12.012
@@ -40,15 +40,15 @@
 - Everaert, G., y Jansen, S. (2018). On the estimation of panel fiscal reaction functions: Heterogeneity or fiscal fatigue? *Economic Modelling*, *70*, 87–96. https://doi.org/10.1016/j.econmod.2017.10.014
 - Favero, C., y Giavazzi, F. (2007). *Debt and the effects of fiscal policy* (NBER Working Paper No. 12822). National Bureau of Economic Research. https://doi.org/10.3386/w12822
 - Federal Reserve Bank of Atlanta. (s. f.). *Wu-Xia shadow federal funds rate* [Conjunto de datos]. https://www.atlantafed.org/cqer/research/wu-xia-shadow-federal-funds-rate
-- Fondo Monetario Internacional [FMI]. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper).
-- Fondo Monetario Internacional [FMI]. (2022). *Staff guidance note on the Sovereign Risk and Debt Sustainability Framework for market access countries* (IMF Policy Paper No. 2022/039). https://www.imf.org/en/Publications/Policy-Papers/Issues/2022/08/08/Staff-Guidance-Note-on-the-Sovereign-Risk-and-Debt-Sustainability-Framework-for-Market-521884
-- Fondo Monetario Internacional [FMI]. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 24/167).
-- Fondo Monetario Internacional [FMI]. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95).
-- Fondo Monetario Internacional [FMI]. (2026). *Argentina: 2026 Article IV consultation, second review under the extended arrangement under the Extended Fund Facility* (IMF Country Report No. 26/105).
+- Fondo Monetario Internacional [FMI]. (2021). *Review of the debt sustainability framework for market access countries* (IMF Policy Paper No. 2021/003). https://doi.org/10.5089/9781513568324.007
+- Fondo Monetario Internacional [FMI]. (2022). *Staff guidance note on the Sovereign Risk and Debt Sustainability Framework for market access countries* (IMF Policy Paper No. 2022/039). https://doi.org/10.5089/9798400216862.007
+- Fondo Monetario Internacional [FMI]. (2024). *Argentina: Eighth review under the extended arrangement under the Extended Fund Facility, requests for modification of performance criteria, waivers of nonobservance of performance criteria, and financing assurances review* (IMF Country Report No. 24/167). https://doi.org/10.5089/9798400278860.002
+- Fondo Monetario Internacional [FMI]. (2025). *Argentina: Request for an extended arrangement under the Extended Fund Facility* (IMF Country Report No. 25/95). https://doi.org/10.5089/9798229009188.002
+- Fondo Monetario Internacional [FMI]. (2026). *Argentina: 2026 Article IV consultation, second review under the extended arrangement under the Extended Fund Facility, requests for a waiver of nonobservance of a performance criterion, modification of performance criteria, and financing assurances review* (IMF Country Report No. 26/105). https://doi.org/10.5089/9798229046831.002
 - Fondo Monetario Internacional [FMI] y Mecanismo Europeo de Estabilidad [ESM]. (2023). *The stochastic debt fanchart in the IMF's Sovereign Risk and Debt Sustainability Framework for MACs* [Presentación, 30 de noviembre de 2023].
 - Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. *The Economic Journal*, *123*(566), F4-F30. https://doi.org/10.1111/ecoj.12010
 - Girouard, N., y André, C. (2005). *Measuring cyclically-adjusted budget balances for OECD countries* (OECD Economics Department Working Papers No. 434). OECD Publishing.
-- González, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo. https://doi.org/10.18235/0004701
+- González Jaramillo, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo. https://doi.org/10.18235/0004701
 - Hakkio, C. S., y Rush, M. (1991). Is the budget deficit "too large?" *Economic Inquiry*, *29*(3), 429–445. https://doi.org/10.1111/j.1465-7295.1991.tb00837.x
 - Hall, P. (1992). *The bootstrap and Edgeworth expansion*. Springer. https://doi.org/10.1007/978-1-4612-4384-7
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, *107*(10), 3119–3145. https://doi.org/10.1257/aer.20151667
@@ -69,7 +69,6 @@
 - Lütkepohl, H. (2005). *New introduction to multiple time series analysis*. Springer.
 - Medeiros, J. (2012). *Stochastic debt simulation using VAR models and a panel fiscal reaction function: Results for a selected number of countries* (European Economy Economic Papers No. 459). Comisión Europea. https://doi.org/10.2765/26084
 - Mendoza, E. G., y Oviedo, P. M. (2009). Public debt, fiscal solvency and macroeconomic uncertainty in Latin America: The cases of Brazil, Colombia, Costa Rica and Mexico. *Economía Mexicana. Nueva Época*, *18*(2), 133–177.
-- Ministerio de Economía de la Nación, Secretaría de Finanzas. (2025). *Informe de deuda pública al 31/12/2025* [Conjunto de datos].
 - Neumeyer, P. A., y Perri, F. (2005). Business cycles in emerging economies: The role of interest rates. *Journal of Monetary Economics*, *52*(2), 345–380. https://doi.org/10.1016/j.jmoneco.2004.04.011
 - Oficina de Presupuesto del Congreso [OPC]. (2026). *Operaciones de deuda pública, julio 2026*.
 - Perron, P. (1989). The great crash, the oil price shock, and the unit root hypothesis. *Econometrica*, *57*(6), 1361–1401. https://doi.org/10.2307/1913712
@@ -87,7 +86,8 @@
 - Sanches, P. (2019). *Análisis de la sostenibilidad de la deuda soberana argentina. 2019-2023* [Tesis de maestría]. Universidad Torcuato Di Tella.
 - Sargent, T. J., y Wallace, N. (1981). Some unpleasant monetarist arithmetic. *Federal Reserve Bank of Minneapolis Quarterly Review*, *5*(3), 1–17.
 - Schwert, G. W. (1989). Tests for unit roots: A Monte Carlo investigation. *Journal of Business & Economic Statistics*, *7*(2), 147–159. https://doi.org/10.1080/07350015.1989.10509723
-- Secretaría de Finanzas, Ministerio de Economía. (2025, 10 de diciembre). *Resultado de licitación del Bono del Tesoro Nacional en dólares estadounidenses 6,50% con vencimiento 30 de noviembre de 2029* [Comunicado]. https://www.argentina.gob.ar/noticias/resultado-de-licitacion-del-bono-del-tesoro-nacional-en-dolares-estadounidenses-650-con
+- Secretaría de Finanzas. (2025a). *Informe de deuda pública al 31/12/2025* [Conjunto de datos]. Ministerio de Economía de la Nación.
+- Secretaría de Finanzas. (2025b, 10 de diciembre). *Resultado de licitación del Bono del Tesoro Nacional en dólares estadounidenses 6,50% con vencimiento 30 de noviembre de 2029* [Comunicado]. Ministerio de Economía de la Nación. https://www.argentina.gob.ar/noticias/resultado-de-licitacion-del-bono-del-tesoro-nacional-en-dolares-estadounidenses-650-con
 - Sims, C. A. (1980). Macroeconomics and reality. *Econometrica*, *48*(1), 1–48. https://doi.org/10.2307/1912017
 - Sims, C. A., Stock, J. H., y Watson, M. W. (1990). Inference in linear time series models with some unit roots. *Econometrica*, *58*(1), 113–144. https://doi.org/10.2307/2938337
 - Thirlwall, A. P. (1979). The balance of payments constraint as an explanation of international growth rate differences. *Banca Nazionale del Lavoro Quarterly Review*, *32*(128), 45–53.

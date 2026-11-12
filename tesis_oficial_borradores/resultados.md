@@ -100,7 +100,7 @@ H1a no queda respaldada: se cumple la condición (i), que no depende de la métr
 
 Con la métrica anual, la relación en 2035 no es monótona. La probabilidad baja hasta 0,12% con un desplazamiento de 6,25 puntos y vuelve a subir, a 1,99% con 10,00 puntos. Con superávits tan altos la deuda queda cerca de cero, y la métrica, que compara el resultado primario necesario con el previsto año por año, se activa con *shocks* pequeños.
 
-![Figura 6.4. Suficiencia del superávit primario. Probabilidad de no estabilización en 2031, con la métrica anual y con la definición operativa del FMI, según el resultado primario de 2031, con el resultado primario de todos los años del escenario base del FMI (2026) desplazado en la misma magnitud; la línea vertical marca el máximo anual de 1996-2025. Estimación central. Fuente: elaboración propia.](../tesis/figuras/fig6_5_suficiencia_superavit.png)
+![Figura 6.4. Suficiencia del superávit primario. Probabilidad de no estabilización en 2031, con la métrica anual y con la definición operativa del FMI, según el resultado primario de 2031, con el resultado primario de todos los años del escenario base del FMI (2026) desplazado en la misma magnitud; la línea vertical marca el máximo anual de 1996-2025. Estimación central. Fuente: elaboración propia.](../tesis/figuras/fig6_4_suficiencia_superavit.png)
 
 ## 6.4 Contraste de H1b
 
@@ -196,4 +196,4 @@ Con la deuda consolidada con el BCRA, que parte de 52,1% del PIB y se estima des
 
 Con *shocks* generados a la manera del FMI sobre la historia argentina de la ventana 1996-2025, la probabilidad en 2031 es 24,1% con la métrica anual, cerca de nueve décimas de la del SVARX (27,7%) y muy superior a la del FMI, con un abanico más de dos veces más ancho que el del organismo (148,4 contra 71,5 puntos; Capítulo 7). Con la definición operativa del FMI, ese procedimiento da 29,1% en 2031 y 19,1% en 2035, muy por encima del SVARX con la misma definición (3,1% y 5,1%): con la historia argentina, el procedimiento del propio FMI no reproduce el 1%, y la diferencia con el SVARX está en los *shocks*, que en el SVARX son sorpresas y en ese procedimiento, desvíos respecto de una media de largo plazo.
 
-![Figura 6.5. Probabilidad de no estabilización por especificación, con la métrica anual. Estimaciones centrales en 2031 y 2035 con intervalos de 90%, y cifras del FMI (2026): 1% a mediano plazo y menos de 3% a diez años. La variante a la manera del FMI no tiene intervalo porque no estima parámetros. Fuente: elaboración propia.](../tesis/figuras/fig6_4_probabilidad_no_estabilizacion.png)
+![Figura 6.5. Probabilidad de no estabilización por especificación, con la métrica anual. Estimaciones centrales en 2031 y 2035 con intervalos de 90%, y cifras del FMI (2026): 1% a mediano plazo y menos de 3% a diez años. La variante a la manera del FMI no tiene intervalo porque no estima parámetros. Fuente: elaboración propia.](../tesis/figuras/fig6_5_probabilidad_no_estabilizacion.png)

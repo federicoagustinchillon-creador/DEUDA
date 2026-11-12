@@ -40,7 +40,8 @@ def main() -> None:
     ax.grid(axis="y", color="#cccccc", linewidth=0.5)
     for lado in ("top", "right"):
         ax.spines[lado].set_visible(False)
-    ax.legend(frameon=False, fontsize=8, loc="upper right")
+    ax.set_axisbelow(True)
+    ax.legend(frameon=False, fontsize=8, loc="lower left")
     fig.tight_layout()
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(SALIDA)

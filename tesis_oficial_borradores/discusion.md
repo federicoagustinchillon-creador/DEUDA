@@ -22,9 +22,9 @@ Consolidar con el BCRA baja el punto de partida a 52,1% del PIB. Su proporción 
 
 El abanico del SVARX mide 40,5 puntos del PIB en 2031, contra 71,5 del FMI y 148,4 del procedimiento del FMI aplicado a la historia argentina, que comparte con el SVARX deuda, identidad y métricas (Figura 7.1).
 
-![Figura 7.1. Abanicos con *shocks* del SVARX y con *shocks* a la manera del FMI. Deuda federal bruta simulada, percentiles 5 y 95 y mediana (% del PIB); los *shocks* a la manera del FMI son bloques de dos años de desvíos históricos de los impulsores anuales de la ventana 1996-2025. Fuente: elaboración propia.](../tesis/figuras/fig7_1_abanico_svarx_vs_fmi.png)
+![Figura 7.1. Abanicos con *shocks* del SVARX y con *shocks* a la manera del FMI. Deuda federal bruta simulada, percentiles 5 y 95 y mediana (% del PIB); los *shocks* a la manera del FMI son bloques de dos años de desvíos históricos de los impulsores anuales de la ventana 1996-2025. El límite inferior de ese procedimiento llega a valores negativos, porque no restringe la deuda a ser positiva. Fuente: elaboración propia.](../tesis/figuras/fig7_1_abanico_svarx_vs_fmi.png)
 
-El procedimiento del FMI mide los *shocks* como desvíos de cada impulsor respecto de una única media, y la historia argentina reúne regímenes monetarios muy distintos (Figura 7.2). Es el riesgo que el FMI y el Mecanismo Europeo de Estabilidad [ESM] (2023) señalan en su método: que la historia usada no sea representativa del futuro. La Tabla 7.1 repite la variante quitando 2002 o fijando cada impulsor en su media.
+El procedimiento del FMI mide los *shocks* como desvíos de cada impulsor respecto de una única media, y la historia argentina reúne regímenes monetarios muy distintos (Figura 7.2). Es el riesgo que el FMI y el ESM (2023) señalan en su método: que la historia usada no sea representativa del futuro. La Tabla 7.1 repite la variante quitando 2002 o fijando cada impulsor en su media.
 
 ![Figura 7.2. Impulsores anuales de la deuda en la ventana 1996-2025. Crecimiento real, tasa real efectiva, depreciación real y resultado primario que usa la variante a la manera del FMI, desde 1997, el primer año con los cuatro impulsores; la línea punteada es la media del período y en rojo se marca 2002. Fuente: elaboración propia.](../tesis/figuras/fig7_2_impulsores_historicos.png)
 

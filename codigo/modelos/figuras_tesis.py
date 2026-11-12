@@ -12,10 +12,10 @@ con su fuente). El abanico (figura 6.2) lo genera fig_abanico_deuda.py.
   fig6_1  Respuestas al impulso a +1 desvio de la tasa de la FED, con bandas de 90%.
   fig6_2  Grafico de abanico (fig_abanico_deuda.py).
   fig6_3  Participacion de cada bloque de shocks en la varianza de la deuda en 2035.
-  fig6_4  Probabilidad de no estabilizacion por especificacion, 2031 y 2035, contra los umbrales del FMI.
-  fig6_5  Contraste de suficiencia del superavit (H1a).
+  fig6_4  Contraste de suficiencia del superavit (H1a).
+  fig6_5  Probabilidad de no estabilizacion por especificacion, 2031 y 2035, contra los umbrales del FMI.
   fig7_1  Abanicos con shocks del SVARX y con shocks a la manera del FMI.
-  fig7_2  Impulsores historicos anuales de la deuda (2000-2025).
+  fig7_2  Impulsores historicos anuales de la deuda (1997-2025).
 
 Uso: python codigo/modelos/figuras_tesis.py
 Salida: tesis/figuras/*.png
@@ -29,6 +29,7 @@ import sys
 import matplotlib
 
 matplotlib.use("Agg")
+import matplotlib.dates as mdates  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
@@ -45,7 +46,7 @@ FIG = BASE / "tesis" / "figuras"
 AZUL, GRIS, ROJO, VERDE = "#1f4e79", "#7f7f7f", "#a23b2a", "#4f7f3a"
 plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False,
                      "axes.grid": True, "grid.color": "#dddddd", "grid.linewidth": 0.5,
-                     "legend.frameon": False, "figure.dpi": 200})
+                     "legend.frameon": False, "figure.dpi": 200, "axes.axisbelow": True})
 
 # FMI (2026), CR 26/105, anexo II, cuadro 2 (% PIB): linea 1, deuda federal bruta, y linea 5,
 # deuda del sector publico consolidado con el BCRA (neta de tenencias intra sector publico).
@@ -57,8 +58,8 @@ def leer(rel: str) -> pd.DataFrame:
     return pd.read_csv(DATOS / rel, parse_dates=["Date"], index_col="Date")
 
 
-def guardar(fig, nombre: str) -> None:
-    fig.tight_layout()
+def guardar(fig, nombre: str, rect: tuple | None = None) -> None:
+    fig.tight_layout(rect=rect)
     fig.savefig(FIG / nombre)
     plt.close(fig)
     print(f"[OK] tesis/figuras/{nombre}")
@@ -69,9 +70,10 @@ def fig5_1() -> None:
     fig, ax = plt.subplots(figsize=(7, 3.6))
     ax.plot(n.index, n["bruta_federal_pib"], color=AZUL, lw=1.8, label="Federal bruta (perímetro del FMI, principal)")
     ax.plot(n.index, n["deuda_consolidada_neta_nominal_pib"], color=GRIS, lw=1.3, label="Consolidada con el BCRA (extensión)")
-    for ctrl, color, etiqueta in ((CONTROL_FEDERAL, ROJO, "FMI (2026), federal bruta"),
-                                  (CONTROL_CONSOLIDADA, VERDE, "FMI (2026), consolidada")):
-        ax.scatter([pd.Timestamp(f"{a}-12-31") for a in ctrl], list(ctrl.values()), color=color, zorder=5, s=20, label=etiqueta)
+    for ctrl, color, etiqueta in ((CONTROL_FEDERAL, AZUL, "FMI (2026), federal bruta"),
+                                  (CONTROL_CONSOLIDADA, GRIS, "FMI (2026), consolidada")):
+        ax.scatter([pd.Timestamp(f"{a}-12-31") for a in ctrl], list(ctrl.values()), marker="D", facecolor=color,
+                   edgecolor="black", linewidth=0.7, zorder=5, s=24, label=etiqueta)
     inicio = pd.Timestamp(f24.INICIO_CONSOLIDADA)
     ax.axvspan(n.index.min(), inicio, color="#eeeeee", zorder=0)
     ax.axvline(inicio, color=GRIS, lw=0.8, ls="--")
@@ -87,7 +89,7 @@ def fig5_2() -> None:
                "crec": "Crecimiento real trimestral (%)", "EMBI": "EMBI Argentina (puntos básicos)",
                "TCRM": "Tipo de cambio real multilateral (índice)"}
     fig = plt.figure(figsize=(7, 5.4))
-    gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 0.22], hspace=0.45)
+    gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 0.3], hspace=0.45)
     axs = [fig.add_subplot(gs[i, j]) for i in range(2) for j in range(2)]
     for ax, c in zip(axs, f24.ENDOG):
         ax.plot(Y.index, Y[c], color=AZUL, lw=0.9)
@@ -95,18 +97,23 @@ def fig5_2() -> None:
             ax.axvline(q, color=ROJO, lw=0.7, ls=":")
         ax.set_title(titulos[c], fontsize=8)
         ax.set_xlim(Y.index.min(), Y.index.max())
+        ax.xaxis.set_major_locator(mdates.YearLocator(8))
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+        ax.tick_params(axis="x", labelsize=7.5)
     # Franja de gobiernos (Menem es la categoria de referencia de las binarias presidenciales).
     fin_ventana = Y.index.max() + pd.offsets.QuarterEnd(0)
     inicios = {"Menem": Y.index.min() - pd.offsets.QuarterEnd(1)}
     mandatos = {"Menem": (inicios["Menem"], pd.Timestamp(list(f24.MANDATOS.values())[0][0]) - pd.offsets.QuarterEnd(1))}
     etiquetas = {"Menem": "Menem", "De_la_Rua": "De la Rúa", "Duhalde": "Duh.", "N_Kirchner": "N. Kirchner",
-                 "CF_Kirchner": "C. Fernández de Kirchner", "Macri": "Macri", "A_Fernandez": "A. Fernández", "Milei": "Milei"}
+                 "CF_Kirchner": "C. F. de Kirchner", "Macri": "Macri", "A_Fernandez": "A. Fernández", "Milei": "Milei"}
     for nombre, (ini, fin) in f24.MANDATOS.items():
         mandatos[nombre] = (pd.Timestamp(ini) - pd.offsets.QuarterEnd(1), pd.Timestamp(fin))
-    axg = fig.add_subplot(gs[2, :])
+    axg = fig.add_subplot(gs[2, 0])
     for k, (nombre, (ini, fin)) in enumerate(mandatos.items()):
         axg.axvspan(ini, fin, color=(AZUL if k % 2 == 0 else GRIS), alpha=0.28, lw=0)
-        axg.text(ini + (fin - ini) / 2, 0.5, etiquetas[nombre], ha="center", va="center", fontsize=5.6 if nombre in ("Duhalde", "De_la_Rua") else 6.2)
+        # Las etiquetas alternan la altura para que no se pisen entre mandatos contiguos.
+        alto = 0.72 if k % 2 == 0 else 0.28
+        axg.text(ini + (fin - ini) / 2, alto, etiquetas[nombre], ha="center", va="center", fontsize=5.6)
     axg.set_xlim(Y.index.min(), Y.index.max())
     axg.set_yticks([])
     axg.grid(False)
@@ -114,8 +121,10 @@ def fig5_2() -> None:
         axg.spines[lado].set_visible(False)
     axg.tick_params(axis="x", length=0, labelbottom=False)
     fechas = ", ".join(f"{q.year}T{q.quarter}" for q in quiebres)
-    fig.text(0.5, 0.005, f"Líneas punteadas: quiebres de Bai y Perron conservados ({fechas}). Franja inferior: gobiernos; Menem es la referencia de las binarias presidenciales.",
-             ha="center", fontsize=6.3)
+    nota = fig.add_subplot(gs[2, 1])
+    nota.axis("off")
+    nota.text(0, 0.5, f"Líneas punteadas: quiebres de Bai y Perron\nconservados ({fechas}).\nFranja de la izquierda: gobiernos, en la misma\nescala de tiempo; Menem es la referencia de\nlas binarias presidenciales.",
+              ha="left", va="center", fontsize=6.3)
     guardar(fig, "fig5_2_variables_endogenas.png")
 
 
@@ -193,12 +202,12 @@ def fig6_3() -> None:
 
 ESPECIFICACIONES = {
     "federal": "Principal", "consolidada": "Consolidada\ncon el BCRA", "federal_dom": "Tasas\nen pesos",
-    "federal_sin_retro": "Sin retro-\nalimentación", "federal_p3": "Tres\nrezagos", "federal_sin_default": "Sin shocks\ndel default",
+    "federal_sin_retro": "Sin retro-\nalimentación", "federal_p3": "Tres\nrezagos", "federal_sin_default": "Sin shocks\n2001T4-2005T3",
     "federal_desde2004": "Datos\ndesde 2004", "federal_sin_presidenciales": "Sin binarias\npresidenciales", "federal_cr2595": "Escenario\nFMI 2025", "federal_kilian": "Corrección\nde Kilian",
 }
 
 
-def fig6_4() -> None:
+def fig6_5() -> None:
     fig, ax = plt.subplots(figsize=(9.2, 4.2))
     specs = [s for s in ESPECIFICACIONES if (TABLAS / f"fase25_{s}_resumen.csv").exists()]
     x = np.arange(len(specs) + 1)
@@ -206,19 +215,21 @@ def fig6_4() -> None:
         vals = [_intervalo(pd.read_csv(TABLAS / f"fase25_{s}_resumen.csv", index_col=0), f"base_p_noest_{anio}", 100) for s in specs]
         fmi = pd.read_csv(TABLAS / "fase25_federal_fmi_resumen.csv", index_col=0)["valor"]
         vals.append((100 * fmi[f"p_noest_{anio}"], 0.0, 0.0))
-        ax.bar(x + dx, [v[0] for v in vals], width=0.34, color=color, capsize=3, error_kw={"lw": 0.8},
-               yerr=[[v[1] for v in vals], [v[2] for v in vals]],
+        ax.bar(x + dx, [v[0] for v in vals], width=0.34, color=color,
                label=f"{anio} ({'mediano plazo' if anio == 2031 else 'diez años'})")
+        con = [k for k, v in enumerate(vals) if v[1] > 0 or v[2] > 0]
+        ax.errorbar(x[con] + dx, [vals[k][0] for k in con], yerr=[[vals[k][1] for k in con], [vals[k][2] for k in con]],
+                    fmt="none", ecolor="black", capsize=3, elinewidth=0.8)
     ax.axhline(1, color=ROJO, lw=1.2, ls="--", label="FMI (2026), mediano plazo: 1%")
     ax.axhline(3, color=ROJO, lw=1.0, ls=":", label="FMI (2026), diez años: menos de 3%")
-    ax.set_xticks(x, [ESPECIFICACIONES[s] for s in specs] + ["Shocks a la\nmanera del FMI"], fontsize=7)
+    ax.set_xticks(x, [ESPECIFICACIONES[s] for s in specs] + ["Shocks a la\nmanera del FMI"], fontsize=6.6)
     ax.set_ylabel("Probabilidad de no estabilización (%)")
     ax.grid(axis="x", visible=False)
     ax.legend(fontsize=7, loc="lower center", ncol=2, bbox_to_anchor=(0.5, 1.0))
-    guardar(fig, "fig6_4_probabilidad_no_estabilizacion.png")
+    guardar(fig, "fig6_5_probabilidad_no_estabilizacion.png")
 
 
-def fig6_5() -> None:
+def fig6_4() -> None:
     t = pd.read_csv(TABLAS / "fase25_federal_suficiencia.csv")
     pb = pd.read_csv(DATOS / "procesados" / "resultado_primario_1996_2025.csv", index_col=0, parse_dates=True)["pb_pib_sin_rentas"]
     maximo = float(pb[pb.index.quarter == 4].loc["1996":].max())  # anio calendario, sin rentas de la propiedad
@@ -233,7 +244,7 @@ def fig6_5() -> None:
     ax.set_xlabel("Resultado primario en 2031 (% del PIB)")
     ax.set_ylabel("%")
     ax.legend(fontsize=7)
-    guardar(fig, "fig6_5_suficiencia_superavit.png")
+    guardar(fig, "fig6_4_suficiencia_superavit.png")
 
 
 def fig7_1() -> None:
@@ -246,7 +257,7 @@ def fig7_1() -> None:
     ax.plot(a.index, a["p50"], color=AZUL, lw=1.6, label="SVARX, mediana")
     ax.set_ylabel("% del PIB")
     ax.set_xticks(a.index)
-    ax.legend(fontsize=7.5, loc="upper left")
+    ax.legend(fontsize=7.5, loc="upper center", bbox_to_anchor=(0.5, -0.1), ncol=2)
     guardar(fig, "fig7_1_abanico_svarx_vs_fmi.png")
 
 
@@ -260,8 +271,8 @@ def fig7_2() -> None:
         ax.axhline(d[c].mean(), color="black", lw=0.8, ls="--")
         ax.set_title(titulos[c], fontsize=8)
         ax.grid(axis="x", visible=False)
-    fig.text(0.5, 0.005, f"Línea punteada: media {d.index.min()}-{d.index.max()}. En rojo, 2002.", ha="center", fontsize=7)
-    guardar(fig, "fig7_2_impulsores_historicos.png")
+    fig.text(0.5, 0.008, f"Línea punteada: media {d.index.min()}-{d.index.max()}. En rojo, 2002.", ha="center", fontsize=7)
+    guardar(fig, "fig7_2_impulsores_historicos.png", rect=(0, 0.04, 1, 1))
 
 
 def figA_1() -> None:
