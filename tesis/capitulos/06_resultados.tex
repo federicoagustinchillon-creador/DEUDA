@@ -37,10 +37,11 @@ entre los estables que no están por debajo del de Schwarz (Portmanteau,
 p = 0,031; sección 4.5 y Apéndice, sección A.4). Esa autocorrelación
 residual leve es una limitación (sección 7.6). Los residuos no muestran
 heterocedasticidad condicional al 5\% en tres de las cuatro ecuaciones
-(ARCH-LM; Engle, 1982); en la del TCRM sí (p \textless{} 0,001).
-Rechazan la normalidad multivariada (Jarque y Bera, 1987; p \textless{}
-0,001), lo que justifica remuestrear \emph{shocks} históricos (Apéndice,
-sección A.5).
+(prueba ARCH-LM, de multiplicadores de Lagrange para la
+heterocedasticidad condicional autorregresiva; Engle, 1982); en la del
+TCRM sí (p \textless{} 0,001). Rechazan la normalidad multivariada
+(Jarque y Bera, 1987; p \textless{} 0,001), lo que justifica remuestrear
+\emph{shocks} históricos (Apéndice, sección A.5).
 
 \subsection{Binarias presidenciales}
 
@@ -416,8 +417,8 @@ probabilidad en 2031 es 29,7\% {[}23,5; 37,3{]}, y la probabilidad de
 que la deuda de 2031 supere a la de 2029 es 20,0\% {[}17,3; 26,7{]}. En
 las 21 especificaciones el límite inferior supera las cifras del FMI; el
 menor, 16,2\% en 2031, corresponde a la variante de tres rezagos, y en
-2035 es 18,0\% (la variante sin ajuste stock-flujo y la del escenario de
-2025).
+2035 es 18,0\% (la variante sin ajuste \emph{stock}-flujo y la del
+escenario de 2025).
 
 H1b no queda respaldada. Con la medida del contraste, la probabilidad de
 no estabilización no se distingue de la que informa el FMI. Con la
@@ -534,14 +535,14 @@ manera del FMI y la cifra del FMI, está en el Apéndice, sección A.10.
 \Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 6.6. Robustez (selección)}\textbf{Tabla 6.6. Robustez (selección)}
 
 {\footnotesize\setlength{\tabcolsep}{3pt}\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.2600}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1300}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1200}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1200}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0900}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0900}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0900}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Especificación
@@ -574,11 +575,11 @@ Deuda consolidada con el BCRA & 11,0\% {[}2,7; 20,2{]} & 31,1\% {[}27,6;
 41,5{]} & 35,0\% {[}32,3; 49,8{]} & 55,2 & no se informa & 19,2 {[}3,2;
 33,8{]} & no se informa \\
 Resultado primario con rentas de la propiedad & 2,9\% {[}0,0; 5,8{]} &
-28,5\% {[}22,3; 36,0{]} & 29,3\% {[}25,8; 36,5{]} & 40,1 & 99,5 {[}92,0;
+28,5\% {[}22,3; 36,0{]} & 29,3\% {[}25,8; 36,6{]} & 40,1 & 99,5 {[}92,0;
 99,8{]} & 20,0 {[}9,6; 31,6{]} & 21,3 {[}3,5; 34,7{]} \\
 Sin retroalimentación de la deuda & 1,3\% {[}0,0; 2,7{]} & 27,2\%
 {[}22,0; 34,1{]} & 25,6\% {[}20,6; 31,7{]} & 38,1 & 95,1 {[}88,1;
-99,6{]} & 8,3 {[}5,6; 10,9{]} & 13,0 {[}7,8; 18,4{]} \\
+99,6{]} & 8,4 {[}5,6; 10,9{]} & 13,0 {[}7,8; 18,4{]} \\
 Tres rezagos & 2,5\% {[}0,0; 5,1{]} & 25,9\% {[}16,2; 32,5{]} & 27,5\%
 {[}22,7; 34,6{]} & 38,1 & 91,6 {[}80,2; 99,6{]} & 17,5 {[}8,6; 28,6{]} &
 17,3 {[}8,1; 28,4{]} \\

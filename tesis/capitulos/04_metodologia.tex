@@ -107,7 +107,7 @@ acumulación es contablemente exacta.
 
 Argentina es una economía pequeña y abierta: sus variables no afectan la
 tasa de la FED ni el VIX, que forman un bloque exógeno, el supuesto
-estándar en estos VAR (Cushman y Zha, 1997; Canova, 2005; Uribe y Yue,
+estándar en estos VAR (Canova, 2005; Cushman y Zha, 1997; Uribe y Yue,
 2006). El efecto de la FED es un multiplicador dinámico de la variable
 exógena y no depende de cómo se identifiquen los \emph{shocks}
 argentinos.
@@ -295,12 +295,12 @@ préstamos interfinancieros en dólares del BCRA y la tasa de fondos
 federales, estimada en la superposición 1998T4-2001T3. El índice del
 TCRM del BCRA empieza en enero de 1997; el de 1996 se encadena hacia
 atrás con las variaciones del tipo de cambio real efectivo amplio del
-BIS. Con dos rezagos, ninguno de los dos empalmes pesa mucho en la
-estimación: el TCRM de 1996 no entra en ella, y el EMBI reconstruido
-solo aparece en 1998T2-1998T3 y como rezago en 1997T4-1998T1. La
-construcción está en el Capítulo 5 y la validación, en el Apéndice,
-sección A.2. Con datos desde 1999, sin el empalme del EMBI, los
-resultados casi no cambian (sección 6.6).
+Banco de Pagos Internacionales (BIS). Con dos rezagos, ninguno de los
+dos empalmes pesa mucho en la estimación: el TCRM de 1996 no entra en
+ella, y el EMBI reconstruido solo aparece en 1998T2-1998T3 y como rezago
+en 1997T4-1998T1. La construcción está en el Capítulo 5 y la validación,
+en el Apéndice, sección A.2. Con datos desde 1999, sin el empalme del
+EMBI, los resultados casi no cambian (sección 6.6).
 
 Los quiebres de Bai y Perron (2003) se estiman sobre la media de la
 deuda, una serie muy persistente en la que el procedimiento tiende a
@@ -316,9 +316,11 @@ contrasta con los cambios de gobierno.
 Un VAR en niveles es consistente aunque haya raíces unitarias, sin
 imponer cointegración, pero algunos estimadores no tienen distribución
 estándar (Sims et al., 1990); por eso la inferencia usa
-\emph{bootstrap}. ADF y KPSS no clasifican con claridad la mayoría de
-las series, y la prueba de Johansen (1991), que omite los quiebres y se
-toma como indicativa (Johansen et al., 2000), no rechaza la ausencia de
+\emph{bootstrap}. las pruebas de Dickey y Fuller aumentada (ADF; Dickey
+y Fuller, 1979) y de Kwiatkowski, Phillips, Schmidt y Shin (KPSS;
+Kwiatkowski et al., 1992) no clasifican con claridad la mayoría de las
+series, y la prueba de Johansen (1991), que omite los quiebres y se toma
+como indicativa (Johansen et al., 2000), no rechaza la ausencia de
 cointegración (Apéndice, sección A.3).
 
 Un VAR es estable si todos los autovalores de su matriz compañera tienen
@@ -342,23 +344,24 @@ informan los resultados con uno y con tres rezagos (sección 6.6). Akaike
 elige seis, un orden inestable (raíz máxima 1,008) (Apéndice, sección
 A.4).
 
-La estimación central usa los parámetros de mínimos cuadrados. Los
-intervalos de 90\% salen de un \emph{bootstrap} de bloques móviles de
-cuatro trimestres sobre los residuos, de diseño recursivo, en el que la
-deuda también se regenera (Brüggemann et al., 2016). Esos autores
-muestran que el \emph{bootstrap} salvaje no reproduce la estructura de
-cuarto orden de las innovaciones, de la que dependen las respuestas
-estructurales; por eso no se usa. Los intervalos son percentiles de Hall
-(1992), que corrigen el sesgo de la distribución \emph{bootstrap}
-respecto de la estimación puntual. Como el remuestreo es en bloques,
-preserva la heterocedasticidad condicional de forma desconocida, que
-aparece en la ecuación del TCRM (Apéndice, sección A.5). Para las
-varianzas y las participaciones de la descomposición, que son cantidades
-acotadas, los intervalos son percentiles simples de las réplicas y no de
-Hall. La corrección de sesgo de Kilian (1998) se informa como robustez.
-Se usan 1.000 réplicas: con 200, cada cola de un intervalo de 95\%, que
-es el que se emplea para la corrección de Bonferroni, quedaba definida
-por unas cinco observaciones y su precisión empírica era insuficiente.
+La estimación central usa los parámetros de mínimos cuadrados ordinarios
+(MCO). Los intervalos de 90\% salen de un \emph{bootstrap} de bloques
+móviles de cuatro trimestres sobre los residuos, de diseño recursivo, en
+el que la deuda también se regenera (Brüggemann et al., 2016). Esos
+autores muestran que el \emph{bootstrap} salvaje no reproduce la
+estructura de cuarto orden de las innovaciones, de la que dependen las
+respuestas estructurales; por eso no se usa. Los intervalos son
+percentiles de Hall (1992), que corrigen el sesgo de la distribución
+\emph{bootstrap} respecto de la estimación puntual. Como el remuestreo
+es en bloques, preserva la heterocedasticidad condicional de forma
+desconocida, que aparece en la ecuación del TCRM (Apéndice, sección
+A.5). Para las varianzas y las participaciones de la descomposición, que
+son cantidades acotadas, los intervalos son percentiles simples de las
+réplicas y no de Hall. La corrección de sesgo de Kilian (1998) se
+informa como robustez. Se usan 1.000 réplicas: con 200, cada cola de un
+intervalo de 95\%, que es el que se emplea para la corrección de
+Bonferroni, quedaba definida por unas cinco observaciones y su precisión
+empírica era insuficiente.
 
 \section{Simulación de Monte Carlo}
 
@@ -366,7 +369,7 @@ por unas cinco observaciones y su precisión empírica era insuficiente.
 
 El escenario base es el del FMI (2026, cuadro 6), de mayo de 2026:
 crecimiento real \(g\), deflactor \(\pi\), tasa efectiva \(i\),
-resultado primario \(pb\), ajuste stock-flujo \(sf\) e inflación
+resultado primario \(pb\), ajuste \emph{stock}-flujo \(sf\) e inflación
 relativa \(ri\) (efecto de la depreciación nominal sobre la deuda en
 moneda extranjera). Aplicada al \emph{stock} del FMI, la identidad
 reproduce su senda con un desvío máximo de 0,12 puntos del PIB. La
@@ -385,13 +388,13 @@ bruta y 0,315 para la consolidada con el BCRA), \(a^{FMI}\) y
 \(d^{FMI}\) son la proporción y el \emph{stock} del FMI, \(e_t\) es el
 desvío de la depreciación real que simula el SVARX y \(x_t\) el de la
 tasa en dólares (EMBI y nivel de la tasa de la FED). El ajuste
-stock-flujo, sobre todo capitalización de deuda indexada en 2026 y 2027,
-se escala por la deuda en pesos respecto de la del FMI, y la inflación
-relativa, por la deuda en moneda extranjera. La proporción en pesos
-queda fija, como supone el FMI (2021, anexo VI, párr. 6). La tasa en
-dólares se reprecia a medida que vence la deuda: cada año se refinancia
-la fracción λ = 0,282, cociente entre las necesidades brutas de
-financiamiento y la deuda promedio de los seis primeros años del
+\emph{stock}-flujo, sobre todo capitalización de deuda indexada en 2026
+y 2027, se escala por la deuda en pesos respecto de la del FMI, y la
+inflación relativa, por la deuda en moneda extranjera. La proporción en
+pesos queda fija, como supone el FMI (2021, anexo VI, párr. 6). La tasa
+en dólares se reprecia a medida que vence la deuda: cada año se
+refinancia la fracción λ = 0,282, cociente entre las necesidades brutas
+de financiamiento y la deuda promedio de los seis primeros años del
 escenario. Como incluye letras en pesos de corto plazo, se informa la
 sensibilidad a λ = 0,15 y 0,40.
 
@@ -435,13 +438,13 @@ trayectoria simulada,
 con \(sf\) y \(ri\) escalados como en la identidad. Equivale a que la
 deuda de \(T\), con el resultado primario del escenario, supere a la de
 \(T-1\), de modo que incluye la valuación de la deuda en moneda
-extranjera y el ajuste stock-flujo de ese año.
+extranjera y el ajuste \emph{stock}-flujo de ese año.
 
 La medida principal es una reconstrucción de la definición operativa del
 FMI, la que el organismo usa para las cifras con que se compara H1b;
 como el FMI no publica el cálculo, la tesis la reconstruye a partir de
 su guía. El resultado primario que estabiliza la deuda se calcula sin
-variación del tipo de cambio real ni ajuste stock-flujo, con las
+variación del tipo de cambio real ni ajuste \emph{stock}-flujo, con las
 variables promediadas a lo largo de la trayectoria (FMI, 2022, recuadro
 3). La tesis usa los impulsores del escenario en el año \(T\) más el
 desvío promedio de la trayectoria desde 2026,
@@ -514,8 +517,8 @@ demás variantes quitan la retroalimentación, usan el resultado primario
 con rentas de la propiedad, usan uno o tres rezagos, omiten los
 quiebres, las binarias presidenciales o los \emph{shocks} de
 2001T4-2005T3, usan solo el EMBI observado (datos desde 1999, sin
-empalme), empiezan en 2004, anulan el ajuste stock-flujo, corrigen el
-sesgo o usan el escenario de 2025. Con la principal suman 21
+empalme), empiezan en 2004, anulan el ajuste \emph{stock}-flujo,
+corrigen el sesgo o usan el escenario de 2025. Con la principal suman 21
 especificaciones del SVARX. Dos de ellas son equivalentes: con una
 elasticidad cíclica de cero, el \emph{shock} fiscal absorbe toda la
 covarianza con el crecimiento, igual que en el ordenamiento de Cholesky
@@ -541,9 +544,9 @@ hipótesis.
 \Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 4.4. Medidas y criterios de contraste}\textbf{Tabla 4.4. Medidas y criterios de contraste}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0800}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6200}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1176}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2745}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6078}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Hipótesis

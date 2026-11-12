@@ -87,4 +87,4 @@ Reúne investigaciones de grado, maestría y doctorado en universidades nacional
 
 ## 3. Catálogo de Archivos y Metadatos
 
-El registro computacional completo de las obras y sus grafos de citaciones cruzadas se encuentra serializado en [`catalogo_analisis_deuda_argentina.json`](catalogo_analisis_deuda_argentina.json).
+El registro de las obras se reconstruye con las referencias de esta carpeta.

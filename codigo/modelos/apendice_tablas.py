@@ -43,7 +43,7 @@ ROBUSTEZ = {
     "federal_desde2004": "Datos desde 2004",
     "federal_sin_quiebres": "Sin variables binarias de quiebre",
     "federal_sin_presidenciales": "Sin variables binarias presidenciales",
-    "federal_sf0": "Ajuste stock-flujo en cero",
+    "federal_sf0": "Ajuste *stock*-flujo en cero",
     "federal_lam0.15": "λ = 0,15",
     "federal_lam0.4": "λ = 0,40",
     "federal_cr2595": "Escenario del FMI de 2025",
@@ -82,7 +82,7 @@ ANCHOS = {  # (dos primeras columnas) -> ancho relativo de cada columna; sin ent
     ("Variable", "*Shock* del resultado primario"): [24, 19, 19, 19, 19],
     ("Regresor", "Coeficiente"): [52, 16, 16, 16],
     ("Medida", "Estimación central"): [64, 16, 20],
-    ("Especificación", "2031, métrica anual (%)"): [26, 15, 15, 15, 15, 14],
+    ("Especificación", "2031, métrica anual (%)"): [29, 14, 14, 14, 14, 15],
     ("Especificación", "No fiscal menos fiscal (puntos)"): [34, 22, 22, 22],
 }
 

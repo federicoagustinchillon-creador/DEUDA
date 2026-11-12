@@ -253,10 +253,10 @@ Estimación central con los parámetros de MCO y 20.000 trayectorias (error de M
 La primera tabla muestra la probabilidad de no estabilización y el ancho del abanico, y la segunda, el reparto de la varianza y el efecto de la FED. Entre corchetes, intervalos de 90%: de Hall, salvo las participaciones y varianzas y la diferencia entre *shocks* no fiscales y fiscal, que usan percentiles simples de las réplicas. Las columnas de la definición operativa del FMI usan la reconstrucción de la sección 4.6: los impulsores del escenario en el año final más el *shock* promedio de cada trayectoria, sin variación del tipo de cambio real ni ajuste *stock*-flujo (FMI, 2022, recuadro 3). La columna de la deuda de la senda de la FED se muestra con dos decimales para distinguir los intervalos que tocan el cero. «No se informa»: más de 1% de las réplicas (10% en la columna del reparto de la varianza) tiene trayectorias explosivas que dominan la media de la deuda. Todas las especificaciones usan los mismos números aleatorios, de modo que las diferencias entre filas no provienen del sorteo. Las filas a la manera del FMI no tienen intervalo porque ese procedimiento no estima parámetros. Fuente de la última fila: FMI (2026, anexo II, cuadro 7 y párrafo 9).
 
 | Especificación | 2031, métrica anual (%) | 2035, métrica anual (%) | 2031, definición del FMI (%) | 2035, definición del FMI (%) | Ancho del abanico 2031 |
-|--------------------------|---------------|---------------|---------------|---------------|--------------|
+|-----------------------------|--------------|--------------|--------------|--------------|---------------|
 | Principal (deuda federal bruta) | 27,7 [20,6; 34,7] | 29,0 [25,0; 36,1] | 3,1 [0,0; 6,3] | 5,1 [0,0; 10,2] | 40,5 |
 | Deuda consolidada con el BCRA | 31,1 [27,6; 41,5] | 35,0 [32,3; 49,8] | 11,0 [2,7; 20,2] | 17,3 [7,4; 32,3] | 55,2 |
-| Resultado primario con rentas de la propiedad | 28,5 [22,3; 36,0] | 29,3 [25,8; 36,5] | 2,9 [0,0; 5,8] | 5,5 [0,0; 10,9] | 40,1 |
+| Resultado primario con rentas de la propiedad | 28,5 [22,3; 36,0] | 29,3 [25,8; 36,6] | 2,9 [0,0; 5,8] | 5,5 [0,0; 10,9] | 40,1 |
 | Canal de tasas en pesos | 29,5 [24,3; 36,5] | 34,9 [31,6; 44,1] | 9,0 [2,7; 17,0] | 17,4 [9,7; 32,3] | 51,6 |
 | Sin retroalimentación de la deuda | 27,2 [22,0; 34,1] | 25,6 [20,6; 31,7] | 1,3 [0,0; 2,7] | 0,3 [0,0; 0,6] | 38,1 |
 | Un rezago (criterio de Schwarz) | 29,4 [27,7; 39,2] | 31,0 [27,2; 40,6] | 3,9 [0,0; 7,7] | 7,3 [0,0; 14,4] | 38,5 |
@@ -270,7 +270,7 @@ La primera tabla muestra la probabilidad de no estabilización y el ancho del ab
 | Datos desde 2004 | 31,1 [26,8; 39,3] | 32,2 [23,7; 42,0] | 6,2 [0,0; 12,5] | 4,9 [0,0; 9,8] | 48,4 |
 | Sin variables binarias de quiebre | 27,1 [22,1; 33,0] | 27,4 [22,9; 33,1] | 2,3 [0,0; 4,7] | 2,3 [0,0; 4,6] | 38,5 |
 | Sin variables binarias presidenciales | 31,8 [25,2; 36,3] | 31,1 [26,9; 35,9] | 6,2 [0,2; 11,9] | 8,3 [0,3; 16,4] | 47,1 |
-| Ajuste stock-flujo en cero | 25,3 [18,2; 32,3] | 22,4 [18,0; 29,0] | 2,2 [0,0; 4,5] | 3,0 [0,0; 6,0] | 35,7 |
+| Ajuste *stock*-flujo en cero | 25,3 [18,2; 32,3] | 22,4 [18,0; 29,0] | 2,2 [0,0; 4,5] | 3,0 [0,0; 6,0] | 35,7 |
 | λ = 0,15 | 27,0 [19,4; 34,2] | 26,9 [22,3; 33,4] | 1,8 [0,0; 3,6] | 1,7 [0,0; 3,4] | 37,0 |
 | λ = 0,40 | 28,3 [21,8; 35,4] | 30,5 [26,7; 37,9] | 4,8 [0,0; 9,3] | 8,1 [0,0; 15,9] | 43,7 |
 | Escenario del FMI de 2025 | 25,7 [18,1; 32,7] | 22,9 [18,0; 29,3] | 0,9 [0,0; 1,8] | 2,0 [0,0; 3,9] | 38,0 |
@@ -287,7 +287,7 @@ Segunda tabla: reparto de la varianza entre *shocks* y efecto de la senda de la 
 | Deuda consolidada con el BCRA | no se informa | 19,2 [3,2; 33,8] | no se informa |
 | Resultado primario con rentas de la propiedad | 99,5 [92,0; 99,8] | 20,0 [9,6; 31,6] | 21,30 [3,55; 34,67] |
 | Canal de tasas en pesos | 98,9 [94,5; 100,0] | 22,5 [7,7; 38,0] | 33,72 [-21,30; 61,03] |
-| Sin retroalimentación de la deuda | 95,1 [88,1; 99,6] | 8,3 [5,6; 10,9] | 13,04 [7,79; 18,36] |
+| Sin retroalimentación de la deuda | 95,1 [88,1; 99,6] | 8,4 [5,6; 10,9] | 13,04 [7,79; 18,36] |
 | Un rezago (criterio de Schwarz) | 99,9 [90,7; 99,9] | 21,7 [8,3; 33,3] | 24,25 [-7,44; 41,22] |
 | Tres rezagos | 91,6 [80,2; 99,6] | 17,5 [8,6; 28,6] | 17,29 [8,14; 28,41] |
 | Cholesky, resultado primario primero | 85,6 [72,3; 99,5] | 18,4 [6,2; 29,0] | 19,29 [0,05; 31,35] |
@@ -299,7 +299,7 @@ Segunda tabla: reparto de la varianza entre *shocks* y efecto de la senda de la 
 | Datos desde 2004 | 90,3 [83,4; 100,0] | 17,5 [-1,9; 31,5] | no se informa |
 | Sin variables binarias de quiebre | 93,9 [88,2; 99,8] | 17,0 [5,3; 25,1] | 15,69 [1,21; 24,47] |
 | Sin variables binarias presidenciales | 77,9 [67,3; 99,4] | 9,7 [3,2; 16,5] | 9,24 [-0,19; 17,06] |
-| Ajuste stock-flujo en cero | 95,9 [89,4; 99,8] | 15,3 [4,4; 24,5] | 14,40 [1,22; 23,46] |
+| Ajuste *stock*-flujo en cero | 95,9 [89,4; 99,8] | 15,3 [4,4; 24,5] | 14,40 [1,22; 23,46] |
 | λ = 0,15 | 96,0 [89,3; 99,7] | 11,1 [2,3; 18,0] | 11,21 [0,45; 18,84] |
 | λ = 0,40 | 97,3 [91,9; 99,9] | 23,0 [10,1; 36,2] | 26,60 [-3,06; 43,49] |
 | Escenario del FMI de 2025 | 96,4 [90,1; 99,8] | 12,0 [2,6; 19,6] | 12,01 [0,04; 20,27] |

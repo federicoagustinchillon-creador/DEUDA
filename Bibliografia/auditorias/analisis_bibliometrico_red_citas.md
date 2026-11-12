@@ -22,7 +22,7 @@
 | 2015 | Jesús Fernández‐Villaverde, Pablo Guerrón-Quintana, Keith Kuester et al. | *Fiscal Volatility Shocks and Economic Activity* | 942 | [https://doi.org/10.1257/aer.20121236](https://doi.org/10.1257/aer.20121236) |
 | 2002 | Malcolm Baker, Jeremy C. Stein, Jeffrey Wurgler | *When Does the Market Matter? Stock Prices and the Investment of Equity-Dependent Firms* | 858 | [https://doi.org/10.3386/w8750](https://doi.org/10.3386/w8750) |
 | 1999 | Martin D.D. Evans, Richard K. Lyons | *Order Flow and Exchange Rate Dynamics* | 813 | [https://doi.org/10.3386/w7317](https://doi.org/10.3386/w7317) |
-| 1984 | Robert J. Shiller | *Stock Prices and Social Dynamics* | 787 | [N/A](N/A) |
+| 1984 | Robert J. Shiller | *Stock Prices and Social Dynamics* | 787 | sin enlace |
 | 2000 | James M. Poterba | *Stock Market Wealth and Consumption* | 725 | [https://doi.org/10.1257/jep.14.2.99](https://doi.org/10.1257/jep.14.2.99) |
 | 2010 | Joshua Rauh, Amir Sufi | *Capital Structure and Debt Structure* | 707 | [https://doi.org/10.1093/rfs/hhq095](https://doi.org/10.1093/rfs/hhq095) |
 | 2015 | Markus Eberhardt, Andrea Presbitero | *Public debt and growth: Heterogeneity and non-linearity* | 613 | [https://doi.org/10.1016/j.jinteco.2015.04.005](https://doi.org/10.1016/j.jinteco.2015.04.005) |

@@ -20,10 +20,10 @@ del modelo.
 \Needspace{8\baselineskip}\addcontentsline{lot}{table}{Tabla 5.1. Series del modelo: rol, fuente y construcción}\textbf{Tabla 5.1. Series del modelo: rol, fuente y construcción}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2200}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1400}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3400}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2020}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1717}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3232}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3030}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Variable
@@ -43,7 +43,7 @@ Informe de Deuda Pública (Administración Central) & Sección 5.2 \\
 Deuda consolidada con el BCRA (\% del PIB) & Extensión, estimada desde
 2002 & MECON (deuda de la Administración Central) y BCRA (balance y
 estadísticas monetarias) & Sección 5.2; no descuenta las tenencias del
-FGS (sección 5.6) \\
+Fondo de Garantía de Sustentabilidad (FGS; sección 5.6) \\
 Resultado primario (\% del PIB) & Endógena & MECON, esquema
 ahorro-inversión-financiamiento del Sector Público Nacional, base caja &
 Suma mensual por trimestre, anualizada; sin rentas de la propiedad
@@ -61,11 +61,11 @@ Tipo de cambio real multilateral (TCRM) & Endógena & BCRA, desde enero
 de 1997 & Promedio trimestral del índice; 1996 encadenado con el tipo de
 cambio real efectivo amplio del BIS (sección 5.4) \\
 Tasa de política monetaria de la Reserva Federal (FED) & Exógena & Tasa
-de fondos federales, obtenida de FRED (Board of Governors of the Federal
-Reserve System, s. f.); tasa sombra de Wu y Xia (2016) (Federal Reserve
-Bank of Atlanta, s. f.) & Promedio trimestral; tasa sombra en el límite
-cero; cambios de serie en 2009T1, 2016T1, 2020T2 y 2022T1 (sección
-5.4) \\
+de fondos federales, obtenida de FRED, la base \emph{Federal Reserve
+Economic Data} (Board of Governors of the Federal Reserve System, s.
+f.); tasa sombra de Wu y Xia (2016) (Federal Reserve Bank of Atlanta, s.
+f.) & Promedio trimestral; tasa sombra en el límite cero; cambios de
+serie en 2009T1, 2016T1, 2020T2 y 2022T1 (sección 5.4) \\
 VIX & Exógena & Índice VIX de la \emph{Chicago Board Options Exchange}
 (CBOE), descargado de Yahoo Finance & Promedio trimestral \\
 \end{longtable}
@@ -82,16 +82,16 @@ las cifras anuales del FMI.
 La deuda federal bruta, de la especificación principal, es la deuda de
 la Administración Central que publica el MECON (Secretaría de Finanzas,
 2025a), en pesos al tipo de cambio de fin de trimestre. Incluye la deuda
-en poder del BCRA, del Fondo de Garantía de Sustentabilidad (FGS) de la
-Administración Nacional de la Seguridad Social (ANSES) y de otros
-organismos públicos, igual que la del FMI (2026, anexo II, cuadro 2,
-línea 1). A fines de 2025 la serie propia da 77,7\% del PIB y la del
-FMI, 80,3\%. La diferencia son conceptos que el MECON no incluye
-(intereses capitalizados hasta el vencimiento, deuda con acreedores que
-no entraron a los canjes y reclamos por los cupones atados al PIB) y la
-medición del PIB. La dinámica se estima con la serie propia y la
-simulación parte del \emph{stock} del FMI, de modo que esa diferencia no
-entra en la proyección. La Figura 5.1 muestra las dos series de deuda.
+en poder del BCRA, del FGS de la Administración Nacional de la Seguridad
+Social (ANSES) y de otros organismos públicos, igual que la del FMI
+(2026, anexo II, cuadro 2, línea 1). A fines de 2025 la serie propia da
+77,7\% del PIB y la del FMI, 80,3\%. La diferencia son conceptos que el
+MECON no incluye (intereses capitalizados hasta el vencimiento, deuda
+con acreedores que no entraron a los canjes y reclamos por los cupones
+atados al PIB) y la medición del PIB. La dinámica se estima con la serie
+propia y la simulación parte del \emph{stock} del FMI, de modo que esa
+diferencia no entra en la proyección. La Figura 5.1 muestra las dos
+series de deuda.
 
 La deuda consolidada con el BCRA, de la extensión, sigue la
 consolidación del FMI (2021, anexo II). Se construye para 1996-2025,
@@ -112,12 +112,12 @@ D = B − T + L − DEP
 donde B es la deuda federal bruta; T, la deuda del Tesoro en poder del
 BCRA (adelantos transitorios, títulos en pesos y Letras
 Intransferibles); L, los pasivos remunerados del BCRA (LEBAC y NOBAC,
-LELIQ y NOTALIQ, posición neta de pases y letras en moneda extranjera),
-y DEP, los depósitos del Tesoro en el BCRA. Las Letras Intransferibles
-se valúan al valor nominal que publica el MECON, el mismo criterio de la
-deuda bruta, y no al valor contable del balance del BCRA (Banco Central
-de la República Argentina, s. f.); antes de 2006, cuando no existían,
-rige el valor contable.
+LELIQ y Notas de Liquidez {[}NOTALIQ{]}, posición neta de pases y letras
+en moneda extranjera), y DEP, los depósitos del Tesoro en el BCRA. Las
+Letras Intransferibles se valúan al valor nominal que publica el MECON,
+el mismo criterio de la deuda bruta, y no al valor contable del balance
+del BCRA (Banco Central de la República Argentina, s. f.); antes de
+2006, cuando no existían, rige el valor contable.
 
 \begin{figure}
 \centering

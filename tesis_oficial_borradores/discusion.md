@@ -103,6 +103,6 @@ El FMI no publica el cálculo con que obtiene su probabilidad de no estabilizaci
 
 ### Extensión consolidada y *shock* de la FED
 
-La extensión consolidada usa el escenario del FMI construido para la deuda federal bruta, con el ajuste stock-flujo y la inflación relativa escalados, y su serie histórica no descuenta los títulos en poder del FGS. Se estima desde 2002, con una muestra efectiva más corta que la de la especificación principal (el Apéndice, sección A.4, da el número de observaciones y el orden del VAR, que se selecciona de nuevo para esa muestra). Las dos estimaciones no cubren el mismo período, de modo que sus diferencias mezclan el perímetro de la deuda con la muestra.
+La extensión consolidada usa el escenario del FMI construido para la deuda federal bruta, con el ajuste *stock*-flujo y la inflación relativa escalados, y su serie histórica no descuenta los títulos en poder del FGS. Se estima desde 2002, con una muestra efectiva más corta que la de la especificación principal (el Apéndice, sección A.4, da el número de observaciones y el orden del VAR, que se selecciona de nuevo para esa muestra). Las dos estimaciones no cubren el mismo período, de modo que sus diferencias mezclan el perímetro de la deuda con la muestra.
 
 El *shock* de la FED es la variación observada de la tasa y no un *shock* monetario identificado con datos de alta frecuencia.
