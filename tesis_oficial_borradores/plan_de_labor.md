@@ -37,7 +37,7 @@ La revisión empieza por la teoría sobre qué determina la sostenibilidad de la
 
 ## 2.1. Antecedentes teóricos
 
-El punto de partida es el enfoque de la restricción externa. El crecimiento resulta de la acumulación de capital físico y humano y de la incorporación de tecnología, y en la Argentina buena parte de los bienes de capital y de los insumos que requiere esa acumulación se importa, de modo que para crecer hacen falta divisas (Díaz Alejandro, 1970). Con esas mismas divisas se paga la deuda en moneda extranjera, y por eso el endeudamiento externo deja a la economía expuesta a la disponibilidad de dólares (Calvo et al., 2003). Esta idea explica por qué, en el caso argentino, el tipo de cambio real y el riesgo país pueden pesar sobre la deuda tanto como el resultado fiscal.
+El punto de partida es el enfoque de la restricción externa. El crecimiento resulta de la acumulación de capital físico y humano y de la incorporación de tecnología. En la Argentina, como en el resto de la región, la industrialización elevó las importaciones, sobre todo de insumos y bienes de capital, a un ritmo mayor que el de las exportaciones, de modo que para crecer hacen falta divisas (Aruguete, 2021). Con esas mismas divisas se paga la deuda en moneda extranjera, y por eso el endeudamiento externo deja a la economía expuesta a la disponibilidad de dólares (Calvo et al., 2003). Esta idea explica por qué, en el caso argentino, el tipo de cambio real y el riesgo país pueden pesar sobre la deuda tanto como el resultado fiscal.
 
 Sobre esa base se apoya la discusión de la solvencia. Un gobierno es solvente si el valor presente de sus superávits primarios futuros alcanza para cubrir la deuda actual, y Bohn (1998) muestra que una condición suficiente es que el superávit responda positivamente al nivel de deuda. Que el gobierno reaccione, sin embargo, no asegura que la deuda se estabilice en un plazo relevante. Cuando la tasa de interés supera con holgura al crecimiento, el superávit necesario puede exceder lo que la economía es capaz de generar, y la fatiga fiscal que describen Ghosh et al. (2013) pone un techo a cuánto ajuste puede sostenerse en el tiempo.
 
@@ -96,7 +96,7 @@ Fuente: elaboración propia.
 
 Todos los datos son secundarios. Cada serie se evaluará según la institución que la produce, su definición y cobertura, sus cambios metodológicos, como el cambio de base del PIB en 2004 o los tramos del resultado primario de 2007 y 2015, y su coherencia con otra fuente. La deuda federal bruta se contrastará con la que publica el FMI, y la simulación partirá del *stock* del organismo a fines de 2025, equivalente a 80,3% del PIB. La deuda consolidada se obtendrá sumando a la deuda bruta los pasivos remunerados del BCRA y restando la deuda del Tesoro en poder del banco central y los depósitos del Tesoro en él. Esta serie se estimará desde 2002, porque hasta entonces el BCRA operaba con la autonomía de la Carta Orgánica de 1992 y bajo la convertibilidad, de modo que la consolidación no tiene fundamento en el criterio del FMI. En cuanto al resultado primario, se tomará la serie sin rentas de la propiedad, ya que el FMI excluye las transferencias de utilidades del BCRA (FMI, 2026, cuadro 1, nota 4) y la fuente pública no permite separarlas del resto de esas rentas.
 
-Dos series no tienen dato publicado para toda la ventana y deberán completarse. La serie diaria del EMBI comienza en diciembre de 1998. Para 1996T1-1998T3 se usará el diferencial entre la tasa de préstamos interfinancieros en dólares del BCRA y la tasa de fondos federales, con una relación que se estimará en la superposición 1998T4-2001T3 y se validará con un pronóstico fuera de muestra. El TCRM del BCRA comienza en enero de 1997, y el año 1996 se reconstruirá encadenándolo con las variaciones del tipo de cambio real efectivo del BIS. Algo similar ocurre con la tasa de la FED, que alterna entre la tasa efectiva y la tasa sombra; en las cuatro transiciones entre ambas (2009T1, 2016T1, 2020T2 y 2022T1) la variación se calculará de modo que el cambio de serie no se confunda con un cambio de política. Para comprobar que los resultados no dependen de estas reconstrucciones, todo el análisis se repetirá con datos desde 1999.
+Dos series no tienen dato publicado para toda la ventana y deberán completarse. La serie diaria del EMBI comienza en diciembre de 1998. Para 1996T1-1998T3 se usará el diferencial entre la tasa de préstamos interfinancieros en dólares del BCRA y la tasa de fondos federales, con una relación que se estimará en la superposición 1998T4-2001T3 y se validará con un pronóstico fuera de muestra. Los valores empalmados entran solo en dos trimestres de la estimación (1998T2 y 1998T3) y en sus rezagos. El TCRM del BCRA comienza en enero de 1997, y el año 1996 se reconstruirá encadenándolo con las variaciones del tipo de cambio real efectivo del BIS. Algo similar ocurre con la tasa de la FED, que alterna entre la tasa efectiva y la tasa sombra; en las cuatro transiciones entre ambas (2009T1, 2016T1, 2020T2 y 2022T1) la variación se calculará de modo que el cambio de serie no se confunda con un cambio de política. Para comprobar que los resultados no dependen de estas reconstrucciones, todo el análisis se repetirá con datos desde 1999.
 
 ## 3.2. Análisis iniciales
 
@@ -126,6 +126,8 @@ Adler, G., y Sosa, S. (2013). *External conditions and debt sustainability in La
 
 Ando, S., Mishra, P., Patel, N., Peralta-Alva, A., y Presbitero, A. F. (2025). Fiscal consolidation and public debt. *Journal of Economic Dynamics and Control*, *170*, artículo 104998. https://doi.org/10.1016/j.jedc.2024.104998
 
+Aruguete, E. (2021). Crisis de balanza de pagos y recuperación de la sostenibilidad de la deuda pública en la Argentina (2016-2020). *Revista Estado y Políticas Públicas*, (16), 101-123.
+
 Bai, J., y Perron, P. (2003). Computation and analysis of multiple structural change models. *Journal of Applied Econometrics*, *18*(1), 1-22. https://doi.org/10.1002/jae.659
 
 Blanchard, O. J., y Quah, D. (1989). The dynamic effects of aggregate demand and supply disturbances. *American Economic Review*, *79*(4), 655-673.
@@ -141,8 +143,6 @@ Calvo, G. A., Izquierdo, A., y Talvi, E. (2003). *Sudden stops, the real exchang
 Canova, F. (2005). The transmission of US shocks to Latin America. *Journal of Applied Econometrics*, *20*(2), 229-251. https://doi.org/10.1002/jae.837
 
 Celasun, O., Debrun, X., y Ostry, J. D. (2006). *Primary surplus behavior and risks to fiscal sustainability in emerging market countries: A "fan-chart" approach* (IMF Working Paper No. 06/67). Fondo Monetario Internacional. https://doi.org/10.5089/9781451863277.001
-
-Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
 
 Dickey, D. A., y Fuller, W. A. (1979). Distribution of the estimators for autoregressive time series with a unit root. *Journal of the American Statistical Association*, *74*(366), 427-431. https://doi.org/10.2307/2286348
 
@@ -186,7 +186,7 @@ Reinhart, C. M., y Rogoff, K. S. (2009). *This time is different: Eight centurie
 
 Rodríguez, A. (2023). Financiamiento y sostenibilidad de la deuda pública: El caso de la economía argentina (2001-2022). *Ciencias Económicas*, *2*(20), e0032. https://doi.org/10.14409/rce.2023.20.e0032
 
-Sanches, P. (2019). *Análisis de la sostenibilidad de la deuda soberana argentina. 2019-2023* [Tesis de maestría]. Universidad Torcuato Di Tella.
+Sanches, P. (2019). *Análisis de la sostenibilidad de la deuda soberana argentina. 2019-2023* [Tesis de maestría en Economía Aplicada]. Universidad Torcuato Di Tella.
 
 Secretaría de Finanzas. (2025, 10 de diciembre). *Resultado de licitación del Bono del Tesoro Nacional en dólares estadounidenses 6,50% con vencimiento 30 de noviembre de 2029* [Comunicado]. Ministerio de Economía de la Nación. https://www.argentina.gob.ar/noticias/resultado-de-licitacion-del-bono-del-tesoro-nacional-en-dolares-estadounidenses-650-con
 
