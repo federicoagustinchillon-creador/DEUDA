@@ -1,0 +1,9 @@
+serie,n_niv,adf_niv,kpss_niv,clas_niv,n_dif,adf_dif,kpss_dif,clas_dif
+Resultado primario,117,0.5795673654001398,0.01,raíz unitaria,116,0.14683291578233237,0.1,ambigua
+Crecimiento real,117,0.05257817526564895,0.1,ambigua,116,3.5678043647497205e-08,0.1,estacionaria
+EMBI,117,0.15383197467572607,0.1,ambigua,116,5.996321986112698e-15,0.1,estacionaria
+TCRM,117,0.24906762110086533,0.1,ambigua,116,6.669131132903099e-12,0.1,estacionaria
+Deuda federal bruta,116,0.09425976658395052,0.1,ambigua,115,3.4296539560669834e-13,0.1,estacionaria
+Deuda consolidada con el BCRA,95,0.39587925157182396,0.0952327920042658,ambigua,94,1.6881778366970354e-14,0.1,estacionaria
+Tasa de la FED (nivel),117,0.10394623958598653,0.01,raíz unitaria,116,0.00027433833243379566,0.1,estacionaria
+VIX,117,0.0002418480396949972,0.1,estacionaria,116,2.8522350298557997e-11,0.1,estacionaria

@@ -1,0 +1,16 @@
+spec                           niveles             mixto       diferencias          mixto_p1   diferencias_p4
+fiscal_%var             1.6 [0.1; 4.3]  10.2 [2.1; 20.8]  11.9 [2.0; 17.9]  17.7 [2.6; 29.4]   7.5 [0.8; 9.5]
+nofiscal-fiscal_p05               91.3              58.5              64.3              41.3             81.0
+H1a(i)                            True              True              True              True             True
+p2031_en_max_pb                   0.87              1.44              1.07              3.92             0.38
+H1a(ii)                          False              True              True              True            False
+H1a                      no respaldada        respaldada        respaldada        respaldada    no respaldada
+p_fmi_2031              3.0 [0.0; 5.9]    3.8 [0.0; 7.5]    3.6 [0.0; 6.9]   7.5 [0.8; 14.2]   1.9 [0.0; 3.8]
+p_fmi_2035              4.9 [0.0; 9.7]   5.6 [0.0; 11.3]    3.8 [0.0; 7.3]   8.8 [0.0; 17.5]  6.0 [1.9; 12.0]
+H1b                      no respaldada     no respaldada     no respaldada     no respaldada    no respaldada
+fed2225_dprob2035     16.3 [1.1; 31.3]   8.5 [0.3; 17.0]  -0.4 [-5.2; 3.6]   9.1 [1.0; 18.1]  1.6 [-2.4; 7.2]
+fed2225_ddeuda2035   19.1 [-2.2; 30.2]  5.3 [-3.5; 11.0]   1.1 [-0.1; 3.9]  4.7 [-6.0; 16.7]   1.4 [0.0; 4.9]
+fed1de_dprob2035       1.1 [-0.3; 2.3]    0.7 [0.1; 1.5]  -0.1 [-0.6; 0.8]    0.9 [0.1; 1.8]  0.1 [-0.3; 1.1]
+fed1de_ddeuda2035       2.0 [0.1; 3.1]   0.6 [-0.3; 1.3]   0.1 [-0.0; 0.4]   0.5 [-0.5; 1.8]  0.2 [-0.0; 0.7]
+H2                             parcial           parcial     no respaldada           parcial          parcial
+deuda2035_media                   44.2              42.3              41.7              43.3             42.6
