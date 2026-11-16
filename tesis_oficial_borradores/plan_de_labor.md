@@ -100,7 +100,7 @@ Dos series no tienen dato publicado para toda la ventana y deberán completarse.
 
 ## 3.2. Análisis iniciales
 
-El análisis comienza por las propiedades estadísticas de las series. Se aplicarán las pruebas de raíz unitaria de Dickey y Fuller (1979) aumentada (ADF) y de Kwiatkowski et al. (1992), conocida como KPSS, la prueba de Zivot y Andrews (1992), que admite un quiebre, y el procedimiento de Bai y Perron (2003) para detectar quiebres múltiples, que luego entrarán al modelo como variables binarias. Con esos resultados se definirá cómo entra cada serie al modelo. El crecimiento es la variación trimestral del PIB real, y el resultado primario, el EMBI y el TCRM entrarán en niveles. Un VAR en niveles se estima de forma consistente aunque alguna serie tenga raíz unitaria (Sims et al., 1990); como en ese caso algunos estimadores no tienen distribución estándar, la inferencia se hará por *bootstrap*. Antes de estimar se comprobará con la prueba de Johansen (1991) que las series no estén cointegradas, porque de estarlo correspondería un modelo de corrección de errores y no un VAR.
+El análisis comienza por las propiedades estadísticas de las series. Se aplicarán las pruebas de raíz unitaria de Dickey y Fuller (1979) aumentada (ADF) y de Kwiatkowski et al. (1992), conocida como KPSS, la prueba de Zivot y Andrews (1992), que admite un quiebre, y el procedimiento de Bai y Perron (2003) para detectar quiebres múltiples, que luego entrarán al modelo como variables binarias. Con esos resultados se definirá cómo entra cada serie al modelo. El crecimiento es la variación trimestral del PIB real, y el resultado primario, el EMBI y el TCRM entrarán en niveles. Un VAR en niveles se estima de forma consistente aunque alguna serie tenga raíz unitaria (Sims et al., 1990); como en ese caso algunos estimadores no tienen distribución estándar, la inferencia se hará por *bootstrap*.
 
 ## 3.3. Estimación y simulación
 
@@ -163,8 +163,6 @@ Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., y Qureshi, M. S. (2013).
 Hall, P. (1992). *The bootstrap and Edgeworth expansion*. Springer. https://doi.org/10.1007/978-1-4612-4384-7
 
 Ivanov, V., y Kilian, L. (2005). A practitioner's guide to lag order selection for VAR impulse response analysis. *Studies in Nonlinear Dynamics and Econometrics*, *9*(1), artículo 2. https://doi.org/10.2202/1558-3708.1219
-
-Johansen, S. (1991). Estimation and hypothesis testing of cointegration vectors in Gaussian vector autoregressive models. *Econometrica*, *59*(6), 1551-1580. https://doi.org/10.2307/2938278
 
 Kilian, L. (1998). Small-sample confidence intervals for impulse response functions. *Review of Economics and Statistics*, *80*(2), 218-230. https://doi.org/10.1162/003465398557465
 
