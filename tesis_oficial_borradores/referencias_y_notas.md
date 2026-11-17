@@ -35,6 +35,7 @@
 - Diamand, M. (1972). La estructura productiva desequilibrada argentina y el tipo de cambio. *Desarrollo Económico*, *12*(45), 25–47. https://doi.org/10.2307/3465991
 - Díaz Alejandro, C. F. (1970). *Essays on the economic history of the Argentine Republic*. Yale University Press.
 - Dickey, D. A., y Fuller, W. A. (1979). Distribution of the estimators for autoregressive time series with a unit root. *Journal of the American Statistical Association*, *74*(366), 427–431. https://doi.org/10.2307/2286348
+- Diebold, F. X., y Mariano, R. S. (1995). Comparing predictive accuracy. *Journal of Business & Economic Statistics*, *13*(3), 253–263. https://doi.org/10.1080/07350015.1995.10524599
 - Eichengreen, B., Hausmann, R., y Panizza, U. (2003). *Currency mismatches, debt intolerance and original sin: Why they are not the same and why it matters* (NBER Working Paper No. 10036). National Bureau of Economic Research. https://doi.org/10.3386/w10036
 - Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. *Econometrica*, *50*(4), 987–1007. https://doi.org/10.2307/1912773
 - Everaert, G., y Jansen, S. (2018). On the estimation of panel fiscal reaction functions: Heterogeneity or fiscal fatigue? *Economic Modelling*, *70*, 87–96. https://doi.org/10.1016/j.econmod.2017.10.014
@@ -51,6 +52,7 @@
 - González Jaramillo, M. J., y Hernández, J. M. (2023). *Public debt sustainability and fiscal reaction functions in Latin America and the Caribbean* (IDB Discussion Paper IDB-DP-988). Banco Interamericano de Desarrollo. https://doi.org/10.18235/0004701
 - Hakkio, C. S., y Rush, M. (1991). Is the budget deficit "too large?" *Economic Inquiry*, *29*(3), 429–445. https://doi.org/10.1111/j.1465-7295.1991.tb00837.x
 - Hall, P. (1992). *The bootstrap and Edgeworth expansion*. Springer. https://doi.org/10.1007/978-1-4612-4384-7
+- Harvey, D., Leybourne, S., y Newbold, P. (1997). Testing the equality of prediction mean squared errors. *International Journal of Forecasting*, *13*(2), 281–291. https://doi.org/10.1016/S0169-2070(96)00719-4
 - Hébert, B., y Schreger, J. (2017). The costs of sovereign default: Evidence from Argentina. *American Economic Review*, *107*(10), 3119–3145. https://doi.org/10.1257/aer.20151667
 - Hobijn, B., Franses, P. H., y Ooms, M. (2004). Generalizations of the KPSS-test for stationarity. *Statistica Neerlandica*, *58*(4), 483–502. https://doi.org/10.1111/j.1467-9574.2004.00272.x
 - Hodrick, R. J., y Prescott, E. C. (1997). Postwar U.S. business cycles: An empirical investigation. *Journal of Money, Credit and Banking*, *29*(1), 1–16. https://doi.org/10.2307/2953682

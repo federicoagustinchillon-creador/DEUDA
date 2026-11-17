@@ -218,6 +218,18 @@ def main() -> None:
     brecha = [dn.loc[f"{a}-12-31", "deuda_consolidada_neta_nominal_pib"] - fmi["Línea 5, deuda consolidada"][i] for i, a in enumerate((2023, 2024, 2025))]
     bf = [fmi["Línea 1, deuda federal bruta"][i] - dn.loc[f"{a}-12-31", "bruta_federal_pib"] for i, a in enumerate((2023, 2024, 2025))]
     L.append("- Brecha consolidada propia menos FMI: " + ", ".join(n(x) for x in brecha) + "; federal FMI menos propia: " + ", ".join(n(x) for x in bf))
+    L.append("\n## Robustez con variables en diferencias (resultados/tablas/robustez_diferencias)")
+    rd = BASE / "resultados" / "tablas" / "robustez_diferencias"
+    ver = pd.read_csv(rd / "veredictos.csv", index_col=0, dtype=str)
+    nombres = {"niveles": "niveles (muestra 1998T3)", "mixto": "mixta (3 rezagos)", "diferencias": "diferencias (2 rezagos)",
+               "mixto_p1": "mixta (1 rezago)", "diferencias_p4": "diferencias (4 rezagos)"}
+    for fila, vals_ in ver.iterrows():
+        L.append(f"- {fila}: " + "; ".join(f"{nombres[c]} {str(v).replace('.', ',')}" for c, v in vals_.items()))
+    pron = pd.read_csv(rd / "comparacion_pronostico.csv")
+    pron = pron[(~pron["sin_2020"]) & (pron["var"] == "pb_pib")].set_index("h")
+    for h in (1, 8):
+        r = pron.loc[h]
+        L.append(f"- Pronóstico del resultado primario a {h} trimestres (RMSE, origen recursivo desde 2015T4, {int(r['n'])} pronósticos): niveles {n(r['rmse_niveles'], 2)}; mixta {n(r['rmse_mixto'], 2)} (p de Diebold y Mariano {n(r['dm_p_mixto'], 3)}); diferencias {n(r['rmse_diferencias'], 2)} (p {n(r['dm_p_diferencias'], 3)})")
     SALIDA.write_text("\n".join(L) + "\n", encoding="utf-8")
     print(f"[OK] {SALIDA.relative_to(BASE)}")
 

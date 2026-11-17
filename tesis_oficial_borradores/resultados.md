@@ -192,6 +192,30 @@ Con datos desde 1999, que usan solo el EMBI observado, la probabilidad de no est
 
 Con la deuda consolidada con el BCRA, que parte de 52,1% del PIB y se estima desde 2002, la senda base llega a 31,9% en 2031 y a 21,8% en 2035, pero el abanico es más ancho que el federal (55,2 contra 40,5 puntos en 2031). La probabilidad de no estabilización, 31,1% [27,6; 41,5] en 2031 y 35,0% [32,3; 49,8] en 2035, supera con holgura las cifras del FMI, y la senda de la FED eleva la probabilidad en 19,2 puntos [3,2; 33,8]. No se informan el reparto de la varianza ni el efecto sobre la deuda esperada, porque trayectorias explosivas dominan las varianzas y las medias en más de un tercio de las réplicas (368 de 1.000), y con 90 trimestres la estimación es poco estable. Por eso esta extensión se presenta como exploratoria: confirma el orden de magnitud de la probabilidad de no estabilización, pero no sirve para contrastar H1a ni la parte de H2 sobre la deuda esperada.
 
+### Variables en diferencias
+
+El VAR en niveles puede objetarse porque la teoría habitual pide variables estacionarias, y las pruebas del Apéndice, sección A.3, no clasifican con claridad la mayoría de las series. La sección 4.5 justifica los niveles (Sims et al., 1990); para medir cuánto importa esa decisión se reestimó el sistema con la misma muestra efectiva, 1998T3-2025T4 (110 trimestres, porque la diferencia consume un trimestre), en tres especificaciones: en niveles; mixta, con el resultado primario en variación; y en diferencias, con el resultado primario, el EMBI y el TCRM en variación (el crecimiento ya es una variación). En la simulación, las variables diferenciadas se acumulan para obtener el desvío en nivel que entra en la identidad de la deuda. El orden de rezagos es el que elige la regla de la sección 4.5: dos en niveles y en diferencias, y tres en la mixta.
+
+**Tabla 6.7. Veredictos con variables en niveles y en diferencias**
+
+| Medida | Niveles | Mixta | Diferencias |
+|----------------------------------------|----------------|----------------|----------------|
+| H1a (i): límite inferior de la diferencia no fiscal menos fiscal (puntos) | 91,3 | 58,5 | 64,3 |
+| H1a (ii): probabilidad en 2031 con el resultado primario en su máximo histórico | 0,87% | 1,44% | 1,07% |
+| Veredicto sobre H1a | No respaldada | Respaldada | Respaldada |
+| H1b: probabilidad en 2031, definición del FMI | 3,0% [0,0; 5,9] | 3,8% [0,0; 7,5] | 3,6% [0,0; 6,9] |
+| H1b: probabilidad en 2035, definición del FMI | 4,9% [0,0; 9,7] | 5,6% [0,0; 11,3] | 3,8% [0,0; 7,3] |
+| Veredicto sobre H1b | No respaldada | No respaldada | No respaldada |
+| H2: senda de 2022-2025, probabilidad en 2035 (pp) | 16,3 [1,1; 31,3] | 8,5 [0,3; 17,0] | -0,4 [-5,2; 3,6] |
+| H2: senda de 2022-2025, deuda en 2035 (pp del PIB) | 19,1 [-2,2; 30,2] | 5,3 [-3,5; 11,0] | 1,1 [-0,1; 3,9] |
+| Veredicto sobre H2 | Parcial | Parcial | No respaldada |
+
+Fuente: elaboración propia. Intervalos de 90%. Las tres columnas usan la misma muestra, de modo que las cifras en niveles difieren levemente de las de las tablas anteriores.
+
+H1b no cambia: con las tres especificaciones, la probabilidad con la definición del FMI es del orden de la del organismo y los intervalos incluyen su cifra. Con los órdenes de Hannan-Quinn, un rezago en la mixta y cuatro en diferencias, tampoco cambia, H1a se respalda en la mixta y no en diferencias, y H2 queda parcialmente respaldada en las dos. La condición (i) de H1a se cumple siempre. La condición (ii), en cambio, depende de si la probabilidad con el superávit en su máximo histórico queda por debajo del 1% del FMI: 0,87% en niveles contra 1,07% y 1,44% en las alternativas, valores muy cercanos al umbral, de modo que el veredicto de H1a es frágil frente a la especificación. El efecto de la senda de la FED sobre la probabilidad se reduce a la mitad con la mixta y desaparece con diferencias, una lectura compatible con que el efecto estimado opere por la persistencia de los niveles del EMBI y del TCRM, que la diferenciación elimina.
+
+Para elegir entre las especificaciones se comparó su pronóstico fuera de muestra del resultado primario, con origen recursivo desde 2015T4. El error cuadrático medio es menor en niveles: a un trimestre, 3,05 contra 3,41 en la mixta y 3,50 en diferencias; a ocho, 5,99 contra 8,61 y 9,38. La prueba de Diebold y Mariano (1995), con la corrección de Harvey et al. (1997), rechaza la igualdad al 10% a ocho trimestres (p = 0,075 y 0,095). En las otras variables ninguna especificación pronostica mejor de manera sistemática. Por eso la tesis mantiene los niveles, e informa que la condición (ii) de H1a y el efecto de la FED dependen de esa decisión (sección 7.6).
+
 ### Procedimiento del FMI
 
 Con *shocks* generados a la manera del FMI sobre la historia argentina de la ventana 1996-2025, la probabilidad en 2031 es 24,1% con la métrica anual, cerca de nueve décimas de la del SVARX (27,7%) y muy superior a la del FMI, con un abanico más de dos veces más ancho que el del organismo (148,4 contra 71,5 puntos; Capítulo 7). Con la definición operativa del FMI, ese procedimiento da 29,1% en 2031 y 19,1% en 2035, muy por encima del SVARX con la misma definición (3,1% y 5,1%): con la historia argentina, el procedimiento del propio FMI no reproduce el 1%, y la diferencia con el SVARX está en los *shocks*, que en el SVARX son sorpresas y en ese procedimiento, desvíos respecto de una media de largo plazo.

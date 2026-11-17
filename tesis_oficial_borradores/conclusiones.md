@@ -38,7 +38,7 @@ Medido como lo mide el FMI, el riesgo de que la deuda federal bruta argentina no
 
 ## 8.6 Alcance
 
-Los resultados están condicionados al escenario base del FMI y a que la dinámica de 1996-2025 siga vigente. La proporción de la deuda en pesos queda fija en el escenario, el mismo supuesto que hace el FMI. Las limitaciones se detallan en la sección 7.6.
+Los resultados están condicionados al escenario base del FMI, a que la dinámica de 1996-2025 siga vigente y a que las variables entren en niveles: con variables en diferencias, la segunda condición de H1a y el efecto de la FED cambian (sección 6.6). La proporción de la deuda en pesos queda fija en el escenario, el mismo supuesto que hace el FMI. Las limitaciones se detallan en la sección 7.6.
 
 ## 8.7 Líneas de trabajo futuro
 

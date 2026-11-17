@@ -111,3 +111,22 @@
 - FMI, Swap con el PBoC: 2023: 2,1, 2024: 0,9, 2025: 0,9
 - FMI, Deuda en moneda extranjera / deuda total (%): 2023: 69,3, 2024: 61,9, 2025: 68,5
 - Brecha consolidada propia menos FMI: 17,1, 7,5, 8,9; federal FMI menos propia: 1,1, 2,6, 2,6
+
+## Robustez con variables en diferencias (resultados/tablas/robustez_diferencias)
+- fiscal_%var: niveles (muestra 1998T3) 1,6 [0,1; 4,3]; mixta (3 rezagos) 10,2 [2,1; 20,8]; diferencias (2 rezagos) 11,9 [2,0; 17,9]; mixta (1 rezago) 17,7 [2,6; 29,4]; diferencias (4 rezagos) 7,5 [0,8; 9,5]
+- nofiscal-fiscal_p05: niveles (muestra 1998T3) 91,3; mixta (3 rezagos) 58,5; diferencias (2 rezagos) 64,3; mixta (1 rezago) 41,3; diferencias (4 rezagos) 81,0
+- H1a(i): niveles (muestra 1998T3) True; mixta (3 rezagos) True; diferencias (2 rezagos) True; mixta (1 rezago) True; diferencias (4 rezagos) True
+- p2031_en_max_pb: niveles (muestra 1998T3) 0,87; mixta (3 rezagos) 1,44; diferencias (2 rezagos) 1,07; mixta (1 rezago) 3,92; diferencias (4 rezagos) 0,38
+- H1a(ii): niveles (muestra 1998T3) False; mixta (3 rezagos) True; diferencias (2 rezagos) True; mixta (1 rezago) True; diferencias (4 rezagos) False
+- H1a: niveles (muestra 1998T3) no respaldada; mixta (3 rezagos) respaldada; diferencias (2 rezagos) respaldada; mixta (1 rezago) respaldada; diferencias (4 rezagos) no respaldada
+- p_fmi_2031: niveles (muestra 1998T3) 3,0 [0,0; 5,9]; mixta (3 rezagos) 3,8 [0,0; 7,5]; diferencias (2 rezagos) 3,6 [0,0; 6,9]; mixta (1 rezago) 7,5 [0,8; 14,2]; diferencias (4 rezagos) 1,9 [0,0; 3,8]
+- p_fmi_2035: niveles (muestra 1998T3) 4,9 [0,0; 9,7]; mixta (3 rezagos) 5,6 [0,0; 11,3]; diferencias (2 rezagos) 3,8 [0,0; 7,3]; mixta (1 rezago) 8,8 [0,0; 17,5]; diferencias (4 rezagos) 6,0 [1,9; 12,0]
+- H1b: niveles (muestra 1998T3) no respaldada; mixta (3 rezagos) no respaldada; diferencias (2 rezagos) no respaldada; mixta (1 rezago) no respaldada; diferencias (4 rezagos) no respaldada
+- fed2225_dprob2035: niveles (muestra 1998T3) 16,3 [1,1; 31,3]; mixta (3 rezagos) 8,5 [0,3; 17,0]; diferencias (2 rezagos) -0,4 [-5,2; 3,6]; mixta (1 rezago) 9,1 [1,0; 18,1]; diferencias (4 rezagos) 1,6 [-2,4; 7,2]
+- fed2225_ddeuda2035: niveles (muestra 1998T3) 19,1 [-2,2; 30,2]; mixta (3 rezagos) 5,3 [-3,5; 11,0]; diferencias (2 rezagos) 1,1 [-0,1; 3,9]; mixta (1 rezago) 4,7 [-6,0; 16,7]; diferencias (4 rezagos) 1,4 [0,0; 4,9]
+- fed1de_dprob2035: niveles (muestra 1998T3) 1,1 [-0,3; 2,3]; mixta (3 rezagos) 0,7 [0,1; 1,5]; diferencias (2 rezagos) -0,1 [-0,6; 0,8]; mixta (1 rezago) 0,9 [0,1; 1,8]; diferencias (4 rezagos) 0,1 [-0,3; 1,1]
+- fed1de_ddeuda2035: niveles (muestra 1998T3) 2,0 [0,1; 3,1]; mixta (3 rezagos) 0,6 [-0,3; 1,3]; diferencias (2 rezagos) 0,1 [-0,0; 0,4]; mixta (1 rezago) 0,5 [-0,5; 1,8]; diferencias (4 rezagos) 0,2 [-0,0; 0,7]
+- H2: niveles (muestra 1998T3) parcial; mixta (3 rezagos) parcial; diferencias (2 rezagos) no respaldada; mixta (1 rezago) parcial; diferencias (4 rezagos) parcial
+- deuda2035_media: niveles (muestra 1998T3) 44,2; mixta (3 rezagos) 42,3; diferencias (2 rezagos) 41,7; mixta (1 rezago) 43,3; diferencias (4 rezagos) 42,6
+- Pronóstico del resultado primario a 1 trimestres (RMSE, origen recursivo desde 2015T4, 40 pronósticos): niveles 3,05; mixta 3,41 (p de Diebold y Mariano 0,167); diferencias 3,50 (p 0,082)
+- Pronóstico del resultado primario a 8 trimestres (RMSE, origen recursivo desde 2015T4, 33 pronósticos): niveles 5,99; mixta 8,61 (p de Diebold y Mariano 0,075); diferencias 9,38 (p 0,095)
