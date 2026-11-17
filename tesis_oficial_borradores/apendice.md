@@ -187,7 +187,7 @@ Orden de las variables, de la primera a la última: crecimiento, TCRM, EMBI, res
 
 ## A.8 Ecuación del resultado primario
 
-Ecuación del resultado primario del VARX en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*. El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es 0,079, con un intervalo de 90% de [0,062; 0,147].
+Ecuación del resultado primario del sistema en forma reducida, especificación principal (MCO, 1998T2-2025T4). No se muestran la constante, las variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et al., 1990), por lo que la inferencia del texto usa los intervalos del *bootstrap*. El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es 0,079, con un intervalo de 90% de [0,062; 0,147].
 
 | Regresor | Coeficiente | Error estándar | p-valor |
 |----------------------------------------------------|----------------|----------------|----------------|

@@ -176,8 +176,9 @@ Como la simulación se hace en desvíos respecto del escenario base
 2026-2035. Cada una consume grados de libertad en las cuatro ecuaciones,
 así que se contrasta su significancia conjunta con una prueba de Wald en
 cada ecuación y una prueba de razón de verosimilitud del sistema con la
-corrección de Sims (1980); el VIF no se usa porque no es estándar en un
-VAR. La especificación sin ellas se informa como robustez (sección 6.6).
+corrección de Sims (1980); el factor de inflación de la varianza no se
+usa porque no es estándar en un VAR. La especificación sin ellas se
+informa como robustez (sección 6.6).
 
 Las binarias presidenciales y las de quiebre pueden ser colineales
 cuando un quiebre coincide con un cambio de gobierno. El Apéndice
@@ -406,18 +407,19 @@ sensibilidad a λ = 0,15 y 0,40.
 La simulación sigue cuatro pasos. Primero, el SVARX se simula durante 40
 trimestres en desvíos respecto del escenario base, de modo que la
 constante y las variables binarias no intervienen. Segundo, el VIX y el
-nivel de la tasa de la FED siguen procesos AR(1) estimados en la muestra
-(coeficientes de 0,703 y 0,972). Sus innovaciones históricas se
-remuestrean junto con los \emph{shocks} estructurales, por fecha, en
-bloques de ocho trimestres, como los bloques de dos años del FMI (2021,
-anexo VI). Se conservan así las colas gordas, la correlación entre
-variables y la autocorrelación remanente. Tercero, al final de cada año
-los desvíos se anualizan: el del crecimiento es la variación del
-promedio anual del nivel del PIB; los del resultado primario y el EMBI,
-promedios del año; el del TCRM, la variación de fin de año. Cuarto, la
-retroalimentación se actualiza al cierre de cada año, porque la
-identidad del FMI es anual: dentro del año, las ecuaciones usan el
-desvío de la deuda del cierre anterior respecto de la senda base.
+nivel de la tasa de la FED siguen procesos autorregresivos de orden uno,
+AR(1), estimados en la muestra (coeficientes de 0,703 y 0,972). Sus
+innovaciones históricas se remuestrean junto con los \emph{shocks}
+estructurales, por fecha, en bloques de ocho trimestres, como los
+bloques de dos años del FMI (2021, anexo VI). Se conservan así las colas
+gordas, la correlación entre variables y la autocorrelación remanente.
+Tercero, al final de cada año los desvíos se anualizan: el del
+crecimiento es la variación del promedio anual del nivel del PIB; los
+del resultado primario y el EMBI, promedios del año; el del TCRM, la
+variación de fin de año. Cuarto, la retroalimentación se actualiza al
+cierre de cada año, porque la identidad del FMI es anual: dentro del
+año, las ecuaciones usan el desvío de la deuda del cierre anterior
+respecto de la senda base.
 
 \subsection{Métrica de no estabilización}
 

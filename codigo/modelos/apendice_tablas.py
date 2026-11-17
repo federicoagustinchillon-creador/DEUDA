@@ -330,7 +330,7 @@ def seccion_fiscal() -> str:
     nota = (" El coeficiente de la deuda rezagada es el efecto de impacto sobre el resultado primario trimestral. El "
             "multiplicador de largo plazo, que descuenta los rezagos propios del resultado primario, es "
             f"{num(lp['p50'], 3)}, con un intervalo de 90% de [{num(lp['p05'], 3)}; {num(lp['p95'], 3)}].")
-    return ("## A.8 Ecuación del resultado primario\n\nEcuación del resultado primario del VARX en forma reducida, "
+    return ("## A.8 Ecuación del resultado primario\n\nEcuación del resultado primario del sistema en forma reducida, "
             f"especificación principal (MCO, {trim(Y.index[p])}-{trim(Y.index[-1])}). No se muestran la constante, las "
             "variables binarias estacionales ni las de los quiebres. Los errores estándar y los p-valores son los de MCO y se "
             "informan como referencia: con regresores que pueden tener raíz unitaria su distribución no es la estándar (Sims et "
