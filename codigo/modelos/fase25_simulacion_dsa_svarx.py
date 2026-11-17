@@ -8,9 +8,9 @@ Contrasta H1a, H1b y H2 (Capitulo 4, seccion 4.7).
 Perimetros:
   - federal (principal): deuda bruta del gobierno federal, el perimetro del analisis de
     sostenibilidad del FMI. Punto de partida: el stock del FMI a fines de 2025 (80,3% del PIB,
-    cuadro 2), de modo que escenario, perimetro, punto de partida y metrica son los del FMI.
+    anexo II, cuadro 2), de modo que escenario, perimetro, punto de partida y metrica son los del FMI.
   - consolidada (extension): deuda del sector publico consolidado con el BCRA en la definicion
-    del FMI (cuadro 2, linea 5: 52,1% del PIB, 68,5% en moneda extranjera).
+    del FMI (anexo II, cuadro 2, linea 5: 52,1% del PIB, 68,5% en moneda extranjera).
 
 Arquitectura (Celasun, Debrun y Ostry, 2006; FMI, 2021, parr. 52):
   1. Escenario base del FMI: crecimiento real g, deflactor pi, tasa efectiva i, resultado primario
@@ -75,8 +75,8 @@ ANIOS = list(range(2026, 2036))
 TRIM = 4 * len(ANIOS)
 METRICA = (2031, 2035)
 # (archivo, probabilidad del FMI a mediano plazo, a 2035, primer anio de proyeccion del informe)
-# CR 26/105: no estabilizacion 1,0% (cuadro 7) y estabilizacion superior a 97% a 2035 (parr. 9).
-# CR 25/95: no estabilizacion 3,0% (cuadro 7) y alrededor de 97% a 2034.
+# CR 26/105: no estabilizacion 1,0% (anexo II, cuadro 7) y estabilizacion superior a 97% a 2035 (anexo II, parr. 9).
+# CR 25/95: no estabilizacion 3,0% (anexo II, cuadro 7) y alrededor de 97% a 2034.
 ESCENARIOS = {
     "cr26105": ("escenario_base_fmi_cr26105.csv", 0.010, 0.030, 2026),
     "cr2595": ("escenario_base_fmi_cr2595.csv", 0.030, 0.030, 2025),
@@ -163,7 +163,7 @@ def verificar_escenario(esc: pd.DataFrame, a_fmi: float, tolerancia: float = 0.5
 def condiciones_iniciales(tipo: str, esc: pd.DataFrame) -> tuple[float, float, float, float]:
     """Deuda inicial (dic-2025, % PIB), proporcion en pesos, proporcion en pesos de la deuda del
     FMI (federal bruta) y TCRM de dic-2025.
-    federal: el stock del FMI (cuadro 2, linea 1), que incluye intereses capitalizados y deuda
+    federal: el stock del FMI (anexo II, cuadro 2, linea 1), que incluye intereses capitalizados y deuda
     no presentada al canje; proporcion en pesos de la deuda de la Administracion Central (MECON).
     consolidada: el stock consolidado del FMI (linea 5) y su proporcion en pesos (5b / 5).
     Otras series (robustez): el ultimo valor propio y la proporcion de la deuda bruta con el BCRA."""

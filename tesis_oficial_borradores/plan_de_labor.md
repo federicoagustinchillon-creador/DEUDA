@@ -90,7 +90,7 @@ Tabla 1. Variables, indicadores y fuentes
 | Política monetaria de Estados Unidos | Tasa de fondos federales; tasa sombra en el límite cero (Wu y Xia, 2016) | Reserva Federal | Exógena |
 | Condiciones financieras globales | VIX | Bolsa de Opciones de Chicago (CBOE) | Exógena |
 | Mandato presidencial | Una variable binaria por mandato | Elaboración propia | Control determinista |
-| Escenario base | Crecimiento, deflactor, tasa efectiva, resultado primario, ajuste *stock*-flujo e inflación relativa, 2026-2035 | FMI (2026), cuadro 6 | Supuesto de la simulación |
+| Escenario base | Crecimiento, deflactor, tasa efectiva, resultado primario, ajuste *stock*-flujo e inflación relativa, 2026-2035 | FMI (2026), anexo II, cuadro 6 | Supuesto de la simulación |
 
 Fuente: elaboración propia.
 

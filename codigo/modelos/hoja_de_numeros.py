@@ -64,7 +64,7 @@ def main() -> None:
     L.append(f"- Quiebres de Bai y Perron (deuda federal bruta 1996-2025): " + ", ".join(f"{q.year}T{q.quarter}" for q in quiebres))
     L.append(f"- Diagnósticos: normalidad multivariada p = {n(dg['Normalidad multivariada (p-valor)'], 3)}; ARCH-LM p: " + ", ".join(f"{k.split()[1]} {n(v, 3)}" for k, v in dg.items() if k.startswith("ARCH")))
     L.append(f"- Desvío de la variación trimestral de la FED en la muestra: {n(meta['sd_dfed'], 3)} pp. AR(1) del VIX: {n(meta['phi_vix'], 3)}; del nivel de la tasa de la FED: {n(meta['phi_fed'], 3)}.")
-    L.append(f"- Proporción en pesos: federal {n(meta['alfa_pesos'], 3)} (MECON, dic-2025; {n(100 * (1 - meta['alfa_pesos']), 1)}% en moneda extranjera); consolidada {n(16.4 / 52.1, 3)} (FMI, cuadro 2). λ = {n(meta['lam'], 3)}. Desvío máximo de la identidad respecto de la senda del FMI: {n(meta['desvio_max_senda_fmi'], 2)} pp.")
+    L.append(f"- Proporción en pesos: federal {n(meta['alfa_pesos'], 3)} (MECON, dic-2025; {n(100 * (1 - meta['alfa_pesos']), 1)}% en moneda extranjera); consolidada {n(16.4 / 52.1, 3)} (FMI, 2026, anexo II, cuadro 2). λ = {n(meta['lam'], 3)}. Desvío máximo de la identidad respecto de la senda del FMI: {n(meta['desvio_max_senda_fmi'], 2)} pp.")
 
     ru = pd.read_csv(T / "fase24b_raiz_unitaria.csv")
     L.append("- Raíz unitaria (ADF p / KPSS p / clasificación): " + "; ".join(f"{s}: {n(a, 3)} / {n(k, 3)} / {c}" for s, a, k, c in zip(ru.serie, ru.adf_p, ru.kpss_p, ru.clasificacion)))
@@ -99,7 +99,7 @@ def main() -> None:
     L.append("- Percentiles de la deuda (p5, p25, mediana, p75, p95): " + "; ".join(
         f"{a}: {n(fc.loc[a, 'p5'])}, {n(fc.loc[a, 'p25'])}, {n(fc.loc[a, 'p50'])}, {n(fc.loc[a, 'p75'])}, {n(fc.loc[a, 'p95'])}" for a in (2026, 2028, 2031, 2033, 2035)))
     L.append(f"- Senda base (identidad sin shocks): 2031 {n(r.loc['senda_base_d2031', 'estimacion'])}, 2035 {n(r.loc['senda_base_d2035', 'estimacion'])}.")
-    L.append("- Senda base publicada por el FMI (2026, cuadro 6): 2031 53,9, 2035 42,8.")
+    L.append("- Senda base publicada por el FMI (2026, anexo II, cuadro 6): 2031 53,9, 2035 42,8.")
     L.append("- Semielasticidad promedio del saldo fiscal respecto de la brecha del producto en la OCDE (Girouard y André, 2005): 0,44.")
     _rep = pd.read_csv(T / "fase25_federal_replicas.csv")
     for _h, _c, _cifra in ((2031, "base_p_noest_fmi_2031", 0.01), (2035, "base_p_noest_fmi_2035", 0.03)):

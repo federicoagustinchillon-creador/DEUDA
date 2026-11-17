@@ -43,7 +43,7 @@ Un aumento de un desvío estándar en la variación de la tasa de política mone
 
 ## 6.2 El gráfico de abanico
 
-La Tabla 6.2 y la Figura 6.2 muestran la distribución de la deuda simulada. La mediana baja de 80,3% del PIB en 2025 a 52,9% en 2031 y a 41,4% en 2035, cerca de la senda determinista de la identidad con el escenario base (53,9% y 42,7%; el FMI publica 53,9% y 42,8%). La caída la determina el escenario del FMI (2026, cuadro 6), con superávit primario sostenido y una tasa de interés efectiva menor que la inflación. La distribución es asimétrica hacia arriba: en 2035 la deuda media es 45,0%, por encima de la mediana, y el percentil 95 supera el punto de partida.
+La Tabla 6.2 y la Figura 6.2 muestran la distribución de la deuda simulada. La mediana baja de 80,3% del PIB en 2025 a 52,9% en 2031 y a 41,4% en 2035, cerca de la senda determinista de la identidad con el escenario base (53,9% y 42,7%; el FMI publica 53,9% y 42,8%). La caída la determina el escenario del FMI (2026, anexo II, cuadro 6), con superávit primario sostenido y una tasa de interés efectiva menor que la inflación. La distribución es asimétrica hacia arriba: en 2035 la deuda media es 45,0%, por encima de la mediana, y el percentil 95 supera el punto de partida.
 
 **Tabla 6.2. Deuda federal bruta simulada (% del PIB), percentiles**
 
@@ -59,7 +59,7 @@ Fuente: elaboración propia. Estimación central, 20.000 trayectorias.
 
 ![Figura 6.2. Gráfico de abanico de la deuda federal bruta simulada, 2025-2035 (% del PIB). Escenario base del FMI (2026) con *shocks* estructurales del SVARX y variables externas simuladas; estimación central con parámetros de mínimos cuadrados y 20.000 trayectorias. La línea discontinua es la senda base del FMI. Fuente: elaboración propia.](../tesis/figuras/fig6_2_abanico_deuda.png)
 
-El ancho del abanico entre los percentiles 5 y 95 es de 40,5 puntos en 2031, con un intervalo de [32,4; 54,5]. El del FMI para la misma deuda es 71,5 (FMI, 2026, cuadro 7). El Capítulo 7 analiza por qué un abanico más angosto convive, con la métrica anual, con una probabilidad de no estabilización mayor.
+El ancho del abanico entre los percentiles 5 y 95 es de 40,5 puntos en 2031, con un intervalo de [32,4; 54,5]. El del FMI para la misma deuda es 71,5 (FMI, 2026, anexo II, cuadro 7). El Capítulo 7 analiza por qué un abanico más angosto convive, con la métrica anual, con una probabilidad de no estabilización mayor.
 
 ## 6.3 Contraste de H1a
 
@@ -104,7 +104,7 @@ Con la métrica anual, la relación en 2035 no es monótona. La probabilidad baj
 
 ## 6.4 Contraste de H1b
 
-El FMI (2026) estima una probabilidad de no estabilización de 1% en su abanico de mediano plazo (cuadro 7) y menor que 3% en su abanico de diez años, que termina en 2035. Con la deuda federal bruta, el mismo punto de partida y el mismo escenario, cada horizonte se contrasta contra la cifra del FMI correspondiente con la definición operativa del organismo, y se informa al lado la métrica anual (sección 4.6; Tabla 6.4).
+El FMI (2026) estima una probabilidad de no estabilización de 1% en su abanico de mediano plazo (anexo II, cuadro 7) y menor que 3% en su abanico de diez años, que termina en 2035. Con la deuda federal bruta, el mismo punto de partida y el mismo escenario, cada horizonte se contrasta contra la cifra del FMI correspondiente con la definición operativa del organismo, y se informa al lado la métrica anual (sección 4.6; Tabla 6.4).
 
 **Tabla 6.4. Contraste de H1b**
 

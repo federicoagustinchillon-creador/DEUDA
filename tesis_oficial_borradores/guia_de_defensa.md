@@ -18,7 +18,7 @@ Documento interno del grupo. No forma parte de la tesis. Resume cada paso del tr
 
 ### Paso 2. Datos y perímetro
 
-- **Perímetro principal (D1):** deuda federal bruta, el perímetro del FMI. La simulación parte del *stock* del FMI a fines de 2025, 80,3% del PIB (cuadro 2, línea 1). Nuestra serie, construida con datos del MECON, da 77,7%; la diferencia son los intereses capitalizados, la deuda no presentada al canje, los reclamos por los cupones atados al PIB y la medición del PIB.
+- **Perímetro principal (D1):** deuda federal bruta, el perímetro del FMI. La simulación parte del *stock* del FMI a fines de 2025, 80,3% del PIB (anexo II, cuadro 2, línea 1). Nuestra serie, construida con datos del MECON, da 77,7%; la diferencia son los intereses capitalizados, la deuda no presentada al canje, los reclamos por los cupones atados al PIB y la medición del PIB.
 - **Extensión:** deuda consolidada con el BCRA, 52,1% del PIB a fines de 2025 en la definición del FMI, con 68,5% en moneda extranjera. Se estima desde 2002, porque antes el BCRA operaba con la autonomía de la Carta Orgánica de 1992 y la Convertibilidad, con límites estrictos a la asistencia al Tesoro, y el criterio del FMI para consolidar es que el banco financie al gobierno o haga actividades cuasifiscales. Nuestra serie no descuenta la deuda en poder del FGS; por eso el nombre exacto es "deuda del Tesoro neta de la que está en poder del BCRA, más los pasivos remunerados del BCRA", y la llamamos deuda consolidada con el BCRA por brevedad.
 - **Ventana (D2):** 1996-2025 para todo el estudio y 2026-2035 para la proyección. Las ecuaciones se estiman con 1998T2-2025T4, 111 trimestres, porque la deuda federal trimestral del MECON empieza en 1998T1 y entra rezagada; los trimestres anteriores son condiciones iniciales de los demás rezagos, y todos los órdenes hasta seis se comparan sobre los mismos trimestres (Lütkepohl, 2005, sec. 4.3). Ojo: por eso el TCRM empalmado de 1996 no entra en la estimación, y el EMBI empalmado solo pesa en 1997T4-1998T3.
 - **Resultado primario (D4):** una sola definición, Sector Público Nacional sin rentas de la propiedad. El FMI excluye de su resultado primario las utilidades que el BCRA transfiere al Tesoro (FMI, 2026, cuadro 1, nota 4), y el MECON no las publica separadas del resto de las rentas: la serie sin rentas es la única pública que las deja afuera. La serie con rentas es robustez.
@@ -72,7 +72,7 @@ La deuda rezagada entra en las cuatro ecuaciones y se acumula con la identidad (
 
 ### Paso 7. Simulación
 
-1. **Escenario base del FMI (2026, cuadro 6):** crecimiento, deflactor, tasa efectiva, resultado primario, ajuste *stock*-flujo e inflación relativa.
+1. **Escenario base del FMI (2026, anexo II, cuadro 6):** crecimiento, deflactor, tasa efectiva, resultado primario, ajuste *stock*-flujo e inflación relativa.
 2. **Desvíos:** el SVARX se simula 40 trimestres en desvíos respecto del escenario, con los *shocks* estructurales remuestreados por fecha en bloques de ocho trimestres (D7), como los bloques de dos años del FMI. Las binarias no intervienen en la proyección.
 3. **Variables externas (D6):** el VIX y el nivel de la tasa de la FED siguen procesos AR(1) (0,703 y 0,972); sus innovaciones se remuestrean junto con los *shocks*. La varianza tiene un cuarto bloque, externo.
 4. **Identidad (D9):** separa moneda local (proporción en pesos 0,422, fija como en el FMI) y extranjera; la tasa en dólares se reprecia con λ = 0,282 por año.

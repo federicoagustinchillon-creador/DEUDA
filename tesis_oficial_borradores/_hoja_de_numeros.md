@@ -8,7 +8,7 @@
 - Quiebres de Bai y Perron (deuda federal bruta 1996-2025): 2006T2, 2018T1
 - Diagnósticos: normalidad multivariada p = 0,000; ARCH-LM p: pb_pib 0,960, crec 0,833, EMBI 0,925, TCRM 0,000
 - Desvío de la variación trimestral de la FED en la muestra: 0,501 pp. AR(1) del VIX: 0,703; del nivel de la tasa de la FED: 0,972.
-- Proporción en pesos: federal 0,422 (MECON, dic-2025; 57,8% en moneda extranjera); consolidada 0,315 (FMI, cuadro 2). λ = 0,282. Desvío máximo de la identidad respecto de la senda del FMI: 0,12 pp.
+- Proporción en pesos: federal 0,422 (MECON, dic-2025; 57,8% en moneda extranjera); consolidada 0,315 (FMI, 2026, anexo II, cuadro 2). λ = 0,282. Desvío máximo de la identidad respecto de la senda del FMI: 0,12 pp.
 - Raíz unitaria (ADF p / KPSS p / clasificación): Resultado primario: 0,580 / 0,010 / I(1); Crecimiento real: 0,053 / 0,100 / ambigua; EMBI: 0,154 / 0,100 / ambigua; TCRM: 0,249 / 0,100 / ambigua; Deuda federal bruta: 0,094 / 0,100 / ambigua; Deuda consolidada con el BCRA: 0,396 / 0,095 / ambigua; Tasa de la FED (nivel): 0,104 / 0,010 / I(1); VIX: 0,000 / 0,100 / I(0)
 - Johansen (niveles, traza vs crítico 5%): r <= 0: 42,7 vs 47,9; r <= 1: 22,0 vs 29,8; r <= 2: 10,9 vs 15,5; r <= 3: 3,3 vs 3,8
 - Empalme EMBI 1996T1-1998T3 con la tasa interbancaria en dólares del BCRA menos la tasa de fondos federales: superposición 1998T4-2001T3, n = 12, EMBI = 550,3 + 1,171 × diferencial, R2 = 0,89, correlación 0,944, RMSE dejando uno afuera 102 pb (desvío del EMBI 240 pb); fuera de muestra 2001T1-T3: real 750; 973; 1469, pronóstico 744; 801; 1033.
@@ -31,7 +31,7 @@
 ## Simulación principal (deuda federal bruta, intervalos de Hall al 90%)
 - Percentiles de la deuda (p5, p25, mediana, p75, p95): 2026: 67,2, 70,3, 72,5, 74,9, 87,7; 2028: 54,1, 60,4, 64,8, 70,2, 80,4; 2031: 36,0, 45,7, 52,9, 61,4, 76,5; 2033: 26,7, 38,1, 47,4, 58,6, 78,9; 2035: 17,7, 30,4, 41,4, 55,9, 84,3
 - Senda base (identidad sin shocks): 2031 53,9, 2035 42,7.
-- Senda base publicada por el FMI (2026, cuadro 6): 2031 53,9, 2035 42,8.
+- Senda base publicada por el FMI (2026, anexo II, cuadro 6): 2031 53,9, 2035 42,8.
 - Semielasticidad promedio del saldo fiscal respecto de la brecha del producto en la OCDE (Girouard y André, 2005): 0,44.
 - Definición del FMI, percentiles simples de las réplicas, 2031: [0,0; 8,3]; réplicas con probabilidad igual o menor que la cifra del FMI: 30%.
 - Definición del FMI, percentiles simples de las réplicas, 2035: [0,0; 13,4]; réplicas con probabilidad igual o menor que la cifra del FMI: 48%.

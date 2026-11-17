@@ -107,7 +107,7 @@
 
 **La métrica.** La probabilidad de que la deuda no se estabilice: la proporción de trayectorias simuladas en las que el resultado primario del escenario base es menor que el necesario para estabilizar la deuda (FMI, 2021, párr. 53 y anexo VI, nota 9). El resultado primario necesario incluye el ajuste stock-flujo, como la identidad: pb* = d_{T-1}(M_T − 1) + sf_T + ri_T.
 
-**El umbral: el propio resultado del FMI.** Se usa el análisis de sostenibilidad más reciente, el del Artículo IV y la segunda revisión del programa (FMI, 2026): probabilidad de estabilización de alrededor de 99% a mediano plazo (no estabilización de 1,0%, cuadro 7) y superior a 97% en el abanico de diez años que termina en 2035. Por eso se contrasta en 2031, el último año del abanico de mediano plazo, contra 1%, y en 2035 contra 3%. El análisis de abril de 2025 queda como robustez del escenario.
+**El umbral: el propio resultado del FMI.** Se usa el análisis de sostenibilidad más reciente, el del Artículo IV y la segunda revisión del programa (FMI, 2026): probabilidad de estabilización de alrededor de 99% a mediano plazo (no estabilización de 1,0%, anexo II, cuadro 7) y superior a 97% en el abanico de diez años que termina en 2035. Por eso se contrasta en 2031, el último año del abanico de mediano plazo, contra 1%, y en 2035 contra 3%. El análisis de abril de 2025 queda como robustez del escenario.
 
 **Cómo se contrasta.** H1b se considera respaldada si el límite inferior del intervalo de 90% supera el umbral (contraste unilateral al 5%); se informa además el intervalo de 95% (corrección de Bonferroni por los dos horizontes).
 
