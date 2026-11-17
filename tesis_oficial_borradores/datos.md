@@ -1,6 +1,6 @@
 # 5. Datos
 
-Las series son trimestrales y cubren 1996-2025. Las ecuaciones se estiman con los trimestres 1998T2-2025T4 (111 observaciones; sección 4.5), porque la deuda federal bruta trimestral del MECON empieza en 1998T1 y entra rezagada; los trimestres anteriores sirven como condiciones iniciales de los demás rezagos. Las fuentes, secundarias, son el Ministerio de Economía de la Nación (MECON), el BCRA, el Instituto Nacional de Estadística y Censos (INDEC), la Reserva Federal, J.P. Morgan y el Banco de Pagos Internacionales. Dos series no tienen dato publicado en toda la ventana, el EMBI antes de diciembre de 1998 y el TCRM en 1996, y se completan con empalmes validados (sección 5.4). Los estadísticos descriptivos están en el Apéndice, sección A.1.
+Las series son trimestrales y cubren 1996-2025. Las ecuaciones se estiman con los trimestres 1998T2-2025T4 (111 observaciones; sección 4.5), porque la deuda federal bruta trimestral del MECON empieza en 1998T1 y entra rezagada; los trimestres anteriores sirven como condiciones iniciales de los demás rezagos. Las fuentes, secundarias, son el MECON, el BCRA, el Instituto Nacional de Estadística y Censos (INDEC), la Reserva Federal, J.P. Morgan y el Banco de Pagos Internacionales. Dos series no tienen dato publicado en toda la ventana, el EMBI antes de diciembre de 1998 y el TCRM en 1996, y se completan con empalmes validados (sección 5.4). Los estadísticos descriptivos están en el Apéndice, sección A.1.
 
 ## 5.1 Series y fuentes
 

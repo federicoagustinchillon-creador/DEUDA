@@ -1,10 +1,10 @@
 # 4. Metodología
 
-Este capítulo presenta la estrategia empírica: un modelo de vectores autorregresivos estructural con variables exógenas (SVARX), combinado con la identidad de acumulación de la deuda y una simulación de Monte Carlo. El estudio cubre la ventana 1996-2025 y la proyección, 2026-2035.
+Este capítulo presenta la estrategia empírica: el SVARX de la sección 1.6, combinado con la identidad de acumulación de la deuda y una simulación de Monte Carlo. El estudio cubre la ventana 1996-2025 y la proyección, 2026-2035.
 
 ## 4.1 Arquitectura general
 
-El modelo sigue la arquitectura de Celasun et al. (2006) para economías emergentes: un VAR trimestral sobre los determinantes de la deuda, una función de reacción fiscal y la identidad de acumulación, que separa los tramos en moneda local y extranjera y convierte las proyecciones anualizadas del VAR en abanicos. El marco vigente del FMI (2021, párr. 52) conserva la idea de aplicar al escenario base *shocks* tomados de la historia. Esta tesis agrega dos elementos que justifica la vacancia: los *shocks* domésticos se identifican estructuralmente y la tasa de política monetaria de la Reserva Federal (FED) entra como un *shock* externo con nombre propio.
+El modelo sigue la arquitectura de Celasun et al. (2006) para economías emergentes: un VAR trimestral sobre los determinantes de la deuda, una función de reacción fiscal y la identidad de acumulación, que separa los tramos en moneda local y extranjera y convierte las proyecciones anualizadas del VAR en abanicos. El marco vigente del FMI (2021, párr. 52) conserva la idea de aplicar al escenario base *shocks* tomados de la historia. Esta tesis agrega dos elementos que justifica la vacancia: los *shocks* domésticos se identifican estructuralmente y la tasa de política monetaria de la FED entra como un *shock* externo con nombre propio.
 
 La especificación principal mide la deuda federal bruta, la del gobierno federal, que es el perímetro del análisis de sostenibilidad del FMI (2026, anexo II). Así el punto de partida, el escenario y el horizonte son los del FMI, y H1b compara magnitudes equivalentes cuando la no estabilización se mide con la definición operativa del organismo (sección 4.6). La simulación parte del stock del FMI a fines de 2025, 80,3% del PIB (FMI, 2026, anexo II, cuadro 2, línea 1), que incluye intereses capitalizados, deuda no presentada al canje y reclamos por los cupones atados al PIB; la serie propia da 77,7% (Capítulo 5).
 
@@ -12,7 +12,7 @@ La extensión mide la deuda consolidada con el BCRA en la definición del FMI (2
 
 ## 4.2 Variables del sistema
 
-El sistema tiene cuatro variables endógenas: el crecimiento real, el resultado primario, el riesgo país, medido por el diferencial del índice EMBI de J.P. Morgan para Argentina (EMBI), y el tipo de cambio real multilateral (TCRM). La Tabla 4.1 resume el rol de cada variable.
+El sistema tiene cuatro variables endógenas: el crecimiento real, el resultado primario, el riesgo país, medido por el diferencial del índice EMBI de J.P. Morgan para Argentina, y el tipo de cambio real multilateral. La Tabla 4.1 resume el rol de cada variable.
 
 **Tabla 4.1. Variables del SVARX**
 

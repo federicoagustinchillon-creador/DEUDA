@@ -2,7 +2,7 @@
 
 Esta tesis se preguntó en qué medida el crecimiento, el tipo de cambio real, el riesgo país y el resultado primario condicionan la sostenibilidad de la deuda pública argentina en 2026-2035, y cuál es la probabilidad de que no se estabilice bajo el escenario base. Para responderla se estimó un SVARX con datos trimestrales de 1996-2025 sobre la deuda federal bruta, que es el perímetro del análisis de sostenibilidad del FMI, y se lo usó para simular la deuda alrededor del escenario base más reciente del FMI (2026), desde su mismo punto de partida, y la no estabilización se midió con la definición operativa del FMI, que decide el contraste, y con una métrica anual como complemento.
 
-Las variables endógenas son el resultado primario, el crecimiento, el riesgo país, medido por el diferencial del índice EMBI de J.P. Morgan para Argentina (EMBI), y el tipo de cambio real multilateral (TCRM). Los *shocks* se identificaron con restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con un bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto. Como extensión, el ejercicio se repitió con la deuda consolidada con el BCRA.
+Las variables endógenas son el resultado primario, el crecimiento, el riesgo país, medido por el EMBI, y el TCRM. Los *shocks* se identificaron con restricciones de impacto en la línea de Blanchard y Perotti (2002) para el bloque fiscal y de actividad, con un bloque cambiario y de riesgo (EMBI y TCRM) identificado en conjunto. Como extensión, el ejercicio se repitió con la deuda consolidada con el BCRA.
 
 ## 8.1 Hipótesis H1a
 

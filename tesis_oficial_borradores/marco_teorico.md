@@ -1,6 +1,6 @@
 # 3. Marco teórico
 
-Los conceptos van de lo general a lo específico: la restricción externa (sección 3.1); la solvencia, la regla de Bohn y la identidad de la deuda con separación por monedas (3.2); la restricción consolidada del Tesoro y el Banco Central de la República Argentina (BCRA) (3.3); la transmisión de la política monetaria de Estados Unidos (3.4); la sostenibilidad probabilística del Fondo Monetario Internacional (FMI) (3.5), y la fatiga fiscal como límite (3.6).
+Los conceptos van de lo general a lo específico: la restricción externa (sección 3.1); la solvencia, la regla de Bohn y la identidad de la deuda con separación por monedas (3.2); la restricción consolidada del Tesoro y el BCRA (3.3); la transmisión de la política monetaria de Estados Unidos (3.4); la sostenibilidad probabilística del FMI (3.5), y la fatiga fiscal como límite (3.6).
 
 ## 3.1 El enfoque de la restricción externa
 
@@ -54,11 +54,11 @@ El FMI propone consolidar al banco central con el gobierno cuando el banco tiene
 
 ## 3.4 Canales de transmisión de la política monetaria de Estados Unidos
 
-La pregunta específica de la tesis es qué ocurre con la deuda pública ante un endurecimiento de la política monetaria de la Reserva Federal (FED). La literatura identifica cuatro canales, de los cuales el modelo incluye los tres primeros. El modelo suma además dos mecanismos que no son canales de la literatura sino parte de su estructura: la respuesta fiscal, que cambia el flujo que reduce la deuda, y el costo directo de la deuda en dólares, porque la identidad suma la tasa de la FED a la tasa en dólares. Este último explica la mayor parte del efecto contable de la FED sobre la deuda (Capítulo 6). La Tabla 4.2 enumera los cinco.
+La pregunta específica de la tesis es qué ocurre con la deuda pública ante un endurecimiento de la política monetaria de la FED. La literatura identifica cuatro canales, de los cuales el modelo incluye los tres primeros. El modelo suma además dos mecanismos que no son canales de la literatura sino parte de su estructura: la respuesta fiscal, que cambia el flujo que reduce la deuda, y el costo directo de la deuda en dólares, porque la identidad suma la tasa de la FED a la tasa en dólares. Este último explica la mayor parte del efecto contable de la FED sobre la deuda (Capítulo 6). La Tabla 4.2 enumera los cinco.
 
 ### Riesgo soberano
 
-Uribe y Yue (2006) estiman que los *shocks* de la tasa de Estados Unidos explican alrededor de 20% de los movimientos de la actividad en las economías emergentes en frecuencias de ciclo, sobre todo a través de la prima de riesgo soberano. Kalemli-Özcan (2019) encuentra que esa política afecta el costo del crédito interno de otros países a través de la percepción de riesgo de los inversores globales, con más intensidad en los emergentes, y Rey (2013) sostiene que flujos de capital, precios de activos y crédito se mueven con un ciclo financiero global asociado al VIX, del que la política monetaria del centro es un factor. Por eso el riesgo país, medido por el diferencial (*spread*) del índice EMBI de J.P. Morgan para Argentina (EMBI), es endógeno, la tasa en dólares se construye como tasa de la FED más EMBI y el VIX entra como variable exógena de condiciones financieras globales, como en Adler y Sosa (2013).
+Uribe y Yue (2006) estiman que los *shocks* de la tasa de Estados Unidos explican alrededor de 20% de los movimientos de la actividad en las economías emergentes en frecuencias de ciclo, sobre todo a través de la prima de riesgo soberano. Kalemli-Özcan (2019) encuentra que esa política afecta el costo del crédito interno de otros países a través de la percepción de riesgo de los inversores globales, con más intensidad en los emergentes, y Rey (2013) sostiene que flujos de capital, precios de activos y crédito se mueven con un ciclo financiero global asociado al VIX, del que la política monetaria del centro es un factor. Por eso el riesgo país, medido por el diferencial (*spread*) del EMBI, es endógeno, la tasa en dólares se construye como tasa de la FED más EMBI y el VIX entra como variable exógena de condiciones financieras globales, como en Adler y Sosa (2013).
 
 ### Tipo de cambio real y valuación
 
