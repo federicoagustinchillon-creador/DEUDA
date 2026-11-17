@@ -225,6 +225,8 @@ def main() -> None:
                "mixto_p1": "mixta (1 rezago)", "diferencias_p4": "diferencias (4 rezagos)"}
     for fila, vals_ in ver.iterrows():
         L.append(f"- {fila}: " + "; ".join(f"{nombres[c]} {str(v).replace('.', ',')}" for c, v in vals_.items()))
+    diag = pd.read_csv(rd / "resumen_estimacion.csv", index_col=0)
+    L.append("- Portmanteau (12 rezagos), p-valor con el orden usado: " + "; ".join(f"{nombres[k]} {n(diag.loc[k, 'portmanteau12_p'], 3)}" for k in diag.index))
     pron = pd.read_csv(rd / "comparacion_pronostico.csv")
     pron = pron[(~pron["sin_2020"]) & (pron["var"] == "pb_pib")].set_index("h")
     for h in (1, 8):

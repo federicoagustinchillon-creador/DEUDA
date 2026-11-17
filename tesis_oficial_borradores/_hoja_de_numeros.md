@@ -128,5 +128,6 @@
 - fed1de_ddeuda2035: niveles (muestra 1998T3) 2,0 [0,1; 3,1]; mixta (3 rezagos) 0,6 [-0,3; 1,3]; diferencias (2 rezagos) 0,1 [-0,0; 0,4]; mixta (1 rezago) 0,5 [-0,5; 1,8]; diferencias (4 rezagos) 0,2 [-0,0; 0,7]
 - H2: niveles (muestra 1998T3) parcial; mixta (3 rezagos) parcial; diferencias (2 rezagos) no respaldada; mixta (1 rezago) parcial; diferencias (4 rezagos) parcial
 - deuda2035_media: niveles (muestra 1998T3) 44,2; mixta (3 rezagos) 42,3; diferencias (2 rezagos) 41,7; mixta (1 rezago) 43,3; diferencias (4 rezagos) 42,6
+- Portmanteau (12 rezagos), p-valor con el orden usado: niveles (muestra 1998T3) 0,033; mixta (3 rezagos) 0,004; diferencias (2 rezagos) 0,041; mixta (1 rezago) 0,000; diferencias (4 rezagos) 0,001
 - Pronóstico del resultado primario a 1 trimestres (RMSE, origen recursivo desde 2015T4, 40 pronósticos): niveles 3,05; mixta 3,41 (p de Diebold y Mariano 0,167); diferencias 3,50 (p 0,082)
 - Pronóstico del resultado primario a 8 trimestres (RMSE, origen recursivo desde 2015T4, 33 pronósticos): niveles 5,99; mixta 8,61 (p de Diebold y Mariano 0,075); diferencias 9,38 (p 0,095)
