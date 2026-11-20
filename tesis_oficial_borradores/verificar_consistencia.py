@@ -10,7 +10,8 @@ Control de consistencia de todo el texto de la tesis y de los documentos para el
   - nombres de deuda fuera de la nomenclatura ("deuda consolidada neta");
   - Cholesky mencionado sin decir que es robustez;
   - numeros con decimales que no estan en la hoja de numeros, el apendice o las decisiones;
-  - rayas, conectores de relleno y contrastes retoricos (filtros de estilo del director).
+  - rayas, conectores de relleno y contrastes retoricos (filtros de estilo del director);
+  - abuso de dos puntos explicativos ("X: y...") y de "de modo que", que delatan prosa armada.
 
 Uso: python tesis_oficial_borradores/verificar_consistencia.py
 """
@@ -71,6 +72,15 @@ def main() -> None:
                 for num in re.findall(r"(?<![\w.,])-?\d+,\d+", linea):
                     if num not in validos and num.lstrip("-") not in validos and num not in {"0,25", "0,5", "0,15", "0,40"}:
                         problemas.append(f"{f}:{n}: número sin fuente en la hoja: {num}")
+        # Estilo: dos puntos que explican (no los que abren una lista o una pregunta) y un conector repetido.
+        prosa = [l for l in texto.splitlines() if not l.startswith(("|", "![", "Fuente", "**Tabla", "[^", "$$"))]
+        explicativos = [m.group(0) for l in prosa for m in re.finditer(r"[^.:]{25,}: [a-záéíóú][^.]{20,}\.", l)
+                        if "," not in m.group(0).split(": ", 1)[1][:60] or " y " not in m.group(0).split(": ", 1)[1]]
+        if len(explicativos) > 8:
+            problemas.append(f"{f}: {len(explicativos)} dos puntos explicativos (máximo 8); reescribir como dos oraciones o con conector")
+        n_dmq = texto.count("de modo que")
+        if n_dmq > 4:
+            problemas.append(f"{f}: 'de modo que' aparece {n_dmq} veces (máximo 4)")
     for p in problemas:
         print(p)
     print(f"\n{len(problemas)} problemas")

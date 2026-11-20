@@ -1,7 +1,7 @@
 \chapter{Metodología}
 
-Este capítulo presenta la estrategia empírica: el SVARX de la sección
-1.6, combinado con la identidad de acumulación de la deuda y una
+Este capítulo presenta la estrategia empírica, que combina el SVARX de
+la sección 1.6 con la identidad de acumulación de la deuda y una
 simulación de Monte Carlo. El estudio cubre la ventana 1996-2025 y la
 proyección, 2026-2035.
 
@@ -14,8 +14,8 @@ tramos en moneda local y extranjera y convierte las proyecciones
 anualizadas del VAR en abanicos. El marco vigente del FMI (2021, párr.
 52) conserva la idea de aplicar al escenario base \emph{shocks} tomados
 de la historia. Esta tesis agrega dos elementos que justifica la
-vacancia: los \emph{shocks} domésticos se identifican estructuralmente y
-la tasa de política monetaria de la FED entra como un \emph{shock}
+vacancia. Los \emph{shocks} domésticos se identifican estructuralmente,
+y la tasa de política monetaria de la FED entra como un \emph{shock}
 externo con nombre propio.
 
 La especificación principal mide la deuda federal bruta, la del gobierno
@@ -89,12 +89,12 @@ orientación de la política económica entre administraciones (sección
 
 Fuente: elaboración propia.
 
-Toda la tesis usa una sola definición: el resultado primario del Sector
+Toda la tesis usa una sola definición, el resultado primario del Sector
 Público Nacional sin rentas de la propiedad. El FMI excluye de su
 resultado primario las transferencias de utilidades del BCRA (FMI, 2026,
 cuadro 1, nota 4), y la fuente pública no separa esas transferencias del
-resto de las rentas de la propiedad, de modo que la serie sin rentas es
-la que las deja afuera. En el perímetro consolidado con el BCRA esas
+resto de las rentas de la propiedad, así que la serie sin rentas es la
+que las deja afuera. En el perímetro consolidado con el BCRA esas
 utilidades son, además, un flujo interno. El resultado primario con
 rentas de la propiedad se usa como variante de robustez.
 
@@ -106,16 +106,16 @@ acumulación es contablemente exacta.
 
 \section{Variables exógenas}
 
-Argentina es una economía pequeña y abierta: sus variables no afectan la
-tasa de la FED ni el VIX, que forman un bloque exógeno, el supuesto
+Argentina es una economía pequeña y abierta, y sus variables no afectan
+la tasa de la FED ni el VIX, que forman un bloque exógeno, el supuesto
 estándar en estos VAR (Canova, 2005; Cushman y Zha, 1997; Uribe y Yue,
 2006). El efecto de la FED es un multiplicador dinámico de la variable
 exógena y no depende de cómo se identifiquen los \emph{shocks}
 argentinos.
 
 La serie es la tasa de fondos federales, con la tasa sombra de Wu y Xia
-(2016) en el límite cero. La serie cambia de tramo en cuatro trimestres:
-entra al límite cero en 2009T1 y en 2020T2 y sale de él en 2016T1 y
+(2016) en el límite cero. La serie cambia de tramo en cuatro trimestres.
+Entra al límite cero en 2009T1 y en 2020T2 y sale de él en 2016T1 y
 2022T1. En esas cuatro transiciones la variación se calcula con la tasa
 efectiva en los dos trimestres, para no confundir el cambio de serie con
 un cambio de política; dentro de cada tramo se usa la propia serie.
@@ -153,9 +153,9 @@ tasa en dólares. \\
 Fuente: elaboración propia.
 
 Las tres primeras filas son los canales de la literatura que el modelo
-incluye (sección 3.4); las dos últimas son mecanismos de su estructura:
-la respuesta fiscal y el costo directo de la deuda en dólares, que entra
-por construcción en la identidad.
+incluye (sección 3.4); las dos últimas, la respuesta fiscal y el costo
+directo de la deuda en dólares, que entra por construcción en la
+identidad, son mecanismos de su estructura.
 
 El canal cuasifiscal solo interviene en la extensión consolidada, a
 través de su serie de deuda; no se proyecta por separado porque los
@@ -187,8 +187,7 @@ de gobierno. Cuando coinciden, como el de 2001T4 con el inicio del
 gobierno de Duhalde, las binarias presidenciales reemplazan a la de
 quiebre; los quiebres dentro de un mandato (2006T2 y 2018T1) se
 conservan. Los quiebres se recalculan al reestimar con una muestra
-distinta, de modo que esta correspondencia es válida para la ventana
-principal.
+distinta, y esta correspondencia es válida para la ventana principal.
 
 \section{\texorpdfstring{Identificación de los \emph{shocks}
 domésticos}{Identificación de los shocks domésticos}}
@@ -214,7 +213,7 @@ trimestre a los otros dos \emph{shocks}, pero el resultado primario y el
 crecimiento no responden en el trimestre a los de este bloque, por los
 rezagos de decisión de Blanchard y Perotti (2002) y la rigidez del
 producto de los VAR monetarios (Christiano et al., 1999). En el caso del
-resultado primario hay un argumento en contra: los derechos de
+resultado primario hay un argumento en contra, porque los derechos de
 exportación dependen del tipo de cambio. El efecto contemporáneo debería
 ser pequeño porque la recaudación se liquida con rezago respecto de la
 depreciación y el gasto se fija en el presupuesto, pero no se descarta;
@@ -258,8 +257,8 @@ PIB, respecto de la brecha del producto es de 0,44 en promedio (Girouard
 y André, 2005), con datos anuales; no se dispone de una estimación para
 Argentina. Aquí se aplica a un crecimiento trimestral sin
 desestacionalizar frente a un resultado primario anualizado. Las
-unidades son compatibles en el trimestre del impacto: las variables
-binarias trimestrales absorben la estacionalidad, de modo que la
+unidades son compatibles en el trimestre del impacto. Las variables
+binarias trimestrales absorben la estacionalidad, y entonces la
 innovación del crecimiento es una sorpresa en el nivel del producto del
 trimestre, que mueve la brecha en la misma proporción si el producto
 potencial no cambia, y el resultado primario anualizado se mide, como el
@@ -276,7 +275,7 @@ primario primero y resultado primario último), cuyas matrices de impacto
 se muestran en el Apéndice (sección A.7) con el mismo formato que la
 matriz estructural y el orden de las variables.
 
-Las variables externas no requieren identificación: forman un cuarto
+Las variables externas no requieren identificación. Forman un cuarto
 bloque, externo, medido con las innovaciones históricas de la FED y del
 VIX (sección 4.6).
 
@@ -298,18 +297,18 @@ federales, estimada en la superposición 1998T4-2001T3. El índice del
 TCRM del BCRA empieza en enero de 1997; el de 1996 se encadena hacia
 atrás con las variaciones del tipo de cambio real efectivo amplio del
 Banco de Pagos Internacionales (BIS). Con dos rezagos, ninguno de los
-dos empalmes pesa mucho en la estimación: el TCRM de 1996 no entra en
-ella, y el EMBI reconstruido solo aparece en 1998T2-1998T3 y como rezago
-en 1997T4-1998T1. La construcción está en el Capítulo 5 y la validación,
-en el Apéndice, sección A.2. Con datos desde 1999, sin el empalme del
-EMBI, los resultados casi no cambian (sección 6.6).
+dos empalmes pesa mucho en la estimación, porque el TCRM de 1996 no
+entra en ella y el EMBI reconstruido solo aparece en 1998T2-1998T3 y
+como rezago en 1997T4-1998T1. La construcción está en el Capítulo 5 y la
+validación, en el Apéndice, sección A.2. Con datos desde 1999, sin el
+empalme del EMBI, los resultados casi no cambian (sección 6.6).
 
 Los quiebres de Bai y Perron (2003) se estiman sobre la media de la
 deuda, una serie muy persistente en la que el procedimiento tiende a
 detectar quiebres espurios, y se aplican como cambios de nivel en las
 cuatro ecuaciones aunque se hayan detectado solo en la deuda. Se aceptan
-así por dos razones: la deuda argentina tuvo cambios de nivel discretos
-y de origen conocido (el canje y el \emph{default} de 2001-2005, la
+así porque la deuda argentina tuvo cambios de nivel discretos y de
+origen conocido (el canje y el \emph{default} de 2001-2005, la
 reestructuración de 2020) que afectan a las demás variables, y la
 especificación sin ellos se informa como robustez (sección 6.6). Los
 quiebres se recalculan al reestimar, y el Apéndice, sección A.3, los
@@ -338,7 +337,7 @@ no la rechaza (Lütkepohl, 2005, sec.~4.4). Schwarz elige uno, con
 residuos autocorrelacionados (p \textless{} 0,001). Con la
 especificación final, que incluye las binarias presidenciales y las
 cuatro transiciones de la tasa de la FED, ningún orden estable pasa la
-prueba al 5\%: con dos el p-valor es 0,031, el mayor entre los estables
+prueba al 5\%. Con dos el p-valor es 0,031, el mayor entre los estables
 (con tres, 0,014). Se adopta entonces la regla de reserva de elegir,
 entre los órdenes estables no menores que el de Schwarz, el de mayor
 p-valor del Portmanteau, que es dos; es también el orden de
@@ -362,8 +361,8 @@ desconocida, que aparece en la ecuación del TCRM (Apéndice, sección
 A.5). Para las varianzas y las participaciones de la descomposición, que
 son cantidades acotadas, los intervalos son percentiles simples de las
 réplicas y no de Hall. La corrección de sesgo de Kilian (1998) se
-informa como robustez. Se usan 1.000 réplicas: con 200, cada cola de un
-intervalo de 95\%, que es el que se emplea para la corrección de
+informa como robustez. Se usan 1.000 réplicas, porque con 200 cada cola
+de un intervalo de 95\%, que es el que se emplea para la corrección de
 Bonferroni, quedaba definida por unas cinco observaciones y su precisión
 empírica era insuficiente.
 
@@ -396,7 +395,7 @@ tasa en dólares (EMBI y nivel de la tasa de la FED). El ajuste
 y 2027, se escala por la deuda en pesos respecto de la del FMI, y la
 inflación relativa, por la deuda en moneda extranjera. La proporción en
 pesos queda fija, como supone el FMI (2021, anexo VI, párr. 6). La tasa
-en dólares se reprecia a medida que vence la deuda: cada año se
+en dólares se reprecia a medida que vence la deuda, y cada año se
 refinancia la fracción λ = 0,282, cociente entre las necesidades brutas
 de financiamiento y la deuda promedio de los seis primeros años del
 escenario. Como incluye letras en pesos de corto plazo, se informa la
@@ -417,7 +416,7 @@ Tercero, al final de cada año los desvíos se anualizan: el del
 crecimiento es la variación del promedio anual del nivel del PIB; los
 del resultado primario y el EMBI, promedios del año; el del TCRM, la
 variación de fin de año. Cuarto, la retroalimentación se actualiza al
-cierre de cada año, porque la identidad del FMI es anual: dentro del
+cierre de cada año, porque la identidad del FMI es anual. Dentro del
 año, las ecuaciones usan el desvío de la deuda del cierre anterior
 respecto de la senda base.
 
@@ -428,7 +427,7 @@ que se contrastan H1b y la condición (ii) de H1a, es la definición
 operativa del FMI, porque las cifras con que se compara H1b surgen de
 ella y la hipótesis exige comparar magnitudes equivalentes. La medida
 complementaria es una métrica anual, que la tesis agrega porque capta un
-riesgo que la definición del FMI deja afuera por construcción: la
+riesgo que la definición del FMI deja afuera por construcción, el de la
 valuación de la deuda en moneda extranjera año por año. Se define
 primero la métrica anual, porque la del FMI se obtiene de ella como caso
 particular.
@@ -442,8 +441,8 @@ trayectoria simulada,
 
 con \(sf\) y \(ri\) escalados como en la identidad. Equivale a que la
 deuda de \(T\), con el resultado primario del escenario, supere a la de
-\(T-1\), de modo que incluye la valuación de la deuda en moneda
-extranjera y el ajuste \emph{stock}-flujo de ese año.
+\(T-1\), e incluye por eso la valuación de la deuda en moneda extranjera
+y el ajuste \emph{stock}-flujo de ese año.
 
 La medida principal es una reconstrucción de la definición operativa del
 FMI, la que el organismo usa para las cifras con que se compara H1b;
@@ -459,12 +458,12 @@ desvío promedio de la trayectoria desde 2026,
 donde \(\bar{x}_T\) y \(\bar{g}_T\) son los desvíos promedio de la tasa
 en dólares y del crecimiento entre 2026 y \(T\) (en la variante del
 canal de tasas en pesos se suma el desvío de la tasa en pesos). El
-término \(ri_T\) es el del escenario base, no un desvío simulado: la
-definición excluye los desvíos del tipo de cambio real, no la valuación
-prevista en el escenario, que el recuadro 3 incluye a través de la
-inflación relativa. Se informa también una lectura literal del recuadro,
-que promedia además los impulsores del escenario y el resultado
-primario.
+término \(ri_T\) es el del escenario base, no un desvío simulado, porque
+la definición excluye los desvíos del tipo de cambio real, no la
+valuación prevista en el escenario, que el recuadro 3 incluye a través
+de la inflación relativa. Se informa también una lectura literal del
+recuadro, que promedia además los impulsores del escenario y el
+resultado primario.
 
 Las dos métricas se miden en 2031 y en 2035, los últimos años de los
 abanicos de mediano plazo y de diez años del FMI. Como medidas
@@ -503,7 +502,7 @@ En el primero, el nivel de la tasa queda 0,501 puntos por encima del
 base en forma permanente desde 2026T1, un desvío estándar de su
 variación trimestral en la muestra. El segundo repite en 2026-2029 la
 senda trimestral de 2022-2025, que llevó la tasa de 0,08\% a un máximo
-de 5,33\% y a 3,90\% a fines de 2025: el nivel sube 5,25 puntos, baja
+de 5,33\% y a 3,90\% a fines de 2025. El nivel sube 5,25 puntos, baja
 1,43 y desde 2030 queda 3,82 puntos por encima del base hasta 2035.
 
 \subsection{Variantes}
@@ -524,11 +523,10 @@ quiebres, las binarias presidenciales o los \emph{shocks} de
 2001T4-2005T3, usan solo el EMBI observado (datos desde 1999, sin
 empalme), empiezan en 2004, anulan el ajuste \emph{stock}-flujo,
 corrigen el sesgo o usan el escenario de 2025. Con la principal suman 21
-especificaciones del SVARX. Dos de ellas son equivalentes: con una
-elasticidad cíclica de cero, el \emph{shock} fiscal absorbe toda la
-covarianza con el crecimiento, igual que en el ordenamiento de Cholesky
-con el resultado primario primero, de modo que dan los mismos
-resultados.
+especificaciones del SVARX. Dos de ellas son equivalentes y dan los
+mismos resultados, porque con una elasticidad cíclica de cero el
+\emph{shock} fiscal absorbe toda la covarianza con el crecimiento, igual
+que en el ordenamiento de Cholesky con el resultado primario primero.
 
 El procedimiento del FMI genera \emph{shocks} en forma reducida, sin
 separar el fiscal del cambiario ni aislar la FED, y no permite
@@ -536,9 +534,9 @@ descomponer la incertidumbre ni contrastar H2; por eso la especificación
 principal es el SVARX. Su identificación reparte la varianza entre
 bloques sin alterar la probabilidad central, porque los \emph{shocks}
 estructurales reconstruyen los mismos residuos con cualquier S. Los
-intervalos sí difieren de una identificación a otra: en cada réplica la
+intervalos sí difieren de una identificación a otra. En cada réplica la
 matriz S se reestima, mientras que los \emph{shocks} históricos se
-calculan con la S de la estimación central, de modo que el residuo
+calculan con la S de la estimación central, y por eso el residuo
 reconstruido en las réplicas depende de la identificación.
 
 \section{Contraste de las hipótesis}
@@ -601,7 +599,7 @@ en dos horizontes y H2 en dos escenarios, se informa también si cada
 conclusión resiste la corrección de Bonferroni, con intervalos de 95\%.
 
 La condición (ii) de H1a se evalúa con un análisis de la suficiencia del
-superávit: se desplaza en la misma magnitud el resultado primario de
+superávit. Se desplaza en la misma magnitud el resultado primario de
 todos los años y se informan la probabilidad cuando el de 2031 alcanza
 el máximo anual de 1996-2025 y el desplazamiento que lleva la de 2031 al
 1\% que estima el FMI para Argentina, cifra que es una estimación para
