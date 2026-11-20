@@ -34,4 +34,4 @@ El modelo toma del panel el EMBI, el TCRM y el PIB real posterior a 2003; el PIB
 
 1. Resultado primario: positivo es superávit y negativo, déficit.
 2. La tesis usa una sola definición del resultado primario, sin rentas de la propiedad. La serie con rentas (`pb_pib_trim`) se usa solo como robustez.
-3. Los datos crudos están en `crudos/` y no se modifican. Los CSV de `crudos/no_referenciados/` no los usa ningún script.
+3. Los datos crudos están en `crudos/` y no se modifican. De `crudos/no_referenciados/` solo se usan `embicsv.csv` (EMBI diario, en el empalme de 1996-1998) y `embi_real_ambito_1998_2026.csv` (en la serie histórica del riesgo país de 1983-2025); el resto no lo usa ningún script.

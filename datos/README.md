@@ -6,6 +6,6 @@ El panel [`dataset_consolidado_1996_2025.csv`](dataset_consolidado_1996_2025.csv
 
 El resto de las series las lee el modelo de `procesados/`: el resultado primario, la tasa de la FED, el VIX, las series de deuda federal bruta y consolidada, los empalmes del EMBI y del TCRM y el escenario base del FMI (Informe de País 26/105). Las ecuaciones se estiman con 1998T2-2025T4 porque la deuda trimestral del MECON empieza en 1998T1. Los scripts que construyen cada archivo están en [`codigo/ingesta_datos/`](../codigo/ingesta_datos/README.md).
 
-Los paneles `dataset_consolidado_real.csv` (2004-2025) y `dataset_consolidado_real_ext.csv` (1999-2025) son de la etapa anterior y sirven de insumo para construir el panel de 1996-2025. Los CSV de `crudos/no_referenciados/` se descargaron en algún momento y ningún script los usa hoy.
+Los paneles `dataset_consolidado_real.csv` (2004-2025) y `dataset_consolidado_real_ext.csv` (1999-2025) son de la etapa anterior y sirven de insumo para construir el panel de 1996-2025. De `crudos/no_referenciados/` solo se usan `embicsv.csv` (EMBI diario, en el empalme de 1996-1998) y `embi_real_ambito_1998_2026.csv` (en la serie histórica del riesgo país de 1983-2025); el resto no lo usa ningún script.
 
 Definiciones, unidades y fuentes de cada variable: [`codebook.md`](codebook.md).
